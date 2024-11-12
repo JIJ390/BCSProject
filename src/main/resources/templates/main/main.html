@@ -20,9 +20,26 @@
   <div class="mainPage">
     <div class="slider">
       <div class="slides">
-        <div class="slide"><img src="../images/mainImg1.jpg" alt="Image 1"></div>
-        <div class="slide"><img src="../images/mainImg2.jpg" alt="Image 2"></div>
-        <div class="slide"><img src="../images/mainImg3.jpg" alt="Image 3"></div>
+        <div class="slide" style="background-image: url(../images/1.webp);">
+          <div class="slideFont1">
+            <span class="slideFontSize">아 여기다 뭐 넣지</span>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url(../images/mainImg2.jpg);">
+          <div class="slideFont1">
+            <span class="slideFontSize">이렇게 글씨까지</span>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url(../images/mainImg3.jpg);">
+          <div class="slideFont1">
+            <span class="slideFontSize">같이 넘어가는거지</span>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url(../images/mainImg1.jpg);">
+          <div class="slideFont1">
+            <span class="slideFontSize">힘들당</span>
+          </div>
+        </div>
       </div>
       <!-- 좌우 화살표 버튼 -->
       <button class="prev" onclick="prevSlide()">&#10094;</button>
@@ -33,6 +50,7 @@
       <span class="dot" onclick="currentSlide(0)"></span>
       <span class="dot" onclick="currentSlide(1)"></span>
       <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
     </div>
     <div class="bestView">신상품
       <p class="bestView-2">최상위 S급 중고폰
@@ -48,21 +66,36 @@
         <div class="a1">
           <h1>배최성에 대하여</h1>
           <pre>
-            글로벌 중고 플랫폼 1위 목표
-            리퍼비시 전자기기 전문 마켓 플레이
+
+    글로벌 중고 플랫폼 1위 목표
+    리퍼비시 전자기기 전문 마켓 플레이
           </pre>
           
         </div>
-        <div class="a2"></div>
-        <div class="a3"></div>
+        <div class="a2">
+          <h1 style="margin-left: 60px;">고품질 리퍼비시 제품</h1>
+          <pre>
+            
+    지구에도 지갑에도 좋은 리퍼 제품
+    절대 안전 제품 품질 보증
+          </pre>
+        </div>
+        <div class="a3">
+          <h1 style="margin-left: 40px;">국내 최고 매입가</h1>
+          <pre>
+            
+    중간 수수료 없이
+    소중한 제품 금액가 그대로
+          </pre>
+        </div>
       </div>
-      <div class="mainFoot2"><img src="../images/mainPage2.png" alt=""></div>
+      <div class="mainFoot2"><img src="../images/mainPage2.png" alt="" style="width: 845px;height: 510px;"></div>
     </div>
   </div>
 </main>
 
 <!-- Footer Section -->
 <th:block th:replace="~{common/footer}"></th:block>
-<script src="../JS/slide.js"></script>
+<script src="/js/main/slide.js"></script>
 </body>
 </html>

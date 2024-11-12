@@ -107,6 +107,22 @@ a {
 .slide {
   min-width: 100%;
   box-sizing: border-box;
+  background-size: 100vw;
+}
+
+
+.slideFont1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.slideFontSize{
+  font-size: 100px;
+  margin-right: 800px;
+  margin-top: 400px;
 }
 
 img {
@@ -176,36 +192,48 @@ img {
 }
 
 .mainFoot{
-  border: 1px solid black;
-  height: 400px;
-  width: 650px;
+  height: 500px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   
 }
-.mainFoot2{
-  border: 1px solid black;
-  height: 400px;
-  width: 650px;
-}
 
 .a1{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: red;
-  height: 150px;
+  height: 200px;
   width: 650px;
 }
 .a2{
-  background-color: yellow;
-  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
   width: 650px;
 }
 .a3{
-  background-color: green;
-  height: 150px;
-  width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 620px;
+}
+
+.viewer1{
+  height: 14vh;
+  border: 1px solid black;
+}
+.viewer2{
+  height: 22vh;
+  border: 1px solid black;
+}
+.viewer3{
+  height: 22vh;
+  border: 1px solid black;
 }
