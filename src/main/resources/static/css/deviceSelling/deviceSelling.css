@@ -1,0 +1,181 @@
+section{  
+  /* border: 1px solid black;  */
+}
+
+
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+.device-selling-head {
+  width: 100%;
+}
+
+.page-title {
+  width: 100%;
+  font-size: 64px;
+  font-weight: 900;
+  padding: 10px;
+  text-align: left;
+}
+
+.page-title-sub {
+  font-size: 32px;
+}
+
+.device-selling-container {
+  width: 100%;
+
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.device-selling-container > img {
+  margin: 10px;
+  width: 560px;
+  height: auto;
+  border-radius: 15px;
+}
+
+.device-selling-info {
+  width: 39%;
+  padding: 12px;
+}
+
+.info-title >span{
+  font-size: 20px;
+}
+
+.info-title >span:last-child{
+  color: var(--font-gray-color);
+}
+
+
+
+.capacity-content {
+  margin: 10px 0;
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  
+}
+
+.grade-content {
+  margin: 10px 0;
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  
+}
+
+.select-box {
+  width: 100px;
+  height: 100px;
+
+  background-color: var(--white-color);
+  border-radius: 10px;
+
+  margin: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition-duration: 0.1s;
+
+}
+
+
+
+.select-box >span:first-child {
+  padding: 12px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.select-box >span:last-child {
+  padding-right: 12px;
+  padding-bottom: 10px;
+  text-align: right;
+  font-size: 14px;
+
+  font-family: 'Pretendard-Thin';
+}
+
+
+.select-box:hover {
+  border: 2px solid var(--main-color);
+
+
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
+}
+
+
+.selling-span1 {
+  font-size: 32px;
+  margin: 20px auto;
+  margin-top: 40px;
+
+
+  text-align: center;
+}
+
+.selling-span2 {
+  font-size: 40px;
+
+  font-family: 'Pretendard-Thin';
+  margin: 10px auto;
+
+  text-align: center;
+}
+
+.selling-span3 {
+  font-size: 32px;
+  margin: 20px auto;
+  margin-top: 40px;
+
+
+  text-align: center;
+}
+
+
+.selling-btn {
+  width: 400px;
+  height: 60px;
+
+
+  background-color: var(--white-color);
+  border: none;
+  border-radius: 15px;
+
+  margin: 20px;
+
+  font-size: 22px;
+
+  transition-duration: 0.1s;
+}
+
+.selling-btn:hover {
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+  height: 68px;
+}
+
+
+

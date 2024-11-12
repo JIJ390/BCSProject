@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Thin';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+
+
+
+*{
+  font-family: 'Pretendard-Regular';
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+:root{
+  --main-color : rgba(0, 255, 156, 1);        /* 사이트 대표 컬러 */
+  --main-gray-color : rgba(240, 240, 240, 1); /* 어두운 페이지 배경색 */
+  --white-color : white;                      /* 흰색 */
+
+  --font-color : rgba(29, 29, 31, 1);         /* 글자색 */
+  --font-gray-color : rgba(110, 110, 115, 1); /* 글자 옅은 회색 */
+}
+
+
+main{
+  display: flex;
+
+}
+
+
+.left-section, .right-section{
+  width: 20%;
+}
+
+.main-section {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+
+
+  align-items: center;
+
+
+}

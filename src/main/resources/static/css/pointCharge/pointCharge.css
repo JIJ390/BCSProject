@@ -1,0 +1,88 @@
+
+section{  
+  /* border: 1px solid black;  */
+}
+
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+}
+
+
+
+.point-charge-head {
+  width: 100%;
+}
+
+.page-title {
+  width: 100%;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+.balance-point {
+  width: 100%;
+  font-size: 32px;
+  font-weight: 100;
+  padding: 10px;
+  text-align: right;
+}
+
+hr {
+  color: var(--font-color);
+}
+
+
+.point-charge-main-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+.charge-box {
+  background-color: var(--white-color);
+
+  width: 300px;
+  height: 200px;
+
+  margin: 10px;
+  margin-top: 20px;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  transition-duration: 0.1s;
+}
+
+.point-check {
+  padding: 16px;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.money-check {
+  padding: 16px;
+  text-align: right;
+  font-size: 22px;
+
+  
+}
+
+.charge-box:hover {
+  border: 2px solid var(--main-color);
+
+  width: 308px;
+  height: 208px;
+
+  cursor: pointer;
+}

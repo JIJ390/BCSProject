@@ -1,0 +1,60 @@
+
+
+
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+
+
+.device-order-compl-head {
+  width: 100%;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 32px;
+
+}
+
+.device-order-compl-container {
+  width: 940px;
+
+
+  background-color: var(--white-color);
+
+  border-radius: 15px;
+
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.span1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.device-name {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.device-img-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.device-img {
+  width: 500px;
+  height: 400px;
+}

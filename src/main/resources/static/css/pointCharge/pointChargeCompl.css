@@ -1,0 +1,108 @@
+
+section{  
+  /* border: 1px solid black;  */
+}
+
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+}
+
+
+
+.point-charge-compl-head {
+  width: 100%;
+}
+
+.page-title {
+  width: 100%;
+  font-size: 32px;
+  padding: 10px;
+  text-align: left;
+}
+
+
+.image-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.logo-image {
+  margin: 80px;
+  width: 400px;
+
+}
+
+
+
+.payment-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+hr {
+  color: var(--font-color);
+}
+
+.payment-container-title {
+  width: 100%;
+  font-size: 40px;
+
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+.balance-point {
+  width: 100%;
+  font-size: 22px;
+
+  padding: 10px;
+  text-align: right;
+}
+
+.charge-point {
+  width: 100%;
+  font-size: 22px;
+
+  padding: 10px;
+  text-align: right;
+}
+
+.current-point {
+  width: 100%;
+  font-size: 22px;
+
+  padding: 10px;
+  text-align: right;
+}
+
+.check-btn {
+  width: 400px;
+  height: 60px;
+
+  margin: 80px;
+
+  background-color: var(--white-color);
+  border: none;
+  border-radius: 15px;
+
+  font-size: 22px;
+
+  transition-duration: 0.1s;
+}
+
+.check-btn:hover {
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+  width: 408px;
+  height: 68px;
+}

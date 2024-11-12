@@ -1,0 +1,135 @@
+
+
+
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+
+.device-order-head {
+  width: 100%;
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 32px;
+
+  font-weight: bold;
+
+}
+
+.device-order-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.device-order-container > img {
+  margin: 10px;
+  width: 500px;
+  height: auto;
+  border-radius: 15px;
+}
+
+.device-order-info {
+  width: 45%;
+  padding: 12px;
+  display: flex;
+
+  padding: 10px;
+
+  flex-direction: column;
+
+
+}
+
+.order-info-title {
+  font-size: 60px;
+  font-weight: bold;
+
+  margin-bottom: 40px;
+}
+
+.order-info-sub {
+
+  margin-top: 24px;
+  font-size: 24px;
+}
+
+.status-container {
+  width: 960px;
+  background-color: var(--white-color);
+
+  margin-top: 30px;
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+}
+.status-container >div {
+  margin: 10px;
+}
+
+.status-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.order-info >span{
+  font-size: 20px;
+
+  padding: 10px;
+}
+
+.price-span {
+  width: 100%;
+
+  text-align: right;
+  padding-right: 20px;
+
+  margin-top: 30px;
+  margin-bottom: 12px;
+  font-size: 32px;
+
+  font-family: 'Pretendard-Thin';
+}
+
+hr {
+  width: 100%;
+}
+
+.btn-area {
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
+}
+
+.order-btn {
+
+  font-size: 22px;
+
+  margin: 60px;
+
+  width: 280px;
+  height: 60px;
+
+  border-radius: 15px;
+  border: none;
+  background-color: var(--white-color);
+  
+}
+
+.order-btn:hover {
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+}
