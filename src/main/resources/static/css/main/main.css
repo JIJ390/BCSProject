@@ -1,0 +1,156 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard-Regular';
+}
+
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+main div{
+  /* border: 1px solid black; */
+}
+
+.mainPage{
+  width: 100%;
+}
+
+.mainImg{
+  margin-top: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bestView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 70px;
+  margin-top: 50px;
+}
+
+.bestView-2{
+  font-size: 35px;
+  margin-left: 30px;
+  color: #6E6E73;
+}
+
+.viewImg{
+  margin-left: 50px;
+}
+.viewImg1{
+  margin-left: 130px;
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header-nav .dep1 > li{
+  display: none;
+  vertical-align: top;
+}
+
+.header-nav .dep1 > li:hover > .dep2{
+  display: block;
+}
+
+/* mainImg */
+.slider {
+  width: 100%;
+  max-width: 1900px;
+  height: 800px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/* 좌우 화살표 버튼 스타일 */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 슬라이드 위치를 표시하는 점(dot) 스타일 */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active {
+  background-color: #717171;
+}
+
+.BCSInfo{
+  margin-left: 10%;
+}
