@@ -123,3 +123,35 @@ img{
   z-index: 500; /* 드롭다운 아래에 위치하도록 설정 */
 }
 
+
+
+
+:root{
+  --main-color : rgba(0, 255, 156, 1);        /* 사이트 대표 컬러 */
+  --main-gray-color : rgba(240, 240, 240, 1); /* 어두운 페이지 배경색 */
+  --white-color : white;                      /* 흰색 */
+
+  --font-color : rgba(29, 29, 31, 1);         /* 글자색 */
+  --font-gray-color : rgba(110, 110, 115, 1); /* 글자 옅은 회색 */
+}
+
+
+main{
+  display: flex;
+
+}
+
+.left-section, .right-section{
+  width: 20%;
+}
+
+.main-section {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+
+
+  align-items: center;
+
+
+}
