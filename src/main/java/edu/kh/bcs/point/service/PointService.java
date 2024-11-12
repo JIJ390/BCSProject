@@ -4,6 +4,6 @@ import edu.kh.bcs.point.dto.Point;
 
 public interface PointService {
 	
-	public Point pointCharge();
+	public int pointCharge(int amount, int memberNo);
 
 }

@@ -32,14 +32,14 @@
         <span class="payment-container-title">
           결제 정보
         </span>
-        <span class="balance-point">
+        <span class="balance-point" data-th-text="${#numbers.formatInteger(beforeChangePoints, 0, 'COMMA') + ' P'}">
           충전 전 포인트 100,000 P
         </span>
-        <span class="charge-point">
+        <span class="charge-point" data-th-text="${#numbers.formatInteger(amount, 0, 'COMMA') + ' P'}">
           충전 포인트 + 100,000 P
         </span>
         <hr>
-        <span class="current-point">현재 포인트 100,000 P</span>
+        <span class="current-point" data-th-text="${#numbers.formatInteger(currentPoint, 0, 'COMMA') + ' P'}">현재 포인트 100,000 P</span>
       </div>
 
       <button class="check-btn">확인</button>
