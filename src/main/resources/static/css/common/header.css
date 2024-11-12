@@ -14,6 +14,8 @@
   font-family: 'Pretendard-Regular';
 }
 
+
+
 /* 메인 헤더 */
 .main-header {
   display: flex;
@@ -99,7 +101,7 @@ img{
   z-index: 1000;
   font-size: 43px;
   padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 600px;
+  height: 72vh;
 }
 
 .header-nav .dep1 .dropdown li {
@@ -166,9 +168,49 @@ main{
   width: 1000px;
   display: flex;
   flex-direction: column;
-
-
   align-items: center;
+}
+
+.info1{
+  width: 60%;
+  margin-left: 70px;
+  margin-top: 20px;
+}
+
+.dropdownContainor{
+  display: flex;
+  flex-direction: row;
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#topBtn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  border-radius: 50%;
+  border: none;
+  padding: 40;
+  background-color: #1D1D1F;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  cursor: pointer;
 }
