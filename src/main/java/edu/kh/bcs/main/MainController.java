@@ -20,7 +20,7 @@ public class MainController {
 		
 		
 		
-		return "main";
+		return "main/main";
 	}
 
 }
