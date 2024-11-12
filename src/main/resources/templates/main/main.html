@@ -1,38 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
   <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/common/header.css">
-  <link rel="stylesheet" href="/css/common/footer.css">
   <link rel="stylesheet" href="/css/main/main.css">
   <title>main</title>
 </head>
 <body>
-    <!-- Header -->
-    <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
-    <header class="main-header">
-      <nav class="header-nav">
-          <ul><a href="#"><img src="../images/logo(login).png" alt=""></a></ul>
-          <ul class="dep1">
-              <a href="#">쇼핑하기</a>
-              <ul class="dropdown">
-                  <li><a href="#">Galaxy Phone</a></li>
-                  <li><a href="#">iPhone</a></li>
-                  <li><a href="#">Galaxy Tab</a></li>
-                  <li><a href="#">iPad</a></li>
-              </ul>
-          </ul>
-          <ul class="dep2"><a href="#">판매하기</a></ul>
-          <ul><a href="#">고객센터</a></ul>
-      </nav>
-      <div class="header-auth">
-          <input type="text" placeholder="" />
-          <a href="#">로그인</a> | <a href="#">회원가입</a>
-      </div>
-  </header>
+    <!-- Header Section -->
+    <th:block th:replace="~{common/header}"></th:block>
   
 
 <!-- main -->
@@ -69,36 +46,8 @@
   </div>
 </main>
 
-<footer>
-  <section class="footer-container">
-    <section class="footer1">
-      <div class="col1"></div>
-      <div class="col2">복무신조 주식회사 대표이사 : 정인재 사업자등록번호 : 111-11-11111 사업자 정보확인 통신판매업 신고 : 1000-서울종로-1111 <br>
-        사업장주소 : 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 2F 호스팅서비스사업자 : BDH(주) 대표번호 : 02-1111-1111 제품/서비스/멤버십: 1588-1111(통화요금 : 발신자부담) <br>
-        본 사이트에서 판매되는 상품 중에는 등록된 개별 판매자가 판매하는 상품이 포함되어 있습니다.  <br>
-        개별 판매자 판매 상품의 경우 복무신조(주)는 통신판매중개업자로서 통신판매의 당사자가 아니므로, 개별 판매자가 등록한 상품, 거래정보 및 거래 등에 대해 책임을 지지 않습니다. <br>
-        소비자분쟁해결기준 <br>
-        본 사이트의 컨텐츠는 저작권법의 보호를 받는 바 무단 전재, 복사, 배포 등을 금합니다.</div>
-      <div class="col3"></div>
-    </section>
-    <section class="footer2">
-      <div class="col1"></div>
-      <div class="col2">Copyright © 2024-2024 배최성. All Rights Reserved.</div>
-      <div class="col3"></div>
-    </section>
-    <section class="footer3">
-      <div class="col1"></div>
-      <div class="col2"><a href="#">개인정보 처리방침</a>
-        <a href="#">약관</a>
-        <a href="#">판매 및 환불</a>
-        <a href="#">법적 고지</a>
-        <a href="#">사이트 맵</a></div>
-      <div class="col3"></div>
-    </section>
-  </section>
-</footer>
-
-
+<!-- Footer Section -->
+<th:block th:replace="~{common/footer}"></th:block>
 <script src="../JS/slide.js"></script>
 </body>
 </html>
