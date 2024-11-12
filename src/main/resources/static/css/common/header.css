@@ -25,6 +25,14 @@
   
 }
 
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* 헤더가 다른 요소 위에 나타나도록 z-index 설정 */
+  background-color: white;
+}
+
 img{
   display: flex;
   align-items: center;
@@ -82,20 +90,22 @@ img{
 /* 드롭다운 스타일 */
 .header-nav .dep1 .dropdown {
   display: none;
-  position: absolute;
-  top: 130%; /* "쇼핑하기" 바로 아래 위치 */
-  left: -350%;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
   background-color: #ffffff;
-  border-radius: 10px;
-  width: 2000%;
-  height: 2500%;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
   z-index: 1000;
   font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 600px;
 }
 
 .header-nav .dep1 .dropdown li {
   display: block;
   padding: 10px;
+  margin-left: 80px;
 }
 
 .header-nav .dep1 .dropdown li a {
@@ -106,7 +116,13 @@ img{
 
 /* hover 시 드롭다운 표시 */
 .header-nav .dep1:hover .dropdown,
-.header-nav .dep1:hover ~ .overlay {
+.header-nav .dep1:hover ~ .overlay,
+.header-nav .dep1 .dropdown:hover {
+  display: block;
+}
+
+.header-nav .dep1:hover ~ .overlay,
+.header-nav .dep1 .dropdown:hover ~ .overlay {
   display: block;
 }
 
@@ -122,4 +138,3 @@ img{
   display: none; /* 기본적으로 숨김 */
   z-index: 500; /* 드롭다운 아래에 위치하도록 설정 */
 }
-
