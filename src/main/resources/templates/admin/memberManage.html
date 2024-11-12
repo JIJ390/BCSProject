@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCS 회원관리</title>
+  <style>
+    body,
+    html {
+      width: 1600px;
+      height: max-content;
+      margin: auto;
+      background-color: #d7d7d7;
+    }
+
+    .member-mamage-body {
+      width: 1000px;
+      height: max-content;
+      margin: auto;
+      margin-top: 200px;
+      margin-bottom: 200px;
+    }
+
+    .member-manage {
+      width: 1000px;
+      height: 1000px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 30px;
+    }
+
+    .member-mamage-title {
+      width: 100%;
+      height: 50px;
+      border-bottom: 1px solid gray;
+      display: flex;
+      align-items: center;
+    }
+
+    .member-mamage {
+      width: 100%;
+      height: 1000px;
+      border-bottom: 1px solid gray;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .member-manage-row {
+      width: 100%;
+      height: 50px;
+      border-bottom: 1px solid gray;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .sidebar-div{
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      border-radius: 100px;
+      position: fixed;
+      margin-left: 1600px;
+      margin-top: 1000px;
+    }
+
+  </style>
+
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar-div"></div>
+
+  <div class="member-mamage-body">
+    <div class="member-manage">
+      <p style="font-size: 40px;">회원 관리 페이지</p>
+      <hr>
+      <div class="member-mamage-title">
+        <span style="font-size: 20px; margin-left: 30px;">회원 번호</span>
+        <span style="font-size: 20px; margin-left: 125px;">이름</span>
+        <span style="font-size: 20px; margin-left: 230px;">이메일</span>
+        <span style="font-size: 20px; margin-left: 230px;">전화 번호</span>
+      </div>
+      <div class="member-mamage-content">
+        <div class="member-manage-row">
+          <span style="font-size: 20px;">1</span>
+          <span style="font-size: 20px;">홍길동</span>
+          <span style="font-size: 20px;">member01@abc.co.kr</span>
+          <span style="font-size: 20px;">010-1234-1234</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
