@@ -28,9 +28,9 @@
 header{
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 1000; /* 헤더가 다른 요소 위에 나타나도록 z-index 설정 */
-  background-color: white;
+  opacity: 0.98;
 }
 
 img{

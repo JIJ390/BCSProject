@@ -5,6 +5,9 @@
   font-style: normal;
 }
 
+header {
+  background-color: white;
+}
 
 /* Reset */
 * {
@@ -163,4 +166,46 @@ img {
 
 .BCSInfo{
   margin-left: 10%;
+}
+
+.mainPageFoot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.mainFoot{
+  border: 1px solid black;
+  height: 400px;
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.mainFoot2{
+  border: 1px solid black;
+  height: 400px;
+  width: 650px;
+}
+
+.a1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  height: 150px;
+  width: 650px;
+}
+.a2{
+  background-color: yellow;
+  height: 150px;
+  width: 650px;
+}
+.a3{
+  background-color: green;
+  height: 150px;
+  width: 650px;
 }
