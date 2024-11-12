@@ -54,12 +54,20 @@ main div{
 
 .viewImg{
   margin-left: 50px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .viewImg1{
   margin-left: 130px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
+
+
+.viewImg,
+.viewImg1 {
+  padding: 20px; /* 이미지 주위 여백 */
+  box-shadow: 1px 3px 0px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* 모서리를 둥글게 */
+}
+
+
 
 ul li {
   list-style: none;
