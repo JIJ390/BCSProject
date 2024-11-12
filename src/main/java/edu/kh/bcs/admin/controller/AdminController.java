@@ -19,5 +19,66 @@ public class AdminController {
 		return "admin/memberManage";
 	}
 	
+	//게시글 관리
+	@GetMapping("adminBoard")
+	public String adminBoard() {
+		
+		
+		return "admin/adminBoard";
+	}
+	
+	
+	//배송 내역 조회
+	@GetMapping("delivery")
+	public String delivery() {
+		
+		
+		return "admin/delivery";
+	}
+	
+	
+	//이벤트 관리
+	@GetMapping("adminEvent")  
+	public String adminEvent() {
+		
+		
+		return "admin/adminEvent";
+	}
+	
+	//1:1 상담 목록
+	@GetMapping("adminChatList")
+	public String adminChatList() {
+		
+		
+		return "admin/adminChatList";
+	}
+	
+	//구매 신청 
+	@GetMapping("adminSale")
+	public String adminSale() {
+		
+		
+		return "admin/adminSale";
+	}
+	
+	
+	//매물 등록
+	@GetMapping("adminRegistration")
+	public String adminRegistration() {
+		
+		
+		return "admin/adminRegistration";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
