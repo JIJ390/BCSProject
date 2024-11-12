@@ -84,13 +84,13 @@ img{
   display: none;
   position: absolute;
   top: 130%; /* "쇼핑하기" 바로 아래 위치 */
-  left: -250%;
+  left: -350%;
   background-color: #ffffff;
   border-radius: 10px;
-  width: 1600%;
+  width: 2000%;
   height: 2500%;
   z-index: 1000;
-  font-size: 60px;
+  font-size: 43px;
 }
 
 .header-nav .dep1 .dropdown li {
