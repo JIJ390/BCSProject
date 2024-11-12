@@ -1,0 +1,21 @@
+
+
+.left-section, .right-section{
+  width: 20%;
+}
+
+.main-section {
+  width: 2000px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.blur-box{
+  display: flex;
+  position: absolute;
+  background-color: var(--font-gray-color);
+  height: 70px;
+  width: 100%;
+  left: 0px;
+}

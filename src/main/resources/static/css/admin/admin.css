@@ -1,0 +1,80 @@
+
+html, body, main {
+  width: 1600px;
+  margin: 0 auto;
+
+}
+html{
+  background-color: #D9D9D9;
+}
+
+
+/* 헤더 사진 */
+
+.photo{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.photo > img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.page-message{
+  margin-top: 200px;
+}
+
+.box-out{
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.box-out{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+p{
+  text-align: center;
+}
+.box-in{
+  justify-content: space-around;
+  display: flex;
+
+  width: 100%;
+}
+.box-list{
+  display: flex;
+  background-color: #fff;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+}
+.box-list > img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+}
+.title{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  
+}
