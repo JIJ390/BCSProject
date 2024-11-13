@@ -9,6 +9,10 @@
   background-color: white;
 }
 
+#dropdown {
+  background-color: white;
+}
+
 /* Reset */
 * {
   margin: 0;
