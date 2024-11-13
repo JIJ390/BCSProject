@@ -14,6 +14,22 @@
   font-family: 'Pretendard-Regular';
 }
 
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+main {
+  width: 1600px;
+}
+
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
+}
+
 
 
 /* 메인 헤더 */
@@ -24,16 +40,15 @@
   padding: 20px 40px; /* 좌우 여백을 약간 넓게 설정 */
   gap: 20px; /* 내부 요소 간 간격 조절 */
   font-size: 20px;
-  
 }
 
 header{
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 1000; /* 헤더가 다른 요소 위에 나타나도록 z-index 설정 */
+  z-index: 1000; 
   opacity: 0.98;
-}
+} 
 
 img{
   display: flex;
@@ -171,7 +186,7 @@ main{
   align-items: center;
 }
 
-.info1{
+.sideMenuContainer{
   width: 60%;
   margin-left: 70px;
   margin-top: 20px;
@@ -193,24 +208,28 @@ main{
 
 
 
-
-
-
-
-
-
-
-
-#topBtn {
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  border-radius: 50%;
-  border: none;
-  padding: 40;
-  background-color: #1D1D1F;
-  width: 60px;
-  height: 60px;
-  font-size: 40px;
-  cursor: pointer;
+.sideItem {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.1s ease;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

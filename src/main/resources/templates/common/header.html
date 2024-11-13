@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
 
-
+    <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/common/sidebar.css">
     <link rel="stylesheet" href="/css/common/header.css">
 
@@ -15,7 +15,7 @@
       <!-- Header -->
       <header class="main-header">
         <nav class="header-nav">
-            <ul><a href="#"><img src="../images/logo.png" alt=""></a></ul>
+            <ul><a href="#"><img src="/images/logo.png" alt=""></a></ul>
             <ul class="dep1">
                 <a href="#">쇼핑하기</a>
                 <div class="dropdown">
@@ -26,12 +26,18 @@
                                 <li><a href="#">Galaxy Tab</a></li>
                                 <li><a href="#">iPad</a></li>
                             </div>
-                            <div class="info1">
-                                <div class="viewer1">
+                            <div class="sideMenuContainer">
+                                <div class="sideMenu1">
                                     <h5 style="margin-bottom: 5px;">판매하기</h5>
                                 </div>
-                                <div class="viewer2"></div>
-                                <div class="viewer3"></div>
+                                <div class="sideMenu2" id="galaxy-content">
+                                    <ul>
+                                        <li>갤럭시 S24 Ultra</a></li>
+                                        <li>갤럭시 S24 Plus</a></li>
+                                        <li>갤럭시 S24</li>
+                                    </ul>
+                                </div>
+                                <div class="sideMenu3"></div>
                             </div>
                     </div>
                     </div>
@@ -45,6 +51,23 @@
             <div th:unless= "${session.loginMember}">
                 <a href="#">로그인</a> | <a href="#">회원가입</a>
             </div>
+
+            <div th:if= "${session.loginMember}">
+                <span><img src="/images/loginLogo.png" width="20px" height="20px"></span>
+            </div>
+
+            <div class="menu-container" th:if="${session.loginMember}">
+                <div class="profile-img">
+                  <img th:with="user=#{user.default.image}" 
+                       th:src="${session.loginMember.profileImg ?: user }" alt="profile">
+                </div>
+            
+                <p class="sideP" th:text="${session.loginMember.memberName}"></p>
+            
+                <a href="#" class="sideItem">마이 페이지</a> 
+                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a> 
+                <a href="#" class="sideItem">로그 아웃</a>
+              </div>
            
         </div>
     </header>
