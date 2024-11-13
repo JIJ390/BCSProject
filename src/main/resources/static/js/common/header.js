@@ -1,4 +1,6 @@
 const dep1 = document.querySelector(".dep1")
+const dep2 = document.querySelector(".dep2")
+const dep3 = document.querySelector(".dep3")
 
 dep1.addEventListener("mouseenter", () => {
   const main = document.querySelector("main")
@@ -13,6 +15,7 @@ dep1.addEventListener("mouseleave", () => {
   main.style.opacity = 1
   footer.style.opacity = 1
 })
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   const galaxyPhoneLink = document.querySelector(".info li a[href='#']");
@@ -47,8 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const dropdownContainer = document.querySelector('.dropdownContainor');
   const galaxyItems = document.querySelectorAll("#galaxy-content li");
   const selectionMessage = document.querySelector(".sideMenu1 span");
-  const phoneModels = document.getElementById("phoneModels");
-  const 종류별Message = document.getElementById("selectionMessage");
+  const buy_phoneModels = document.getElementById("buy_phoneModels");
+  const sell_phoneModels = document.getElementById("sell_phoneModels");
+  const modelMessage = document.getElementById("selectionMessage");
 
   // 처음에 내용을 숨깁니다.
   galaxyContent.style.display = 'none';
@@ -67,13 +71,15 @@ document.addEventListener("DOMContentLoaded", function () {
               if (galaxyContent.style.display === 'none') {
                   galaxyContent.style.display = 'block';
                   selectionMessage.style.display = 'none'; // "원하는 종류를 선택하세요" 메시지를 숨김
-                  종류별Message.style.display = 'block'; // "종류별" 메시지는 유지
-                  phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
+                  modelMessage.style.display = 'block'; // "종류별" 메시지는 유지
+                  buy_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
+                  sell_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
               } else {
                   galaxyContent.style.display = 'none';
                   selectionMessage.style.display = 'block'; // 메시지를 다시 보이게 함
-                  종류별Message.style.display = 'none'; // "종류별" 메시지를 숨김
-                  phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
+                  modelMessage.style.display = 'none'; // "종류별" 메시지를 숨김
+                  buy_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
+                  sell_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
               }
           })
           .catch(error => {
@@ -91,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
   dropdownContainer.addEventListener("mouseleave", function () {
       galaxyContent.style.display = 'none';
       selectionMessage.style.display = 'block'; // "원하는 종류를 선택하세요" 메시지를 다시 보이게 함
-      phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
+      buy_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
+      sell_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
   });
 
   // 각 갤럭시 메뉴 항목에 클릭 이벤트 추가 (필터 및 검색 기능 구현)
@@ -148,3 +155,33 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 });
+
+
+
+
+dep2.addEventListener("mouseenter", () => {
+  const main = document.querySelector("main")
+  const footer = document.querySelector("footer")
+  main.style.opacity = 0.3
+  footer.style.opacity = 0.3
+})
+
+dep2.addEventListener("mouseleave", () => {
+  const main = document.querySelector("main")
+  const footer = document.querySelector("footer")
+  main.style.opacity = 1
+  footer.style.opacity = 1
+})
+dep3.addEventListener("mouseenter", () => {
+  const main = document.querySelector("main")
+  const footer = document.querySelector("footer")
+  main.style.opacity = 0.3
+  footer.style.opacity = 0.3
+})
+
+dep3.addEventListener("mouseleave", () => {
+  const main = document.querySelector("main")
+  const footer = document.querySelector("footer")
+  main.style.opacity = 1
+  footer.style.opacity = 1
+})
