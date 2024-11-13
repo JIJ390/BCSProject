@@ -178,5 +178,5 @@ const getSidebarProfileBtn = () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  // getHomeContent();
+  getHomeContent();
 })
