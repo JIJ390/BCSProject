@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 관리</title>
+    <title>중고물품 </title>
+    <link rel="stylesheet" href="/css/admin/board.css">
+    <link rel="stylesheet" href="/css/admin/header.css">
 </head>
+
 <body>
-    
+
+    <!-- <th:blick th:replace="~{common/header}"> </th:blick> -->
+    <main>
+
+        <section class="main-section">
+
+            <div class="title">
+                <h1>매입 목록</h1>
+            </div>
+
+            <div class="head">
+                <a href="http://localhost/admin">←</a>
+            </div>
+            <div class="delivery-list">
+                <div class="box-title">
+                    <h1>배송 목록</h1>
+                    <div>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="list-category">
+                    <table>
+                        <colgroup>
+                            <col style="width: 15%;">
+                            <col style="width: 40%;">
+                            <col style="width: 20%;">
+                            <col style="width: 20%;">
+                            <col style="width: 10%;">
+                        </colgroup>
+
+                        <tr class="category" id="category-top">
+                            <td><a href="">게시글 번호▼</a></td>
+                            <td><a href=""></a></td>
+                            <td><a href="">휴대폰 이름▼</a></td>
+                            <td><a href="">총 수량▼</a></td>
+                            <td><a href="">최신순▼</a></td>
+                        </tr>
+                        <div class="category-inside">
+                            <!-- 고객  -->
+                            <tr class="category">
+                                <td>1</td>
+                                <td class="android-img"><img src="/images/1.webp" alt="" ></td>
+                                <td >플립4</td>
+                                <td>243</td>
+                                <td>2023/08/27</td>
+                            </tr>
+
+                        </div>
+                    </table>
+
+                    <th:block th:replace="~{admin/androidPopUp}"> </th:block>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+        </section>
+
+    </main>
+    <footer>
+        ㅁㄴㅇ
+    </footer>
+
 </body>
+<script src="/js/adminJS/popUp.js"></script>
+<script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+
 </html>

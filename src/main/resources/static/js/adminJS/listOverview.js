@@ -53,10 +53,15 @@ for (let i = 0; i < listBtn.length; i++) {
 }
 // 바깥쪽 영역을 눌렀을 때 뷰가 꺼지게 하기
 document.addEventListener("click", (event) => {
-    if (!event.target.closest(".list-btn") && !event.target.closest(".status-hiden")) {
+    if (!event.target.closest(".list-btn") ) {
       for (let i = 0; i < statusHiden.length; i++) {
         statusHiden[i].style.display = "none";
         arrow[i].innerText = "△";
       }
     }
   });
+
+
+
+
+

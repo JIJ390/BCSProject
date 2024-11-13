@@ -61,6 +61,13 @@ public class AdminController {
 		return "admin/adminSale";
 	}
 	
+	@GetMapping("androidPopUp")
+	public String androidPopUp() {
+		
+		
+		return "admin/androidPopUp";
+	}
+	
 	
 	//매물 등록
 	@GetMapping("adminRegistration")
