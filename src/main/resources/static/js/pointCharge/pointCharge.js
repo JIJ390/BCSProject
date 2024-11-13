@@ -68,24 +68,52 @@ const requestPay = (paidAmount) => {
 		 //결제 성공 시
 		if (rsp.success) {
 
-      console.log(rsp.paid_amount);
+      // 결제된 금액
+      const amount = rsp.paid_amount;
 
-      const url = "/point/charge";    // 요청 주소
+      // 비동기로 결제 금액에 따른 포인트 충전
+      fetch("/point/charge", {
+        method : "POST", 
+        headers: {"Content-Type": "application/json"}, 
+        body : amount
+      })
+      .then(response => {
+        if(response.ok) return response.text();
+        throw new Error("충전 실패 : " + response.status);
+      })
+      .then(beforeChangePoints => {
+
+        // 비동기 충전 성공 시 이동
+        const url = "/point/charge/compl";    // 요청 주소
   
-      const form = document.createElement("form");
-      form.action = url;            // 요청 주소
-      form.method = "POST";         // 메소드 지정
+        const form = document.createElement("form");
+        form.action = url;            // 요청 주소
+        form.method = "POST";         // 메소드 지정
+      
+        // amount 는 위 결제 정보에서 가져옴
+        const input1 = document.createElement("input");
+        input1.type  = "hidden";
+        input1.name  = "amount";
+        input1.value = amount;
+
+        // beforeChangePoints 는 비동기로 조회해온 정보
+        const input2 = document.createElement("input");
+        input2.type  = "hidden";
+        input2.name  = "beforeChangePoints";
+        input2.value = beforeChangePoints;
+
+        form.append(input1, input2); 
+      
+        document.querySelector("body").append(form);
+      
+        form.submit(); 
     
-      const input = document.createElement("input");
-      input.type  = "hidden";
-      input.name  = "amount";
-      input.value = rsp.paid_amount;
-    
-      form.append(input); 
-    
-      document.querySelector("body").append(form);
-    
-      form.submit(); 
+      })
+      .catch(err => console.error(err));
+
+
+
+
 
 
 		} else {

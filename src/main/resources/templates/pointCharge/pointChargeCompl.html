@@ -33,14 +33,31 @@
           결제 정보
         </span>
         
-        <span class="balance-point" data-th-text="${#numbers.formatInteger(beforeChangePoints, 0, 'COMMA') + ' P'}">
-          충전 전 포인트 100,000 P
-        </span>
-        <span class="charge-point" data-th-text="${#numbers.formatInteger(amount, 0, 'COMMA') + ' P'}">
-          충전 포인트 + 100,000 P
-        </span>
+        <div class="point-box">
+          <span>
+            기존 포인트
+          </span>
+          <span data-th-text="${#numbers.formatInteger(beforeChangePoints, 0, 'COMMA') + ' P'}">
+            충전 전 포인트 100,000 P
+          </span>
+        </div>
+
+        <div class="point-box">
+          <span>
+            충전 포인트 
+          </span>
+          <span data-th-text="${#numbers.formatInteger(amount, 0, 'COMMA') + ' P'}">
+            충전 포인트 + 100,000 P
+          </span>
+        </div>
+
         <hr>
-        <span class="current-point" data-th-text="${#numbers.formatInteger(currentPoint, 0, 'COMMA') + ' P'}">현재 포인트 100,000 P</span>
+        <div class="point-box">
+          <span>
+            현재 포인트
+          </span>
+          <span data-th-text="${#numbers.formatInteger(currentPoint, 0, 'COMMA') + ' P'}">현재 포인트 100,000 P</span>
+        </div>
       </div>
 
       <button class="check-btn">확인</button>
@@ -54,5 +71,7 @@
     푸터
   </footer>
 
+
+  <script src="/js/pointCharge/pointChargeCompl.js"></script>
 </body>
 </html>

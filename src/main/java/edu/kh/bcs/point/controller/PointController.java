@@ -1,11 +1,16 @@
 package edu.kh.bcs.point.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.point.dto.Point;
 import edu.kh.bcs.point.service.PointService;
@@ -37,34 +42,37 @@ public class PointController {
 	 * @return
 	 */
 	@PostMapping("charge")
-	public String PointCharge (
-			Model model) {
+	@ResponseBody
+	public int PointCharge (
+			@RequestBody int amount
+			) {
 		
-		
-//		@RequestParam("amount") int amount,
 		int memberNo = 1;
-		
-		System.out.println("asdasdasdasasd");		
-		System.out.println("asdasdasdasasd");		
-		System.out.println("asdasdasdasasd");		
-		System.out.println("asdasdasdasasd");		
-		System.out.println("asdasdasdasasd");		
-		
-		int amount = 100;
-		
-		log.debug("amount : {}", amount);
-		log.debug("amount : {}", amount);
-		log.debug("amount : {}", amount);
-		log.debug("amount : {}", amount);
-		log.debug("amount : {}", amount);
 		
 		int beforeChangePoints = 0;	// 로그인 세션에 담긴 값 가져오기
 		
-		int memberPoint = service.pointCharge(amount, memberNo);
+		int result = service.pointCharge(amount, memberNo);
+		
+		// 포인트 충전 전 포인트 반환
+		return beforeChangePoints;
+	}
+	
+	
+	@PostMapping("charge/compl")
+	public String PointChargeCompl (
+			@RequestParam("amount") int amount,
+			@RequestParam("beforeChangePoints") int beforeChangePoints,
+			Model model) {	
+		
+		int memberNo = 1;
+
+		int currentPoint = service.selectMemberPoint(memberNo);
+		
+		// 세션 동기화 과정 필요
 		
 		model.addAttribute("beforeChangePoints", beforeChangePoints);
+		model.addAttribute("currentPoint", currentPoint);
 		model.addAttribute("amount", amount);
-		model.addAttribute("currentPoint", memberPoint);
 		
 		return "pointCharge/pointChargeCompl";
 	}

@@ -18,15 +18,28 @@ public class PointServiceImpl implements PointService{
 
 	private final PointMapper mapper;
 	
+	/**
+	 * 포인트 충전
+	 */
 	@Override
 	public int pointCharge(int amount, int memberNo) {
 		
 		// 회원 정보 포인트 충전
 		int result1 = mapper.pointCharge(amount, memberNo);
 
-		
 		// 포인트 충전 내역 업데이트
 		int result2 = mapper.insertPointLog(amount, memberNo);
+		
+		return result2;
+	}
+	
+	
+	
+	/**
+	 * 포인트 충전 후 현재 포인트 조회
+	 */
+	@Override
+	public int selectMemberPoint(int memberNo) {
 		
 		return mapper.selectMemberPoint(memberNo);
 	}
