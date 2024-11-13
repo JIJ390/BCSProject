@@ -1,7 +1,5 @@
 package edu.kh.bcs.point.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.kh.bcs.point.dto.Point;
 import edu.kh.bcs.point.service.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,7 +44,7 @@ public class PointController {
 			@RequestBody int amount
 			) {
 		
-		int memberNo = 1;
+		int memberNo = 13;
 		
 		int beforeChangePoints = 0;	// 로그인 세션에 담긴 값 가져오기
 		
@@ -64,7 +61,7 @@ public class PointController {
 			@RequestParam("beforeChangePoints") int beforeChangePoints,
 			Model model) {	
 		
-		int memberNo = 1;
+		int memberNo = 13;
 
 		int currentPoint = service.selectMemberPoint(memberNo);
 		
