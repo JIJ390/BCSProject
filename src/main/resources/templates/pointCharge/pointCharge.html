@@ -11,7 +11,7 @@
 <body>
   
   <header>
-    헤더
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -29,8 +29,8 @@
       </div>
       <div class="point-charge-main-container">
         <div class="charge-box" id="chargeBox1">
-          <span class="point-check">10,000 P 충전</span>
-          <span class="money-check">10,000 ₩</span>
+          <span class="point-check">샘플 P 충전</span>
+          <span class="money-check">100 ₩</span>
         </div>
 
         <div class="charge-box" id="chargeBox2">
@@ -65,10 +65,10 @@
     </section>
   </main>
   <footer>
-    푸터
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
-  <script src="/js/pointCharge/pointCharge.js"></script>
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <script src="/js/pointCharge/pointCharge.js"></script>
 </body>
 </html>

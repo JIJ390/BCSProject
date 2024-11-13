@@ -4,6 +4,21 @@ import edu.kh.bcs.point.dto.Point;
 
 public interface PointService {
 	
-	public Point pointCharge();
+	
+	/**
+	 * 포인트 충전
+	 * @param amount
+	 * @param memberNo
+	 * @return
+	 */
+	public int pointCharge(int amount, int memberNo);
+
+	
+	/**
+	 * 포인트 충전 후 현재 포인트 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public int selectMemberPoint(int memberNo);
 
 }
