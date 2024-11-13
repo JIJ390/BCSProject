@@ -14,6 +14,30 @@
   font-family: 'Pretendard-Regular';
 }
 
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+main {
+  width: 1600px;
+
+  padding-top: 80px;
+}
+
+.left-section, .main-section, .right-section {
+  margin-top: 80px;
+}
+
+
+header {
+  background-color: var(--main-gray-color);
+}
+
+
 /* 메인 헤더 */
 .main-header {
   display: flex;
@@ -22,16 +46,16 @@
   padding: 20px 40px; /* 좌우 여백을 약간 넓게 설정 */
   gap: 20px; /* 내부 요소 간 간격 조절 */
   font-size: 20px;
-  
 }
 
 header{
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 1000; /* 헤더가 다른 요소 위에 나타나도록 z-index 설정 */
+  z-index: 1000; 
   opacity: 0.98;
-}
+  height: 80px;
+} 
 
 img{
   display: flex;
@@ -99,13 +123,13 @@ img{
   z-index: 1000;
   font-size: 43px;
   padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 600px;
+  height: 72vh;
 }
 
 .header-nav .dep1 .dropdown li {
   display: block;
   padding: 10px;
-  margin-left: 80px;
+  margin-left: 30px;
 }
 
 .header-nav .dep1 .dropdown li a {
@@ -166,9 +190,74 @@ main{
   width: 1000px;
   display: flex;
   flex-direction: column;
-
-
   align-items: center;
-
-
 }
+
+.sideMenuContainer{
+  width: 60%;
+  margin-left: 70px;
+  margin-top: 20px;
+}
+
+.dropdownContainor{
+  display: flex;
+  flex-direction: row;
+}
+
+/* 밑줄 표시를 위한 active 클래스 추가 */
+#galaxy-content li.active {
+  text-decoration: underline; /* 밑줄 표시 */
+  font-weight: bold; /* 클릭된 항목을 강조하기 위해 굵게 표시 */
+}
+
+#phoneModels{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.phoneModels-box{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: 1200px;
+}
+
+#selectionMessage{
+  font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.sideItem {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.1s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.bcs.point.mapper.PointMapper">
   	
+  	
+  	<!-- 회원 테이블 업데이트 -->
+	<update id="pointCharge">
+  		UPDATE "MEMBER"
+  		SET 
+  			MEMBER_POINT = MEMBER_POINT + #{amount}
+  		WHERE 
+  			MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 포인트 내역 입력 -->
+	<insert id="insertPointLog">
+		INSERT INTO "POINT_LOG"
+		VALUES (SEQ_POINT_LOG_NO.NEXTVAL,
+				(SELECT MEMBER_POINT
+				 FROM "MEMBER"
+				 WHERE MEMBER_NO = #{memberNo}),
+				'포인트 충전', 
+				#{amount}, DEFAULT, #{memberNo})
+	</insert>
+  	
+  	
+  	<!-- 회원 현재 포인트 조회 -->
+  	<select id="selectMemberPoint">
+  		SELECT MEMBER_POINT
+  		FROM
+  			"MEMBER"
+  		WHERE
+  			MEMBER_NO = #{memberNo}
+  	</select>
 </mapper>
