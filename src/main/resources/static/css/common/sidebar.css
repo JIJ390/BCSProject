@@ -8,7 +8,11 @@
   right: 70px;
 
   overflow: hidden;
+  background-color: #1d1d1f;
+
 }
+
+
 
 .sidebar-div {
   width: 350px;
@@ -20,6 +24,8 @@
   right: 120px;
   transition: 0.3s;
   border-radius: 20px;
+  display: none;
+  box-shadow: 5px 10px #888888;
 }
 
 .sidebar-div-content {
@@ -79,7 +85,7 @@
   align-items: center;
 }
 
-.sidebar-profile-footer > div{
+.sidebar-profile-footer>div {
   display: flex;
   justify-content: space-between;
   align-items: center;

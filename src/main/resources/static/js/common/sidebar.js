@@ -3,14 +3,20 @@ const sidebarDiv = document.querySelector(".sidebar-div");
 sidebarButton.addEventListener('click', () => {
   if (sidebarDiv.classList.contains("divHidden")) {
     sidebarDiv.classList.remove("divHidden");
-    sidebarDiv.style.transform = 'translate(0px, -10px)'
-    sidebarDiv.style.opacity = 1;
+    setTimeout(() => {
+      sidebarDiv.style.opacity = 1;
+      sidebarDiv.style.transform = 'translate(0px, -10px)'
+    }, 50); 
+    sidebarDiv.style.display = "block"
 
   }
   else {
     sidebarDiv.classList.add("divHidden");
     sidebarDiv.style.opacity = 0;
     sidebarDiv.style.transform = 'translate(0px, 10px)'
+    setTimeout(() => {
+      sidebarDiv.style.display = "none"
+    }, 50);
   }
 })
 
@@ -140,7 +146,7 @@ const getSidebarProfileBtn = () => {
     document.querySelector(".sidebar-profile-emailBtn").style.backgroundColor = "rgb(71, 71, 71)";
     document.querySelector(".sidebar-profile-footer-button2").style.transform = "translate(0, 0)";
   }
-  else{
+  else {
     document.querySelector(".sidebar-profile-emailBtn").style.backgroundColor = "green";
     document.querySelector(".sidebar-profile-footer-button2").style.transform = "translate(19px, 0)";
   }
