@@ -6,13 +6,20 @@ section{
 html, body, main {
   background-color: var(--main-gray-color);
 
-  width: 1600px;
-  height: 100%;
-
   margin: 0 auto;
+
+  color: var(--font-color);
 }
 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
+}
 
 .point-charge-compl-head {
   width: 100%;
@@ -84,7 +91,7 @@ hr {
   width: 400px;
   height: 60px;
 
-  margin: 80px;
+  margin-top: 80px;
 
   background-color: var(--white-color);
   border: none;

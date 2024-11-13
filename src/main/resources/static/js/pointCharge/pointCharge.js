@@ -120,7 +120,7 @@ const requestPay = (paidAmount) => {
 			let message = '결제에 실패하였습니다.\n';
 			message += '에러 내용 : ' + rsp.error_msg;
 
-      alert(msg);
+      alert(message);
 		}
 	});
 } 

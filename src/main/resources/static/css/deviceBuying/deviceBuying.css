@@ -1,16 +1,19 @@
-section{  
-  /* border: 1px solid black;  */
-}
-
 
 html, body, main {
   background-color: var(--main-gray-color);
 
-  width: 1600px;
-
   margin: 0 auto;
 
   color: var(--font-color);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
 }
 
 .device-buying-head {

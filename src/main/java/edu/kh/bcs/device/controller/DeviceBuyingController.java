@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DeviceBuyingController {
 
 	@GetMapping("")
-	public String deviceDetailView() {
+	public String deviceBuyView() {
 		
 		return "deviceBuying/deviceBuying";
 		

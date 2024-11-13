@@ -11,7 +11,7 @@
 <body>
   
   <header>
-    헤더
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -19,7 +19,7 @@
     </section>
     <section class="main-section">
       <div class="device-selling-head">
-        <span class="page-title">
+        <span class="page-title" th:text="${device.deviceName}">
           iPhone 16
         </span>
         <span class="page-title-sub">
@@ -36,8 +36,11 @@
             <span>색상. </span>
             <span>색상을 선택하세요</span>
           </div>
-          <div class="color-content">
-            a a a a a a a 
+          <div class="color-content" >
+
+            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:value="*{colorNo}" th:each="color:${device.colorList}" th:object="${color}">
+            </div>
+
           </div>
 
           <div class="info-title">
@@ -46,20 +49,14 @@
           </div>
           <div class="capacity-content">
 
-            <div class="select-box">
-              <span>128 GB</span>
-              <span>+ 0 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>256 GB</span>
-              <span>+ 100,000 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>512 GB</span>
-              <span>+ 200,000 ₩</span>
-            </div>
+            <th:block th:each="capacity:${device.capacityList}" th:object="${capacity}">
+              <div class="select-box capacity-box" th:data-value="*{capacityPrice}">
+                <span th:text="*{capacityType}">B 등급</span>
+                <span th:text="|+ *{#numbers.formatInteger(capacityPrice, 0, 'COMMA')} ₩|">+ 0 ₩</span>
+              </div>
+
+            </th:block>
+
           </div>
 
           <div class="info-title">
@@ -68,28 +65,22 @@
           </div>
           <div class="grade-content">
 
-            <div class="select-box">
-              <span>B 등급</span>
-              <span>+ 0 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>A 등급</span>
-              <span>+ 100,000 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>S 등급</span>
-              <span>+ 200,000 ₩</span>
-            </div>
+            <th:block th:each="grade:${device.gradeList}" th:object="${grade}">
+              <div class="select-box grade-box" th:data-value="*{gradeScale}">
+                <span th:text="|*{gradeType} 등급|">B 등급</span>
+                <span th:text="|+ *{#numbers.formatInteger(gradeScale, 0, 'COMMA')} ₩|">+ 0 ₩</span>
+              </div>
+  
+            </th:block>
+
 
           </div>
 
         </div>
       </div>
 
-      <span class="selling-span1">판매하려는 iPhone 16 의 예상 가격</span>
-      <span class="selling-span2">1,234,567 ₩</span>
+      <span class="selling-span1" th:text="|판매하려는 *{device.deviceName} 의 예상 가격|">판매하려는 iPhone 16 의 예상 가격</span>
+      <span class="selling-span2" th:text="|${#numbers.formatInteger(device.deviceSellingPrice, 0, 'COMMA')} ₩|">1,234,567 ₩</span>
 
       <hr>
 
@@ -102,9 +93,11 @@
       라이트 섹션
     </section>
   </main>
+
   <footer>
-    푸터
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+  <script src="/js/deviceSelling/deviceSelling.js"></script>
 </body>
 </html>
