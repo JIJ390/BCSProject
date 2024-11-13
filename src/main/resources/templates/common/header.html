@@ -13,7 +13,7 @@
 <body>
     <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
       <!-- Header -->
-      <header class="main-header">
+      <header id="mainHeader" class="main-header">
         <nav class="header-nav">
             <ul><a href="#"><img src="/images/logo.png" alt=""></a></ul>
             <ul class="dep1">
@@ -29,12 +29,22 @@
                             <div class="sideMenuContainer">
                                 <div class="sideMenu1">
                                     <h5 style="margin-bottom: 5px;">판매하기</h5>
+                                    <span style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
                                 </div>
                                 <div class="sideMenu2" id="galaxy-content">
-                                    <ul>
-                                        <li>갤럭시 S24 Ultra</a></li>
-                                        <li>갤럭시 S24 Plus</a></li>
-                                        <li>갤럭시 S24</li>
+                                    <p id="selectionMessage" style="display: none; margin-top: 30px; font-weight: bold;">종류별</p>
+                                    <ul id="phoneModels" style="display: none;">
+                                        <div class="phoneModels-box">
+                                            <li>갤럭시 S24 Ultra</li>
+                                            <li>갤럭시 S24 Plus</li>
+                                            <li>갤럭시 S24</li>
+                                        </div>
+                                        <div class="phoneModels-box">
+                                            <li>갤럭시 Z폴드6 5G</li>
+                                            <li>갤럭시 Z폴드5 5G</li>
+                                            <li>갤럭시 Z플립6 5G</li>
+                                            <li>갤럭시 Z플립5 5G</li>
+                                        </div>
                                     </ul>
                                 </div>
                                 <div class="sideMenu3"></div>
