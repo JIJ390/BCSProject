@@ -16,8 +16,10 @@ public class HelpController {
 	/* 고객센터 페이지로 전환 */
 	@GetMapping("help")
 	public String help() {
-		return "help";
+		return "help/faq";
 	}
+	
+	
 	
 	
 	

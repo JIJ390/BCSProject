@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ</title>
   <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
-  <link rel="stylesheet" href="../../static/css/help/help.css">
+  <link rel="stylesheet" href="/css/help/help.css">
+  
 
 </head>
 <body>
@@ -14,42 +15,65 @@
     <th:block th:replace="~{common/header}"></th:block>
 
   </header>
-  <h1>테스트</h1>
-  <section class="page-info">고객센터 > FAQ</section>
-  <section class="helpView">
-    <div class="help-container">
-      <div class="button-area">
-          <div class="helpIconBox">
-            <img src="../../static/images/help/notice.png"><br>
-            공지사항
-          </div>
-
-          <div class="helpIconBox">
-            <img src="../../static/images/help/faq.png"><br>
-            FAQ
-          </div>
-
-          <div class="helpIconBox">
-            <img src="../../static/images/help/event.png"><br>
-            이벤트
-          </div>
+  <main>
+    <section class="page-info">
+      <span>고객센터 > FAQ</span>
+    </section>
+    <section class="helpView">
+      <div class="help-container">
+        <div class="button-area">
+            <div class="helpIconBox">
+              <img src="/images/help/notice.png">
+              <div class="iconText">공지사항</div>
+            </div>
+  
+            <div class="helpIconBox">
+              <img src="/images/help/faq.png">
+              <div class="iconText">FAQ</div>
+            </div>
+  
+            <div class="helpIconBox">
+              <img src="/images/help/event.png">
+              <div class="iconText">이벤트</div>
+            </div>
+        </div>
+        <div class="faq-list-area">
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+          <div class="faq"><span>Q</span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
+          <hr>
+          <div class="faq-open">답변 내용 넣기</div>
+        </div>
+        <div class="more-help-area">이 외 문의는 여기로 보내 주세요.</div>
       </div>
-      <div class="faq-list-area">
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-        <div class="faq"><span>Q</span><span>궁금한 점 리스트</span><span>▼</span></div>
-        <div class="faq-open">답변 내용 넣기</div>
-      </div>
-      <div class="more-help-area">이 외 문의는 여기로 보내 주세요.</div>
-    </div>
-  </section>
+    </section>
+  </main>
+
+  <script>
+    const haederNav =  document.getElementsByClassName("header-nav")[0];
+    const pageInfoSpan = document.querySelector(".page-info > span");
+
+    const movePageIngo = () => {
+      const rect = haederNav.getBoundingClientRect();
+      pageInfoSpan.style.marginLeft = rect.x + 'px';
+    }
+
+    window.addEventListener("resize", movePageIngo);
+
+    movePageIngo();
+  </script>
 </body>
 </html>

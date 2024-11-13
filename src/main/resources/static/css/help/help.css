@@ -2,14 +2,37 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Pretendard-Regular';
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+main{
+  margin-top: 130px;
+  flex-direction: column;
+}
+
+.page-info{
+  width: 100vh;
+}
+
+.page-info > span{
+  background-color: aqua;
 }
 
 .helpView{
-  display: flex;
   background-color: #c9c9c9;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
+/* 영역 감싸는 컨테이너 */
 .help-container{
   width: 900px;
   height: 1800px;
@@ -19,24 +42,33 @@
 /* 아이콘 있는 영역 */
 .button-area{
   width: 900px;
-  height: 150px;
+  /* height: 150px; */
   background-color: #fff;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
+  padding: 30px;
+}
+
+.iconText{
+  margin-top: 10px;
 }
 
 /* 아이콘과 버튼 감싸는 박스 */
 .helpIconBox{
-  width: 100px;
+  /* width: 100px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* FAQ 내용 리스트 출력 */
 .faq-list-area{
   width: 900px;
-  height: 500px;
   background-color: #7d90e4;
+  margin-top: 15;
 }
 
 .faq{
@@ -44,6 +76,7 @@
   width: 900px;
   height: 34px;
   align-items: center;
+  margin: 10px 10px;
 }
 
 .faq > span:first-child{
@@ -65,12 +98,16 @@
 /* FAQ 답변 */
 .faq-open{
   background-color: #e7e7e7;
+  padding: 15px;
   display: none;
 }
 
 
+/* 그외문의 영역 */
 .more-help-area{
-  width: 900px;
+  width: 800px;
   height: 200px;
   background-color: #d193fa;
+  margin-top: 15px;
+  margin-left: 10px;
 }
