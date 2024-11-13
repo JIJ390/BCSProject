@@ -102,15 +102,17 @@ ul{
   position: absolute;
   display: flex;
   flex-direction: column;
-  height: 180px;
+  height: -1%;
   border: 1px solid black;
   border-radius: 30px;
   width: 150px;
   justify-content: center;
-  gap: 5PX;
   background-color: var(--main-gray-color);
   cursor: pointer;
-  gap: 5px;
+}
+.status > p{
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 .status-hiden{
   display: none;

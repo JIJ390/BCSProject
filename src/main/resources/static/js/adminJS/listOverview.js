@@ -22,8 +22,8 @@ for (let i = 0; i < listBtn.length; i++) {
 
 
 /* p 태그 감싸고 있는 div */
+const divElement = document.querySelectorAll(".status");
 for (let e = 0; e < divElement.length; e++) {
-    const divElement = document.querySelectorAll(".status");
     /* p 태그 */
     const pElements = divElement[e].querySelectorAll("p");
     /* p 태그 반복문 */
@@ -36,23 +36,27 @@ for (let e = 0; e < divElement.length; e++) {
     }
 }
 
+for (let i = 0; i < listBtn.length; i++) {
+    listBtn[i]?.addEventListener("click", () => {
+        // 열려있는 뷰를 모두 닫음
+        for (let j = 0; j < statusHiden.length; j++) {
+            statusHiden[j].style.display = "none";
+            arrow[j].innerText = "△";
+        }
 
-// --------------------------------------------------------- 오버뷰다른요소 클릭시 꺼짐
-document.addEventListener("DOMContentLoaded", () => {
-    addEventListener("click", e => {
-        console.log(e.target)
-
-        if (e.target.classList.contains("status")) return;
-
-        const elements = status?.querySelectorAll("*");
-
-        let flag = true;
-        elements?.forEach(item => { // 클릭된 요소가 열려있는 신고 팝업의 후손인 경우 
-            if (item == e.target) {
-                flag = false;
-                return;
-            }
-        })
-        if(flag)  status.classList.add("status-hiden");
+        // 클릭한 뷰를 열음
+        if (statusHiden[i].style.display === "none") {
+            statusHiden[i].style.display = "block";
+            arrow[i].innerText = "▼";
+        }
     });
-})
+}
+// 바깥쪽 영역을 눌렀을 때 뷰가 꺼지게 하기
+document.addEventListener("click", (event) => {
+    if (!event.target.closest(".list-btn") && !event.target.closest(".status-hiden")) {
+      for (let i = 0; i < statusHiden.length; i++) {
+        statusHiden[i].style.display = "none";
+        arrow[i].innerText = "△";
+      }
+    }
+  });
