@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>배최성 표준 html </title>
-  <link rel="stylesheet" href="/css/signUp/signUp.css">
-  <link rel="stylesheet" href="/css/signUp/header.css">
-  <link rel="stylesheet" href="/css/signUp/footer.css">
+  <link rel="stylesheet" href="/css/myPage/signUp.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="/css/common/footer.css">
 </head>
 <body>
   
@@ -23,23 +23,31 @@
     <div  class="signup-box-confirm"> <!-- 회원가입 박스 -->
         <div style="text-align: center;">배최성 계정 만들기</div><br>
 
-        <form>
+        <form >
           <div class="input-group">
               <label for="email">이메일</label>
-              <input type="email" id="email" placeholder="이메일">
+              <input type="email" id="memberEmail" placeholder="이메일">
               <button type="button" class="btn-email">인증번호 받기</button>
+          </div>
+          <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+
+          <div class="input-group">
+              <label for="email">이메일인증</label>
+              <input type="text" id="email" placeholder="인증번호를 입력해주세요.">
+              <button type="button" class="btn-email-confirm">인증하기</button>
           </div>
 
           <div class="input-group">
               <label for="username">아이디</label>
-              <input type="text" id="username" placeholder="아이디를 입력해주세요.">
-              <button type="button" class="btn-idCheck">중복확인</button>
+              <input type="text" id="memberId" placeholder="아이디를 입력해주세요.">
           </div>
+          <span class="signUp-message" id="idMessage">영어,숫자 6글자~14글자 사이로 입력해주세요.</span>
 
           <div class="input-group">
               <label for="password">비밀번호</label>
               <input type="password" id="password" placeholder="비밀번호">
           </div>
+          <span class="signUp-message" id="pwMessage">영어,숫자,특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.</span>
 
           <div class="input-group">
               <label for="password-confirm">비밀번호 확인</label>
@@ -48,13 +56,15 @@
 
           <div class="input-group">
               <label for="phoneNumber">휴대폰번호</label>
-              <input type="text" id="phoneNumber" placeholder="휴대폰번호">
-          </div>
+              <input type="text" id="phoneNumber" placeholder="(- 없이 숫자만 입력)">
+            </div>
+            <span class="signUp-message" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
 
           <div class="input-group">
-              <label for="nickname">닉네임</label>
-              <input type="text" id="nickname" placeholder="닉네임">
+              <label for="nickname">이름</label>
+              <input type="text" id="memberNickname" placeholder="이름">
           </div>
+          <span class="signUp-message" id="nickMessage">이름을 입력해주세요</span>
 
           <div class="input-group">
               <label for="address">주소</label>
@@ -64,8 +74,8 @@
               <input type="text" id="detail-address" placeholder="상세 주소">
           </div>
 
-          <button type="submit" class="signup-button-create">가입하기</button>
-      </form>
+          <button type="button" class="signup-button-create">가입하기</button>
+        </form>
         
        
     </div>
@@ -80,4 +90,6 @@
   </footer>
 
 </body>
+<script src="/js/myPage/signUp.js"></script>
+
 </html>
