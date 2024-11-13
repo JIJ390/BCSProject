@@ -293,6 +293,8 @@ main{
   flex-direction: row;
 }
 
+
+
 /* 밑줄 표시를 위한 active 클래스 추가 */
 #galaxy-content li.active {
   text-decoration: underline; /* 밑줄 표시 */
@@ -333,7 +335,6 @@ main{
   font-size: 14px;
   transition: color 0.1s ease;
 }
-
 
 
 
