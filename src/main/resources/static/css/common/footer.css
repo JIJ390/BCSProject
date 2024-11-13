@@ -15,26 +15,29 @@
 }
 
 
-
 .footer1{
   background-color: #f0f0f0;
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
   height: 200px;
-  width: 100vw;
+  width: 98vw;
 }
 
 .col1, .col3{
   height: 80px;
-  width: 89px;
+}
+
+.col1{
+  height: 80px;
+  width: 20vw;
 }
 
 .col2{
   flex-grow: 1;
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 98vw;
 }
 
 
@@ -50,7 +53,7 @@
   display: flex;
   justify-content: space-between;
   height: 80px;
-  width: 100vw;
+  width: 100%;
 
 }
 
@@ -60,7 +63,3 @@
   text-decoration: none;
 }
 
-
-.footer-copy{
-  display: flex;
-}
