@@ -61,29 +61,24 @@ hr {
   text-align: left;
 }
 
-.balance-point {
+.point-box {
   width: 100%;
+
+  display: flex;
+  align-items: end;
+  justify-content: end;
+
+}
+
+.point-box >span {
+  width: 20%;
   font-size: 22px;
 
   padding: 10px;
   text-align: right;
 }
 
-.charge-point {
-  width: 100%;
-  font-size: 22px;
 
-  padding: 10px;
-  text-align: right;
-}
-
-.current-point {
-  width: 100%;
-  font-size: 22px;
-
-  padding: 10px;
-  text-align: right;
-}
 
 .check-btn {
   width: 400px;

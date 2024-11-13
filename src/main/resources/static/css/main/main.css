@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-header {
+#mainHeader {
   background-color: white;
 }
 
@@ -121,8 +121,8 @@ a {
 
 .slideFontSize{
   font-size: 100px;
-  margin-right: 800px;
-  margin-top: 400px;
+  margin-right: 50vw;
+  margin-top: 30vh;
 }
 
 img {

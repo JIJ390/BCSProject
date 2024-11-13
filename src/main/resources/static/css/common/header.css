@@ -14,6 +14,28 @@
   font-family: 'Pretendard-Regular';
 }
 
+html, body, main {
+  background-color: var(--main-gray-color);
+
+  margin: 0 auto;
+
+  color: var(--font-color);
+}
+
+main {
+  width: 1600px;
+
+  padding-top: 80px;
+}
+
+.left-section, .main-section, .right-section {
+  margin-top: 80px;
+}
+
+
+header {
+  background-color: var(--main-gray-color);
+}
 
 
 /* 메인 헤더 */
@@ -24,16 +46,16 @@
   padding: 20px 40px; /* 좌우 여백을 약간 넓게 설정 */
   gap: 20px; /* 내부 요소 간 간격 조절 */
   font-size: 20px;
-  
 }
 
 header{
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 1000; /* 헤더가 다른 요소 위에 나타나도록 z-index 설정 */
+  z-index: 1000; 
   opacity: 0.98;
-}
+  height: 80px;
+} 
 
 img{
   display: flex;
@@ -78,6 +100,8 @@ img{
   text-decoration: none;
 }
 
+
+/* ------------------------------------------------------------------------ */
 /* 드롭다운 메뉴 스타일 */
 .header-nav .dep1 {
   position: relative;
@@ -107,7 +131,7 @@ img{
 .header-nav .dep1 .dropdown li {
   display: block;
   padding: 10px;
-  margin-left: 80px;
+  margin-left: 30px;
 }
 
 .header-nav .dep1 .dropdown li a {
@@ -127,22 +151,109 @@ img{
 .header-nav .dep1 .dropdown:hover ~ .overlay {
   display: block;
 }
-
-/* 오버레이 기본 스타일 (흐림 효과용) */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* 반투명 검정색 */
-  backdrop-filter: blur(5px); /* 흐림 효과 */
-  display: none; /* 기본적으로 숨김 */
-  z-index: 500; /* 드롭다운 아래에 위치하도록 설정 */
-
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* 드롭다운 메뉴 스타일 */
+.header-nav .dep2 {
+  position: relative;
+  z-index: 1000; /* 드롭다운이 오버레이 위에 표시되도록 */
 }
 
+.header-nav .dep2 > a {
+  padding: 10px;
+  cursor: pointer;
+}
 
+/* 드롭다운 스타일 */
+.header-nav .dep2 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: #ffffff;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 72vh;
+}
+
+.header-nav .dep2 .dropdown li {
+  display: block;
+  padding: 10px;
+  margin-left: 30px;
+}
+
+.header-nav .dep2 .dropdown li a {
+  color: #1D1D1F;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* hover 시 드롭다운 표시 */
+.header-nav .dep2:hover .dropdown,
+.header-nav .dep2:hover ~ .overlay,
+.header-nav .dep2 .dropdown:hover {
+  display: block;
+}
+
+.header-nav .dep2:hover ~ .overlay,
+.header-nav .dep2 .dropdown:hover ~ .overlay {
+  display: block;
+}
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* 드롭다운 메뉴 스타일 */
+.header-nav .dep3 {
+  position: relative;
+  z-index: 1000; /* 드롭다운이 오버레이 위에 표시되도록 */
+}
+
+.header-nav .dep3 > a {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* 드롭다운 스타일 */
+.header-nav .dep3 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: #ffffff;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 72vh;
+}
+
+.header-nav .dep3 .dropdown li {
+  display: block;
+  padding: 10px;
+  margin-left: 30px;
+}
+
+.header-nav .dep3 .dropdown li a {
+  color: #1D1D1F;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* hover 시 드롭다운 표시 */
+.header-nav .dep3:hover .dropdown,
+.header-nav .dep3:hover ~ .overlay,
+.header-nav .dep3 .dropdown:hover {
+  display: block;
+}
+
+.header-nav .dep3:hover ~ .overlay,
+.header-nav .dep3 .dropdown:hover ~ .overlay {
+  display: block;
+}
+/* ------------------------------------------------------------------------ */
 
 
 :root{
@@ -171,7 +282,7 @@ main{
   align-items: center;
 }
 
-.info1{
+.sideMenuContainer{
   width: 60%;
   margin-left: 70px;
   margin-top: 20px;
@@ -181,4 +292,62 @@ main{
   display: flex;
   flex-direction: row;
 }
+
+
+
+/* 밑줄 표시를 위한 active 클래스 추가 */
+#galaxy-content li.active {
+  text-decoration: underline; /* 밑줄 표시 */
+  font-weight: bold; /* 클릭된 항목을 강조하기 위해 굵게 표시 */
+}
+
+#buy_phoneModels{
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.buy_phoneModels-box{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: 1200px;
+}
+
+#selectionMessage{
+  font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.sideItem {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.1s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
