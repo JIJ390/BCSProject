@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
 
 	@GetMapping("myPageLogin")
-	public String project() {
+	public String myPageLogin() {
 		
 		
 		
@@ -17,24 +17,37 @@ public class MyPageController {
 	}
 	
 	
-	@GetMapping("signUpAccount")
-	public String signUpAccount() {
+	@GetMapping("myPageMain")
+	public String myPageMain() {
+			
 		
 		
-		
-		return "student/signUpAccount";
+		return "myPage/myPageMain";
 	}
 	
-	@GetMapping("signUpAccountConfirm")
-	public String signUpAccountConfirm() {
 	
-		return "student/signUpAccountConfirm";
+	@GetMapping("myPageUpdate")
+	public String myPageUpdate() {
+		
+		return "myPage/myPageupdate";
 	}
 	
-	@GetMapping("signUpCreate")
-	public String signUpCreate() {
+	@GetMapping("myPageOrderHistory")
+	public String myPageOrderHistory() {
 		
-		return "student/signUpCreate";
+		return "myPage/myPageOrderHistory";
+	}
+	
+	@GetMapping("myPageSalesHistory")
+	public String myPageSalesHistory() {
+		
+		return "myPage/myPageSalesHistory";
+	}
+	
+	@GetMapping("myPagePointHistory")
+	public String myPagePointHistory() {
+		
+		return "myPage/myPagePointHistory";
 	}
 	
 }
