@@ -117,8 +117,14 @@ ul{
 }
 .list-btn{
   cursor: pointer;
+  justify-content: center;
 }
 
 #category-top{
   padding-bottom: 10px;
+}
+
+
+.list-btn, .arrow {
+  display: inline-block;
 }

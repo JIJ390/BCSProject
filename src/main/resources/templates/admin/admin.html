@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>배최성 표준 html </title>
   <link rel="stylesheet" href="/css/admin/header.css">
-    <link rel="stylesheet" href="/css/admin/admin.css">
-  <link rel="stylesheet" href="/css/admin/admin-header.css">
+  <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
 <body>
   
@@ -16,26 +15,7 @@
 <div class="blur-box">
   <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
   <!-- Header -->
-  <header class="main-header">
-    <nav class="header-nav">
-        <ul><a href="#"><img src="images/logo(login).png" alt=""></a></ul>
-        <ul class="dep1">
-            <a href="#">쇼핑하기</a>
-            <ul class="dropdown">
-                <li><a href="#">Galaxy Phone</a></li>
-                <li><a href="#">iPhone</a></li>
-                <li><a href="#">Galaxy Tab</a></li>
-                <li><a href="#">iPad</a></li>
-            </ul>
-        </ul>
-        <ul class="dep2"><a href="#">판매하기</a></ul>
-        <ul><a href="#">고객센터</a></ul>
-    </nav>
-    <div class="header-auth">
-        <input type="text" placeholder="" />
-        <a href="#">로그인</a> | <a href="#">회원가입</a>
-    </div>
-</header>
+  <th:block th:replace="~{common/header}"></th:block>
 </div>
     <!-- <section class="left-section">
       레프트 섹션
