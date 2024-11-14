@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.help.mapper.HelpMapper">
+  	
+  	<!-- 게시글 조회 -->
+  	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM "NOTICE"
+	</select>
+	
+	<!-- 리스트 불러오기 -->
+	<select id="selectNoticeList">
+		SELECT
+			NOTICE_NUMBER,
+			ROW_NUMBER() OVER (ORDER BY NOTICE_NUMBER ASC) "RNUM",
+			NOTICE_TITLE,
+			TO_CHAR(NOTICE_WRITE_DATE, 'YYYY-MM-DD') AS "NOTICE_WRITE_DATE"
+		FROM NOTICE
+		WHERE NOTICE_NUMBER > 0
+		ORDER BY NOTICE_NUMBER DESC
+	</select>
+  	
+</mapper>
