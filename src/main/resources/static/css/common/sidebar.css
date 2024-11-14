@@ -26,6 +26,7 @@
   border-radius: 20px;
   display: none;
   box-shadow: 5px 10px #888888;
+  z-index: 1000;
 }
 
 .sidebar-div-content {

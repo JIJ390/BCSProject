@@ -1,0 +1,33 @@
+<th:block th:if= "${cpCount}">
+  <input type="hidden" class="getCpCount" th:value="${cpCount}">
+  
+  <button class="pn-1"><i class="fa-solid fa-backward-fast"></i></button>
+  <button class="pn-2"><i class="fa-solid fa-caret-left"></i></button>
+  
+  <div class="pnNumber">
+    <th:block th:each= "pn:${pnList}">
+    
+      <button class="pnBtn"><p class="pnValue" th:text="${pn}"></p></button>
+    
+    </th:block>
+    
+  </div>
+  
+  <th:block th:if= "${lastIndex == 0}">
+        <button><p>...</p></button>
+        <button class="pn-5"><p th:text="${cpCount}"></p></button>
+  </th:block>
+  
+  <button class="pn-3"><i class="fa-solid fa-caret-right"></i></button>
+  <button class="pn-4"><i class="fa-solid fa-forward-fast"></i></i></div>
+  </th:block>
+  <th:block th:unless= "${cpCount}">
+
+    <button><i class="fa-solid fa-backward-fast"></i></button>
+    <button><i class="fa-solid fa-caret-left"></i></button>
+
+    <button><p>0</p></button>
+    
+    <button><i class="fa-solid fa-caret-right"></i></button>
+    <button><i class="fa-solid fa-forward-fast"></i></i></div>
+</th:block>
