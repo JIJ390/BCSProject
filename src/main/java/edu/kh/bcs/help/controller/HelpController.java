@@ -11,12 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("help")
 public class HelpController {
 
 	/* 고객센터 페이지로 전환 */
-	@GetMapping("help")
+	@GetMapping("")
 	public String help() {
-		return "help/faq";
+		return "help/notice";
 	}
 	
 	

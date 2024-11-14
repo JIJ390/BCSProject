@@ -12,6 +12,11 @@
   font-style: normal;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 main{
   margin-top: 130px;
   flex-direction: column;
@@ -21,12 +26,9 @@ main{
   width: 100vh;
 }
 
-.page-info > span{
-  background-color: aqua;
-}
+
 
 .helpView{
-  background-color: #c9c9c9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,15 +37,12 @@ main{
 /* 영역 감싸는 컨테이너 */
 .help-container{
   width: 900px;
-  height: 1800px;
-  background-color: #ffb4b4;
 }
 
 /* 아이콘 있는 영역 */
 .button-area{
   width: 900px;
   /* height: 150px; */
-  background-color: #fff;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -67,7 +66,6 @@ main{
 /* FAQ 내용 리스트 출력 */
 .faq-list-area{
   width: 900px;
-  background-color: #7d90e4;
   margin-top: 15;
 }
 
@@ -98,16 +96,25 @@ main{
 /* FAQ 답변 */
 .faq-open{
   background-color: #e7e7e7;
+  height: 150px;
   padding: 15px;
-  display: none;
+  /* display: none; */
 }
 
 
 /* 그외문의 영역 */
 .more-help-area{
   width: 800px;
-  height: 200px;
-  background-color: #d193fa;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-left: 10px;
+  margin-bottom: 50px;
+}
+
+.more-help-area > span{
+  padding: 10px;
+  color: rgb(129, 129, 129);
+}
+
+.more-help-area > span:first-child{
+  margin-left: 30px;
 }
