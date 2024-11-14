@@ -1,7 +1,11 @@
 
-html, body, main {
+ main {
   width: 1600px;
+  background-color: #D9D9D9;
   margin: 0 auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 
 }
 html{

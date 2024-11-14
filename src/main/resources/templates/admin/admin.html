@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,24 @@
   <link rel="stylesheet" href="/css/admin/header.css">
   <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
-<body>
-  
-  
 
+<body>
+
+
+
+  <div class="blur-box">
+    <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
+    <!-- Header -->
+    <th:block th:replace="~{common/header}"></th:block>
+  </div>
   <main>
-<div class="blur-box">
-  <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
-  <!-- Header -->
-  <th:block th:replace="~{common/header}"></th:block>
-</div>
     <!-- <section class="left-section">
       레프트 섹션
     </section> -->
 
     <section class="main-section">
 
-      <div class="photo">
-        <img src="images/header.jpg" alt="header사진" class="header-img">
-      </div>
+      <img src="images/header.jpg" alt="header사진" class="header-img">
 
       <h2 class="page-message">관리자 페이지</h2>
       <hr>
@@ -34,66 +34,66 @@
       <div class="box-out">
         <!-- 첫번째 줄 -->
         <div class="box-in">
-                <div>          
-                  <a href="asd">                  
-                  <div class="box-list"><img src="images/user.jpg" alt=""></div>
-                  </a>
-                  <p>회원관리</p>
-                </div>
-          <div>    
-            <a href="asd">                  
-              <div class="box-list"><img src="images/list.png" alt=""></div>
-              </a>
-            <p>게시글 관리</p>
+          <div>
+            <a href="asd">
+              <div class="box-list"><img src="images/user.jpg" alt=""></div>
+            </a>
+            <p>회원관리</p>
           </div>
-          <div>         
-            <a href="asd">                  
+          <form action="admin/adminBoard" method="get">
+              <div onclick="submitForm()">
+                <div class="box-list"><img src="images/list.png" alt=""></div>
+                  <p>게시글 관리</p>
+              </div>
+          </form>
+          <div>
+            <a href="asd">
               <div class="box-list"><img src="images/event.png" alt=""></div>
-            </a> 
+            </a>
             <p>이벤트 등록</p>
           </div>
         </div>
         <!-- 두번째 줄 -->
         <div class="box-in">
-          <div>        
-            <a href="asd">                  
+          <div>
+            <a href="asd">
               <div class="box-list"><img src="images/delivery.png" alt=""></div>
-            </a>  
-             <p>배송 내역 조회</p>
-            </div>
-            <div>    
-              <a href="asd">                  
-                <div class="box-list"><img src="images/message.png" alt=""></div>
-              </a>      
-              <p>1:1 상담목록</p>
-            </div>
-            <div>     
-              <a href="asd">                  
-                <div class="box-list"><img src="images/noteBook.png" alt=""></div>
-              </a>     
-              <p>구매 신청 관리</p>
-            </div>
+            </a>
+            <p>배송 내역 조회</p>
+          </div>
+          <div>
+            <a href="asd">
+              <div class="box-list"><img src="images/message.png" alt=""></div>
+            </a>
+            <p>1:1 상담목록</p>
+          </div>
+          <div>
+            <a href="asd">
+              <div class="box-list"><img src="images/noteBook.png" alt=""></div>
+            </a>
+            <p>구매 신청 관리</p>
+          </div>
         </div>
         <!-- 세번째 줄 -->
         <div class="box-in">
-          <div>      
-            <a href="asd">                  
+          <div>
+            <a href="asd">
               <div class="box-list"><img src="images/+icon.png" alt=""></div>
-            </a>   
+            </a>
             <p>기종 등록</p>
           </div>
-          
-          <div>      
-            <a href="asd">                  
+
+          <div>
+            <a href="asd">
               <div class="box-list"><img src="images/phon.png" alt=""></div>
-            </a>   
+            </a>
             <p>매물 등록</p>
           </div>
-          
-          <div>      
-              <div class="box-list"></div>
+
+          <div>
+            <div class="box-list"></div>
           </div>
-          
+
 
         </div>
       </div>
@@ -109,5 +109,7 @@
     푸터
   </footer>
 
+  <script src="/js/adminJs/admin.js"> </script>
 </body>
+
 </html>
