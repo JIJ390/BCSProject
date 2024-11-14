@@ -16,5 +16,6 @@ public class Grade {
 	private int gradeNumber;
 	private int deviceNo;
 	private String gradeType;
-	private int gradeScale;
+	private int gradePrice;
+	private int gradeSellPrice;
 }
