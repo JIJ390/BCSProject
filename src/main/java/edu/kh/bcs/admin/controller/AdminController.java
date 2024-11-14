@@ -62,7 +62,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("androidPopUp")
-	public String androidPopUp() {
+	public String androidPopUp() { 
 		
 		
 		return "admin/androidPopUp";
@@ -75,6 +75,14 @@ public class AdminController {
 		
 		
 		return "admin/adminRegistration";
+	}
+	
+//	기종 등록
+	@GetMapping("adminModelRegistration")
+	public String adminModelRegistration() {
+		
+		
+		return "admin/adminModelRegistration ";
 	}
 	
 	

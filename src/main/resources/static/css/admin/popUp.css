@@ -21,8 +21,8 @@ main {
 }
 
 
-.popUpLayer{
-    position: fixed;
+.popUp-layer{
+    position: absolute;
     top: 180px;
     left: 0;
     right: 0;
@@ -30,11 +30,11 @@ main {
     border-radius: 30px;
     background-color: #D9D9D9;
     width: 600px;
-    height:700px;
+    height:1100px;
 }
 
 
-.popUpIn{
+.popUp-in{
     background-color: #fff;
     width: 80%;
     height: 80%;
@@ -46,15 +46,15 @@ main {
     transform: translate(-50%, -50%);
 }
 
-.popUpTop{
+.popUp-top{
     height: 10%;
 }
 
-.popUpBottom{
+.popUp-bottom{
     height: 90%;
 }
 
-.popUpMagin{
+.popUp-magin{
     margin: 30px;
 }
 
@@ -63,3 +63,13 @@ img{
     height: 100px;
 }
 
+.close-btn{
+    position: relative;
+    left: 550px;
+    top: 30px;
+    font-size: 40px;
+}
+
+.popUp-close{
+    display: none;
+}
