@@ -17,12 +17,12 @@
   </header>
   <main>
     <section class="page-info">
-      <span>고객센터 > 공지사항</span>
+      <span>고객센터 &gt; 공지사항</span>
     </section>
     <section class="helpView">
       <div class="help-container">
         <div class="button-area">
-            <a href="/help">
+            <a href="/help/notice">
               <div class="helpIconBox">
                 <img src="/images/help/notice.png">
                 <div class="iconText">공지사항</div>
@@ -41,31 +41,77 @@
               <div class="iconText">이벤트</div>
             </div>
         </div>
-        <div class="faq-list-area">
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기</p></div>
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기</p></div>
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기</p></div>
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기</p></div>
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기<br>엔터는?</p></div>
-          <div class="faq"><span><h3>Q</h3></span><span><h3>궁금한 점 리스트</h3></span><span><img src="/images/help/semo.png" class="arrowBtn"></span></div>
-          <hr>
-          <div class="faq-open"><p>답변 내용 넣기</p></div>
+        <div class="notice-list-area">
+          <div class="notice">
+            <div class="list-wrapper">
+              <table class="list-table">
+                  
+                  <thead>
+                      <tr>
+                          <th>글번호</th>
+                          <th class="table-subject">제목</th>
+                          <th>작성일</th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                      <!-- 게시글이 존재하지 않을 때 -->
+                      <th:block th:if="${#lists.isEmpty(noticeList)}">
+                      <tr>
+                          <th colspan="3">게시글이 존재하지 않습니다.</th>
+                      </tr>
+                      </th:block>
+
+                      <!-- 게시글이 존재할 때 -->
+                      <th:block th:unless="${#lists.isEmpty(noticeList)}">
+                          <!-- unless : false 일 때 동작 -->
+                          <tr th:each="notice : ${noticeList}" th:object="${notice}">
+                              <td th:text="*{noticeNumber}">게시글 번호</td>
+                              <td> 
+                                 <a th:text="*{noticeTitle}">게시글 제목</a>
+                              </td>
+                               <!-- 작성일 -->
+                              <td th:text="*{noticeWriteDate}">2023-10-26</td>
+                          </tr>
+                      </th:block>
+                  </tbody>
+              </table>
+          </div>
         </div>
-        <div class="more-help-area">이 외 문의는 여기로 보내 주세요. <span>메일 문의</span>  <span>채팅 문의</span></div> 
+        <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+          <ul class="pagination" th:object="${pagination}">
+          
+              <!-- 첫 페이지로 이동 -->
+              <li><a href="#">&lt;&lt;</a></li>
+
+              <!-- 이전 목록 마지막 번호로 이동 -->
+              <li><a href="#">&lt;</a></li>
+
+              <!-- 특정 페이지로 이동 -->
+              
+              <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                  <!-- 현재 보고있는 페이지 -->
+                  <li th:if="${i} == *{currentPage}">
+                      <a class="current" th:text="${i}">현재 페이지</a>
+                  </li>
+
+                  <!-- 보고있지 않은 페이지 -->                    
+                  <li th:unless="${i} == *{currentPage}"> <a href="#" th:text="${i}">이동할 수 있는 페이지</a> </li>
+              </th:block>
+
+              <!-- 다음 목록 시작 번호로 이동 -->
+              <li><a href="#">&gt;</a></li>
+
+              <!-- 끝 페이지로 이동 -->
+              <li><a href="#">&gt;&gt;</a></li>
+          </ul>
+      </div> 
       </div>
     </section>
   </main>
-
+  <th:block th:replace="~{common/footer}"></th:block>
+  
 
   <script>
     const haederNav =  document.getElementsByClassName("header-nav")[0];
@@ -79,6 +125,11 @@
     window.addEventListener("resize", movePageIngo);
 
     movePageIngo();
+  </script>
+  <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+  <script src="/js/help/help.js"></script>
+  <script th:inline="javascript">
+      const pagination = /*[[${pagination}]]*/ "페이지네이션객체";
   </script>
 </body>
 </html>
