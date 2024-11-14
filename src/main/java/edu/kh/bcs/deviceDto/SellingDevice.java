@@ -1,5 +1,6 @@
 package edu.kh.bcs.deviceDto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,19 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Capacity {
-
+public class SellingDevice {
+	
+	private int sellingDeviceNo;
+	private String clientBank;
+	private String accountNo;
+	private String requestComment;
 	private int deviceNo;
 	private int capacityNumber;
-	private String capacityType;
-	private int capacityPrice;
-	private int capacitySellPrice;
+	private int gradeNumber;
+	private int colorNo;
+	private int memberNo;
+	private String clientName;
+	private String clientTel;
+	
+
 }

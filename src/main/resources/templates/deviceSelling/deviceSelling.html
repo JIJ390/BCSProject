@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>아이폰 16 판매</title>
+  <title th:text="|${device.deviceName} 판패하기|">아이폰 16 판매</title>
   <link rel="stylesheet" href="/css/deviceSelling/deviceSelling.css">
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
@@ -16,7 +16,8 @@
   
   <main>
     <section class="left-section">
-      레프트 섹션
+      화면 위쪽에 검색 페이지 돌아가는 nav 추가 예정
+      이미지 변경 기능 추가해야 함 -> 기기 등록 완료 후
     </section>
     <section class="main-section">
       <div class="device-selling-head">
@@ -39,9 +40,10 @@
           </div>
           <div class="color-content" >
 
-            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:value="*{colorNo}" th:each="color:${device.colorList}" th:object="${color}">
+            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}" th:each="color:${device.colorList}" th:object="${color}">
             </div>
 
+            <span class="color-name"></span>
           </div>
 
           <div class="info-title">
@@ -51,9 +53,10 @@
           <div class="capacity-content">
 
             <th:block th:each="capacity:${device.capacityList}" th:object="${capacity}">
-              <div class="select-box capacity-box" th:data-value="*{capacityPrice}">
+              <div class="select-box capacity-box" th:data-value="*{capacityNumber}">
                 <span th:text="*{capacityType}">B 등급</span>
-                <span th:text="|+ *{#numbers.formatInteger(capacityPrice, 0, 'COMMA')} ₩|">+ 0 ₩</span>
+                <span th:text="|+ *{#numbers.formatInteger(capacitySellPrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{capacitySellPrice}">+ 0 ₩</span>
               </div>
 
             </th:block>
@@ -67,9 +70,10 @@
           <div class="grade-content">
 
             <th:block th:each="grade:${device.gradeList}" th:object="${grade}">
-              <div class="select-box grade-box" th:data-value="*{gradeScale}">
+              <div class="select-box grade-box" th:data-value="*{gradeNumber}">
                 <span th:text="|*{gradeType} 등급|">B 등급</span>
-                <span th:text="|+ *{#numbers.formatInteger(gradeScale, 0, 'COMMA')} ₩|">+ 0 ₩</span>
+                <span th:text="|+ *{#numbers.formatInteger(gradeSellPrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{gradeSellPrice}" >+ 0 ₩</span>
               </div>
   
             </th:block>
@@ -87,17 +91,82 @@
 
       <span class="selling-span3">판매 하시겠습니까?</span>
       
-      <button class="selling-btn">판매 신청</button>
+      <button class="selling-btn" id="sellingBtn">판매 신청</button>
 
     </section>
     <section class="right-section">
       라이트 섹션
     </section>
+
+
+    
+    <div class="close-popup device-selling-popup">
+      <form th:action="|sell/accept/${device.deviceNo}|" 
+            method="POST" 
+            id="sellingFrm">
+        <h1>판매 신청</h1>
+        <div class="popup-device">
+          <span>신청 기종 > </span>
+          <span th:text="|${device.deviceName} > |"></span>
+          <span id="deviceStatus">내추럴 티타늄 > 128 GB > S 등급</span>
+        </div>
+        <div class="popup-amount">
+          <span>예상 가격 </span>
+          <span id="expectedPrice">1,234,567 ₩</span>
+          <hr>
+        </div>
+  
+        <div class="popup-box">
+          <span>휴대폰 번호</span>
+          <input type="text" name="clientTel" id="clientTel" placeholder="'-' 제외하고 입력해 주세요">
+        </div>
+  
+        <div class="popup-box">
+          <span>입금 계좌</span>
+          <div class="bank-box">
+            <select name="clientBank">
+              <option value="농협">농협</option>
+              <option value="국민은행">국민은행</option>
+              <option value="신한은행">신한은행</option>
+              <option value="우리은행">우리은행</option>
+              <option value="하나은행">하나은행</option>
+              <option value="기업은행">기업은행</option>
+              <option value="새마을금고">새마을금고</option>
+              <option value="우체국">우체국</option>
+              <option value="수협">수협</option>
+              <option value="신협">신협</option>
+              <option value="산업은행">산업은행</option>
+            </select>
+            <input type="text" name="accountNo" id="accountNo" placeholder="계좌 번호를 입력해 주세요">
+            <input type="text" name="clientName" id="clientName" placeholder="예금주를 입력해 주세요">
+
+          </div>
+
+        </div>
+  
+        <div class="popup-box">
+          <span>요청 사항</span>
+          <textarea name="" id="" placeholder="요청 사항을 입력해 주세요"></textarea>
+        </div>
+  
+        <div class="btn-area">
+          <button class="submit-btn">
+            신청하기
+          </button> 
+        </div>
+
+
+
+      </form>
+    
+    </div>
+    <div id="blackDisplay"></div>
   </main>
 
   <footer>
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
+
 
   <script src="/js/deviceSelling/deviceSelling.js"></script>
 </body>

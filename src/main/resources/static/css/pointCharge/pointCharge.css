@@ -17,9 +17,6 @@ main {
   justify-content: center;
 }
 
-.left-section, .main-section, .right-section {
-  margin-top: 150px;
-}
 
 
 .point-charge-head {
@@ -52,6 +49,8 @@ hr {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  margin-bottom: 100px;
   
 }
 
@@ -70,6 +69,8 @@ hr {
   justify-content: space-between;
 
   transition-duration: 0.1s;
+
+  border: 2px solid var(--white-color);
 }
 
 .point-check {
@@ -88,9 +89,5 @@ hr {
 
 .charge-box:hover {
   border: 2px solid var(--main-color);
-
-  width: 308px;
-  height: 208px;
-
   cursor: pointer;
 }

@@ -19,6 +19,8 @@ main {
 
 .left-section, .main-section, .right-section {
   margin-top: 150px;
+
+  margin-bottom: 100px;
 }
 
 .point-charge-compl-head {
@@ -94,7 +96,8 @@ hr {
   margin-top: 80px;
 
   background-color: var(--white-color);
-  border: none;
+
+  border: 2px solid var(--white-color);
   border-radius: 15px;
 
   font-size: 22px;
@@ -105,6 +108,4 @@ hr {
 .check-btn:hover {
   border: 2px solid var(--main-color);
   cursor: pointer;
-  width: 408px;
-  height: 68px;
 }
