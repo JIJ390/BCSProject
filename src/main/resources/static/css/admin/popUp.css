@@ -1,0 +1,75 @@
+:root {
+    --main-color: rgba(0, 255, 156, 1);
+    /* 사이트 대표 컬러 */
+    --main-gray-color: rgba(240, 240, 240, 1);
+    /* 어두운 페이지 배경색 */
+    --white-color: white;
+    /* 흰색 */
+
+    --font-color: rgba(29, 29, 31, 1);
+    /* 글자색 */
+    --font-gray-color: rgba(110, 110, 115, 1);
+    /* 글자 옅은 회색 */
+}
+
+html,
+body,
+main {
+    width: 1600px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+
+.popUp-layer{
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 30px;
+    background-color: #D9D9D9;
+    width: 600px;
+    height:1100px;
+}
+
+
+.popUp-in{
+    background-color: #fff;
+    width: 80%;
+    height: 80%;
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popUp-top{
+    height: 10%;
+}
+
+.popUp-bottom{
+    height: 90%;
+}
+
+.popUp-magin{
+    margin: 30px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
+.close-btn{
+    position: relative;
+    left: 550px;
+    top: 30px;
+    font-size: 40px;
+}
+
+.popUp-close{
+    display: none;
+}

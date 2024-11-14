@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>배최성 표준 html </title>
-  <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="../CSS/header.css">
-  <link rel="stylesheet" href="css/admin-header.css">
+  <link rel="stylesheet" href="/css/admin/header.css">
+  <link rel="stylesheet" href="/css/admin/admin.css">
 </head>
 <body>
   
@@ -16,26 +15,7 @@
 <div class="blur-box">
   <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
   <!-- Header -->
-  <header class="main-header">
-    <nav class="header-nav">
-        <ul><a href="#"><img src="../images/logo(login).png" alt=""></a></ul>
-        <ul class="dep1">
-            <a href="#">쇼핑하기</a>
-            <ul class="dropdown">
-                <li><a href="#">Galaxy Phone</a></li>
-                <li><a href="#">iPhone</a></li>
-                <li><a href="#">Galaxy Tab</a></li>
-                <li><a href="#">iPad</a></li>
-            </ul>
-        </ul>
-        <ul class="dep2"><a href="#">판매하기</a></ul>
-        <ul><a href="#">고객센터</a></ul>
-    </nav>
-    <div class="header-auth">
-        <input type="text" placeholder="" />
-        <a href="#">로그인</a> | <a href="#">회원가입</a>
-    </div>
-</header>
+  <th:block th:replace="~{common/header}"></th:block>
 </div>
     <!-- <section class="left-section">
       레프트 섹션
@@ -44,7 +24,7 @@
     <section class="main-section">
 
       <div class="photo">
-        <img src="adminImage/header.jpg" alt="header사진" class="header-img">
+        <img src="images/header.jpg" alt="header사진" class="header-img">
       </div>
 
       <h2 class="page-message">관리자 페이지</h2>
@@ -56,19 +36,19 @@
         <div class="box-in">
                 <div>          
                   <a href="asd">                  
-                  <div class="box-list"><img src="adminImage/user.jpg" alt=""></div>
+                  <div class="box-list"><img src="images/user.jpg" alt=""></div>
                   </a>
                   <p>회원관리</p>
                 </div>
           <div>    
             <a href="asd">                  
-              <div class="box-list"><img src="adminImage/list.png" alt=""></div>
+              <div class="box-list"><img src="images/list.png" alt=""></div>
               </a>
             <p>게시글 관리</p>
           </div>
           <div>         
             <a href="asd">                  
-              <div class="box-list"><img src="adminImage/event.png" alt=""></div>
+              <div class="box-list"><img src="images/event.png" alt=""></div>
             </a> 
             <p>이벤트 등록</p>
           </div>
@@ -77,33 +57,44 @@
         <div class="box-in">
           <div>        
             <a href="asd">                  
-              <div class="box-list"><img src="adminImage/delivery.png" alt=""></div>
+              <div class="box-list"><img src="images/delivery.png" alt=""></div>
             </a>  
-             <p>배송 내역 등록</p>
+             <p>배송 내역 조회</p>
             </div>
             <div>    
               <a href="asd">                  
-                <div class="box-list"><img src="adminImage/message.png" alt=""></div>
+                <div class="box-list"><img src="images/message.png" alt=""></div>
               </a>      
               <p>1:1 상담목록</p>
             </div>
             <div>     
               <a href="asd">                  
-                <div class="box-list"><img src="adminImage/noteBook.png" alt=""></div>
+                <div class="box-list"><img src="images/noteBook.png" alt=""></div>
               </a>     
-              <p>판매 신청 관리</p>
+              <p>구매 신청 관리</p>
             </div>
         </div>
         <!-- 세번째 줄 -->
         <div class="box-in">
           <div>      
             <a href="asd">                  
-              <div class="box-list"><img src="adminImage/+icon.png" alt=""></div>
+              <div class="box-list"><img src="images/+icon.png" alt=""></div>
+            </a>   
+            <p>기종 등록</p>
+          </div>
+          
+          <div>      
+            <a href="asd">                  
+              <div class="box-list"><img src="images/phon.png" alt=""></div>
             </a>   
             <p>매물 등록</p>
           </div>
-          <div class="box-list"></div>
-          <div class="box-list"></div>
+          
+          <div>      
+              <div class="box-list"></div>
+          </div>
+          
+
         </div>
       </div>
 
