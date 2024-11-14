@@ -129,10 +129,6 @@ a {
   margin-top: 30vh;
 }
 
-img {
-  width: 100%;
-  display: block;
-}
 
 /* 좌우 화살표 버튼 스타일 */
 .prev, .next {
@@ -240,4 +236,140 @@ img {
 .viewer3{
   height: 22vh;
   border: 1px solid black;
+}
+
+
+
+
+
+
+/* mainImg */
+.slider2 {
+  width: 100%;
+  max-width: 1000px;
+  height: 300px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
+
+.slides2 {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  margin: auto;
+}
+
+.slide2 {
+  min-width: 25%;
+  box-sizing: border-box;
+  height: 200px;
+  width: 150px;
+  padding: 80px;
+}
+
+
+.slideFont1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.slideFontSize{
+  font-size: 100px;
+  margin-right: 50vw;
+  margin-top: 30vh;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+/* 좌우 화살표 버튼 스타일 */
+.prev2, .next2 {
+  cursor: pointer;
+  position: absolute;
+  top: 68%;
+  width: 40px;
+  padding: 8px;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+  border: none;
+  user-select: none;
+  border-radius: 50%;
+}
+
+.prev2 {
+  left: 0;
+}
+
+.next2 {
+  right: 0;
+}
+
+.prev2:hover, .next2:hover {
+  background-color: rgba(224, 224, 224, 0.8);
+}
+
+.BLFont{
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.subItem-box{
+  margin-top: 50px; 
+  width: 100%; 
+  height: 700px; 
+  background-color: white
+}
+
+.subItem-box{
+  display: flex;
+
+}
+
+.subItem-1{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.subItem-2{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.subItem-3{
+  width: 70%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subItem-4{
+  display: flex;
+}
+
+.pImgs-1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pImgs-2{
+  margin-left: 5px;
+  margin-top: 15px;
+  font-weight: bold;
 }

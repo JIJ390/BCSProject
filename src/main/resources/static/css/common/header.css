@@ -124,7 +124,7 @@ img{
   z-index: 1000;
   font-size: 43px;
   padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 72vh;
+  height: 430px;
 }
 
 .header-nav .dep1 .dropdown li {
@@ -137,6 +137,7 @@ img{
   color: #1D1D1F;
   text-decoration: none;
   white-space: nowrap;
+  font-size: 35px;
 }
 
 /* hover 시 드롭다운 표시 */
@@ -149,6 +150,10 @@ img{
 .header-nav .dep1:hover ~ .overlay,
 .header-nav .dep1 .dropdown:hover ~ .overlay {
   display: block;
+}
+
+.dropdownContainor{
+  margin-top: 20px;
 }
 /* ------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------ */
@@ -283,7 +288,7 @@ main{
 
 .sideMenuContainer{
   width: 60%;
-  margin-left: 70px;
+  margin-left: 100px;
   margin-top: 20px;
 }
 
@@ -309,6 +314,7 @@ main{
   display: flex;
   flex-direction: row;
   align-items: start;
+  margin-top: 1.5vh;
   width: 1200px;
 }
 
@@ -316,6 +322,18 @@ main{
   font-size: 25px;
 }
 
+.plusItem{
+  border: 1px solid black; 
+  width: 750px; 
+  height: 35px; 
+  text-align: center; 
+  margin-top: 22px; 
+  margin-left: 40px; 
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 
