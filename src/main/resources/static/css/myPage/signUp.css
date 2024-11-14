@@ -3,9 +3,9 @@ body {
 }
 
 .signup-box {
-  margin-top: 15%;
+  margin-top: 0%;
   width: 60%;
-  height: 70%;
+  height: max-content;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -39,7 +39,7 @@ body {
 
 /* 약관동의버튼 */
 .signup-button-agree {
-  margin-top: 120px;
+  margin-top: 50px;
   width: 300px;
   padding: 10px 20px;
   font-size: 16px;
@@ -253,7 +253,7 @@ input[type="password"] input[type="phoneNumber"] {
 .login-box {
   margin-top: 15%;
   width: 45%;
-  height: 60%;
+  height: 75%;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -331,7 +331,7 @@ input[type="password"] {
 .loginBtn {
   align-self: center;
   margin-top: 40px;
-  width: 350px;
+  width: 70%;
   padding: 10px 20px;
   font-size: 16px;
   color: #333;

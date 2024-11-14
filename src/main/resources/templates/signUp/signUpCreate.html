@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,80 +9,82 @@
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
 </head>
+
 <body>
-  
+
   <header>
-    
-<div style="display: flex; align-items: center; justify-content: center; margin-top: 30px;" >
+
+    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
       <img src="/images/logo.png" alt="">
       BCS ACCOUNT | 배최성 계정관리
-</div>
+    </div>
   </header>
   <main>
     <section class="left-section">
     </section>
     <section class="main-section">
-      
 
-    <div  class="signup-box-confirm"> <!-- 회원가입 박스 -->
+
+      <div class="signup-box-confirm"> <!-- 회원가입 박스 -->
         <div style="text-align: center;">배최성 계정 만들기</div><br>
 
-        <form >
+        <form action="signUp" method="POST" name="signUpForm" id="signUpForm">
           <div class="input-group">
-              <label for="email">이메일</label>
-              <input type="email" id="memberEmail" placeholder="이메일">
-              <button type="button" class="btn-email">인증번호 받기</button>
+            <label for="email">이메일</label>
+            <input type="email" id="memberEmail" placeholder="이메일">
+            <button type="button" class="btn-email" id="sendAuthKeyBtn">인증번호 받기</button>
           </div>
           <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 
           <div class="input-group">
-              <label for="email">이메일인증</label>
-              <input type="text" id="email" placeholder="인증번호를 입력해주세요.">
-              <button type="button" class="btn-email-confirm">인증하기</button>
+            <label for="email">이메일인증</label>
+            <input maxlength="6" type="text" id="authKey" placeholder="인증번호를 입력해주세요.">
+            <button type="button" class="btn-email-confirm" id="checkAuthKeyBtn">인증하기</button>
           </div>
+          <span class="signUp-message" id="authKeyMessage"></span>
 
           <div class="input-group">
-              <label for="username">아이디</label>
-              <input type="text" id="memberId" placeholder="아이디를 입력해주세요.">
+            <label for="username">아이디</label>
+            <input type="text" id="memberId" placeholder="아이디를 입력해주세요.">
           </div>
           <span class="signUp-message" id="idMessage">영어,숫자 6글자~14글자 사이로 입력해주세요.</span>
 
           <div class="input-group">
-              <label for="password">비밀번호</label>
-              <input type="password" id="memberPw" placeholder="비밀번호">
+            <label for="password">비밀번호</label>
+            <input type="password" id="memberPw" placeholder="비밀번호">
           </div>
           <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자 1글자 이상 6~20글자 사이로 입력해주세요.</span>
 
           <div class="input-group">
-              <label for="password-confirm">비밀번호 확인</label>
-              <input type="password" id="memberPwConfirm" placeholder="비밀번호 확인">
+            <label for="password-confirm">비밀번호 확인</label>
+            <input type="password" id="memberPwConfirm" placeholder="비밀번호 확인">
           </div>
 
           <div class="input-group">
-              <label for="phoneNumber">휴대폰번호</label>
-              <input type="text" id="memberTel" placeholder="(- 없이 숫자만 입력)">
-            </div>
-            <span class="signUp-message" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
+            <label for="phoneNumber">휴대폰번호</label>
+            <input type="text" id="memberTel" placeholder="(- 없이 숫자만 입력)">
+          </div>
+          <span class="signUp-message" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
 
           <div class="input-group">
-              <label for="nickname">이름</label>
-              <input type="text" id="memberName" placeholder="이름">
+            <label for="nickname">이름</label>
+            <input type="text" id="memberName" placeholder="이름">
           </div>
           <span class="signUp-message" id="nameMessage">이름을 입력해주세요</span>
 
           <div class="input-group">
-              <label for="address">주소</label>
-              <input type="text" id="zipcode" placeholder="우편번호">
-              <button type="button" class="btn-address">검색</button>
-              <input type="text" id="road-address" placeholder="도로명 / 지번주소">
-              <input type="text" id="detail-address" placeholder="상세 주소">
+            <label for="address">주소</label>
+            <input type="text" class="lipcode" id="postcode" placeholder="우편번호">
+            <button type="button" class="btn-address" id="findAddressBtn">검색</button>
+            <input type="text" id="address" placeholder="도로명 / 지번주소" >
+            <input type="text" id="detailAddress" placeholder="상세 주소">
           </div>
 
-          <button type="button" class="signup-button-create">가입하기</button>
+          <button type="button" class="signup-button-create" id="signUpBtn">가입하기</button>
         </form>
-        
-       
-    </div>
+
+
+      </div>
 
 
     </section>
@@ -90,11 +93,13 @@
   </main>
 
   <footer>
-<!-- Footer Section -->
-<th:block th:replace="~{common/footer}"></th:block>
+    <!-- Footer Section -->
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+  <script src="/js/myPage/signUp.js"></script>
 </body>
-<script src="/js/myPage/signUp.js"></script>
 
 </html>
