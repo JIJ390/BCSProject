@@ -1,6 +1,8 @@
 package edu.kh.bcs.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,45 +46,21 @@ public class AdminServiceImpl implements AdminService{
 		
 		List<Member> memberList = null;
 		
-		if(searchType.equals("회원번호") && !searchText.equals("")) {
-				memberList = mapper.memberNoList(searchText);
-		}
-		else if(searchType.equals("이름") && !searchText.equals("")){
-			if(ud == 1) {
-				memberList = mapper.memberNameListU(cp, searchText);
-			}
-			else {
-				memberList = mapper.memberNameListD(cp, searchText);
-				
-			}
-		}
-		else if(searchType.equals("이메일") && !searchText.equals("")) {
-			if(ud == 1) {
-				memberList = mapper.memberEmailListU(cp, searchText);
-			}
-			else {
-				memberList = mapper.memberEmailListD(cp, searchText);
-			}
-		}
-		else if(searchType.equals("전화번호") && !searchText.equals("")) {
-			if(ud == 1) {
-				memberList = mapper.memberTelListU(cp, searchText);
-			}else {
-				memberList = mapper.memberTelListD(cp, searchText);
-			}
-			
-		}
-		else {
-			if(ud == 1) {
-				memberList = mapper.allListU(cp);
-			}
-			else {
-				memberList = mapper.allListD(cp);
-			}
-		}
-		
+		memberList = mapper.searchMemberList(cp, searchType, searchText, ud);
 		
 		return memberList;
+	}
+
+	@Override
+	public Map<String, String> adminMemberDetail(int memberNo) {
+		
+		Map<String , String> map = new HashMap<>();
+		map.put("memberFl", mapper.adminMemberFl(memberNo));
+		map.put("memberAdFl", mapper.adminMemberAdFl(memberNo));
+		map.put("memberBuy", mapper.adminMemberBuy(memberNo));
+		map.put("memberSell", mapper.adminMemberSell(memberNo));
+		
+		return map;
 	}
 	
 }

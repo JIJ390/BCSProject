@@ -1,6 +1,7 @@
 package edu.kh.bcs.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 
@@ -11,5 +12,7 @@ public interface AdminService {
 	int getResultCount(String searchType, String searchText);
 
 	List<Member> getMemberList(int cp, String searchType, String searchText, int ud);
+
+	Map<String, String> adminMemberDetail(int memberNo);
 
 }
