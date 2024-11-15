@@ -9,7 +9,6 @@
   		FROM "MEMBER"
   		WHERE MEMBER_EMAIL = #{email}
   		AND MEMBER_DEL_FL ='N'
-  			
 	</select>
 	
   	<!-- 아이디 중복검사 -->
@@ -19,8 +18,26 @@
   		FROM "MEMBER"
   		WHERE MEMBER_ID = #{id}
   		AND MEMBER_DEL_FL ='N'
-  			
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="signUpRun">
+		INSERT INTO "MEMBER"
+		VALUES(
+			SEQ_MEMBER_NO.NEXTVAL,
+			#{memberName},
+			#{memberEmail},
+			#{memberPw},
+			DEFAULT,
+			DEFAULT,
+			#{memberAddress},
+			DEFAULT,
+			DEFAULT,
+			#{memberTel},
+			#{memberId}
+			)
+
+	</insert>
 	
 
   	

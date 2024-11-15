@@ -2,8 +2,67 @@
 const createBtn = document.querySelector('.signup-button');
 
 createBtn?.addEventListener('click', () => {
-  window.location.href = '/signUp/signUpCreate';
+  window.location.href = '/signUp/signUpAccount';
 });
+
+// ㅡㅡㅡㅡㅡㅡㅡ  자세히보기 약관확인  ㅡㅡㅡㅡㅡㅡㅡㅡㅡ //
+const accountDetail = document.querySelectorAll(".accountDetail");
+
+for(let i=0; i<accountDetail.length; i++){
+  
+  accountDetail[i].addEventListener("click", () =>{
+  
+    window.location.href ='/signUp/signUpAccountConfirm';
+  });
+}
+
+// ㅡㅡㅡㅡㅡㅡㅡ 약관확인 버튼 눌렀을때 다시 돌아오기 ㅡㅡㅡㅡ/
+const accountConfirm = document.querySelector(".signup-button-agree-confirm");
+
+accountConfirm?.addEventListener("click", ()=>{
+
+  window.location.href = '/signUp/signUpAccount';
+
+})
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡ 체크박스 버튼 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ/
+
+const checkBtn = document.querySelectorAll(".checkBtn");
+const checkBtnAll = document.querySelector(".checkBtnAll");
+
+
+checkBtnAll.addEventListener("change", () => {
+
+  if(checkBtnAll.checked === true){
+
+  checkBtn[0].checked = true;
+  checkBtn[1].checked = true;
+  checkBtn[2].checked = true;
+
+}else{
+
+  checkBtn[0].checked = false;
+  checkBtn[1].checked = false;
+  checkBtn[2].checked = false;
+  }
+
+
+});
+
+const agreeBtn = document.querySelector(".signup-button-agree");
+
+agreeBtn.addEventListener("click", () => {
+
+  if(checkBtn[0].checked && checkBtn[1].checked && 
+    checkBtn[2].checked){
+
+      window.location.href = '/signUp/signUpCreate'
+      return;
+    }
+    alert("필수약관을 동의해주세요.")
+
+})
+
 
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 주소 API ㅡㅡㅡㅡ//
@@ -38,7 +97,7 @@ function findAddress() {
 
 /* 주소 검색버튼 클릭 시 */
 document.querySelector("#findAddressBtn")
-  .addEventListener("click", findAddress);
+  ?.addEventListener("click", findAddress);
 
   // 함수명만 작성하는경우
   // 함수명() 작성하는 경우 : 함수에 정의된 내용을 실행
@@ -80,7 +139,7 @@ emailMessageObj.duplication = "이미 사용중인 이메일입니다";
 emailMessageObj.check = "이메일 중복 확인 완료";
 
 // 이메일이 입력될 때마다 유효성 검사 수행
-memberEmail.addEventListener('input', e => {
+memberEmail?.addEventListener('input', e => {
 
   // 입력된 값 얻어오기
   const inputEmail = memberEmail.value.trim();
@@ -160,7 +219,7 @@ idMessageObj.duplication = "이미 사용중인 아이디입니다";
 idMessageObj.check = "사용가능한 아이디입니다.";
 
 // 3) 아이디을 입력할 때마다 유효성 검사
-memberId.addEventListener('input', e => {
+memberId?.addEventListener('input', e => {
   
   // 입력 받은 아이디
   const inputId = memberId.value.trim();
@@ -232,7 +291,7 @@ telMessageObj.normal = "전화번호를 입력해주세요.(- 제외)";
 telMessageObj.invaild = "유효하지 않은 전화번호 형식입니다.";
 telMessageObj.check = "유효한 전화번호 형식입니다.";
 
-memberTel.addEventListener("input", () => {
+memberTel?.addEventListener("input", () => {
 
   const inputTel = memberTel.value.trim();
 
@@ -276,7 +335,7 @@ pwMessageObj.vaild = "유효한 비밀번호 형식입니다.";
 pwMessageObj.error = "비밀번호가 일치하지 않습니다";
 pwMessageObj.check = "비밀번호가 일치합니다.";
 
-memberPw.addEventListener("input", () => {
+memberPw?.addEventListener("input", () => {
   
   const inputPw = memberPw.value.trim();
 
@@ -336,7 +395,7 @@ function checkPw(){
 }
 
 /* ----- 비밀번호 확인이 입력 되었을 때 ----- */
-memberPwConfirm.addEventListener("input", () => {
+memberPwConfirm?.addEventListener("input", () => {
 
     // 비밀번호 input에 작성된 값이 유효한 형식일때만 비교
     if(checkObj.memberPw === true){
@@ -358,7 +417,7 @@ nameMessageObj.normal = "전화번호를 입력해주세요.(- 제외)";
 nameMessageObj.invaild = "이름형식이 유효하지 않습니다.";
 nameMessageObj.check = "유효한 이름입니다.";
 
-memberName.addEventListener("input", () => {
+memberName?.addEventListener("input", () => {
 
   const inputName = memberName.value.trim();
 
@@ -413,7 +472,7 @@ let authTimer; // 타이머 역할의 setInterval을 저장할 변수
 
 
 // 인증번호 받기버튼 클릭 시
-sendAuthKeyBtn.addEventListener("click", () => {
+sendAuthKeyBtn?.addEventListener("click", () => {
 
   checkObj.authKey = false; // 인증안된 상태로 기록
   authKeyMessage.innerText = ""; // 인증관련 메시지 삭제
@@ -490,7 +549,7 @@ sendAuthKeyBtn.addEventListener("click", () => {
 const authKey = document.querySelector("#authKey");
 const checkAuthKeyBtn = document.querySelector("#checkAuthKeyBtn");
 
-checkAuthKeyBtn.addEventListener("click", () => {
+checkAuthKeyBtn?.addEventListener("click", () => {
 
   // + (추가조건) 타이머 00:00인 경우 버튼클릭 막기
   if(min === 0 && sec === 0){
@@ -561,7 +620,7 @@ checkAuthKeyBtn.addEventListener("click", () => {
 /* 회원 가입 form 제출 시 전체 유효성 검사 여부 확인 */
 const signUpForm = document.querySelector("#signUpForm");
 
-signUpForm.addEventListener("submit", e => {
+signUpForm?.addEventListener("submit", e => {
 
   // e.preventDefault(); // 기본 이벤트(form 제출) 막기
 
@@ -625,3 +684,5 @@ signUpForm.addEventListener("submit", e => {
 
 
 });
+
+
