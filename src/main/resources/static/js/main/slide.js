@@ -39,32 +39,3 @@ setInterval(nextSlide, 5000);
 // 페이지 로드 시 첫 슬라이드를 표시
 showSlide(currentIndex);
 
-
-// 하단 슬라이드 기능
-let currentIndex2 = 0;
-
-function showSlide2(index) {
-  const slides2 = document.querySelector('.slides2');
-  const totalSlides2 = 2; // 슬라이드는 2페이지만 존재
-
-  if (index >= totalSlides2) {
-    currentIndex2 = 0;
-  } else if (index < 0) {
-    currentIndex2 = totalSlides2 - 1;
-  } else {
-    currentIndex2 = index;
-  }
-
-  slides2.style.transform = `translateX(-${currentIndex2 * 100}%)`;
-}
-
-function nextSlide2() {
-  showSlide2(currentIndex2 + 1);
-}
-
-function prevSlide2() {
-  showSlide2(currentIndex2 - 1);
-}
-
-// 페이지 로드 시 첫 슬라이드를 표시
-showSlide2(currentIndex2);
