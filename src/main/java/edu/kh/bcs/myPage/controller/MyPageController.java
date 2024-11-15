@@ -37,8 +37,11 @@ public class MyPageController {
 			RedirectAttributes ra,
 			Model model) {
 		
-//		log.debug("memberId : {}", memberId);
-//		log.debug("memberPw : {}", memberPw);
+		log.debug("memberId : {}", memberId);
+		log.debug("memberId : {}", memberId);
+		log.debug("memberId : {}", memberId);
+		log.debug("memberId : {}", memberId);
+		log.debug("memberPw : {}", memberPw);
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(memberId, memberPw);
