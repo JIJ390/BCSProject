@@ -12,7 +12,7 @@ public interface AdminService {
 
 	int getResultCount(String searchType, String searchText);
 
-	List<Member> getMemberList(int cp, String searchType, String searchText, int ud);
+	List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc);
 	/** 휴대폰 리스트
 	 * 
 	 * @return
@@ -22,5 +22,8 @@ public interface AdminService {
 
 
 	Map<String, String> adminMemberDetail(int memberNo);
+
+	int memberDelFlChange(int memberNo);
+	int memberFlChange(int memberNo);
 
 }

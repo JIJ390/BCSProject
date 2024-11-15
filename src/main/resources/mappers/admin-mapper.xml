@@ -53,10 +53,10 @@ FROM
 		LIKE '%' || #{searchText} || '%'
 		ORDER BY 
 		<choose>
-			<when test="searchType == '회원번호'">MEMBER_NO</when>
-			<when test="searchType == '이름'">MEMBER_NAME</when>
-			<when test="searchType == '이메일'">MEMBER_EMAIL</when>
-			<when test="searchType == '전화번호'">MEMBER_TEL</when>
+			<when test="searchAsc == '회원번호'">MEMBER_NO</when>
+			<when test="searchAsc == '이름'">MEMBER_NAME</when>
+			<when test="searchAsc == '이메일'">MEMBER_EMAIL</when>
+			<when test="searchAsc == '전화번호'">MEMBER_TEL</when>
 		</choose>	
 		<choose>
 			<when test="ud == 1">DESC</when>
@@ -64,6 +64,8 @@ FROM
 		</choose>
 		) A)
 WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
+
+
 	</select>
 	
 	
@@ -87,6 +89,18 @@ WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 		FROM "SELLING_DEVICE"
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
+	
+	<update id="memberDelFlChange">
+UPDATE "MEMBER"
+SET MEMBER_DEL_FL = CASE WHEN MEMBER_DEL_FL = 'Y' THEN 'N' ELSE 'Y' END
+WHERE MEMBER_NO = #{memberNo}
+	</update>
+	<update id="memberFlChange">
+UPDATE "MEMBER"
+SET MEMBER_FL = CASE WHEN MEMBER_FL = '1' THEN '2' ELSE '1' END
+WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	
 	
 	<select id="deviceList" resultType="Device">
