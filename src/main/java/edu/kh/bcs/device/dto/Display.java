@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceList.dto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
