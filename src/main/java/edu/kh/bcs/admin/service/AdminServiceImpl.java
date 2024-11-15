@@ -94,15 +94,14 @@ public class AdminServiceImpl implements AdminService{
 		
 		return mapper.deviceList();
 	}
+// 팝업	
+@Override
+public List<Device> popUpData(int deviceNo) {
 	
-	// 팝업 
-	@Override
-	public List<SellingDevice> popUpData() {
-		
-		
-		
-		
-		return mapper.popUpData();
-	}
+	
+	return mapper.popUpData(deviceNo);
+	
+	
+}
 }
 

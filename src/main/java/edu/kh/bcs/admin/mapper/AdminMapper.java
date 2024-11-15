@@ -40,6 +40,6 @@ public interface AdminMapper {
 	// 디바이스 리스트 조회
 	List<Device> deviceList();
 	// 팝업 리스트 색 조회
-	List<SellingDevice> popUpData();
+	List<Device> popUpData(int deviceNo);
 
 }

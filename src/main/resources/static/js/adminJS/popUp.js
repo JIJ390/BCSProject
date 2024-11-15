@@ -12,28 +12,31 @@ closeBtn.addEventListener('click', () => {
 
 
 
-/* 팝업 열기 */
-const openPopup = () => {
-    document.querySelector('.android-img')
-    popUpLayer.classList.remove('popUp-close');
-    submit();
-}
-
 
 //  팝업 비동기 조회
-const selectList = () => {
-    fetch('/admin/api/popUpData')
-    .then(res => {
-
-        if (res.ok) return Response.json();
-        throw new Error("조회 실패");  
-    })
-    .then(result => {
+    const ListView = () => {
+        const deviceNo = document.querySelector(".deviceNo");// 댓글 번호
+        result = deviceNo.textContent;
         console.log(result);
-    })
-    .catch(err => console.errerr(err));
+        /* 팝업 켜짐 */
+        popUpLayer.classList.remove('popUp-close');
+        
 
-}
+        fetch("/popUpData", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: deviceNo
+        })
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error("목록 조회 실패")
+            })
+            .then(result => {
+                console.log(result);
+                
+            })
+            .catch(err => console.error(err));
+    }
 
 
 

@@ -49,8 +49,8 @@
                         </tr>
                         <div class="category-inside"  th:each="boardList:${boardList}">
                             <tr class="category" >
-                                <td th:text="${boardList.deviceNo}">기종 번호</td>
-                                <td class="android-img" onclick="openPopup()"><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
+                                <td class="deviceNo" th:text="${boardList.deviceNo}"></td>
+                                <td class="android-img" onclick="ListView()"><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
                                 <td th:text="${boardList.deviceName}">기종 이름</td>
                                 <td th:text="${boardList.colorResult}">총 기종에 숫자</td>
                                 <td th:text="${boardList.deviceDate}">등록 날짜</td>

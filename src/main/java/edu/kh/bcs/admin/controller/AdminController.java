@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.device.dto.Color;
@@ -122,12 +125,20 @@ public class AdminController {
 	}
 	
 	// SELLING 이 아니라  DEVICE로 해야할듯
-	@GetMapping("api/popUpData")
+	@PostMapping("/popUpData")
 	public String popUpData(
+			@RequestBody int deviceNo,
 			Model model
 			) {
 		
-		List<SellingDevice> popUpData = service.sellingDevice();
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
+		
+		List<Device> popUpData = service.popUpData(deviceNo);
 		
 		
 		return null;

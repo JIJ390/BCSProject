@@ -20,10 +20,11 @@ public interface AdminService {
 	List<Device> deviceList();
 
 	/** 팝업 색 가져오기
+	 * @param deviceNo 
 	 * 
 	 * @return
 	 */
-	List<SellingDevice> popUpData();
+	List<Device> popUpData(int deviceNo);
 
 
 
