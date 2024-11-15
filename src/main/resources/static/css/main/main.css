@@ -241,83 +241,6 @@ a {
 
 
 
-
-
-/* mainImg */
-.slider2 {
-  width: 100%;
-  max-width: 1000px;
-  height: 300px;
-  margin: auto;
-  overflow: hidden;
-  position: relative;
-  margin-top: 150px;
-  margin-bottom: 150px;
-}
-
-.slides2 {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  margin: auto;
-}
-
-.slide2 {
-  min-width: 25%;
-  box-sizing: border-box;
-  height: 200px;
-  width: 150px;
-  padding: 80px;
-}
-
-
-.slideFont1{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-}
-
-.slideFontSize{
-  font-size: 100px;
-  margin-right: 50vw;
-  margin-top: 30vh;
-}
-
-img {
-  width: 100%;
-  display: block;
-}
-
-/* 좌우 화살표 버튼 스타일 */
-.prev2, .next2 {
-  cursor: pointer;
-  position: absolute;
-  top: 68%;
-  width: 40px;
-  padding: 8px;
-  margin-top: -22px;
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.3s;
-  border: none;
-  user-select: none;
-  border-radius: 50%;
-}
-
-.prev2 {
-  left: 0;
-}
-
-.next2 {
-  right: 0;
-}
-
-.prev2:hover, .next2:hover {
-  background-color: rgba(224, 224, 224, 0.8);
-}
-
 .BLFont{
   font-size: 50px;
   font-weight: bold;
@@ -362,14 +285,40 @@ img {
   display: flex;
 }
 
-.pImgs-1{
+
+.sub-slider-box{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 600px;
+  width: 100%;
+  border: 1px solid black;
+  background-color: red;
 }
 
-.pImgs-2{
-  margin-left: 5px;
-  margin-top: 15px;
-  font-weight: bold;
+.sub-silder{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 80%;
+  border: 1px solid black;
+  background-color: green;
+}
+
+
+
+.sub-slide-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  background-color: yellow;
+}
+
+.sub-slide{
+  display: flex;
+  align-items: center;
+
 }
