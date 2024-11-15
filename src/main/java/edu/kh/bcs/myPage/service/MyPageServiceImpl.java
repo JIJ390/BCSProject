@@ -36,12 +36,27 @@ public class MyPageServiceImpl implements MyPageService{
 		//	 (비밀번호 포함!)
 		Member loginMember = mapper.login(memberId);
 		
-		// 2. DB에서 조회된 비밀번호와, 입력받은 비밀번호가 같은지 확인
-		log.debug("비밀번호 일치? : {}",
-					encoder.matches(memberPw, loginMember.getMemberPw()));
-
 		
-		return null;
+		log.debug("loginMember {}", loginMember);
+		log.debug("loginMember {}", loginMember);
+		log.debug("loginMember {}", loginMember);
+		log.debug("loginMember {}", loginMember);
+		
+		// 2. id가 일치하는 회원정보가 없을경우
+		if(loginMember == null) return null;
+		
+		// 3. DB에서 조회된 비밀번호와, 입력받은 비밀번호가 같은지 확인
+//		log.debug("비밀번호 일치? : {}",
+//					encoder.matches(memberPw, loginMember.getMemberPw()));
+
+		// 입력받은 비밀번호와 DB에서 조회된 비밀번호가 일치하지 않을 때
+		if( !encoder.matches(memberPw, loginMember.getMemberPw())) {
+			return null;
+		}
+		
+		
+		// 4. 로그인 결과 반환
+		return loginMember;
 	}
 	
 }
