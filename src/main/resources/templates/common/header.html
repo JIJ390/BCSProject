@@ -103,22 +103,16 @@
                 <a href="#">로그인</a> | <a href="#">회원가입</a>
             </div>
 
-            <div th:if= "${session.loginMember}">
-                <span><img src="/images/loginLogo.png" width="20px" height="20px"></span>
-            </div>
-
             <div class="menu-container" th:if="${session.loginMember}">
-                <div class="profile-img">
-                  <img th:with="user=#{user.default.image}" 
-                       th:src="${session.loginMember.profileImg ?: user }" alt="profile">
-                </div>
             
                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
             
                 <a href="#" class="sideItem">마이 페이지</a> 
-                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a> 
-                <a href="#" class="sideItem">로그 아웃</a>
+                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a> 
+                <a href="#" cass="sideItem">로그 아웃</a>
               </div>
+
+            </div>
            
         </div>
     </header>

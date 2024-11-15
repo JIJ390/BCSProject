@@ -2,12 +2,17 @@ package edu.kh.bcs.signUp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.signUp.service.SignUpService;
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequestMapping("signUp")
@@ -16,7 +21,12 @@ public class SignUpController {
 	
 	public final SignUpService service;
 	
+	
 
+	/**
+	 * 회원가입 누르는 페이지
+	 * @return
+	 */
 	@GetMapping("signUp")
 	public String signUp() {
 		
@@ -66,7 +76,32 @@ public class SignUpController {
 		return service.idCheck(id);
 	}
 	
+
+	/** 회원가입 수행
+	 * @param inputMember : 입력값이 저장된 Member 객체(커맨드 객체)
+	 * @param ra : 리다이렉트 시 request scope로 값 전달
+	 * @return
+	 */
+	@PostMapping
+	public String signUpRun(
+			@ModelAttribute Member inputMember,
+			RedirectAttributes ra) {
 	
+		// 회원가입 서비스 호출
+		int result = service.signUp(inputMember);
+		
+		// 서비스 결과에 따라 응답 제어
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			path = "/";
+			message
+			 	= inputMember.getMemberId() + "님의 가입을 환영합니다^^";
+		}
+		
+		return "redirect:";
+	}
 	
 	
 	
