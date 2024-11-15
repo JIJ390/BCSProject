@@ -41,4 +41,11 @@ public class DeviceSellingServiceImpl implements DeviceSellingService {
 		
 		return sellingDevice.getSellingDeviceNo();
 	}
+	
+	
+	// 판매 완료 페이지 정보 가져오기
+	@Override
+	public SellingDevice selectSellingDevice(int sellingDeviceNo) {
+		return mapper.selectSellingDevice(sellingDeviceNo);
+	}
 }
