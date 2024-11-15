@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
 import edu.kh.bcs.device.dto.Device;
@@ -43,11 +44,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public List<Member> getMemberList(int cp, String searchType, String searchText, int ud) {
+	public List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc) {
 		
 		List<Member> memberList = null;
 		
-		memberList = mapper.searchMemberList(cp, searchType, searchText, ud);
+
+		
+		memberList = mapper.searchMemberList(cp, searchType, searchText, ud, searchAsc);
 		
 		return memberList;
 	}
@@ -63,6 +66,17 @@ public class AdminServiceImpl implements AdminService{
 		map.put("memberSell", mapper.adminMemberSell(memberNo));
 		
 		return map;
+	}
+	
+	@Override
+	public int memberDelFlChange(int memberNo) {
+		
+		return mapper.memberDelFlChange(memberNo);
+	}
+	@Override
+	public int memberFlChange(int memberNo) {
+		
+		return mapper.memberFlChange(memberNo);
 	}
 
 	

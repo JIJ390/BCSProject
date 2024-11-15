@@ -1,33 +1,42 @@
-<th:block th:if= "${cpCount}">
+<th:block th:if="${cpCount}">
   <input type="hidden" class="getCpCount" th:value="${cpCount}">
-  
-  <button  style="width: 30px; height: 30px; border: 1px solid black;"class="pn-1"><i class="fa-solid fa-backward-fast"><<<</i></button>
-  <button  style="width: 30px; height: 30px; border: 1px solid black;"class="pn-2"><i class="fa-solid fa-caret-left"><</i></button>
-  
+
+  <button class="pn-1"><img style=" width: 20px; height: 20px;" src="/images/rlxk/왼왼왼.png"></button>
+  <button class="pn-2"><img style=" width: 20px; height: 20px;" src="/images/rlxk/왼.png"></button>
+
   <div class="pnNumber">
-    <th:block th:each= "pn:${pnList}">
-    
-      <button class="pnBtn"><p class="pnValue" th:text="${pn}"></p></button>
-    
+    <th:block th:each="pn:${pnList}">
+
+      <button class="pnBtn">
+        <p class="pnValue" th:text="${pn}"></p>
+      </button>
+
     </th:block>
-    
+
   </div>
-  
-  <th:block th:if= "${lastIndex == 0}">
-        <button><p>...</p></button>
-        <button class="pn-5"><p th:text="${cpCount}"></p></button>
-  </th:block>
-  
-  <button style="width: 30px; height: 30px; border: 1px solid black;" class="pn-3"><i class="fa-solid fa-caret-right">></i></button>
-  <button  style="width: 30px; height: 30px; border: 1px solid black;"class="pn-4"><i class="fa-solid fa-forward-fast">>>></i></i></div>
-  </th:block>
-  <th:block th:unless= "${cpCount}">
 
-    <button><i style="width: 30px; height: 30px; border: 1px solid black;" class="fa-solid fa-backward-fast"></i></button>
-    <button><i style="width: 30px; height: 30px; border: 1px solid black;" class="fa-solid fa-caret-left"></i></button>
+  <th:block th:if="${lastIndex == 0}">
+    <button>
+      <p>...</p>
+    </button>
+    <button class="pn-5">
+      <p th:text="${cpCount}"></p>
+    </button>
+  </th:block>
 
-    <button><p>0</p></button>
-    
-    <button><i  style="width: 30px; height: 30px; border: 1px solid black;" class="fa-solid fa-caret-right">></i></button>
-    <button><i style="width: 30px; height: 30px; border: 1px solid black;"  class="fa-solid fa-forward-fast">>>></i></i></div>
+  <button class="pn-3"><img style=" width: 20px; height: 20px;" src="/images/rlxk/오른.png"></button>
+  <button class="pn-4"><img style=" width: 20px; height: 20px;" src="/images/rlxk/오른오른오른.png"></button>
+</th:block>
+<th:block th:unless="${cpCount}">
+
+<button class="pn-1"><img style=" width: 20px; height: 20px;" src="/images/rlxk/왼왼왼.png"></button>
+<button class="pn-2"><img style=" width: 20px; height: 20px;" src="/images/rlxk/왼.png"></button>
+
+  <button>
+    <p>0</p>
+  </button>
+
+  <button class="pn-3"><img style=" width: 20px; height: 20px;" src="/images/rlxk/오른.png"></button>
+  <button class="pn-4"><img style=" width: 20px; height: 20px;" src="/images/rlxk/오른오른오른.png"></button>
+    </div>
 </th:block>

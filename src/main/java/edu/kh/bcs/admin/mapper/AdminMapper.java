@@ -36,10 +36,15 @@ public interface AdminMapper {
 			@Param("cp")int cp, 
 			@Param("searchType")String searchType, 
 			@Param("searchText")String searchText, 
-			@Param("ud")int ud);
+			@Param("ud")int ud,
+			@Param("searchAsc") String searchAsc);
 
 	
 	
 	List<Device> deviceList();
+
+	int memberDelFlChange(int memberNo);
+
+	int memberFlChange(int memberNo);
 
 }

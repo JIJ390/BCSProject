@@ -33,6 +33,9 @@
       display: flex;
       align-items: center;
     }
+    .member-mamage-title >span{
+      display: flex;
+    }
 
     .member-mamage {
       width: 100%;
@@ -203,17 +206,17 @@
 
   <div class="admin-member-detail 팝업히든">
     <div><div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i class="fa-solid fa-x"></i>X</button></div></div>
-    <div><p>회원번호</p><p class="admin-member-detail-no">123</p></div>
-    <div><p>이름</p><p class="admin-member-detail-name">홍길동</p></div>
-    <div><p>이메일</p><p class="admin-member-detail-email">123@madsf@mc.kr</p></div>
-    <div><p>전화번호</p><p class="admin-member-detail-tel">010-1111-2222</p></div>
-    <div><p>주소</p><p class="admin-member-detail-address">제주도</p></div>
-    <div><p>가입날짜</p><p class="admin-member-detail-date">2024-12-12</p></div>
-    <div><p>탈퇴여부</p><p class="admin-member-detail-fl">'N'</p><button class="탈퇴처리">탈퇴처리</button></div>
-    <div><p>보유 포인트</p><p class="admin-member-detail-point">999,999,999</p></div>
-    <div><p>관리자 권한</p><p class="admin-member-detail-adminfl">1</p><button class="권한변경">권한변경</button></div>
-    <div><p>구매 횟수</p><p class="admin-member-detail-buy">2</p></div>
-    <div><p>판매 횟수</p><p class="admin-member-detail-sell">1</p></div>
+    <div><p>회원번호</p><p class="admin-member-detail-no"></p></div>
+    <div><p>이름</p><p class="admin-member-detail-name"></p></div>
+    <div><p>이메일</p><p class="admin-member-detail-email"></p></div>
+    <div><p>전화번호</p><p class="admin-member-detail-tel"></p></div>
+    <div><p>주소</p><p class="admin-member-detail-address"></p></div>
+    <div><p>가입날짜</p><p class="admin-member-detail-date"></p></div>
+    <div><p>탈퇴여부</p><p class="admin-member-detail-fl"></p><button class="탈퇴처리">탈퇴처리</button></div>
+    <div><p>보유 포인트</p><p class="admin-member-detail-point"></p></div>
+    <div><p>관리자 권한</p><p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button></div>
+    <div><p>구매 횟수</p><p class="admin-member-detail-buy"></p></div>
+    <div><p>판매 횟수</p><p class="admin-member-detail-sell"></p></div>
   </div>
 
   <div class="member-mamage-body">
@@ -234,7 +237,7 @@
             </div>
           </button>
           <input type="text">
-          <button>
+          <button style="border: 1px solid black; width: 40px; height: 40px;">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -242,10 +245,10 @@
     </div>
     <hr>
     <div class="member-mamage-title">
-      <span style="font-size: 20px; margin-left: 20px;">회원 번호<i style="padding-left: 5px; width: 30px; height: 30px; border: 1px solid black;" class="넘버 fa-solid fa-caret-down"></i></span>
-      <span style="font-size: 20px; margin-left: 115px;">이름<i style="padding-left: 5px; width: 30px; height: 30px; border: 1px solid black;" class="이름 fa-solid fa-caret-down"></i></span>
-      <span style="font-size: 20px; margin-left: 215px;">이메일<i style="padding-left: 5px; width: 30px; height: 30px; border: 1px solid black;" class="이메일 fa-solid fa-caret-down"></i></span>
-      <span style="font-size: 20px; margin-left: 215px;">전화 번호<i style="padding-left: 5px; width: 30px; height: 30px; border: 1px solid black;" class="전화번호 fa-solid fa-caret-down"></i></span>
+      <span style="font-size: 20px; margin-left: 20px;">회원 번호<img class="넘버" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
+      <span style="font-size: 20px; margin-left: 115px;">이름<img class="이름"  style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
+      <span style="font-size: 20px; margin-left: 215px;">이메일<img class="이메일" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
+      <span style="font-size: 20px; margin-left: 215px;">전화 번호<img class="전화번호" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
       <!-- <i class="fa-solid fa-caret-up"></i> -->
     </div>
     <div class="member-mamage-content">
@@ -312,28 +315,36 @@
           
           const data = e.target.closest(".member-manage-row");
 
+          if(data.dataset.memberAddress === undefined){
+            data.dataset.memberAddress = "기본 주소 없음"
+          }
+          if(data.dataset.memberAddress === ',,'){
+            data.dataset.memberAddress = "기본 주소 없음"
+          }
+
           document.querySelector(".admin-member-detail-no").innerText = data.dataset.memberNo;
           document.querySelector(".admin-member-detail-name").innerText =  data.dataset.memberName;
           document.querySelector(".admin-member-detail-email").innerText =  data.dataset.memberEmail;
           document.querySelector(".admin-member-detail-tel").innerText =  data.dataset.memberTel;
           document.querySelector(".admin-member-detail-address").innerText =  data.dataset.memberAddress;
           document.querySelector(".admin-member-detail-date").innerText =  data.dataset.memberDate;
-          document.querySelector(".admin-member-detail-fl").innerText =  data.dataset.memberDelFl;
+          document.querySelector(".admin-member-detail-fl").innerText =  data.dataset.memberDelfl;
           document.querySelector(".admin-member-detail-point").innerText =  data.dataset.memberPoint;
           document.querySelector(".admin-member-detail-adminfl").innerText =  data.dataset.memberFl;
           document.querySelector(".admin-member-detail-tel").innerText =  data.dataset.memberTel;
           
-         
-          getAdminMemberRef(data);
+          const memberNo = data.dataset.memberNo;
+
+          getAdminMemberRef(memberNo);
 
         })
       }
     }
 
 
-    const getAdminMemberRef = (data) => {
+    const getAdminMemberRef = (memberNo) => {
 
-      fetch("/admin/adminMemberDetail?memberNo="+data.dataset.memberNo)
+      fetch("/admin/adminMemberDetail?memberNo="+memberNo)
           .then(response => {
             if(response.ok){
               return response.json();
@@ -353,17 +364,48 @@
           })
     }
 
-
-
     const adminMemberCngBtn = () => {
-      const delBtn = document.querySelector(".탈퇴버튼");
+      const delBtn = document.querySelector(".탈퇴처리");
       const admBtn = document.querySelector(".권한변경");
-
-      delBtn.addEventListener("click", (e) => {
-
-        const memberNo = e.target.closest(".admin-member-detail").children[1].children[2].value;
+      
+      delBtn?.addEventListener("click", () => {
+        const memberNo =Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
+        fetch("/admin/memberDelFlChange?memberNo="+memberNo)
+        .then(response => {
+          if(response.ok){
+            return response.text();
+          }
+          throw new Error("실패")
+        })
+        .then(result => {
+          getAdminMemberRef(memberNo)
+        })
+        .catch(err => {
+          console.log(err);
+        })
 
       })
+
+      admBtn?.addEventListener("click", () => {
+        const memberNo =Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
+        fetch("/admin/memberFlChange?memberNo="+memberNo)
+        .then(response => {
+          if(response.ok){
+            return response.text();
+          }
+          throw new Error("실패")
+        })
+        .then(result => {
+          getAdminMemberRef(memberNo)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+      })
+
+
+
     }
     
     
@@ -380,7 +422,7 @@
     let ud = 1;
     let searchType = '';
     let searchText = '';
-    
+    let searchAsc = '';
     
     const getMemberPagenation = () => {
       fetch("/admin/adminMemberPage?searchType="+searchType+"&searchText="+searchText+"&cp="+cp)
@@ -428,7 +470,7 @@
       }
 
 
-      fetch("/admin/adminMemberSearch?cp="+cp+"&searchType="+searchType+"&searchText="+searchText+"&ud="+ud)
+      fetch("/admin/adminMemberSearch?cp="+cp+"&searchType="+searchType+"&searchText="+searchText+"&ud="+ud+"&searchAsc="+searchAsc)
       .then(response => {
         if(response.ok){
           return response.text();
@@ -447,8 +489,7 @@
 
     const getMemberAsc = () => {
       adminMemberNo.addEventListener("click", () => {
-        searchType = '회원번호';
-        searchText = document.querySelector(".member-manage-search").value;
+        searchAsc = '회원번호';
 
         if(searchText === undefined){
           searchText = '' ;
@@ -457,22 +498,19 @@
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberNo.classList.add("fa-caret-up");
-          adminMemberNo.classList.remove("fa-caret-down");
+          adminMemberNo.src = '/images/rlxk/아래.png'
         }
         else {
           ud = 1;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberNo.classList.remove("fa-caret-up");
-          adminMemberNo.classList.add("fa-caret-down");
+          adminMemberNo.src = '/images/rlxk/위.png'
         }
       })
 
 
       adminMemberName.addEventListener("click", () => {
-        searchType = '이름'
-        searchText = document.querySelector(".member-manage-search").value;
+        searchAsc = '이름'
 
         if(searchText === undefined){
           searchText = '' ;
@@ -481,22 +519,19 @@
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberName.classList.add("fa-caret-up");
-          adminMemberName.classList.remove("fa-caret-down");
+          adminMemberName.src = '/images/rlxk/아래.png'
         }
         else {
           ud = 1;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberName.classList.remove("fa-caret-up");
-          adminMemberName.classList.add("fa-caret-down");
+          adminMemberName.src = '/images/rlxk/위.png'
         }
       })
 
 
       adminMemberEmail.addEventListener("click", () => {
-        searchType = '이메일'
-        searchText = document.querySelector(".member-manage-search").value;
+        searchAsc = '이메일'
 
         if(searchText === undefined){
           searchText = '' ;
@@ -505,22 +540,19 @@
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberEmail.classList.add("fa-caret-up");
-          adminMemberEmail.classList.remove("fa-caret-down");
+          adminMemberEmail.src = '/images/rlxk/아래.png'
         }
         else {
           ud = 1;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberEmail.classList.remove("fa-caret-up");
-          adminMemberEmail.classList.add("fa-caret-down");
+          adminMemberEmail.src = '/images/rlxk/위.png'
         }
       })
 
 
       adminMemberTel.addEventListener("click", () => {
-        searchType = '전화번호'
-        searchText = document.querySelector(".member-manage-search").value;
+        searchAsc = '전화번호'
 
         if(searchText === undefined){
           searchText = '' ;
@@ -529,15 +561,13 @@
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberTel.classList.add("fa-caret-up");
-          adminMemberTel.classList.remove("fa-caret-down");
+          adminMemberTel.src = '/images/rlxk/아래.png'
         }
         else {
           ud = 1;
           getMemberPagenation();
           getMemberSearchList();
-          adminMemberTel.classList.remove("fa-caret-up");
-          adminMemberTel.classList.add("fa-caret-down");
+          adminMemberTel.src = '/images/rlxk/위.png'
         }
       })
 
@@ -583,7 +613,7 @@
 
     const memberSearchBtn = () => {
       document.querySelector(".member-manage-search").children[2].addEventListener("click", () => {
-        searchType = document.querySelector(".member-manage-search").children[0].innerText;
+        searchType = document.querySelector(".member-manage-category").innerText;
         searchText = document.querySelector(".member-manage-search").children[1].value;
         cp = 1;
         getMemberPagenation();
@@ -613,10 +643,12 @@
     document.addEventListener("DOMContentLoaded", () => {
       searchText = '';
       searchType = '회원번호';
+      searchAsc = '회원번호';
       getMemberPagenation();
       getMemberSearchList();
       memberSearchBtn();
       getMemberAsc();
+      adminMemberCngBtn();
     })
 
   </script>

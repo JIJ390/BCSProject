@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.device.dto.Device;
@@ -179,10 +180,11 @@ public class AdminController {
 			@RequestParam("searchType") String searchType,
 			@RequestParam("searchText") String searchText,
 			@RequestParam("cp") int cp,
-			@RequestParam("ud") int ud
+			@RequestParam("ud") int ud,
+			@RequestParam("searchAsc") String searchAsc
 			) {
 		
-		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud);
+		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
 		System.out.println("cp:"+cp);
 		System.out.println("ud:"+ud);
@@ -212,6 +214,23 @@ public class AdminController {
 		
 		Map<String , String> map = service.adminMemberDetail(memberNo);
 		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("memberDelFlChange")
+	public int memberDelFlChange(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		return service.memberDelFlChange(memberNo);
+	}
+	@ResponseBody
+	@GetMapping("memberFlChange")
+	public int memberFlChange(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		return service.memberFlChange(memberNo);
 	}
 	
 	
