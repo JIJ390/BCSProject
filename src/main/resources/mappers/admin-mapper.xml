@@ -213,13 +213,36 @@ WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 	
 	
 	<select id="deviceList" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+ORDER BY
+	DEVICE_DATE DESC
+	</select>
+	
+	<select id="popUpData" resultType="SellingDevice">
+	
 	
 	
 	
 	
 	</select>
-	
-	
 	
 	
 	

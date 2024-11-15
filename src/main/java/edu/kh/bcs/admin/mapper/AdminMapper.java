@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
@@ -36,7 +37,9 @@ public interface AdminMapper {
 	List<Member> allListD(int cp);
 
 	
-	
+	// 디바이스 리스트 조회
 	List<Device> deviceList();
+	// 팝업 리스트 색 조회
+	List<SellingDevice> popUpData();
 
 }

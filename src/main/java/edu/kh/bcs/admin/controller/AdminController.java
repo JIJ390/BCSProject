@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.kh.bcs.admin.service.AdminService;
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("admin")
 @RequiredArgsConstructor
+@Slf4j
 public class AdminController {
 	
 	private static final int Device = 0;
@@ -42,13 +47,18 @@ public class AdminController {
 			Model model
 			) {
 //		휴대폰 정보 받아오기
-		List<Device> result = service.deviceList();
+		List<Device> boardList = service.deviceList();
 		
 		
-		model.addAttribute("result", result);
+		model.addAttribute("boardList", boardList);
+		
+		log.debug("asasdadsdadasds : {}", boardList);
+		log.debug("asasdadsdadasds : {}", boardList);
+		log.debug("asasdadsdadasds : {}", boardList);
+		log.debug("asasdadsdadasds : {}", boardList);
 		
 		
-		return "adminBoard";
+		return "admin/adminBoard";
 		
 		
 	}
@@ -111,6 +121,17 @@ public class AdminController {
 		return "admin/adminModelRegistration ";
 	}
 	
+	// SELLING 이 아니라  DEVICE로 해야할듯
+	@GetMapping("api/popUpData")
+	public String popUpData(
+			Model model
+			) {
+		
+		List<SellingDevice> popUpData = service.sellingDevice();
+		
+		
+		return null;
+	}
 	
 	
 	

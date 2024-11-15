@@ -12,5 +12,27 @@ closeBtn.addEventListener('click', () => {
 
 
 
+/* 팝업 열기 */
+const openPopup = () => {
+    document.querySelector('.android-img')
+    popUpLayer.classList.remove('popUp-close');
+    submit();
+}
+
+
+//  팝업 비동기 조회
+const selectList = () => {
+    fetch('/admin/api/popUpData')
+    .then(res => {
+
+        if (res.ok) return Response.json();
+        throw new Error("조회 실패");  
+    })
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => console.errerr(err));
+
+}
 
 

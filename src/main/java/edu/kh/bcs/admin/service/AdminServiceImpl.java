@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 
@@ -86,12 +87,22 @@ public class AdminServiceImpl implements AdminService{
 		return memberList;
 	}
 
-	
+	//디바이스 리스트 조회
 	@Override
 	public List<Device> deviceList() {
 
 		
 		return mapper.deviceList();
+	}
+	
+	// 팝업 
+	@Override
+	public List<SellingDevice> popUpData() {
+		
+		
+		
+		
+		return mapper.popUpData();
 	}
 }
 

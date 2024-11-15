@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>중고물품 </title>
     <link rel="stylesheet" href="/css/admin/board.css">
@@ -13,13 +13,12 @@
 
     <!-- <th:blick th:replace="~{common/header}"> </th:blick> -->
     <main>
-
         <section class="main-section">
+            
 
             <div class="title">
                 <h1>매입 목록</h1>
             </div>
-
             <div class="head">
                 <a href="http://localhost/admin">←</a>
             </div>
@@ -31,31 +30,30 @@
                         <input type="text">
                     </div>
                 </div>
-                <div class="list-category">
+                <div class="list-category" >
                     <table>
                         <colgroup>
-                            <col style="width: 15%;">
-                            <col style="width: 40%;">
-                            <col style="width: 20%;">
-                            <col style="width: 20%;">
                             <col style="width: 10%;">
+                            <col style="width: 20%;">
+                            <col style="width: 40%;">
+                            <col style="width: 10%;">
+                            <col style="width: 20%;">
                         </colgroup>
 
                         <tr class="category" id="category-top">
-                            <td><a href="">게시글 번호▼</a></td>
+                            <td><a href="">기종 번호▼</a></td>
                             <td><a href=""></a></td>
                             <td><a href="">휴대폰 이름▼</a></td>
                             <td><a href="">총 수량▼</a></td>
                             <td><a href="">최신순▼</a></td>
                         </tr>
-                        <div class="category-inside">
-                            <!-- 고객  -->
-                            <tr class="category">
-                                <td>1</td>
-                                <td class="android-img"><img src="/images/1.webp" alt="" ></td>
-                                <td >플립4</td>
-                                <td>243</td>
-                                <td>2023/08/27</td>
+                        <div class="category-inside"  th:each="boardList:${boardList}">
+                            <tr class="category" >
+                                <td th:text="${boardList.deviceNo}">기종 번호</td>
+                                <td class="android-img" onclick="openPopup()"><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
+                                <td th:text="${boardList.deviceName}">기종 이름</td>
+                                <td th:text="${boardList.colorResult}">총 기종에 숫자</td>
+                                <td th:text="${boardList.deviceDate}">등록 날짜</td>
                             </tr>
 
                         </div>

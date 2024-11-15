@@ -40,6 +40,10 @@ public class Device {
 	private String ramCapacity;
 	private String displaySize;
 	
+	private String deviceDate;
+	private String colorResult;
+	
+	
 	private List<Color> colorList;
 	private List<Grade> gradeList;
 	private List<Capacity> capacityList;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -28,11 +28,11 @@
                             <col style="width: 20%;">
                         </colgroup>
                         <tr class="category" id="category-top ">
-                            <td><a href=""></a></td>
-                            <td><a href="">색상▼</a></td>
-                            <td><a href="">총수량▼</a></td>
+                            <td></td>
+                            <td>색상▼</td>
+                            <td>총수량▼</td>
                         </tr>
-                        <div class="scroller">
+                        <div class="scroller" onclick="selectList()">
                             <tr class="category" id="category-top">
                                 <td><img src="/images/sample_iphone16_blue.png" alt=""></td>
                                 <td>코발트 블루</td>

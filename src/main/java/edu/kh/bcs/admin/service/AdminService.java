@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
@@ -17,6 +18,12 @@ public interface AdminService {
 	 * @return
 	 */
 	List<Device> deviceList();
+
+	/** 팝업 색 가져오기
+	 * 
+	 * @return
+	 */
+	List<SellingDevice> popUpData();
 
 
 
