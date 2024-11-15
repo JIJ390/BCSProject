@@ -1,12 +1,14 @@
 package edu.kh.bcs.device.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.bcs.device.mapper.DeviceSellingMapper;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class DeviceSellingServiceImpl implements DeviceSellingService {

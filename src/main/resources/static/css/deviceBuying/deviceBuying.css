@@ -60,6 +60,40 @@ main {
   color: var(--font-gray-color);
 }
 
+.color-content {
+  margin: 10px 0;
+
+  padding: 10px;
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+
+  align-items: center;
+  
+}
+
+
+.color-circle {
+  margin: 4px;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--font-gray-color);
+  border-radius: 32px;
+  box-shadow: inset 0px 3px 6px 1px var(--font-gray-color);
+}
+
+.color-circle:hover {
+  cursor: pointer;
+}
+
+.color-name {
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+
 
 
 .capacity-content {
