@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
-import edu.kh.bcs.deviceDto.Device;
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 
