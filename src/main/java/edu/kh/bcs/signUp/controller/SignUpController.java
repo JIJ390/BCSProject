@@ -12,8 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.signUp.service.SignUpService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Controller
 @RequestMapping("signUp")
 @RequiredArgsConstructor
@@ -82,13 +83,16 @@ public class SignUpController {
 	 * @param ra : 리다이렉트 시 request scope로 값 전달
 	 * @return
 	 */
-	@PostMapping
+	@PostMapping("signUpCreate")
 	public String signUpRun(
 			@ModelAttribute Member inputMember,
 			RedirectAttributes ra) {
 	
 		// 회원가입 서비스 호출
-		int result = service.signUp(inputMember);
+		int result = service.signUpRun(inputMember);
+		
+		log.debug("회원가입정보 : {}", inputMember);
+		
 		
 		// 서비스 결과에 따라 응답 제어
 		String path = null;
@@ -100,7 +104,9 @@ public class SignUpController {
 			 	= inputMember.getMemberId() + "님의 가입을 환영합니다^^";
 		}
 		
-		return "redirect:";
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
 	}
 	
 	

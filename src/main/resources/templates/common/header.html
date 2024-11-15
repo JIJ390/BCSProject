@@ -100,7 +100,7 @@
         <div class="header-auth">
             <input type="text" placeholder="" />
             <div th:unless= "${session.loginMember}">
-                <a href="#">로그인</a> | <a href="#">회원가입</a>
+                <a href="/myPage/myPageLogin">로그인</a> | <a href="/signUp/signUpAccount">회원가입</a>
             </div>
 
             <div class="menu-container" th:if="${session.loginMember}">
@@ -109,7 +109,7 @@
             
                 <a href="#" class="sideItem">마이 페이지</a> 
                 <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a> 
-                <a href="#" cass="sideItem">로그 아웃</a>
+                <a href="/myPage/logout" cass="sideItem">로그 아웃</a>
               </div>
 
             </div>
@@ -123,6 +123,7 @@
     
     <th:block th:replace= "~{common/sidebar}"></th:block>
     <script src="/js/common/sidebar.js"></script>
+
 
 </body>
 </html>

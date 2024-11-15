@@ -13,6 +13,9 @@ public interface SignUpMapper {
 	// 아이디 중복검사
 	int idCheck(String id);
 
+	// 회원가입
+	int signUpRun(Member inputMember);
+
 
 	
 	
