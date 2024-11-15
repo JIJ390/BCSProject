@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import edu.kh.bcs.deviceDto.Device;
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
