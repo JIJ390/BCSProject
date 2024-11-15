@@ -1,7 +1,9 @@
 package edu.kh.bcs.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -182,11 +184,15 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud);
 		
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
+		System.out.println("cp:"+cp);
+		System.out.println("ud:"+ud);
+		System.out.println("Text:"+searchText);
+		System.out.println("Type:"+searchType);
+		System.out.println("cp:"+cp);
+		System.out.println("ud:"+ud);
+		System.out.println("Text:"+searchText);
+		System.out.println("Type:"+searchType);
+
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
@@ -197,6 +203,17 @@ public class AdminController {
 		
 		return "admin/adminMember/adminMemberList";
 	}
+	
+	@ResponseBody
+	@GetMapping("adminMemberDetail")
+	public Map<String, String> adminMemberDetail(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		Map<String , String> map = service.adminMemberDetail(memberNo);
+		return map;
+	}
+	
 	
 	
 	

@@ -25,5 +25,12 @@ public class SellingDevice {
 	private String clientName;
 	private String clientTel;
 	
+	private String deviceName;
+	private String capacityType;
+	private String gradeType;
+	private String colorName;
+	
+	private String memberName;
+	
 
 }

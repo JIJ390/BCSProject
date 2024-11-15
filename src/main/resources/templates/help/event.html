@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트</title>
+  <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
+  <link rel="stylesheet" href="/css/help/help.css">
+  
+
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+
+  </header>
+  <main>
+    <section class="page-info">
+      <span>고객센터 &gt; 이벤트</span>
+    </section>
+    <section class="helpView">
+      <div class="help-container">
+        <div class="button-area">
+            <a href="/help/notice">
+              <div class="helpIconBox">
+                <img src="/images/help/notice.png">
+                <div class="iconText">공지사항</div>
+              </div>
+            </a>
+            
+            <a href="/help/faq">
+              <div class="helpIconBox">
+                <img src="/images/help/faq.png">
+                <div class="iconText">FAQ</div>
+              </div>
+            </a>
+              
+            <a href="/help/event">  
+              <div class="helpIconBox">
+                <img src="/images/help/event.png">
+                <div class="iconText">이벤트</div>
+              </div>
+            </a>
+        </div>
+        <div class="event-list-area">
+          
+         <h2>테스트용</h2>
+        <div class="more-help-area">이 외 문의는 여기로 보내 주세요. <span>메일 문의</span>  <span>채팅 문의</span></div> 
+      </div>
+    </section>
+  </main>
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+  <script src="/js/help/help.js"></script>
+  <script>
+    const haederNav =  document.getElementsByClassName("header-nav")[0];
+    const pageInfoSpan = document.querySelector(".page-info > span");
+
+    const movePageIngo = () => {
+      const rect = haederNav.getBoundingClientRect();
+      pageInfoSpan.style.marginLeft = rect.x + 'px';
+    }
+
+    window.addEventListener("resize", movePageIngo);
+
+    movePageIngo();
+  </script>
+</body>
+</html>
