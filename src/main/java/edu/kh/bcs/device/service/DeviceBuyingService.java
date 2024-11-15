@@ -11,4 +11,13 @@ public interface DeviceBuyingService {
 	 */
 	Device selectDetailDevice(int deviceNo);
 
+	
+	/**
+	 * 내폰 사기 예상 가격
+	 * @param deviceNo
+	 * @param plusPrice
+	 * @return
+	 */
+	int expectedPrice(int deviceNo, int plusPrice);
+
 }

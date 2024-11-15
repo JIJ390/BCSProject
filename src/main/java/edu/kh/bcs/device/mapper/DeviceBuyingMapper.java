@@ -14,4 +14,12 @@ public interface DeviceBuyingMapper {
 	 */
 	Device selectDetailDevice(int deviceNo);
 
+	
+	/**
+	 * 예상 가격 가져오기
+	 * @param deviceNo
+	 * @return
+	 */
+	int expectedPrice(int deviceNo);
+
 }

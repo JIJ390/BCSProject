@@ -111,8 +111,16 @@
 	</select>
 	
 	
-	
-	
+	<!-- 내 폰 사기 예상 가격 -->
+	<select id="expectedPrice" resultType="_int">
+		SELECT
+			DEVICE_BUYING_PRICE
+		FROM
+			DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+	</select>
+		
 	
 
 </mapper>

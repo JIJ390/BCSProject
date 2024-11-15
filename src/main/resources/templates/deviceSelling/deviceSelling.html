@@ -167,6 +167,9 @@
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+  <script th:inline="javascript">
+    const device = /*[[${device}]]*/ 기종;
+  </script>
 
   <script src="/js/deviceSelling/deviceSelling.js"></script>
 </body>

@@ -1,10 +1,15 @@
 package edu.kh.bcs.device.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.service.DeviceBuyingService;
@@ -45,5 +50,22 @@ public class DeviceBuyingController {
 		return "deviceBuying/deviceBuying";
 		
 							
+	}
+	
+	
+	/**
+	 * 내폰 사기 예상 가격
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("expectedPrice")
+	@ResponseBody
+	public int expectedPrice(
+			@RequestBody Map<String, Integer> map) {
+		
+		int plusPrice = map.get("plusPrice");
+		int deviceNo = map.get("deviceNo");
+		
+		return service.expectedPrice(deviceNo, plusPrice);
 	}
 }
