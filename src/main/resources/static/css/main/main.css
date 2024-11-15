@@ -306,6 +306,8 @@ a {
   background-color: green;
 }
 
+
+
 .sub-slide-box{
   display: flex;
   align-items: center;
@@ -313,4 +315,10 @@ a {
   height: 100%;
   width: 80%;
   background-color: yellow;
+}
+
+.sub-slide{
+  display: flex;
+  align-items: center;
+
 }
