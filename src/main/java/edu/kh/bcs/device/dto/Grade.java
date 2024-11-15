@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +16,6 @@ public class Grade {
 	private int gradeNumber;
 	private int deviceNo;
 	private String gradeType;
-	private int gradeScale;
+	private int gradePrice;
+	private int gradeSellPrice;
 }

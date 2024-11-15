@@ -11,17 +11,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.service.AdminService;
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("admin")
+@RequiredArgsConstructor
 public class AdminController {
 	
-	@Autowired
-	private AdminService service; 
+	private static final int Device = 0;
+	
+	private final AdminService service; 
 	
 	// localhost/admin 접속 시 admin/adminMain.html 매핑
 	@RequestMapping("")
@@ -37,10 +40,19 @@ public class AdminController {
 	
 	//게시글 관리
 	@GetMapping("adminBoard")
-	public String adminBoard() {
+	public String adminBoard(
+			Model model
+			) {
+//		휴대폰 정보 받아오기
+		List<Device> result = service.deviceList();
 		
 		
-		return "admin/adminBoard";
+		model.addAttribute("result", result);
+		
+		
+		return "adminBoard";
+		
+		
 	}
 	
 	

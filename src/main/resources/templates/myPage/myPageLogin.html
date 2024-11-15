@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,46 +9,51 @@
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
 </head>
+
 <body>
-  
+
   <header>
-    BCS ACCOUNT | 배최성 계정관리
+    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
+      <img src="/images/logo.png" alt="">
+      BCS ACCOUNT | 배최성 계정관리
+    </div>
   </header>
+
   <main>
     <section class="left-section">
     </section>
     <section class="main-section">
-      
-      
 
-    <div  class="login-box"> 
-      <div style="text-align: center; font-size: 30px;">하나의 계정으로,<br>세상의 중고폰을 내손에!<br>나의 배최성 계정에<br>로그인하세요!</div>
 
-      <form>
+
+      <div class="login-box">
+        <div style="text-align: center; font-size: 30px;">하나의 계정으로,<br>세상의 중고폰을 내손에!<br>나의 배최성 계정에<br>로그인하세요!</div>
+
+        <form action="/myPage/login" method="POST" id="loginForm">
           <div class="input-group-login">
-              <input type="text" placeholder="아이디">
+            <input type="text" placeholder="아이디" name="memberId">
           </div>
-          
+
           <div class="input-group-login">
-              <input type="password" placeholder="비밀번호">
+            <input type="password" placeholder="비밀번호" name="memberPw">
           </div>
-        
-        <div class="options">
+
+          <div class="options">
             <label>
-                <input type="checkbox">
-                아이디저장
+              <input type="checkbox">
+              아이디저장
             </label>
-        </div>
-        
-        <button type="submit" class="loginBtn">로그인</button>
-        
-        <div class="links">
+          </div>
+
+          <button type="submit" class="loginBtn">로그인</button>
+
+          <div class="links">
             <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
-        </div>
-    </form>
-        
-       
-    </div>
+          </div>
+        </form>
+
+
+      </div>
 
 
     </section>
@@ -55,7 +61,6 @@
     </section>
   </main>
   <footer>
-    푸터
   </footer>
 
 </body>

@@ -17,6 +17,11 @@ main {
   margin-top: 150px;
 }
 
+
+
+
+
+
 .device-selling-head {
   width: 100%;
 }
@@ -70,6 +75,8 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
+
+  align-items: center;
   
 }
 
@@ -81,6 +88,15 @@ main {
   border: 2px solid var(--font-gray-color);
   border-radius: 32px;
   box-shadow: inset 0px 3px 6px 1px var(--font-gray-color);
+}
+
+.color-circle:hover {
+  cursor: pointer;
+}
+
+.color-name {
+  margin-left: 20px;
+  font-size: 20px;
 }
 
 
@@ -124,11 +140,17 @@ main {
 }
 
 
-.selected {
+
+
+.selected-capacity {
   border: 2px solid var(--main-color);
 }
 
-.selected-box {
+.selected-grade {
+  border: 2px solid var(--main-color);
+}
+
+.selected-color {
   border: 2px solid var(--main-color);
 }
 
@@ -178,15 +200,16 @@ hr {
 
   margin: 10px auto;
 
+  margin-bottom: 30px;
   text-align: center;
 
-    font-family: 'Pretendard-Thin';
+  font-family: 'Pretendard-Thin';
 }
 
 .selling-span3 {
   font-size: 32px;
   margin: 20px auto;
-  margin-top: 40px;
+  margin-top: 30px;
 
 
   text-align: center;
@@ -199,7 +222,7 @@ hr {
 
 
   background-color: var(--white-color);
-  border: none;
+  border: 2px solid var(--white-color);
   border-radius: 15px;
 
   margin: 20px;
@@ -215,4 +238,183 @@ hr {
 }
 
 
+.device-selling-popup {
+  background-color: var(--main-gray-color);
 
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  width: 600px;
+  position: fixed; /* 브라우저에서 위치 고정 */
+
+  /* 브라우저 정가운데 배치 */
+  margin: auto;
+  top: 40px;
+  left: 0;
+  right: 0;
+
+  padding: 15px;
+  box-shadow: 0px 5px 6px -2px var(--border-color);
+  z-index: 1001;
+}
+
+
+
+.close-popup {
+	display: none;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+  z-index: 1000; /* 팝업이 항상 위로 오도록 설정 */
+}
+
+
+h1 {
+  padding: 14px;
+}
+
+.popup-box {
+  display: flex;
+  margin: 30px 0;
+
+
+  padding: 0 14px;
+}
+
+.popup-device {
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.popup-device > span {
+  font-size: 16px;
+}
+
+
+.popup-amount {
+  padding: 14px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-amount > span:first-child {
+  font-size: 16px;
+}
+
+.popup-amount > span:last-of-type {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 36px;
+
+
+  font-family: 'Pretendard-Thin';
+}
+
+
+
+
+.popup-box > span {
+  display: inline-block;
+  font-size: 16px;
+  width: 140px;
+
+}
+
+.popup-box > input {
+  display: inline-block;
+  font-size: 16px;
+  width: 400px;
+  height: 28px;
+
+  padding: 8px;
+
+  color: var(--font-gray-color);
+
+
+  border: none;
+
+}
+
+.popup-box > textarea {
+  display: inline-block;
+  font-size: 16px;
+  width: 400px;
+
+  padding: 8px;
+
+  color: var(--font-gray-color);
+
+  border: none;
+}
+
+.bank-box {
+  display: flex;
+  flex-direction: column;
+
+  align-items: end;
+}
+
+.bank-box > select {
+  display: inline-block;
+  font-size: 16px;
+  width: 400px;
+  height: 28px;
+
+  padding-left: 4px;
+
+  margin-bottom: 15px;
+
+  color: var(--font-gray-color);
+
+  border: none;
+}
+
+.bank-box > input {
+  display: inline-block;
+  font-size: 16px;
+  width: 400px;
+  height: 28px;
+
+  padding: 8px;
+
+  margin-bottom: 15px;
+
+  color: var(--font-gray-color);
+
+  border: none;
+
+}
+
+.btn-area {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn {
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+
+  font-size: 20px;
+
+  background-color: var(--white-color);
+  border: 2px solid var(--white-color);
+
+  transition-duration: 0.2s;
+}
+
+.submit-btn:hover {
+  border: 2px solid var(--main-color);
+}

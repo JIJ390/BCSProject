@@ -1,6 +1,7 @@
 package edu.kh.bcs.device.service;
 
-import edu.kh.bcs.deviceDto.Device;
+import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 
 public interface DeviceSellingService {
 
@@ -18,5 +19,12 @@ public interface DeviceSellingService {
 	 * @return
 	 */
 	int expectedPrice(int deviceNo, int plusPrice);
+
+	/**
+	 * 판매 신청
+	 * @param sellingDevice
+	 * @return
+	 */
+	int acceptSellingDevice(SellingDevice sellingDevice);
 
 }

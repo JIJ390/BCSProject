@@ -40,13 +40,13 @@
                                             <li>갤럭시 S24 Plus</li>
                                             <li>갤럭시 S24</li>
                                         </div>
-                                        <div class="phoneModels-box">
+                                        <div class="phoneModels-box" style="margin-top: auto;">
                                             <li>갤럭시 Z폴드6 5G</li>
                                             <li>갤럭시 Z폴드5 5G</li>
                                             <li>갤럭시 Z플립6 5G</li>
                                             <li>갤럭시 Z플립5 5G</li>
                                         </div>
-                                        <div style="border: 1px solid black; width: 60%; text-align: center;">
+                                        <div class="plusItem">
                                             <a href="">더보기+</a>
                                         </div>
                                     </ul>
@@ -63,7 +63,7 @@
                 <div class="dropdown">
                     <div class="dropdownContainor">
                         <div class="info">
-                                <li><a href="#">Galaxy Phone</a></li>
+                                <li id="galaxySelect"><a href="#">Galaxy Phone</a></li>
                                 <li><a href="#">iPhone</a></li>
                                 <li><a href="#">Galaxy Tab</a></li>
                                 <li><a href="#">iPad</a></li>
@@ -95,7 +95,7 @@
                     </div>
                 </ul>
             </ul>
-            <ul><a href="#">고객센터</a></ul>
+            <ul><a href="/help/notice">고객센터</a></ul>
         </nav>
         <div class="header-auth">
             <input type="text" placeholder="" />
@@ -103,22 +103,16 @@
                 <a href="#">로그인</a> | <a href="#">회원가입</a>
             </div>
 
-            <div th:if= "${session.loginMember}">
-                <span><img src="/images/loginLogo.png" width="20px" height="20px"></span>
-            </div>
-
             <div class="menu-container" th:if="${session.loginMember}">
-                <div class="profile-img">
-                  <img th:with="user=#{user.default.image}" 
-                       th:src="${session.loginMember.profileImg ?: user }" alt="profile">
-                </div>
             
                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
             
                 <a href="#" class="sideItem">마이 페이지</a> 
-                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberAuth), '2')}">관리자 페이지</a> 
-                <a href="#" class="sideItem">로그 아웃</a>
+                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a> 
+                <a href="#" cass="sideItem">로그 아웃</a>
               </div>
+
+            </div>
            
         </div>
     </header>

@@ -85,27 +85,29 @@
 	
 	<select id="selectGradeList" resultType="Grade">
 		SELECT
+			GRADE_NUMBER,
 			GRADE_TYPE,
-			GRADE_SCALE
+			GRADE_SELL_PRICE
 		FROM
 			GRADE
 		WHERE
 			DEVICE_NO = #{deviceNo}
-		ORDER BY GRADE_SCALE ASC
+		ORDER BY GRADE_SELL_PRICE ASC
 			
 	</select>
 	
 	<select id="selectCapacityList" resultType="Capacity">
 		SELECT
 			CAPACITY_TYPE,
-			CAPACITY_PRICE
+			CAPACITY_SELL_PRICE,
+			CAPACITY_NUMBER
 		FROM 
 			CAPACITY_PRICE
 		LEFT JOIN 
 			CAPACITY USING (CAPACITY_NUMBER)
 		WHERE
 				DEVICE_NO = #{deviceNo}
-		ORDER BY CAPACITY_PRICE ASC
+		ORDER BY CAPACITY_SELL_PRICE ASC
 	</select>
 	
 	
@@ -123,4 +125,33 @@
 		WHERE
 			DEVICE_NO = #{deviceNo}
 	</select>
+	
+	
+	<insert id="acceptSellingDevice">
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="sellingDeviceNo">
+			SELECT SEQ_SELLING_DEVICE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO "SELLING_DEVICE"
+		VALUES (
+			#{sellingDeviceNo},
+			DEFAULT,
+			#{clientBank},
+			#{accountNo},
+			#{requestComment},
+			#{deviceNo},
+			#{capacityNumber},
+			#{gradeNumber},
+			#{colorNo},
+			#{memberNo},
+			1,
+			#{clientName},
+			#{clientTel}
+			
+		)
+		
+	
+	</insert>
 </mapper>

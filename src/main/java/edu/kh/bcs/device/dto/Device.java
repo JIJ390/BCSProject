@@ -1,7 +1,10 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import java.util.List;
 
+import edu.kh.bcs.device.dto.Capacity;
+import edu.kh.bcs.device.dto.Color;
+import edu.kh.bcs.device.dto.Grade;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

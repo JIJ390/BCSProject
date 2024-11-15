@@ -1,5 +1,6 @@
 let currentIndex = 0;
 
+// 상단 슬라이드 기능
 function showSlide(index) {
   const slides = document.querySelector('.slides');
   const dots = document.querySelectorAll('.dot');
@@ -37,5 +38,4 @@ setInterval(nextSlide, 5000);
 
 // 페이지 로드 시 첫 슬라이드를 표시
 showSlide(currentIndex);
-
 

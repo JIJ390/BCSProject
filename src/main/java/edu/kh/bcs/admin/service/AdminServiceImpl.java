@@ -6,16 +6,17 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
 	
-	@Autowired
-	private AdminMapper mapper;
+	private final AdminMapper mapper;
 
 	@Override
 	public int getResultCount(String searchType, String searchText) {
@@ -51,6 +52,7 @@ public class AdminServiceImpl implements AdminService{
 		return memberList;
 	}
 
+
 	@Override
 	public Map<String, String> adminMemberDetail(int memberNo) {
 		
@@ -62,5 +64,13 @@ public class AdminServiceImpl implements AdminService{
 		
 		return map;
 	}
+
 	
+	@Override
+	public List<Device> deviceList() {
+
+		
+		return mapper.deviceList();
+	}
 }
+

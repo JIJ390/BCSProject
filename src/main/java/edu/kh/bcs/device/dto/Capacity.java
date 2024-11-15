@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +14,9 @@ import lombok.ToString;
 public class Capacity {
 
 	private int deviceNo;
+	private int capacityNumber;
 	private String capacityType;
 	private int capacityPrice;
+	private int capacitySellPrice;
 }
+

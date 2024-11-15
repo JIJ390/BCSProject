@@ -119,12 +119,12 @@ img{
   top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
   left: 0; /* 화면의 왼쪽 끝에 맞춤 */
   right: 0; /* 화면의 오른쪽 끝에 맞춤 */
-  background-color: var(--main-gray-color);
+  background-color: white;
   border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
   z-index: 1000;
   font-size: 43px;
   padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 72vh;
+  height: 430px;
 }
 
 .header-nav .dep1 .dropdown li {
@@ -137,6 +137,7 @@ img{
   color: #1D1D1F;
   text-decoration: none;
   white-space: nowrap;
+  font-size: 35px;
 }
 
 /* hover 시 드롭다운 표시 */
@@ -149,6 +150,10 @@ img{
 .header-nav .dep1:hover ~ .overlay,
 .header-nav .dep1 .dropdown:hover ~ .overlay {
   display: block;
+}
+
+.dropdownContainor{
+  margin-top: 20px;
 }
 /* ------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------ */
@@ -170,12 +175,12 @@ img{
   top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
   left: 0; /* 화면의 왼쪽 끝에 맞춤 */
   right: 0; /* 화면의 오른쪽 끝에 맞춤 */
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
   z-index: 1000;
   font-size: 43px;
   padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 72vh;
+  height: 430px;
 }
 
 .header-nav .dep2 .dropdown li {
@@ -188,6 +193,7 @@ img{
   color: #1D1D1F;
   text-decoration: none;
   white-space: nowrap;
+  font-size: 35px;
 }
 
 /* hover 시 드롭다운 표시 */
@@ -214,44 +220,7 @@ img{
   cursor: pointer;
 }
 
-/* 드롭다운 스타일 */
-.header-nav .dep3 .dropdown {
-  display: none;
-  position: fixed; /* 화면 전체 기준으로 위치 설정 */
-  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
-  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
-  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
-  background-color: #ffffff;
-  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
-  z-index: 1000;
-  font-size: 43px;
-  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 72vh;
-}
 
-.header-nav .dep3 .dropdown li {
-  display: block;
-  padding: 10px;
-  margin-left: 30px;
-}
-
-.header-nav .dep3 .dropdown li a {
-  color: #1D1D1F;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* hover 시 드롭다운 표시 */
-.header-nav .dep3:hover .dropdown,
-.header-nav .dep3:hover ~ .overlay,
-.header-nav .dep3 .dropdown:hover {
-  display: block;
-}
-
-.header-nav .dep3:hover ~ .overlay,
-.header-nav .dep3 .dropdown:hover ~ .overlay {
-  display: block;
-}
 /* ------------------------------------------------------------------------ */
 
 
@@ -283,7 +252,7 @@ main{
 
 .sideMenuContainer{
   width: 60%;
-  margin-left: 70px;
+  margin-left: 100px;
   margin-top: 20px;
 }
 
@@ -309,6 +278,7 @@ main{
   display: flex;
   flex-direction: row;
   align-items: start;
+  margin-top: 1.5vh;
   width: 1200px;
 }
 
@@ -316,6 +286,18 @@ main{
   font-size: 25px;
 }
 
+.plusItem{
+  border: 1px solid black; 
+  width: 750px; 
+  height: 35px; 
+  text-align: center; 
+  margin-top: 22px; 
+  margin-left: 40px; 
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

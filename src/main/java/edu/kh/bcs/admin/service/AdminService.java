@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
@@ -12,6 +13,13 @@ public interface AdminService {
 	int getResultCount(String searchType, String searchText);
 
 	List<Member> getMemberList(int cp, String searchType, String searchText, int ud);
+	/** 휴대폰 리스트
+	 * 
+	 * @return
+	 */
+	List<Device> deviceList();
+
+
 
 	Map<String, String> adminMemberDetail(int memberNo);
 

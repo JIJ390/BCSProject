@@ -89,6 +89,13 @@ WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 	</select>
 	
 	
+	<select id="deviceList" resultType="Device">
+	
+	
+	
+	
+	</select>
+	
 	
 	
 	

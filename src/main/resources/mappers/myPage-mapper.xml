@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.myPage.mapper.MyPageMapper">
+  	
+  	<!-- [TIP]
+  	  parameterType 속성은 필수가 아니다!!!
+  	  Mybatis TypeHandler가 파라미터의 타입을 알아서 판별할 수 있다.
+  	  --> 
+  	 
+  	
+  	<select id="login">
+  			SELECT
+  				MEMBER_NO,
+  				MEMBER_NAME,
+  				MEMBER_EMAIL,
+  				MEMBER_PW,
+  				MEMBER_DEL_FL,
+  				MEMBER_DATE,
+  				MEMBER_ADDRESS,
+  				MEMBER_FL,
+  				MEMBER_POINT,
+  				MEMBER_TEL,
+  				MEMBER_ID
+  			FROM "MEMBER"
+  			WHERE MEMBER_ID = #{memberId}
+  			AND   MEMBER_DEL_FL = 'N'
+  	</select>
+  	
+  	
+
+  	
+</mapper>

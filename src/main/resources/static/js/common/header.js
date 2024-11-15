@@ -1,6 +1,7 @@
+/* 헤더 매뉴 hover시 background opacity */
+
 const dep1 = document.querySelector(".dep1")
 const dep2 = document.querySelector(".dep2")
-const dep3 = document.querySelector(".dep3")
 
 dep1.addEventListener("mouseenter", () => {
   const main = document.querySelector("main")
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   galaxyContent.style.display = 'none';
 
   // 메뉴 토글을 비동기적으로 처리
-  function toggleMenu() {
+  function toggleMenu(contentElement) {
       return fetch('https://jsonplaceholder.typicode.com/posts/1') // 임의의 비동기 요청 (더미 API)
           .then(response => {
               if (!response.ok) {
@@ -68,14 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
           })
           .then(data => {
               // 데이터를 가져온 이후 메뉴를 토글
-              if (galaxyContent.style.display === 'none') {
-                  galaxyContent.style.display = 'block';
+              if (contentElement.style.display === 'none') {
+                  contentElement.style.display = 'block';
                   selectionMessage.style.display = 'none'; // "원하는 종류를 선택하세요" 메시지를 숨김
                   modelMessage.style.display = 'block'; // "종류별" 메시지는 유지
                   buy_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
                   sell_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
               } else {
-                  galaxyContent.style.display = 'none';
+                  contentElement.style.display = 'none';
                   selectionMessage.style.display = 'block'; // 메시지를 다시 보이게 함
                   modelMessage.style.display = 'none'; // "종류별" 메시지를 숨김
                   buy_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
@@ -90,8 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // "Galaxy Phone" 클릭 시 메뉴 토글
   galaxyPhoneLink.addEventListener("click", function (event) {
       event.preventDefault(); // 기본 링크 동작을 막음
-      toggleMenu(); // 비동기 방식으로 메뉴 토글
+      toggleMenu(galaxyContent); // 비동기 방식으로 메뉴 토글
   });
+
 
   // 메뉴에서 마우스가 나갔을 때 메뉴 숨기기
   dropdownContainer.addEventListener("mouseleave", function () {
@@ -136,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+
   // 필터링된 결과를 화면에 표시하는 함수
   function displayFilteredResults(data) {
       // 여기에 필터링된 데이터를 HTML에 표시하는 로직을 작성하세요
@@ -159,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
 dep2.addEventListener("mouseenter", () => {
   const main = document.querySelector("main")
   const footer = document.querySelector("footer")
@@ -167,19 +171,6 @@ dep2.addEventListener("mouseenter", () => {
 })
 
 dep2.addEventListener("mouseleave", () => {
-  const main = document.querySelector("main")
-  const footer = document.querySelector("footer")
-  main.style.opacity = 1
-  footer.style.opacity = 1
-})
-dep3.addEventListener("mouseenter", () => {
-  const main = document.querySelector("main")
-  const footer = document.querySelector("footer")
-  main.style.opacity = 0.3
-  footer.style.opacity = 0.3
-})
-
-dep3.addEventListener("mouseleave", () => {
   const main = document.querySelector("main")
   const footer = document.querySelector("footer")
   main.style.opacity = 1
