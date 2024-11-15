@@ -2,8 +2,8 @@ package edu.kh.bcs.device.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import edu.kh.bcs.deviceDto.Device;
-import edu.kh.bcs.deviceDto.SellingDevice;
+import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 
 @Mapper
 public interface DeviceSellingMapper {
