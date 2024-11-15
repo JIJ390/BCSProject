@@ -87,12 +87,16 @@ img{
 }
 
 .header-auth input {
+  position: relative;
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 250px;
   background: url(../images/search.png) no-repeat right;
+  resize: none;
+  box-sizing: border-box;
 }
+
 
 .header-auth a {
   color: #1D1D1F;
@@ -302,18 +306,22 @@ main{
 
 
 
-
+.menu-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
 
 
 .sideItem {
-  display: block;
   margin: 10px 0;
+  padding: 20px;
   text-decoration: none;
   color: #333;
-  font-size: 14px;
   transition: color 0.1s ease;
 }
 
