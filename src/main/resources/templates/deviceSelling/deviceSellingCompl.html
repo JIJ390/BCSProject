@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배최성 표준 html </title>
+  <link rel="stylesheet" href="/css/deviceSelling/deviceSellingCompl.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="/css/common/footer.css">
+</head>
+<body>
+  
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+  </header>
+
+  <main>
+    <section class="left-section">
+      레프트 섹션
+    </section>
+    <section class="main-section" th:object="${sellingDevice}">
+      <div class="page-title">판매 신청 완료</div>
+      <div class="device-status" th:text="|신청 기종 > *{deviceName} > *{colorName} > *{capacityType} > *{gradeType} 등급|">신청 기종 > iPhone 15 PRO > 블루 티타늄 > 1 TB > A 등급</div>
+      <div class="sub-title">판매 신청이 접수되었습니다.</div>
+
+      <div class="selling-container">
+        <span>입력 정보 확인</span>
+
+        <div class="selling-box">
+          <span>신청자</span>
+
+          <span th:text="*{memberName}">홍길동</span>
+        </div>
+
+        <div class="selling-box">
+          <span>전화 번호</span>
+          <span th:text="*{clientTel}">01011111111</span>
+        </div>
+
+        <div class="selling-box">
+          <span>은행</span>
+          <span th:text="*{clientBank}">농협 / 1111222223333 / 홍길동</span>
+        </div>
+
+        <div class="selling-box">
+          <span>계좌 번호</span>
+          <span th:text="*{accountNo}">농협 / 1111222223333 / 홍길동</span>
+        </div>
+
+        <div class="selling-box">
+          <span>예금주</span>
+          <span th:text="*{clientName}">농협 / 1111222223333 / 홍길동</span>
+        </div>
+
+        <div class="selling-box">
+          <span>요청 사항</span>
+          <span th:if= "*{requestComment}" th:text="*{requestComment}"></span>
+          <span th:unless="*{requestComment}">요청 사항 미작성</span>
+        </div>
+      </div>
+
+      <div class="guide-line-container">
+        <div class="guide-line-box"> 
+          <div class="img-box">
+            <img src="/images/sellingDevice/신청.png" alt="">
+          </div>
+          <div class="guide-number">01</div>
+          <div class="guide-content">신청 완료
+
+          </div>
+        </div>
+
+        <div class="guide-line-box"> 
+          <div class="img-box">
+            <img src="/images/sellingDevice/검수.png" alt="">
+          </div>
+          <div class="guide-number">02</div>
+          <div class="guide-content">검수 과정</div>
+        </div>
+
+        <div class="guide-line-box"> 
+          <div class="img-box">
+            <img src="/images/sellingDevice/송금.png" alt="">
+          </div>
+          <div class="guide-number">03</div>
+          <div class="guide-content">송금 / 반려</div>
+        </div>
+      </div>
+
+      <div class="guide-line">아래 주소로 기기를 보내주시면 빠른 시일 내일 내에 검수하여 결과를 알려드리도록 하겠습니다</div>
+
+      <div class="adress-container">
+        <span>매장 주소</span>
+        <span>서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 2F </span>
+      </div>
+
+      <div class="guide-line">기타 문의 사항이 있다면 고객센터를 이용해 주세요</div>
+
+      <hr>
+
+      <div class="btn-area">
+        <button class="check-btn" id="checkBtn">
+          확인
+        </button> 
+      </div>
+
+    </section>
+    <section class="right-section">
+      라이트 섹션
+    </section>
+  </main>
+
+  <footer>
+    <th:block th:replace="~{common/footer}"></th:block>
+  </footer>
+
+  <script src="/js/deviceSelling/deviceSellingCompl.js"></script>
+</body>
+</html>
