@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>아이폰 16 구매하기</title>
+  <title  th:text="|${device.deviceName} 구매하기|">아이폰 16 구매하기</title>
   <link rel="stylesheet" href="/css/deviceBuying/deviceBuying.css">
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
@@ -19,7 +19,7 @@
     </section>
     <section class="main-section">
       <div class="device-buying-head">
-        <span class="page-title">
+        <span class="page-title" th:text="${device.deviceName}">
           iPhone 16
         </span>
         <span class="page-title-sub">
@@ -37,7 +37,10 @@
             <span>색상을 선택하세요</span>
           </div>
           <div class="color-content">
-            a a a a a a a 
+            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}" th:each="color:${device.colorList}" th:object="${color}">
+            </div>
+
+            <span class="color-name"></span>
           </div>
 
           <div class="info-title">
@@ -46,20 +49,16 @@
           </div>
           <div class="capacity-content">
 
-            <div class="select-box">
-              <span>128 GB</span>
-              <span>+ 0 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>256 GB</span>
-              <span>+ 100,000 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>512 GB</span>
-              <span>+ 200,000 ₩</span>
-            </div>
+            <th:block th:each="capacity:${device.capacityList}" th:object="${capacity}">
+              <div class="select-box capacity-box" th:data-value="*{capacityNumber}">
+                <span th:text="*{capacityType}">B 등급</span>
+                <span th:text="|+ *{#numbers.formatInteger(capacitySellPrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{capacitySellPrice}">+ 0 ₩</span>
+              </div>
+
+            </th:block>
+
+
           </div>
 
           <div class="info-title">
@@ -68,20 +67,15 @@
           </div>
           <div class="grade-content">
 
-            <div class="select-box">
-              <span>B 등급</span>
-              <span>+ 0 ₩</span>
-            </div>
             
-            <div class="select-box">
-              <span>A 등급</span>
-              <span>+ 100,000 ₩</span>
-            </div>
-            
-            <div class="select-box">
-              <span>S 등급</span>
-              <span>+ 200,000 ₩</span>
-            </div>
+            <th:block th:each="grade:${device.gradeList}" th:object="${grade}">
+              <div class="select-box grade-box" th:data-value="*{gradeNumber}">
+                <span th:text="|*{gradeType} 등급|">B 등급</span>
+                <span th:text="|+ *{#numbers.formatInteger(gradeSellPrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{gradeSellPrice}" >+ 0 ₩</span>
+              </div>
+  
+            </th:block>
 
           </div>
 
@@ -90,11 +84,16 @@
 
 
       </div>
-      <span class="price-span">가격 1,234,567 ₩</span>
+
+      <div class="price-box">
+        <span>가격 </span>
+        <span class="price-span" th:text="|${#numbers.formatInteger(device.deviceBuyingPrice, 0, 'COMMA')} ₩|">1,234,567 ₩</span>
+      </div>
+
       <hr>
 
       <div class="btn-area">
-        <button class="buying-btn">구매하기</button>
+        <button class="buying-btn" id="buyingBtn">구매하기</button>
       </div>
 
       <div class="chart-info">
@@ -120,9 +119,9 @@
       <canvas id="myChart" width="950px" height="500px"></canvas>
 
 
-      <div class="device-info">
+      <div class="device-info" th:object="${device}">
         <div class="device-info-title">
-          <span>iPhone 16</span>
+          <span th:text="*{deviceName}">iPhone 16</span>
           <span>상세 스펙</span>
         </div>
 
@@ -134,19 +133,19 @@
             </div>
             <div class="device-info-content-box-sub-title">
               <span>운영체제</span>
-              <span>정보</span>
+              <span th:text="*{deviceOs}"></span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>출시일</span>
-              <span>정보</span>
+              <span th:text="*{deviceReleaseDate}"></span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>배터리 용량</span>
-              <span>정보</span>
+              <span th:text="*{deviceBatteryCapacity}">정보</span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>무게</span>
-              <span>정보</span>
+              <span th:text="*{deviceWeight}">정보</span>
             </div>
           </div>
 
@@ -157,11 +156,11 @@
             </div>
             <div class="device-info-content-box-sub-title">
               <span>전면화소</span>
-              <span>정보</span>
+              <span th:text="*{deviceFrontPixel}">정보</span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>후면화소</span>
-              <span>정보</span>
+              <span th:text="*{deviceBackPixel}">정보</span>
             </div>
           </div>
 
@@ -172,15 +171,15 @@
             </div>
             <div class="device-info-content-box-sub-title">
               <span>화면 크기</span>
-              <span>정보</span>
+              <span th:text="*{displaySize}">정보</span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>해상도</span>
-              <span>정보</span>
+              <span th:text="*{deviceResolution}">정보</span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>화소 밀도</span>
-              <span>정보</span>
+              <span th:text="*{devicePixel}">정보</span>
             </div>
 
           </div>
@@ -191,12 +190,12 @@
               <span>시스템</span>
             </div>
             <div class="device-info-content-box-sub-title">
-              <span>내장 메모리</span>
-              <span>정보</span>
+              <span>메모리</span>
+              <span th:text="*{ramCapacity}">정보</span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>CPU</span>
-              <span>정보</span>
+              <span th:text="*{deviceCpuName}">정보</span>
             </div>
           </div>
 
@@ -216,6 +215,10 @@
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+
+  <script th:inline="javascript">
+    const device = /*[[${device}]]*/ 기종;
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="/js/deviceBuying/deviceBuying.js"></script>

@@ -1,5 +1,7 @@
 package edu.kh.bcs.device.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,11 @@ public class DeviceSellingController {
 		
 		Device device = service.selectDetailDevice(deviceNo);
 		
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
+		
 		model.addAttribute("device", device);
 		
 		return "deviceSelling/deviceSelling";
@@ -43,9 +50,10 @@ public class DeviceSellingController {
 	@PostMapping("expectedPrice")
 	@ResponseBody
 	public int expectedPrice(
-			@RequestBody int plusPrice) {
+			@RequestBody Map<String, Integer> map) {
 		
-		int deviceNo = 3;
+		int plusPrice = map.get("plusPrice");
+		int deviceNo = map.get("deviceNo");
 		
 		return service.expectedPrice(deviceNo, plusPrice);
 	}

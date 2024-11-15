@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="sample2">
+<mapper namespace="edu.kh.bcs.device.mapper.DeviceBuyingMapper">
   	
   	<resultMap type="Device" id="device_rm">
 
@@ -111,85 +111,16 @@
 	</select>
 	
 	
-	
-	
-	
-	
-	
-	
+	<!-- 내 폰 사기 예상 가격 -->
 	<select id="expectedPrice" resultType="_int">
 		SELECT
-			DEVICE_SELLING_PRICE
+			DEVICE_BUYING_PRICE
 		FROM
 			DEVICE
 		WHERE
 			DEVICE_NO = #{deviceNo}
 	</select>
-	
-	
-	<insert id="acceptSellingDevice">
-		<selectKey order="BEFORE"
-				   resultType="_int"
-				   keyProperty="sellingDeviceNo">
-			SELECT SEQ_SELLING_DEVICE_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		
-		INSERT INTO "SELLING_DEVICE"
-		VALUES (
-			#{sellingDeviceNo},
-			DEFAULT,
-			#{clientBank},
-			#{accountNo},
-			#{requestComment},
-			#{deviceNo},
-			#{capacityNumber},
-			#{gradeNumber},
-			#{colorNo},
-			#{memberNo},
-			1,
-			#{clientName},
-			#{clientTel}
-			
-		)
 		
 	
-	</insert>
-	
-	
-	
-	
-	
-	<!-- 판매 신청 조회 -->
-	<select id="selectSellingDevice">
-		SELECT
-			(SELECT 
-				DEVICE_NAME
-			 FROM "DEVICE"
-			 WHERE DEVICE_NO = S.DEVICE_NO) "DEVICE_NAME",
-			 CLIENT_BANK,
-			 ACCOUNT_NO,
-			 REQUEST_COMMENT,
-			(SELECT
-			 		CAPACITY_TYPE
-			 FROM CAPACITY
-			 WHERE CAPACITY_NUMBER = S.CAPACITY_NUMBER) "CAPACITY_TYPE",
-			(SELECT
-					GRADE_TYPE
-			 FROM "GRADE"
-			 WHERE GRADE_NUMBER = S.GRADE_NUMBER) "GRADE_TYPE",
-			(SELECT
-					COLOR_NAME
-			 FROM COLOR
-			 WHERE COLOR_NO = S.COLOR_NO) "COLOR_NAME",
-			 MEMBER_NO,
-			 CLIENT_NAME,
-			 REGEXP_REPLACE(CLIENT_TEL, '(.{3})(.+)(.{4})', '\1-\2-\3') "CLIENT_TEL",
-			(SELECT
-					MEMBER_NAME
-			 FROM "MEMBER"
-			 WHERE MEMBER_NO = S.MEMBER_NO) "MEMBER_NAME"
-		FROM SELLING_DEVICE S
-		WHERE
-			SELLING_DEVICE_NO = #{sellingDeviceNo}
-	</select>
+
 </mapper>
