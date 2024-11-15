@@ -35,180 +35,57 @@
 	
 	
 	
-	<select id="memberNoList" resultType="Member">
-		SELECT *
-		FROM MEMBER
-		WHERE MEMBER_NO = #{searchText}
+	<select id="searchMemberList">
+SELECT *
+FROM
+(
+	SELECT ROWNUM "RN", A.*
+	FROM
+		(SELECT E.*
+		FROM "MEMBER" E
+		WHERE 
+		<choose>
+			<when test="searchType == '회원번호'">MEMBER_NO</when>
+			<when test="searchType == '이름'">MEMBER_NAME</when>
+			<when test="searchType == '이메일'">MEMBER_EMAIL</when>
+			<when test="searchType == '전화번호'">MEMBER_TEL</when>
+		</choose>
+		LIKE '%' || #{searchText} || '%'
+		ORDER BY 
+		<choose>
+			<when test="searchType == '회원번호'">MEMBER_NO</when>
+			<when test="searchType == '이름'">MEMBER_NAME</when>
+			<when test="searchType == '이메일'">MEMBER_EMAIL</when>
+			<when test="searchType == '전화번호'">MEMBER_TEL</when>
+		</choose>	
+		<choose>
+			<when test="ud == 1">DESC</when>
+			<when test="ud == 2">ASC</when>
+		</choose>
+		) A)
+WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 	</select>
 	
-	<select id="memberNameListU" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE (MEMBER_NAME LIKE '%' || #{searchText} || '%')
-	ORDER BY MEMBER_NAME ASC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
-	</select>
-	<select id="memberNameListD" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE (MEMBER_NAME LIKE '%' || #{searchText} || '%')
-	ORDER BY MEMBER_NAME DESC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
-	</select>
 	
-	<select id="memberEmailListU" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE MEMBER_EMAIL LIKE '%' || #{searchText} || '%'
-	ORDER BY MEMBER_EMAIL ASC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
+	<select id="adminMemberFl">
+		SELECT MEMBER_DEL_FL
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
-	<select id="memberEmailListD" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE MEMBER_EMAIL LIKE '%' || #{searchText} || '%'
-ORDER BY MEMBER_EMAIL DESC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
+	<select id="adminMemberAdFl">
+		SELECT MEMBER_FL
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
-	
-	<select id="memberTelListU" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE MEMBER_TEL LIKE '%' || #{searchText} || '%'
-	ORDER BY MEMBER_TEL ASC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
+	<select id="adminMemberBuy">
+		SELECT COUNT(*)
+		FROM "ORDER"
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
-	<select id="memberTelListD" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	WHERE MEMBER_TEL LIKE '%' || #{searchText} || '%'
-ORDER BY MEMBER_TEL DESC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10)AND 10 + ((#{cp}-1)*10)
-	</select>
-	
-	<select id="allListU" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	ORDER BY MEMBER_NO DESC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
-	</select>
-	<select id="allListD" resultType="Member">
-SELECT E.*
-FROM
-	(SELECT 
-		MEMBER_NO,
-		MEMBER_NAME,
-		MEMBER_EMAIL,
-		MEMBER_PW,
-		MEMBER_DEL_FL,
-		MEMBER_DATE,
-		MEMBER_ADDRESS,
-		MEMBER_FL,
-		MEMBER_POINT,
-		MEMBER_TEL,
-		MEMBER_ID,
-		ROWNUM "RN"
-	FROM "MEMBER"
-	ORDER BY MEMBER_NO ASC) E
-WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
+	<select id="adminMemberSell">
+		SELECT COUNT(*)
+		FROM "SELLING_DEVICE"
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	
@@ -218,8 +95,6 @@ WHERE E.RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 	
 	
 	</select>
-	
-	
 	
 	
 	

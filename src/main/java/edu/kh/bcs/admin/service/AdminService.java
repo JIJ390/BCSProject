@@ -1,6 +1,7 @@
 package edu.kh.bcs.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 
@@ -19,5 +20,7 @@ public interface AdminService {
 	List<Device> deviceList();
 
 
+
+	Map<String, String> adminMemberDetail(int memberNo);
 
 }

@@ -21,19 +21,22 @@ public interface AdminMapper {
 
 	int allCount();
 
-	List<Member> memberNoList(String searchText);
+	
 
-	List<Member> memberNameListU(@Param("cp") int cp, @Param("searchText") String searchText);
-	List<Member> memberNameListD(@Param("cp") int cp, @Param("searchText") String searchText);
+	String adminMemberFl(int memberNo);
 
-	List<Member> memberEmailListU(@Param("cp") int cp, @Param("searchText") String searchText);
-	List<Member> memberEmailListD(@Param("cp") int cp, @Param("searchText") String searchText);
+	String adminMemberAdFl(int memberNo);
 
-	List<Member> memberTelListU(@Param("cp") int cp, @Param("searchText") String searchText);
-	List<Member> memberTelListD(@Param("cp") int cp, @Param("searchText") String searchText);
+	String adminMemberBuy(int memberNo);
 
-	List<Member> allListU(int cp);
-	List<Member> allListD(int cp);
+	String adminMemberSell(int memberNo);
+
+
+	List<Member> searchMemberList(
+			@Param("cp")int cp, 
+			@Param("searchType")String searchType, 
+			@Param("searchText")String searchText, 
+			@Param("ud")int ud);
 
 	
 	
