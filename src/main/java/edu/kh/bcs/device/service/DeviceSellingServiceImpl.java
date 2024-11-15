@@ -3,8 +3,8 @@ package edu.kh.bcs.device.service;
 import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.device.mapper.DeviceSellingMapper;
-import edu.kh.bcs.deviceDto.Device;
-import edu.kh.bcs.deviceDto.SellingDevice;
+import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import lombok.RequiredArgsConstructor;
 
 @Service

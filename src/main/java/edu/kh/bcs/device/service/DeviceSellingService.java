@@ -1,7 +1,7 @@
 package edu.kh.bcs.device.service;
 
-import edu.kh.bcs.deviceDto.Device;
-import edu.kh.bcs.deviceDto.SellingDevice;
+import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 
 public interface DeviceSellingService {
 

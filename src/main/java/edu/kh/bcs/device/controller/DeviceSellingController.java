@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.device.service.DeviceSellingService;
-import edu.kh.bcs.deviceDto.Device;
-import edu.kh.bcs.deviceDto.SellingDevice;
+import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +11,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Color {
-	
+public class Capacity {
+
 	private int deviceNo;
-	private int colorNo;
-	private String colorName;
-	private String colorCode;
-	private String colorDeviceImg;
-
+	private int capacityNumber;
+	private String capacityType;
+	private int capacityPrice;
+	private int capacitySellPrice;
 }
-
 

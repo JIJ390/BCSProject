@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Capacity {
+public class Grade {
 
+	private int gradeNumber;
 	private int deviceNo;
-	private int capacityNumber;
-	private String capacityType;
-	private int capacityPrice;
-	private int capacitySellPrice;
+	private String gradeType;
+	private int gradePrice;
+	private int gradeSellPrice;
 }

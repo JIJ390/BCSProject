@@ -1,4 +1,4 @@
-package edu.kh.bcs.deviceDto;
+package edu.kh.bcs.device.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Grade {
-
-	private int gradeNumber;
+public class Color {
+	
 	private int deviceNo;
-	private String gradeType;
-	private int gradePrice;
-	private int gradeSellPrice;
+	private int colorNo;
+	private String colorName;
+	private String colorCode;
+	private String colorDeviceImg;
+
 }
