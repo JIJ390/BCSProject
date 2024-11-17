@@ -1,3 +1,211 @@
+
+
+
+
+
+
+// 색상 > 용량 > 등급 순으로 선택 하도록
+// 상위 필터 선택하지 않으면 클릭 이벤트 불가
+
+// + 비동기로 매물 조회해서 해당 매물 없으면 비활성화
+
+
+const capacityContent = document.querySelector(".capacity-content");
+const gradeContent = document.querySelector(".grade-content");
+
+const colorCircle = document.querySelectorAll(".color-circle");
+const capacityBox = document.querySelectorAll(".capacity-box");
+const gradeBox = document.querySelectorAll(".grade-box");
+
+// 불투명 설정
+capacityContent.classList.add("none-click");
+gradeContent.classList.add("none-click");
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+
+  // 색깔 선택
+  colorCircle.forEach(circle => {
+
+    circle.addEventListener("click", () => {
+
+      capacityContent.classList.remove("none-click");
+
+      // 선택 시 모든 색깔에서 클래스 제거
+      colorCircle.forEach(c => {
+        c.classList.remove('selected-color')
+      })
+
+      // 선택 클래스 추가
+      circle.classList.add('selected-color');
+
+      const colorName = circle.getAttribute("data-value2");
+
+      document.querySelector(".color-name").innerText = colorName;
+    })
+  })
+
+
+  
+  // 저장소 용량 선택
+  capacityBox.forEach(capacity => {
+
+    capacity.addEventListener("click", () => {
+
+      gradeContent.classList.remove("none-click");
+
+      // 선택 시 모든 용량에서 클래스 제거
+      capacityBox.forEach(c => {
+        c.classList.remove('selected-capacity')
+      })
+
+      // 선택 클래스 추가
+      capacity.classList.add('selected-capacity');
+
+      expectedPrice();
+    })
+  })
+
+  // 등급 선택
+  gradeBox.forEach(grade => {
+
+    grade.addEventListener("click", () => {
+    
+    
+      // 선택 시 모든 등급에서 클래스 제거
+      gradeBox.forEach(g => {
+        g.classList.remove('selected-grade')
+      })
+    
+      // 선택 클래스 추가
+      grade.classList.add('selected-grade');
+    
+      expectedPrice();
+    })
+  })
+
+})
+
+
+// 가격 비동기 변경
+const expectedPrice = () => {
+  const selectedCapacity = document.querySelector(".selected-capacity");
+  const selectedGrade = document.querySelector(".selected-grade");
+
+  // 선택에 따라 가산되는 가격
+  let plusPrice = 0;
+
+  // 첫 선택 오류 해결
+  if (selectedCapacity !== null) plusPrice += Number(selectedCapacity.children[1].getAttribute("data-value"));
+  if (selectedGrade !== null) plusPrice += Number(selectedGrade.children[1].getAttribute("data-value"));
+
+  const map = {
+    "plusPrice" : plusPrice,
+    "deviceNo"  : device.deviceNo
+  }
+
+  fetch("/device/buy/expectedPrice", {
+    method : "POST", 
+    headers: {"Content-Type": "application/json"}, 
+    body : JSON.stringify(map)
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("변경 실패 : " + response.status);
+  })
+  .then(expectedPrice => {
+
+    const priceSpan = document.querySelector(".price-span");
+
+    priceSpan.innerText = expectedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ₩';
+    
+  })
+  .catch(err => console.error(err));
+  
+}
+
+
+
+const buyingBtn = document.querySelector("#buyingBtn");
+
+// 유효성 검사
+buyingBtn.addEventListener("click", e => {
+
+  // 로그인 관련 검사 추가해야함
+
+  const selectedColor = document.querySelector(".selected-color");
+  const selectedCapacity = document.querySelector(".selected-capacity");
+  const selectedGrade = document.querySelector(".selected-grade");
+  
+  const colorContent = document.querySelector(".color-content");
+  const capacityContent = document.querySelector(".capacity-content");
+  const gradeContent = document.querySelector(".grade-content");
+
+  if (selectedColor === null) {
+    alert("색상을 선택해 주세요");
+
+    const scrollPosition = colorContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
+
+
+    return;
+  }
+
+  if (selectedCapacity === null) {
+    alert("용량을 선택해 주세요");
+
+    const scrollPosition = capacityContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+  if (selectedGrade === null) {
+    alert("등급을 선택해 주세요");
+
+    const scrollPosition = gradeContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 ,
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 그래프
+
 document.addEventListener('DOMContentLoaded', () => {
   const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -87,185 +295,3 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 })
-
-
-
-
-
-// 색상 > 용량 > 등급 순으로 선택 하도록
-// 상위 필터 선택하지 않으면 클릭 이벤트 불가
-
-// + 비동기로 매물 조회해서 해당 매물 없으면 비활성화
-
-
-const capacityContent = document.querySelector(".capacity-content");
-const gradeContent = document.querySelector(".grade-content");
-
-const colorCircle = document.querySelectorAll(".color-circle");
-const capacityBox = document.querySelectorAll(".capacity-box");
-const gradeBox = document.querySelectorAll(".grade-box");
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  // 불투명 설정
-  capacityContent.classList.add("none-click");
-  gradeContent.classList.add("none-click");
-
-  // 색깔 선택
-  colorCircle.forEach(circle => {
-
-    circle.addEventListener("click", () => {
-
-      capacityContent.classList.remove("none-click");
-
-      // 선택 시 모든 색깔에서 클래스 제거
-      colorCircle.forEach(c => {
-        c.classList.remove('selected-color')
-      })
-
-      // 선택 클래스 추가
-      circle.classList.add('selected-color');
-
-      const colorName = circle.getAttribute("data-value2");
-
-      document.querySelector(".color-name").innerText = colorName;
-    })
-  })
-
-
-  
-  // 저장소 용량 선택
-  capacityBox.forEach(capacity => {
-
-    capacity.addEventListener("click", () => {
-
-      gradeContent.classList.remove("none-click");
-
-      // 선택 시 모든 용량에서 클래스 제거
-      capacityBox.forEach(c => {
-        c.classList.remove('selected-capacity')
-      })
-
-      // 선택 클래스 추가
-      capacity.classList.add('selected-capacity');
-
-      expectedPrice();
-    })
-  })
-
-  // 등급 선택
-  gradeBox.forEach(grade => {
-
-    grade.addEventListener("click", () => {
-    
-    
-      // 선택 시 모든 등급에서 클래스 제거
-      gradeBox.forEach(g => {
-        g.classList.remove('selected-grade')
-      })
-    
-      // 선택 클래스 추가
-      grade.classList.add('selected-grade');
-    
-      expectedPrice();
-    })
-  })
-
-})
-
-
-// 가격 비동기 변경
-const expectedPrice = () => {
-  const selectedCapacity = document.querySelector(".selected-capacity");
-  const selectedGrade = document.querySelector(".selected-grade");
-
-  // 선택에 따라 가산되는 가격
-  let plusPrice = 0;
-
-  // 첫 선택 오류 해결
-  if (selectedCapacity !== null) plusPrice += Number(selectedCapacity.children[1].getAttribute("data-value"));
-  if (selectedGrade !== null) plusPrice += Number(selectedGrade.children[1].getAttribute("data-value"));
-
-  const map = {
-    "plusPrice" : plusPrice,
-    "deviceNo"  : device.deviceNo
-  }
-
-  fetch("/device/sell/expectedPrice", {
-    method : "POST", 
-    headers: {"Content-Type": "application/json"}, 
-    body : JSON.stringify(map)
-  })
-  .then(response => {
-    if(response.ok) return response.text();
-    throw new Error("변경 실패 : " + response.status);
-  })
-  .then(expectedPrice => {
-
-    const priceSpan = document.querySelector(".price-span");
-
-    priceSpan.innerText = expectedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ₩';
-    
-  })
-  .catch(err => console.error(err));
-  
-}
-
-
-
-const buyingBtn = document.querySelector("#buyingBtn");
-
-// 유효성 검사
-buyingBtn.addEventListener("click", e => {
-
-  // 로그인 관련 검사 추가해야함
-
-  const selectedColor = document.querySelector(".selected-color");
-  const selectedCapacity = document.querySelector(".selected-capacity");
-  const selectedGrade = document.querySelector(".selected-grade");
-  
-  const colorContent = document.querySelector(".color-content");
-  const capacityContent = document.querySelector(".capacity-content");
-  const gradeContent = document.querySelector(".grade-content");
-
-  if (selectedColor === null) {
-    alert("색상을 선택해 주세요");
-
-    const scrollPosition = colorContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-
-    return;
-  }
-
-  if (selectedCapacity === null) {
-    alert("용량을 선택해 주세요");
-
-    const scrollPosition = capacityContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-  if (selectedGrade === null) {
-    alert("등급을 선택해 주세요");
-
-    const scrollPosition = gradeContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 ,
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-});

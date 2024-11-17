@@ -87,7 +87,7 @@
 		SELECT
 			GRADE_NUMBER,
 			GRADE_TYPE,
-			GRADE_SELL_PRICE
+			GRADE_PRICE
 		FROM
 			GRADE
 		WHERE
@@ -99,7 +99,7 @@
 	<select id="selectCapacityList" resultType="Capacity">
 		SELECT
 			CAPACITY_TYPE,
-			CAPACITY_SELL_PRICE,
+			CAPACITY_PRICE,
 			CAPACITY_NUMBER
 		FROM 
 			CAPACITY_PRICE
