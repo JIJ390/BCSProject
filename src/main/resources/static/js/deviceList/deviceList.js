@@ -151,16 +151,15 @@ searchFilter.appendChild(clearAllBtn);
 
 
 
-
-const deviceListContainer = document.querySelector(".deviceList-items-container");
-
+const searchBtn = document.querySelector('#searchBtn')
 searchBtn.addEventListener("click", () => {
   if (selectedItems.length === 0) {
     alert("선택된 항목이 없습니다!");
     return;
   }
 
-  // 서버로 선택된 항목 전송
+  console.log("전송할 필터:", selectedItems); // 디버깅 로그
+
   fetch("/search", {
     method: "POST",
     headers: {
@@ -174,31 +173,24 @@ searchBtn.addEventListener("click", () => {
       if (response.ok) return response.json();
       throw new Error("검색 요청 실패");
     })
-    .then((data) => {
-      console.log("검색 결과:", data);
+    .then((result) => {
+      console.log("검색 결과:", reulst);
 
-      // 기존 데이터 초기화
-      deviceListContainer.innerHTML = "";
-
-      // 서버에서 받은 데이터 동적으로 렌더링
-      data.forEach((device) => {
-        const deviceBox = document.createElement("div");
-        deviceBox.classList.add("deviceList-item-box");
-
-        deviceBox.innerHTML = `
-          <div class="deviceList-item-section">
-            <div class="deviceList-items">
-              <img src="${device.deviceImg}" alt="${device.deviceName}">
+      // 결과 출력
+      deviceListContainer.innerHTML = data
+        .map(
+          (device) => `
+          <div class="deviceList-item-box">
+            <div class="deviceList-item-section">
+              <div class="deviceList-items">
+                <img src="${device.deviceImg}" alt="${device.deviceName}">
+              </div>
+              <div style="margin-top: 15px;">${device.deviceName}</div>
             </div>
-            <div style="margin-top: 15px;">${device.deviceName}</div>
           </div>
-        `;
-
-        // 선택된 DEVICE_NO는 data-value 속성으로 추가 (숨김 데이터)
-        deviceBox.setAttribute("data-device-no", device.deviceNo);
-
-        deviceListContainer.appendChild(deviceBox);
-      });
+        `
+        )
+        .join("");
     })
     .catch((err) => console.error(err));
 });

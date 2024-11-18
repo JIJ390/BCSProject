@@ -41,12 +41,23 @@ public class DeviceListController {
 	
 	
 	
-	/* 검색 결과 반환 */
 	@PostMapping("search")
 	@ResponseBody
 	public List<Filter> searchDevices(@RequestBody List<String> filters) {
-		log.info("선택된 필터: {}", filters);
-		return service.searchDevices(filters);
+	    if (filters == null || filters.isEmpty()) {
+	        throw new IllegalArgumentException("필터가 제공되지 않았습니다.");
+	    }
+
+	    log.info("선택된 필터: {}", filters);
+
+	    // 검색 로직 호출
+	    List<Filter> result = service.searchDevices(filters);
+
+	    if (result.isEmpty()) {
+	        log.info("검색 결과가 없습니다.");
+	    }
+
+	    return result;
 	}
-	
+
 }

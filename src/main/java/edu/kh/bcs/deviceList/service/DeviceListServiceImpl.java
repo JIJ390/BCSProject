@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.dto.Filter;
 import edu.kh.bcs.deviceList.mapper.DeviceListMapper;
 import lombok.RequiredArgsConstructor;
