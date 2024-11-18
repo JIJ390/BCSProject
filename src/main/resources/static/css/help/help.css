@@ -326,3 +326,34 @@ span {
   letter-spacing: 0 !important;
 }
 
+/* ------------------------------------------ */
+/* 이벤트 영역 */
+/* 이벤트 리스트 출력 */
+.event-list-area{
+  width: 900px;
+  margin-top: 25px;
+  background-color: #fff;
+}
+
+.event-wrapper{
+  display: inline-flex;
+  width: 900px;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.row-wrapper{
+  margin-top: 10px;
+}
+
+.event-item{
+  min-width: 30%;
+  height: 200px;
+  background-color: #727272;
+  align-items: center;
+  text-align: center;
+
+  border: solid 1px #1d1d1f;
+  border-radius: 8px;
+  padding: 10px;
+}
