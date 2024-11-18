@@ -87,7 +87,7 @@
 		SELECT
 			GRADE_NUMBER,
 			GRADE_TYPE,
-			GRADE_SELL_PRICE
+			GRADE_PRICE
 		FROM
 			GRADE
 		WHERE
@@ -99,7 +99,7 @@
 	<select id="selectCapacityList" resultType="Capacity">
 		SELECT
 			CAPACITY_TYPE,
-			CAPACITY_SELL_PRICE,
+			CAPACITY_PRICE,
 			CAPACITY_NUMBER
 		FROM 
 			CAPACITY_PRICE
@@ -121,6 +121,126 @@
 			DEVICE_NO = #{deviceNo}
 	</select>
 		
+		
+		
+	<!-- 색상 매물 조회 다중 -->
+	<select id="checkColor">
+	
+		SELECT C.COLOR_NO AS "colorNo", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = C.COLOR_NO
+			) AS "colorCount"
+		FROM
+			COLOR C 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
+		WHERE
+			C.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY C.COLOR_NO
+		ORDER BY "colorNo" ASC
+	</select>
+	
+	
+	<!-- 색상 매물 조회 -->
+	<select id="selectColor">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND
+			COLOR_NO = #{colorNo}
+	</select>
+	
+	
+	
+	<!-- 내 폰 사기 용량 매물 조회해서 재고 없을 시 불투명 -->
+	<select id="checkCapacity">
+		SELECT C.CAPACITY_NUMBER AS "capacityNumber", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = #{colorNo}
+			AND
+				CAPACITY_NUMBER = C.CAPACITY_NUMBER
+			) AS "capacityCount"
+		FROM
+			CAPACITY_PRICE C 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
+		WHERE
+			C.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY C.CAPACITY_NUMBER
+		ORDER BY "capacityNumber" ASC
+	</select>
+	
+	
+
+	
+	<!-- 용량 매물 조회 -->
+	<select id="selectCapacity">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND 
+			COLOR_NO = #{colorNo}
+		AND
+			CAPACITY_NUMBER = #{capacityNumber}
+	</select>
+	
+	
+	<!-- 다중 등급 매물 확인 -->
+	<select id="checkGrade">
+		SELECT G.GRADE_NUMBER AS "gradeNumber", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = #{colorNo}
+			AND
+				CAPACITY_NUMBER = #{capacityNumber}
+			AND
+				GRADE_NUMBER = G.GRADE_NUMBER
+			) AS "gradeCount"
+		FROM
+			GRADE G 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = G.DEVICE_NO)
+		WHERE
+			G.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY G.GRADE_NUMBER
+		ORDER BY "gradeNumber" ASC
+	
+	</select>
+	
+	
+	
+	<!-- 등급 매물 조회 -->
+	<select id="selectGrade">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND 
+			COLOR_NO = #{colorNo}
+		AND
+			CAPACITY_NUMBER = #{capacityNumber}
+		AND
+			GRADE_NUMBER = #{gradeNumber}
+	</select>
 	
 
 </mapper>

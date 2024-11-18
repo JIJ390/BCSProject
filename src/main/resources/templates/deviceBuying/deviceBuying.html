@@ -52,8 +52,8 @@
             <th:block th:each="capacity:${device.capacityList}" th:object="${capacity}">
               <div class="select-box capacity-box" th:data-value="*{capacityNumber}">
                 <span th:text="*{capacityType}">B 등급</span>
-                <span th:text="|+ *{#numbers.formatInteger(capacitySellPrice, 0, 'COMMA')} ₩|"
-                      th:data-value="*{capacitySellPrice}">+ 0 ₩</span>
+                <span th:text="|+ *{#numbers.formatInteger(capacityPrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{capacityPrice}">+ 0 ₩</span>
               </div>
 
             </th:block>
@@ -71,8 +71,8 @@
             <th:block th:each="grade:${device.gradeList}" th:object="${grade}">
               <div class="select-box grade-box" th:data-value="*{gradeNumber}">
                 <span th:text="|*{gradeType} 등급|">B 등급</span>
-                <span th:text="|+ *{#numbers.formatInteger(gradeSellPrice, 0, 'COMMA')} ₩|"
-                      th:data-value="*{gradeSellPrice}" >+ 0 ₩</span>
+                <span th:text="|+ *{#numbers.formatInteger(gradePrice, 0, 'COMMA')} ₩|"
+                      th:data-value="*{gradePrice}" >+ 0 ₩</span>
               </div>
   
             </th:block>
@@ -132,8 +132,8 @@
               <span>기본 사양</span>
             </div>
             <div class="device-info-content-box-sub-title">
-              <span>운영체제</span>
-              <span th:text="*{deviceOs}"></span>
+              <span>출고가</span>
+              <span th:text="|*{#numbers.formatInteger(deviceReleasePrice, 0, 'COMMA')} ₩|"></span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>출시일</span>
@@ -188,6 +188,10 @@
           <div class="device-info-content-box">
             <div class="device-info-content-box-title">
               <span>시스템</span>
+            </div>
+            <div class="device-info-content-box-sub-title">
+              <span>운영체제</span>
+              <span th:text="*{deviceOs}"></span>
             </div>
             <div class="device-info-content-box-sub-title">
               <span>메모리</span>

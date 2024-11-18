@@ -345,6 +345,10 @@ hr {
   min-width: 100px;
 }
 
+.none-product {
+  opacity: 0.3;
+}
+
 .none-click {
   opacity: 0.3;
   pointer-events: none; 
