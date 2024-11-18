@@ -19,5 +19,17 @@
 		WHERE NOTICE_NUMBER > 0
 		ORDER BY NOTICE_NUMBER DESC
 	</select>
+	
+	<!-- 게시글 상세 조회 -->
+		<select id="detailNoticeView">
+		SELECT
+			NOTICE_NUMBER,
+			NOTICE_TITLE,
+			TO_CHAR(NOTICE_WRITE_DATE, 'YYYY"년" MM"월" DD"일"') AS NOTICE_WRITE_DATE,
+			NOTICE_CONTENT		
+		FROM NOTICE
+		WHERE NOTICE_NUMBER > 0
+		AND   NOTICE_NUMBER = #{noticeNumber}
+	</select>
   	
 </mapper>

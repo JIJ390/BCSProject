@@ -36,6 +36,10 @@ public class HelpServiceImpl implements HelpService {
 			return map;
 		}
 	
-	
+	// 공지사항 상세 보기
+	@Override
+	public HelpDto detailViewNotice(int noticeNo) {
+		return mapper.detailNoticeView(noticeNo);
+	}
 
 }

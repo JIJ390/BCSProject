@@ -46,16 +46,20 @@
         </div>
         <div class="notice-list-area">
           <div class="notice">
-            <div id="title-area">
-              <div>아이콘 영역</div>
-              <div>제목</div>
-              <div>등록일</div>
+            <div th:object="${notice}">
+              <div class="notice-view-subject">
+                <div class="sub-icon"><img src="/images/help/sub-notice.png"></div>
+                <div class="sub-title" th:text="*{noticeTitle}">제목 영역</div>
+                <div class="sub-date" th:text="*{noticeWriteDate}">작성 게시일 영역</div>
+              </div>
+              <hr>
+              <div class="notice-view-content" th:text="*{noticeContent}">내용</div>
+              <hr>
             </div>
-            <div id="content-area">내용</div>
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="goToList">목록으로</div>
+        <div class="goToList">
+          <div class="goToListBtn" onclick="history.back()">목록으로</div>
         </div>
     </section>
   </main>

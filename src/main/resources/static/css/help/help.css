@@ -68,7 +68,7 @@ main{
 /* FAQ 내용 리스트 출력 */
 .faq-list-area{
   width: 900px;
-  margin-top: 15;
+  margin-top: 25px;
 }
 
 .faq{
@@ -185,18 +185,18 @@ span {
   max-height: 100%;
 }
 
-.list-wrapper{
+.notice-wrapper{
   min-height: 670px;
   width: 100%;
 }
 
-.list-table{
+.notice-table{
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   border-collapse: collapse;
 }
 
-.list-table > thead{ 
+.notice-table > thead{ 
   color: rgb(43, 43, 43);
   margin-top: 10px;
   height: 20px;
@@ -204,24 +204,24 @@ span {
   align-items: center;
 }
 
-.list-table tr{
-  height: 60px;
+.notice-table tr{
+  height: 50px;
 }
 
-.list-table > tbody > tr:first-child{
+.notice-table > tbody > tr:first-child{
   border-top: 1px solid gray;
 }
 
-.list-table > tbody > tr:last-child{
+.notice-table > tbody > tr:last-child{
   border-bottom: 1px solid gray;
 }
 
 
-.list-table tr > *{ text-align: center; }
-.list-table tr > *:nth-of-type(1){ width: 10%; }
+.notice-table tr > *{ text-align: center; }
+.notice-table tr > *:nth-of-type(1){ width: 10%; }
 
-.list-table tr > td:nth-of-type(2){
-   width: 50%; 
+.notice-table tr > td:nth-of-type(2){
+   /* width: 50%;  */
    text-align: left;
    padding-left: 50px;
    text-decoration: none;
@@ -231,19 +231,70 @@ span {
   text-align: center;
 }
 
-.list-table tr > *:nth-of-type(3){ width: 13%; }
-.list-table tr > *:nth-of-type(4){ width: 10%; }
-.list-table tr > *:nth-of-type(5){ width: 8%; }
-.list-table tr > *:nth-of-type(6){ width: 8%; }
+.notice-table tr > *:nth-of-type(3){ width: 13%; }
+.notice-table tr > *:nth-of-type(4){ width: 10%; }
+.notice-table tr > *:nth-of-type(5){ width: 8%; }
+.notice-table tr > *:nth-of-type(6){ width: 8%; }
+
+.pagination-area{
+  margin-top: 15px;
+}
 
 
 /* 공지사항 상세 조회 */
 .title-area{
+  margin-top: 10px;
   display: flex;
   border-style: solid 1px #1d1d1f;
   background-color: #727272;
-  height: 150px;
+  height: 120px;
 }
+
+/* 게시물 클릭 시 */
+.notice-view-subject{
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  margin-top: 25px;
+  margin-bottom: 7px;
+}
+
+.sub-title{
+  flex-grow: 1;
+  margin-left: 25px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.notice-view-content{
+  padding: 30px;
+}
+
+.sub-icon > img {
+  scale: 0.8;
+}
+
+.goToList{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.goToListBtn{
+  width: 400px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #1d1d1f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+
 
 /* 페이지네이션 */
 
