@@ -1,15 +1,20 @@
 
 
-
 html, body, main {
   background-color: var(--main-gray-color);
-
-  width: 1600px;
-  height: 100%;
 
   margin: 0 auto;
 
   color: var(--font-color);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
 }
 
 
@@ -33,7 +38,7 @@ html, body, main {
 }
 
 .device-order-container > img {
-  margin: 10px;
+  margin:20px;
   width: 500px;
   height: auto;
   border-radius: 15px;
@@ -84,10 +89,25 @@ html, body, main {
   font-weight: bold;
 }
 
-.order-info >span{
+
+.order-info {
+  display: flex;
+
+  margin: 20px 0;
+
+  padding-left: 10px;
+}
+
+.order-info > span:first-child {
+  font-size: 20px;
+  width: 200px;
+
+  
+}
+
+.order-info > span:last-child {
   font-size: 20px;
 
-  padding: 10px;
 }
 
 .price-span {
