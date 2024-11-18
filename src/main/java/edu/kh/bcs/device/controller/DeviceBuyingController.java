@@ -1,5 +1,6 @@
 package edu.kh.bcs.device.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -53,6 +54,10 @@ public class DeviceBuyingController {
 	}
 	
 	
+	
+	
+	
+	
 	/**
 	 * 내폰 사기 예상 가격
 	 * @param map
@@ -67,5 +72,139 @@ public class DeviceBuyingController {
 		int deviceNo = map.get("deviceNo");
 		
 		return service.expectedPrice(deviceNo, plusPrice);
+	}
+	
+	/**
+	 * (다중)내 폰 사기 색상 매물 조회해서 재고 없을 시 불투명
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkColor")
+	@ResponseBody
+	public List<Map<String, String>> checkColor(
+			@RequestBody int deviceNo) {
+		
+		
+		List<Map<String, String>> list = service.checkColor(deviceNo);
+		
+		
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		
+		for(Map<String, String> map : list) {
+			map.replace("colorNo", String.valueOf(map.get("colorNo")));
+			map.replace("colorCount", String.valueOf(map.get("colorCount")));
+		}
+		
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	
+	/**
+	 * (단일)내 폰 사기 색상 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectColor")
+	@ResponseBody
+	public int selectColor(
+			@RequestBody Map<String, Integer> map) {
+		
+		int colorNo = map.get("colorNo");
+		int deviceNo = map.get("deviceNo");
+		
+		return service.selectColor(colorNo, deviceNo);
+	}
+	
+	
+	/**
+	 * (다중)내 폰 사기 용량 매물 조회해서 재고 없을 시 불투명
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkCapacity")
+	@ResponseBody
+	public List<Map<String, String>> checkCapacity(
+			@RequestBody Map<String, Integer> map1) {
+		
+		int colorNo = map1.get("colorNo");
+		int deviceNo = map1.get("deviceNo");
+		
+		List<Map<String, String>> list = service.checkCapacity(deviceNo, colorNo);
+		
+		for(Map<String, String> map2 : list) {
+			map2.replace("capacityNumber", String.valueOf(map2.get("capacityNumber")));
+			map2.replace("capacityCount", String.valueOf(map2.get("capacityCount")));
+		}
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	/**
+	 * (단일)내 폰 사기 용량 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectCapacity")
+	@ResponseBody
+	public int selectCapacity(
+			@RequestBody Map<String, Integer> map) {
+		
+		int colorNo = map.get("colorNo");
+		int capacityNumber = map.get("capacityNumber");
+		int deviceNo = map.get("deviceNo");
+		
+		return service.selectCapacity(colorNo, capacityNumber, deviceNo);
+	}
+	
+	
+	
+	
+	/**
+	 * (단일)내 폰 사기 용량 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkGrade")
+	@ResponseBody
+	public List<Map<String, String>> checkGrade(
+			@RequestBody Map<String, Integer> map1) {
+		
+		int colorNo = map1.get("colorNo");
+		int capacityNumber = map1.get("capacityNumber");
+		int deviceNo = map1.get("deviceNo");
+		
+		List<Map<String, String>> list = service.checkGrade(colorNo, capacityNumber, deviceNo);
+		
+		for(Map<String, String> map2 : list) {
+			map2.replace("gradeNumber", String.valueOf(map2.get("gradeNumber")));
+			map2.replace("gradeCount", String.valueOf(map2.get("gradeCount")));
+		}
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 단일 등급 매물 조회
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectGrade")
+	@ResponseBody
+	public int selectGrade(
+			@RequestBody Map<String, Integer> map) {
+		
+		// 매개 변수가 많아서(4 개) 묶어서 처리
+		return service.selectGrade(map);
 	}
 }

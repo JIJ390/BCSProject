@@ -17,32 +17,45 @@ const colorCircle = document.querySelectorAll(".color-circle");
 const capacityBox = document.querySelectorAll(".capacity-box");
 const gradeBox = document.querySelectorAll(".grade-box");
 
+const deviceNo = device.deviceNo;
+
 // 불투명 설정
 capacityContent.classList.add("none-click");
 gradeContent.classList.add("none-click");
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // 색상 재고 확인 후 색상 회색 변경
+  fetch("/device/buy/checkColor",  {
+    method : "POST", 
+    headers: {"Content-Type": "application/json"}, 
+    body : deviceNo
+  })
+  .then(response => {
+    if (response.ok) return response.json();
+    throw new Error("조회 실패 : " + response.status);
+  })
+  .then(result => {
+
+    // 결과(색상 번호 , 재고 수)
+    result.forEach((item, index) => {
+      if (item.colorCount === '0') colorCircle[index].classList.add("none-product");
+    }) 
+  })
+  .catch(err => console.error(err));
 
 
   // 색깔 선택
   colorCircle.forEach(circle => {
 
+    // 클릭 이벤트 부여
     circle.addEventListener("click", () => {
 
-      capacityContent.classList.remove("none-click");
+      // 선택된 색상 번호 
+      const colorNo = circle.getAttribute("data-value");
+      // 재고 화인
+      checkSelectedColor(colorNo, circle);
 
-      // 선택 시 모든 색깔에서 클래스 제거
-      colorCircle.forEach(c => {
-        c.classList.remove('selected-color')
-      })
-
-      // 선택 클래스 추가
-      circle.classList.add('selected-color');
-
-      const colorName = circle.getAttribute("data-value2");
-
-      document.querySelector(".color-name").innerText = colorName;
     })
   })
 
@@ -53,15 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     capacity.addEventListener("click", () => {
 
-      gradeContent.classList.remove("none-click");
+      const colorNo = document.querySelector(".selected-color").getAttribute("data-value");
+      const capacityNumber = capacity.getAttribute("data-value");
 
-      // 선택 시 모든 용량에서 클래스 제거
-      capacityBox.forEach(c => {
-        c.classList.remove('selected-capacity')
-      })
-
-      // 선택 클래스 추가
-      capacity.classList.add('selected-capacity');
+      // 용량 재고 확인
+      checkSelectedCapacity(colorNo, capacityNumber, capacity);
 
       expectedPrice();
     })
@@ -71,21 +80,231 @@ document.addEventListener("DOMContentLoaded", () => {
   gradeBox.forEach(grade => {
 
     grade.addEventListener("click", () => {
-    
-    
-      // 선택 시 모든 등급에서 클래스 제거
-      gradeBox.forEach(g => {
-        g.classList.remove('selected-grade')
-      })
-    
-      // 선택 클래스 추가
-      grade.classList.add('selected-grade');
+
+      
+      const colorNo = document.querySelector(".selected-color").getAttribute("data-value");
+      const capacityNumber = document.querySelector(".selected-capacity").getAttribute("data-value");
+      const gradeNumber = grade.getAttribute("data-value");
+
+      // 등급 재고 확인
+      checkSelectedGrade(colorNo, capacityNumber, gradeNumber, grade);
     
       expectedPrice();
     })
   })
 
 })
+
+
+// 비동기 동기로 전환/ 색상 선택 시 재고 확인
+const checkSelectedColor = async (colorNo, circle) => {
+
+  const map = {
+    "colorNo" : colorNo,  
+    "deviceNo"  : deviceNo
+  }
+
+  try {
+    // 재고 확인
+    const response = await fetch("/device/buy/selectColor", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"}, 
+      body : JSON.stringify(map)
+    });
+
+    if (!response.ok) throw new Error("실패" + response.status);
+    const colorCheck = await response.text();
+
+
+    // 재고 0 이면 품절 알림
+    if (colorCheck === '0') {
+      alert("해당 색상 상품은 품절되었습니다");
+      return;
+    }
+
+    
+    gradeContent.classList.add("none-click");
+
+    // 이전에 쌓인 클래스 제거
+    capacityBox.forEach((item) => {
+      item.classList.remove("none-product");
+      item.classList.remove("selected-capacity");
+    })
+
+    // 이전에 쌓인 클래스 제거
+    gradeBox.forEach((item) => {
+      item.classList.remove("none-product");
+      item.classList.remove("selected-grade");
+    })
+
+    // 용량 재고 확인 후 색상 회색 변경
+    const response2 = await fetch("/device/buy/checkCapacity",  {
+      method : "POST", 
+      headers: {"Content-Type": "application/json"}, 
+      body : JSON.stringify(map)
+    });
+
+    if (!response2.ok) throw new Error("실패" + response2.status);
+    const result = await response2.json();
+
+    // 결과(용량 번호 , 재고 수)
+    result.forEach((item, index) => {
+      if (item.capacityCount === '0') capacityBox[index].classList.add("none-product");
+    }) 
+    
+    
+    // 시간 지연
+    setTimeout(function() {capacityContent.classList.remove("none-click")}, 50);
+
+    // 선택 시 모든 색깔에서 클래스 제거
+    colorCircle.forEach(c => {
+      c.classList.remove('selected-color')
+    })
+    
+    // 선택 클래스 추가
+    circle.classList.add('selected-color');
+
+    const colorName = circle.getAttribute("data-value2");
+
+    document.querySelector(".color-name").innerText = colorName;
+
+
+  } catch(err) {
+    console.log(err);
+  }
+
+}
+
+
+
+// 비동기 동기로 전환/ 용량 선택 시 재고 확인
+const checkSelectedCapacity = async (colorNo, capacityNumber, capacity) => {
+
+  const map = {
+    "colorNo" : colorNo,  
+    "capacityNumber" : capacityNumber,
+    "deviceNo" : deviceNo
+  }
+
+
+  try {
+    // 용량 재고 확인
+    const response = await fetch("/device/buy/selectCapacity", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"}, 
+      body : JSON.stringify(map)
+    });
+
+    if (!response.ok) throw new Error("실패" + response.status);
+    const capacityCheck = await response.text();
+
+    // 재고 0 이면 품절 알림
+    if (capacityCheck === '0') {
+      alert("해당 용량 상품은 품절되었습니다");
+      return;
+    }
+
+    // 이전에 쌓인 클래스 제거
+    gradeBox.forEach((item) => {
+      item.classList.remove("none-product");
+      item.classList.remove("selected-grade");
+    })
+
+    // 등급 재고 확인 후 색상 회색 변경
+    const response2 = await fetch("/device/buy/checkGrade",  {
+      method : "POST", 
+      headers: {"Content-Type": "application/json"}, 
+      body : JSON.stringify(map)
+    });
+
+    if (!response2.ok) throw new Error("실패" + response2.status);
+    const result = await response2.json();
+
+      // 결과(용량 번호 , 재고 수)
+    result.forEach((item, index) => {
+      if (item.gradeCount === '0') gradeBox[index].classList.add("none-product");
+    }) 
+    
+    // 시간 지연
+    setTimeout(function() {gradeContent.classList.remove("none-click")}, 50);
+
+    // 선택 시 모든 용량에서 클래스 제거
+    capacityBox.forEach(c => {
+      c.classList.remove('selected-capacity')
+    })
+  
+    // 선택 클래스 추가
+    capacity.classList.add('selected-capacity');
+
+
+  } catch(err) {
+    console.log(err);
+  }
+
+}
+
+
+
+const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) => {
+  const map = {
+    "colorNo" : colorNo,  
+    "capacityNumber" : capacityNumber,
+    "gradeNumber" : gradeNumber,
+    "deviceNo" : deviceNo,
+  }
+
+  try {
+
+    // 등급 재고 확인
+    const response = await fetch("/device/buy/selectGrade", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"}, 
+      body : JSON.stringify(map)
+    });
+
+    if (!response.ok) throw new Error("실패" + response.status);
+    const gradeCheck = await response.text();
+
+    // 재고 0 이면 품절 알림
+    if (gradeCheck === '0') {
+      alert("해당 등급 상품은 품절되었습니다");
+      return;
+    }
+
+    // 선택 시 모든 등급에서 클래스 제거
+    gradeBox.forEach(g => {
+      g.classList.remove('selected-grade')
+    })
+    
+    // 선택 클래스 추가
+    grade.classList.add('selected-grade');
+
+
+  } catch(err) {
+    console.log(err);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 가격 비동기 변경
@@ -102,7 +321,7 @@ const expectedPrice = () => {
 
   const map = {
     "plusPrice" : plusPrice,
-    "deviceNo"  : device.deviceNo
+    "deviceNo"  : deviceNo
   }
 
   fetch("/device/buy/expectedPrice", {
@@ -183,23 +402,6 @@ buyingBtn.addEventListener("click", e => {
   }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
