@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이벤트</title>
-  <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
-  <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
-  <link rel="stylesheet" href="../../static/css/help/help.css">
+  <link rel="stylesheet" href="/css/help/help.css">
   
 
 </head>
@@ -45,9 +43,47 @@
             </a>
         </div>
         <div class="event-list-area">
+          <div class="event">
+            <div class="event-wrapper">
+              <div class="event-item">1</div>
+              <div class="event-item">2</div>
+              <div class="event-item">3</div>
+            </div>
+            <div class="event-wrapper row-wrapper">
+              <div class="event-item">4</div>
+              <div class="event-item">5</div>
+              <div class="event-item">6</div>
+            </div>
+          </div>
+        <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+          <ul class="pagination" th:object="${pagination}">
           
-         <h2>테스트용</h2>
-        <div class="more-help-area">이 외 문의는 여기로 보내 주세요. <span>메일 문의</span>  <span>채팅 문의</span></div> 
+              <!-- 첫 페이지로 이동 -->
+              <li><a href="#">&lt;&lt;</a></li>
+
+              <!-- 이전 목록 마지막 번호로 이동 -->
+              <li><a href="#">&lt;</a></li>
+
+              <!-- 특정 페이지로 이동 -->
+              
+              <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                  <!-- 현재 보고있는 페이지 -->
+                  <li th:if="${i} == *{currentPage}">
+                      <a class="current" th:text="${i}">현재 페이지</a>
+                  </li>
+
+                  <!-- 보고있지 않은 페이지 -->                    
+                  <li th:unless="${i} == *{currentPage}"> <a href="#" th:text="${i}">이동할 수 있는 페이지</a> </li>
+              </th:block>
+
+              <!-- 다음 목록 시작 번호로 이동 -->
+              <li><a href="#">&gt;</a></li>
+
+              <!-- 끝 페이지로 이동 -->
+              <li><a href="#">&gt;&gt;</a></li>
+          </ul>
+      </div> 
       </div>
     </section>
   </main>
