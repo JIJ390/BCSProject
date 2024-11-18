@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.device.mapper.DeviceOrderMapper">
+  	
+	<select id="orderDeviceView">
+	
+		SELECT 
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE
+		FROM 
+			BUYING_DEVICE BD
+		LEFT JOIN
+			COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+		LEFT JOIN
+			GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+		LEFT JOIN
+			CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+		LEFT JOIN
+			DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+		WHERE
+			BD.DEVICE_NO = #{deviceNo}
+		AND
+			BD.COLOR_NO = #{colorNo}
+		AND
+			BD.GRADE_NUMBER = #{gradeNumber}
+		AND
+			BD.CAPACITY_NUMBER = #{capacityNumber}
+		AND
+			SOLD_FL = 'N'
+	</select>  	
+</mapper>

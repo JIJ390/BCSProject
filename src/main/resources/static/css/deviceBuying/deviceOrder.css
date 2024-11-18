@@ -100,7 +100,7 @@ main {
 
 .order-info > span:first-child {
   font-size: 20px;
-  width: 200px;
+  width: 150px;
 
   
 }
@@ -152,4 +152,44 @@ hr {
 .order-btn:hover {
   border: 2px solid var(--main-color);
   cursor: pointer;
+}
+
+
+.client-address {
+  display: flex;
+}
+
+
+.client-address > input {
+  width: 560px;
+  height: 26px;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+  padding: 5px;
+
+  border: 1px solid rgb(136, 136, 136);
+}
+
+.client-address > button {
+  width: 140px;
+  height: 26px;
+
+  font-size: 18px;
+
+  margin-left: 20px;
+
+
+  border: 1px solid rgb(136, 136, 136);
+}
+
+.order-info > textarea {
+  display: inline-block;
+  font-size: 18px;
+  width: 560px;
+
+  padding: 8px;
+
+  border: 1px solid rgb(136, 136, 136);
 }

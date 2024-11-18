@@ -41,7 +41,7 @@
           <span>AAA</span>
         </div>
         <div class="order-info">
-          <span>받으시는 분 전화번호</span>
+          <span>받는 분 전화번호</span>
           <span>010-1111-2222</span>
         </div>
       </div>
@@ -50,11 +50,28 @@
         <span class="status-title">배송지 정보</span>
         <div class="order-info">
           <span>주소</span>
-          <span>카카오 api 사용!</span>
+          <div class="adress-area">
+    
+            <div class="client-address">
+              <input type="text" name="clientAddress"
+              placeholder="우편번호" id="postcode">
+              <button type="button" id="findAddressBtn">검색</button>
+            </div>
+  
+            <div class="client-address">
+              <input type="text" name="clientAddress"
+                placeholder="도로명/지번 주소" id="address">
+            </div>
+  
+            <div class="client-address">
+              <input type="text" name="clientAddress"
+                placeholder="상세 주소" id="detailAddress">
+            </div>
+          </div>
         </div>
         <div class="order-info">
           <span>요청 사항</span>
-          <input type="text">
+          <textarea name="" id=""></textarea>
         </div>
       </div>
 
@@ -76,5 +93,8 @@
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+  <script src="/js/deviceBuying/deviceOrder.js"></script>
+
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

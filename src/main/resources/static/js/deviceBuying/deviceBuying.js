@@ -96,6 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
+
+
+
+
+
+
+
 // 비동기 동기로 전환/ 색상 선택 시 재고 확인
 const checkSelectedColor = async (colorNo, circle) => {
 
@@ -295,8 +302,89 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
 
 
 
+const buyingFrm = document.querySelector("#buyingFrm");
+
+// 유효성 검사
+buyingFrm.addEventListener("submit", e => {
+
+  // 로그인 관련 검사 추가해야함
+
+  const selectedColor = document.querySelector(".selected-color");
+  const selectedCapacity = document.querySelector(".selected-capacity");
+  const selectedGrade = document.querySelector(".selected-grade");
+  
+  const colorContent = document.querySelector(".color-content");
+  const capacityContent = document.querySelector(".capacity-content");
+  const gradeContent = document.querySelector(".grade-content");
+
+  if (selectedColor === null) {
+    e.preventDefault();
+    alert("색상을 선택해 주세요");
+
+    const scrollPosition = colorContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
 
 
+    return;
+  }
+
+  if (selectedCapacity === null) {
+    e.preventDefault();
+    alert("용량을 선택해 주세요");
+
+    const scrollPosition = capacityContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+  if (selectedGrade === null) {
+    e.preventDefault();
+    alert("등급을 선택해 주세요");
+
+    const scrollPosition = gradeContent.offsetTop;
+
+
+    window.scrollTo({
+      top : scrollPosition - 150 ,
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+
+  const input1 = document.createElement("input");
+  input1.name = "colorNo";
+  input1.type = "hidden";
+  input1.value = colorNo;
+
+  const input2 = document.createElement("input");
+  input2.name = "capacityNumber";
+  input2.type = "hidden";
+  input2.value = capacityNumber;
+
+  const input3 = document.createElement("input");
+  input3.name = "gradeNumber";
+  input3.type = "hidden";
+  input3.value = gradeNumber;
+
+  console.log(colorNo, capacityNumber, gradeNumber);
+
+  e.preventDefault();
+  return;
+
+  e.target.append(input1, input2, input3);
+
+});
 
 
 
@@ -345,63 +433,6 @@ const expectedPrice = () => {
 }
 
 
-
-const buyingBtn = document.querySelector("#buyingBtn");
-
-// 유효성 검사
-buyingBtn.addEventListener("click", e => {
-
-  // 로그인 관련 검사 추가해야함
-
-  const selectedColor = document.querySelector(".selected-color");
-  const selectedCapacity = document.querySelector(".selected-capacity");
-  const selectedGrade = document.querySelector(".selected-grade");
-  
-  const colorContent = document.querySelector(".color-content");
-  const capacityContent = document.querySelector(".capacity-content");
-  const gradeContent = document.querySelector(".grade-content");
-
-  if (selectedColor === null) {
-    alert("색상을 선택해 주세요");
-
-    const scrollPosition = colorContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-
-    return;
-  }
-
-  if (selectedCapacity === null) {
-    alert("용량을 선택해 주세요");
-
-    const scrollPosition = capacityContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-  if (selectedGrade === null) {
-    alert("등급을 선택해 주세요");
-
-    const scrollPosition = gradeContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 ,
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-});
 
 
 
