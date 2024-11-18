@@ -13,10 +13,7 @@
 <body>
 
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-      <img src="/images/logo.png" alt="">
-      BCS ACCOUNT | 배최성 계정관리
-    </div>
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -34,27 +31,27 @@
       <!-- Icons Section -->
       <div class="icon-grid">
         <div class="icon-item">
-          <img src="/images/phone-icon.png" alt="내정보 수정">
+          <img src="/images/myPage/phone-icon.png" alt="내정보 수정">
           <span>내정보 수정</span>
         </div>
 
         <div class="icon-item">
-          <img src="/images/transaction-history.png" alt="거래내역">
+          <img src="/images/myPage/transaction-history.png" alt="거래내역">
           <span>거래내역</span>
         </div>
 
         <div class="icon-item">
-          <img src="/images/purchase-history.png" alt="구매내역">
+          <img src="/images/myPage/purchase-history.png" alt="구매내역">
           <span>구매내역</span>
         </div>
 
         <div class="icon-item">
-          <img src="/images/inquiry.png" alt="1대1 문의">
+          <img src="/images/myPage/inquiry.png" alt="1대1 문의">
           <span>1대1 문의</span>
         </div>
 
         <div class="icon-item">
-          <img src="/images/points.png" alt="포인트 사용 내역">
+          <img src="/images/myPage/points.png" alt="포인트 사용 내역">
           <span>포인트 사용 내역</span>
         </div>
 
@@ -65,7 +62,7 @@
     </section>
   </main>
   <footer>
-    푸터
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
 </body>

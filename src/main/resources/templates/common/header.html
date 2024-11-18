@@ -107,7 +107,7 @@
             
                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
             
-                <a href="#" class="sideItem">마이 페이지</a> 
+                <a href="/myPage/myPageMain" class="sideItem">마이 페이지</a> 
                 <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a> 
                 <a href="/myPage/logout" cass="sideItem">로그 아웃</a>
               </div>

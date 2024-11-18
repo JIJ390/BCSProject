@@ -13,9 +13,12 @@
 <body>
 
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-      <img src="/images/logo.png" alt="">
-      BCS ACCOUNT | 배최성 계정관리
+    <div style="display: flex; align-items: center; 
+    justify-content: center; background-color: white; 
+    height: 80px; font-size: 20px;">
+      <a href="/"><img src="/images/logo.png" alt=""></a>
+      <div style="margin-left: 70px; margin-right: 9%;
+                  font-weight: bold;">BCS ACCOUNT | 배최성 계정관리</div>
     </div>
   </header>
 
@@ -27,7 +30,10 @@
 
 
       <div class="login-box">
-        <div style="text-align: center; font-size: 30px;">하나의 계정으로,<br>세상의 중고폰을 내손에!<br>나의 배최성 계정에<br>로그인하세요!</div>
+        <div style="text-align: center; 
+        font-size: 28px;
+        padding: 30px;"
+        >하나의 계정으로,<br>세상의 중고폰을 내손에!<br>나의 배최성 계정에<br>로그인하세요!</div>
 
         <form action="/myPage/login" method="POST" id="loginForm">
           <div class="input-group-login">
@@ -47,9 +53,53 @@
 
           <button type="submit" class="loginBtn">로그인</button>
 
-          <div class="links">
-            <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
+          <div class="idPwFind">
+            <span>아이디 / 비밀번호 찾기</span>
           </div>
+
+          
+          <!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+          
+                    <div class="popup">
+                      <div class="idPwText">
+                        <div class="idPwFind1">아이디 비밀번호 찾기 </div>
+                        <span class="xBtn">x</span>
+                      </div>
+                      <div class="popup-header">
+                        <button type="button"  class="tab-button active" data-tab="id-search">아이디 찾기</button>
+                        <button type="button"  class="tab-button" data-tab="pw-search">비밀번호 찾기</button>
+                      </div>
+                      <div class="popup-content">
+                        <div class="tab-content active" id="id-search">
+                          <form>
+                            <label>가입자 이메일</label>
+                            <input type="text" placeholder="가입자 이메일 입력">
+                            <label>이메일</label>
+                            <input type="text" placeholder="asdf@naver.com">
+                            <input type="text" placeholder="인증번호 입력">
+                            <button type="button">인증번호받기</button>
+                            <button type="submit">아이디 찾기</button>
+                          </form>
+                          <p>입력하신 정보는 아이디를 조회하는 용도로만 사용됩니다.</p>
+                        </div>
+                        <div class="tab-content" id="pw-search">
+                          <form>
+                            <label>가입자 이메일</label>
+                            <input type="text" placeholder="가입자 이메일 입력">
+                            <label>가입자 이메일</label>
+                            <input type="text" placeholder="가입자 이메일 입력">
+                            <label>이메일</label>
+                            <input type="text" placeholder="asdf@naver.com">
+                            <input type="text" placeholder="인증번호 입력">
+                            <button type="button">인증번호받기</button>
+                            <button type="submit">비밀번호 찾기</button>
+                          </form>
+                          <p>입력하신 정보는 비밀번호를 조회하는 용도로만 사용됩니다.</p>
+                        </div>
+                      </div>
+                    </div>
+          <!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
         </form>
 
 

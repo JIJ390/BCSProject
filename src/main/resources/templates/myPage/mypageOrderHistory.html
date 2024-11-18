@@ -10,10 +10,7 @@
 </head>
 <body class="orderHistoryBody">
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-        <img src="/images/logo.png" alt="">
-        BCS ACCOUNT | 배최성 계정관리
-      </div>
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -71,7 +68,7 @@
   </section>
 </main>
 <footer>
-  푸터
+    <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
 <script src="/js/myPage/myPage.js"></script>

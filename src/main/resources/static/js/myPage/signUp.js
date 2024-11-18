@@ -31,7 +31,7 @@ const checkBtn = document.querySelectorAll(".checkBtn");
 const checkBtnAll = document.querySelector(".checkBtnAll");
 
 
-checkBtnAll.addEventListener("change", () => {
+checkBtnAll?.addEventListener("change", () => {
 
   if(checkBtnAll.checked === true){
 
@@ -51,7 +51,7 @@ checkBtnAll.addEventListener("change", () => {
 
 const agreeBtn = document.querySelector(".signup-button-agree");
 
-agreeBtn.addEventListener("click", () => {
+agreeBtn?.addEventListener("click", () => {
 
   if(checkBtn[0].checked && checkBtn[1].checked && 
     checkBtn[2].checked){
