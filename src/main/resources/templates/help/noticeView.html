@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이벤트</title>
+  <title>공지사항 자세히 보기</title>
   <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
-  <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
+  <link rel="stylesheet" href="/css/help/help.css">
   <link rel="stylesheet" href="../../static/css/help/help.css">
   
 
@@ -18,7 +18,7 @@
   </header>
   <main>
     <section class="page-info">
-      <span>고객센터 &gt; 이벤트</span>
+      <span>고객센터 &gt; 공지사항</span>
     </section>
     <section class="helpView">
       <div class="help-container">
@@ -44,17 +44,24 @@
               </div>
             </a>
         </div>
-        <div class="event-list-area">
-          
-         <h2>테스트용</h2>
-        <div class="more-help-area">이 외 문의는 여기로 보내 주세요. <span>메일 문의</span>  <span>채팅 문의</span></div> 
-      </div>
+        <div class="notice-list-area">
+          <div class="notice">
+            <div id="title-area">
+              <div>아이콘 영역</div>
+              <div>제목</div>
+              <div>등록일</div>
+            </div>
+            <div id="content-area">내용</div>
+          </div>
+        </div>
+        <div>
+          <div class="goToList">목록으로</div>
+        </div>
     </section>
   </main>
   <th:block th:replace="~{common/footer}"></th:block>
+  
 
-
-  <script src="/js/help/help.js"></script>
   <script>
     const haederNav =  document.getElementsByClassName("header-nav")[0];
     const pageInfoSpan = document.querySelector(".page-info > span");
@@ -67,6 +74,11 @@
     window.addEventListener("resize", movePageIngo);
 
     movePageIngo();
+  </script>
+  <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+  <script src="/js/help/help.js"></script>
+  <script th:inline="javascript">
+      const pagination = /*[[${pagination}]]*/ "페이지네이션객체";
   </script>
 </body>
 </html>

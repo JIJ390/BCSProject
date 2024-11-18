@@ -236,6 +236,17 @@ span {
 .list-table tr > *:nth-of-type(5){ width: 8%; }
 .list-table tr > *:nth-of-type(6){ width: 8%; }
 
+
+/* 공지사항 상세 조회 */
+.title-area{
+  display: flex;
+  border-style: solid 1px #1d1d1f;
+  background-color: #727272;
+  height: 150px;
+}
+
+/* 페이지네이션 */
+
 .pagination{
   list-style: none;
   display: flex;
