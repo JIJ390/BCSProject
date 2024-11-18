@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AdminServiceImpl implements AdminService{
 	
 	private final AdminMapper mapper;
@@ -94,14 +97,26 @@ public class AdminServiceImpl implements AdminService{
 		
 		return mapper.deviceList();
 	}
+	
+
 // 팝업	
-@Override
-public List<Device> popUpData(int deviceNo) {
+	@Override
+	public List<Color> popUpData(int result) {
+		
+		return mapper.popUpData(result);
+	}
 	
+	@Override
+	public List<Device> adminSearch(String search) {
+		
+		List<Device> result = mapper.adminSearch(search);
+		
+		
+		log.debug("impl 값 ㅣ : {}", result);
+		log.debug("impl 값 ㅣ : {}", result);
+		return result;
+	}
+
 	
-	return mapper.popUpData(deviceNo);
-	
-	
-}
 }
 

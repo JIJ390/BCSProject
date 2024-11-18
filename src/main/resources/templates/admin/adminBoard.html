@@ -24,37 +24,40 @@
             </div>
             <div class="delivery-list">
                 <div class="box-title">
-                    <h1>배송 목록</h1>
-                    <div>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text">
-                    </div>
+                    <h1>게시글 목록</h1>
+<form>
+                                    <div>
+                                        <button class="searchBtn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                        <input type="text" class="searchContext">
+                                    </div>
+</form>
+
                 </div>
                 <div class="list-category" >
                     <table>
                         <colgroup>
-                            <col style="width: 10%;">
                             <col style="width: 20%;">
-                            <col style="width: 40%;">
-                            <col style="width: 10%;">
+                            <col style="width: 20%;">
+                            <col style="width: 30%;">
+                            <col style="width: 20%;">
                             <col style="width: 20%;">
                         </colgroup>
 
                         <tr class="category" id="category-top">
-                            <td><a href="">기종 번호▼</a></td>
+                            <td><a >기종 번호▼</a></td>
                             <td><a href=""></a></td>
-                            <td><a href="">휴대폰 이름▼</a></td>
-                            <td><a href="">총 수량▼</a></td>
-                            <td><a href="">최신순▼</a></td>
+                            <td><a >휴대폰 이름▼</a></td>
+                            <td><a >총 수량▼</a></td>
+                            <td><a >최신순▼</a></td>
                         </tr>
                         <div class="category-inside"  th:each="boardList:${boardList}">
-                            <tr class="category" >
-                                <td class="deviceNo" th:text="${boardList.deviceNo}"></td>
-                                <td class="android-img" onclick="ListView()"><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
-                                <td th:text="${boardList.deviceName}">기종 이름</td>
-                                <td th:text="${boardList.colorResult}">총 기종에 숫자</td>
-                                <td th:text="${boardList.deviceDate}">등록 날짜</td>
-                            </tr>
+                                <tr class="category" >
+                                    <td class="deviceNo" th:text="${boardList.deviceNo}"></td>
+                                    <td class="android-img" ><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
+                                    <td th:text="${boardList.deviceName}">기종 이름</td>
+                                    <td th:text="${boardList.colorResult}">총 기종에 숫자</td>
+                                    <td th:text="${boardList.deviceDate}">등록 날짜</td>
+                                </tr>
 
                         </div>
                     </table>
@@ -79,6 +82,7 @@
     </footer>
 
 </body>
+<script src="/js/adminJS/adminBoard.js"> </script>
 <script src="/js/adminJS/popUp.js"></script>
 <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 

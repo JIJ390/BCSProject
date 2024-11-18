@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
@@ -39,7 +40,10 @@ public interface AdminMapper {
 	
 	// 디바이스 리스트 조회
 	List<Device> deviceList();
+
 	// 팝업 리스트 색 조회
-	List<Device> popUpData(int deviceNo);
+	List<Color> popUpData(int result);
+	//검색 조건
+	List<Device> adminSearch(String search);
 
 }

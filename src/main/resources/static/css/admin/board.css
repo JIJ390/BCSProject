@@ -150,3 +150,9 @@ ul {
     justify-content: center;
     cursor: pointer;  
 }
+
+.searchBtn{
+    border: none;
+    background-color: white;
+    font-size: 20px;
+}

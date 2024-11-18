@@ -51,20 +51,37 @@ public class AdminController {
 			) {
 //		휴대폰 정보 받아오기
 		List<Device> boardList = service.deviceList();
-		
-		
 		model.addAttribute("boardList", boardList);
 		
-		log.debug("asasdadsdadasds : {}", boardList);
-		log.debug("asasdadsdadasds : {}", boardList);
-		log.debug("asasdadsdadasds : {}", boardList);
-		log.debug("asasdadsdadasds : {}", boardList);
 		
 		
 		return "admin/adminBoard";
 		
 		
 	}
+	
+	@GetMapping("/adminBoard/search")
+	public String search(
+			Model model,
+			@RequestParam(value = "search", required=false) String search
+			) {
+		
+		log.debug("검색 결과 : {}", search);
+		log.debug("검색 결과 : {}", search);
+		
+		
+		List<Device> result = service.adminSearch(search);
+		
+		
+		log.debug("가져온 값: {}", result);
+		log.debug("가져온 값: {}", result);
+		
+		model.addAttribute("boardList", result);
+		
+		return "admin/adminBoard";
+	}
+	
+
 	
 	
 	//배송 내역 조회
@@ -127,21 +144,29 @@ public class AdminController {
 	// SELLING 이 아니라  DEVICE로 해야할듯
 	@PostMapping("/popUpData")
 	public String popUpData(
-			@RequestBody int deviceNo,
+			@RequestBody int result,
 			Model model
 			) {
 		
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		log.debug("aaaaaaaaaaaaaaaaaa : {}", deviceNo);
-		
-		List<Device> popUpData = service.popUpData(deviceNo);
+		log.debug("aaaaaaaaaaa : {}", result);
 		
 		
-		return null;
+		
+		
+		List<Color> popUpData = service.popUpData(result);
+		
+		
+		
+		log.debug("r1232lt 값 입니다 : {}", popUpData);
+		log.debug("result 값 입니다 : {}", popUpData);
+		log.debug("result 값 입니다 : {}", popUpData);
+		log.debug("result 값 입니다 : {}", popUpData);
+		log.debug("result 값 입니다 : {}", popUpData);
+		log.debug("result 값 입니다 : {}", popUpData);
+		
+		model.addAttribute("popUpData", popUpData);
+		
+		return "admin/androidPopUp :: popUp-tbody";
 	}
 	
 	
