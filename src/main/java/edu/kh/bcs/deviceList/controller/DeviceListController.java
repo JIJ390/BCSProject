@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,5 +38,15 @@ public class DeviceListController {
 	public List<String> selectFilterList(@RequestParam("filterType") String filterType) {
 	    return service.selectFilterListByType(filterType);
 	}
-
+	
+	
+	
+	/* 검색 결과 반환 */
+	@PostMapping("search")
+	@ResponseBody
+	public List<Filter> searchDevices(@RequestBody List<String> filters) {
+		log.info("선택된 필터: {}", filters);
+		return service.searchDevices(filters);
+	}
+	
 }

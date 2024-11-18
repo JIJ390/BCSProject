@@ -16,6 +16,8 @@ public class Filter {
 	private String deviceRamCapacity;
 	private String capacityType;
 	private String deviceDisplaySize;
-	
+	private String deviceImg;
+	private int deviceNo;
+	private String deviceName; 
 	
 }

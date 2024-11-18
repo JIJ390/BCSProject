@@ -116,13 +116,13 @@ main{
   margin-bottom: 30px;
 }
 
-.ram-check{
+.item-check{
   width: 90%;
   display: flex;
   justify-content: space-evenly;
 }
 
-.ram-check > div{
+.item-check > div{
   width: 80px;
   height: 100%;
   cursor: pointer;
@@ -163,6 +163,94 @@ main{
   flex-wrap: wrap; /* 줄 바꿈 허용 */
   gap: 20px; /* 아이템 간격 추가 (선택 사항) */
 }
+
+/* 검색 영역 */
+.search-container{
+  display: flex;
+  height: 7vh;
+  width: 70%;
+}
+
+.search-filter{
+  height: 100%;
+  width: 90%;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px; /* 선택 항목 간 간격 */
+}
+
+.search-Btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.device-item {
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.device-item:hover {
+  background-color: #f0f0f0;
+}
+
+.search-filter .clear-btn {
+  margin-right: 5px;
+  margin-left: auto; /* 오른쪽 끝으로 이동 */
+  padding: 2px 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  border-radius: 50%; /* 원형 버튼 */
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  display: none; /* 초기에는 표시하지 않음 */
+}
+
+.search-filter .clear-btn:hover {
+  background-color: #e8e8e8;
+}
+
+.search-filter .filter-tag {
+  padding: 5px 10px;
+  border: 2px solid black; 
+  border-radius: 15px;
+  font-size: 16px;
+  color: black;
+  margin: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-filter .filter-tag .remove-btn {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  color: #605f5f;
+  background: none;
+  border: none;
+  margin-left: 5px;
+  line-height: 1;
+}
+
 
 
 
