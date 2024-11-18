@@ -10,10 +10,7 @@
 </head>
 <body class="orderHistoryBody">
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-      <img src="/images/logo.png" alt="">
-      BCS ACCOUNT | 배최성 계정관리
-    </div>
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -23,7 +20,7 @@
     <div class="container">
         <h2>포인트 내역</h2>
         <div class="point-mid">
-          <img class="point-icon" src="/images/points.png" alt="">
+          <img class="point-icon" src="/images/myPage/points.png" alt="">
           <h3>나의 포인트 : 20,000P</h3>
         </div>
         <table>
@@ -72,7 +69,7 @@
   </section>
 </main>
 <footer>
-  푸터
+  <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
 <script src="/js/myPage/myPage.js"></script>
