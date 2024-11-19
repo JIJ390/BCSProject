@@ -108,16 +108,81 @@ WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<select id="deviceList" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+ORDER BY
+	DEVICE_DATE DESC
+	</select>
 	
+	<select id="popUpData" resultType="Color">
 	
-	
-	
+	SELECT 
+		COLOR_DEVICE_IMG,
+		COLOR_NAME,  
+		COUNT(BUYING_DEVICE_NO) colorResult
+	FROM 
+		COLOR
+	JOIN 
+	   (
+	   	SELECT * FROM DEVICE WHERE DEVICE_NO=#{result}
+	   ) USING (DEVICE_NO)
+	LEFT JOIN 
+			(
+			SELECT * FROM BUYING_DEVICE WHERE SOLD_FL = 'N'
+			) USING (COLOR_NO)
+	GROUP BY 
+		COLOR_DEVICE_IMG,COLOR_NAME, DEVICE_NAME
 	</select>
 	
 	
-	
-	
-	
+	<select id="adminSearch" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+WHERE 
+	DEVICE_NAME LIKE '%' || #{search} || '%'
+ORDER BY
+	DEVICE_DATE DESC
+	</select>
+
 	
 	
 </mapper>

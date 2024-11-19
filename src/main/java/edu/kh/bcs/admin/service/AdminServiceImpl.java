@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AdminServiceImpl implements AdminService{
 	
 	private final AdminMapper mapper;
@@ -56,6 +60,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 
+	//디바이스 리스트 조회
+
+
 	@Override
 	public Map<String, String> adminMemberDetail(int memberNo) {
 		
@@ -80,6 +87,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	
+
 	@Override
 	public List<Device> deviceList() {
 
@@ -87,9 +95,31 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.deviceList();
 	}
 
+	
+
+// 팝업	
+	@Override
+	public List<Color> popUpData(int result) {
+		
+		return mapper.popUpData(result);
+	}
+	
+	@Override
+	public List<Device> adminSearch(String search) {
+		
+		List<Device> result = mapper.adminSearch(search);
+		
+		
+		log.debug("impl 값 ㅣ : {}", result);
+		log.debug("impl 값 ㅣ : {}", result);
+		return result;
+	}
+
+
 	@Override
 	public Member getLoginMember(int memberNo) {
 		return mapper.getLoginMember(memberNo);
 	}
+
 }
 

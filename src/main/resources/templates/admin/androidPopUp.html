@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -22,24 +22,27 @@
 
                 <div class="popUp-bottom">
                     <table>
-                        <colgroup>
-                            <col style="width: 20%;">
-                            <col style="width: 50%;">
-                            <col style="width: 20%;">
-                        </colgroup>
-                        <tr class="category" id="category-top ">
-                            <td><a href=""></a></td>
-                            <td><a href="">색상▼</a></td>
-                            <td><a href="">총수량▼</a></td>
-                        </tr>
-                        <div class="scroller">
-                            <tr class="category" id="category-top">
-                                <td><img src="/images/sample_iphone16_blue.png" alt=""></td>
-                                <td>코발트 블루</td>
-                                <td>287개</td>
+                        <thead>
+                            <colgroup>
+                                <col style="width: 20%;">
+                                <col style="width: 50%;">
+                                <col style="width: 20%;">
+                            </colgroup>
+                            <tr class="category" id="category-top ">
+                                <td></td>
+                                <td>색상▼</td>
+                                <td>총수량▼</td>
                             </tr>
-                        </div>
-
+                        </thead>
+                        <tbody id="popUp-tbody" th:fragment="popUp-tbody">
+                            <th:block class="scroller" th:each="popUpData : ${popUpData}">
+                                    <tr class="category" id="category-top">
+                                        <td><img th:src="@{popUpData.colorDeviceImg}" alt=""></td>
+                                        <td th:text="${popUpData.colorName}">코발트 블루</td>
+                                        <td th:text="${popUpData.colorResult}">287개</td>
+                                    </tr>
+                            </th:block>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -50,7 +53,6 @@
 
 </body>
 <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
-<script src="/js/adminJS/androidPopUpScroller.js"> </script>
 <script src="/js/adminJS/popUp.js"> </script>
 
 </html>

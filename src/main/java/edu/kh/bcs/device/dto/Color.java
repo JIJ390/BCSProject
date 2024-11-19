@@ -19,4 +19,7 @@ public class Color {
 	private String colorCode;
 	private String colorDeviceImg;
 
+	
+	//컬러 총 합 계수
+	private int colorResult;
 }
