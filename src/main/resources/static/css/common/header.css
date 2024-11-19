@@ -328,7 +328,9 @@ main{
 
 
 
-
+.plusItem > a{
+  width: 100%;
+}
 
 
 
