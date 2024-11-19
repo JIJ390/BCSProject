@@ -84,6 +84,19 @@ const selectFilterList = (filterType) => {
             // 태그 추가
             const tag = document.createElement("div");
             tag.classList.add("filter-tag");
+
+            if (filterType === 'ram') {
+              tag.classList.add("ram");
+            }
+
+            if (filterType === 'hdd') {
+              tag.classList.add("hdd");
+            }
+            
+            if (filterType === 'inch') {
+              tag.classList.add("inch");
+            }
+
             tag.setAttribute("data-value", item);
             tag.textContent = item;
 
@@ -150,47 +163,43 @@ document.querySelector("#inch-filter").addEventListener("click", () => {
 searchFilter.appendChild(clearAllBtn);
 
 
+// 필터 검색
+const searchBtn = document.querySelector("#searchBtn").addEventListener("click", () => {
 
-const searchBtn = document.querySelector('#searchBtn')
-searchBtn.addEventListener("click", () => {
-  if (selectedItems.length === 0) {
-    alert("선택된 항목이 없습니다!");
-    return;
-  }
+  const ramList = document.querySelectorAll(".ram");
+  const hddList = document.querySelectorAll(".hdd");
+  const inchList = document.querySelectorAll(".inch");
 
-  console.log("전송할 필터:", selectedItems); // 디버깅 로그
+  let obj = {};
 
-  fetch("/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      filters: selectedItems,
-    }),
+  ramList.forEach((item, index) => {
+    obj[`ram${index}`] = item.getAttribute("data-value");
   })
-    .then((response) => {
-      if (response.ok) return response.json();
-      throw new Error("검색 요청 실패");
-    })
-    .then((result) => {
-      console.log("검색 결과:", reulst);
 
-      // 결과 출력
-      deviceListContainer.innerHTML = data
-        .map(
-          (device) => `
-          <div class="deviceList-item-box">
-            <div class="deviceList-item-section">
-              <div class="deviceList-items">
-                <img src="${device.deviceImg}" alt="${device.deviceName}">
-              </div>
-              <div style="margin-top: 15px;">${device.deviceName}</div>
-            </div>
-          </div>
-        `
-        )
-        .join("");
-    })
-    .catch((err) => console.error(err));
-});
+  hddList.forEach((item, index) => {
+    obj[`hdd${index}`] = item.getAttribute("data-value");
+  })
+
+  inchList.forEach((item, index) => {
+    obj[`inch${index}`] = item.getAttribute("data-value");
+  })
+
+  console.log(obj);
+  
+
+  fetch('/searchDetail', {
+    method : "POST",
+    headers : {"Content-Type": "application/json"},
+    body : JSON.stringify(obj)
+  }) // URL에 파라미터 추가
+  .then(response => {
+    if(response.ok){
+      return response.text();
+    }
+    throw new Error("조회 실패");
+  })
+  .then(result => {
+    console.log(result);
+  })
+  .catch(err => console.error(err));
+})

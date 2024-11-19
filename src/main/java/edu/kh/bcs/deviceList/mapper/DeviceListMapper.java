@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.dto.Filter;
 
 @Mapper
@@ -17,10 +18,13 @@ public interface DeviceListMapper {
 	List<String> selectFilterList(String filterType);
 
 	
-	/** 비동기로 검색
-	 * @param filters
-	 * @return
-	 */
-	List<Filter> searchDevices(List<String> filters);
+	
+	
+	String searchDetail(Filter filter);
+
+	
+	
+
+	
 
 }

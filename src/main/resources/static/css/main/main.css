@@ -361,7 +361,7 @@ a {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* 좌우 버튼 스타일 */
