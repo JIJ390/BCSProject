@@ -26,4 +26,6 @@ public interface AdminService {
 	int memberDelFlChange(int memberNo);
 	int memberFlChange(int memberNo);
 
+	Member getLoginMember(int memberNo);
+
 }

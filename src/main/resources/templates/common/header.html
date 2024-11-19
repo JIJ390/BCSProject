@@ -123,6 +123,10 @@
     
     <th:block th:replace= "~{common/sidebar}"></th:block>
     <script src="/js/common/sidebar.js"></script>
+    <script th:inline="javascript">
+        const notificationLoginCheck = /*[[${session.loginMember} ? true : false ]]*/ false;
+    </script>
+    <script src="/js/sse/sse.js"></script>
 
 
 </body>

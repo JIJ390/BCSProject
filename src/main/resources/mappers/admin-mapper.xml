@@ -101,7 +101,11 @@ SET MEMBER_FL = CASE WHEN MEMBER_FL = '1' THEN '2' ELSE '1' END
 WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
-	
+	<select id="getLoginMember">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo} 
+	</select>
 	
 	<select id="deviceList" resultType="Device">
 	
