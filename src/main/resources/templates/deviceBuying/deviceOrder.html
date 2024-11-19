@@ -15,9 +15,12 @@
   </header>
   <main>
     <section class="left-section">
-      레프트 섹션
+
+      로그인 세션에 저장된 기본 정보 가져오기
+
+      요청 사항 80 자 제한 걸기
     </section>
-    <section class="main-section">
+    <section class="main-section" th:object="${orderBuyingDevice}">
       <div class="device-order-head">
         <span class="page-title">
           당신의 선택
@@ -27,66 +30,70 @@
 
         <img src="/images/sample_iphone16_blue.png" alt="">
         <div class="device-order-info">
-          <span class="order-info-title">iPhone 16</span>
-          <span class="order-info-sub">코발트 블루</span>
-          <span class="order-info-sub">128 GB</span>
-          <span class="order-info-sub">S 등급</span>
+          <span class="order-info-title" th:text="*{deviceName}">iPhone 16</span>
+          <span class="order-info-sub" th:text="*{colorName}">코발트 블루</span>
+          <span class="order-info-sub" th:text="*{capacityType}">128 GB</span>
+          <span class="order-info-sub" th:text="|*{gradeType} 등급|">S 등급</span>
         </div>
       </div>
 
-      <div class="status-container">
-        <span class="status-title">구매자 정보</span>
-        <div class="order-info">
-          <span>받는 분 이름</span>
-          <span>AAA</span>
-        </div>
-        <div class="order-info">
-          <span>받는 분 전화번호</span>
-          <span>010-1111-2222</span>
-        </div>
-      </div>
+      <form th:action="|/device/order/payment/*{buyingDeviceNo}|" 
+            method="POST" 
+            id="orderFrm">
 
-      <div class="status-container">
-        <span class="status-title">배송지 정보</span>
-        <div class="order-info">
-          <span>주소</span>
-          <div class="adress-area">
-    
-            <div class="client-address">
-              <input type="text" name="clientAddress"
-              placeholder="우편번호" id="postcode">
-              <button type="button" id="findAddressBtn">검색</button>
-            </div>
-  
-            <div class="client-address">
-              <input type="text" name="clientAddress"
-                placeholder="도로명/지번 주소" id="address">
-            </div>
-  
-            <div class="client-address">
-              <input type="text" name="clientAddress"
-                placeholder="상세 주소" id="detailAddress">
-            </div>
+        <div class="status-container">
+          <span class="status-title">구매자 정보</span>
+          <div class="order-info">
+            <span>받는 분 이름</span>
+            <input type="text" name="orderName">
+          </div>
+          <div class="order-info">
+            <span>받는 분 전화번호</span>
+            <input type="text" name="orderTel">
           </div>
         </div>
-        <div class="order-info">
-          <span>요청 사항</span>
-          <textarea name="" id=""></textarea>
+  
+        <div class="status-container">
+          <span class="status-title">배송지 정보</span>
+          <div class="order-info">
+            <span>주소</span>
+            <div class="adress-area">
+      
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                placeholder="우편번호" id="postcode">
+                <button type="button" id="findAddressBtn">검색</button>
+              </div>
+    
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                  placeholder="도로명/지번 주소" id="address">
+              </div>
+    
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                  placeholder="상세 주소" id="detailAddress">
+              </div>
+            </div>
+          </div>
+          <div class="order-info">
+            <span>요청 사항</span>
+            <textarea name="orderComment" placeholder="요청 사항을 작성해 주세요"></textarea>
+          </div>
         </div>
-      </div>
 
+        <span class="price-span"  th:text="|결제 금액 *{#numbers.formatInteger(buyingDevicePrice, 0, 'COMMA')} ₩|">결제 금액 1,234,567 ₩</span>
       
-      <span class="price-span">결제 금액 1,234,567 ₩</span>
-      
-      <hr>
+        <hr>
+  
+        <div class="btn-area">
+          <button class="order-btn">구매하기</button>
+        </div>
 
-      <div class="btn-area">
-        <button class="order-btn">구매하기</button>
-      </div>
+      </form>
 
     </section>
     <section class="right-section">
-      라이트 섹션
     </section>
   </main>
   <footer>

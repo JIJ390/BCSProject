@@ -72,12 +72,14 @@ main {
 .status-container {
   width: 960px;
   background-color: var(--white-color);
-
+  
+  margin: 0 20px;
   margin-top: 30px;
 
   border-radius: 15px;
 
   padding: 20px;
+
 
 }
 .status-container >div {
@@ -85,8 +87,12 @@ main {
 }
 
 .status-title {
+  display: inline-block;
+
   font-size: 24px;
   font-weight: bold;
+
+  margin-bottom: 10px;
 }
 
 
@@ -105,12 +111,25 @@ main {
   
 }
 
-.order-info > span:last-child {
-  font-size: 20px;
 
+.order-info > input {
+  width: 560px;
+  height: 26px;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+  padding: 5px;
+
+  background-color: var(--main-gray-color);
+
+  border: none;
 }
 
+
 .price-span {
+  display: inline-block;
+
   width: 100%;
 
   text-align: right;
@@ -155,12 +174,12 @@ hr {
 }
 
 
-.client-address {
+.order-address {
   display: flex;
 }
 
 
-.client-address > input {
+.order-address > input {
   width: 560px;
   height: 26px;
 
@@ -169,20 +188,32 @@ hr {
   margin-bottom: 10px;
   padding: 5px;
 
-  border: 1px solid rgb(136, 136, 136);
+  background-color: var(--main-gray-color);
+
+  border: none;
 }
 
-.client-address > button {
+.order-address > button {
   width: 140px;
   height: 26px;
 
-  font-size: 18px;
+  font-size: 16px;
 
   margin-left: 20px;
 
+  border: 2px solid var(--main-gray-color);
 
-  border: 1px solid rgb(136, 136, 136);
+  font-family: 'Pretendard-Thin';
+
+  transition-duration: 0.2s;
 }
+
+.order-address > button:hover {
+  border: 2px solid var(--main-color);
+  
+}
+
+
 
 .order-info > textarea {
   display: inline-block;
@@ -191,5 +222,8 @@ hr {
 
   padding: 8px;
 
-  border: 1px solid rgb(136, 136, 136);
+  background-color: var(--main-gray-color);
+
+  border: none;
 }
+

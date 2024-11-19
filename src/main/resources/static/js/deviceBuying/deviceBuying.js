@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // 용량 재고 확인
       checkSelectedCapacity(colorNo, capacityNumber, capacity);
 
-      expectedPrice();
     })
   })
 
@@ -89,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // 등급 재고 확인
       checkSelectedGrade(colorNo, capacityNumber, gradeNumber, grade);
     
-      expectedPrice();
     })
   })
 
@@ -242,7 +240,7 @@ const checkSelectedCapacity = async (colorNo, capacityNumber, capacity) => {
   
     // 선택 클래스 추가
     capacity.classList.add('selected-capacity');
-
+    expectedPrice();
 
   } catch(err) {
     console.log(err);
@@ -285,7 +283,7 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
     
     // 선택 클래스 추가
     grade.classList.add('selected-grade');
-
+    expectedPrice();
 
   } catch(err) {
     console.log(err);
@@ -362,25 +360,29 @@ buyingFrm.addEventListener("submit", e => {
   }
 
 
+  // 결제 페이지에서 뒤로 가기 시 여러 개의 input 태그가 쌓여 오류 발생 해결 
+  // form 내부의 모든 input 태그 가져오기
+  const inputs = e.target.querySelectorAll('input');
+  // 각 input 태그를 삭제
+  inputs.forEach(input => input.remove());
+
+
+
   const input1 = document.createElement("input");
   input1.name = "colorNo";
   input1.type = "hidden";
-  input1.value = colorNo;
+  input1.value = selectedColor.getAttribute("data-value");
 
   const input2 = document.createElement("input");
   input2.name = "capacityNumber";
   input2.type = "hidden";
-  input2.value = capacityNumber;
+  input2.value = selectedCapacity.getAttribute("data-value");
+
 
   const input3 = document.createElement("input");
   input3.name = "gradeNumber";
   input3.type = "hidden";
-  input3.value = gradeNumber;
-
-  console.log(colorNo, capacityNumber, gradeNumber);
-
-  e.preventDefault();
-  return;
+  input3.value = selectedGrade.getAttribute("data-value");
 
   e.target.append(input1, input2, input3);
 

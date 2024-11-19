@@ -31,3 +31,91 @@ function findAddress() {
 /* 주소 검색 버튼 클릭 시 */
 /* 버튼 있을 때만!!! 활성화 */
 findAddressBtn.addEventListener("click", findAddress);
+
+
+
+
+
+
+
+
+
+
+
+
+// 유효성 검사
+const form = document.querySelector("#orderFrm");
+
+form.addEventListener("submit", e => {
+
+  /* 입력 사항 */
+  const orderTel = document.querySelector("[name=orderTel]")
+  const orderName = document.querySelector("[name=orderName]")
+
+  console.log(orderTel);
+
+  /* 주소 */
+  const postcode = document.querySelector("#postcode");
+  const address = document.querySelector("#address");
+  const detailAddress = document.querySelector("#detailAddress");
+
+
+
+  const regEx =  /^[가-힣]+$/;  // 한글 이름 유효성 검사
+  const inputName = orderName.value.trim()
+
+  if (inputName.length < 2) {
+    alert("이름은 두 글자 이상으로 입력해 주세요");
+    orderName.focus();
+    e.preventDefault();
+    return;
+  }
+
+  if ((regEx.test(inputName) === false)){
+    alert("한글로 된 이름을 입력해 주세요");
+    orderName.focus();
+    e.preventDefault();
+    return;
+  }
+
+
+  const regExTel = /^010[0-9]{8}$/; // 010으로 시작, 이후 숫자 8개 (총 11자)
+
+  // 전화 번호
+  if ((regExTel.test(orderTel.value.trim()) === false)) {
+    alert("유효한 전화번호를 입력해 주세요");
+    orderTel.focus();
+    e.preventDefault();
+    return;
+  }
+
+  // 주소창 둘 중 하나가 비었을 때
+  if ((postcode.value.trim().length === 0) || (address.value.trim().length === 0)) {
+    alert("주소를 검색해 주세요");
+    postcode.focus();
+    e.preventDefault();
+    return;
+  }
+
+  // 상세 주소
+  if ((detailAddress.value.trim().length === 0)) {
+    alert("상세 주소를 입력해 주세요");
+    detailAddress.focus();
+    e.preventDefault();
+    return;
+  }
+
+  let deviceNo = 0;
+  
+  deviceNo = location.href.substr(-1);
+
+  console.log(deviceNo);
+
+  const input = document.createElement("input");
+  input.name = "deviceNo";
+  input.type = "hidden";
+  input.value = deviceNo;
+
+  e.target.append(input);
+
+});

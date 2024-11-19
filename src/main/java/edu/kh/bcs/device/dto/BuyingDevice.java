@@ -1,5 +1,16 @@
 package edu.kh.bcs.device.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BuyingDevice {
 	
 	// DB 기반 필드
