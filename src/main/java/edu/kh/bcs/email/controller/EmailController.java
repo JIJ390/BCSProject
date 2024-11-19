@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.common.util.RedisUtil;
@@ -30,11 +31,13 @@ public class EmailController {
 	@ResponseBody
 	@PostMapping("sendAuthKey")
 	public int sendAuthKey(
-			@RequestBody String email) {
+			@RequestBody String memberEmail
+			) {
 		
-		return service.sendEmail("signUp", email);
+		return service.sendEmail("signUp", memberEmail);
 	}
-	
+
+
 	/** 인증 번호 확인
 	 * @param map : 입력받은 email, authKey 가 저장된 map
 	 * 	HttpMessageConverter에 의해 JSON -> Map 자동 변환
@@ -49,7 +52,24 @@ public class EmailController {
 		return service.checkAuthKey(map);
 	}
 	
-	
+	@ResponseBody
+	@GetMapping("/myPage/emailName")
+	public int findIdReal(
+			@RequestParam("memberName")String memberName,
+			@RequestParam("memberEmail")String memberEmail) {
+		
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+		System.out.println(memberName);
+		System.out.println(memberEmail);
+		
+		return service.findIdReal(memberName, memberEmail);
+		
+	}
 	
 	
 	

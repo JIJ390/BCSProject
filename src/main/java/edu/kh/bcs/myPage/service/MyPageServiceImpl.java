@@ -36,11 +36,11 @@ public class MyPageServiceImpl implements MyPageService{
 		//	 (비밀번호 포함!)
 		Member loginMember = mapper.login(memberId);
 		
-		
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
+//		
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
 		
 		// 2. id가 일치하는 회원정보가 없을경우
 		if(loginMember == null) return null;
@@ -57,6 +57,12 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		// 4. 로그인 결과 반환
 		return loginMember;
+	}
+	
+	// 아이디불러오기
+	@Override
+	public String findId(String memberEmail) {
+		return mapper.findId(memberEmail);
 	}
 	
 }

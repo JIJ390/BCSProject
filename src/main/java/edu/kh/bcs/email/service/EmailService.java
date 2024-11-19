@@ -10,12 +10,26 @@ public interface EmailService {
 	 * @return
 	 */
 	int sendEmail(String htmlName, String email);
+	
+
 
 	/** 인증번호 확인
 	 * @param map
 	 * @return
 	 */
 	boolean checkAuthKey(Map<String, String> map);
+
+
+	/** 아이디 찾기
+	 * @param memberName
+	 * @param memberEmail
+	 * @return
+	 */
+	int findIdReal(String memberName, String memberEmail);
+
+	
+
+	
 
 
 }

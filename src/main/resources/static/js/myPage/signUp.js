@@ -486,6 +486,8 @@ sendAuthKeyBtn?.addEventListener("click", () => {
     return;
   }
 
+
+  
   // 2) 비동기로 서버에서 작성된 이메일로 인증코드 발송(AJAX)
   fetch("/email/sendAuthKey", {
     method : "POST",

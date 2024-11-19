@@ -26,6 +26,27 @@
   			AND   MEMBER_DEL_FL = 'N'
   	</select>
   	
+  	<select id="findId">
+  		SELECT
+  			MEMBER_ID
+  		FROM
+  			"MEMBER"
+  		WHERE
+  			MEMBER_EMAIL = #{memberEmail}
+  	</select>
+  	
+  	<!-- 일치하는 아이디가 1개인지 0개인지 -->
+  	<select id="findIdReal">
+  		SELECT COUNT(*)
+  		FROM
+  			"MEMBER"
+  		WHERE
+  			MEMBER_EMAIL = #{memberEmail}
+  		AND
+  			MEMBER_NAME = #{memberName}
+  	
+  	</select>
+  	
   	
 
   	

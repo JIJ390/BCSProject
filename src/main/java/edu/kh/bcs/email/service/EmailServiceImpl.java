@@ -10,6 +10,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import edu.kh.bcs.common.util.RedisUtil;
+import edu.kh.bcs.myPage.mapper.MyPageMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
@@ -29,7 +30,16 @@ public class EmailServiceImpl implements EmailService {
 	// 자바 타임리프를 사용할 수 있게하는 객체(Bean)
 	// html 코드를 java로 읽어올 수 있음
 	private final SpringTemplateEngine templateEngine;
-
+	
+	private final MyPageMapper mapper;
+	
+	
+	// 아이디 찾기
+	@Override
+	public int findIdReal(String memberName, String memberEmail) {
+		return mapper.findIdReal(memberName, memberEmail);
+	}
+	
 	// 이메일 발송 서비스
 	@Override
 	public int sendEmail(String htmlName, String email) {
@@ -160,11 +170,7 @@ public class EmailServiceImpl implements EmailService {
 		return redisUtil.getValue(email).equals(authKey);
 	}
 	
-	
-	
-	
-	
-	
+
 	
 	
 	
