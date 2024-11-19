@@ -126,24 +126,25 @@
 	<!-- 색상 매물 조회 다중 -->
 	<select id="checkColor">
 	
-		SELECT C.COLOR_NO AS "colorNo", (
+		SELECT C.COLOR_NO AS "colorNo", 
+		(
 			SELECT COUNT(*)
 			FROM BUYING_DEVICE
 			WHERE
 				DEVICE_NO = #{deviceNo}
 			AND
 				COLOR_NO = C.COLOR_NO
-			) AS "colorCount"
+			AND
+				SOLD_FL = 'N')
+				 AS "colorCount"
 		FROM
 			COLOR C 
 		LEFT JOIN 
 			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
 		WHERE
 			C.DEVICE_NO = #{deviceNo}
-		AND 
-			B.SOLD_FL = 'N'
 		GROUP BY C.COLOR_NO
-		ORDER BY "colorNo" ASC
+	
 	</select>
 	
 	
@@ -155,6 +156,8 @@
 			DEVICE_NO = #{deviceNo}
 		AND
 			COLOR_NO = #{colorNo}
+		AND
+			SOLD_FL = 'N'
 	</select>
 	
 	
@@ -170,6 +173,8 @@
 				COLOR_NO = #{colorNo}
 			AND
 				CAPACITY_NUMBER = C.CAPACITY_NUMBER
+			AND
+				SOLD_FL = 'N'
 			) AS "capacityCount"
 		FROM
 			CAPACITY_PRICE C 
@@ -177,8 +182,6 @@
 			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
 		WHERE
 			C.DEVICE_NO = #{deviceNo}
-		AND 
-			B.SOLD_FL = 'N'
 		GROUP BY C.CAPACITY_NUMBER
 		ORDER BY "capacityNumber" ASC
 	</select>
@@ -196,6 +199,8 @@
 			COLOR_NO = #{colorNo}
 		AND
 			CAPACITY_NUMBER = #{capacityNumber}
+		AND
+			SOLD_FL = 'N'
 	</select>
 	
 	
@@ -212,6 +217,8 @@
 				CAPACITY_NUMBER = #{capacityNumber}
 			AND
 				GRADE_NUMBER = G.GRADE_NUMBER
+			AND
+				SOLD_FL = 'N'
 			) AS "gradeCount"
 		FROM
 			GRADE G 
@@ -219,8 +226,6 @@
 			BUYING_DEVICE B ON (B.DEVICE_NO = G.DEVICE_NO)
 		WHERE
 			G.DEVICE_NO = #{deviceNo}
-		AND 
-			B.SOLD_FL = 'N'
 		GROUP BY G.GRADE_NUMBER
 		ORDER BY "gradeNumber" ASC
 	
@@ -240,6 +245,8 @@
 			CAPACITY_NUMBER = #{capacityNumber}
 		AND
 			GRADE_NUMBER = #{gradeNumber}
+		AND
+			SOLD_FL = 'N'
 	</select>
 	
 

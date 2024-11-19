@@ -1,15 +1,20 @@
 
 
-
 html, body, main {
   background-color: var(--main-gray-color);
-
-  width: 1600px;
-  height: 100%;
 
   margin: 0 auto;
 
   color: var(--font-color);
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
 }
 
 
@@ -33,7 +38,7 @@ html, body, main {
 }
 
 .device-order-container > img {
-  margin: 10px;
+  margin:20px;
   width: 500px;
   height: auto;
   border-radius: 15px;
@@ -67,12 +72,14 @@ html, body, main {
 .status-container {
   width: 960px;
   background-color: var(--white-color);
-
+  
+  margin: 0 20px;
   margin-top: 30px;
 
   border-radius: 15px;
 
   padding: 20px;
+
 
 }
 .status-container >div {
@@ -80,17 +87,49 @@ html, body, main {
 }
 
 .status-title {
+  display: inline-block;
+
   font-size: 24px;
   font-weight: bold;
+
+  margin-bottom: 10px;
 }
 
-.order-info >span{
+
+.order-info {
+  display: flex;
+
+  margin: 20px 0;
+
+  padding-left: 10px;
+}
+
+.order-info > span:first-child {
   font-size: 20px;
+  width: 150px;
 
-  padding: 10px;
+  
 }
+
+
+.order-info > input {
+  width: 560px;
+  height: 26px;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+  padding: 5px;
+
+  background-color: var(--main-gray-color);
+
+  border: none;
+}
+
 
 .price-span {
+  display: inline-block;
+
   width: 100%;
 
   text-align: right;
@@ -133,3 +172,58 @@ hr {
   border: 2px solid var(--main-color);
   cursor: pointer;
 }
+
+
+.order-address {
+  display: flex;
+}
+
+
+.order-address > input {
+  width: 560px;
+  height: 26px;
+
+  font-size: 18px;
+
+  margin-bottom: 10px;
+  padding: 5px;
+
+  background-color: var(--main-gray-color);
+
+  border: none;
+}
+
+.order-address > button {
+  width: 140px;
+  height: 26px;
+
+  font-size: 16px;
+
+  margin-left: 20px;
+
+  border: 2px solid var(--main-gray-color);
+
+  font-family: 'Pretendard-Thin';
+
+  transition-duration: 0.2s;
+}
+
+.order-address > button:hover {
+  border: 2px solid var(--main-color);
+  
+}
+
+
+
+.order-info > textarea {
+  display: inline-block;
+  font-size: 18px;
+  width: 560px;
+
+  padding: 8px;
+
+  background-color: var(--main-gray-color);
+
+  border: none;
+}
+

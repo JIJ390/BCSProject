@@ -15,7 +15,6 @@
   </header>
   <main>
     <section class="left-section">
-      레프트 섹션
     </section>
     <section class="main-section">
       <div class="device-buying-head">
@@ -93,7 +92,11 @@
       <hr>
 
       <div class="btn-area">
-        <button class="buying-btn" id="buyingBtn">구매하기</button>
+        <form th:action="|/device/order/${device.deviceNo}|" 
+              method="POST" 
+              id="buyingFrm">
+          <button class="buying-btn" id="buyingBtn">구매하기</button>
+        </form>
       </div>
 
       <div class="chart-info">
@@ -212,7 +215,6 @@
 
     </section>
     <section class="right-section">
-      라이트 섹션
     </section>
   </main>
   <footer>
