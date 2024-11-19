@@ -44,26 +44,43 @@ showSlide(currentIndex);
 /* 서브 슬라이드 부분 */
 
 
-// 슬라이드 이동 함수
-let currentIndex2 = 1; // 슬라이드는 복사된 슬라이드(1번)부터 시작
+// 슬라이드 이동 변수
+let currentIndex2 = 3; // 복사된 슬라이드 포함 시작 위치
 const slideContainer2 = document.querySelector('.sub-slide');
 const slideItems2 = Array.from(document.querySelectorAll('.items'));
 const totalSlides2 = slideItems2.length;
 
+// 복사 슬라이드 추가
 function cloneSlides() {
-  const firstClone = slideItems2[0].cloneNode(true);
-  const lastClone = slideItems2[totalSlides2 - 1].cloneNode(true);
+  const cloneCount = 3; // 복사할 슬라이드 수
+  const total = slideItems2.length;
 
-  slideContainer2.appendChild(firstClone); // 마지막에 첫 번째 슬라이드 추가
-  slideContainer2.insertBefore(lastClone, slideItems2[0]); // 처음에 마지막 슬라이드 추가
+  // 뒤쪽에 복사된 슬라이드 추가
+  for (let i = 0; i < cloneCount; i++) {
+    const clone = slideItems2[i].cloneNode(true);
+    slideContainer2.appendChild(clone);
+  }
+
+  // 앞쪽에 복사된 슬라이드 추가
+  for (let i = total - cloneCount; i < total; i++) {
+    const clone = slideItems2[i].cloneNode(true);
+    slideContainer2.insertBefore(clone, slideItems2[0]);
+  }
+
+  // 복사된 슬라이드를 포함한 배열 업데이트
+  const updatedSlides = Array.from(document.querySelectorAll('.items'));
+  slideItems2.length = 0; // 기존 배열 초기화
+  updatedSlides.forEach((item) => slideItems2.push(item));
 }
 
+// 초기 위치 설정
 function setInitialPosition() {
   const slideWidth = slideItems2[0].offsetWidth + 80; // 이미지 너비 + gap
-  slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`; // 첫 번째 슬라이드로 이동
+  currentIndex2 = 3; // 첫 번째 슬라이드가 3번째 위치에 오도록 설정
+  slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`; // 초기 위치 설정
 }
 
-// 슬라이드 이동 함수
+// 슬라이드 업데이트
 function updateSlide2() {
   const slideWidth = slideItems2[0].offsetWidth + 80; // 이미지 너비 + gap
   const newTransform = -(currentIndex2 * slideWidth);
@@ -71,38 +88,42 @@ function updateSlide2() {
   slideContainer2.style.transition = 'transform 0.5s ease-in-out';
   slideContainer2.style.transform = `translateX(${newTransform}px)`;
 
-  // 슬라이드 위치 초기화 (복사된 슬라이드 처리)
-  slideContainer2.addEventListener('transitionend', () => {
-    slideContainer2.style.transition = 'none'; // 애니메이션 제거
-    if (currentIndex2 === 0) {
-      currentIndex2 = totalSlides2; // 마지막 슬라이드로 이동
-      slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`;
-    } else if (currentIndex2 === totalSlides2 + 1) {
-      currentIndex2 = 1; // 첫 번째 슬라이드로 이동
-      slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`;
-    }
-  });
+  slideContainer2.addEventListener(
+    'transitionend',
+    () => {
+      slideContainer2.style.transition = 'none'; // 애니메이션 제거
+      if (currentIndex2 <= 2) {
+        currentIndex2 = totalSlides2 + 2; // 마지막 복사 슬라이드로 이동
+        slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`;
+      } else if (currentIndex2 >= totalSlides2 + 3) {
+        currentIndex2 = 3; // 첫 번째 슬라이드로 이동
+        slideContainer2.style.transform = `translateX(-${currentIndex2 * slideWidth}px)`;
+      }
+    },
+    { once: true } // 이벤트가 한 번만 실행되도록 설정
+  );
 }
 
-// 이전 슬라이드로 이동
+// 이전 슬라이드 이동
 function prevSlide2() {
   currentIndex2--;
   updateSlide2();
 }
 
-// 다음 슬라이드로 이동
+// 다음 슬라이드 이동
 function nextSlide2() {
   currentIndex2++;
   updateSlide2();
 }
 
-// 초기화 함수
+// 슬라이더 초기화
 function initSlider() {
   cloneSlides(); // 복사 슬라이드 생성
   setInitialPosition(); // 초기 위치 설정
 }
 
-// 슬라이더 초기화
+// 초기화 실행
 initSlider();
+
 
 

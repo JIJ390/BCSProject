@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.dto.Filter;
 import edu.kh.bcs.deviceList.service.DeviceListService;
 import lombok.RequiredArgsConstructor;
@@ -40,24 +41,13 @@ public class DeviceListController {
 	}
 	
 	
-	
-	@PostMapping("search")
+
+	@PostMapping("searchDetail")
 	@ResponseBody
-	public List<Filter> searchDevices(@RequestBody List<String> filters) {
-	    if (filters == null || filters.isEmpty()) {
-	        throw new IllegalArgumentException("필터가 제공되지 않았습니다.");
-	    }
-
-	    log.info("선택된 필터: {}", filters);
-
-	    // 검색 로직 호출
-	    List<Filter> result = service.searchDevices(filters);
-
-	    if (result.isEmpty()) {
-	        log.info("검색 결과가 없습니다.");
-	    }
-
-	    return result;
+	public String searchDetail(
+			@RequestBody Filter filter)  {
+		
+		return service.searchDetail(filter);
+		
 	}
-
 }
