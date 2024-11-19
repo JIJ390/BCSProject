@@ -86,11 +86,6 @@ const getHomeContent = () => {
       setTimeout(() => {
         document.querySelector(".sidebar-div-content").innerHTML = html;
         document.querySelector(".sidebar-div-content").classList.add('sidebar-div-content-view');
-        if (aiMessageBackup !== '') {
-          strIndex = aiMessageBackup.lastIndexOf('<div class="chattingArea" style="opacity: 1;">')
-          backUpStr = aiMessageBackup.substring(strIndex + 120, aiMessageBackup.length - 12)
-          document.querySelector(".chat-message-backup").innerHTML = backUpStr;
-        }
         getHomeMessageBtn();
       }, 100);
 
@@ -115,7 +110,13 @@ const getChatContent = () => {
         getChattingDetailClick();
         if (aiMessageBackup !== '') {
           strIndex = aiMessageBackup.lastIndexOf('<div class="chattingArea" style="opacity: 1;">')
-          backUpStr = aiMessageBackup.substring(strIndex + 120, aiMessageBackup.length - 12)
+          backUpStr1 = aiMessageBackup.substring(strIndex + 120, aiMessageBackup.length - 12)
+          if(backUpStr1.length > 40){
+            backUpStr = backUpStr1.substring(0,40) + "..."
+          }
+          else{
+            backUpStr = backUpStr1
+          }
           document.querySelector(".chat-message-backup").innerHTML = backUpStr;
         }
       }, 100);
@@ -352,7 +353,7 @@ const getMyMessageBtn = () => {
       area.append(img);
 
       const div = document.createElement("div");
-      div.innerText = "상단의 판매하기 메뉴에서 판매하세요"
+      div.innerText = "상단의 판매하기 메뉴에서 원하시는 기종 선택 후 클릭하시면 판매 페이지로 이동할 수 있습니다"
       div.classList.add("chatting-left")
 
       area.append(div)

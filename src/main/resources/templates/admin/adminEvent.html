@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트 관리</title>
 
     <style>
-        .admin-event-main{
+        .admin-event-main {
             width: 1000px;
             height: 1000px;
             background-color: white;
@@ -14,17 +15,19 @@
             margin-top: 100px;
             padding: 30px;
         }
-        
-        .admin-event-main-header{
+
+        .admin-event-main-header {
             width: 100%;
             text-align: start;
             border-bottom: 1px solid black;
         }
-        .admin-event-main-header > p{
+
+        .admin-event-main-header>p {
             font-size: 40px;
         }
-        .admin-event-main-body-1{
-            width:  100%;
+
+        .admin-event-main-body-1 {
+            width: 100%;
             border-bottom: 1px solid black;
             padding: 20px 5px;
 
@@ -32,30 +35,74 @@
             justify-content: space-between;
             align-content: end;
         }
-        .admin-event-main-body-1 > p{
+
+        .admin-event-main-body-1>p {
             font-size: 30px;
             margin-top: 10px;
         }
-        .admin-event-main-body-1 > button{
+
+        .admin-event-main-body-1>button {
             width: 70px;
             height: 50px;
             font-size: 30px;
         }
 
-        .admin-event-main-content{
+        .admin-event-main-content {
             width: 100%;
             height: 700px;
             border: 1px solid magenta;
         }
 
+        .member-mamage-backBtn {
+            width: 100px;
+            height: 50px;
+            border: 1px solid rgb(134, 134, 134);
+            margin: auto;
+            margin-top: 20px;
+            padding: 15px 20px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .event-add-popup {
+            width: 800px;
+            height: 800px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            transition: all 0.2s;
+            opacity: 0;
+
+        }
+
+        .event-add-popup-hidden {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <th:block th:replace="~{common/header}"></th:block>
 
+    <div class="event-add-popup event-add-popup-hidden">
+        <div><p style="font-size: 30px; ">이벤트 추가하기</p></div>
+        <div style="width: 70%; height: 30%; border: 1px solid black; margin: 0 auto;"></div>
+    </div>
+
     <div class="admin-event-main">
-        <div class="admin-event-main-header"><p>이벤트</p></div>
-        <div class="admin-event-main-body-1"><p>진행중인 이벤트</p><button>+</button></div>
+        <div class="admin-event-main-header">
+            <p>이벤트</p>
+        </div>
+        <div class="admin-event-main-body-1">
+            <p>진행중인 이벤트</p><button class="admin-event-add"
+                style="background-color: white; border: 1px solid gray;">+</button>
+        </div>
 
         <div class="admin-event-main-content">
             <div></div>
@@ -83,8 +130,8 @@
 
 
 
-
     </div>
+    <div class="member-mamage-backBtn">뒤로가기</div>
 
 
 
@@ -100,5 +147,37 @@
 
 
     <th:block th:replace="~{common/footer}"></th:block>
+
+    <script>
+        const backBtn = document.querySelector(".member-mamage-backBtn");
+        backBtn.addEventListener("click", () => {
+            location.href = "http://localhost/admin";
+        })
+
+        const addBtn = document.querySelector('.admin-event-add');
+        const popup = document.querySelector(".event-add-popup");
+
+        addBtn.addEventListener("click", () => {
+            if (popup.classList.contains("event-add-popup-hidden")) {
+                setTimeout(() => {
+                    popup.style.opacity = 1;
+                }, 50);
+                popup.classList.remove("event-add-popup-hidden");
+                return;
+            }
+            popup.style.opacity = 0;
+            setTimeout(() => {
+                popup.classList.add("event-add-popup-hidden");
+            }, 150);
+        })
+
+
+
+    </script>
+
+
+
+
 </body>
+
 </html>
