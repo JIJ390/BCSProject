@@ -1,5 +1,6 @@
 package edu.kh.bcs.email.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,20 +53,17 @@ public class EmailController {
 		return service.checkAuthKey(map);
 	}
 	
+	/** 아이디 찾기
+	 * @param memberName
+	 * @param memberEmail
+	 * @return
+	 */
 	@ResponseBody
-	@GetMapping("/myPage/emailName")
+	@GetMapping("emailName")
 	public int findIdReal(
-			@RequestParam("memberName")String memberName,
-			@RequestParam("memberEmail")String memberEmail) {
-		
-		System.out.println(memberName);
-		System.out.println(memberEmail);
-		System.out.println(memberName);
-		System.out.println(memberEmail);
-		System.out.println(memberName);
-		System.out.println(memberEmail);
-		System.out.println(memberName);
-		System.out.println(memberEmail);
+				@RequestParam("memberName")String memberName,
+				@RequestParam("memberEmail")String memberEmail
+			) {
 		
 		return service.findIdReal(memberName, memberEmail);
 		

@@ -37,7 +37,8 @@
   	
   	<!-- 일치하는 아이디가 1개인지 0개인지 -->
   	<select id="findIdReal">
-  		SELECT COUNT(*)
+  		SELECT
+  			*
   		FROM
   			"MEMBER"
   		WHERE

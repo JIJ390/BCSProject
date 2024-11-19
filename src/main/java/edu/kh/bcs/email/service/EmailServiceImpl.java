@@ -37,8 +37,11 @@ public class EmailServiceImpl implements EmailService {
 	// 아이디 찾기
 	@Override
 	public int findIdReal(String memberName, String memberEmail) {
+		
 		return mapper.findIdReal(memberName, memberEmail);
 	}
+	
+	
 	
 	// 이메일 발송 서비스
 	@Override
