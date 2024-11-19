@@ -154,4 +154,42 @@
 		
 	
 	</insert>
+	
+	
+	
+	
+	
+	<!-- 판매 신청 조회 -->
+	<select id="selectSellingDevice">
+		SELECT
+			(SELECT 
+				DEVICE_NAME
+			 FROM "DEVICE"
+			 WHERE DEVICE_NO = S.DEVICE_NO) "DEVICE_NAME",
+			 CLIENT_BANK,
+			 ACCOUNT_NO,
+			 REQUEST_COMMENT,
+			(SELECT
+			 		CAPACITY_TYPE
+			 FROM CAPACITY
+			 WHERE CAPACITY_NUMBER = S.CAPACITY_NUMBER) "CAPACITY_TYPE",
+			(SELECT
+					GRADE_TYPE
+			 FROM "GRADE"
+			 WHERE GRADE_NUMBER = S.GRADE_NUMBER) "GRADE_TYPE",
+			(SELECT
+					COLOR_NAME
+			 FROM COLOR
+			 WHERE COLOR_NO = S.COLOR_NO) "COLOR_NAME",
+			 MEMBER_NO,
+			 CLIENT_NAME,
+			 REGEXP_REPLACE(CLIENT_TEL, '(.{3})(.+)(.{4})', '\1-\2-\3') "CLIENT_TEL",
+			(SELECT
+					MEMBER_NAME
+			 FROM "MEMBER"
+			 WHERE MEMBER_NO = S.MEMBER_NO) "MEMBER_NAME"
+		FROM SELLING_DEVICE S
+		WHERE
+			SELLING_DEVICE_NO = #{sellingDeviceNo}
+	</select>
 </mapper>

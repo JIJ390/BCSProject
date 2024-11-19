@@ -1,34 +1,24 @@
-section{  
-}
-
-
-html, body, main {
-  width: 1600px;
-  height: 100%;
-  margin: 0 auto;
-}
-
 body {
   background-color: var(--main-gray-color);
 }
 
 .signup-box {
-  margin-top: 15%;
+  margin-top: 0%;
   width: 60%;
-  height: 70%;
+  height: max-content;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.account{
+.account {
   font-size: 12px;
   text-align: left;
 }
 
 
-.signup-box div{
+.signup-box div {
   text-align: center;
   font-size: 40px;
   color: var(--font-color);
@@ -48,8 +38,8 @@ body {
 }
 
 /* 약관동의버튼 */
-.signup-button-agree{
-  margin-top: 120px;
+.signup-button-agree {
+  margin-top: 50px;
   width: 300px;
   padding: 10px 20px;
   font-size: 16px;
@@ -61,7 +51,7 @@ body {
 }
 
 /* 약관확인버튼 */
-.signup-button-agree-confirm{
+.signup-button-agree-confirm {
   margin-top: 40px;
   width: 300px;
   padding: 10px 20px;
@@ -74,33 +64,36 @@ body {
 }
 
 .signup-button:hover {
-  background-color: #bcbcbc; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  background-color: #bcbcbc;
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
 }
 
 .signup-button-agree:hover {
-  background-color: #bcbcbc; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  background-color: #bcbcbc;
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
 }
 
 .signup-button-agree-confirm:hover {
-  background-color: #bcbcbc; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  background-color: #bcbcbc;
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
 }
 
 
 
 /* 자세히보기버튼 */
-.accountDetail{
+.accountDetail {
   cursor: pointer;
 }
 
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
-/* 회원가입 css */
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 회원가입 css */
 
 .signup-box-confirm {
   margin-top: 7%;
-  width: 40%;
-  height: 90%;
+  width: 390px;
+  height: max-content;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -123,26 +116,23 @@ form {
 }
 
 label {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 input[type="text"],
 input[type="email"],
-input[type="password"] 
-input[type="phoneNumber"] 
-{
-  width: 102%;
+input[type="password"] input[type="phoneNumber"] {
   padding: 10px;
-  margin-top: 2px;
+  margin-top: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
   color: #333;
 }
 
-/* ㅡㅡㅡㅡㅡㅡㅡ가입 버튼들 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* 가입 버튼들 */
 
 .btn-email {
   position: absolute;
@@ -157,7 +147,24 @@ input[type="phoneNumber"]
   cursor: pointer;
 }
 
+.btn-email-confirm {
+  position: absolute;
+  height: 50%;
+  right: 0;
+  top: 27px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .btn-email:hover {
+  background-color: #ccc;
+}
+
+.btn-email-confirm:hover {
   background-color: #ccc;
 }
 
@@ -196,14 +203,15 @@ input[type="phoneNumber"]
   background-color: #ccc;
 }
 
-/* ㅡㅡㅡㅡㅡㅡㅡ가입 버튼들 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+/* 가입 버튼들  */
 
 #zipcode {
   width: calc(100% - 80px);
 }
 
 /* 가입하기버튼 */
-.signup-button-create{
+.signup-button-create {
   margin-top: 40px;
   width: 260px;
   padding: 10px 20px;
@@ -217,16 +225,35 @@ input[type="phoneNumber"]
 }
 
 .signup-button-create:hover {
-  background-color: #bcbcbc; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  background-color: #bcbcbc;
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
+}
+
+/* ㅡㅡㅡㅡㅡ 회원가입 관련 메세지 ㅡㅡㅡㅡㅡ */
+/* 입력 관련 메세지 */
+.signUp-message {
+  margin-top: -10px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
+
+/* 메세지 색상 지정 */
+.confirm {
+  color: rgb(6, 195, 253);
+}
+
+.error {
+  color: red;
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ로그인  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 
 .login-box {
-  margin-top: 15%;
+  margin-top: 6%;
   width: 45%;
-  height: 60%;
+  height: 90%;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -283,11 +310,12 @@ input[type="password"] {
   background-color: #bbb;
 }
 
-.links {
+.idPwFind {
   font-size: 12px;
   color: #666;
   margin-top: 15px;
   align-self: center;
+  cursor: pointer;
 }
 
 .links a {
@@ -301,10 +329,10 @@ input[type="password"] {
 }
 
 /* 로그인버튼 */
-.loginBtn{
+.loginBtn {
   align-self: center;
-  margin-top: 40px;
-  width: 350px;
+  margin-top: 20px;
+  width: 70%;
   padding: 10px 20px;
   font-size: 16px;
   color: #333;
@@ -316,8 +344,111 @@ input[type="password"] {
 }
 
 .loginBtn:hover {
-  background-color: #bcbcbc; /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  background-color: #bcbcbc;
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
 }
+/*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+.idPwText{
+  display: flex;
+  justify-content: space-between;
+}
+
+.idPwFind1{
+  margin-left: 255px;
+}
+
+.xBtn{
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.popup {
+    width: 650px;
+    margin: 100px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* position: absolute; */
+    display: none;
+    margin-top: -332px;
+    margin-left: -124px;
+    z-index: 999;
+    background: white;
+}
+
+.popup-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tab-button.active {
+  background: #e74c3c;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #e74c3c;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #c0392b;
+}
+
+button[type="button"] {
+  background: #3498db;
+}
+
+button[type="button"]:hover {
+  background: #2980b9;
+}
+
+/*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+
+
+
+
+
+
 
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 메인 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -370,10 +501,10 @@ input[type="password"] {
   margin-top: 5px;
 }
 
-.mypageUpdate-box{
+.mypageUpdate-box {
   margin-top: 10%;
   width: 50%;
-  height: 70%;
+  height: 90%;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -382,13 +513,13 @@ input[type="password"] {
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 수정 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
-.mypageUpdate-title{
+.mypageUpdate-title {
   text-align: center;
   font-size: 30px;
 
 }
 
-.update-group{
+.update-group {
   display: flex;
   width: 300px;
   flex-direction: column;
@@ -397,7 +528,7 @@ input[type="password"] {
   margin-bottom: 10px;
 }
 
-.update-group-1{
+.update-group-1 {
   display: flex;
   width: 450px;
   flex-direction: column;
@@ -418,6 +549,7 @@ input[type="password"] {
   cursor: pointer;
   margin-left: 25px;
 }
+
 .signup-button-delete {
   margin-top: 40px;
   width: 200px;
@@ -431,81 +563,95 @@ input[type="password"] {
   margin-left: 25px;
 }
 
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: center;
+
+}
+
+.withDraw{
+  font-size: 14px;
+  margin-top: 25px;
+  margin-left: 30px;
+  cursor: pointer;
+  width: 85px;
 }
 
 
-        /* 구매내역 */
+/* 구매내역 */
 
 
-      .container {
-          background-color: white;
-          height: max-content;
-          width: 60%;
-          padding: 20px;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-          border-radius: 10px;
-          margin-top: 30%;
-      }
+.container {
+  background-color: white;
+  height: max-content;
+  width: 60%;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin-top: 15%;
+}
 
-      h2 {
-          text-align: left;
-          font-size: 24px;
-          margin-bottom: 10px;
-      }
+h2 {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-      .point-mid {
-          display: flex;
-          justify-content: flex-end;
-          margin-bottom: 10px;
-      }
+.point-mid {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
 
-      .point-mid input {
-          width: 30%;
-          padding: 5px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          font-size: 14px;
-          text-align: end;
-      }
+.point-mid input {
+  width: 30%;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: end;
+}
 
-      .point-icon{
-        width: 10%;
-        margin-right: 10px;
-        margin-top: -11px;
-      }
+.point-icon {
+  width: 10%;
+  margin-right: 10px;
+  margin-top: -11px;
+}
 
-      table {
-          width: 100%;
-          border-collapse: collapse;
-          font-size: 14px;
-      }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
 
-      th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-      }
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
 
 
-      .pagination {
-          display: flex;
-          justify-content: center;
-          margin-top: 10px;
-      }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
 
-      .pagination a {
-          margin: 0 5px;
-          padding: 5px 10px;
-          text-decoration: none;
-          color: #333;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-      }
+.pagination a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #777272;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 
-      .pagination a:hover {
-          background-color: #2196f3;
-          color: white;
-      }
+.pagination a:hover {
+  background-color: #2196f3;
+  color: white;
+}
+
+main{
+  width: auto !important;
+}

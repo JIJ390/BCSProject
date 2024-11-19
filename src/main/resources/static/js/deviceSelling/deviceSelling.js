@@ -26,22 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // 등급 선택
-  gradeBox.forEach(grade => {
 
-    grade.addEventListener("click", () => {
-
-      // 선택 시 모든 등급에서 클래스 제거
-      gradeBox.forEach(g => {
-        g.classList.remove('selected-grade')
-      })
-
-      // 선택 클래스 추가
-      grade.classList.add('selected-grade');
-
-      expectedPrice();
-    })
-  })
 
   
   // 저장소 용량 선택
@@ -61,6 +46,23 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
+  // 등급 선택
+  gradeBox.forEach(grade => {
+
+    grade.addEventListener("click", () => {
+
+      // 선택 시 모든 등급에서 클래스 제거
+      gradeBox.forEach(g => {
+        g.classList.remove('selected-grade')
+      })
+
+      // 선택 클래스 추가
+      grade.classList.add('selected-grade');
+
+      expectedPrice();
+    })
+  })
+
 })
 
 
@@ -69,24 +71,27 @@ const expectedPrice = () => {
   const selectedGrade = document.querySelector(".selected-grade");
 
   // 선택에 따라 가산되는 가격
-  let plusPice = 0;
+  let plusPrice = 0;
 
   // 첫 선택 오류 해결
-  if (selectedCapacity !== null) plusPice += Number(selectedCapacity.children[1].getAttribute("data-value"));
-  if (selectedGrade !== null) plusPice += Number(selectedGrade.children[1].getAttribute("data-value"));
+  if (selectedCapacity !== null) plusPrice += Number(selectedCapacity.children[1].getAttribute("data-value"));
+  if (selectedGrade !== null) plusPrice += Number(selectedGrade.children[1].getAttribute("data-value"));
+
+  const map = {
+    "plusPrice" : plusPrice,
+    "deviceNo"  : device.deviceNo
+  }
 
   fetch("/device/sell/expectedPrice", {
     method : "POST", 
     headers: {"Content-Type": "application/json"}, 
-    body : plusPice
+    body : JSON.stringify(map)
   })
   .then(response => {
     if(response.ok) return response.text();
     throw new Error("변경 실패 : " + response.status);
   })
   .then(expectedPrice => {
-
-    console.log(expectedPrice);
 
     const priceSpan = document.querySelector(".selling-span2");
 

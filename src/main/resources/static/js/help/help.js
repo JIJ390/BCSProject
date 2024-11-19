@@ -1,7 +1,5 @@
 const pageNoList = document.querySelectorAll(".pagination a");
 
-
-
 pageNoList?.forEach((item, index) => {
   item.addEventListener("click", e => {
     e.preventDefault();
@@ -24,3 +22,25 @@ pageNoList?.forEach((item, index) => {
 
   })
 });
+
+// ----------------------------------------
+
+// faq 토글 
+const faqDivs = document.querySelectorAll(".faq")
+const faq = document.querySelectorAll(".faq-open")
+
+faqDivs.forEach((faqDiv, index) => {
+  faqDiv.addEventListener("click", e => {
+    if (faq[index].style.display === "none"){
+      faq[index].style.display = "block";
+      faqDiv.querySelector('.arrowBtn').style.transform = "rotate( 180deg )";
+    } else {
+      faq[index].style.display = "none";
+      faqDiv.querySelector('.arrowBtn').style.transform = "rotate( 0deg )";
+    }
+  })
+})
+
+// -------------------------------------------
+
+// notice 목록으로 돌아가기

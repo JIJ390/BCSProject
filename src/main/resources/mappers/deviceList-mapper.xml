@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.deviceList.mapper.DeviceListMapper">
+  	
+  	<select id="selectFilterList">
+  	
+	  SELECT 
+    <choose>
+        <when test="filterType == 'ram'">
+            RAM.DEVICE_RAM_CAPACITY
+        </when>
+        <when test="filterType == 'hdd'">
+            CAP.CAPACITY_TYPE
+        </when>
+        <when test="filterType == 'inch'">
+            DISP.DEVICE_DISPLAY_SIZE
+        </when>
+    </choose>
+    FROM DEVICE D
+	    JOIN RAM ON D.DEVICE_RAM_CODE = RAM.DEVICE_RAM_CODE
+	    JOIN DISPLAY DISP ON D.DEVICE_DISPLAY_CODE = DISP.DEVICE_DISPLAY_CODE
+	    JOIN CAPACITY_PRICE CP ON D.DEVICE_NO = CP.DEVICE_NO
+	    JOIN CAPACITY CAP ON CP.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER
+  	</select>
+  	
+  	
+
+	<select id="searchDetail">
+		SELECT DEVICE_NO, DEVICE_IMG, DEVICE_NAME 
+   		FROM DEVICE
+	</select>  	
+  	
+  
+  	
+</mapper>

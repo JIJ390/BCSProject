@@ -1,7 +1,9 @@
 package edu.kh.bcs.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.device.dto.Color;
@@ -25,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
+@SessionAttributes("loginMember")
 @Controller
 @RequestMapping("admin")
 @RequiredArgsConstructor
@@ -250,16 +258,21 @@ public class AdminController {
 			@RequestParam("searchType") String searchType,
 			@RequestParam("searchText") String searchText,
 			@RequestParam("cp") int cp,
-			@RequestParam("ud") int ud
+			@RequestParam("ud") int ud,
+			@RequestParam("searchAsc") String searchAsc
 			) {
 		
-		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud);
+		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
-		System.out.println(memberList.size());
+		System.out.println("cp:"+cp);
+		System.out.println("ud:"+ud);
+		System.out.println("Text:"+searchText);
+		System.out.println("Type:"+searchType);
+		System.out.println("cp:"+cp);
+		System.out.println("ud:"+ud);
+		System.out.println("Text:"+searchText);
+		System.out.println("Type:"+searchType);
+
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
@@ -270,6 +283,49 @@ public class AdminController {
 		
 		return "admin/adminMember/adminMemberList";
 	}
+	
+	@ResponseBody
+	@GetMapping("adminMemberDetail")
+	public Map<String, String> adminMemberDetail(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		Map<String , String> map = service.adminMemberDetail(memberNo);
+		return map;
+	}
+	
+	@ResponseBody
+	@GetMapping("memberDelFlChange")
+	public int memberDelFlChange(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		return service.memberDelFlChange(memberNo);
+	}
+	@ResponseBody
+	@GetMapping("memberFlChange")
+	public int memberFlChange(
+			@RequestParam("memberNo") int memberNo
+			) {
+		
+		return service.memberFlChange(memberNo);
+	}
+	
+	@GetMapping("memberLogin")
+	public String memberLogin(
+			@RequestParam("memberNo") int memberNo,
+			Model model
+			) {
+		
+		Member loginMember = service.getLoginMember(memberNo);
+
+		
+		model.addAttribute("loginMember", loginMember);
+		
+		return "admin/memberManage";
+	}
+	
+	
 	
 	
 	

@@ -27,4 +27,12 @@ public interface DeviceSellingService {
 	 */
 	int acceptSellingDevice(SellingDevice sellingDevice);
 
+	
+	/**
+	 * 판매 완료 페이지 정보 가져오기
+	 * @param sellingDeviceNo
+	 * @return
+	 */
+	SellingDevice selectSellingDevice(int sellingDeviceNo);
+
 }

@@ -1,5 +1,7 @@
 package edu.kh.bcs.device.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +27,18 @@ public class DeviceSellingController {
 	private final DeviceSellingService service;
 	
 	
-	@GetMapping("")
+	@GetMapping("{deviceNo}")
 	public String deviceSellView(
-			//@RequestParam("deviceNo") int deviceNo
+			@PathVariable("deviceNo") int deviceNo,
 			Model model
 			) {
 		
-		int deviceNo = 3;
-		
 		Device device = service.selectDetailDevice(deviceNo);
 		
-		log.info("device : {}", device);
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
+		log.debug("device : {}", device);
 		
 		model.addAttribute("device", device);
 		
@@ -47,9 +50,10 @@ public class DeviceSellingController {
 	@PostMapping("expectedPrice")
 	@ResponseBody
 	public int expectedPrice(
-			@RequestBody int plusPrice) {
+			@RequestBody Map<String, Integer> map) {
 		
-		int deviceNo = 3;
+		int plusPrice = map.get("plusPrice");
+		int deviceNo = map.get("deviceNo");
 		
 		return service.expectedPrice(deviceNo, plusPrice);
 	}
@@ -73,18 +77,29 @@ public class DeviceSellingController {
 		sellingDevice.setDeviceNo(deviceNo);
 		sellingDevice.setMemberNo(memberNo);
 		
-		log.debug("sellingDevice : {}", sellingDevice);
-		log.debug("sellingDevice : {}", sellingDevice);
-		log.debug("sellingDevice : {}", sellingDevice);
-		log.debug("sellingDevice : {}", sellingDevice);
-		log.debug("sellingDevice : {}", sellingDevice);
-		
 		int selligDeviceNo = service.acceptSellingDevice(sellingDevice);
 		
-		log.debug("selligDeviceNo : {}", selligDeviceNo);
-		log.debug("selligDeviceNo : {}", selligDeviceNo);
-		log.debug("selligDeviceNo : {}", selligDeviceNo);
+		return "redirect:/device/sell/compl/" + selligDeviceNo;
+	}
+	
+	
+	@GetMapping("compl/{sellingDeviceNo}")
+	public String deviceSellCompl(
+			@PathVariable("sellingDeviceNo") int sellingDeviceNo,
+			Model model) {
 		
-		return "redirect:/";
+		SellingDevice sellingDevice = service.selectSellingDevice(sellingDeviceNo);
+		
+		// 추후 로그인 정보에 따라 접근 불가 지정해야함
+		
+		log.info("sellingDevice : {}", sellingDevice);
+		log.info("sellingDevice : {}", sellingDevice);
+		log.info("sellingDevice : {}", sellingDevice);
+		log.info("sellingDevice : {}", sellingDevice);
+		
+		
+		model.addAttribute("sellingDevice", sellingDevice);
+		
+		return "deviceSelling/deviceSellingCompl";
 	}
 }

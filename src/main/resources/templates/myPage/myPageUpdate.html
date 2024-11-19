@@ -11,7 +11,13 @@
 <body>
   
   <header>
-    BCS ACCOUNT | 배최성 계정관리
+    <div style="display: flex; align-items: center; 
+    justify-content: center; background-color: white; 
+    height: 80px; font-size: 20px;">
+      <a href="/"><img src="/images/logo.png" alt=""></a>
+      <div style="margin-left: 70px; margin-right: 9%;
+                  font-weight: bold;">BCS ACCOUNT | 배최성 계정관리</div>
+    </div>
   </header>
   <main>
     <section class="left-section">
@@ -34,10 +40,7 @@
               <input type="password" id="newPassword" placeholder="변경하시는 비밀번호를 입력해주세요.">
           </div>
 
-          <div class="update-group-1">
-              <label for="nicknameChange">닉네임</label>
-              <input type="text" id="nicknameChange" placeholder="변경하고 싶은 닉네임을 입력해주세요.">
-          </div>
+   
 
           <div class="update-group">
               <label for="addressChange">주소</label>
@@ -51,6 +54,7 @@
             <button type="submit" class="signup-button-update">회원정보 수정</button>
             <button type="text" class="signup-button-delete">취소</button>
           </div>
+          <div class="withDraw">회원 탈퇴하기</div>
       </form>
         
        
@@ -62,7 +66,7 @@
     </section>
   </main>
   <footer>
-    푸터
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
 </body>

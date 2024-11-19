@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트</title>
+  <link rel="stylesheet" href="/css/help/help.css">
+  
+
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+
+  </header>
+  <main>
+    <section class="page-info">
+      <span>고객센터 &gt; 이벤트</span>
+    </section>
+    <section class="helpView">
+      <div class="help-container">
+        <div class="button-area">
+            <a href="/help/notice">
+              <div class="helpIconBox">
+                <img src="/images/help/notice.png">
+                <div class="iconText">공지사항</div>
+              </div>
+            </a>
+            
+            <a href="/help/faq">
+              <div class="helpIconBox">
+                <img src="/images/help/faq.png">
+                <div class="iconText">FAQ</div>
+              </div>
+            </a>
+              
+            <a href="/help/event">  
+              <div class="helpIconBox">
+                <img src="/images/help/event.png">
+                <div class="iconText">이벤트</div>
+              </div>
+            </a>
+        </div>
+        <div class="event-list-area">
+          <div class="event">
+            <div class="event-wrapper">
+              <div class="event-item">1</div>
+              <div class="event-item">2</div>
+              <div class="event-item">3</div>
+            </div>
+            <div class="event-wrapper row-wrapper">
+              <div class="event-item">4</div>
+              <div class="event-item">5</div>
+              <div class="event-item">6</div>
+            </div>
+          </div>
+        <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+          <ul class="pagination" th:object="${pagination}">
+          
+              <!-- 첫 페이지로 이동 -->
+              <li><a href="#">&lt;&lt;</a></li>
+
+              <!-- 이전 목록 마지막 번호로 이동 -->
+              <li><a href="#">&lt;</a></li>
+
+              <!-- 특정 페이지로 이동 -->
+              
+              <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}">
+                  <!-- 현재 보고있는 페이지 -->
+                  <li th:if="${i} == *{currentPage}">
+                      <a class="current" th:text="${i}">현재 페이지</a>
+                  </li>
+
+                  <!-- 보고있지 않은 페이지 -->                    
+                  <li th:unless="${i} == *{currentPage}"> <a href="#" th:text="${i}">이동할 수 있는 페이지</a> </li>
+              </th:block>
+
+              <!-- 다음 목록 시작 번호로 이동 -->
+              <li><a href="#">&gt;</a></li>
+
+              <!-- 끝 페이지로 이동 -->
+              <li><a href="#">&gt;&gt;</a></li>
+          </ul>
+      </div> 
+      </div>
+    </section>
+  </main>
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+  <script src="/js/help/help.js"></script>
+  <script>
+    const haederNav =  document.getElementsByClassName("header-nav")[0];
+    const pageInfoSpan = document.querySelector(".page-info > span");
+
+    const movePageIngo = () => {
+      const rect = haederNav.getBoundingClientRect();
+      pageInfoSpan.style.marginLeft = rect.x + 'px';
+    }
+
+    window.addEventListener("resize", movePageIngo);
+
+    movePageIngo();
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeviceList</title>
+  <link rel="stylesheet" href="css/deviceList/deviceList.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+  </header>
+  
+  <main>
+    <div class="deviceList-container">
+      <div class="deviceList-header-section">
+        <div class="deviceList-header-1">
+          <div class="deviceList-galaxy"><span>Galaxy</span></div>
+        </div>
+        <div class="deviceList-header-2">
+          <div class="deviceList-galaxy"><span>Galaxy Tab</span></div>
+        </div>
+        <div class="deviceList-header-3">
+          <div class="deviceList-iPhone"><span>iPhone</span></div>
+        </div>
+        <div class="deviceList-header-4">
+          <div class="deviceList-iPhone"><span>iPad</span></div>
+        </div>
+      </div>
+
+      <div class="filter-container">
+        <div class="filter-section">
+          <div class="filter-items" id="ram-filter">램(RAM)</div>|
+          <div class="filter-items" id="hdd-filter">용량(HDD)</div>|
+          <div class="filter-items" id="inch-filter">화면 크기</div>
+        </div>
+      </div>
+
+      <div class="filter-check-container">
+        <div class="item-check" id="filter-item"></div>
+      </div>
+
+      <div class="search-container">
+        <div class="search-filter"></div>
+        <div class="search-Btn" id="searchBtn"> 검색하기 </div>
+      </div>
+      
+
+      <div class="deviceList-items-container">
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+        <div class="deviceList-item-box">
+          <div class="deviceList-item-section">
+            <div class="deviceList-items"><img src="/images/sample_iphone16_blue.png" alt=""></div>
+            <div style="margin-top: 15px;">아이폰16</div>
+          </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+    <script src="/js/deviceList/deviceList.js"></script>
+
+
+  </main>
+  <!-- Footer Section -->
+<th:block th:replace="~{common/footer}"></th:block>
+</body>
+</html>

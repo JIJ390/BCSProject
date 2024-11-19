@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.device.mapper.DeviceBuyingMapper">
+  	
+  	<resultMap type="Device" id="device_rm">
+
+		<!-- id 태그 : PK 역할 필드, 컬럼 작성 태그(필수 작성!!!!) -->
+		<id property="deviceNo" column="DEVICE_NO" />
+
+
+		<!-- collection 태그 select 로 조회된 결과를 컬렉션(List)에 담아 지정된 필드에 세팅 property : 
+			List 를 담을 DTO의 필드명 select : 실행할 select 의 id column : 조회 결과 중 지정된 컬럼의 값을 파라미터로 
+			전달 이 경우 selectDetail 조회한 BOARD_NO javaType : List(컬렉션)의 타입을 지정 ofType : List(컬렉션)의 
+			제네릭(타입 제한) 지정 -->
+		<collection property="colorList" 
+			select="selectColorList"
+			column="DEVICE_NO" 
+			javaType="java.util.ArrayList" ofType="Color" />
+
+		<collection property="gradeList"
+			select="selectGradeList" 
+			column="DEVICE_NO"
+			javaType="java.util.ArrayList" ofType="Grade" />
+
+		<collection property="capacityList"
+			select="selectCapacityList" 
+			column="DEVICE_NO"
+			javaType="java.util.ArrayList" ofType="Capacity" />
+		
+	</resultMap>
+	
+	
+	<!-- 기종 판매 정보 조회 -->
+	<select id="selectDetailDevice" resultMap="device_rm">
+		SELECT 
+			DEVICE_NO,
+			DEVICE_RELEASE_DATE,
+			DEVICE_RELEASE_PRICE,
+			DEVICE_IMG,
+			DEVICE_OS,
+			DEVICE_RESOLUTION,
+			DEVICE_PIXEL,
+			DEVICE_FRONT_PIXEL,
+			DEVICE_BACK_PIXEL,
+			DEVICE_WIRELESS_CHARGE,
+			DEVICE_FAST_CHARGE,
+			DEVICE_WEIGHT,
+			DEVICE_BATTERY_CAPACITY,
+			DEVICE_NAME,
+			DEVICE_BUYING_PRICE,
+			DEVICE_SELLING_PRICE,
+			DEVICE_BRAND,
+			DEVICE_CPU_NAME,
+			(SELECT DEVICE_DISPLAY_SIZE
+			 FROM
+			 	DISPLAY
+			 WHERE
+			 	DEVICE_DISPLAY_CODE = D.DEVICE_DISPLAY_CODE
+			 ) "DISPLAY_SIZE",
+			(SELECT DEVICE_RAM_CAPACITY
+			 FROM
+			 	RAM
+			 WHERE
+			 	DEVICE_RAM_CODE = D.DEVICE_RAM_CODE
+			 ) "RAM_CAPACITY"
+		FROM 
+			DEVICE D
+		WHERE
+			DEVICE_NO = #{deviceNo}
+	
+	</select>
+	
+	
+	<select id="selectColorList" resultType="Color">
+		SELECT
+			COLOR_NO,
+			COLOR_NAME,
+			COLOR_CODE,
+			COLOR_DEVICE_IMG
+		FROM
+			COLOR
+		WHERE
+			DEVICE_NO = #{deviceNo}
+	</select>
+	
+	<select id="selectGradeList" resultType="Grade">
+		SELECT
+			GRADE_NUMBER,
+			GRADE_TYPE,
+			GRADE_PRICE
+		FROM
+			GRADE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		ORDER BY GRADE_SELL_PRICE ASC
+			
+	</select>
+	
+	<select id="selectCapacityList" resultType="Capacity">
+		SELECT
+			CAPACITY_TYPE,
+			CAPACITY_PRICE,
+			CAPACITY_NUMBER
+		FROM 
+			CAPACITY_PRICE
+		LEFT JOIN 
+			CAPACITY USING (CAPACITY_NUMBER)
+		WHERE
+				DEVICE_NO = #{deviceNo}
+		ORDER BY CAPACITY_SELL_PRICE ASC
+	</select>
+	
+	
+	<!-- 내 폰 사기 예상 가격 -->
+	<select id="expectedPrice" resultType="_int">
+		SELECT
+			DEVICE_BUYING_PRICE
+		FROM
+			DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+	</select>
+		
+		
+		
+	<!-- 색상 매물 조회 다중 -->
+	<select id="checkColor">
+	
+		SELECT C.COLOR_NO AS "colorNo", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = C.COLOR_NO
+			) AS "colorCount"
+		FROM
+			COLOR C 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
+		WHERE
+			C.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY C.COLOR_NO
+		ORDER BY "colorNo" ASC
+	</select>
+	
+	
+	<!-- 색상 매물 조회 -->
+	<select id="selectColor">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND
+			COLOR_NO = #{colorNo}
+	</select>
+	
+	
+	
+	<!-- 내 폰 사기 용량 매물 조회해서 재고 없을 시 불투명 -->
+	<select id="checkCapacity">
+		SELECT C.CAPACITY_NUMBER AS "capacityNumber", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = #{colorNo}
+			AND
+				CAPACITY_NUMBER = C.CAPACITY_NUMBER
+			) AS "capacityCount"
+		FROM
+			CAPACITY_PRICE C 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = C.DEVICE_NO)
+		WHERE
+			C.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY C.CAPACITY_NUMBER
+		ORDER BY "capacityNumber" ASC
+	</select>
+	
+	
+
+	
+	<!-- 용량 매물 조회 -->
+	<select id="selectCapacity">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND 
+			COLOR_NO = #{colorNo}
+		AND
+			CAPACITY_NUMBER = #{capacityNumber}
+	</select>
+	
+	
+	<!-- 다중 등급 매물 확인 -->
+	<select id="checkGrade">
+		SELECT G.GRADE_NUMBER AS "gradeNumber", (
+			SELECT COUNT(*)
+			FROM BUYING_DEVICE
+			WHERE
+				DEVICE_NO = #{deviceNo}
+			AND
+				COLOR_NO = #{colorNo}
+			AND
+				CAPACITY_NUMBER = #{capacityNumber}
+			AND
+				GRADE_NUMBER = G.GRADE_NUMBER
+			) AS "gradeCount"
+		FROM
+			GRADE G 
+		LEFT JOIN 
+			BUYING_DEVICE B ON (B.DEVICE_NO = G.DEVICE_NO)
+		WHERE
+			G.DEVICE_NO = #{deviceNo}
+		AND 
+			B.SOLD_FL = 'N'
+		GROUP BY G.GRADE_NUMBER
+		ORDER BY "gradeNumber" ASC
+	
+	</select>
+	
+	
+	
+	<!-- 등급 매물 조회 -->
+	<select id="selectGrade">
+		SELECT COUNT(*)
+		FROM BUYING_DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+		AND 
+			COLOR_NO = #{colorNo}
+		AND
+			CAPACITY_NUMBER = #{capacityNumber}
+		AND
+			GRADE_NUMBER = #{gradeNumber}
+	</select>
+	
+
+</mapper>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="|${device.deviceName} 판패하기|">아이폰 16 판매</title>
+  <title th:text="|${device.deviceName} 판매하기|">아이폰 16 판매</title>
   <link rel="stylesheet" href="/css/deviceSelling/deviceSelling.css">
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
@@ -30,7 +30,7 @@
       </div>
 
       <div class="device-selling-container">
-        <img src="../images/sample_iphone16.jpg" alt="">
+        <img src="../../images/sample_iphone16.jpg" alt="">
 
         <div class="device-selling-info">
 
@@ -101,7 +101,7 @@
 
     
     <div class="close-popup device-selling-popup">
-      <form th:action="|sell/accept/${device.deviceNo}|" 
+      <form th:action="|accept/${device.deviceNo}|" 
             method="POST" 
             id="sellingFrm">
         <h1>판매 신청</h1>
@@ -146,7 +146,7 @@
   
         <div class="popup-box">
           <span>요청 사항</span>
-          <textarea name="" id="" placeholder="요청 사항을 입력해 주세요"></textarea>
+          <textarea name="requestComment" placeholder="요청 사항을 입력해 주세요"></textarea>
         </div>
   
         <div class="btn-area">
@@ -167,6 +167,9 @@
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+  <script th:inline="javascript">
+    const device = /*[[${device}]]*/ 기종;
+  </script>
 
   <script src="/js/deviceSelling/deviceSelling.js"></script>
 </body>
