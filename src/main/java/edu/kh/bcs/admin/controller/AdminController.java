@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.device.dto.Color;
@@ -66,15 +69,11 @@ public class AdminController {
 			@RequestParam(value = "search", required=false) String search
 			) {
 		
-		log.debug("검색 결과 : {}", search);
-		log.debug("검색 결과 : {}", search);
 		
 		
 		List<Device> result = service.adminSearch(search);
 		
 		
-		log.debug("가져온 값: {}", result);
-		log.debug("가져온 값: {}", result);
 		
 		model.addAttribute("boardList", result);
 		
@@ -133,6 +132,30 @@ public class AdminController {
 		return "admin/adminRegistration";
 	}
 	
+	@PostMapping("/adminModelRegistration/insert")
+	public String insertDevice(
+			//메인사진
+	        @RequestParam(name = "divceImg", required = false) MultipartFile  divceImg,
+	        //6개 사진 담겨있음
+	        @RequestParam("colorImg") List<MultipartFile> colorImg,
+	        @RequestParam(name = "deviceText", required = false) String  deviceText,
+	        @RequestParam(name = "colorText", required = false) String  colorText,
+	        @ModelAttribute Device device,
+	        RedirectAttributes rs
+	        
+			) {
+		
+		
+		
+		
+		
+		
+		
+		
+		return "redirect:/admin/adminModelRegistration";
+	}
+	
+	
 //	기종 등록
 	@GetMapping("adminModelRegistration")
 	public String adminModelRegistration() {
@@ -148,7 +171,6 @@ public class AdminController {
 			Model model
 			) {
 		
-		log.debug("aaaaaaaaaaa : {}", result);
 		
 		
 		
@@ -157,12 +179,6 @@ public class AdminController {
 		
 		
 		
-		log.debug("r1232lt 값 입니다 : {}", popUpData);
-		log.debug("result 값 입니다 : {}", popUpData);
-		log.debug("result 값 입니다 : {}", popUpData);
-		log.debug("result 값 입니다 : {}", popUpData);
-		log.debug("result 값 입니다 : {}", popUpData);
-		log.debug("result 값 입니다 : {}", popUpData);
 		
 		model.addAttribute("popUpData", popUpData);
 		

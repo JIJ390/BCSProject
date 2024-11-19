@@ -50,16 +50,16 @@
                             <td><a >총 수량▼</a></td>
                             <td><a >최신순▼</a></td>
                         </tr>
-                        <div class="category-inside"  th:each="boardList:${boardList}">
+                        <tbody class="category-inside"  th:each="boardList:${boardList}">
                                 <tr class="category" >
                                     <td class="deviceNo" th:text="${boardList.deviceNo}"></td>
-                                    <td class="android-img" ><img th:src="${boardList.deviceImg}"alt="">기종 이미지</td>
+                                    <td class="android-img" ><img src="@{boardList.deviceImg}"alt=""></td>
                                     <td th:text="${boardList.deviceName}">기종 이름</td>
                                     <td th:text="${boardList.colorResult}">총 기종에 숫자</td>
                                     <td th:text="${boardList.deviceDate}">등록 날짜</td>
                                 </tr>
 
-                        </div>
+                        </tbody>
                     </table>
 
                     <th:block th:replace="~{admin/androidPopUp}"> </th:block>

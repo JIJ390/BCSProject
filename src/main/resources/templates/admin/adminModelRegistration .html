@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,119 +9,278 @@
 </head>
 
 <body>
-    
-<div class="title">
-        <!-- 메인 색 첨부 -->
+
+    <form action="adminModelRegistration/insert" method="post" enctype="multipart/form-data">
+        <div class="title">
+            <!-- 메인 색 첨부 -->
             <a href="http://localhost/admin" class="menu">←</a>
-    </div>
-    <h1>기종등록</h1>
-    <div class="main-img-container">
-        <p>메인 사진</p>
-        <div class="main-img-gray-bc">
-            <div class="main-img">
-                <input type="file">
+        </div>
+        <h1>기종등록</h1>
+        <div class="main-img-container">
+            <p>메인 사진</p>
+            <div class="main-img-gray-bc">
+                <div class="main-img">
+                    <img src="" class="preview">
+                </div>
+                <input type="file" class="input-img" name="divceImg">
+                <span class="delete_image">&times;</span>
             </div>
         </div>
-    </div>
 
-    <!-- 단일 색 첨부 -->
-    <div class="main-color-container">
-        <p>단일 색 사진</p>
-        <div class="main-color-img-bc">
-            <div class="main-color-first">
-                <div class="main-color-in-radios">
-                    <input type="file">
+        <!-- 단일 색 첨부 -->
+        <div class="main-color-container">
+            <p>단일 색 사진</p>
+            <div class="main-color-img-bc">
+                <div class="main-color-first">
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+
+                    <div class="colorText">
+                        <h2>왼쪽부터 순차적으로 입력</h2>
+                        <div>
+                            이름 :
+                            <!-- 색 이름 -->
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                        </div>
+                        <hr>
+                        <div>
+                            색상코드 :
+                            <!-- 색상 코드 -->
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                        </div>
+                        <p>*색상이 존재하지않으면 빈칸.</p>
+                    </div>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
+
+                <div class="main-color-last">
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="colorText">
+                        <h2>왼쪽부터 순차적으로 입력</h2>
+                        <div>
+                            이름 :
+                            <!-- 색 이름 -->
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                        </div>
+                        <hr>
+                        <div>
+                            색상코드 :
+                            <!-- 색상 코드 -->
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                            <input type="text" name="colorText">
+                        </div>
+                        <p>*색상이 존재하지않으면 빈칸.</p>
+                    </div>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
-                </div>
+
             </div>
+        </div>
+        <!-------------- 상세 스펙 적는 ---------------->
+        <div class="main-content-container">
+            <p>상세 스펙</p>
+            <div class="main-content-arrow">
+                <!-- 제목 -->
+                <div class="main-content-right">
+                    <!-- 출시일 -->
+                    <p name="deviceText">출시일</p>
 
-            <div class="main-color-last">
-                <div class="main-color-in-radios">
-                    <input type="file">
+                    <!-- 출고가 -->
+                    <p name="deviceReleasePrice">출고가</p>
+
+                    <!-- 운영체제 -->
+                    <p name="deviceOs">운영체제</p>
+
+                    <!-- 해상도 -->
+                    <p name="deviceResolution">해상도</p>
+
+                    <!-- 기종 화소 밀도 -->
+                    <p name="devicePixel">기종 화소 밀도</p>
+
+                    <!-- 기종 전면 화소 -->
+                    <p name="deviceFrontPixel">기종 전면 화소</p>
+
+                    <!-- 기종 후면 화소 -->
+                    <p name="deviceBackPixel">기종 후면 화소</p>
+
+                    <!-- 기종 무선충전 -->
+                    <p name="deviceWirelessCharge">기종 무선충전</p>
+
+                    <!-- 기종 급속 충전 -->
+                    <p name="deviceFastCharge">기종 급속 충전</p>
+
+                    <!-- 기종 무게 -->
+                    <p name="deviceWeight">기종 무게</p>
+
+                    <!-- 배터리 용량 -->
+                    <p name="deviceBatteryCapacity">배터리 용량</p>
+
+                    <!-- 디바이스 이름 -->
+                    <p name="deviceName">디바이스 이름</p>
+
+                    <!-- 내폰사기 -->
+                    <p name="deviceBuyingPrice">내폰사기</p>
+
+                    <!-- 내폰 팔기 -->
+                    <p name="deviceSellingPrice">내폰 팔기</p>
+
+                    <!-- 기종제조사 -->
+                    <p name="deviceBrand">기종제조사</p>
+
+                    <!-- cpu 이름 -->
+                    <p name="deviceCpuName">cpu 이름</p>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
-                </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
+                <!-- 입력할 값 -->
+                <div class="main-content-left">
+                    <!-- 출시일 -->
+                    <input type="text" name="deviceText">
+
+                    <!-- 출고가 -->
+                    <input type="text" name="deviceReleasePrice">
+
+                    <!-- 운영체제 -->
+                    <input type="text" name="deviceOs">
+
+                    <!-- 해상도 -->
+                    <input type="text" name="deviceResolution">
+
+                    <!-- 기종 화소 밀도 -->
+                    <input type="text" name="devicePixel">
+
+                    <!-- 기종 전면 화소 -->
+                    <input type="text" name="deviceFrontPixel">
+
+                    <!-- 기종 후면 화소 -->
+                    <input type="text" name="deviceBackPixel">
+
+                    <!-- 기종 무선충전 -->
+                    <input type="text" name="deviceWirelessCharge">
+
+                    <!-- 기종 급속 충전 -->
+                    <input type="text" name="deviceFastCharge">
+
+                    <!-- 기종 무게 -->
+                    <input type="text" name="deviceWeight">
+
+                    <!-- 배터리 용량 -->
+                    <input type="text" name="deviceBatteryCapacity">
+
+                    <!-- 디바이스 이름 -->
+                    <input type="text" name="deviceName">
+
+                    <!-- 내폰사기 -->
+                    <input type="text" name="deviceBuyingPrice">
+
+                    <!-- 내폰 팔기 -->
+                    <input type="text" name="deviceSellingPrice">
+
+                    <!-- 기종제조사 -->
+                    <input type="text" name="deviceBrand">
+
+                    <!-- cpu 이름 -->
+                    <input type="text" name="deviceCpuName">
+
+
+
+
                 </div>
             </div>
 
         </div>
-    </div>
+<!-------------- 상세 스펙 적는 ---------------->
+        <div class="main-content-container-bottom">
 
-    <!-- 상세 스펙 -->
+            <!-- 램 -->
+            <h2>램 용량 선택</h2>
+            <select name="ramCapacity" id="ram">
+                <option value="1">2 GB</option>
+                <option value="2">4 GB</option>
+                <option value="3">6 GB</option>
+                <option value="4">8 GB</option>
+                <option value="5">12 GB</option>
+            </select>
+            <h2>기종 제조사</h2>
+            <select name="deviceBrand" id="brand">
+                <option value="1">삼성</option>
+                <option value="2">APLLE</option>
+                <option value="3">태블릿</option>
+            </select>
 
-    
+            <!-- 디스플레이 입력 -->
+            <h2>디스플레이 입력</h2>
+            <input type="text" name="displaySize">
 
-    <div class="main-content-container">
-        <p>상세 스펙</p>
-        <div class="main-content-arrow">
-            <!-- 제목 -->
-            <div class="main-content-right">
-                <p>기종 번허</p>
-                <p>출시일</p>
-                <p>출고가</p>
-                <p>기본가격</p>
-                <p>기종 화소 밀도</p>
-                <p>기종 전면 화소</p>
-                <p>전면 화소</p>
-                <p>기종 무선충전</p>
-                <p>기종 급속 충전</p>
-                <p>기종 무게</p>
-                <p>배터리 용량</p>
-                <p>CPU코드</p>
-                <p>RAM코드</p>
-                <p>기종 화면 크기</p>
-                <p>해상도</p>
-            </div>
-            <!-- 입력할 값 -->
-            <div class="main-content-left">
-                <!-- 기종번호 -->
-                <input type="text">
-                <!-- 출시일 -->
-                <input type="text">
-                <!-- 출고가 -->
-                <input type="text">
-                <!-- 기본가격 -->
-                <input type="text">
-                <!-- 기종 화소 밀도 -->
-                <input type="text">
-                <!-- 기종 전면 화소 -->
-                <input type="text">
-                <!-- 전면 화소 -->
-                <input type="text">
-                <!-- 기종 무선충전 -->
-                <input type="text">
-                <!-- 기종 급속 충전 -->
-                <input type="text">
-                <!-- 기종 무게 -->
-                <input type="text">
-                <!-- 배터리 용량 -->
-                <input type="text">
-                <!-- CPU코드 -->
-                <input type="text">
-                <!-- RAM코드 -->
-                <input type="text">
-                <!-- 기종 화면 크기 -->
-                <input type="text">
-                <!-- 해상도 -->
-                <input type="text">
-            </div>
-        </div>            
-        <button>등록</button>
-    </div>
+
+        </div>
+
+        <div class="insert-btn">
+            <button>등록</button>
+        </div>
+    </form>
 
 
 
 
 
-    
+
 
 </body>
+<script src="/js/adminJS/adminModelRegistration.js"></script>
+
 </html>
