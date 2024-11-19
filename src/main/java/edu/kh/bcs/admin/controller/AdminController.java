@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 
+@SessionAttributes("loginMember")
 @Controller
 @RequestMapping("admin")
 @RequiredArgsConstructor
@@ -232,6 +235,21 @@ public class AdminController {
 		
 		return service.memberFlChange(memberNo);
 	}
+	
+	@GetMapping("memberLogin")
+	public String memberLogin(
+			@RequestParam("memberNo") int memberNo,
+			Model model
+			) {
+		
+		Member loginMember = service.getLoginMember(memberNo);
+
+		
+		model.addAttribute("loginMember", loginMember);
+		
+		return "admin/memberManage";
+	}
+	
 	
 	
 	

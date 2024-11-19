@@ -47,4 +47,6 @@ public interface AdminMapper {
 
 	int memberFlChange(int memberNo);
 
+	Member getLoginMember(int memberNo);
+
 }

@@ -19,5 +19,9 @@ public class SidebarController {
 	public String getProContent() {
 		return "common/sidebar/profile";
 	}
+	@RequestMapping("sidebarChatDetail")
+	public String sidebarChatDetail() {
+		return "common/sidebar/chatDetail";
+	}
 	
 }

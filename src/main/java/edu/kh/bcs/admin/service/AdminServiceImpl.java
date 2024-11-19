@@ -86,5 +86,10 @@ public class AdminServiceImpl implements AdminService{
 		
 		return mapper.deviceList();
 	}
+
+	@Override
+	public Member getLoginMember(int memberNo) {
+		return mapper.getLoginMember(memberNo);
+	}
 }
 

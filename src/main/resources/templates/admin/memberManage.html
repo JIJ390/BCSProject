@@ -202,9 +202,11 @@
 
 <body>
 
+  
   <th:block th:replace="~{common/header}"></th:block>
-
+  
   <div class="admin-member-detail 팝업히든">
+    [[${session.loginMember}]]
     <div><div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i class="fa-solid fa-x"></i>X</button></div></div>
     <div><p>회원번호</p><p class="admin-member-detail-no"></p></div>
     <div><p>이름</p><p class="admin-member-detail-name"></p></div>
@@ -217,6 +219,7 @@
     <div><p>관리자 권한</p><p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button></div>
     <div><p>구매 횟수</p><p class="admin-member-detail-buy"></p></div>
     <div><p>판매 횟수</p><p class="admin-member-detail-sell"></p></div>
+    <div><button class="admin-member-login">로그인하기</button></div>
   </div>
 
   <div class="member-mamage-body">
@@ -425,6 +428,9 @@
     let searchAsc = '';
     
     const getMemberPagenation = () => {
+
+      console.log("pageNation");
+
       fetch("/admin/adminMemberPage?searchType="+searchType+"&searchText="+searchText+"&cp="+cp)
       .then(response => {
         if(response.ok){
@@ -454,6 +460,9 @@
 
 
     const getMemberSearchList = () => {
+
+      console.log("searchLIst");
+
       var numRegex = /^[0-9]*$/;
       if(searchType === '회원번호'){
         if(!numRegex.test(searchText)){
@@ -649,6 +658,15 @@
       memberSearchBtn();
       getMemberAsc();
       adminMemberCngBtn();
+    })
+
+
+    document.querySelector(".admin-member-login").addEventListener("click", (e) => {
+
+      const memberNo = Number(e.target.closest(".admin-member-detail").children[1].children[1].innerText);
+      console.log(memberNo);
+
+      location.href = "/admin/memberLogin?memberNo="+memberNo
     })
 
   </script>
