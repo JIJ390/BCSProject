@@ -55,9 +55,9 @@ public class DeviceOrderServiceImpl implements DeviceOrderService {
 		// 선택 매물 가격 조회
 		int price = mapper.priceCheck(order);
 		
-//		if (balancePoint < price) {
-//			return -1;
-//		}
+		if (balancePoint < price) {
+			return -1;
+		}
 		
 		price = 1;
 		

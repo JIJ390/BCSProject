@@ -227,3 +227,28 @@ hr {
   border: none;
 }
 
+.point-charge {
+  width: 980px;
+
+  display: flex;
+  justify-content: end;
+  padding-top: 10px;
+}
+
+.point-charge > span {
+  padding-right: 10px;
+
+  font-family: 'Pretendard-Thin';
+
+  color: rgb(255, 113, 113);
+}
+
+
+.point-charge > a {
+
+  text-decoration-line: none;
+  font-family: 'Pretendard-Thin';
+
+  color: black;
+
+}

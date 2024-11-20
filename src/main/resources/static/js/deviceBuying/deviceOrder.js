@@ -48,9 +48,31 @@ const form = document.querySelector("#orderFrm");
 
 form.addEventListener("submit", e => {
 
+  // 로그인하지 않았을 시 
+  if(loginMember === null) {
+    e.preventDefault();
+
+    alert("로그인 후 이용해 주세요");
+    if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      location.href = "/myPage/myPageLogin";
+    }
+    return;
+  }
+
+  if (orderBuyingDevice.buyingDevicePrice > loginMember.memberPoint) {
+    e.preventDefault();
+
+    alert("잔액이 부족합니다");
+    if (confirm("포인트 충전 페이지로 이동하시겠습니까?")) {
+      location.href = "/point";
+    }
+    return;
+  }
+
   /* 입력 사항 */
   const orderTel = document.querySelector("[name=orderTel]")
   const orderName = document.querySelector("[name=orderName]")
+  const orderComment = document.querySelector("[name=orderComment]")
 
   console.log(orderTel);
 
@@ -60,8 +82,7 @@ form.addEventListener("submit", e => {
   const detailAddress = document.querySelector("#detailAddress");
 
 
-
-  const regEx =  /^[가-힣]+$/;  // 한글 이름 유효성 검사
+  const regEx =  /^[가-힣]{2,10}$/;  // 한글 이름 유효성 검사
   const inputName = orderName.value.trim()
 
   if (inputName.length < 2) {
@@ -101,6 +122,13 @@ form.addEventListener("submit", e => {
   if ((detailAddress.value.trim().length === 0)) {
     alert("상세 주소를 입력해 주세요");
     detailAddress.focus();
+    e.preventDefault();
+    return;
+  }
+
+  if ((orderComment.value.trim().length >= 80)) {
+    alert("요청 사항은 80자 이내로 작성해 주세요");
+    orderComment.focus();
     e.preventDefault();
     return;
   }

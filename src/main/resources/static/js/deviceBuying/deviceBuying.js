@@ -305,7 +305,16 @@ const buyingFrm = document.querySelector("#buyingFrm");
 // 유효성 검사
 buyingFrm.addEventListener("submit", e => {
 
-  // 로그인 관련 검사 추가해야함
+  // 로그인하지 않았을 시 
+  if(loginMember === null) {
+    e.preventDefault();
+
+    alert("로그인 후 이용해 주세요");
+    if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      location.href = "/myPage/myPageLogin";
+    }
+    return;
+  }
 
   const selectedColor = document.querySelector(".selected-color");
   const selectedCapacity = document.querySelector(".selected-capacity");
