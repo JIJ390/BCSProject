@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -13,12 +14,15 @@ import edu.kh.bcs.common.util.RedisUtil;
 import edu.kh.bcs.myPage.mapper.MyPageMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Helper;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 이메일 관련 비즈니스 로직 처리클래스
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmailServiceImpl implements EmailService {
 
 	// EmailConfig 내용이 적용된 이메일 발송이 가능한 객체(Bean)
@@ -27,6 +31,8 @@ public class EmailServiceImpl implements EmailService {
 	// Redis(InMemory DB) CRUD 할 수 있는 기능을 제공하는 객체(Bean)
 	private final RedisUtil redisUtil;
 
+	private final BCryptPasswordEncoder encoder; // BCrypt 암호화 객체 의존성 주입 받기
+	
 	// 자바 타임리프를 사용할 수 있게하는 객체(Bean)
 	// html 코드를 java로 읽어올 수 있음
 	private final SpringTemplateEngine templateEngine;
@@ -34,13 +40,106 @@ public class EmailServiceImpl implements EmailService {
 	private final MyPageMapper mapper;
 	
 	
-	// 아이디 찾기
 	@Override
-	public int findIdReal(String memberName, String memberEmail) {
+	public int findIdReal(String htmlName, Map<String, String> obj2) {
 		
-		return mapper.findIdReal(memberName, memberEmail);
+//		System.out.println(obj2.get("email"));
+//		System.out.println(obj2.get("name"));
+		
+		
+		try {
+		
+		String email = obj2.get("email");
+		String name = obj2.get("name");
+		
+		int emailName = mapper.findIdReal(email, name);
+		
+		System.out.println(name);
+		System.out.println(name);
+		System.out.println(name);
+		System.out.println(name);
+		System.out.println(name);
+		System.out.println(name);
+		
+		
+		String authKey = createAuthKey(); // 생성된 인증 번호
+		
+		System.out.println(emailName);
+		
+//		if(emailName > 0 ) {
+//			return 1;
+//		}
+
+		String emailTitle = "[BCS] 아이디찾기 인증번호입니다."; 
+		
+		/* 메일 발송 */
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+		
+		helper.setTo(email); // 받는 사람 이메일 세팅
+		helper.setSubject(emailTitle); // 이메일 제목 세팅
+		
+		helper.setText(loadHtml(authKey, htmlName), true); // 이메일 내용 세팅
+
+		// CID(Content-ID)를 이용해 메일에 이미지 첨부
+		helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+		
+		// 메일 발송하기
+		mailSender.send(mimeMessage);
+		
+		// 이메일, 인증번호 저장 (5분 후 만료)
+		redisUtil.setValue(email, authKey, 60 * 5);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0; // 예외발생 == 실패 == 0 반환
+			
+		}
+		return 1; // 성공 == 1 반환
 	}
 	
+	// 비밀번호 찾기 인증번호 보내기
+	@Override
+	public int findPw(String htmlName, Map<String, String> obj3) {
+		
+		try {
+			
+			String id = obj3.get("id");
+			String name = obj3.get("name");
+			
+			String email = mapper.findPw(id, name);
+			String authKey = createAuthKey(); // 생성된 인증 번호
+			
+			
+			String emailTitle = "[BCS] 비밀번호찾기 인증번호입니다."; 
+			
+			/* 메일 발송 */
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			
+			helper.setTo(email); // 받는 사람 이메일 세팅
+			helper.setSubject(emailTitle); // 이메일 제목 세팅
+			
+			helper.setText(loadHtml(authKey, htmlName), true); // 이메일 내용 세팅
+
+			// CID(Content-ID)를 이용해 메일에 이미지 첨부
+			helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+			
+			// 메일 발송하기
+			mailSender.send(mimeMessage);
+			
+			// 이메일, 인증번호 저장 (5분 후 만료)
+			redisUtil.setValue(email, authKey, 60 * 5);
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+				return 0; // 예외발생 == 실패 == 0 반환
+				
+			}
+			return 1; // 성공 == 1 반환
+		}
 	
 	
 	// 이메일 발송 서비스
@@ -172,6 +271,9 @@ public class EmailServiceImpl implements EmailService {
 		
 		return redisUtil.getValue(email).equals(authKey);
 	}
+
+
+
 	
 
 	

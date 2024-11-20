@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.common.util.RedisUtil;
 import edu.kh.bcs.email.service.EmailService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("email")
 public class EmailController {
@@ -59,16 +61,34 @@ public class EmailController {
 	 * @return
 	 */
 	@ResponseBody
-	@GetMapping("emailName")
+	@PostMapping("emailName")
 	public int findIdReal(
-				@RequestParam("memberName")String memberName,
-				@RequestParam("memberEmail")String memberEmail
+				@RequestBody Map<String, String> obj2
 			) {
+		log.debug("sdfsdf : {}", obj2);
+//		System.out.println(obj2.get("email"));
+//		System.out.println(obj2.get("email"));
+//		System.out.println(obj2.get("email"));
+//		System.out.println(obj2.get("name"));
+//		System.out.println(obj2.get("name"));
+//		System.out.println(obj2.get("email"));
 		
-		return service.findIdReal(memberName, memberEmail);
+		return service.findIdReal("idFind", obj2);
 		
 	}
 	
+	@ResponseBody
+	@PostMapping("emailPw")
+	public int findPw(
+			@RequestBody Map<String, String> obj3
+			) {
+		
+		System.out.println(obj3.get("id"));
+		System.out.println(obj3.get("id"));
+		System.out.println(obj3.get("id"));
+		
+		return service.findPw("pwFind", obj3);
+	}
 	
 	
 	

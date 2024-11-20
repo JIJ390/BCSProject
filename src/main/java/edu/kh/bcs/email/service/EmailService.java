@@ -20,12 +20,25 @@ public interface EmailService {
 	boolean checkAuthKey(Map<String, String> map);
 
 
-	/** 아이디 찾기
-	 * @param memberName
-	 * @param memberEmail
+	/** 아이디 찾기 
+	 * @param obj2
 	 * @return
 	 */
-	int findIdReal(String memberName, String memberEmail);
+	int findIdReal(String htmlName, Map<String, String> obj2);
+
+
+	/** 비밀번호 찾기
+	 * @param string
+	 * @param obj3
+	 * @return
+	 */
+	int findPw(String htmlName, Map<String, String> obj3);
+
+
+
+
+
+
 
 	
 
