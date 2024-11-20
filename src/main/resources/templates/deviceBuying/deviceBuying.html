@@ -103,15 +103,15 @@
 
         <div class="chart-title">
           <span>최근 시세표</span>
-          <span>2024.11</span>
+          <span class="current-date"></span>
         </div>
         <div class="chart-sub-title">
           <span>최고가</span>
-          <span>100,000 ₩</span>
+          <span class="max-price">100,000 ₩</span>
         </div>
         <div class="chart-sub-title">
           <span>최저가</span>
-          <span>100,000 ₩</span>
+          <span class="min-price">100,000 ₩</span>
         </div>
         <div class="chart-sub-title">
           <span>평균가</span>
@@ -225,6 +225,8 @@
   <script th:inline="javascript">
     const device = /*[[${device}]]*/ 기종;
     const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
+
+    const priceList = /*[[${priceList}]]*/ 시세정보;
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

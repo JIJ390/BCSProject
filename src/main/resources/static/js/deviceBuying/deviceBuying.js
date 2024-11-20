@@ -482,13 +482,67 @@ document.addEventListener('DOMContentLoaded', () => {
   // Register the plugin
   Chart.register(verticalLinePlugin);
 
+
+
+  const date = new Date();
+
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let currentDate = `${year}.${month}`;
+
+  console.log(currentDate);
+
+  document.querySelector(".current-date").innerText = currentDate;
+
+  // 월별 조회
+  const priceArr = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+  let maxPrice = 0;
+  let minPrice = 9999999999;
+
+  console.log(priceList);
+
+  // 12 번 반복
+  for(let i = 0; i < 12; i ++) {
+
+    priceList.forEach((item) => {
+
+      priceArr[i].month = i + 1
+
+      if ((i + 1) == item.month.substr(-2)) {
+        priceArr[i].avgPrice = item.avgPrice 
+      }
+    })
+  }
+
+
+  priceList.forEach((item) => {
+    if (item.avgPrice > maxPrice) {
+      maxPrice = item.avgPrice
+    }
+
+    if (item.avgPrice < minPrice) {
+      minPrice = item.avgPrice
+    }
+  })
+
+  document.querySelector(".max-price").innerText = maxPrice.toLocaleString('ko-KR') + ' ₩';
+  document.querySelector(".min-price").innerText = minPrice.toLocaleString('ko-KR') + ' ₩';
+
+  console.log(priceArr);
+
   const myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', ''],
+          labels: ['', priceArr[0].month, priceArr[1].month, priceArr[2].month, priceArr[3].month, 
+                       priceArr[4].month, priceArr[5].month, priceArr[6].month, priceArr[7].month,
+                       priceArr[8].month, priceArr[9].month, priceArr[10].month, priceArr[11].month, ''],
           datasets: [{
               label: '', // 라벨을 빈 문자열로 설정하여 숨김
-              data: [null, 1000000, 1200000, 1400000, 1500000, 1300000, 1100000, 1400000, 1600000, 1200000, 1300000, 1000000, 1000000],
+              data: [null, priceArr[0].avgPrice, priceArr[1].avgPrice, priceArr[2].avgPrice, priceArr[3].avgPrice, 
+                           priceArr[4].avgPrice, priceArr[5].avgPrice, priceArr[6].avgPrice, priceArr[7].avgPrice,
+                           priceArr[8].avgPrice, priceArr[9].avgPrice, priceArr[10].avgPrice, priceArr[11].avgPrice, null],
               fill: false,
               borderColor: 'rgba(29, 29, 31, 1)',
               pointRadius: 0, // 데이터 포인트 표시 숨기기
