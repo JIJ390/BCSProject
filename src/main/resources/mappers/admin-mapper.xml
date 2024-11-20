@@ -182,6 +182,38 @@ WHERE
 ORDER BY
 	DEVICE_DATE DESC
 	</select>
+	
+	
+	
+	
+	<!-- 기종 등록 -->
+	<insert id="device"
+			parameterType="Device">
+			
+	INSERT INTO 
+		"DEVICE"
+	VALUES (
+	   SEQ_DEVICE_NO.NEXTVAL,
+	   TO_DATE (#{deviceReleaseDate}, 'YYYY-MM-DD'),
+	   #{deviceReleasePrice},
+	   #{deviceRename},
+	   #{deviceOs},
+	   #{deviceResolution},
+	   #{devicePixel},
+	   #{deviceFrontPixel},
+	   #{deviceBackPixel},
+	   DEFAULT, DEFAULT,
+	   #{deviceWeight},
+	   #{deviceBatteryCapacity},
+	   #{deviceName},
+	   #{deviceBuyingPrice},
+	   #{deviceSellingPrice},
+	   #{deviceBrand},
+	   #{ramCapacity},
+	   #{deviceCpuName},
+	   #{displaySize}
+	);
+	</insert>
 
 	
 	

@@ -1,5 +1,6 @@
 package edu.kh.bcs.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import edu.kh.bcs.admin.service.AdminService;
+import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
@@ -146,13 +148,16 @@ public class AdminController {
 	        @RequestParam(name = "divceImg", required = false) MultipartFile  divceImg,
 	        //6개 사진 담겨있음
 	        @RequestParam("colorImg") List<MultipartFile> colorImg,
-	        @RequestParam(name = "deviceText", required = false) String  deviceText,
-	        @RequestParam(name = "colorText", required = false) String  colorText,
+	        @ModelAttribute Color color,
 	        @ModelAttribute Device device,
 	        RedirectAttributes rs
-	        
 			) {
 		
+		//divce 객체로 넣어줄거 
+		int text = service.textContent(device,color,colorImg,divceImg);
+		
+		
+
 		
 		
 		
@@ -160,7 +165,7 @@ public class AdminController {
 		
 		
 		
-		return "redirect:/admin/adminModelRegistration";
+		return "redirect:/admin/adminBoard";
 	}
 	
 	
