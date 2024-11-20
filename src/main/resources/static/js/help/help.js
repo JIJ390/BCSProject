@@ -43,4 +43,9 @@ faqDivs.forEach((faqDiv, index) => {
 
 // -------------------------------------------
 
-// notice 목록으로 돌아가기
+// event 작성하기
+const eventWrite = document.querySelector(".writeBtn");
+
+eventWrite.addEventListener("click", ()=>{
+  location.href = '/help/eventWriteView';
+})

@@ -80,6 +80,8 @@ public class HelpController {
 		return "help/noticeView";
 	}
 	
+	// 이벤트 게시글 등록
+	
 	
 	
 	
