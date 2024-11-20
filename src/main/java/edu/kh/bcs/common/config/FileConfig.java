@@ -46,7 +46,12 @@ public class FileConfig implements WebMvcConfigurer{
 	//---------------------------------------------------------------
 	// 파일 연결 정보 쓰는 곳
 	
+	// 이벤트 게시판용
+	@Value("${my.event.resource-handler}")
+	private String eventResourceHandler;			// 테스트 이미지 요청 주소
 	
+	@Value("${my.event.resource-location}")
+	private String eventResourceLocation;		// 테스트 이미지 요청 시 
 	
 	
 	//---------------------------------------------------------------------------
@@ -90,7 +95,13 @@ public class FileConfig implements WebMvcConfigurer{
 		.addResourceHandler(testResourceHandler)			// /images/test/**
 		.addResourceLocations(testResourceLocation);  // file:///C:/uploadFiles/test/	
 		
+		registry
+		.addResourceHandler(eventResourceHandler)					// /images/review/**
+		.addResourceLocations(eventResourceLocation);			// file:///C:/uploadFiles/review/
+		
 	}
+	
+	
 	
 
 }
