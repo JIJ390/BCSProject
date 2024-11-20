@@ -30,11 +30,11 @@ public class DeviceListServiceImpl implements DeviceListService {
 	
 	@Override
 	public List<Device> searchDetail(Map<String, Object> obj) {
-		log.debug("aaa : {}", obj);
-		log.debug("aaa : {}", obj);
-		log.debug("aaa : {}", obj);
-		log.debug("aaa : {}", obj);
-		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
 		
 		List<String> hddList = new ArrayList<>();
 		
@@ -74,15 +74,15 @@ public class DeviceListServiceImpl implements DeviceListService {
 		}
 		
 		
-		log.debug("ramList : {}", ramList);
-		log.debug("hddList : {}", hddList);
-		log.debug("inchList : {}", inchList);
+//		log.debug("ramList : {}", ramList);
+//		log.debug("hddList : {}", hddList);
+//		log.debug("inchList : {}", inchList);
 		
 		List<Device> deviceList = mapper.selectDeviceList(ramList, hddList, inchList);
 		
-		log.debug("deviceList : {}", deviceList);
-		log.debug("deviceList : {}", deviceList);
-		log.debug("deviceList : {}", deviceList);
+//		log.debug("deviceList : {}", deviceList);
+//		log.debug("deviceList : {}", deviceList);
+//		log.debug("deviceList : {}", deviceList);
 
 		
 		

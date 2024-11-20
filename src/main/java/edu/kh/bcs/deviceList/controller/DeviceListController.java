@@ -47,12 +47,12 @@ public class DeviceListController {
 	public List<Device> searchDetail(
 			@RequestBody Map<String, Object> obj)  {
 		
-		log.debug("obj : {}", obj);
-		log.debug("obj : {}", obj);
-		log.debug("obj : {}", obj);
-		log.debug("obj : {}", obj);
-		log.debug("obj : {}", obj);
-		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
 		
 		
 		return service.searchDetail(obj);
