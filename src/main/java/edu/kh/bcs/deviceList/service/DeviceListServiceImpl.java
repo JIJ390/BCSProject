@@ -1,14 +1,18 @@
 package edu.kh.bcs.deviceList.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.device.dto.Device;
-import edu.kh.bcs.deviceList.dto.Filter;
 import edu.kh.bcs.deviceList.mapper.DeviceListMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DeviceListServiceImpl implements DeviceListService {
@@ -24,10 +28,68 @@ public class DeviceListServiceImpl implements DeviceListService {
 	}
 	
 	
-	
-	
 	@Override
-	public String searchDetail(Filter filter) {
-		return mapper.searchDetail(filter);
+	public List<Device> searchDetail(Map<String, Object> obj) {
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+//		log.debug("aaa : {}", obj);
+		
+		List<String> hddList = new ArrayList<>();
+		
+		List<String> ramList = new ArrayList<>();
+		
+		List<String> inchList = new ArrayList<>();
+		
+//		List<Map<String, Object>> hddList = new ArrayList<>();
+//		
+//		List<Map<String, Object>> ramList = new ArrayList<>();
+//		
+//		List<Map<String, Object>> inchList = new ArrayList<>();
+//		
+		
+		
+		for (Map.Entry<String, Object> entry : obj.entrySet()) {
+			
+			
+			// entry 로는 map 관련 메서드 사용 불가
+//		    Map<String, Object> tempMap = new HashMap<>();
+		    
+//		    tempMap.put(entry.getKey(), entry.getValue());
+		    
+		    
+		    if (entry.getKey().contains("ram")) {
+		    	ramList.add((String)entry.getValue());
+		    }
+		    
+		    else if (entry.getKey().contains("hdd")) {
+		    	hddList.add((String)entry.getValue());
+		    }
+		    
+		    else {
+		    	inchList.add((String)entry.getValue());
+		    }
+
+		}
+		
+		
+//		log.debug("ramList : {}", ramList);
+//		log.debug("hddList : {}", hddList);
+//		log.debug("inchList : {}", inchList);
+		
+		List<Device> deviceList = mapper.selectDeviceList(ramList, hddList, inchList);
+		
+//		log.debug("deviceList : {}", deviceList);
+//		log.debug("deviceList : {}", deviceList);
+//		log.debug("deviceList : {}", deviceList);
+
+		
+		
+		return deviceList;
 	}
+	
+	
+	
+
 }
