@@ -176,7 +176,7 @@
 	<select id="selectOrder">
 		SELECT
 			ORDER_NAME,
-			ORDER_TEL,
+			REGEXP_REPLACE(ORDER_TEL, '(.{3})(.+)(.{4})', '\1-\2-\3') "ORDER_TEL",
 			ORDER_COMMENT,
 			ORDER_ADDRESS,
 			MEMBER_NO,

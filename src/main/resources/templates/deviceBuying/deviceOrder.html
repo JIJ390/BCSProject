@@ -45,11 +45,11 @@
           <span class="status-title">구매자 정보</span>
           <div class="order-info">
             <span>받는 분 이름</span>
-            <input type="text" name="orderName">
-          </div>
+            <input type="text" name="orderName" th:value="${session.loginMember.memberName}">
+          </div> 
           <div class="order-info">
             <span>받는 분 전화번호</span>
-            <input type="text" name="orderTel">
+            <input type="text" name="orderTel" th:value="${session.loginMember.memberTel}">
           </div>
         </div>
   
@@ -78,13 +78,17 @@
           </div>
           <div class="order-info">
             <span>요청 사항</span>
-            <textarea name="orderComment" placeholder="요청 사항을 작성해 주세요"></textarea>
+            <textarea name="orderComment" placeholder="80 자 이내로 요청 사항을 작성해 주세요"></textarea>
           </div>
         </div>
 
         <span class="price-span"  th:text="|결제 금액 *{#numbers.formatInteger(buyingDevicePrice, 0, 'COMMA')} ₩|">결제 금액 1,234,567 ₩</span>
       
         <hr>
+        <div class="point-charge" th:if="${orderBuyingDevice.buyingDevicePrice > session.loginMember.memberPoint}">
+          <span>* 포인트가 부족합니다</span>
+          <a href="/point">충전하기</a>
+        </div>
   
         <div class="btn-area">
           <button class="order-btn">구매하기</button>
@@ -100,8 +104,14 @@
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
-  <script src="/js/deviceBuying/deviceOrder.js"></script>
 
+
+  <script th:inline="javascript">
+    const orderBuyingDevice = /*[[${orderBuyingDevice}]]*/ 기종;
+    const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
+  </script>
+
+  <script src="/js/deviceBuying/deviceOrder.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

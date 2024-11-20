@@ -40,10 +40,13 @@ public class DeviceBuyingController {
 		
 		Device device = service.selectDetailDevice(deviceNo);
 		
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
+		List<Map<String, String>> priceList = service.selectPriceList(deviceNo);
+		
+		log.debug("priceList : {}", priceList);
+		log.debug("priceList : {}", priceList);
+		log.debug("priceList : {}", priceList);
+		log.debug("priceList : {}", priceList);
+		log.debug("priceList : {}", priceList);
 		
 		
 		model.addAttribute("device", device);
