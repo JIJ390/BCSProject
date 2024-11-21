@@ -11,4 +11,11 @@ public interface MyPageService {
 	 */
 	Member login(String memberId, String memberPw);
 
+	/**
+	 * 아이디 불러오기
+	 * @param memberEmail
+	 * @return
+	 */
+	String findId(String memberEmail);
+
 }

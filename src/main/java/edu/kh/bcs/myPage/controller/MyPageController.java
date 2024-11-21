@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -46,24 +48,24 @@ public class MyPageController {
 			HttpServletResponse resp
 			) {
 		
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberPw : {}", memberPw);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberPw : {}", memberPw);
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(memberId, memberPw);
 		
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
 		
 		
 		if(loginMember == null) { // 로그인이 실패
 			
-			log.debug("aaaaaaaaaa");
+//			log.debug("aaaaaaaaaa");
 			
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다!");
 			
@@ -77,6 +79,8 @@ public class MyPageController {
 			/* Model을 이용해서 Session scope에 값 추가하는 방법 */
 			// 1. model에 값 추가 (request)
 			model.addAttribute("loginMember", loginMember);
+			
+			ra.addFlashAttribute("message", "로그인 되었습니다!");
 			
 			log.debug("loginMember", loginMember);
 			
@@ -139,7 +143,23 @@ public class MyPageController {
 		return "redirect:/"; // 메인페이지
 	}
 	
-
+	/**
+	 * 아이디 뜨게하기
+	 * @param memberEmail
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("/myPage/findId")
+	public String findId(
+			@RequestBody String memberEmail) {
+		
+		
+		return service.findId(memberEmail);
+	}
+	
+	
+	
+	
 	@GetMapping("myPage/myPageLogin")
 	public String myPageLogin() {
 		
