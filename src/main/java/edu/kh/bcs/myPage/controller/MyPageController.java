@@ -80,6 +80,8 @@ public class MyPageController {
 			// 1. model에 값 추가 (request)
 			model.addAttribute("loginMember", loginMember);
 			
+			ra.addFlashAttribute("message", "로그인 되었습니다!");
+			
 			log.debug("loginMember", loginMember);
 			
 			// 2. 클래스 선언부에 @SessionAttributes({"key"}) 추가

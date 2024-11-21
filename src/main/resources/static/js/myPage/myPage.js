@@ -22,32 +22,6 @@ function getCookie(key) {
   return cookieObj[key];
 }
 
-// HTML 로딩(렌더링)이 끝난 후 수행
-document.addEventListener("DOMContentLoaded", () => {
-
-  const saveId = getCookie("saveId"); // 쿠키에 저장된 Id 얻어오기
-
-
-  // 저장된 아이디가 없을경우
-  if (saveId == undefined) return;
-
-  const memberId
-    = document.querySelector("#loginForm input[name=memberId]");
-
-  const checkbox
-    = document.querySelector("#loginForm input[name=saveId]");
-
-  // 로그인 상태인 경우 함수 종료
-  if (memberId == null) return;
-
-  // 아이디 입력란에 저장된 아이디 출력
-  memberId.value = saveId;
-
-  // 아이디 저장 체크박스를 체크 상태로 바꾸기
-  checkbox.checked = true;
-
-
-})
 
 
 const checkObj = {
@@ -56,8 +30,10 @@ const checkObj = {
   "memberPwConfirm": false,
   "memberId": false,
   "memberTel": false,
-  "authKey": false
-};
+  "authKey": false,
+  "memberName" : false,
+  "authKey3" : false
+  };
 
 /* ---------- 이메일 유효성 검사 --------- */
 const memberEmail = document.querySelector('#memberEmail');
@@ -392,6 +368,12 @@ sendAuthKeyBtn?.addEventListener("click", () => {
   })
   .then(result => {
     console.log(result);
+    if(result == 0){
+      alert("이메일과 이름이 일치하지 않습니다!")
+    }else{
+      
+    }
+
   })
   .catch(err => console.error(err));
 
@@ -518,7 +500,7 @@ memberId?.addEventListener('input', e => {
 
 const getNumberBtn = document.querySelector("#getNumberPw");
 const findPwBtn    = document.querySelector(".findPw");
-const authKeyMessage2 = document.querySelector("#authKeyMessage");
+const authKeyMessage2 = document.querySelector("#authKeyMessage2");
 const getMemberId = document.querySelector("#memberId");
 const memberNamePw = document.querySelector("#memberName");
 const memberName2 = document.querySelector(".memberName2")
@@ -548,8 +530,8 @@ getNumberBtn?.addEventListener("click", ()=>{
     headers : {"Content-Type" : "application/json"},
     body : JSON.stringify(obj3)
 
-    // POST 방식으로 /email/sendAuthKey 요청을 처리하는 컨트롤러에
-    // 입력된 이메일을 body에 담아서 제출
+    // POST 방식으로 /email/emailPw 요청을 처리하는 컨트롤러에
+    // 입력된 이메일, 이름을 body에 담아서 제출
   })
   .then(response => {
     if(response.ok) return response.text();
@@ -557,51 +539,225 @@ getNumberBtn?.addEventListener("click", ()=>{
     
   })
   .then(result => {
+
     console.log(result);
+
+    if(result == 0){
+      alert("아이디와 이름이 일치하지 않습니다!");
+      return;
+    } else {
+    // 3) 이메일 발송 메시지 출력 + 5분타이머 출력
+    alert("인증번호가 발송되었습니다!")
+
+    authKeyMessage2.innerText = initTime; // 05:00 문자열 출력
+    authKeyMessage2.classList.remove("confirm", "error"); // 검정글씨
+
+    // 1초가 지날 때 마다 함수 내부 내용이 실행되는 setInterval 작성
+    authTimer = setInterval(()=>{
+      authKeyMessage2.innerText = `${addZero(min)}:${addZero(sec)}`;
+
+      // 0분 0초인 경우
+      if(min === 0 & sec === 0){
+        checkObj.authKey = false; // 인증 못했다고 기록
+        clearInterval(authTimer); // 1초마다 동작하는 setInterval 멈춤
+        authKeyMessage2.classList.add("error");
+        authKeyMessage2.classList.remove("confirm");
+        return
+      }
+
+      if(sec === 0){ // 출력된 초가 0인 경우(1분 지남)
+        sec = 60;
+        min--; // 분 감소
+      }
+
+      sec--; // 1초가 지날 때 마다 sec 값 1씩 감소
+
+
+    }, 1000);
+
+    /* 전달 받은 숫자가 10미만(한 자리 수) 인 경우 
+    앞에 0을 붙여서 반환하는 함수*/
+
+    function addZero(num){
+      if(num < 10) return "0" + num;
+      else         return num;
+    }
+  }
+
+ 
+ 
+  })
+
+
+  .catch(err => console.error(err));
+  
+});
+
+//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
+
+
+// -------------------------------------------
+/* 인증번호를 입력하고 인증하기 버튼을 클릭한 경우 */
+// const authKey3 = document.querySelector("#authKey");
+const checkAuthKeyBtn3 = document.querySelector("#checkAuthKeyBtn3");
+
+checkAuthKeyBtn3?.addEventListener("click", () => {
+
+  // + (추가조건) 타이머 00:00인 경우 버튼클릭 막기
+  if(min === 0 && sec === 0){
+    alert("인증번호 입력 제한시간을 초과하였습니다!");
+    return;
+  }
+
+  
+  const authKey3 = document.querySelector("#authKey1");
+  // 1) 인증번호 6자리가 입력되었는지 확인
+  // if(authKey.value.trim().length < 6){
+  //   alert("인증번호가 잘못입력되었습니다!!!!");
+  //   return;
+  // }
+
+  // 2) 입력된 이메일과 인증번호를 비동기로 서버에 전달하여
+  // Redis에 저장된 이메일, 인증번호와 일치하는지 확인
+
+  /* AJAX로 여러 데이터를 서버로 전달하고 싶을 땐
+    JSON 형태로 값을 전달해야한다! */
+
+  // 서버로 제출할 데이터를 저장한 객체생성
+  const obj = {
+    "id" : memberId.value, // 입력한 아이디
+    "authKey" : authKey3.value    // 입력한 인증번호
+  };
+
+  // JSON.stringify(객체) : 객체 -> JSON 변환 (문자열화)
+
+  fetch("/email/checkAuthKey2", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : JSON.stringify(obj)
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("인증 에러");
+  })
+  .then(result => {
+    console.log("인증결과: ", result);
+
+   if(result == 'false'){ // 인증 실패
+    console.log(result);
+    console.log(result);
+    console.log(result);
+    alert("인증번호가 일치하지 않습니다");
+    checkObj1.authKey3 = false;
+    return;
+   }else{ // 인증 성공
+    clearInterval(authTimer);
+    checkObj1.authKey3 = true;
+   }
+
+   // 4) 일치하는 경우
+   // - 타이머 멈춤
+   clearInterval(authTimer);
+
+   // + "인증되었습니다" 화면에 초록색으로 출력
+   authKeyMessage2.innerText = "인증 되었습니다";
+   authKeyMessage2.classList.add("confirm");
+   authKeyMessage2.classList.remove("error");
+
+   checkObj.authKey = true; // 인증 완료표시
+  })
+  .catch(err => console.error(err));
+  
+});
+
+
+const authKey3 = document.querySelector("#authKey1");
+
+
+// ** 이메일 임시비밀번호 발급 &*&*////////////
+
+// 임시 비밀번호 발송
+
+const sendEmail = document.querySelector("#sendEmail"); // 이메일 발송 버튼
+
+const checkObj1 = {
+  "authKey3": false
+};
+
+
+sendEmail.addEventListener("click", () => { // 이메일 발송 버튼 클릭 시
+
+
+
+  if(memberId.value.trim().length == 0){
+    alert("아이디를 입력해주세요")
+    return
+  }
+  
+
+
+  if(checkObj.memberId && checkObj1.authKey3 == false){
+    alert("아이디 또는 인증번호를 확인해주세요")
+    console.log(checkObj.memberId);
+    console.log(checkObj1.authKey3);
+    console.log(checkObj.authKey);
+    e.preventDefault();
+    return;
+  } else {
+    alert("인증된 이메일로 임시비밀번호를 발송드렸습니다")
+  } 
+
+  // 서버에서 작성된 이메일로 인증 코드 발송 (Ajax)
+  fetch("/email/sendAuthKey3", {
+    method : "POST",
+    headers : {"Content-Type" : "application/json"},
+    body : memberId.value
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("이메일 발송 실패")
+  })
+  .then(result => {
+    console.log(result);
+    if(result === 1){
+    }else{
+    }
   })
   .catch(err => console.error(err));
 
-  // 3) 이메일 발송 메시지 출력 + 5분타이머 출력
-  alert("인증번호가 발송되었습니다!")
-
-  authKeyMessage2.innerText = initTime; // 05:00 문자열 출력
-  authKeyMessage2.classList.remove("confirm", "error"); // 검정글씨
-
-  // 1초가 지날 때 마다 함수 내부 내용이 실행되는 setInterval 작성
-  authTimer = setInterval(()=>{
-    authKeyMessage2.innerText = `${addZero(min)}:${addZero(sec)}`;
-
-    // 0분 0초인 경우
-    if(min === 0 & sec === 0){
-      checkObj.authKey = false; // 인증 못했다고 기록
-      clearInterval(authTimer); // 1초마다 동작하는 setInterval 멈춤
-      authKeyMessage2.classList.add("error");
-      authKeyMessage2.classList.remove("confirm");
-      return
-    }
-
-    if(sec === 0){ // 출력된 초가 0인 경우(1분 지남)
-      sec = 60;
-      min--; // 분 감소
-    }
-
-    sec--; // 1초가 지날 때 마다 sec 값 1씩 감소
+  
+  location.href = "/myPage/myPageLogin";
 
 
-  }, 1000);
 
-  /* 전달 받은 숫자가 10미만(한 자리 수) 인 경우 
-  앞에 0을 붙여서 반환하는 함수*/
 
-  function addZero(num){
-    if(num < 10) return "0" + num;
-    else         return num;
-  }
 });
 
 
 
+// HTML 로딩(렌더링)이 끝난 후 수행
+document.addEventListener("DOMContentLoaded", () => {
+
+  const saveId = getCookie("saveId"); // 쿠키에 저장된 Id 얻어오기
 
 
+  // 저장된 아이디가 없을경우
+  if (saveId == undefined) return;
+
+  const memberId
+    = document.querySelector("#loginForm input[name=memberId]");
+
+  const checkbox
+    = document.querySelector("#loginForm input[name=saveId]");
+
+  // 로그인 상태인 경우 함수 종료
+  if (memberId == null) return;
+
+  // 아이디 입력란에 저장된 아이디 출력
+  memberId.value = saveId;
+
+  // 아이디 저장 체크박스를 체크 상태로 바꾸기
+  checkbox.checked = true;
 
 
+})

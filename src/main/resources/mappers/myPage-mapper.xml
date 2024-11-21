@@ -47,6 +47,7 @@
   	
   	</select>
   	
+  	<!-- 비번찾기 -->
   	  	<select id="findPw">
   		SELECT MEMBER_EMAIL
   		FROM
@@ -58,6 +59,41 @@
   	
   	</select>
   	
+  	<!-- 비번찾기 이메일 불러오기 -->
+  	<select id="checkAuthKey2">
+  		SELECT MEMBER_EMAIL
+  		FROM
+  			"MEMBER"
+  		WHERE
+  			MEMBER_ID = #{id}
+  	
+  	
+  	</select>
+  	
+  	<!-- 임시비번찾기 이멜 불러오기 -->
+  	<!--  -->
+  	<select id="sendAuthKey3">
+  	  		SELECT MEMBER_EMAIL
+  		FROM
+  			"MEMBER"
+  		WHERE
+  			MEMBER_ID = #{id}
+  	</select>
+  	
+  	<!-- 이메일을 통한 회원넘버 조회 -->
+  		<select id="findMemberNoByEmail">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{email}
+		AND MEMBER_DEL_FL = 'N'
+	</select>
+	
+		<update id="updatePassword">
+		UPDATE "MEMBER"
+		SET MEMBER_PW = #{encPw} 
+		WHERE MEMBER_NO = #{memberNo}
+		AND MEMBER_DEL_FL = 'N'
+	</update>
 
   	
 </mapper>

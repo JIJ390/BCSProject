@@ -35,6 +35,21 @@ public interface EmailService {
 	int findPw(String htmlName, Map<String, String> obj3);
 
 
+ /** 인증번호 확인
+  * @param map 
+  * @return
+  */
+	boolean checkAuthKey2(Map<String, String> map);
+
+
+/** 임시 비밀번호 발송
+ * @param string
+ * @param id
+ * @return
+ */
+int sendAuthKey3(String htmlName, String id);
+
+
 
 
 

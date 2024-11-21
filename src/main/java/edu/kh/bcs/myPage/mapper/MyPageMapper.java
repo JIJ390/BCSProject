@@ -39,6 +39,33 @@ public interface MyPageMapper {
 			@Param("id") String id, 
 			@Param("name") String name);
 
+	/** 비번 인증
+	 * @param id
+	 * @return
+	 */
+	String checkAuthKey2(String id);
+
+	/** 임시 비번
+	 * @param id
+	 * @return
+	 */
+	String sendAuthKey3(String id);
+
+	/** 이메일을 통한 회원넘버 조회
+	 * @param email
+	 * @return
+	 */
+	int findMemberNoByEmail(String email);
+
+	/** 회원넘버를 통한 비번 업데이트
+	 * @param memberNo
+	 * @param encPw
+	 * @return
+	 */
+  int updatePassword(
+  		@Param("memberNo") int memberNo, 
+  		@Param("encPw") String encPw); // 비밀번호 업데이트
+
 
 
 
