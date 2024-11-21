@@ -27,8 +27,21 @@ public interface DeviceListMapper {
 			@Param("hddList") List<String> hddList,
 			@Param("inchList") List<String> inchList);
 
+
+
+
+
+	List<Device> phoneList(String category);
+
+
+
+
+
 	
 	
+
+
+
 
 
 	

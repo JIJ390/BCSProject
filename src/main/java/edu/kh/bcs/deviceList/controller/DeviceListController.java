@@ -57,5 +57,15 @@ public class DeviceListController {
 		
 		return service.searchDetail(obj);
 		
+	};
+	
+
+	@PostMapping("phoneList")
+	@ResponseBody
+	public List<Device> phoneList(
+			@RequestBody String category){
+		
+		return service.phoneList(category);
 	}
 }
+	
