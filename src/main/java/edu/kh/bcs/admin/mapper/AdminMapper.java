@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -55,6 +56,40 @@ public interface AdminMapper {
 	int memberFlChange(int memberNo);
 
 	Member getLoginMember(int memberNo);
+
+	
+	
+	/** divceImg content
+	 * 
+	 * @param deviceText
+	 * @param divceImg
+	 * @return
+	 */
+	int device(Device device);
+
+	//color에 넣을 deviceNo 구해오기
+	int selectDeviceNo();
+
+	/** device insert 후 -> color insert
+	 * 
+	 * @param color
+	 * @return
+	 */
+	int colorInsert(Color color);
+
+	/** grade Insert
+	 * 
+	 * @param gradePriceOrly
+	 * @param gradeSellPriceOrly
+	 * @param gradeTypeOrly
+	 * @param deviceGetNo 
+	 * @return
+	 */
+	int grade(
+			@Param("gradePriceOrly") String gradePriceOrly, 
+			@Param("gradeSellPriceOrly") String gradeSellPriceOrly, 
+			@Param("gradeTypeOrly") String gradeTypeOrly,  
+			@Param("deviceGetNo") int deviceGetNo);
 
 
 }

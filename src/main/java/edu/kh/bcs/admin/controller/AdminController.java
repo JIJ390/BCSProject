@@ -1,5 +1,6 @@
 package edu.kh.bcs.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +25,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import edu.kh.bcs.admin.service.AdminService;
+import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -146,21 +149,20 @@ public class AdminController {
 	        @RequestParam(name = "divceImg", required = false) MultipartFile  divceImg,
 	        //6개 사진 담겨있음
 	        @RequestParam("colorImg") List<MultipartFile> colorImg,
-	        @RequestParam(name = "deviceText", required = false) String  deviceText,
-	        @RequestParam(name = "colorText", required = false) String  colorText,
+	        @ModelAttribute Color color,
 	        @ModelAttribute Device device,
+	        @RequestParam("gradePrice") String gradePrice,
+	        @RequestParam("gradeSellPrice") String gradeSellPrice,
+	        @RequestParam("gradeType") String gradeType,
 	        RedirectAttributes rs
-	        
 			) {
 		
 		
+		//divce 객체로 넣어줄거 
+		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
+		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,colorImg,divceImg);
 		
-		
-		
-		
-		
-		
-		return "redirect:/admin/adminModelRegistration";
+		return "redirect:/admin/adminBoard";
 	}
 	
 	
