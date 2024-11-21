@@ -101,25 +101,27 @@
 
       <div class="chart-info">
 
-        <div class="chart-title">
+        <div class="chart-title" >
           <span>최근 시세표</span>
-          <span>2024.11</span>
-        </div>
-        <div class="chart-sub-title">
+          <span class="current-date">2024.11</span>
+        </div> 
+        <div class="chart-sub-title" th:if="${#arrays.length(priceList) > 0}">
           <span>최고가</span>
-          <span>100,000 ₩</span>
+          <span th:text="|${#numbers.formatInteger(priceStatus.maxPrice, 0, 'COMMA')} ₩|">100,000 ₩</span>
         </div>
-        <div class="chart-sub-title">
+        <div class="chart-sub-title" th:if="${#arrays.length(priceList) > 0}">
           <span>최저가</span>
-          <span>100,000 ₩</span>
+          <span th:text="|${#numbers.formatInteger(priceStatus.minPrice, 0, 'COMMA')} ₩|">100,000 ₩</span>
         </div>
-        <div class="chart-sub-title">
+        <div class="chart-sub-title" th:if="${#arrays.length(priceList) > 0}">
           <span>평균가</span>
-          <span>100,000 ₩</span>
+          <span  th:text="|${#numbers.formatInteger(priceStatus.avgPrice, 0, 'COMMA')} ₩|">100,000 ₩</span>
         </div>
+
       </div>
 
       <canvas id="myChart" width="950px" height="500px"></canvas>
+      <div class="graph-info">* 상기 시세표에 비어있는 구간이 있다면 해당 년월에 거래가 발생하지 않았음을 의미합니다</div>
 
 
       <div class="device-info" th:object="${device}">
@@ -225,6 +227,8 @@
   <script th:inline="javascript">
     const device = /*[[${device}]]*/ 기종;
     const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
+
+    const priceList = /*[[${priceList}]]*/ 시세정보;
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

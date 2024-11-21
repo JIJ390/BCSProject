@@ -479,16 +479,103 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   };
 
+  const centerTextPlugin = {
+    id: 'centerTextPlugin',
+    beforeDraw: (chart) => {
+        const { width, height, ctx } = chart;
+
+        // 텍스트 설정
+        const text = "최근 거래가 존재하지 않습니다";
+        const fontSize = 40; // 텍스트 크기
+        ctx.save();
+        ctx.font = `${fontSize}px Pretendard-Regular`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // 캔버스 중앙 좌표 계산
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        // 텍스트 그리기
+        ctx.fillStyle = 'gray'; // 텍스트 색상
+        ctx.fillText(text, centerX, centerY);
+        ctx.restore();
+    }
+};
+
   // Register the plugin
   Chart.register(verticalLinePlugin);
+
+  if (priceList.length === 0) {
+    Chart.register(centerTextPlugin);
+  }
+
+
+
+  const date = new Date();
+
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let currentDate = `${year}.${month}`;
+
+  console.log(currentDate);
+
+  document.querySelector(".current-date").innerText = currentDate;
+
+  // 월별 조회
+  const priceArr = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+  // 12 번 반복
+  for(let i = 0; i < 12; i ++) {
+
+    priceList.forEach((item) => {
+
+      priceArr[i].month = i + 1
+
+      if ((i + 1) == item.month.substr(-2)) {
+        priceArr[i].avgPrice = item.avgPrice 
+      }
+    })
+  }
+
+
+  // let maxPrice = 0;
+  // let minPrice = 9999999999;
+  
+
+  // console.log(priceList);
+
+  // priceList.forEach((item) => {
+  //   if (item.avgPrice > maxPrice) {
+  //     maxPrice = item.avgPrice
+  //   }
+
+  //   if (item.avgPrice < minPrice) {
+  //     minPrice = item.avgPrice
+  //   }
+  // })
+
+  // if (document.querySelector(".max-price") !== null) {
+  //   document.querySelector(".max-price").innerText = maxPrice.toLocaleString('ko-KR') + ' ₩';
+  // }
+
+  // if (document.querySelector(".min-price") !== null) {
+  //   document.querySelector(".min-price").innerText = minPrice.toLocaleString('ko-KR') + ' ₩';
+  // }
+
 
   const myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', ''],
+          labels: ['', 1, 2, 3, 4, 
+                       5, 6, 7, 8,
+                       9, 10, 11, 12, ''],
           datasets: [{
               label: '', // 라벨을 빈 문자열로 설정하여 숨김
-              data: [null, 1000000, 1200000, 1400000, 1500000, 1300000, 1100000, 1400000, 1600000, 1200000, 1300000, 1000000, 1000000],
+              data: [null, priceArr[0].avgPrice, priceArr[1].avgPrice, priceArr[2].avgPrice, priceArr[3].avgPrice, 
+                           priceArr[4].avgPrice, priceArr[5].avgPrice, priceArr[6].avgPrice, priceArr[7].avgPrice,
+                           priceArr[8].avgPrice, priceArr[9].avgPrice, priceArr[10].avgPrice, priceArr[11].avgPrice, null],
               fill: false,
               borderColor: 'rgba(29, 29, 31, 1)',
               pointRadius: 0, // 데이터 포인트 표시 숨기기

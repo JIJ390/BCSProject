@@ -266,4 +266,18 @@
 		GROUP BY TO_CHAR(BUYING_DEVICE_SOLD_DATE, 'YYYY-MM')
 		ORDER BY "month" ASC
 	</select>
+	
+	<select id="priceStatus">
+		SELECT 
+			MAX(BUYING_DEVICE_PRICE) AS "maxPrice",
+			MIN(BUYING_DEVICE_PRICE) AS "minPrice",
+			ROUND(AVG(BUYING_DEVICE_PRICE), -3) AS "avgPrice"
+		FROM BUYING_DEVICE
+		WHERE 
+			DEVICE_NO = #{deviceNo}
+		AND	
+			TO_CHAR(BUYING_DEVICE_SOLD_DATE, 'YYYY') = TO_CHAR(CURRENT_DATE, 'YYYY')
+		AND 
+			SOLD_FL = 'Y'
+	</select>
 </mapper>
