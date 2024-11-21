@@ -187,8 +187,7 @@ ORDER BY
 	
 	
 	<!-- 기종 등록 -->
-	<insert id="device"
-			parameterType="Device">
+	<insert id="device">
 			
 	INSERT INTO 
 		"DEVICE"
@@ -196,7 +195,7 @@ ORDER BY
 	   SEQ_DEVICE_NO.NEXTVAL,
 	   TO_DATE (#{deviceReleaseDate}, 'YYYY-MM-DD'),
 	   #{deviceReleasePrice},
-	   #{deviceRename},
+	   #{deviceImg},
 	   #{deviceOs},
 	   #{deviceResolution},
 	   #{devicePixel},
@@ -212,8 +211,52 @@ ORDER BY
 	   #{ramCapacity},
 	   #{deviceCpuName},
 	   #{displaySize}
-	);
+	)
 	</insert>
+
+<!--DEVICENO 하나 가져오기 -->
+<select id="selectDeviceNo">
+	SELECT
+		MAX(DEVICE_NO)
+	FROM
+		DEVICE
+	ORDER BY 
+		DEVICE_NO DESC
+</select>
+
+
+<insert id="colorInsert">
+
+INSERT INTO
+	COLOR
+		(COLOR_NO, 
+		COLOR_NAME, 
+		COLOR_CODE, 
+		COLOR_DEVICE_IMG, 
+		DEVICE_NO)
+	VALUES
+		(SEQ_COLOR_NO.NEXTVAL, 
+		#{colorName}, 
+		#{colorCode}, 
+		#{colorDeviceImg}, 
+		#{deviceNo})
+</insert>
+
+
+<insert id="grade">
+INSERT INTO 
+	GRADE
+VALUES
+	(SEQ_GRADE_NO.NEXTVAL,
+	#{gradeTypeOrly},
+	#{gradePriceOrly},
+	#{gradeSellPriceOrly},
+	#{deviceGetNo})
+</insert>
+
+
+
+
 
 	
 	

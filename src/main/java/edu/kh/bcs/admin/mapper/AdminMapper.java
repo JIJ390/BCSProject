@@ -65,8 +65,31 @@ public interface AdminMapper {
 	 * @param divceImg
 	 * @return
 	 */
-	int device(@Param("device") Device device, 
-			   @Param("deviceRename") String deviceRename);
+	int device(Device device);
+
+	//color에 넣을 deviceNo 구해오기
+	int selectDeviceNo();
+
+	/** device insert 후 -> color insert
+	 * 
+	 * @param color
+	 * @return
+	 */
+	int colorInsert(Color color);
+
+	/** grade Insert
+	 * 
+	 * @param gradePriceOrly
+	 * @param gradeSellPriceOrly
+	 * @param gradeTypeOrly
+	 * @param deviceGetNo 
+	 * @return
+	 */
+	int grade(
+			@Param("gradePriceOrly") String gradePriceOrly, 
+			@Param("gradeSellPriceOrly") String gradeSellPriceOrly, 
+			@Param("gradeTypeOrly") String gradeTypeOrly,  
+			@Param("deviceGetNo") int deviceGetNo);
 
 
 }

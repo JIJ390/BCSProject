@@ -17,6 +17,7 @@ import edu.kh.bcs.admin.mapper.AdminMapper;
 import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -26,181 +27,218 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @PropertySource("classpath:/config.properties")
-public class AdminServiceImpl implements AdminService{
-	
+public class AdminServiceImpl implements AdminService {
+
 	private final AdminMapper mapper;
 
-	@Value("${my.device.web-path}")
-	private String webPath;
-	
+	// 디바이스 메인 사진
 	@Value("${my.device.folder-path}")
-	private String folderPath;
-	
-	
-	
+	private String folderPathDevice;
+	@Value("${my.device.web-path}")
+	private String webPathDevice;
+
+	// 디바이스 단일 색
+	@Value("${my.deviceColor.folder-path}")
+	private String folderPathColor;
+	@Value("${my.deviceColor.web-path}")
+	private String webPathDeviceColor;
+
 	@Override
 	public int getResultCount(String searchType, String searchText) {
-		
+
 		int resultCount = 0;
-		
-		if(searchType.equals("회원번호") && !searchText.equals("")) {
+
+		if (searchType.equals("회원번호") && !searchText.equals("")) {
 			resultCount = mapper.memberNoCount(searchText);
-		}
-		else if(searchType.equals("이름") && !searchText.equals("")){
+		} else if (searchType.equals("이름") && !searchText.equals("")) {
 			resultCount = mapper.memberNameCount(searchText);
-		}
-		else if(searchType.equals("이메일") && !searchText.equals("") ) {
+		} else if (searchType.equals("이메일") && !searchText.equals("")) {
 			resultCount = mapper.memberEmailCount(searchText);
-		}
-		else if(searchType.equals("전화번호") && !searchText.equals("")) {
+		} else if (searchType.equals("전화번호") && !searchText.equals("")) {
 			resultCount = mapper.memberTelCount(searchText);
-		}
-		else {
+		} else {
 			resultCount = mapper.allCount();
 		}
-		
+
 		return resultCount;
 	}
-	
+
 	@Override
 	public List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc) {
-		
-		List<Member> memberList = null;
-		
 
-		
+		List<Member> memberList = null;
+
 		memberList = mapper.searchMemberList(cp, searchType, searchText, ud, searchAsc);
-		
+
 		return memberList;
 	}
 
-
-	//디바이스 리스트 조회
-
+	// 디바이스 리스트 조회
 
 	@Override
 	public Map<String, String> adminMemberDetail(int memberNo) {
-		
-		Map<String , String> map = new HashMap<>();
+
+		Map<String, String> map = new HashMap<>();
 		map.put("memberFl", mapper.adminMemberFl(memberNo));
 		map.put("memberAdFl", mapper.adminMemberAdFl(memberNo));
 		map.put("memberBuy", mapper.adminMemberBuy(memberNo));
 		map.put("memberSell", mapper.adminMemberSell(memberNo));
-		
+
 		return map;
 	}
-	
+
 	@Override
 	public int memberDelFlChange(int memberNo) {
-		
+
 		return mapper.memberDelFlChange(memberNo);
 	}
+
 	@Override
 	public int memberFlChange(int memberNo) {
-		
+
 		return mapper.memberFlChange(memberNo);
 	}
-
-	
 
 	@Override
 	public List<Device> deviceList() {
 
-		
 		return mapper.deviceList();
 	}
-
-	
 
 // 팝업	
 	@Override
 	public List<Color> popUpData(int result) {
-		
+
 		return mapper.popUpData(result);
 	}
-	
+
 	@Override
 	public List<Device> adminSearch(String search) {
-		
+
 		List<Device> result = mapper.adminSearch(search);
-		
-		
+
 		log.debug("impl 값 ㅣ : {}", result);
 		log.debug("impl 값 ㅣ : {}", result);
 		return result;
 	}
 
-
 	@Override
 	public Member getLoginMember(int memberNo) {
 		return mapper.getLoginMember(memberNo);
 	}
-	
-	
+
+	// ============================================기종 등록
 	@Override
-	public int textContent(Device device, Color color, List<MultipartFile> colorImg, MultipartFile divceImg) {
-		
-		//device파일 리네임
+	public int textContent(Device device, Color color, 
+			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
+			MultipartFile divceImg) {
+		// device파일 리네임
 		String divceImge = divceImg.getOriginalFilename();
+
 		String deviceRename = FileUtil.rename(divceImge);
-		
-		
-		
-		int deviceInsert = mapper.device(device,deviceRename);
-		
-		//insert 실패할경우
-		if(deviceInsert == 0) {
-			
-			System.out.println("업로드 실패");
-		}else {
+
+		device.setDeviceImg(webPathDevice + deviceRename);
+
+		// 스펙 등록
+		int deviceInsert = mapper.device(device);
+
+		// insert 실패할경우
+		if (deviceInsert == 0) {
+			System.out.println("상세 정보에 값이 제대로 들어오지 않았습니다.");
+			// 0 주고 탈출
+			return 0;
+		} else {
 			try {
-				
-				File folder = new File(folderPath); 
-				if(folder.exists() == false) { //존재하지 않을때에
+
+				File folder = new File(folderPathDevice);
+				if (folder.exists() == false) { // 존재하지 않을때에
 					folder.mkdir(); // 폴더 생성 구문
 				}
-				
-				divceImg.transferTo(new File(folderPath + deviceRename));
-				
+
+				divceImg.transferTo(new File(folderPathDevice + deviceRename));
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			// SELECT해서 DEVICE_NO 가져오기
+			int deviceGetNo = mapper.selectDeviceNo();
+
+			// colorImg 6개 사진 들어감
+			// colorimg 필터
+			for (int i = 0; i < colorImg.size(); i++) {
+				// 없을 경우
+				// 분기문중 없는 경우 다음 숫자
+				if (colorImg.get(i).isEmpty())
+					continue;
+
+				// 이미지가 있을 경우 원본명 얻어오기
+				String textImg = colorImg.get(i).getOriginalFilename();
+
+				// 변경된 파일명 중복되지않게끔
+				// 만들어둔 FileUtil 사용하기
+				String rename = FileUtil.rename(textImg);
+
+				String[] colorNameList = color.getColorName().split(",");
+				String[] colorCodeList = color.getColorCode().split(",");
+				String colorNameOut = colorNameList[i];
+				String colorCodeOut = colorCodeList[i];
+
+				//
+				Color color2 = new Color();
+
+				// deviceCode 빨간색
+				color2.setColorName(colorNameOut);
+				// deviceCode #23123
+				color2.setColorCode(colorCodeOut);
+				// deviceGetNo select 해서 가져온 값
+				color2.setDeviceNo(deviceGetNo);
+				color2.setColorDeviceImg(webPathDeviceColor + rename);
+
+				try {
+					int colorInsert = mapper.colorInsert(color2);
+
+					File folder = new File(folderPathColor);
+					if (folder.exists() == false) { // 존재하지 않을때에
+						folder.mkdir(); // 폴더 생성 구문
+					}
+					colorImg.get(i).transferTo(new File(folderPathColor + rename));
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+			} // for 문 끝남
+			
+			
+			String[] gradeTypeSplit = gradeType.split(",");
+			String[] gradePriceSplit = gradePrice.split(",");
+			String[] gradeSellPriceSplit = gradeSellPrice.split(",");
+				
+			//3개
+			for(int i = 0 ; i < gradeTypeSplit.length; i++) {
+				
+				//자른거
+				
+				//자른거 완성
+				String gradePriceOrly = gradePriceSplit[i];
+				String gradeSellPriceOrly = gradeSellPriceSplit[i];
+				String GradeTypeOrly = gradeTypeSplit[i];
+				
+				
+				int grade = mapper.grade(gradePriceOrly,gradeSellPriceOrly,GradeTypeOrly,deviceGetNo);
+				
+				
+			}
+			
+
+			
+			
 			
 			
 		}
 		
-//		//실제 업로드될 파일
-//		List<Color> uploadList = new ArrayList<>();
-//		
-//		//colorimg 필터
-//		for(int i = 0 ; i < colorImg.size() ; i++) { 
-//			
-//			// 없을 경우
-//			//분기문중 없는 경우 다음 숫자
-//			if(colorImg.get(i).isEmpty()) continue;
-//			
-//			//이미지가 있을 경우 원본명 얻어오기
-//			String textImg = colorImg.get(i).getOriginalFilename();
-//			
-//			//변경된 파일명 중복되지않게끔
-//			//만들어둔 FileUtil 사용하기
-//			String rename = FileUtil.rename(textImg);
-//			
-//			log.debug("변경된 이름 : {}", rename);
-//			log.debug("변경된 이름 : {}", rename);
-//			log.debug("변경된 이름 : {}", rename);
-//			log.debug("변경된 이름 : {}", rename);
-//			
-//		}
-		
-		
-		
-		
-		return deviceInsert;
+			return 1;
 	}
-	
-	
-	
 
 }
-

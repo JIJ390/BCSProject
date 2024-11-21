@@ -28,6 +28,7 @@ import edu.kh.bcs.admin.service.AdminService;
 import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -150,20 +151,16 @@ public class AdminController {
 	        @RequestParam("colorImg") List<MultipartFile> colorImg,
 	        @ModelAttribute Color color,
 	        @ModelAttribute Device device,
+	        @RequestParam("gradePrice") String gradePrice,
+	        @RequestParam("gradeSellPrice") String gradeSellPrice,
+	        @RequestParam("gradeType") String gradeType,
 	        RedirectAttributes rs
 			) {
 		
+		
 		//divce 객체로 넣어줄거 
-		int text = service.textContent(device,color,colorImg,divceImg);
-		
-		
-
-		
-		
-		
-		
-		
-		
+		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
+		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,colorImg,divceImg);
 		
 		return "redirect:/admin/adminBoard";
 	}

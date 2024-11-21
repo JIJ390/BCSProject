@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -52,12 +53,14 @@ public interface AdminService {
 	 * 
 	 * @param deviceText divce 내용
 	 * @param colorText	color 내용
+	 * @param Grade Grade 내용
 	 * @param divceImg img 1 개 
-	 * @param colorImg img 6 개
+	 * @param colorImg img 6 개 
 	 * @return
 	 */
-
-	int textContent(Device device, Color color, List<MultipartFile> colorImg, MultipartFile divceImg);
+	int textContent(Device device, Color color, 
+			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
+			MultipartFile divceImg);
 
 
 	

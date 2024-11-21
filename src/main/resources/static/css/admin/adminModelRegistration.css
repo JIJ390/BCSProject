@@ -124,7 +124,7 @@ p{
     background-color: #fff;
     border-radius: 30px;
     width: 900px;
-    height: 400px;
+    height: 466px;
 }
 
 
@@ -245,13 +245,11 @@ p{
     font-size: 20px;
 }
 
-
 .insert-btn{
-    position: absolute;
-    bottom: -1190px;
-    right: 200px;
-  
+    display: flex;
+    justify-content: center;
 }
+
 .insert-btn > button{
     font-size: 100px;
 }

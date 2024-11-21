@@ -65,17 +65,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorText">
-                            <input type="text" name="colorText">
-                            <input type="text" name="colorText">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorText">
-                            <input type="text" name="colorText">
-                            <input type="text" name="colorText">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -114,17 +114,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName">
-                            <input type="text" name="colorName">
-                            <input type="text" name="colorName">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색"> 
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode">
-                            <input type="text" name="colorCode">
-                            <input type="text" name="colorCode">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -180,42 +180,42 @@
                 <!-- 입력할 값 -->
                 <div class="main-content-left">
                     <!-- 출시일 -->
-                    <input type="text" name="deviceReleaseDate">
+                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)"> 
 
                     <!-- 출고가 -->
-                    <input type="text" name="deviceReleasePrice">
+                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
 
                     <!-- 운영체제 -->
-                    <input type="text" name="deviceOs">
+                    <input type="text" name="deviceOs" placeholder="ex. ios 00">
 
                     <!-- 해상도 -->
-                    <input type="text" name="deviceResolution">
+                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080">
 
                     <!-- 기종 화소 밀도 -->
-                    <input type="text" name="devicePixel">
+                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display">
 
                     <!-- 기종 전면 화소 -->
-                    <input type="text" name="deviceFrontPixel">
+                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만">
 
                     <!-- 기종 후면 화소 -->
-                    <input type="text" name="deviceBackPixel">
+                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만">
 
                     <!-- 기종 무게 -->
-                    <input type="text" name="deviceWeight">
+                    <input type="text" name="deviceWeight" placeholder="ex. 100 g">
 
                     <!-- 배터리 용량 -->
-                    <input type="text" name="deviceBatteryCapacity">
+                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh">
 
                     <!-- 디바이스 이름 -->
-                    <input type="text" name="deviceName">
+                    <input type="text" name="deviceName" placeholder="ex. iPhone 16">
 
                     <!-- 내폰사기 -->
-                    <input type="text" name="deviceBuyingPrice">
+                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000">
 
                     <!-- 내폰 팔기 -->
-                    <input type="text" name="deviceSellingPrice">
+                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000">
                     <!-- cpu 이름 -->
-                    <input type="text" name="deviceCpuName">
+                    <input type="text" name="deviceCpuName" placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
 
 
 
@@ -238,18 +238,44 @@
             </select>
             <h2>기종 제조사</h2>
             <select name="deviceBrand" id="brand">
-                <option>삼성</option>
-                <option>APLLE</option>
-                <option>태블릿</option>
+                <option>SAMSUNG</option>
+                <option>iPhone</option>
+                <option>Galaxy Tab</option>
+                <option>iPad</option>
             </select>
 
             <!-- 디스플레이 입력 -->
             <h2>디스플레이 입력</h2>
-            <input type="text" name="displaySize">
+            <select name="displaySize" id="brand">
+                <option value="1">6.1</option>
+                <option value="2">6.06</option>
+                <option value="3">6.7</option>
+            </select>
+            <br>
+
+<div>
+    <p>등급</p>
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
+    
+</div>
+<div>
+    <p>등록할 가격</p>
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+</div>
+<div>
+    <p>판매할 가격</p>
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+</div>
 
 
         </div>
-
+<br><br>
         <div class="insert-btn">
             <button>등록</button>
         </div>

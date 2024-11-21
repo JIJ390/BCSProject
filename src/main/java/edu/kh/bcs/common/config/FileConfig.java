@@ -46,6 +46,12 @@ public class FileConfig implements WebMvcConfigurer{
 	
 	@Value("${my.device.resource-location}")
 	private String deviceResourceLocation;
+	// 디바이스 컬러
+	@Value("${my.deviceColor.resource-handler}")
+	private String deviceColorResourceHandler;
+	
+	@Value("${my.deviceColor.resource-location}")
+	private String deviceColorResourceLocation;
 	
 	//---------------------------------------------------------------
 	// 파일 연결 정보 쓰는 곳
@@ -92,11 +98,15 @@ public class FileConfig implements WebMvcConfigurer{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
 		.addResourceHandler(testResourceHandler)			// /images/test/**
-		.addResourceLocations(testResourceLocation);  // file:///C:/uploadFiles/test/	
+		.addResourceLocations(testResourceLocation);  // file:///C:/bcs/test/	
 		
 		registry
 		.addResourceHandler(deviceResourceHandler)			// /images/device/**
-		.addResourceLocations(deviceResourceLocation);  // file:///C:/uploadFiles/device/	
+		.addResourceLocations(deviceResourceLocation);  // file:///C:/bcs/device/	
+		
+		registry
+		.addResourceHandler(deviceColorResourceHandler)			// /images/device/**
+		.addResourceLocations(deviceColorResourceLocation);  // file:///C:/bcs/deviceColor/	
 		
 		
 		
