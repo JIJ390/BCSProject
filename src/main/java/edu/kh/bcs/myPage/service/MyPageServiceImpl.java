@@ -65,4 +65,34 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.findId(memberEmail);
 	}
 	
+	// 회원탈퇴 기능
+	@Override
+	public int withdrawal(String memberPw, Member loginMember) {
+		
+	// 1) 비밀번호 일치 검사
+		if(encoder.matches(memberPw, loginMember.getMemberPw()) == false) {
+			return 0; // 다를경우 0 반환
+		}
+		
+	// 2) 회원탈퇴 Mapper 호출 (update)
+		
+		return mapper.withdrawal(loginMember.getMemberNo());
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public int passwordChange(String currentPw, String newPw, Member loginMember) {
+		if(encoder.matches(currentPw, loginMember.getMemberPw()) == false) { // 비밀번호가 일치하지 않을때
+			return 0;
+		} 
+		
+		String encPw = encoder.encode(newPw);
+		
+		loginMember.setMemberPw(encPw);
+		return mapper.passwordChange(loginMember.getMemberNo(), encPw);
+	}
+	
+	
+	
+	
 }

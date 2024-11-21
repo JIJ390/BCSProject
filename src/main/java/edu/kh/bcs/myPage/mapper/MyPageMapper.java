@@ -66,6 +66,21 @@ public interface MyPageMapper {
   		@Param("memberNo") int memberNo, 
   		@Param("encPw") String encPw); // 비밀번호 업데이트
 
+  /** 회원 탈퇴
+   * @param memberNo
+   * @return
+   */
+	int withdrawal(int memberNo);
+
+	/** 비밀번호 변경
+	 * @param memberNo
+	 * @param encPw
+	 * @return
+	 */
+	int passwordChange(
+									@Param("memberNo")	int memberNo,
+									@Param("encPw")	String encPw);
+
 
 
 

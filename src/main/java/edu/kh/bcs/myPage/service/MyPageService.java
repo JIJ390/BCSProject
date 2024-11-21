@@ -18,4 +18,19 @@ public interface MyPageService {
 	 */
 	String findId(String memberEmail);
 
+	/** 회원탈퇴 기능
+	 * @param memberPw
+	 * @param loginMember
+	 * @return
+	 */
+	int withdrawal(String memberPw, Member loginMember);
+
+	/** 비번변경
+	 * @param currentPw
+	 * @param newPw
+	 * @param loginMember
+	 * @return
+	 */
+	int passwordChange(String currentPw, String newPw, Member loginMember);
+
 }

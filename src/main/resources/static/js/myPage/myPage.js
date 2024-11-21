@@ -164,18 +164,18 @@ const xBtn = document.querySelector(".xBtn");
 const tabButtons = document.querySelectorAll(".tab-button");
 const tabContents = document.querySelectorAll(".tab-content");
 
-idPwFind.addEventListener("click", () => {
+idPwFind?.addEventListener("click", () => {
   popup.style.display = "block";
 
 });
 
-xBtn.addEventListener("click", () => {
+xBtn?.addEventListener("click", () => {
   popup.style.display = "none";
 
 })
 
 
-tabButtons[0].addEventListener("click", () => {
+tabButtons[0]?.addEventListener("click", () => {
 
   tabButtons[0].classList.add("active");
   tabContents[0].classList.add("active");
@@ -183,7 +183,7 @@ tabButtons[0].addEventListener("click", () => {
   tabContents[1].classList.remove("active");
 
 })
-tabButtons[1].addEventListener("click", () => {
+tabButtons[1]?.addEventListener("click", () => {
 
   tabButtons[1].classList.add("active");
   tabContents[1].classList.add("active");
@@ -198,13 +198,13 @@ tabButtons[1].addEventListener("click", () => {
 const inputFields = document.querySelectorAll('.idFind');
 
 inputFields.forEach(input => {
-  input.addEventListener('focus', function () {
+  input?.addEventListener('focus', function () {
     // 포커스 시 기존 placeholder 저장하고 제거
     this.setAttribute('data-placeholder', this.placeholder);
     this.placeholder = '';
   });
 
-  input.addEventListener('blur', function () {
+  input?.addEventListener('blur', function () {
     // 포커스 해제 시 placeholder 복원
     this.placeholder = this.getAttribute('data-placeholder');
   });
@@ -685,7 +685,7 @@ const checkObj1 = {
 };
 
 
-sendEmail.addEventListener("click", () => { // 이메일 발송 버튼 클릭 시
+sendEmail?.addEventListener("click", () => { // 이메일 발송 버튼 클릭 시
 
 
 
@@ -761,3 +761,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 })
+
+// ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 회원탈퇴, 비밀번호 수정 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+/* 비밀번호 변경 */
+
+// 비밀번호 변경 form 태그
+const changePw = document.querySelector("#pwChangeForm");
+
+changePw?.addEventListener("submit", e => {
+
+  // 입력 요소 모두 얻어오기
+  const currentPw = document.querySelector("#currentPw");
+  const newPw = document.querySelector("#newPw");
+  const newPwConfirm = document.querySelector("#newPwConfirm");
+
+  // 현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 입력 여부 체크
+
+  let str;
+
+  if(newPwConfirm.value.trim().length == 0)
+    str = "새 비밀번호를 확인을 입력해 주세요"; 
+
+  if(newPw.value.trim().length == 0)
+    str = "새 비밀번호를 입력해 주세요"; 
+
+  if(currentPw.value.trim().length == 0)
+    str = "현재 비밀번호를 입력해 주세요"; 
+  
+  if(str !== undefined){ // 입력되지 않은 값이 존재
+    alert(str);
+    e.preventDefault(); // form 제출 막기
+    return; // submit 이벤트 핸들러 종료
+  }
+
+  // 2. 새 비밀번호가 알맞은 형태로 작성 되었는가 확인
+  const lengthCheck = newPw.value.length >= 6 && newPw.value.length <= 20;
+  const letterCheck = /[a-zA-Z]/.test(newPw.value); // 영어 알파벳 포함
+  const numberCheck = /\d/.test(newPw.value); // 숫자 포함
+  const specialCharCheck = /[!@#_-]/.test(newPw.value); // 특수문자 포함
+
+  // 조건이 하나라도 만족하지 못하면
+  if ( !(lengthCheck && letterCheck && numberCheck && specialCharCheck) ) {
+      alert("영어, 숫자, 특수문자 1글자 이상, 6~20자 사이로 입력해주세요")
+      e.preventDefault();
+      return;
+  }
+
+  // 3. 새 비밀번호, 새 비밀번호 확인이 같은지 체크
+  if(newPw.value !== newPwConfirm.value){
+    alert("새 비밀번호가 일치하지 않습니다.");
+    e.preventDefault();
+    return;
+  }
+});
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* 회원 탈퇴 유효성 검사 */
+const withdrawal = document.querySelector("#withdrawal");
+withdrawal?.addEventListener("submit", e => {
+  if(confirm("정말 탈퇴하시겠습니까?") == false) { // 취소 클릭 시
+    alert("탈퇴가 취소되었습니다");
+    e.preventDefault();
+    return;
+  }
+})
+
+/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 1대1문의로 넘어가기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+const chat1vs1 = document.querySelector(".chat1vs1");
+chat1vs1?.addEventListener("click", () => {
+  document.querySelector(".sidebar-button").click();
+  document.querySelector(".sidebar-messageBtn").click();
+})
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+/* 다음 주소 API */
+function findAddress() {
+  new daum.Postcode({
+      oncomplete: function(data) {
+          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+          // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+          // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+          var addr = ''; // 주소 변수
+    
+
+          //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+          if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+              addr = data.roadAddress;
+          } else { // 사용자가 지번 주소를 선택했을 경우(J)
+              addr = data.jibunAddress;
+          }
+
+          
+          // 우편번호와 주소 정보를 해당 필드에 넣는다.
+          document.getElementById("postcode").value = data.zonecode;
+          document.getElementById("address").value = addr;
+          // 커서를 상세주소 필드로 이동한다.
+          document.getElementById("detailAddress").focus();
+      }
+  }).open();
+}
+
+/* 주소 검색버튼 클릭 시 */
+document.querySelector("#findAddressBtn")
+  ?.addEventListener("click", findAddress);
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ   ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/

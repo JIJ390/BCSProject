@@ -554,6 +554,7 @@ button[type="button"]:hover {
   align-items: flex-start;
   position: relative;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .signup-button-update {
@@ -569,6 +570,9 @@ button[type="button"]:hover {
   margin-left: 25px;
 }
 
+.signup-button-update:hover {
+  background-color: #bcbcbc;}
+
 .signup-button-delete {
   margin-top: 40px;
   width: 200px;
@@ -581,6 +585,10 @@ button[type="button"]:hover {
   cursor: pointer;
   margin-left: 25px;
 }
+
+.signup-button-delete:hover {
+  background-color: #bcbcbc;}
+
 
 .btn-container {
   display: flex;
