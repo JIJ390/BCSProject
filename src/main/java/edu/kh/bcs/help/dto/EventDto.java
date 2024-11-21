@@ -24,5 +24,7 @@ public class EventDto {
 		private String eventTitle;
 		private String eventContent;
 		private String eventThumbnail; // 썸네일 이미지
+		
+		private String max;
 
 }
