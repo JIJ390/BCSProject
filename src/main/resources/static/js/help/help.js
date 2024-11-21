@@ -49,3 +49,5 @@ const eventWrite = document.querySelector(".writeBtn");
 eventWrite.addEventListener("click", ()=>{
   location.href = '/help/eventWriteView';
 })
+
+console.log(eventList);

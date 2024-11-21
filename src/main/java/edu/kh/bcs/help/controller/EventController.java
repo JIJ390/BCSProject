@@ -1,6 +1,10 @@
 package edu.kh.bcs.help.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.EventPagination;
 import edu.kh.bcs.help.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +30,32 @@ public class EventController {
 	private final EventService service;
 	
 	
+	// 글쓰기 화면
 	@GetMapping("help/eventWriteView")
 	public String eventWriteGo() {
 		return "/help/eventWrite";
+	}
+	
+	
+	// 이벤트 리스트 보기
+	@GetMapping("help/event")
+	public String selectEventList(
+			@RequestParam(value="cp", required = false, defaultValue="1") int cp,
+			Model model
+			) {
+		
+		Map<String, Object> map = service.selectEventList(cp);
+		
+		List<EventDto> eventList = (List<EventDto>)map.get("eventList");
+		EventPagination pagination = (EventPagination)map.get("pagination");
+		
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("pagination", pagination);
+		
+		if(cp == 1) model.addAttribute("newMark", true);
+		
+		
+		return "help/event";
 	}
 	
 	
@@ -65,5 +93,11 @@ public class EventController {
 		return "redirect:" + path; // 임시 작성
 		
 	}
+	
+	
+	
+	
+	
+	
 
-}
+} // end

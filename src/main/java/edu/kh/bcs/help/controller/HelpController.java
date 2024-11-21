@@ -36,10 +36,10 @@ public class HelpController {
 	
 	
 	/* 이벤트 버튼 누르면 전환*/
-	@GetMapping("event")
-	public String event() {
-		return "help/event";
-	}
+//	@GetMapping("event")
+//	public String event() {
+//		return "help/event";
+//	}
 
 	
 	/* 공지사항 리스트 불러오기 */
