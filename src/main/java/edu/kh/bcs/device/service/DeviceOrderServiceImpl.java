@@ -59,8 +59,6 @@ public class DeviceOrderServiceImpl implements DeviceOrderService {
 			return -1;
 		}
 		
-		price = 1;
-		
 		Point point = new Point();
 		
 		point.setAmount(price);
