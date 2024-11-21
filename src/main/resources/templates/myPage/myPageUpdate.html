@@ -29,32 +29,38 @@
     <div  class="mypageUpdate-box"> <!-- 개인정보수정 박스 -->
         <div class="mypageUpdate-title">내정보 수정</div><br>
 
-        <form>
+        <form action="passwordChange" method="POST" name="pwChangeForm" id="pwChangeForm">
           <div class="update-group-1">
               <label for="passwordUpdate">비밀번호수정</label>
-              <input type="password" id="passwordUpdate" placeholder="현재 비밀번호를 입력해주세요.">
+              <input type="password" id="currentPw" name="currentPw" placeholder="현재 비밀번호를 입력해주세요.">
           </div>
+          
+          <div class="update-group-1">
+            <label for="newPassword">새 비밀번호</label>
+            <input type="password" id="newPw" name="newPw" placeholder="변경하시는 비밀번호를 입력해주세요.">
+          </div>
+          <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자 1글자 이상 6~20글자 사이로 입력해주세요.</span>
 
           <div class="update-group-1">
-              <label for="newPassword">새 비밀번호</label>
-              <input type="password" id="newPassword" placeholder="변경하시는 비밀번호를 입력해주세요.">
+              <label for="newPassword">새 비밀번호확인</label>
+              <input type="password" id="newPwConfirm" name="newPwConfirm" placeholder="변경하시는 비밀번호를 확인해주세요.">
           </div>
 
    
 
           <div class="update-group">
               <label for="addressChange">주소</label>
-              <input type="text" id="zipcode" placeholder="우편번호">
-              <button type="button" class="btn-address">검색</button>
-              <input type="text" id="road-address" placeholder="도로명 / 지번주소">
-              <input type="text" id="detail-address" placeholder="상세 주소">
+              <input type="text" id="postcode" name="postcode" placeholder="우편번호">
+              <button type="button" class="btn-address" id="findAddressBtn">검색</button>
+              <input type="text" id="address" placeholder="도로명 / 지번주소" >
+              <input type="text" id="detailAddress" placeholder="상세 주소">
           </div>
 
           <div class="btn-container">
             <button type="submit" class="signup-button-update">회원정보 수정</button>
             <button type="text" class="signup-button-delete">취소</button>
           </div>
-          <div class="withDraw">회원 탈퇴하기</div>
+          <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
       </form>
         
        
@@ -71,4 +77,5 @@
 
 </body>
 <script src="/js/myPage/myPage.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

@@ -87,13 +87,32 @@
 		WHERE MEMBER_EMAIL = #{email}
 		AND MEMBER_DEL_FL = 'N'
 	</select>
-	
+
+	<!-- 임시비밀번호로 세팅 -->	
 		<update id="updatePassword">
 		UPDATE "MEMBER"
 		SET MEMBER_PW = #{encPw} 
 		WHERE MEMBER_NO = #{memberNo}
 		AND MEMBER_DEL_FL = 'N'
 	</update>
+
+	<!-- 회원 탈퇴 -->
+		<update id="withdrawal">
+		UPDATE "MEMBER"
+		SET MEMBER_DEL_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+		</update>
+		
+	<!-- 비밀번호 변경 -->
+		<update id="passwordChange">
+			UPDATE "MEMBER"
+			SET MEMBER_PW = #{encPw}
+			WHERE MEMBER_NO = #{memberNo}
+			AND MEMBER_DEL_FL = 'N'
+		
+		</update>	
+		
+		
 
   	
 </mapper>
