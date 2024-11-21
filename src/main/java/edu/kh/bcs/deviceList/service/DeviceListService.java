@@ -22,6 +22,19 @@ public interface DeviceListService {
 	 */
 	List<Device> searchDetail(Map<String, Object> obj);
 
+
+	List<Device> phoneList(String category);
+
+
+	
+	
+
+
+
+
+
+	
+
 	
 
 

@@ -18,151 +18,6 @@ dep1.addEventListener("mouseleave", () => {
 })
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const galaxyPhoneLink = document.querySelector(".info li a[href='#']");
-//   const galaxyContent = document.getElementById("galaxy-content");
-//   const dropdown = document.querySelector('.dropdown');
-
-//   // 처음에 내용을 숨깁니다.
-//   galaxyContent.style.display = 'none';
-
-//   // "Galaxy Phone" 클릭 시 토글
-//   galaxyPhoneLink.addEventListener("click", function (event) {
-//       event.preventDefault(); // 기본 링크 동작을 막음
-
-//       // 내용을 토글(보이기/숨기기)합니다.
-//       if (galaxyContent.style.display === 'none') {
-//           galaxyContent.style.display = 'block';
-//       } else {
-//           galaxyContent.style.display = 'none';
-//       }
-//   });
-
-//   // 드롭다운 메뉴에서 마우스가 나갔을 때 숨기기
-//   dropdown.addEventListener("mouseleave", function () {
-//       galaxyContent.style.display = 'none';
-//   });
-// });
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  const galaxyPhoneLink = document.querySelector(".info li a[href='#']");
-  const galaxyContent = document.getElementById("galaxy-content");
-  const dropdownContainer = document.querySelector('.dropdownContainor');
-  const galaxyItems = document.querySelectorAll("#galaxy-content li");
-  const selectionMessage = document.querySelector(".sideMenu1 span");
-  const buy_phoneModels = document.getElementById("buy_phoneModels");
-  const sell_phoneModels = document.getElementById("sell_phoneModels");
-  const modelMessage = document.getElementById("selectionMessage");
-
-  // 처음에 내용을 숨깁니다.
-  galaxyContent.style.display = 'none';
-
-  // 메뉴 토글을 비동기적으로 처리
-  function toggleMenu(contentElement) {
-      return fetch('https://jsonplaceholder.typicode.com/posts/1') // 임의의 비동기 요청 (더미 API)
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('네트워크 응답에 문제가 있습니다.');
-              }
-              return response.json(); // 응답을 JSON으로 변환
-          })
-          .then(data => {
-              // 데이터를 가져온 이후 메뉴를 토글
-              if (contentElement.style.display === 'none') {
-                  contentElement.style.display = 'block';
-                  selectionMessage.style.display = 'none'; // "원하는 종류를 선택하세요" 메시지를 숨김
-                  modelMessage.style.display = 'block'; // "종류별" 메시지는 유지
-                  buy_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
-                  sell_phoneModels.style.display = 'block'; // 폰 모델 목록을 보이게 함
-              } else {
-                  contentElement.style.display = 'none';
-                  selectionMessage.style.display = 'block'; // 메시지를 다시 보이게 함
-                  modelMessage.style.display = 'none'; // "종류별" 메시지를 숨김
-                  buy_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
-                  sell_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
-              }
-          })
-          .catch(error => {
-              console.error('에러 발생:', error);
-          });
-  }
-
-  // "Galaxy Phone" 클릭 시 메뉴 토글
-  galaxyPhoneLink.addEventListener("click", function (event) {
-      event.preventDefault(); // 기본 링크 동작을 막음
-      toggleMenu(galaxyContent); // 비동기 방식으로 메뉴 토글
-  });
-
-
-  // 메뉴에서 마우스가 나갔을 때 메뉴 숨기기
-  dropdownContainer.addEventListener("mouseleave", function () {
-      galaxyContent.style.display = 'none';
-      selectionMessage.style.display = 'block'; // "원하는 종류를 선택하세요" 메시지를 다시 보이게 함
-      buy_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
-      sell_phoneModels.style.display = 'none'; // 폰 모델 목록을 숨김
-  });
-
-  // 각 갤럭시 메뉴 항목에 클릭 이벤트 추가 (필터 및 검색 기능 구현)
-  galaxyItems.forEach(item => {
-      item.addEventListener("click", function () {
-          // 기존에 active 클래스가 있는 항목에서 제거
-          galaxyItems.forEach(i => i.classList.remove("active"));
-          // 현재 클릭된 항목에 active 클래스 추가
-          item.classList.add("active");
-
-          // 선택된 항목의 텍스트를 서버로 전송하여 필터 요청 수행
-          const selectedModel = item.textContent;
-
-          // 비동기적으로 서버에 데이터 요청
-          fetch('https://example.com/api/filter', { // 서버 엔드포인트 주소
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ model: selectedModel }) // 서버로 선택된 모델 데이터 전송
-          })
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('네트워크 응답에 문제가 있습니다.');
-              }
-              return response.json();
-          })
-          .then(data => {
-              // 서버에서 필터링된 데이터를 받아온 후 화면에 표시
-              displayFilteredResults(data);
-          })
-          .catch(error => {
-              console.error('에러 발생:', error);
-          });
-      });
-  });
-
-
-  // 필터링된 결과를 화면에 표시하는 함수
-  function displayFilteredResults(data) {
-      // 여기에 필터링된 데이터를 HTML에 표시하는 로직을 작성하세요
-      // 예: 특정 섹션에 데이터를 추가하여 필터링된 제품 목록을 보여줌
-      const resultSection = document.getElementById('resultSection'); // 결과를 표시할 섹션 (가정)
-      resultSection.innerHTML = ''; // 기존 내용 초기화
-
-      data.forEach(item => {
-          const productElement = document.createElement('div');
-          productElement.className = 'product-item';
-          productElement.innerHTML = `
-              <h3>${item.name}</h3>
-              <p>${item.description}</p>
-              <p>가격: ${item.price}원</p>
-          `;
-          resultSection.appendChild(productElement);
-      });
-  }
-});
-
-
-
-
-
 dep2.addEventListener("mouseenter", () => {
   const main = document.querySelector("main")
   const footer = document.querySelector("footer")
@@ -176,3 +31,193 @@ dep2.addEventListener("mouseleave", () => {
   main.style.opacity = 1
   footer.style.opacity = 1
 })
+
+
+
+// document.querySelectorAll(".info li a").forEach((link) => {
+//     link.addEventListener("click", function (event) {
+//         event.preventDefault();
+
+//         let category = this.textContent.trim();
+
+//         // 카테고리 매핑
+//         const categoryMapping = {
+//             "iPhone": "Apple",
+//             "Galaxy Phone": "삼성",
+//             "Galaxy Tab": "GalaxyTab",
+//             "iPad": "iPad",
+//         };
+
+//         category = categoryMapping[category] || category;
+
+//         console.log(`Fetching data for category: ${category}`);
+
+//         fetch('/phoneList', {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: category,
+//         })
+//             .then((response) => {
+//                 if (!response.ok) {
+//                     throw new Error(`Server error: ${response.statusText}`);
+//                 }
+//                 return response.json();
+//             })
+//             .then((data) => {
+//                 console.log("Received data:", data);
+
+//                 const selectionMessage = document.querySelector("#selectionMessage");
+//                 if (selectionMessage) {
+//                     selectionMessage.style.display = "none"; // 메시지 숨기기
+//                 }
+
+//                 const container = document.querySelector(`#buy_phoneModels_galaxy`);
+//                 const moreButton = document.querySelector(`#moreButton`);
+//                 if (!container || !moreButton) {
+//                     console.error(`Container or More Button not found.`);
+//                     return;
+//                 }
+
+//                 container.innerHTML = ""; // 기존 콘텐츠 초기화
+//                 container.classList.add("active"); // 리스트 활성화
+//                 container.style.display = "grid"; // 보여주기
+
+//                 // 데이터 추가 (최대 6개)
+//                 data.slice(0, 6).forEach((device) => {
+//                     const li = document.createElement("li");
+//                     li.textContent = device.deviceName;
+//                     container.appendChild(li);
+//                 });
+
+//                 // "더보기 +" 버튼 표시 및 링크 설정
+//                 moreButton.style.display = "block";
+//                 moreButton.href = `/deviceList?category=${encodeURIComponent(category)}`; // 동적 링크 설정
+//             })
+//             .catch((error) => {
+//                 console.error("Error fetching devices:", error);
+//             });
+//     });
+// });
+
+// // 드롭다운 닫힐 때 초기화
+// document.querySelectorAll(".dropdownContainor").forEach((dropdown) => {
+//     dropdown.addEventListener("mouseleave", () => {
+//         const selectionMessage = document.querySelector("#selectionMessage");
+//         const container = document.querySelector(`#buy_phoneModels_galaxy`);
+//         const moreButton = document.querySelector(`#moreButton`);
+
+//         if (selectionMessage) {
+//             selectionMessage.style.display = "block"; // 메시지 다시 표시
+//         }
+
+//         if (container) {
+//             container.style.display = "none"; // 다시 숨기기
+//             container.innerHTML = ""; // 기존 항목 삭제
+//             container.classList.remove("active"); // 활성화 해제
+//         }
+
+//         if (moreButton) {
+//             moreButton.style.display = "none"; // "더보기 +" 버튼 숨기기
+//             moreButton.href = "/deviceList"; // 기본 링크 초기화
+//         }
+//     });
+// });
+
+
+document.querySelectorAll(".info li a").forEach((link) => {
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let category = this.textContent.trim();
+
+        // 카테고리 매핑
+        const categoryMapping = {
+            "iPhone": "Apple",
+            "Galaxy Phone": "SAMSUNG",
+            "Galaxy Tab": "Galaxy Tab",
+            "iPad": "iPad",
+        };
+
+        category = categoryMapping[category] || category;
+
+        console.log(`Fetching data for category: ${category}`);
+
+        fetch('/phoneList', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: category,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Received data:", data);
+
+                const selectionMessage = document.querySelector("#selectionMessage");
+                if (selectionMessage) {
+                    selectionMessage.style.display = "none"; // 메시지 숨기기
+                }
+
+                const container = document.querySelector(`#buy_phoneModels_galaxy`);
+                const moreButton = document.querySelector(`#moreButton`);
+                if (!container || !moreButton) {
+                    console.error(`Container or More Button not found.`);
+                    return;
+                }
+
+                container.innerHTML = ""; // 기존 콘텐츠 초기화
+                container.classList.add("active"); // 리스트 활성화
+                container.style.display = "grid"; // 보여주기
+                container.style.marginLeft = "-100px"; // 보여주기
+
+                
+
+                // 데이터 추가 (최대 6개)
+                data.slice(0, 6).forEach((device) => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.textContent = device.deviceName; // 링크 텍스트
+                    a.href = `/device/buy/${device.deviceNo}`; // 동적 링크 (예: 디바이스 상세 페이지)
+                    a.style.textDecoration = "none"; // 링크 스타일 (선택 사항)
+                    a.style.color = "inherit"; // 링크 색상 유지 (선택 사항)
+                    li.appendChild(a); // <li> 안에 <a> 추가
+                    container.appendChild(li); // <ul>에 <li> 추가
+                });
+
+                // "더보기 +" 버튼 표시 및 링크 설정
+                moreButton.style.display = "block";
+                moreButton.href = `/deviceList?category=${encodeURIComponent(category)}`; // 동적 링크 설정
+            })
+            .catch((error) => {
+                console.error("Error fetching devices:", error);
+            });
+    });
+});
+
+
+// 드롭다운 닫힐 때 초기화
+document.querySelectorAll(".dropdownContainor").forEach((dropdown) => {
+    dropdown.addEventListener("mouseleave", () => {
+        const selectionMessage = document.querySelector("#selectionMessage");
+        const container = document.querySelector(`#buy_phoneModels_galaxy`);
+        const moreButton = document.querySelector(`#moreButton`);
+
+        if (selectionMessage) {
+            selectionMessage.style.display = "block"; // '원하는 종류를 선택하세요' 다시 표시
+        }
+
+        if (container) {
+            container.style.display = "none"; // 리스트 숨기기
+            container.innerHTML = ""; // 리스트 초기화 (동적 <li> 삭제)
+            container.classList.remove("active"); // 활성화 해제
+        }
+
+        if (moreButton) {
+            moreButton.style.display = "none"; // 더보기 버튼 숨기기
+            moreButton.href = "/deviceList"; // 기본 링크로 초기화
+        }
+    });
+});

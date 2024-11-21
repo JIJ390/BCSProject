@@ -86,8 +86,15 @@
 	)
 	
 	
-	
 	</select>
-  
-  	
+	
+	
+
+	<select id="phoneList">
+		SELECT DEVICE_NO, DEVICE_NAME
+		FROM DEVICE
+		WHERE DEVICE_BRAND = #{category}
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	
+	</select>  	
 </mapper>
