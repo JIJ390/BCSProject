@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리뷰 작성 페이지</title>
+  <link rel="stylesheet" href="/css/review/reviewWrite.css">
+  <link rel="stylesheet" href="/css/common/header.css">
+  <link rel="stylesheet" href="/css/common/footer.css">
+</head>
+<body>
+  
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+  </header>
+  
+  <main>
+    <section class="left-section">
+    </section>
+    <section class="main-section" th:object="${orderDevice}">
+      <div class="device-nav" th:text="|*{deviceName} > *{colorName} > *{capacityType} > *{gradeType} 등급|"></div>
+      <div class="head-info">
+        <span>리뷰 수정</span>
+      </div> 
+
+      
+      <div class="star-container">
+        <div class="star-box">
+          <div class="star-star">
+            <img src="/images/review2/empty-star-left.png" alt="0.5점" class="star" data-value="0.5">
+            <img src="/images/review2/empty-star-right.png" alt="1점"   class="star" data-value="1">
+          </div>
+          <div class="star-star">
+            <img src="/images/review2/empty-star-left.png" alt="1.5점" class="star" data-value="1.5">
+            <img src="/images/review2/empty-star-right.png" alt="2점"   class="star" data-value="2">
+          </div>
+          <div class="star-star">
+            <img src="/images/review2/empty-star-left.png" alt="2.5점" class="star" data-value="2.5">
+            <img src="/images/review2/empty-star-right.png"alt="3점"   class="star" data-value="3">
+          </div>
+          <div class="star-star">
+            <img src="/images/review2/empty-star-left.png" alt="3.5점" class="star" data-value="3.5">
+            <img src="/images/review2/empty-star-right.png"alt="4점"   class="star" data-value="4">
+          </div>
+          <div class="star-star">
+            <img src="/images/review2/empty-star-left.png" alt="4.5점" class="star" data-value="4.5">
+            <img src="/images/review2/empty-star-right.png"alt="5점"   class="star" data-value="5">
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+      
+      <div class="review-container">
+        <form method="POST" 
+              th:action="|/review/update/${review.reviewNo}|" 
+              id="updateFrm" 
+              enctype="multipart/form-data">
+          <div class="review-head">
+
+            <div style="font-size: 48px; font-weight: bold; line-height: 60px;" th:text="${orderDevice.deviceName}"></div>
+  
+            <div class="img-box">
+  
+              <div class="preview-img-box">
+                <img class="preview-img" th:src="${review.reviewImg}"  onError="this.style.visibility='hidden'">
+              </div>
+  
+  
+              <label for="imgInput">
+                <img src="/images/review2/camera.png" alt="">
+              </label>
+              <input type="file" name="imgInput" id="imgInput" class="input-img" accept="image/*" >
+  
+            </div>
+  
+          </div>
+  
+          <textarea name="reviewContent" id="" placeholder="500자 이내로 리뷰를 작성해 주세요" th:text="${review.reviewContent}"></textarea>
+
+          <input type="text" name="reviewScore">
+
+        </form>
+      </div>
+
+
+      <div class="review-btn" id="updateBtn">수정하기</div>
+
+
+
+      <div class="close-popup preview-img-popup">
+        <img th:src="${review.reviewImg}" alt="" class="preview-img2">
+      </div>
+
+      
+      <div id="blackDisplay"></div>
+    </section>
+    <section class="right-section">
+    </section>
+  </main>
+  <footer>
+    <th:block th:replace="~{common/footer}"></th:block>
+  </footer>
+  <script th:inline="javascript">
+    const review = /*[[${review}]]*/ 리뷰;
+  </script>
+  <script src="/js/review/reviewUpdate.js"></script>
+
+</body>
+</html>

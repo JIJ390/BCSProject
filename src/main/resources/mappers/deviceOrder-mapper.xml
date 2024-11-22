@@ -132,7 +132,7 @@
 				 FROM "MEMBER"
 				 WHERE MEMBER_NO = #{memberNo}),
 				'핸드폰 구매', 
-				#{amount}, DEFAULT, #{memberNo})
+				-#{amount}, DEFAULT, #{memberNo})
 	</insert>
 	
 	
