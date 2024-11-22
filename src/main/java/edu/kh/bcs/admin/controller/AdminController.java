@@ -74,7 +74,14 @@ public class AdminController {
 		return "admin/adminEvent";
 	}
 	
-	//1:1 상담 목록
+	@GetMapping("adminProductinquiry")
+	public String adminProductinquiry(
+			) {
+		
+		return "admin/adminProductinquiry";
+	}
+	
+	
 	@GetMapping("adminChatList")
 	public String adminChatList() {
 		
