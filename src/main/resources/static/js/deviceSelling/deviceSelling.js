@@ -112,6 +112,17 @@ sellingBtn.addEventListener("click", e => {
 
   e.stopPropagation(); // 이벤트 전파 방지 팝업이 열리면서 꺼지는 현상 방지
 
+
+  // 로그인하지 않았을 시 
+  if(loginMember === null) {
+  
+    alert("로그인 후 이용해 주세요");
+    if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      location.href = "/myPage/myPageLogin";
+    }
+    return;
+  }
+
   const selectedColor = document.querySelector(".selected-color");
   const selectedCapacity = document.querySelector(".selected-capacity");
   const selectedGrade = document.querySelector(".selected-grade");
@@ -214,6 +225,17 @@ const sellingFrm = document.querySelector("#sellingFrm");
 // 판매 신청 유효성 검사
 sellingFrm.addEventListener("submit", e => {
 
+  // 로그인하지 않았을 시 
+  if(loginMember === null) {
+    e.preventDefault();
+
+    alert("로그인 후 이용해 주세요");
+    if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      location.href = "/myPage/myPageLogin";
+    }
+    return;
+  }
+
   const selectedColor = document.querySelector(".selected-color");
   const selectedCapacity = document.querySelector(".selected-capacity");
   const selectedGrade = document.querySelector(".selected-grade");
@@ -261,7 +283,7 @@ sellingFrm.addEventListener("submit", e => {
 
   const telTest = /^010[0-9]{8}$/;  // 010 으로 시작 이후 숫자 8개
   const accountTest = /^[0-9]{10,14}$/;   // 10 - 14 자리 숫자
-  const nameTest = /^[a-zA-Z0-9가-힣]{3,10}$/; // 한글,영어,숫자로만 3~10글자
+  const nameTest =  /^[가-힣]{2,10}$/;  // 한글 이름 유효성 검사
 
   const clientName = document.querySelector("#clientName");
   const accountNo = document.querySelector("#accountNo");
@@ -286,7 +308,7 @@ sellingFrm.addEventListener("submit", e => {
   }
 
   if (nameTest.test(clientName.value.trim()) === false) {
-    alert("올바른 형태의 이름을 입력해 주세요");
+    alert("2 글자 이상의 한글로 입력해 주세요");
 
     e.preventDefault();
     clientName.focus();

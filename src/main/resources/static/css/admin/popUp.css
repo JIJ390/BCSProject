@@ -16,7 +16,6 @@ html,
 body,
 main {
     width: 1600px;
-    height: 100%;
     margin: 0 auto;
 }
 
@@ -72,4 +71,8 @@ img{
 
 .popUp-close{
     display: none;
+}
+
+.close-btn{
+    cursor: pointer;
 }

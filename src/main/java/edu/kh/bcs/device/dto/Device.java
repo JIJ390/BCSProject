@@ -2,6 +2,8 @@ package edu.kh.bcs.device.dto;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Grade;
@@ -40,7 +42,16 @@ public class Device {
 	private String ramCapacity;
 	private String displaySize;
 	
+	private String deviceDate;
+	private String colorResult;
+	
+	
 	private List<Color> colorList;
 	private List<Grade> gradeList;
 	private List<Capacity> capacityList;
+	
+	
+	
+	//파일 업로드 편의성
+	private MultipartFile uploadFile; // 개발 편의성
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 자세히 보기</title>
+  <!-- <link rel="stylesheet" href="/css/help/help.css"> -->
+  <link rel="stylesheet" href="/css/help/help.css">
+  
+
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <th:block th:replace="~{common/header}"></th:block>
+
+  </header>
+  <main>
+    <section class="page-info">
+      <span>고객센터 &gt; 이벤트</span>
+    </section>
+    <section class="helpView">
+      <div class="help-container">
+        <div class="button-area">
+            <a href="/help/notice">
+              <div class="helpIconBox">
+                <img src="/images/help/notice.png">
+                <div class="iconText">공지사항</div>
+              </div>
+            </a>
+            
+            <a href="/help/faq">
+              <div class="helpIconBox">
+                <img src="/images/help/faq.png">
+                <div class="iconText">FAQ</div>
+              </div>
+            </a>
+              
+            <a href="/help/event">  
+              <div class="helpIconBox">
+                <img src="/images/help/event.png">
+                <div class="iconText">이벤트</div>
+              </div>
+            </a>
+        </div>
+        <div class="event-list-area">
+          <div class="event">
+            <div th:object="${notice}">
+              <div class="notice-view-subject">
+                <div class="sub-icon"><img src="/images/help/sub-notice.png"></div>
+                <div class="sub-title" th:text="*{noticeTitle}">제목 영역</div>
+                <div class="sub-date" th:text="*{noticeWriteDate}">작성 게시일 영역</div>
+              </div>
+              <hr>
+              <div class="event-view-image" th:text="*{noticeContent}">이벤트 이미지</div>
+              <div class="notice-view-content" th:text="*{noticeContent}">내용</div>
+              <hr>
+            </div>
+            </div>
+          </div>
+        <div class="goToList">
+          <div class="goToListBtn" onclick="history.back()">목록으로</div>
+        </div>
+    </section>
+  </main>
+  <th:block th:replace="~{common/footer}"></th:block>
+  
+
+  <script>
+    const haederNav =  document.getElementsByClassName("header-nav")[0];
+    const pageInfoSpan = document.querySelector(".page-info > span");
+
+    const movePageIngo = () => {
+      const rect = haederNav.getBoundingClientRect();
+      pageInfoSpan.style.marginLeft = rect.x + 'px';
+    }
+
+    window.addEventListener("resize", movePageIngo);
+
+    movePageIngo();
+  </script>
+  <script src="https://kit.fontawesome.com/ac3b627b7e.js" crossorigin="anonymous"></script>
+  <script src="/js/help/help.js"></script>
+  <script th:inline="javascript">
+      const pagination = /*[[${pagination}]]*/ "페이지네이션객체";
+  </script>
+</body>
+</html>

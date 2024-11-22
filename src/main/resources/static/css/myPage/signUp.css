@@ -355,7 +355,7 @@ input[type="password"] {
 }
 
 .idPwFind1{
-  margin-left: 255px;
+  margin-left: 205px;
 }
 
 .xBtn{
@@ -364,18 +364,18 @@ input[type="password"] {
 }
 
 .popup {
-    width: 650px;
-    margin: 100px auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /* position: absolute; */
-    display: none;
-    margin-top: -332px;
-    margin-left: -124px;
-    z-index: 999;
-    background: white;
+  width: 550px;
+  margin: 100px auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: none;
+  margin-top: -332px;
+  margin-left: -93px;
+  z-index: 999;
+  background: white;
 }
 
 .popup-header {
@@ -407,11 +407,12 @@ input[type="password"] {
   display: block;
 }
 
-form {
+.form1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 
 input[type="text"] {
   padding: 8px;
@@ -444,6 +445,24 @@ button[type="button"]:hover {
 /*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 
 
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 2 ㅡ ㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.idConfirm{
+  width: 240px;
+  height: 100px;
+  /* margin: 100px auto; */
+  border: 1px solid #ccc;
+  display: none;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  margin-left: 52px;
+  top: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 1000;
+  background: beige;
+
+}
 
 
 
@@ -535,6 +554,7 @@ button[type="button"]:hover {
   align-items: flex-start;
   position: relative;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .signup-button-update {
@@ -550,6 +570,9 @@ button[type="button"]:hover {
   margin-left: 25px;
 }
 
+.signup-button-update:hover {
+  background-color: #bcbcbc;}
+
 .signup-button-delete {
   margin-top: 40px;
   width: 200px;
@@ -562,6 +585,10 @@ button[type="button"]:hover {
   cursor: pointer;
   margin-left: 25px;
 }
+
+.signup-button-delete:hover {
+  background-color: #bcbcbc;}
+
 
 .btn-container {
   display: flex;

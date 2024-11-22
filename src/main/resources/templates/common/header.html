@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +10,15 @@
     <link rel="stylesheet" href="/css/common/header.css">
 
     <script src="https://kit.fontawesome.com/b289d4a0af.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
     <!-- Header -->
     <header id="mainHeader" class="main-header">
         <nav class="header-nav">
-            <ul><a href="/"><img src="/images/logo.png" alt=""></a></ul>
+            <ul>
+                <a href="/"><img src="/images/logo.png" alt=""></a>
+            </ul>
             <ul class="dep1">
                 <a href="#">쇼핑하기</a>
                 <div class="dropdown" id="dropdown">
@@ -32,7 +32,7 @@
                         <div class="sideMenuContainer">
                             <div class="sideMenu1">
                                 <h5 style="margin-bottom: 5px;">구매하기</h5>
-                                <span style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+<!--                                 <span style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
                                 <p id="selectionMessage" style="display: none; margin-top: 30px; font-weight: bold;">종류별
@@ -54,7 +54,24 @@
                                     </div>
                                 </ul>
                             </div>
-                            <div class="sideMenu3">
+                            <div class="sideMenu3"> -->
+                                <span id="selectionMessage" style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+                            </div>
+                            <div class="sideMenu2" id="galaxy-content">
+                                <ul class="grid-list" id="buy_phoneModels_galaxy" style="display: none;"></ul>
+                                <a href="/deviceList/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
+                            </div>
+                            <div class="sideMenu2" id="iphone-content">
+                                <ul class="grid-list" id="buy_phoneModels_iphone" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
+                            </div>
+                            <div class="sideMenu2" id="galaxytab-content">
+                                <ul class="grid-list" id="buy_phoneModels_galaxytab" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
+                            </div>
+                            <div class="sideMenu2" id="ipad-content">
+                                <ul class="grid-list" id="buy_phoneModels_ipad" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
                             </div>
                         </div>
                     </div>
@@ -74,7 +91,7 @@
                         <div class="sideMenuContainer">
                             <div class="sideMenu1">
                                 <h5 style="margin-bottom: 5px;">판매하기</h5>
-                                <span style=" color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+<!--                                 <span style=" color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
                                 <p id="selectionMessage" style="display: none; margin-top: 30px; font-weight: bold;">종류별
@@ -97,7 +114,24 @@
                         </div>
                     </div>
                 </div>
-            </ul>
+            </ul> -->
+                                <span style="color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+                            </div>
+                            <div class="sideMenu2" id="sell_galaxy-content">
+                                <ul id="sell_phoneModels_galaxy" style="display: none;"></ul>
+                            </div>
+                            <div class="sideMenu2" id="sell_iphone-content">
+                                <ul id="sell_phoneModels_iphone" style="display: none;"></ul>
+                            </div>
+                            <div class="sideMenu2" id="sell_galaxytab-content">
+                                <ul id="sell_phoneModels_galaxytab" style="display: none;"></ul>
+                            </div>
+                            <div class="sideMenu2" id="sell_ipad-content">
+                                <ul id="sell_phoneModels_ipad" style="display: none;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ul>
             <ul><a href="/help/notice">고객센터</a></ul>
         </nav>
@@ -106,10 +140,9 @@
             <div th:unless="${session.loginMember}">
                 <a href="/myPage/myPageLogin">로그인</a> | <a href="/signUp/signUpAccount">회원가입</a>
             </div>
-
             <div class="menu-container" th:if="${session.loginMember}">
 
-                <p class="sideP" th:text="${session.loginMember.memberName}"></p>
+<!--                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
 
                 <a href="/myPage/myPageMain" class="sideItem">마이 페이지</a>
                 <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a>
@@ -125,15 +158,24 @@
 
     <script src="/js/common/header.js"></script>
 
+    <th:block th:replace="~{common/sidebar}"></th:block> -->
+                <p class="sideP" th:text="${session.loginMember.memberName}"></p>
+                <a href="/myPage/myPageMain" class="sideItem">마이 페이지</a>
+                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a>
+                <a href="/myPage/logout" class="sideItem">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <script src="/js/common/header.js"></script>
     <th:block th:replace="~{common/sidebar}"></th:block>
+    <script src="/js/common/sidebar.js"></script>
     <script th:inline="javascript">
         const notificationLoginCheck = /*[[${session.loginMember} ? true : false ]]*/ false;
         const notificationLoginNo = /*[[${session.loginMember} ? ${session.loginMember.memberNo} : 0 ]]*/ 0;
     </script>
     <script src="/js/common/sidebar.js"></script>
     <script src="/js/sse/sse.js"></script>
-
-
 </body>
 
 </html>

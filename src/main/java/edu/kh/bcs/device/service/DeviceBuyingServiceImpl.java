@@ -74,4 +74,22 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	public int selectGrade(Map<String, Integer> map) {
 		return mapper.selectGrade(map);
 	}
+	
+	
+	// 시세표
+	@Override
+	public List<Map<String, String>> selectPriceList(int deviceNo) {
+		return mapper.selectPriceList(deviceNo);
+	}
+	
+	
+	// 세부 가격 정보
+	@Override
+	public Map<String, String> priceStatus(int deviceNo) {
+		
+		return mapper.priceStatus(deviceNo);
+	}
+	
+	
+
 }

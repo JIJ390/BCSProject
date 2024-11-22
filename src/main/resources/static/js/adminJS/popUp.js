@@ -14,3 +14,37 @@ closeBtn.addEventListener('click', () => {
 
 
 
+const deviceNos = document.querySelectorAll(".deviceNo");
+const androidImg = document.querySelectorAll(".android-img");
+for (let i = 0; i < androidImg.length; i++) {
+    androidImg[i].addEventListener("click", () => {
+
+        let result = Number(deviceNos[i].textContent);
+        console.log(result);
+        /* 팝업 켜짐 */
+        popUpLayer.classList.remove('popUp-close');
+
+        fetch("/admin/popUpData", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: result
+        })
+            .then(response => {
+                if (response.ok) return response.text();
+                throw new Error("목록 조회 실패")
+            })
+            .then(result => {
+                document.querySelector("#popUp-tbody").innerHTML = result;
+                console.log(result);
+                
+            })
+            .catch(err => console.error(err));
+    });
+}
+
+
+
+
+
+
+

@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
@@ -20,6 +24,22 @@ public interface AdminService {
 	 * @return
 	 */
 	List<Device> deviceList();
+
+
+	/** 팝업 색 가져오기
+	 * @param deviceNo 
+	 * 
+	 * @return
+	 */
+	List<Color> popUpData(int result);
+
+	//검색 조건
+	List<Device> adminSearch(String search);
+
+
+
+
+
 
 
 
@@ -43,5 +63,22 @@ public interface AdminService {
 	int chatRead(int chattingRoomNo, int memberNo);
 
 	int firstArCheck(int memberNo);
+
+	/** 이미지 내용 전달
+	 * 
+	 * @param deviceText divce 내용
+	 * @param colorText	color 내용
+	 * @param Grade Grade 내용
+	 * @param divceImg img 1 개 
+	 * @param colorImg img 6 개 
+	 * @return
+	 */
+	int textContent(Device device, Color color, 
+			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
+			MultipartFile divceImg);
+
+
+	
+	
 
 }

@@ -1,9 +1,10 @@
 package edu.kh.bcs.deviceList.service;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.kh.bcs.device.dto.Device;
-import edu.kh.bcs.deviceList.dto.Filter;
+
 
 public interface DeviceListService {
 
@@ -14,9 +15,29 @@ public interface DeviceListService {
 	List<String> selectFilterListByType(String filterType);
 
 	
+	/**
+	 * 검색
+	 * @param obj : ram, hdd, inch
+	 * @return
+	 */
+	List<Device> searchDetail(Map<String, Object> obj);
+
+
+	List<Device> phoneList(String category);
+
+
 	
 	
-	String searchDetail(Filter filter);
+
+
+
+
+
+	
+
+	
+
+
 
 	
 	

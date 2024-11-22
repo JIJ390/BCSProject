@@ -1,22 +1,31 @@
 
 
-
 html, body, main {
   background-color: var(--main-gray-color);
-
-  width: 1600px;
-  height: 100%;
 
   margin: 0 auto;
 
   color: var(--font-color);
 }
 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
+
+  margin-bottom: 100px;
+}
 
 .device-order-compl-head {
   width: 100%;
-  padding: 20px;
+
+  margin: 20px 0;
+
+  padding: 10px;
 }
 
 .page-title {
@@ -25,7 +34,7 @@ html, body, main {
 }
 
 .device-order-compl-container {
-  width: 940px;
+  width: 1000px;
 
 
   background-color: var(--white-color);
@@ -36,6 +45,8 @@ html, body, main {
 
   display: flex;
   flex-direction: column;
+
+  margin-bottom: 60px;
 }
 
 .span1 {
@@ -57,4 +68,133 @@ html, body, main {
 .device-img {
   width: 500px;
   height: 400px;
+}
+
+
+.device-order-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-info-sub {
+  font-size: 20px;
+  margin: 10px 0;
+  padding-left: 15px;
+}
+
+
+hr {
+  width: 100%;
+}
+
+.point-box {
+  width: 100%;
+
+  display: flex;
+  align-items: end;
+  justify-content: end;
+
+}
+
+
+.point-box >span {
+  width: 22%;
+  font-size: 24px;
+
+  padding: 10px;
+  text-align: right;
+
+  font-family: 'Pretendard-Thin';
+}
+
+
+
+
+.status-container {
+  width: 1000px;
+  background-color: var(--white-color);
+  
+  margin: 0 20px;
+  margin-top: 30px;
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+}
+.status-container >div {
+  margin: 10px;
+}
+
+.status-title {
+  display: inline-block;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+
+.order-info {
+  display: flex;
+
+  margin: 20px 0;
+
+  padding-left: 10px;
+}
+
+.order-info > span:first-child {
+  font-size: 20px;
+  width: 150px;
+}
+
+.order-info > span:last-child {
+  font-size: 20px;
+  width: 500px;
+}
+
+.adress-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.adress-area > span {
+  font-size: 20px;
+  width: 500px;
+}
+
+.info-box {
+  width: 100%;
+
+  text-align: center;
+
+  font-size: 32px;
+
+  margin: 20px 0;
+
+  margin-top: 100px;
+}
+
+
+
+.check-btn {
+  width: 400px;
+  height: 60px;
+
+  margin-top: 80px;
+
+  background-color: var(--white-color);
+
+  border: 2px solid var(--white-color);
+  border-radius: 15px;
+
+  font-size: 22px;
+
+  transition-duration: 0.1s;
+}
+
+.check-btn:hover {
+  border: 2px solid var(--main-color);
+  cursor: pointer;
 }

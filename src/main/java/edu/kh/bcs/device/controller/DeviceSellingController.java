@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.bcs.device.service.DeviceSellingService;
+import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
 import lombok.RequiredArgsConstructor;
@@ -68,11 +71,20 @@ public class DeviceSellingController {
 	@PostMapping("accept/{deviceNo}")
 	public String acceptSellingDevice(
 			@ModelAttribute SellingDevice sellingDevice,
-			@PathVariable("deviceNo") int deviceNo
+			@PathVariable("deviceNo") int deviceNo,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			RedirectAttributes ra
 			) {
 		
+		// 로그인 하지 않았을 시
+		if (loginMember == null) {
+			ra.addFlashAttribute("message", "로그인 후 이용해 주세요");
+			return "redirect:/myPage/myPageLogin";
+		}
+		
+		
 		// 세션 로그인으로 가져올 예정
-		int memberNo = 13;
+		int memberNo = loginMember.getMemberNo();
 		
 		sellingDevice.setDeviceNo(deviceNo);
 		sellingDevice.setMemberNo(memberNo);
@@ -86,17 +98,20 @@ public class DeviceSellingController {
 	@GetMapping("compl/{sellingDeviceNo}")
 	public String deviceSellCompl(
 			@PathVariable("sellingDeviceNo") int sellingDeviceNo,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			RedirectAttributes ra,
 			Model model) {
 		
 		SellingDevice sellingDevice = service.selectSellingDevice(sellingDeviceNo);
 		
-		// 추후 로그인 정보에 따라 접근 불가 지정해야함
-		
-		log.info("sellingDevice : {}", sellingDevice);
-		log.info("sellingDevice : {}", sellingDevice);
-		log.info("sellingDevice : {}", sellingDevice);
-		log.info("sellingDevice : {}", sellingDevice);
-		
+
+		// 로그인 하지 않았을 시
+		// sellingDevice 가 없을 시
+		// 다른 회원 정보로 접근 시
+		if ((loginMember == null) || (sellingDevice == null) || (loginMember.getMemberNo() != sellingDevice.getMemberNo())) {
+			ra.addFlashAttribute("message", "잘못된 접근입니다");
+			return "redirect:/";
+		}
 		
 		model.addAttribute("sellingDevice", sellingDevice);
 		

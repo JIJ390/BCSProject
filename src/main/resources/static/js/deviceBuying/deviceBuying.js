@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // 용량 재고 확인
       checkSelectedCapacity(colorNo, capacityNumber, capacity);
 
-      expectedPrice();
     })
   })
 
@@ -89,11 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // 등급 재고 확인
       checkSelectedGrade(colorNo, capacityNumber, gradeNumber, grade);
     
-      expectedPrice();
     })
   })
 
 })
+
+
+
+
+
+
+
 
 
 // 비동기 동기로 전환/ 색상 선택 시 재고 확인
@@ -235,7 +240,7 @@ const checkSelectedCapacity = async (colorNo, capacityNumber, capacity) => {
   
     // 선택 클래스 추가
     capacity.classList.add('selected-capacity');
-
+    expectedPrice();
 
   } catch(err) {
     console.log(err);
@@ -278,7 +283,7 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
     
     // 선택 클래스 추가
     grade.classList.add('selected-grade');
-
+    expectedPrice();
 
   } catch(err) {
     console.log(err);
@@ -295,8 +300,102 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
 
 
 
+const buyingFrm = document.querySelector("#buyingFrm");
+
+// 유효성 검사
+buyingFrm.addEventListener("submit", e => {
+
+  // 로그인하지 않았을 시 
+  if(loginMember === null) {
+    e.preventDefault();
+
+    alert("로그인 후 이용해 주세요");
+    if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      location.href = "/myPage/myPageLogin";
+    }
+    return;
+  }
+
+  const selectedColor = document.querySelector(".selected-color");
+  const selectedCapacity = document.querySelector(".selected-capacity");
+  const selectedGrade = document.querySelector(".selected-grade");
+  
+  const colorContent = document.querySelector(".color-content");
+  const capacityContent = document.querySelector(".capacity-content");
+  const gradeContent = document.querySelector(".grade-content");
+
+  if (selectedColor === null) {
+    e.preventDefault();
+    alert("색상을 선택해 주세요");
+
+    const scrollPosition = colorContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
 
 
+    return;
+  }
+
+  if (selectedCapacity === null) {
+    e.preventDefault();
+    alert("용량을 선택해 주세요");
+
+    const scrollPosition = capacityContent.offsetTop;
+
+    window.scrollTo({
+      top : scrollPosition - 150 , 
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+  if (selectedGrade === null) {
+    e.preventDefault();
+    alert("등급을 선택해 주세요");
+
+    const scrollPosition = gradeContent.offsetTop;
+
+
+    window.scrollTo({
+      top : scrollPosition - 150 ,
+      behavior : "smooth" 
+    });
+
+    return;
+  }
+
+
+  // 결제 페이지에서 뒤로 가기 시 여러 개의 input 태그가 쌓여 오류 발생 해결 
+  // form 내부의 모든 input 태그 가져오기
+  const inputs = e.target.querySelectorAll('input');
+  // 각 input 태그를 삭제
+  inputs.forEach(input => input.remove());
+
+
+
+  const input1 = document.createElement("input");
+  input1.name = "colorNo";
+  input1.type = "hidden";
+  input1.value = selectedColor.getAttribute("data-value");
+
+  const input2 = document.createElement("input");
+  input2.name = "capacityNumber";
+  input2.type = "hidden";
+  input2.value = selectedCapacity.getAttribute("data-value");
+
+
+  const input3 = document.createElement("input");
+  input3.name = "gradeNumber";
+  input3.type = "hidden";
+  input3.value = selectedGrade.getAttribute("data-value");
+
+  e.target.append(input1, input2, input3);
+
+});
 
 
 
@@ -346,63 +445,6 @@ const expectedPrice = () => {
 
 
 
-const buyingBtn = document.querySelector("#buyingBtn");
-
-// 유효성 검사
-buyingBtn.addEventListener("click", e => {
-
-  // 로그인 관련 검사 추가해야함
-
-  const selectedColor = document.querySelector(".selected-color");
-  const selectedCapacity = document.querySelector(".selected-capacity");
-  const selectedGrade = document.querySelector(".selected-grade");
-  
-  const colorContent = document.querySelector(".color-content");
-  const capacityContent = document.querySelector(".capacity-content");
-  const gradeContent = document.querySelector(".grade-content");
-
-  if (selectedColor === null) {
-    alert("색상을 선택해 주세요");
-
-    const scrollPosition = colorContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-
-    return;
-  }
-
-  if (selectedCapacity === null) {
-    alert("용량을 선택해 주세요");
-
-    const scrollPosition = capacityContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 , 
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-  if (selectedGrade === null) {
-    alert("등급을 선택해 주세요");
-
-    const scrollPosition = gradeContent.offsetTop;
-
-    window.scrollTo({
-      top : scrollPosition - 150 ,
-      behavior : "smooth" 
-    });
-
-    return;
-  }
-
-});
-
 
 
 
@@ -437,16 +479,103 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   };
 
+  const centerTextPlugin = {
+    id: 'centerTextPlugin',
+    beforeDraw: (chart) => {
+        const { width, height, ctx } = chart;
+
+        // 텍스트 설정
+        const text = "최근 거래가 존재하지 않습니다";
+        const fontSize = 40; // 텍스트 크기
+        ctx.save();
+        ctx.font = `${fontSize}px Pretendard-Regular`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // 캔버스 중앙 좌표 계산
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        // 텍스트 그리기
+        ctx.fillStyle = 'gray'; // 텍스트 색상
+        ctx.fillText(text, centerX, centerY);
+        ctx.restore();
+    }
+};
+
   // Register the plugin
   Chart.register(verticalLinePlugin);
+
+  if (priceList.length === 0) {
+    Chart.register(centerTextPlugin);
+  }
+
+
+
+  const date = new Date();
+
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let currentDate = `${year}.${month}`;
+
+  console.log(currentDate);
+
+  document.querySelector(".current-date").innerText = currentDate;
+
+  // 월별 조회
+  const priceArr = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+  // 12 번 반복
+  for(let i = 0; i < 12; i ++) {
+
+    priceList.forEach((item) => {
+
+      priceArr[i].month = i + 1
+
+      if ((i + 1) == item.month.substr(-2)) {
+        priceArr[i].avgPrice = item.avgPrice 
+      }
+    })
+  }
+
+
+  // let maxPrice = 0;
+  // let minPrice = 9999999999;
+  
+
+  // console.log(priceList);
+
+  // priceList.forEach((item) => {
+  //   if (item.avgPrice > maxPrice) {
+  //     maxPrice = item.avgPrice
+  //   }
+
+  //   if (item.avgPrice < minPrice) {
+  //     minPrice = item.avgPrice
+  //   }
+  // })
+
+  // if (document.querySelector(".max-price") !== null) {
+  //   document.querySelector(".max-price").innerText = maxPrice.toLocaleString('ko-KR') + ' ₩';
+  // }
+
+  // if (document.querySelector(".min-price") !== null) {
+  //   document.querySelector(".min-price").innerText = minPrice.toLocaleString('ko-KR') + ' ₩';
+  // }
+
 
   const myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', ''],
+          labels: ['', 1, 2, 3, 4, 
+                       5, 6, 7, 8,
+                       9, 10, 11, 12, ''],
           datasets: [{
               label: '', // 라벨을 빈 문자열로 설정하여 숨김
-              data: [null, 1000000, 1200000, 1400000, 1500000, 1300000, 1100000, 1400000, 1600000, 1200000, 1300000, 1000000, 1000000],
+              data: [null, priceArr[0].avgPrice, priceArr[1].avgPrice, priceArr[2].avgPrice, priceArr[3].avgPrice, 
+                           priceArr[4].avgPrice, priceArr[5].avgPrice, priceArr[6].avgPrice, priceArr[7].avgPrice,
+                           priceArr[8].avgPrice, priceArr[9].avgPrice, priceArr[10].avgPrice, priceArr[11].avgPrice, null],
               fill: false,
               borderColor: 'rgba(29, 29, 31, 1)',
               pointRadius: 0, // 데이터 포인트 표시 숨기기

@@ -15,6 +15,8 @@ import lombok.ToString;
 @ToString
 public class HelpDto {
 	
+	// 공지사항용
+	
 	private int noticeNumber;
 	private String noticeTitle;
 	private String noticeContent;

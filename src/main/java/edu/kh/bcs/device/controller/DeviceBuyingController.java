@@ -38,15 +38,26 @@ public class DeviceBuyingController {
 			Model model
 			) {
 		
+		// 기종 상세 정보
 		Device device = service.selectDetailDevice(deviceNo);
 		
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
+		// 시세표 조회
+		List<Map<String, String>> priceList = service.selectPriceList(deviceNo);
+		
+		// 전체 
+		Map<String, String> priceStatus = service.priceStatus(deviceNo);
+		
+		
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
 		
 		
 		model.addAttribute("device", device);
+		model.addAttribute("priceList", priceList);
+		model.addAttribute("priceStatus", priceStatus);
 		
 		return "deviceBuying/deviceBuying";
 		

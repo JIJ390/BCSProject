@@ -2,6 +2,7 @@ package edu.kh.bcs.deviceList.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.device.dto.Device;
-import edu.kh.bcs.deviceList.dto.Filter;
 import edu.kh.bcs.deviceList.service.DeviceListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +44,28 @@ public class DeviceListController {
 
 	@PostMapping("searchDetail")
 	@ResponseBody
-	public String searchDetail(
-			@RequestBody Filter filter)  {
+	public List<Device> searchDetail(
+			@RequestBody Map<String, Object> obj)  {
 		
-		return service.searchDetail(filter);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
+//		log.debug("obj : {}", obj);
 		
+		
+		return service.searchDetail(obj);
+		
+	};
+	
+
+	@PostMapping("phoneList")
+	@ResponseBody
+	public List<Device> phoneList(
+			@RequestBody String category){
+		
+		return service.phoneList(category);
 	}
 }
+	

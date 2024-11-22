@@ -171,16 +171,156 @@ AND CHATTING_ROOM_NO = #{chattingRoomNo}
 	
 	
 	<select id="deviceList" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+ORDER BY
+	DEVICE_DATE DESC
+	</select>
+	
+	<select id="popUpData" resultType="Color">
+	
+	SELECT 
+		COLOR_DEVICE_IMG,
+		COLOR_NAME,  
+		COUNT(BUYING_DEVICE_NO) colorResult
+	FROM 
+		COLOR
+	JOIN 
+	   (
+	   	SELECT * FROM DEVICE WHERE DEVICE_NO=#{result}
+	   ) USING (DEVICE_NO)
+	LEFT JOIN 
+			(
+			SELECT * FROM BUYING_DEVICE WHERE SOLD_FL = 'N'
+			) USING (COLOR_NO)
+	GROUP BY 
+		COLOR_DEVICE_IMG,COLOR_NAME, DEVICE_NAME
+	</select>
 	
 	
-	
-	
+	<select id="adminSearch" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+WHERE 
+	DEVICE_NAME LIKE '%' || #{search} || '%'
+ORDER BY
+	DEVICE_DATE DESC
 	</select>
 	
 	
 	
 	
-	
+	<!-- 기종 등록 -->
+	<insert id="device">
+			
+	INSERT INTO 
+		"DEVICE"
+	VALUES (
+	   SEQ_DEVICE_NO.NEXTVAL,
+	   TO_DATE (#{deviceReleaseDate}, 'YYYY-MM-DD'),
+	   #{deviceReleasePrice},
+	   #{deviceImg},
+	   #{deviceOs},
+	   #{deviceResolution},
+	   #{devicePixel},
+	   #{deviceFrontPixel},
+	   #{deviceBackPixel},
+	   DEFAULT, DEFAULT,
+	   #{deviceWeight},
+	   #{deviceBatteryCapacity},
+	   #{deviceName},
+	   #{deviceBuyingPrice},
+	   #{deviceSellingPrice},
+	   #{deviceBrand},
+	   #{ramCapacity},
+	   #{deviceCpuName},
+	   #{displaySize}
+	)
+	</insert>
+
+<!--DEVICENO 하나 가져오기 -->
+<select id="selectDeviceNo">
+	SELECT
+		MAX(DEVICE_NO)
+	FROM
+		DEVICE
+	ORDER BY 
+		DEVICE_NO DESC
+</select>
+
+
+<insert id="colorInsert">
+
+INSERT INTO
+	COLOR
+		(COLOR_NO, 
+		COLOR_NAME, 
+		COLOR_CODE, 
+		COLOR_DEVICE_IMG, 
+		DEVICE_NO)
+	VALUES
+		(SEQ_COLOR_NO.NEXTVAL, 
+		#{colorName}, 
+		#{colorCode}, 
+		#{colorDeviceImg}, 
+		#{deviceNo})
+</insert>
+
+
+<insert id="grade">
+INSERT INTO 
+	GRADE
+VALUES
+	(SEQ_GRADE_NO.NEXTVAL,
+	#{gradeTypeOrly},
+	#{gradePriceOrly},
+	#{gradeSellPriceOrly},
+	#{deviceGetNo})
+</insert>
+
+
+
+
+
 	
 	
 </mapper>

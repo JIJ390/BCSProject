@@ -80,5 +80,23 @@ public interface DeviceBuyingService {
 	int selectGrade(Map<String, Integer> map);
 
 
+	/**
+	 * 시세표 조회
+	 * @param deviceNo
+	 * @return
+	 */
+	List<Map<String, String>> selectPriceList(int deviceNo);
+
+
+	/**
+	 * 가격 정보
+	 * @param deviceNo
+	 * @return
+	 */
+	Map<String, String> priceStatus(int deviceNo);
+
+
+
+
 
 }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>배최성 표준 html </title>
+  <title>BCS 로그인페이지 </title>
   <link rel="stylesheet" href="/css/myPage/signUp.css">
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
@@ -58,50 +58,67 @@
           </div>
 
           
-          <!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-          
-                    <div class="popup">
-                      <div class="idPwText">
-                        <div class="idPwFind1">아이디 비밀번호 찾기 </div>
-                        <span class="xBtn">x</span>
-                      </div>
-                      <div class="popup-header">
-                        <button type="button"  class="tab-button active" data-tab="id-search">아이디 찾기</button>
-                        <button type="button"  class="tab-button" data-tab="pw-search">비밀번호 찾기</button>
-                      </div>
-                      <div class="popup-content">
-                        <div class="tab-content active" id="id-search">
-                          <form>
-                            <label>가입자 이메일</label>
-                            <input type="text" placeholder="가입자 이메일 입력">
-                            <label>이메일</label>
-                            <input type="text" placeholder="asdf@naver.com">
-                            <input type="text" placeholder="인증번호 입력">
-                            <button type="button">인증번호받기</button>
-                            <button type="submit">아이디 찾기</button>
-                          </form>
-                          <p>입력하신 정보는 아이디를 조회하는 용도로만 사용됩니다.</p>
-                        </div>
-                        <div class="tab-content" id="pw-search">
-                          <form>
-                            <label>가입자 이메일</label>
-                            <input type="text" placeholder="가입자 이메일 입력">
-                            <label>가입자 이메일</label>
-                            <input type="text" placeholder="가입자 이메일 입력">
-                            <label>이메일</label>
-                            <input type="text" placeholder="asdf@naver.com">
-                            <input type="text" placeholder="인증번호 입력">
-                            <button type="button">인증번호받기</button>
-                            <button type="submit">비밀번호 찾기</button>
-                          </form>
-                          <p>입력하신 정보는 비밀번호를 조회하는 용도로만 사용됩니다.</p>
-                        </div>
-                      </div>
-                    </div>
-          <!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
+         
         </form>
 
+         <!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+          
+         <div class="popup">
+          <div class="idPwText">
+            <div class="idPwFind1">아이디 비밀번호 찾기 </div>
+            <span class="xBtn">x</span>
+          </div>
+          <div class="form1">
+            <div class="popup-header">
+              <button type="button"  class="tab-button active" data-tab="id-search">아이디 찾기</button>
+              <button type="button"  class="tab-button" data-tab="pw-search">비밀번호 찾기</button>
+            </div>
+          </div>
+          <div class="popup-content">
+            <div class="tab-content active" id="id-search">
+              <div class="form1">
+                <input type="text" class="idFind" placeholder="가입자 이메일 입력" name="memberEmail" id="memberEmail">
+                <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+
+                <input type="text" class="idFind memberName" placeholder="가입자 이름 입력" name="memberName" id="memberName">
+                <span class="signUp-message" id="nameMessage">이름을 입력해주세요</span>
+
+                <input type="text" class="idFind AuthKey" placeholder="인증번호 입력" maxlength="6">
+                <span class="signUp-message" id="authKeyMessage"></span>
+                <button type="button" class="getNumber" id="sendAuthKeyBtn">인증번호받기</button>
+                
+                <button type="button" class="findId">아이디 찾기</button>
+              </div>
+              <p>입력하신 정보는 아이디를 조회하는 용도로만 사용됩니다.</p>
+            </div>
+            <div class="tab-content" id="pw-search">
+              <div class="form1">
+                <input type="text" class="idFind memberName" placeholder="가입자 아이디 입력" name="memberId" id="memberId">
+                <span class="signUp-message" id="idMessage">영어,숫자 6글자~14글자 사이로 입력해주세요.</span>
+
+                <input type="text" class="idFind memberName2" placeholder="가입자 이름 입력" name="memberName">
+                <span class="signUp-message nameMessage" id="nameMessage">이름을 입력해주세요</span>
+
+                <input type="text" class="idFind AuthKey" placeholder="인증번호 입력"  maxlength="6" id="authKey1">
+                <span class="signUp-message" id="authKeyMessage2"></span>
+
+                <button type="button" class="getNumber" id="getNumberPw">인증번호받기</button>
+                <button type="button" class="checkAuthKeyBtn3" id="checkAuthKeyBtn3">인증하기</button>
+
+                <button type="button" class="findPw" id="sendEmail">비밀번호 찾기</button>
+              </div>
+              <p>입력하신 정보는 비밀번호를 조회하는 용도로만 사용됩니다.</p>
+            </div>
+          </div>
+        </div>
+<!--@@@@@@@@@@@@@@@@@@@@@@@ 팝업레이어창 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+        <section class="idConfirm">
+          회원님의 아이디는<div class="idResult"></div>입니다.
+          
+
+          <br><button class="idConfirmBtn">확인</button>
+          
+        </section>
 
       </div>
 
@@ -115,7 +132,11 @@
 
 </body>
 <script src="/js/myPage/myPage.js"></script>
+<script th:inline="javascript">
+  const message =  /*[[${message}]]*/ "전달 받은 message";
 
+  if(message != null) alert(message);
+</script>
 
 
 

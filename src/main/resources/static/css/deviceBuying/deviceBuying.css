@@ -353,3 +353,14 @@ hr {
   opacity: 0.3;
   pointer-events: none; 
 }
+
+.graph-info {
+  width: 100%;
+  text-align: left;
+
+  padding-left: 35px;
+
+  padding-top: 10px;
+
+  color: gray;
+}
