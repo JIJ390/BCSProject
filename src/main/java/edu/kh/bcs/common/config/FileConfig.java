@@ -56,6 +56,13 @@ public class FileConfig implements WebMvcConfigurer{
 	
 	//---------------------------------------------------------------------------
 	
+	// 리뷰 
+	@Value("${my.review.resource-handler}")
+	private String reviewResourceHandler;			//
+	
+	@Value("${my.review.resource-location}")
+	private String reviewResourceLocation;		// 
+	
 
 	/* MultipartResolver 설정 */
 	@Bean
@@ -98,6 +105,10 @@ public class FileConfig implements WebMvcConfigurer{
 		registry
 		.addResourceHandler(eventResourceHandler)					// /images/review/**
 		.addResourceLocations(eventResourceLocation);			// file:///C:/uploadFiles/review/
+		
+		registry
+		.addResourceHandler(reviewResourceHandler)					
+		.addResourceLocations(reviewResourceLocation);			
 		
 	}
 	

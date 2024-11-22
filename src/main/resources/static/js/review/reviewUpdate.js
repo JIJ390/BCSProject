@@ -1,7 +1,10 @@
 const stars = document.querySelectorAll(".star");
-let selectedRating = 0;
+let selectedRating = Math.round(review.reviewScore * 2) / 2;
+
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  highlightStars(selectedRating);
   
   stars.forEach((star, index) => {
 
@@ -188,11 +191,10 @@ imgPopUp.addEventListener("click", e => {
 
 
 
-const insertBtn = document.querySelector("#insertBtn");
+const updateBtn = document.querySelector("#updateBtn");
 
 
-insertBtn.addEventListener("click", () => {
-
+updateBtn.addEventListener("click", () => {
 
   // 별점 선택 유효성 검사
   if (!(selectedRating > 0 && selectedRating <= 5)) {
@@ -208,23 +210,16 @@ insertBtn.addEventListener("click", () => {
     return;
   }
 
-  // 이미지 선택 유효성 검사
- 
-  if(inputImage.value.trim().length === 0) {
-    alert("대표 이미지를 선택해 주세요");
-    e.preventDefault();
-    return;
-  }
+  // 수정 페이지는 이미지 유효성 검사 없음
 
-
-  const insertFrm = document.querySelector("#insertFrm")
+  const updateFrm = document.querySelector("#updateFrm")
 
   const input = document.querySelector("[name=reviewScore]");
   input.value = selectedRating;
 
   console.log(input.value);
 
-  insertFrm.append(input);
+  updateFrm.append(input);
 
-  insertFrm.submit();
+  updateFrm.submit();
 })
