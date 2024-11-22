@@ -364,3 +364,72 @@ hr {
 
   color: gray;
 }
+
+
+.review-container {
+  width: 940px;
+
+  margin-top: 20px;
+  margin-bottom: 200px;
+
+}
+
+.review-head-box {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 40px;
+}
+
+.review-title {
+  font-size: 48px;
+
+  font-weight: bold;
+
+
+}
+
+.star-container {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 32px;
+
+}
+
+.star-text {
+  padding-top: 14px;
+}
+
+.star-star{
+  display: flex;
+  margin: 1px;
+}
+
+.star-box {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.star {
+  width: 16px;
+}
+
+.review-content-box {
+  width: 100%;
+  height: 100px;
+  
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+
+  padding: 20px;
+  margin: 20px 0;
+}
