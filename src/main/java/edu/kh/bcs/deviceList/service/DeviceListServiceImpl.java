@@ -94,7 +94,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	@Override
 	public List<Device> phoneList(String category) {
 		
-		log.debug("category : {}", category);
+//		log.debug("category : {}", category);
 		return mapper.phoneList(category);
 	}
 
