@@ -316,6 +316,39 @@ public class AdminController {
 		return "admin/memberManage";
 	}
 	
+	// galaxy 시리즈
+	@GetMapping("event/galaxy")
+	public String galaxy(
+			Model model,
+			@RequestParam("series") String series
+			) {
+		
+		List<Device> deviceList = service.galaxyA(series);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		return "admin/adminEvent/deviceType";
+	}
+	// iPhone 시리즈
+	@GetMapping("event/iPhone")
+	public String iPhone(
+			Model model,
+			@RequestParam("series") String series
+			) {
+		
+		List<Device> deviceList = service.iPhone(series);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		
+		return "admin/adminEvent/deviceType";
+	}
+	
+	
 	
 	
 	

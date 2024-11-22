@@ -167,6 +167,41 @@ public class AdminServiceImpl implements AdminService {
 	public int chatRead(int chattingRoomNo, int memberNo) {
 		return mapper.chatRead(chattingRoomNo, memberNo);
 	}
+	
+	@Override
+	public List<Device> galaxyA(String series) {
+		
+		if(series.equals("A")) {
+			return mapper.galaxyA();
+		}
+		if(series.equals("S")) {
+			return mapper.galaxyS();
+		}
+		if(series.equals("Filp")) {
+			return mapper.galaxyFilp();
+		}
+		else if(series.equals("Fold")) {
+			
+			return mapper.galaxyFold();
+		}
+		else {
+			return mapper.galaxyTab();
+		}
+		
+	}
+	
+	@Override
+	public List<Device> iPhone(String series) {
+		if(series.equals("number")) {
+			return mapper.iPhone();
+		}
+		if(series.equals("X")) {
+			return mapper.iPhoneX();
+		}
+		else {
+			return mapper.iPad();
+		}
+	}
 
 
 	// ============================================기종 등록

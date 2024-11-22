@@ -65,25 +65,172 @@
         }
 
         .event-add-popup {
-            width: 800px;
-            height: 800px;
+            width: 500px;
+            height: 630px;
             position: absolute;
             border: 1px solid black;
             background-color: white;
             display: flex;
             flex-direction: column;
-
+            padding: 15px;
+            
             left: 0;
             right: 0;
-            margin: 0 auto;
+            margin: 50px auto;
             transition: all 0.2s;
             opacity: 0;
-
+            
         }
 
         .event-add-popup-hidden {
             display: none;
         }
+
+        .event-link-popup{
+            width: 700px;
+            height: 300px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: white;
+            display: flex;
+
+            flex-direction: column;
+            padding: 15px;
+            left: 0;
+            right: 0;
+            margin: 174px auto;
+            transition: all 0.2s;
+            opacity: 0;
+            z-index: 3;
+        }
+
+        .event-link-popup-hidden {
+            display: none;
+        }
+
+        .event-popup-X{
+            background-color: white;
+            border: 0;
+            width: 100px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+        .event-update-btn{
+            margin: auto; 
+            width: 100px; 
+            height: 40px; 
+            border: 1px solid gray; 
+            border-radius: 10px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .event-thumbnail-img{
+            width: 70%; 
+            height: 30%; 
+            border: 1px solid black;
+            margin: 0 auto;
+            text-align: end;
+            padding: 10px;
+
+            object-fit: contain;
+
+        }
+
+        .event-thumbnail-X{
+            font-size: 30px;
+        }
+
+        .event-link-select{
+            width: 25%;
+            height: 100%;
+            border: 1px solid cyan;
+
+            overflow-y: auto;
+            
+        }
+        .event-link-select::-webkit-scrollbar{
+            display: none;
+        }
+
+        .event-link-select-button1{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button1:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button2{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button2:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button3{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button3:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button4{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 15px;
+
+        }
+        .event-link-select-button4:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 15px;
+
+        }
+
+
     </style>
 </head>
 
@@ -91,8 +238,29 @@
     <th:block th:replace="~{common/header}"></th:block>
 
     <div class="event-add-popup event-add-popup-hidden">
-        <div><p style="font-size: 30px; ">이벤트 추가하기</p></div>
-        <div style="width: 70%; height: 30%; border: 1px solid black; margin: 0 auto;"></div>
+        <div style="display: flex; justify-content: space-between;"><p style="font-size: 30px; ">이벤트 추가하기</p> <button class="event-popup-X">X</button></div>
+        <div style="font-size: 30px; margin-bottom: 10px;">제목 : <input style="border: 1px solid gray; width: 70%; height: 30px; " type="text"></div>
+        <img class="event-thumbnail-img" src="/images/help/파일업로드.png"></img>
+        <div style="margin-bottom: 20px;"><p style="font-size: 25px;">썸내일 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload(this)" accept="image/*"></div>
+        <div><p>이벤트 상세 내용</p></div>
+        <div><textarea style="width: 400px; height: 100px; resize: none;  outline: none;"></textarea></div>
+        <div style="display: flex;"><p>배너 클릭시 링크 연결</p><button class="event-selectDevice" style="width: 40px; height: 20px; border: 1px solid gray; background-color: white;">+</button></div>
+        <div><p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 제품 번호</p></div>
+        <div><p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 제품 이름</p></div>
+        <div class="event-update-btn" style="margin: auto; width: 100px; height: 40px; border: 1px solid gray; border-radius: 10px; display: flex; justify-content: center; align-items: center;">추가하기</div>
+    </div>
+
+    <div class="event-link-popup event-link-popup-hidden">
+        <div style="width: 100%; height: 16%; display: flex; justify-content: space-between; border-bottom: 1px solid gray;"><p style="font-size: 30px;">디바이스 선택</p><p class="link-popup-X" style="font-size: 30px;">X</p></div>
+        <div style="width: 100%; height: 84%; border: 1px solid magenta; display: flex; ">
+            <div class="event-link-select">
+                <div class="event-link-select-button1">Samsung</div>
+                <div class="event-link-select-button1">Apple</div>
+            </div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+        </div>
     </div>
 
     <div class="admin-event-main">
@@ -149,11 +317,14 @@
     <th:block th:replace="~{common/footer}"></th:block>
 
     <script>
+
+        /* 뒤로가기 */
         const backBtn = document.querySelector(".member-mamage-backBtn");
         backBtn.addEventListener("click", () => {
             location.href = "http://localhost/admin";
         })
-
+        
+        /* 팝업 열고 닫기 */
         const addBtn = document.querySelector('.admin-event-add');
         const popup = document.querySelector(".event-add-popup");
 
@@ -165,11 +336,339 @@
                 popup.classList.remove("event-add-popup-hidden");
                 return;
             }
+            if(!popup.classList.contains("event-add-popup-hidden") && !linkpopup.classList.contains("event-link-popup-hidden")){
+                preventDefault();
+            }
             popup.style.opacity = 0;
             setTimeout(() => {
                 popup.classList.add("event-add-popup-hidden");
             }, 150);
         })
+
+        /* X 버튼 팝업 닫기 */
+        const popupXbtn = document.querySelector(".event-popup-X");
+        popupXbtn.addEventListener("click", () => {
+            if(!popup.classList.contains("event-add-popup-hidden") && !linkpopup.classList.contains("event-link-popup-hidden")){
+                preventDefault();
+            }
+            popup.style.opacity = 0;
+            setTimeout(() => {
+                popup.classList.add("event-add-popup-hidden");
+            }, 150);
+        })
+
+
+        /* 파일 이미지 업로드 시 썸네일 화면 미리보기 출력 */
+        const eventThumbnailUpload = (file) => {
+
+            const thumbnail = document.querySelector(".event-thumbnail-img");
+
+            if(file.files && file.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    thumbnail.src = e.target.result;
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else{
+                thumbnail.src ="/images/help/파일업로드.png";
+            }
+
+        }
+
+        /* 링크 걸기 위해 디바이스 찾는 팝업 열기 */
+        const linkBtn = document.querySelector(".event-selectDevice");
+        const linkpopup = document.querySelector(".event-link-popup");
+        linkBtn.addEventListener("click", () => {
+            if (linkpopup.classList.contains("event-link-popup-hidden")) {
+                setTimeout(() => {
+                    linkpopup.style.opacity = 1;
+                }, 50);
+                linkpopup.classList.remove("event-link-popup-hidden");
+                return;
+            }
+            linkpopup.style.opacity = 0;
+            setTimeout(() => {
+                linkpopup.classList.add("event-link-popup-hidden");
+            }, 150);
+        })
+
+        /* 링크 팝업 닫기 버튼  */
+        const linkXBtn = document.querySelector(".link-popup-X");
+        linkXBtn.addEventListener("click", () => {
+            linkpopup.style.opacity = 0;
+            setTimeout(() => {
+                linkpopup.classList.add("event-link-popup-hidden");
+            }, 150);
+        })
+
+
+        /* 기종 선택 화면 삼성,애플 선택버튼 */
+        const selectArea = document.querySelectorAll(".event-link-select");
+        const button1 = document.querySelectorAll(".event-link-select-button1");
+
+        // 삼성
+        button1[0].addEventListener('click', () => {
+
+            // 갤럭시 갤럭시탭
+            const galaxy = document.createElement("div");
+            const galaxyTab = document.createElement("div");
+
+            galaxy.classList.add("event-link-select-button2")
+            galaxy.innerText = 'Galaxy'
+            galaxyTab.innerText = 'Galaxy Tab'
+            galaxyTab.classList.add("event-link-select-button2")
+
+            // 클릭 시 이벤트
+            galaxy.addEventListener("click", () => {
+
+                // 갤럭시 a, s, fold, filp 시리즈 출력
+                const galaxyA = document.createElement("div");
+                const galaxyS = document.createElement("div");
+                const galaxyFilp = document.createElement("div");
+                const galaxyFold = document.createElement("div");
+
+                galaxyA.classList.add("event-link-select-button3")
+                galaxyA.innerText = "galaxy A"
+                galaxyS.classList.add("event-link-select-button3")
+                galaxyS.innerText = "galaxy S"
+                galaxyFilp.classList.add("event-link-select-button3")
+                galaxyFilp.innerText = "galaxy Filp"
+                galaxyFold.classList.add("event-link-select-button3")
+                galaxyFold.innerText = "galaxy Fold"
+
+                    // 버튼 클릭 시 갤럭시 시리즈별로 출력 
+                    galaxyA.addEventListener("click" , () => {
+                        fetch("/admin/event/galaxy?series=A")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                    })
+                    galaxyS.addEventListener("click" , () => {
+                        fetch("/admin/event/galaxy?series=S")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                    })
+                    galaxyFilp.addEventListener("click" , () => {
+                        fetch("/admin/event/galaxy?series=Filp")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                    })
+                    galaxyFold.addEventListener("click" , () => {
+                        fetch("/admin/event/galaxy?series=Fold")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                    })
+
+
+
+
+
+
+                selectArea[2].replaceChildren();
+                selectArea[3].replaceChildren();
+
+                selectArea[2].append(galaxyA)
+                selectArea[2].append(galaxyS)
+                selectArea[2].append(galaxyFilp)
+                selectArea[2].append(galaxyFold)
+
+            })
+
+
+            galaxyTab.addEventListener("click", () => {
+
+                // 갤탭 시리즈 출력
+                const galaxyTab = document.createElement("div");
+
+                galaxyTab.classList.add("event-link-select-button3")
+                galaxyTab.innerText = "galaxy Tab S"
+
+                selectArea[2].replaceChildren();
+                selectArea[3].replaceChildren();
+
+                galaxyTab.addEventListener("click" , () => {
+                        fetch("/admin/event/galaxy?series=Tab")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                    })
+
+                selectArea[2].append(galaxyTab)
+
+            })
+
+
+            selectArea[1].replaceChildren();
+            selectArea[2].replaceChildren();
+            selectArea[3].replaceChildren();
+
+            selectArea[1].append(galaxy)
+            selectArea[1].append(galaxyTab)
+
+        })
+        // 애플
+        button1[1].addEventListener('click', () => {
+
+            // 아이폰 아이패드
+            const Iphone = document.createElement("div");
+            const Ipad = document.createElement("div");
+
+            Iphone.classList.add("event-link-select-button2")
+            Iphone.innerText = 'iPhone'
+            Ipad.innerText = 'iPad'
+            Ipad.classList.add("event-link-select-button2")
+
+            //  클릭 시 이벤트
+            Iphone.addEventListener("click", () => {
+
+                // 아이폰 숫자, X 시리즈 출력
+                const iPhone1 = document.createElement("div");
+                const iPhoneX = document.createElement("div");
+
+                iPhone1.classList.add("event-link-select-button3")
+                iPhone1.innerText = "iPhone"
+                iPhoneX.classList.add("event-link-select-button3")
+                iPhoneX.innerText = "iPhone X"
+
+                iPhone1.addEventListener("click", () => {
+                    fetch("/admin/event/iPhone?series=number")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                })
+                iPhoneX.addEventListener("click", () => {
+                    fetch("/admin/event/iPhone?series=X")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                })
+
+
+
+
+
+                selectArea[2].replaceChildren();
+                selectArea[3].replaceChildren();
+
+                selectArea[2].append(iPhone1)
+                selectArea[2].append(iPhoneX)
+
+
+            })
+
+            Ipad.addEventListener("click", () => {
+
+                // 아이패드 시리즈 출력
+                const iPad = document.createElement("div");
+
+                iPad.classList.add("event-link-select-button3")
+                iPad.innerText = "iPad"
+
+                iPad.addEventListener("click", () => {
+                    fetch("/admin/event/iPhone?series=Pad")
+                        .then(Response => {
+                            if(Response.ok){
+                                return Response.text();
+                            }
+                            throw new Error("시리즈 조회 실패")
+                        })
+                        .then(html => {
+                            selectArea[3].innerHTML = html;
+                            getDeviceLink();
+                        })
+                })
+
+                selectArea[2].replaceChildren();
+                selectArea[3].replaceChildren();
+
+                selectArea[2].append(iPad)
+
+            })
+
+
+            selectArea[1].replaceChildren();
+            selectArea[2].replaceChildren();
+            selectArea[3].replaceChildren();
+
+            selectArea[1].append(Iphone)
+            selectArea[1].append(Ipad)
+
+        })
+
+
+        /* 이벤트 링크 기종 선택 시 이벤트 */
+        const getDeviceLink = () => {
+
+            const deviceBtn = document.querySelectorAll(".event-link-select-button4");
+            for(let i = 0; i < deviceBtn.length; i++){
+                deviceBtn[i].addEventListener("click", () => {
+                    if(deviceBtn[i].innerText === '검색 결과 없음'){
+                        return;
+                    }
+                    document.querySelectorAll(".admin-event-link")[0].innerText = deviceBtn[i].dataset.deviceNo;
+                    document.querySelectorAll(".admin-event-link")[1].innerText = deviceBtn[i].dataset.deviceName;
+                    document.querySelector(".link-popup-X").click();
+                })
+            }
+
+        }
+
+
+
+
 
 
 

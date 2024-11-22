@@ -108,5 +108,21 @@ public interface AdminMapper {
 			@Param("gradeTypeOrly") String gradeTypeOrly,  
 			@Param("deviceGetNo") int deviceGetNo);
 
+	List<Device> galaxyA();
+
+	List<Device> galaxyS();
+
+	List<Device> galaxyFilp();
+
+	List<Device> galaxyFold();
+
+	List<Device> galaxyTab();
+
+	List<Device> iPhone();
+
+	List<Device> iPhoneX();
+
+	List<Device> iPad();
+
 
 }

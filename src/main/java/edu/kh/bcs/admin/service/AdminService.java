@@ -77,6 +77,10 @@ public interface AdminService {
 			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
 			MultipartFile divceImg);
 
+	List<Device> galaxyA(String series);
+
+	List<Device> iPhone(String series);
+
 
 	
 	
