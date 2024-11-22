@@ -164,6 +164,9 @@ document.querySelector("#inch-filter").addEventListener("click", () => {
 searchFilter.appendChild(clearAllBtn);
 
 
+
+
+
 // 필터 검색
 const searchBtn = document.querySelector("#searchBtn").addEventListener("click", () => {
 
@@ -185,6 +188,8 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
   inchList.forEach((item, index) => {
     obj[`inch${index}`] = item.getAttribute("data-value");
   })
+
+  
   
   if(Object.keys(obj).length === 0){
     alert("하나 이상의 필터를 선택해 주세요")
@@ -192,9 +197,24 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
 
     return
   }
-  // console.log(obj);
 
-  
+
+  // 쿼리스트링 브랜드 값 가져오기
+  const url = new URL(location.href);
+  const brandSearch = url.searchParams.get("category");
+
+  // 객체에 값 담기
+  obj['brand'] = brandSearch;
+
+  console.log(brand);
+
+
+  // 검색일 때
+  if (brand !== undefined) {
+    console.log(brand);
+    obj['brand'] = brand;
+  }
+
 
   fetch('/searchDetail', {
     method : "POST",
@@ -260,172 +280,82 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
 })
 
 
+const dataBrand = document.querySelectorAll("[data-brand]");
 
+let brand
 
+dataBrand.forEach(filter => {
+  // 각 요소에 클릭 이벤트 리스너 추가
+  filter.addEventListener("click", () => {
+    brand = filter.getAttribute("data-brand"); // 클릭된 요소의 data-brand 값 가져오기
 
+    // 기존 선택 초기화
+    dataBrand.forEach(el => el.classList.remove("selected"));
 
+    // 콘솔 출력
+    console.log(brand); 
+    
 
+    fetch(`/brandList?brand=${brand}`)
+    .then(response => {
+      if(response.ok) {
+        return response.json();
+      }
+      throw new Error("데이터 요청 실패")
+    })
+    .then(result => {
+      console.log(result);
 
-
-// // DOM 요소 가져오기
-// const brandFilters = document.querySelectorAll("#galaxyFilter, #galaxyTabFilter, #iPhoneFilter, #iPadFilter");
-// const filterContainer = document.querySelector(".filter-container");
-// const searchContainer = document.querySelector(".search-container");
-
-// // 선택 상태 저장 객체
-// const filterState = {
-//   brand: null,
-//   filters: {
-//     ram: [],
-//     hdd: [],
-//     inch: []
-//   }
-// };
-
-// // 브랜드 클릭 이벤트
-// brandFilters.forEach((brandFilter) => {
-//   brandFilter.addEventListener("click", () => {
-//     const brandMap = {
-//       galaxyFilter: "SAMSUNG",
-//       galaxyTabFilter: "SAMSUNGTAB",
-//       iPhoneFilter: "Apple",
-//       iPadFilter: "AppleTab"
-//     };
-
-//     // 브랜드 상태 업데이트
-//     filterState.brand = brandMap[brandFilter.id];
-
-//     // 선택된 브랜드 스타일 업데이트
-//     brandFilters.forEach((el) => el.classList.remove("active-brand"));
-//     brandFilter.classList.add("active-brand");
-
-//     console.log("선택된 브랜드:", filterState.brand);
-
-//     // 브랜드 선택 후 필터 초기화
-//     initializeFilters();
-//   });
-// });
-
-// // 필터 초기화 함수
-// function initializeFilters() {
-//   fetch(`/initializeFilters?brand=${filterState.brand}`)
-//     .then((response) => {
-//       if (response.ok) return response.json();
-//       throw new Error("필터 초기화 실패");
-//     })
-//     .then((filters) => {
-//       renderFilters(filters);
-//     })
-//     .catch((err) => console.error(err));
-// }
-
-// // 필터 렌더링 함수
-// function renderFilters(filters) {
-//   const { ram, hdd, inch } = filters;
-//   filterContainer.innerHTML = "";
-
-//   // 각 필터 추가
-//   renderFilterList("RAM", ram, "ram");
-//   renderFilterList("용량", hdd, "hdd");
-//   renderFilterList("화면 크기", inch, "inch");
-// }
-
-// // 개별 필터 리스트 생성
-// function renderFilterList(title, list, type) {
-//   const filterGroup = document.createElement("div");
-//   filterGroup.classList.add("filter-group");
-
-//   const titleElement = document.createElement("h4");
-//   titleElement.textContent = title;
-//   filterGroup.appendChild(titleElement);
-
-//   list.forEach((item) => {
-//     const filterItem = document.createElement("div");
-//     filterItem.textContent = item;
-//     filterItem.classList.add("filter-item");
-
-//     // 클릭 이벤트 추가
-//     filterItem.addEventListener("click", () => {
-//       toggleFilter(type, item);
-//       filterItem.classList.toggle("selected-filter");
-//       console.log("선택된 필터:", filterState.filters);
-//     });
-
-//     filterGroup.appendChild(filterItem);
-//   });
-
-//   filterContainer.appendChild(filterGroup);
-// }
-
-// // 필터 추가/제거
-// function toggleFilter(type, value) {
-//   const filterList = filterState.filters[type];
-//   if (filterList.includes(value)) {
-//     filterState.filters[type] = filterList.filter((item) => item !== value);
-//   } else {
-//     filterState.filters[type].push(value);
-//   }
-// }
-
-// // 검색 버튼 이벤트
-// searchContainer.querySelector("#searchBtn").addEventListener("click", () => {
-
-//   const requestPayload = {
-//     brand: filterState.brand,
-//     filters: filterState.filters
-//   };
-
-//   console.log(requestPayload);
-
-//   fetch("/searchByBrandAndFilters", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(requestPayload)
-//   })
-//     .then((response) => {
-//       if (response.ok) return response.json();
-//       throw new Error("검색 실패");
-//     })
-//     .then((result) => {
-//       updateSearchResults(result);
-//     })
-//     .catch((err) => console.error(err));
-// });
-
-// // 검색 결과 업데이트
-// function updateSearchResults(results) {
-//   const itemsContainer = document.querySelector(".deviceList-items-container");
-//   itemsContainer.innerHTML = "";
-
-//   results.forEach((item) => {
-//     const itemBox = document.createElement("div");
-//     itemBox.classList.add("deviceList-item-box");
-
-//     const itemSection = document.createElement("div");
-//     itemSection.classList.add("deviceList-item-section");
-
-//     const imgElement = document.createElement("img");
-//     imgElement.src = item.deviceImg || "/images/default_image.png";
-//     imgElement.alt = item.deviceName || "이름 없음";
-
-//     const nameElement = document.createElement("div");
-//     nameElement.textContent = item.deviceName || "이름 없음";
-
-//     const priceElement = document.createElement("div");
-//     priceElement.textContent = item.deviceBuyingPrice
-//       ? `${item.deviceBuyingPrice.toLocaleString()}원`
-//       : "가격 정보 없음";
-
-//     itemSection.appendChild(imgElement);
-//     itemSection.appendChild(nameElement);
-//     itemSection.appendChild(priceElement);
-//     itemBox.appendChild(itemSection);
-//     itemsContainer.appendChild(itemBox);
-//   });
-// }
-
-
-
+    // 기존 내용을 초기화
+    const itemsContainer = document.querySelector(".deviceList-items-container");
+    itemsContainer.innerHTML = "";
+  
+    // 새로운 데이터로 업데이트
+    result.forEach(item => {
+      // 데이터에서 필요한 정보 추출
+      const deviceName = item.deviceName || "이름 없음";
+      const devicePrice = item.deviceBuyingPrice ? `${item.deviceBuyingPrice.toLocaleString()}원` : "가격 정보 없음";
+      const deviceImg = item.deviceImg || "/images/default_image.png"; // 기본 이미지 처리
+  
+      // 아이템 박스 생성
+      const itemBox = document.createElement("div");
+      itemBox.classList.add("deviceList-item-box");
+  
+      // 아이템 섹션 생성
+      const itemSection = document.createElement("div");
+      itemSection.classList.add("deviceList-item-section");
+  
+      // 이미지 요소 생성
+      const imgElement = document.createElement("img");
+      imgElement.src = deviceImg;
+      imgElement.alt = deviceName;
+  
+      // 이름 요소 생성
+      const nameElement = document.createElement("div");
+      nameElement.style.marginTop = "15px";
+      nameElement.textContent = deviceName;
+  
+      // 가격 요소 생성
+      const priceElement = document.createElement("div");
+      priceElement.textContent = devicePrice;
+  
+      // 섹션에 요소 추가
+      itemSection.appendChild(imgElement);
+      itemSection.appendChild(nameElement);
+      itemSection.appendChild(priceElement);
+  
+      // 박스에 섹션 추가
+      itemBox.appendChild(itemSection);
+  
+      // 컨테이너에 박스 추가
+      itemsContainer.appendChild(itemBox);
+    });
+  })
+    .catch(error => {
+      console.error(err);
+    })
+  })
+})
 
 
 

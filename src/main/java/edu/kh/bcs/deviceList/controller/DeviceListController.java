@@ -56,6 +56,7 @@ public class DeviceListController {
 //		log.debug("obj : {}", obj);
 //		log.debug("obj : {}", obj);
 		
+
 		
 		return service.searchDetail(obj);
 		
@@ -69,5 +70,16 @@ public class DeviceListController {
 		
 		return service.phoneList(category);
 	}
+	
+	@GetMapping("brandList")
+	@ResponseBody
+	public List<Device> brandList(
+			@RequestParam("brand") String brand) {
+		
+		log.debug("브랜드 값 : {}", brand);
+		return service.brandList(brand);
+	}
+	
+	
 }
 	
