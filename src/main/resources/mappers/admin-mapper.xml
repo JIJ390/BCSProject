@@ -169,6 +169,77 @@ AND CHATTING_ROOM_NO = #{chattingRoomNo}
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<select id="galaxyA">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% A%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyS">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% S%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyFilp">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Flip%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyFold">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Fold%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyTab">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Tab%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPhone">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPhone%'
+		AND NOT DEVICE_NAME LIKE '% X%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPhoneX">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPhone%'
+		AND DEVICE_NAME LIKE '% X%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPad">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPad%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	
 	
 	<select id="deviceList" resultType="Device">
 SELECT 
