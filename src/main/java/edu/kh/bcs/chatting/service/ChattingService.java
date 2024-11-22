@@ -6,4 +6,6 @@ public interface ChattingService {
 
 	int insertMessage(ChattingMessage msg);
 
+	String getSenderName(int senderNo);
+
 }

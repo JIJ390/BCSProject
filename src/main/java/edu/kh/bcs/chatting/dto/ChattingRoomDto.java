@@ -9,11 +9,12 @@ import lombok.ToString;
 @ToString
 public class ChattingRoomDto {
 	  private int chattingRoomNo;
+	  private String chattingRoomCreateDate;
+	  private int adminNo;
+	  private int memberNo;
+	  
+	  private String memberName;
 	  private String lastMessage;
-	  private String sendTime;
-	  private int targetNo;
-	  private String targetNickname;
-	  private String targetProfile;
-	  private int notReadCount;
-	  private int maxMessageNo;
+	  
+	  private int noReadCount;
 }

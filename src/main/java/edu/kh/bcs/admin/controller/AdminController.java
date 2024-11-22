@@ -156,10 +156,6 @@ public class AdminController {
 			cpCount++;
 		}
 
-		System.out.println(cpCount);
-		System.out.println(cpCount);
-		System.out.println(pnList);
-		System.out.println(pnList);
 		
 		model.addAttribute("pnList", pnList);
 		model.addAttribute("cpCount", cpCount);
@@ -189,21 +185,14 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-		System.out.println("cp:"+cp);
-		System.out.println("ud:"+ud);
-		System.out.println("Text:"+searchText);
-		System.out.println("Type:"+searchType);
-		System.out.println("cp:"+cp);
-		System.out.println("ud:"+ud);
-		System.out.println("Text:"+searchText);
-		System.out.println("Type:"+searchType);
+
 
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
 		}
 
-	
+		
 		model.addAttribute("memberList", memberList);
 		
 		return "admin/adminMember/adminMemberList";

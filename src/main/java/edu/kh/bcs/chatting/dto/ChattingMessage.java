@@ -8,11 +8,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ChattingMessage {
-  private int messageNo;
-  private String messageContent;
-  private String readFl;
+  private int chattingMessageNo;
+  private String chattingMessageContent;
+  private String chattingMessageReadFl;
   private int senderNo;
-  private int targetNo;
+  private String senderName;
+  private int receiverNo;
   private int chattingRoomNo;
-  private String sendTime;
+  private String chattingMessageSendDate;
 }

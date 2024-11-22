@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.kh.bcs.chatting.dto.ChattingMessage;
+import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -48,5 +50,21 @@ public interface AdminMapper {
 	int memberFlChange(int memberNo);
 
 	Member getLoginMember(int memberNo);
+
+	List<ChattingRoomDto> adminChatCheck(int memberNo);
+
+	List<ChattingMessage> adminChattingList(int chattingRoomNo);
+
+	ChattingRoomDto chatroom(int chattingRoomNo);
+
+	int createChatRoom(int memberNo);
+
+	int selectRoomNo(int memberNo);
+
+	int noReadCount(int memberNo);
+
+	int chatRead(@Param("chattingRoomNo")int chattingRoomNo, @Param("memberNo")int memberNo);
+
+	int firstArCheck(int memberNo);
 
 }

@@ -139,7 +139,7 @@ public class MyPageController {
 		return "redirect:/"; // 메인페이지
 	}
 	
-
+	
 	@GetMapping("myPage/myPageLogin")
 	public String myPageLogin() {
 		

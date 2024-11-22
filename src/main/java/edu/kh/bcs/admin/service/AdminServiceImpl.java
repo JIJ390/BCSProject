@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import edu.kh.bcs.chatting.dto.ChattingMessage;
+import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +56,11 @@ public class AdminServiceImpl implements AdminService{
 		
 		return memberList;
 	}
+	
+	@Override
+		public List<ChattingRoomDto> adminChatCheck(int memberNo) {
+			return mapper.adminChatCheck(memberNo);
+		}
 
 
 	@Override
@@ -78,6 +85,11 @@ public class AdminServiceImpl implements AdminService{
 		
 		return mapper.memberFlChange(memberNo);
 	}
+	
+	@Override
+	public List<ChattingMessage> adminChattingList(int chattingRoomNo) {
+		return mapper.adminChattingList(chattingRoomNo);
+	}
 
 	
 	@Override
@@ -90,6 +102,35 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Member getLoginMember(int memberNo) {
 		return mapper.getLoginMember(memberNo);
+	}
+
+	@Override
+	public ChattingRoomDto chatroom(int chattingRoomNo) {
+		return mapper.chatroom(chattingRoomNo);
+	}
+	
+	@Override
+	public int createChatRoom(int memberNo) {
+		
+		int create = mapper.createChatRoom(memberNo);
+		int roomNo = mapper.selectRoomNo(memberNo);
+		
+		return roomNo;
+	}
+	
+	@Override
+	public int firstArCheck(int memberNo) {
+		return mapper.firstArCheck(memberNo);
+	}
+	
+	@Override
+	public int noReadCount(int memberNo) {
+		return mapper.noReadCount(memberNo);
+	}
+	
+	@Override
+	public int chatRead(int chattingRoomNo, int memberNo) {
+		return mapper.chatRead(chattingRoomNo, memberNo);
 	}
 }
 
