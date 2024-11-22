@@ -22,10 +22,16 @@ public interface DeviceListService {
 	List<Device> searchDetail(Map<String, Object> obj);
 
 
+	/* 드롭다운 브랜드별 필터 */
 	List<Device> phoneList(String category);
 
 
+	/* 구매 목록 페이지 브랜드 별 검색 기능 */
 	List<Device> brandList(String brand);
+
+	
+	/* 드롭다운 판매 브랜드별 필터 */
+	List<Device> sellList(String category);
 
 
 	

@@ -44,6 +44,7 @@ public class DeviceListController {
 	
 	
 
+	/* 구매 목록 페이지 필터 검색 */
 	@PostMapping("searchDetail")
 	@ResponseBody
 	public List<Device> searchDetail(
@@ -63,6 +64,7 @@ public class DeviceListController {
 	};
 	
 
+	/* 드롭다운 브랜드별 필터 */
 	@PostMapping("phoneList")
 	@ResponseBody
 	public List<Device> phoneList(
@@ -71,13 +73,27 @@ public class DeviceListController {
 		return service.phoneList(category);
 	}
 	
+	
+	
+	/* 구매 목록 페이지 브랜드 별 검색 기능 */
 	@GetMapping("brandList")
 	@ResponseBody
 	public List<Device> brandList(
 			@RequestParam("brand") String brand) {
 		
-		log.debug("브랜드 값 : {}", brand);
+//		log.debug("브랜드 값 : {}", brand);
 		return service.brandList(brand);
+	}
+	
+	
+	/* 드롭다운 판매 브랜드별 필터 */
+	@PostMapping("sellList")
+	@ResponseBody
+	public List<Device> sellList (
+			@RequestBody String category){
+		
+		return service.sellList(category);
+		
 	}
 	
 	
