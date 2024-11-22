@@ -167,7 +167,7 @@ public class AdminServiceImpl implements AdminService {
 	public int chatRead(int chattingRoomNo, int memberNo) {
 		return mapper.chatRead(chattingRoomNo, memberNo);
 	}
-}
+
 
 	// ============================================기종 등록
 	@Override
