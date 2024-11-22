@@ -1,5 +1,7 @@
 package edu.kh.bcs.myPage.service;
 
+import java.util.Map;
+
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface MyPageService {
@@ -32,5 +34,23 @@ public interface MyPageService {
 	 * @return
 	 */
 	int passwordChange(String currentPw, String newPw, Member loginMember);
+
+	/**
+	 * 주소변경
+	 * @param postcode
+	 * @param memberNo
+	 * @return
+	 */
+	int addressChange(String address, int memberNo);
+
+	/** 번호변경
+	 * @param number
+	 * @param memberNo
+	 * @return
+	 */
+	int numberChange(String number, int memberNo);
+
+
+	Map<String, Object> selectSellingList(int cp, int memberNo);
 
 }

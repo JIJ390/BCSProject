@@ -17,6 +17,7 @@ public class SellingDevice {
 	private String clientBank;
 	private String accountNo;
 	private String requestComment;
+	private String sellingDeviceDate;
 	private int deviceNo;
 	private int capacityNumber;
 	private int gradeNumber;
@@ -29,6 +30,7 @@ public class SellingDevice {
 	private String capacityType;
 	private String gradeType;
 	private String colorName;
+	private String statusContent;
 	
 	private String memberName;
 	

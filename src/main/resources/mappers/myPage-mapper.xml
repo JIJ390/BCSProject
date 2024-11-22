@@ -109,8 +109,70 @@
 			SET MEMBER_PW = #{encPw}
 			WHERE MEMBER_NO = #{memberNo}
 			AND MEMBER_DEL_FL = 'N'
-		
 		</update>	
+		
+	<!-- 주소 변경 -->
+		<update id="addressChange">
+			UPDATE "MEMBER"
+			SET MEMBER_ADDRESS = #{address}
+			WHERE MEMBER_NO = #{memberNo}
+			AND MEMBER_DEL_FL = 'N'
+		</update>	
+		
+	<!-- 주소 변경 -->
+		<update id="numberChange">
+			UPDATE "MEMBER"
+			SET MEMBER_TEL = #{number}
+			WHERE MEMBER_NO = #{memberNo}
+			AND MEMBER_DEL_FL = 'N'
+		</update>	
+		
+		<select id="selectSellingListCount" resultType="_int">
+			SELECT
+				COUNT(*)
+			FROM
+				"SELLING_DEVICE"
+		</select>
+		
+		
+		<select id="selectSellingList" resultType="SellingDevice">
+		SELECT
+	    (SELECT 
+	        DEVICE_NAME
+	     FROM "DEVICE"
+	     WHERE DEVICE_NO = S.DEVICE_NO) AS "DEVICE_NAME",
+	    SELLING_DEVICE_DATE,
+	    CLIENT_BANK,
+	    ACCOUNT_NO,
+	    REQUEST_COMMENT,
+	    (SELECT
+	         CAPACITY_TYPE
+	     FROM CAPACITY
+	     WHERE CAPACITY_NUMBER = S.CAPACITY_NUMBER) AS "CAPACITY_TYPE",
+	    (SELECT
+	         GRADE_TYPE
+	     FROM "GRADE"
+	     WHERE GRADE_NUMBER = S.GRADE_NUMBER) AS "GRADE_TYPE",
+	    (SELECT
+	         COLOR_NAME
+	     FROM COLOR
+	     WHERE COLOR_NO = S.COLOR_NO) AS "COLOR_NAME",
+	    MEMBER_NO,
+	    CLIENT_NAME,
+	    REGEXP_REPLACE(CLIENT_TEL, '(.{3})(.+)(.{4})', '\1-\2-\3') AS "CLIENT_TEL",
+	    (SELECT
+	         MEMBER_NAME
+	     FROM "MEMBER"
+	     WHERE MEMBER_NO = S.MEMBER_NO) AS "MEMBER_NAME",
+	    -- SELLING_DEVICE_STATUS 테이블에서 상태 정보 조인
+	    (SELECT 
+	         SELLING_DEVICE_STATUS_CONTENT
+	     FROM SELLING_DEVICE_STATUS
+	     WHERE SELLING_DEVICE_STATUS_CODE = S.STATUS_CODE) AS "STATUS_CONTENT"
+		FROM SELLING_DEVICE S
+		WHERE
+		    MEMBER_NO = #{memberNo}
+		</select>
 		
 		
 
