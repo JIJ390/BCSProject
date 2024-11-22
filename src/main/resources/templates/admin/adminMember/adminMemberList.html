@@ -1,14 +1,14 @@
   <th:block th:each= "member:${memberList}">
     <div class="member-manage-row" 
-      th:data-member-no = ${member.memberNo}
-      th:data-member-name = ${member.memberName}
-      th:data-member-email = ${member.memberEmail}
-      th:data-member-tel = ${member.memberTel}
-      th:data-member-delFl = ${member.memberDelFl}
-      th:data-member-date = ${member.memberDate}
-      th:data-member-address = ${member.memberAddress}
-      th:data-member-fl = ${member.memberFl}
-      th:data-member-point = ${member.memberPoint}
+      th:data-member-no = "${member.memberNo}"
+      th:data-member-name = "${member.memberName}"
+      th:data-member-email = "${member.memberEmail}"
+      th:data-member-tel = "${member.memberTel}"
+      th:data-member-delFl = "${member.memberDelFl}"
+      th:data-member-date = "${member.memberDate}"
+      th:data-member-address = "${member.memberAddress}"
+      th:data-member-fl =" ${member.memberFl}"
+      th:data-member-point = "${member.memberPoint}"
       >
       <span style="font-size: 20px; width: 17%;" th:text="${member.memberNo}">1</span>
       <span style="font-size: 20px; width: 27%" th:text="${member.memberName}">홍길동</span>

@@ -5,16 +5,27 @@
   <div class="sidebar-profile-content">
     <div class="sidebar-profile-content-img"><img src="/images/mainPage/2.webp"
         style="width: 200px; height: 100px; border-radius: 10px; "></div>
+ <th:block th:if= "${session.loginMember}">
+      <div>
+        <p style="color: #afafaf; font-size: 20px;" th:text="${session.loginMember.memberName}">사용자 이름</p>
+      </div>
+      <div>
+        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="${session.loginMember.memberTel}">연락처 : </p>
+      </div>
+      <div>
+        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="${session.loginMember.memberAddress}">주소 : </p>
+      </div>
+      <div>
+        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="|${session.loginMember.memberPoint}포인트|">포인트 : </p>
+      </div>
+      <button class="sidebar-profile-updateBtn"><i class="fa-solid fa-pen-to-square" style="margin-right: 10px;"></i>수정하기</button>
+ </th:block>
+ <th:block th:unless= "${session.loginMember}">
     <div>
-      <p style="color: #afafaf; font-size: 20px;">사용자 이름</p>
+      <p style="color: rgb(146, 146, 146); font-size: 17px;">로그인해주세요</p>
     </div>
-    <div>
-      <p style="color: rgb(146, 146, 146); font-size: 17px;">연락처 : </p>
-    </div>
-    <div>
-      <p style="color: rgb(146, 146, 146); font-size: 17px;">주소 : </p>
-    </div>
-    <button class="sidebar-profile-updateBtn"><i class="fa-solid fa-pen-to-square" style="margin-right: 10px;"></i>수정하기</button>
+    <button class="sidebar-profile-loginBtn">로그인</button>
+ </th:block>
   </div>
   <div class="sidebar-profile-footer">
     <div style="width: 90%; height: 25%; margin-bottom: 10px;">

@@ -9,10 +9,11 @@
     </div>
     <div style="width: 80%; height: 100%; margin-top: 5px; overflow: hidden;">
       <p style="color: rgb(179, 179, 179);">BCS A.I 상담원</p>
-      <p class="chat-message-backup" style="width: 100%; font-size: 15px; color: rgb(179, 179, 179);">궁금한점이 있으면 질문해 주세요</p>
+      <p class="chat-message-backup" style="width: 100%; font-size: 15  px; color: rgb(179, 179, 179);">궁금한점이 있으면 질문해 주세요</p>
     </div>
   </div>
-  <div style="width: 95%; height: 70px; border-radius: 10px; display: flex;">
+  <span class="inner-admin-chat"></span>
+  <!-- <div class="chatting-admin-area">
     <div style="width: 20%; height: 100%;">
       <img src="/images/logo_login.png" style="margin: 10px; width: 40px; height: 30px;; margin-top: 12px;">
     </div>
@@ -20,5 +21,8 @@
       <p style="color: rgb(179, 179, 179);">관리자</p>
       <p style="color: rgb(179, 179, 179);">채팅 내용 불러오기</p>
     </div>
-  </div>
+  </div> -->
+  <th:block th:if= "${session.loginMember}">
+    <input type="hidden" th:value="${session.loginMember.memberNo}" class="side-getLoginMemberNo">
+  </th:block>
 </div>

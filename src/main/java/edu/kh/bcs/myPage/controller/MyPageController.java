@@ -144,6 +144,9 @@ public class MyPageController {
 		return "redirect:/"; // 메인페이지
 	}
 	
+	
+	@GetMapping("myPage/myPageLogin")
+=======
 	/**
 	 * 아이디 뜨게하기
 	 * @param memberEmail

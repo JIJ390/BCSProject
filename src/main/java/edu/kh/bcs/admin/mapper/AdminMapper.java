@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.bcs.chatting.dto.ChattingMessage;
+import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
@@ -57,6 +59,21 @@ public interface AdminMapper {
 
 	Member getLoginMember(int memberNo);
 
+	List<ChattingRoomDto> adminChatCheck(int memberNo);
+
+	List<ChattingMessage> adminChattingList(int chattingRoomNo);
+
+	ChattingRoomDto chatroom(int chattingRoomNo);
+
+	int createChatRoom(int memberNo);
+
+	int selectRoomNo(int memberNo);
+
+	int noReadCount(int memberNo);
+
+	int chatRead(@Param("chattingRoomNo")int chattingRoomNo, @Param("memberNo")int memberNo);
+
+	int firstArCheck(int memberNo);
 	
 	
 	/** divceImg content

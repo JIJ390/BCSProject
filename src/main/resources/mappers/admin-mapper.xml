@@ -101,11 +101,74 @@ SET MEMBER_FL = CASE WHEN MEMBER_FL = '1' THEN '2' ELSE '1' END
 WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<select id="adminChatCheck">
+SELECT E.*, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO = E.MEMBER_NO) "MEMBER_NAME",
+(
+	SELECT CHATTING_MESSAGE_CONTENT
+	FROM 
+		(
+			SELECT CHATTING_MESSAGE_CONTENT, ROWNUM "RN"
+			FROM CHATTING_MESSAGE
+			WHERE CHATTING_ROOM_NO = E.CHATTING_ROOM_NO
+			ORDER BY CHATTING_MESSAGE_NO DESC
+		) "E"
+	WHERE RN = 1
+) "LAST_MESSAGE",
+(
+	SELECT COUNT(*) 
+	FROM CHATTING_MESSAGE 
+	WHERE RECEIVER_NO = #{memberNo}
+	AND CHATTING_MESSAGE_READ_FL = 'N' 
+) "NO_READ_COUNT"
+FROM CHATTING_ROOM "E"
+WHERE MEMBER_NO = #{memberNo} OR ADMIN_NO = #{memberNo}
+	</select>
+	
+	<select id="adminChattingList">
+		SELECT E.*, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO = E.SENDER_NO) "SENDER_NAME"
+		FROM CHATTING_MESSAGE "E"
+		WHERE CHATTING_ROOM_NO = #{chattingRoomNo}
+		ORDER BY CHATTING_MESSAGE_NO ASC
+	</select>
+	
+	<select id="firstArCheck">
+		SELECT COUNT(*)
+		FROM CHATTING_MESSAGE
+		WHERE RECEIVER_NO = #{memberNo}
+		AND CHATTING_MESSAGE_READ_FL = 'N'
+	</select>
+	
+	<update id="chatRead">
+UPDATE CHATTING_MESSAGE
+SET CHATTING_MESSAGE_READ_FL = 'Y'
+WHERE RECEIVER_NO = #{memberNo}
+AND CHATTING_ROOM_NO = #{chattingRoomNo}
+	</update>
+	
+	
 	<select id="getLoginMember">
 		SELECT *
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo} 
 	</select>
+	
+	<select id="chatroom">
+		SELECT *
+		FROM CHATTING_ROOM
+		WHERE CHATTING_ROOM_NO = #{chattingRoomNo}
+	</select>
+	
+	<insert id="createChatRoom">
+		INSERT INTO CHATTING_ROOM
+		VALUES (SEQ_CHATTING_ROOM_NO.NEXTVAL, DEFAULT, 13, #{memberNo})
+	</insert>
+	
+	<select id="selectRoomNo">
+		SELECT CHATTING_ROOM_NO
+		FROM CHATTING_ROOM
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 	
 	<select id="deviceList" resultType="Device">
 SELECT 

@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.bcs.chatting.dto.ChattingMessage;
+import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -48,6 +50,19 @@ public interface AdminService {
 
 	Member getLoginMember(int memberNo);
 
+	List<ChattingRoomDto> adminChatCheck(int memberNo);
+
+	List<ChattingMessage> adminChattingList(int chattingRoomNo);
+
+	ChattingRoomDto chatroom(int chattingRoomNo);
+
+	int createChatRoom(int memberNo);
+
+	int noReadCount(int memberNo);
+
+	int chatRead(int chattingRoomNo, int memberNo);
+
+	int firstArCheck(int memberNo);
 
 	/** 이미지 내용 전달
 	 * 
