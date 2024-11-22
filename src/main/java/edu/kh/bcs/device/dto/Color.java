@@ -23,6 +23,11 @@ public class Color {
 	private String colorCode;
 	private String colorDeviceImg;
 
+
+	//색상 총 조회
+	private int colorCount;
+	
+
 	
 	//컬러 총 합 계수
 	private int colorResult;
@@ -30,4 +35,5 @@ public class Color {
 	
 	//파일 업로드 편의성
 	private MultipartFile uploadFile; // 개발 편의성
+
 }

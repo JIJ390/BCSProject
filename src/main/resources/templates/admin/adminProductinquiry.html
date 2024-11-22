@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품조회</title>
+    <link rel="stylesheet" href="/css/admin/adminProductinquiry.css">
+</head>
+
+
+<body>
+
+    <th:block th:replace="~{common/header}"></th:block>
+
+
+
+
+    <div class="main-container">
+        <div class="container-in">
+            <div class="container-in-title">
+                <div class="container-in-title-title">
+                    <p>상품조회</p>
+                </div>
+                <div class="container-in-title-btn">
+                    <div>SamSung</div>
+                    <div>Galaxy Tab</div>
+                    <div>Apple</div>
+                    <div>Ipad</div>
+                </div>
+                <div class="container-in-title-search">
+                    <div>
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" placeholder="검색">
+                    </div>
+                </div>
+            </div>
+            <table class="container-in-content" style="border-collapse: collapse" th:each= "deviceList:${deviceList}">
+
+                <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 10%;">
+                    <col style="width: 20%;">
+                    <col style="width: 25%;">
+                    <col style="width: 20%;">
+                    <col style="width: 15%;">
+                </colgroup>
+
+                <hr>
+                <thead>
+                    <tr>
+                        <td>상품 이미지</td>
+                        <td>상품 종류</td>
+                        <td>상품 번호</td>
+                        <td>개수</td>
+                        <td>일자</td>
+                        <td>버튼</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><img th:src="${deviceList.deviceImg}"></td>
+                        <td th:text="${deviceList.deviceNo}">  </td>
+                        <td th:text="${deviceList.deviceName}"> </td>
+                        <td class="color-result">
+                            <p> 현재 개수      :  <th:block th:text="${deviceList.deviceCount}">22</th:block> </p>
+                            <p> 현재 주문 개수 :  <th:block th:text="${deviceList.orderCount}">4</th:block> </p>
+                            <p> 색상별 개수    :  <th:block>5</th:block> </p>
+                            <div class="color">
+                                <div class="border-radius-color"></div>
+                                <div class="border-radius-color"></div>
+                                <div class="border-radius-color"></div>
+                            </div>
+                        </td>
+                        <td th:text="${deviceList.deviceReleaseDate}"> </td>
+                        <td class="td-btn">
+                            <p>구매 현황</p>
+                            <p>판매 현황</p>
+                            <p>상세보기</p>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            <div class="container-in-btn">
+                <a href="">상품 전체 보기</a>
+                <a href="/admin/adminModelRegistration">기종 등록하기</a>
+            </div>
+            <div class="container-in-page-nation">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+<script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
+
+
+</html>

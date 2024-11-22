@@ -131,6 +131,10 @@ public class FileConfig implements WebMvcConfigurer{
 		.addResourceHandler(reviewResourceHandler)					
 		.addResourceLocations(reviewResourceLocation);			
 		
+		registry
+		.addResourceHandler(deviceResourceHandler)			// /images/test/**
+		.addResourceLocations(deviceResourceLocation);  // file:///C:/uploadFiles/test/	
+		
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import edu.kh.bcs.admin.service.AdminService;
+
 import edu.kh.bcs.common.util.FileUtil;
+
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -111,7 +114,23 @@ public class AdminController {
 		return "admin/adminEvent";
 	}
 	
-	//1:1 상담 목록
+	@GetMapping("adminProductinquiry")
+	public String adminProductinquiry(
+			Device device,
+			Color color,
+			Model model
+			) {
+		
+		List<Device> result = service.result(device,color);
+		
+		
+		model.addAttribute("deviceList", result);
+		
+		
+		return "admin/adminProductinquiry";
+	}
+	
+	
 	@GetMapping("adminChatList")
 	public String adminChatList() {
 		

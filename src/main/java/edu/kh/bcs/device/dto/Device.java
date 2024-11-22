@@ -50,8 +50,14 @@ public class Device {
 	private List<Grade> gradeList;
 	private List<Capacity> capacityList;
 	
+
+	//주문 조회
+	private int orderCount;
+	//현재 개수
+	private int deviceCount;
 	
 	
-	//파일 업로드 편의성
-	private MultipartFile uploadFile; // 개발 편의성
+	
+	
+
 }

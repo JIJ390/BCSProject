@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.common.util.FileUtil;
+
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -116,6 +118,18 @@ public class AdminServiceImpl implements AdminService {
 
 		return mapper.deviceList();
 	}
+
+	
+	//관리자 - 상품조회
+	@Override
+	public List<Device> result(Device device, Color color) {
+		
+		List<Device> deviceList = mapper.deviceColorList(device,color);
+		
+		return deviceList;
+	}
+}
+
 
 // 팝업	
 	@Override

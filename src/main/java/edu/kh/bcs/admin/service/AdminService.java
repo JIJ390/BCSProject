@@ -6,8 +6,11 @@ import java.util.Map;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -48,6 +51,15 @@ public interface AdminService {
 	int memberDelFlChange(int memberNo);
 	int memberFlChange(int memberNo);
 
+
+	/** 관리자 상품 조회
+	 * 
+	 * @param device
+	 * @param color
+	 * @return
+	 */
+	List<Device> result(Device device, Color color);
+
 	Member getLoginMember(int memberNo);
 
 	List<ChattingRoomDto> adminChatCheck(int memberNo);
@@ -84,5 +96,6 @@ public interface AdminService {
 
 	
 	
+
 
 }

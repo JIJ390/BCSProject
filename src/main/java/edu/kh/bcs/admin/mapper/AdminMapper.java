@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
@@ -56,6 +58,15 @@ public interface AdminMapper {
 	int memberDelFlChange(int memberNo);
 
 	int memberFlChange(int memberNo);
+
+
+	/** 관리자 상품 조회
+	 *  
+	 * @param device
+	 * @param color
+	 * @return
+	 */
+	List<Device> deviceColorList(Device device, Color color);
 
 	Member getLoginMember(int memberNo);
 
@@ -123,6 +134,7 @@ public interface AdminMapper {
 	List<Device> iPhoneX();
 
 	List<Device> iPad();
+
 
 
 }
