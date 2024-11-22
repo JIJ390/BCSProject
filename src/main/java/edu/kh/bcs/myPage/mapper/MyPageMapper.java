@@ -1,8 +1,12 @@
 package edu.kh.bcs.myPage.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
@@ -80,6 +84,31 @@ public interface MyPageMapper {
 	int passwordChange(
 									@Param("memberNo")	int memberNo,
 									@Param("encPw")	String encPw);
+
+	/**
+	 * 주소변경
+	 * @param postcode
+	 * @param memberNo
+	 * @return
+	 */
+	int addressChange(
+							@Param("address") String address, 
+							@Param("memberNo") int memberNo);
+
+	/** 번호변경
+	 * @param number
+	 * @param memberNo
+	 * @return
+	 */
+	int numberChange(
+							@Param("number") String number, 
+							@Param("memberNo") int memberNo);
+
+	
+	int selectSellingListCount();
+	
+
+	List<SellingDevice> selectSellingList(int memberNo, RowBounds rowBounds);
 
 
 

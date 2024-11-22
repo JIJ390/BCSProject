@@ -1,5 +1,7 @@
 package edu.kh.bcs.myPage.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -209,16 +211,21 @@ public class MyPageController {
 	 */
 	@PostMapping("passwordChange")
 	public String passwordChange(
-			@RequestParam("currentPw") String currentPw,
-			@RequestParam("newPw") String newPw,
 			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "currentPw", required = false) String currentPw,
+			@RequestParam(value = "newPw", required = false) String newPw,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "number", required = false) String number,
 			RedirectAttributes ra){
 		
-		int result = service.passwordChange(currentPw, newPw, loginMember);
 		
 		String message = null;
 		String path = null;
 		
+
+		
+		
+		int result = service.passwordChange(currentPw, newPw, loginMember);
 		if(result > 0) {
 			message = "비밀번호가 변경 되었습니다";
 			path = "/myPage/myPageMain"; // 마이페이지로 리다이렉트
@@ -230,6 +237,92 @@ public class MyPageController {
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:" + path;
+	}
+	
+
+	/** 주소 변경
+	 * @param loginMember
+	 * @param address
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("addressChange")
+	public String addressChange(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "address", required = false) String address,
+			RedirectAttributes ra){
+		
+		System.out.println(address);
+		System.out.println(address);
+		System.out.println(address);
+		System.out.println(address);
+		
+		String message = null;
+		String path = null;
+		
+		int result1 = service.addressChange(address, loginMember.getMemberNo());
+		if
+		(result1 > 0) {
+			message = "주소가 변경 되었습니다";
+			path = "/myPage/myPageMain";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	/** 전번변경
+	 * @param loginMember
+	 * @param number
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("numberChange")
+	public String numberChange(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "phoneNumber", required = false) String number,
+			RedirectAttributes ra){
+		
+		System.out.println(number);
+		System.out.println(number);
+		System.out.println(number);
+		System.out.println(number);
+		
+		String message = null;
+		String path = null;
+		
+		int result2 = service.numberChange(number, loginMember.getMemberNo());
+		System.out.println(result2);
+		
+		if(result2 > 0) {
+			message = "전화번호가 변경 되었습니다";
+			path = "/myPage/myPageMain";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+		
+	}
+	
+	
+	@GetMapping("selectSellingList")
+	@ResponseBody
+	public Map<String, Object> selectSellingList(
+				@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+				@RequestParam("memberNo") int memberNo
+			) {
+		
+		Map<String, Object> map = service.selectSellingList(cp, memberNo);
+		
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		
+		return map;
 	}
 	
 	
