@@ -11,6 +11,7 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.mapper.DeviceListMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import oracle.net.aso.c;
 
 @Slf4j
 @Service
@@ -28,7 +29,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	    return mapper.selectFilterList(filterType);
 	}
 	
-	
+	// 검색
 	@Override
 	public List<Device> searchDetail(Map<String, Object> obj) {
 //		log.debug("aaa : {}", obj);
@@ -80,10 +81,10 @@ public class DeviceListServiceImpl implements DeviceListService {
 		}
 		
 		
-		log.debug("brand : {}", brand);
-		log.debug("brand : {}", brand);
-		log.debug("brand : {}", brand);
-		log.debug("brand : {}", brand);
+//		log.debug("brand : {}", brand);
+//		log.debug("brand : {}", brand);
+//		log.debug("brand : {}", brand);
+//		log.debug("brand : {}", brand);
 		
 //		log.debug("ramList : {}", ramList);
 //		log.debug("hddList : {}", hddList);
@@ -101,7 +102,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	}
 	
 	
-	
+	/* 드롭다운 브랜드별 필터 */
 	@Override
 	public List<Device> phoneList(String category) {
 		
@@ -109,6 +110,12 @@ public class DeviceListServiceImpl implements DeviceListService {
 		return mapper.phoneList(category);
 	}
 	
+
+	/* 드롭다운 판매 브랜드별 필터 */
+	@Override
+	public List<Device> sellList(String category) {
+		return mapper.sellList(category);
+	}
 	
 	
 	
@@ -123,7 +130,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	@Override
 	public List<Device> brandList(String brand) {
 		
-		log.debug("브랜드 명 : {}", brand);
+//		log.debug("브랜드 명 : {}", brand);
 		return mapper.brandList(brand);
 	}
 

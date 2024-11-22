@@ -47,6 +47,13 @@ public interface DeviceListMapper {
 
 
 
+	List<Device> sellList(String category);
+
+
+
+
+
+
 	
 
 

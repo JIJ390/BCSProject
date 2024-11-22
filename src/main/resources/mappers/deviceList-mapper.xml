@@ -133,7 +133,14 @@
 			DEVICE_RELEASE_DATE DESC
 	</select>
 	
+		<!-- 헤더 구매하기 Device 호출 -->
+	<select id="sellList">
+		SELECT DEVICE_NO, DEVICE_NAME, DEVICE_IMG
+		FROM DEVICE
+		WHERE DEVICE_BRAND = #{category}
+		ORDER BY DEVICE_RELEASE_DATE DESC
 	
+	</select>  
 	
 	
 	

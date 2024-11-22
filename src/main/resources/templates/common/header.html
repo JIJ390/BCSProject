@@ -17,10 +17,27 @@
     <header id="mainHeader" class="main-header">
         <nav class="header-nav">
             <ul>
-                <a href="/"><img src="/images/logo.png" alt=""></a>
+                <a href="/"><img id="logo" src="/images/logo.png" alt="Logo"></a>
             </ul>
+            
+            <script th:inline="javascript">
+                // 로그인 여부와 memberNo를 서버에서 Thymeleaf로 전달
+                const memberNo = /*[[${session.loginMember != null ? session.loginMember.memberNo : 0}]]*/ 0;
+            </script>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const logo = document.getElementById('logo');
+                    
+                    // memberNo가 0이 아니라면 로그인이 된 것으로 간주
+                    if (memberNo !== 0) {
+                        logo.src = '/images/logo_login.png'; // 로그인된 상태의 로고
+                    }
+                });
+            </script>
+            
             <ul class="dep1">
-                <a href="#">쇼핑하기</a>
+                <a href="/deviceList">쇼핑하기</a>
                 <div class="dropdown" id="dropdown">
                     <div class="dropdownContainor">
                         <div class="info">
@@ -32,29 +49,6 @@
                         <div class="sideMenuContainer">
                             <div class="sideMenu1">
                                 <h5 style="margin-bottom: 5px;">구매하기</h5>
-<!--                                 <span style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
-                            </div>
-                            <div class="sideMenu2" id="galaxy-content">
-                                <p id="selectionMessage" style="display: none; margin-top: 30px; font-weight: bold;">종류별
-                                </p>
-                                <ul id="buy_phoneModels" style="display: none;">
-                                    <div class="phoneModels-box">
-                                        <li>갤럭시 S24 Ultra</li>
-                                        <li>갤럭시 S24 Plus</li>
-                                        <li>갤럭시 S24</li>
-                                    </div>
-                                    <div class="phoneModels-box" style="margin-top: auto;">
-                                        <li>갤럭시 Z폴드6 5G</li>
-                                        <li>갤럭시 Z폴드5 5G</li>
-                                        <li>갤럭시 Z플립6 5G</li>
-                                        <li>갤럭시 Z플립5 5G</li>
-                                    </div>
-                                    <div class="plusItem">
-                                        <a href="/deviceList">더보기+</a>
-                                    </div>
-                                </ul>
-                            </div>
-                            <div class="sideMenu3"> -->
                                 <span id="selectionMessage" style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
@@ -80,10 +74,10 @@
             </ul>
             <ul class="dep2">
                 <a href="#">판매하기</a>
-                <div class="dropdown">
+                <div class="dropdown" id="dropdown">
                     <div class="dropdownContainor">
                         <div class="info">
-                            <li id="galaxySelect"><a href="#">Galaxy Phone</a></li>
+                            <li><a href="#">Galaxy Phone</a></li>
                             <li><a href="#">iPhone</a></li>
                             <li><a href="#">Galaxy Tab</a></li>
                             <li><a href="#">iPad</a></li>
@@ -91,43 +85,23 @@
                         <div class="sideMenuContainer">
                             <div class="sideMenu1">
                                 <h5 style="margin-bottom: 5px;">판매하기</h5>
-<!--                                 <span style=" color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+                                <span id="sellselectionMessage" style="margin-bottom: 5px; color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
-                                <p id="selectionMessage" style="display: none; margin-top: 30px; font-weight: bold;">종류별
-                                </p>
-                                <ul id="sell_phoneModels" style="display: none;">
-                                    <div class="phoneModels-box">
-                                        <li>갤럭시 S24 Ultra</li>
-                                        <li>갤럭시 S24 Plus</li>
-                                        <li>갤럭시 S24</li>
-                                    </div>
-                                    <div class="phoneModels-box">
-                                        <li>갤럭시 Z폴드6 5G</li>
-                                        <li>갤럭시 Z폴드5 5G</li>
-                                        <li>갤럭시 Z플립6 5G</li>
-                                        <li>갤럭시 Z플립5 5G</li>
-                                    </div>
-                                </ul>
+                                <ul class="grid-list" id="sell_phoneModels_galaxy" style="display: none;"></ul>
+                                <a href="/deviceList/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
-                            <div class="sideMenu3"></div>
-                        </div>
-                    </div>
-                </div>
-            </ul> -->
-                                <span style="color: #6C6C6C; font-size: 25px;">원하는 종류를 선택하세요</span>
+                            <div class="sideMenu2" id="iphone-content">
+                                <ul class="grid-list" id="sell_phoneModels_iphone" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
-                            <div class="sideMenu2" id="sell_galaxy-content">
-                                <ul id="sell_phoneModels_galaxy" style="display: none;"></ul>
+                            <div class="sideMenu2" id="galaxytab-content">
+                                <ul class="grid-list" id="sell_phoneModels_galaxytab" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
-                            <div class="sideMenu2" id="sell_iphone-content">
-                                <ul id="sell_phoneModels_iphone" style="display: none;"></ul>
-                            </div>
-                            <div class="sideMenu2" id="sell_galaxytab-content">
-                                <ul id="sell_phoneModels_galaxytab" style="display: none;"></ul>
-                            </div>
-                            <div class="sideMenu2" id="sell_ipad-content">
-                                <ul id="sell_phoneModels_ipad" style="display: none;"></ul>
+                            <div class="sideMenu2" id="ipad-content">
+                                <ul class="grid-list" id="sell_phoneModels_ipad" style="display: none;"></ul>
+                                <a href="/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +110,10 @@
             <ul><a href="/help/notice">고객센터</a></ul>
         </nav>
         <div class="header-auth">
-            <input type="text" placeholder="" style="width: 250px;">
+            <div class="search-container-1">
+                <input class="search-input" id="searchInput" type="text" placeholder="제품명을 입력하세요">
+                <button class="searchB" id="searchB"><img src="/images/search.png" alt=""></button>
+            </div>
             <div th:unless="${session.loginMember}">
                 <a href="/myPage/myPageLogin">로그인</a> | <a href="/signUp/signUpAccount">회원가입</a>
             </div>
