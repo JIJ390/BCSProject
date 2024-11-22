@@ -1,0 +1,14 @@
+<th:block th:if= "${#lists.size(deviceList) != 0}">
+  <th:block th:each= "device:${deviceList}">
+
+    <div 
+    th:data-device-no = "${device.deviceNo}"
+    th:data-device-name = "${device.deviceName}"
+    class="event-link-select-button4" th:text="${device.deviceName}"></div>
+
+
+  </th:block>
+</th:block>
+<th:block th:unless= "${#lists.size(deviceList) != 0}">
+  <div class="event-link-select-button4">검색 결과 없음</div>
+</th:block>

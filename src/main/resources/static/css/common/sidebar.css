@@ -38,7 +38,16 @@
 
 .sidebar-div-content-view {
   opacity: 1;
+
 }
+
+
+.admin-chat-right {}
+
+
+
+
+
 
 .sidebar-profile-updateBtn {
   border: 0;
@@ -53,7 +62,33 @@
   transition: 0.1s;
 }
 
+.sidebar-profile-loginBtn {
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(71, 71, 71);
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+  color: rgb(202, 202, 202);
+  text-align: center;
+  margin-top: 30px;
+  transition: 0.1s;
+}
+
 .sidebar-profile-updateBtn:hover {
+  border: 0;
+  border-radius: 10px;
+  background-color: rgb(214, 214, 214);
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+  color: rgb(112, 112, 112);
+  transition: 0.1s;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.sidebar-profile-loginBtn:hover {
   border: 0;
   border-radius: 10px;
   background-color: rgb(214, 214, 214);
@@ -120,6 +155,7 @@
   flex-direction: column;
   justify-content: start;
   padding-left: 20px;
+  transition: all 0.2s;
 }
 
 .sidebar-div-content-chatting>div:hover {
@@ -190,8 +226,217 @@
   transition: 0.3s;
 }
 
+
+
 .sidebar-div-content-chatting-header {
   display: flex;
   width: 100%;
   height: 13%;
+}
+
+
+.chatting-qlist {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  transition: all 0.2s;
+  opacity: 1;
+}
+
+.sidebar-chatting-detail-body {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.sidebar-chatting-detail-body::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-chatting-detail-body-admin {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.sidebar-chatting-detail-body-admin::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-chatting-detail-input {
+  width: 100%;
+  height: 10%;
+
+  display: flex;
+}
+
+.sidebar-chatting-detail-inputbar {
+  width: 85%;
+  height: 100%;
+  resize: none;
+  overflow: hidden;
+  background-color: rgb(85, 85, 85);
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  padding: 5px;
+  font-size: 15px;
+  margin: 0 10px;
+}
+
+.sidebar-chatting-detail-inputbutton {
+  width: 15%;
+  height: 100%;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  font-size: 15px;
+  border: 0;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+
+.chatting-img {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.chatting-qlist>div {
+  width: max-content;
+  height: max-content;
+  margin-left: 20px;
+  margin-top: 5px;
+  border: 1px solid gray;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chatting-qlist>div:hover {
+  width: max-content;
+  height: max-content;
+  margin-left: 20px;
+  margin-top: 5px;
+  border: 1px solid gray;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chatting-right {
+  width: max-content;
+  height: max-content;
+  margin-left: 20px;
+  margin-top: 5px;
+  border: 1px solid gray;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  float: right;
+  margin-right: 10px;
+}
+
+.chatting-left {
+  width: max-content;
+  max-width: 200px;
+  min-height: 40px;
+  max-height: max-content;
+  background-color: rgb(179, 179, 179);
+  margin-left: 20px;
+  margin-top: 5px;
+
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chattingArea {
+  width: 100%;
+  height: max-content;
+  opacity: 0;
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.chattingAreaAdmin {
+  width: 100%;
+  height: max-content;
+  /* opacity: 0; */
+  transition: all 0.2s;
+  padding: 10px;
+}
+
+.chatting-receiver-area {
+  width: max-content;
+  max-width: 260px;
+  height: max-content;
+  float: right;
+  padding: 10px;
+  border: 1px solid gray;
+  color: white;
+  border-radius: 10px;
+
+}
+
+.chatting-receiver-div1 {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.chatting-sender-name {
+  color: white;
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
+.chatting-receiver-div2 {
+  width: max-content;
+  max-width: 260px;
+  height: max-content;
+  float: left;
+  padding: 10px;
+  background-color: rgb(179, 179, 179);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+.chatting-receiver-img1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.chatting-admin-area {
+  width: 95%;
+  height: 70px;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.chatting-admin-area:hover {
+  width: 95%;
+  height: 70px;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  background-color: rgb(85, 85, 85);
+}
+
+.sidebar-2-ar{
+  color: rgb(56, 56, 56);
 }

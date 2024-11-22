@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.review.mapper.ReviewMapper">
+
+	<!-- 리뷰 인서트 -->
+	<insert id="reviewInsert">
+		INSERT INTO "REVIEW"
+		VALUES (
+			SEQ_REVIEW_NO.NEXTVAL,
+			#{reviewImg},
+			#{reviewContent},
+			#{reviewScore},
+			DEFAULT,
+			#{orderNo}
+		)
+	</insert>
+	
+	<select id="selectReview">
+		SELECT
+			REVIEW_NO, 
+			REVIEW_IMG,
+			REVIEW_CONTENT,
+			REVIEW_SCORE,
+			ORDER_NO
+		FROM "REVIEW"
+		WHERE 
+			REVIEW_NO = #{reviewNo}
+	</select>
+	
+	<!-- 리뷰 수정 -->
+	<update id="reviewUpdate">
+		UPDATE "REVIEW"
+		SET
+			<if test="reviewImg != null and !reviewImg.equals('')">
+				REVIEW_IMG = #{reviewImg},
+			</if>
+			REVIEW_CONTENT = #{reviewContent},
+			REVIEW_SCORE = #{reviewScore}
+		WHERE
+			REVIEW_NO = #{reviewNo}
+	</update>
+  	
+</mapper>

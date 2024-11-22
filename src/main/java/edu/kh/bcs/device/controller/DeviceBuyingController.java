@@ -1,5 +1,6 @@
 package edu.kh.bcs.device.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -37,20 +38,35 @@ public class DeviceBuyingController {
 			Model model
 			) {
 		
+		// 기종 상세 정보
 		Device device = service.selectDetailDevice(deviceNo);
 		
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
-		log.debug("device : {}", device);
+		// 시세표 조회
+		List<Map<String, String>> priceList = service.selectPriceList(deviceNo);
+		
+		// 전체 
+		Map<String, String> priceStatus = service.priceStatus(deviceNo);
+		
+		
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
+		log.debug("priceStatus {} ", priceStatus);
 		
 		
 		model.addAttribute("device", device);
+		model.addAttribute("priceList", priceList);
+		model.addAttribute("priceStatus", priceStatus);
 		
 		return "deviceBuying/deviceBuying";
 		
 							
 	}
+	
+	
+	
+	
 	
 	
 	/**
@@ -67,5 +83,139 @@ public class DeviceBuyingController {
 		int deviceNo = map.get("deviceNo");
 		
 		return service.expectedPrice(deviceNo, plusPrice);
+	}
+	
+	/**
+	 * (다중)내 폰 사기 색상 매물 조회해서 재고 없을 시 불투명
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkColor")
+	@ResponseBody
+	public List<Map<String, String>> checkColor(
+			@RequestBody int deviceNo) {
+		
+		
+		List<Map<String, String>> list = service.checkColor(deviceNo);
+		
+		
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		log.debug("list : {}", list);
+		
+		for(Map<String, String> map : list) {
+			map.replace("colorNo", String.valueOf(map.get("colorNo")));
+			map.replace("colorCount", String.valueOf(map.get("colorCount")));
+		}
+		
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	
+	/**
+	 * (단일)내 폰 사기 색상 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectColor")
+	@ResponseBody
+	public int selectColor(
+			@RequestBody Map<String, Integer> map) {
+		
+		int colorNo = map.get("colorNo");
+		int deviceNo = map.get("deviceNo");
+		
+		return service.selectColor(colorNo, deviceNo);
+	}
+	
+	
+	/**
+	 * (다중)내 폰 사기 용량 매물 조회해서 재고 없을 시 불투명
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkCapacity")
+	@ResponseBody
+	public List<Map<String, String>> checkCapacity(
+			@RequestBody Map<String, Integer> map1) {
+		
+		int colorNo = map1.get("colorNo");
+		int deviceNo = map1.get("deviceNo");
+		
+		List<Map<String, String>> list = service.checkCapacity(deviceNo, colorNo);
+		
+		for(Map<String, String> map2 : list) {
+			map2.replace("capacityNumber", String.valueOf(map2.get("capacityNumber")));
+			map2.replace("capacityCount", String.valueOf(map2.get("capacityCount")));
+		}
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	/**
+	 * (단일)내 폰 사기 용량 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectCapacity")
+	@ResponseBody
+	public int selectCapacity(
+			@RequestBody Map<String, Integer> map) {
+		
+		int colorNo = map.get("colorNo");
+		int capacityNumber = map.get("capacityNumber");
+		int deviceNo = map.get("deviceNo");
+		
+		return service.selectCapacity(colorNo, capacityNumber, deviceNo);
+	}
+	
+	
+	
+	
+	/**
+	 * (단일)내 폰 사기 용량 매물 조회해서 재고 없을 시 알림
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("checkGrade")
+	@ResponseBody
+	public List<Map<String, String>> checkGrade(
+			@RequestBody Map<String, Integer> map1) {
+		
+		int colorNo = map1.get("colorNo");
+		int capacityNumber = map1.get("capacityNumber");
+		int deviceNo = map1.get("deviceNo");
+		
+		List<Map<String, String>> list = service.checkGrade(colorNo, capacityNumber, deviceNo);
+		
+		for(Map<String, String> map2 : list) {
+			map2.replace("gradeNumber", String.valueOf(map2.get("gradeNumber")));
+			map2.replace("gradeCount", String.valueOf(map2.get("gradeCount")));
+		}
+		
+		// 파싱 에러 BigDemical
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 단일 등급 매물 조회
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("selectGrade")
+	@ResponseBody
+	public int selectGrade(
+			@RequestBody Map<String, Integer> map) {
+		
+		// 매개 변수가 많아서(4 개) 묶어서 처리
+		return service.selectGrade(map);
 	}
 }

@@ -11,9 +11,12 @@
 <body>
   
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-      <img src="/images/logo.png" alt="">
-      BCS ACCOUNT | 배최성 계정관리
+    <div style="display: flex; align-items: center; 
+    justify-content: center; background-color: white; 
+    height: 80px; font-size: 20px;">
+      <a href="/"><img src="/images/logo.png" alt=""></a>
+      <div style="margin-left: 70px; margin-right: 9%;
+                  font-weight: bold;">BCS ACCOUNT | 배최성 계정관리</div>
     </div>
   </header>
   <main>
@@ -23,41 +26,77 @@
       
       
 
-    <div  class="mypageUpdate-box"> <!-- 개인정보수정 박스 -->
-        <div class="mypageUpdate-title">내정보 수정</div><br>
-
-        <form>
-          <div class="update-group-1">
-              <label for="passwordUpdate">비밀번호수정</label>
-              <input type="password" id="passwordUpdate" placeholder="현재 비밀번호를 입력해주세요.">
-          </div>
-
-          <div class="update-group-1">
+   <div class="decalcomanie" style="display: flex;">
+      <div  class="mypageUpdate-box"> <!-- 개인정보수정 박스 -->
+          <div class="mypageUpdate-title">내정보 수정 - 비밀번호 변경</div><br>
+  
+          <form action="passwordChange" method="POST" name="pwChangeForm" class="pwChangeForm">
+            <div class="update-group-1">
+                <label for="passwordUpdate">비밀번호수정</label>
+                <input type="password" id="currentPw" name="currentPw" placeholder="현재 비밀번호를 입력해주세요.">
+            </div>
+            
+            <div class="update-group-1">
               <label for="newPassword">새 비밀번호</label>
-              <input type="password" id="newPassword" placeholder="변경하시는 비밀번호를 입력해주세요.">
-          </div>
-
-          <div class="update-group-1">
-              <label for="nicknameChange">닉네임</label>
-              <input type="text" id="nicknameChange" placeholder="변경하고 싶은 닉네임을 입력해주세요.">
-          </div>
-
-          <div class="update-group">
-              <label for="addressChange">주소</label>
-              <input type="text" id="zipcode" placeholder="우편번호">
-              <button type="button" class="btn-address">검색</button>
-              <input type="text" id="road-address" placeholder="도로명 / 지번주소">
-              <input type="text" id="detail-address" placeholder="상세 주소">
-          </div>
-
-          <div class="btn-container">
-            <button type="submit" class="signup-button-update">회원정보 수정</button>
-            <button type="text" class="signup-button-delete">취소</button>
-          </div>
-      </form>
+              <input type="password" id="newPw" name="newPw" placeholder="변경하시는 비밀번호를 입력해주세요.">
+            </div>
+            <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자 1글자 이상 6~20글자 사이로 입력해주세요.</span>
+  
+            <div class="update-group-1">
+                <label for="newPassword">새 비밀번호확인</label>
+                <input type="password" id="newPwConfirm" name="newPwConfirm" placeholder="변경하시는 비밀번호를 확인해주세요.">
+            </div>
+            <div class="btn-container">
+              <button type="submit" class="signup-button-update">회원정보 수정</button>
+              <button type="button" class="signup-button-delete">취소</button>
+            </div>
+            <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
+        </form>
+          
+        <!-- 똑같은 녀석 하나더 복사 -->
+      </div>
+      
+            <div  class="mypageUpdate-box" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
+                <div class="mypageUpdate-title">내정보 수정 - 주소 변경</div><br>
         
-       
-    </div>
+                <form action="addressChange" method="POST" name="pwChangeForm"  class="pwChangeForm">
+      
+                  <div class="update-group">
+                      <label for="addressChange">주소</label>
+                      <input type="text" id="postcode" name="address" placeholder="우편번호">
+                      <button type="button" class="btn-address" id="findAddressBtn">검색</button>
+                      <input type="text" id="address" name="address" placeholder="도로명 / 지번주소" >
+                      <input type="text" id="detailAddress" name="address" placeholder="상세 주소">
+                  </div>
+        
+                  <div class="btn-container">
+                    <button type="submit" class="signup-button-update">회원정보 수정</button>
+                    <button type="button" class="signup-button-delete">취소</button>
+                  </div>
+                  <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
+              </form>
+            </div>
+      <!-- 전화번호 -->
+            <div  class="mypageUpdate-box" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
+                <div class="mypageUpdate-title">내정보 수정 - 번호 변경</div><br>
+        
+                <form action="numberChange" method="POST" name="pwChangeForm" class="pwChangeForm">
+      
+                  <div class="update-group">
+                      <label for="addressChange">전화번호</label>
+                      <input type="number" id="number" name="phoneNumber" placeholder="전화번호입력" maxlength="11">
+        
+                  <div class="btn-container">
+                    <button type="submit" class="signup-button-update1" style="font-size: 14px;">회원정보 수정</button>
+                    <button type="button" class="signup-button-delete1">취소</button>
+                  </div>
+                  <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
+              </form>
+            </div>
+      
+
+
+   </div>
 
 
     </section>
@@ -65,8 +104,10 @@
     </section>
   </main>
   <footer>
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
 </body>
 <script src="/js/myPage/myPage.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

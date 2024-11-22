@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.chatting.mapper.ChattingMapper">
+
+	<insert id="insertMessage">
+		INSERT INTO CHATTING_MESSAGE
+		VALUES(SEQ_CHATTING_MESSAGE_NO.NEXTVAL, #{chattingMessageContent}, 
+		'N', DEFAULT, #{senderNo}, #{chattingRoomNo}, #{receiverNo})
+	</insert>
+
+	<select id="getSenderName">
+		SELECT MEMBER_NAME
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{senderNo}
+	</select>
+	
+</mapper>

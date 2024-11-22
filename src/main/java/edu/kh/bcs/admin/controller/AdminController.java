@@ -1,5 +1,6 @@
 package edu.kh.bcs.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,19 +11,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+
 import edu.kh.bcs.admin.service.AdminService;
+
+import edu.kh.bcs.common.util.FileUtil;
+
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
+@SessionAttributes("loginMember")
 @Controller
 @RequestMapping("admin")
 @RequiredArgsConstructor
+@Slf4j
 public class AdminController {
 	
 	private static final int Device = 0;
@@ -47,16 +67,34 @@ public class AdminController {
 			Model model
 			) {
 //		휴대폰 정보 받아오기
-		List<Device> result = service.deviceList();
+		List<Device> boardList = service.deviceList();
+		model.addAttribute("boardList", boardList);
 		
 		
-		model.addAttribute("result", result);
 		
-		
-		return "adminBoard";
+		return "admin/adminBoard";
 		
 		
 	}
+	
+	@GetMapping("/adminBoard/search")
+	public String search(
+			Model model,
+			@RequestParam(value = "search", required=false) String search
+			) {
+		
+		
+		
+		List<Device> result = service.adminSearch(search);
+		
+		
+		
+		model.addAttribute("boardList", result);
+		
+		return "admin/adminBoard";
+	}
+	
+
 	
 	
 	//배송 내역 조회
@@ -124,6 +162,29 @@ public class AdminController {
 		return "admin/adminRegistration";
 	}
 	
+	@PostMapping("/adminModelRegistration/insert")
+	public String insertDevice(
+			//메인사진
+	        @RequestParam(name = "divceImg", required = false) MultipartFile  divceImg,
+	        //6개 사진 담겨있음
+	        @RequestParam("colorImg") List<MultipartFile> colorImg,
+	        @ModelAttribute Color color,
+	        @ModelAttribute Device device,
+	        @RequestParam("gradePrice") String gradePrice,
+	        @RequestParam("gradeSellPrice") String gradeSellPrice,
+	        @RequestParam("gradeType") String gradeType,
+	        RedirectAttributes rs
+			) {
+		
+		
+		//divce 객체로 넣어줄거 
+		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
+		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,colorImg,divceImg);
+		
+		return "redirect:/admin/adminBoard";
+	}
+	
+	
 //	기종 등록
 	@GetMapping("adminModelRegistration")
 	public String adminModelRegistration() {
@@ -132,6 +193,26 @@ public class AdminController {
 		return "admin/adminModelRegistration ";
 	}
 	
+	// SELLING 이 아니라  DEVICE로 해야할듯
+	@PostMapping("/popUpData")
+	public String popUpData(
+			@RequestBody int result,
+			Model model
+			) {
+		
+		
+		
+		
+		
+		List<Color> popUpData = service.popUpData(result);
+		
+		
+		
+		
+		model.addAttribute("popUpData", popUpData);
+		
+		return "admin/androidPopUp :: popUp-tbody";
+	}
 	
 	
 	
@@ -171,10 +252,6 @@ public class AdminController {
 			cpCount++;
 		}
 
-		System.out.println(cpCount);
-		System.out.println(cpCount);
-		System.out.println(pnList);
-		System.out.println(pnList);
 		
 		model.addAttribute("pnList", pnList);
 		model.addAttribute("cpCount", cpCount);
@@ -204,21 +281,14 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-		System.out.println("cp:"+cp);
-		System.out.println("ud:"+ud);
-		System.out.println("Text:"+searchText);
-		System.out.println("Type:"+searchType);
-		System.out.println("cp:"+cp);
-		System.out.println("ud:"+ud);
-		System.out.println("Text:"+searchText);
-		System.out.println("Type:"+searchType);
+
 
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
 		}
 
-	
+		
 		model.addAttribute("memberList", memberList);
 		
 		return "admin/adminMember/adminMemberList";
@@ -250,6 +320,54 @@ public class AdminController {
 		
 		return service.memberFlChange(memberNo);
 	}
+	
+	@GetMapping("memberLogin")
+	public String memberLogin(
+			@RequestParam("memberNo") int memberNo,
+			Model model
+			) {
+		
+		Member loginMember = service.getLoginMember(memberNo);
+
+		
+		model.addAttribute("loginMember", loginMember);
+		
+		return "admin/memberManage";
+	}
+	
+	// galaxy 시리즈
+	@GetMapping("event/galaxy")
+	public String galaxy(
+			Model model,
+			@RequestParam("series") String series
+			) {
+		
+		List<Device> deviceList = service.galaxyA(series);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		return "admin/adminEvent/deviceType";
+	}
+	// iPhone 시리즈
+	@GetMapping("event/iPhone")
+	public String iPhone(
+			Model model,
+			@RequestParam("series") String series
+			) {
+		
+		List<Device> deviceList = service.iPhone(series);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		System.out.println(deviceList);
+		
+		return "admin/adminEvent/deviceType";
+	}
+	
+	
 	
 	
 	

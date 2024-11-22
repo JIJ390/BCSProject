@@ -10,10 +10,7 @@
 </head>
 <body class="orderHistoryBody">
   <header>
-    <div style="display: flex; align-items: center; justify-content: center; background-color: white; height: 100px;">
-        <img src="/images/logo.png" alt="">
-        BCS ACCOUNT | 배최성 계정관리
-      </div>
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
@@ -21,43 +18,28 @@
     <section class="main-section">
 
     <div class="container">
-        <h2>구매내역</h2>
-        <div class="search-bar">
-            <input type="text" placeholder="검색어를 입력해주세요.">
-            <button>검색</button>
-        </div>
+        <h2>내폰 판매내역</h2>
+ 
+
         <table>
             <thead>
                 <tr>
-                    <th>기종번호</th>
-                    <th>휴대폰</th>
-                    <th>상품정보</th>
+                    <th>해당 기종 정보</th>
                     <th>주문일자</th>
+                    <th>상태</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>DEF1242f</td>
-                    <td>아이폰</td>
-                    <td>512GB bluegreencolor</td>
-                    <td>24.11.07</td>
+                    <td>아이폰 4s 황금색 S급 8GB</td>
+                    <td>24년11월22일</td>
+                    <td>판매신청/검수중/송금/반려</td>
                 </tr>
-                <tr>
-                    <td>RGE1242e</td>
-                    <td>아르폰</td>
-                    <td>member01@bcs.co.kr</td>
-                    <td>24.11.07</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>갤럭시</td>
-                    <td>member01@bcs.co.kr</td>
-                    <td>24.11.07</td>
-                </tr>
+          
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
-        <div class="pagination">
+        <div class="pagination" id="paginationBox">
             <a href="#">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
@@ -70,8 +52,16 @@
   <section class="right-section">
   </section>
 </main>
+
+
+
+<script th:inline="javascript">
+    const loginNo = /*[[${session.loginMember.memberNo}]]*/ false;
+</script>
+
+
 <footer>
-  푸터
+    <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
 <script src="/js/myPage/myPage.js"></script>

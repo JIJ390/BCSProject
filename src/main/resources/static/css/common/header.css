@@ -87,12 +87,16 @@ img{
 }
 
 .header-auth input {
+  position: relative;
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 250px;
   background: url(../images/search.png) no-repeat right;
+  resize: none;
+  box-sizing: border-box;
 }
+
 
 .header-auth a {
   color: #1D1D1F;
@@ -137,7 +141,6 @@ img{
   color: #1D1D1F;
   text-decoration: none;
   white-space: nowrap;
-  font-size: 35px;
 }
 
 /* hover 시 드롭다운 표시 */
@@ -302,24 +305,99 @@ main{
 
 
 
-
+.menu-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
 
 
 .sideItem {
-  display: block;
   margin: 10px 0;
+  padding: 20px;
   text-decoration: none;
   color: #333;
-  font-size: 14px;
   transition: color 0.1s ease;
 }
 
 
 
 
+.plusItem > a{
+  width: 100%;
+}
+
+
+
+/* 리스트 항목 스타일 */
+.grid-list {
+  display: none; /* 기본적으로 숨기기 */
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개씩 배치 */
+  grid-gap: 5px; /* 항목 간 간격 */
+  list-style: none; /* 기본 리스트 스타일 제거 */
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.grid-list li > a {
+  border-radius: 8px; /* 둥근 모서리 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  position: relative;
+}
+
+.grid-list li > a::after{
+  content: "";
+  position: absolute;
+  left:0px;
+  top: 100%;
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  transform: scale(0);
+  transition: transform 0.3s;
+}
+
+.grid-list li:hover > a::after {
+  transform: scale(1) 
+}
+
+.grid-list li a {
+  text-decoration: none; /* 기본 밑줄 제거 */
+  color: #333; /* 링크 기본 색상 */
+  font-size: 23px; /* 글씨 크기 */
+  /* display: block; 전체 영역 클릭 가능 */
+}
+
+.grid-list li a:hover {
+  color: #007BFF; /* 링크 호버 시 색상 변경 */
+  text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
+
+/* 더보기 버튼 스타일 */
+.more-button {
+  display: flex; /* 숨기기 기본값 */
+  text-align: center;
+  margin: 20px auto; /* 중앙 배치 */
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black; /* 텍스트 색상 */
+  border: 1px solid black;
+  text-decoration: none;
+  border-radius: 5px; /* 버튼 둥글게 */
+  transition: background-color 0.3s ease;
+  width: 80%; /* 텍스트 크기에 맞는 너비 */
+}
+
+.more-button:hover {
+  text-decoration: none; /* 밑줄 제거 */
+}
 
 
 

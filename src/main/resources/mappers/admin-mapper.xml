@@ -101,10 +101,44 @@ SET MEMBER_FL = CASE WHEN MEMBER_FL = '1' THEN '2' ELSE '1' END
 WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<select id="adminChatCheck">
+SELECT E.*, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO = E.MEMBER_NO) "MEMBER_NAME",
+(
+	SELECT CHATTING_MESSAGE_CONTENT
+	FROM 
+		(
+			SELECT CHATTING_MESSAGE_CONTENT, ROWNUM "RN"
+			FROM CHATTING_MESSAGE
+			WHERE CHATTING_ROOM_NO = E.CHATTING_ROOM_NO
+			ORDER BY CHATTING_MESSAGE_NO DESC
+		) "E"
+	WHERE RN = 1
+) "LAST_MESSAGE",
+(
+	SELECT COUNT(*) 
+	FROM CHATTING_MESSAGE 
+	WHERE RECEIVER_NO = #{memberNo}
+	AND CHATTING_MESSAGE_READ_FL = 'N' 
+) "NO_READ_COUNT"
+FROM CHATTING_ROOM "E"
+WHERE MEMBER_NO = #{memberNo} OR ADMIN_NO = #{memberNo}
+	</select>
 	
+	<select id="adminChattingList">
+		SELECT E.*, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO = E.SENDER_NO) "SENDER_NAME"
+		FROM CHATTING_MESSAGE "E"
+		WHERE CHATTING_ROOM_NO = #{chattingRoomNo}
+		ORDER BY CHATTING_MESSAGE_NO ASC
+	</select>
 	
-	<select id="deviceList" resultType="Device">
+	<select id="firstArCheck">
+		SELECT COUNT(*)
+		FROM CHATTING_MESSAGE
+		WHERE RECEIVER_NO = #{memberNo}
+		AND CHATTING_MESSAGE_READ_FL = 'N'
+	</select>
 	
+
 	</select>
 	
 	<select id="deviceColorList">
@@ -122,12 +156,262 @@ SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
 FROM DEVICE D
 ORDER BY 
 	DEVICE_RELEASE_DATE DESC
+
+	<update id="chatRead">
+UPDATE CHATTING_MESSAGE
+SET CHATTING_MESSAGE_READ_FL = 'Y'
+WHERE RECEIVER_NO = #{memberNo}
+AND CHATTING_ROOM_NO = #{chattingRoomNo}
+	</update>
+	
+	
+	<select id="getLoginMember">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo} 
+	</select>
+	
+	<select id="chatroom">
+		SELECT *
+		FROM CHATTING_ROOM
+		WHERE CHATTING_ROOM_NO = #{chattingRoomNo}
+
+	</select>
+	
+	<insert id="createChatRoom">
+		INSERT INTO CHATTING_ROOM
+		VALUES (SEQ_CHATTING_ROOM_NO.NEXTVAL, DEFAULT, 13, #{memberNo})
+	</insert>
+	
+	<select id="selectRoomNo">
+		SELECT CHATTING_ROOM_NO
+		FROM CHATTING_ROOM
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="galaxyA">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% A%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyS">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% S%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyFilp">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Flip%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyFold">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Fold%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="galaxyTab">
+		SELECT *
+		FROM 
+			(SELECT *
+			FROM DEVICE
+			WHERE DEVICE_NAME LIKE '%Galaxy%'
+			OR DEVICE_NAME LIKE '%galaxy%')
+		WHERE DEVICE_NAME LIKE '% Tab%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPhone">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPhone%'
+		AND NOT DEVICE_NAME LIKE '% X%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPhoneX">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPhone%'
+		AND DEVICE_NAME LIKE '% X%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	<select id="iPad">
+		SELECT *
+		FROM DEVICE
+		WHERE DEVICE_NAME LIKE '%iPad%'
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	</select>
+	
+	
+	<select id="deviceList" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+ORDER BY
+	DEVICE_DATE DESC
+	</select>
+	
+	<select id="popUpData" resultType="Color">
+	
+	SELECT 
+		COLOR_DEVICE_IMG,
+		COLOR_NAME,  
+		COUNT(BUYING_DEVICE_NO) colorResult
+	FROM 
+		COLOR
+	JOIN 
+	   (
+	   	SELECT * FROM DEVICE WHERE DEVICE_NO=#{result}
+	   ) USING (DEVICE_NO)
+	LEFT JOIN 
+			(
+			SELECT * FROM BUYING_DEVICE WHERE SOLD_FL = 'N'
+			) USING (COLOR_NO)
+	GROUP BY 
+		COLOR_DEVICE_IMG,COLOR_NAME, DEVICE_NAME
+	</select>
+	
+	
+	<select id="adminSearch" resultType="Device">
+SELECT 
+	A.DEVICE_NO,
+	DEVICE_IMG,
+	DEVICE_NAME,
+	COLOR_RESULT "colorResult",
+	DEVICE_DATE "deviceDate"
+FROM 
+	DEVICE A
+JOIN
+	(
+	SELECT 
+		DEVICE_NO,
+		COUNT(DEVICE_NO) COLOR_RESULT,
+		MAX(BUYING_DEVICE_UPLOAD_DATE) DEVICE_DATE
+	FROM 
+		BUYING_DEVICE
+	WHERE 
+		SOLD_FL = 'N'
+
+	GROUP BY 
+		DEVICE_NO
+	) B ON (A.DEVICE_NO = B.DEVICE_NO)
+WHERE 
+	DEVICE_NAME LIKE '%' || #{search} || '%'
+ORDER BY
+	DEVICE_DATE DESC
 	</select>
 	
 	
 	
 	
-	
+	<!-- 기종 등록 -->
+	<insert id="device">
+			
+	INSERT INTO 
+		"DEVICE"
+	VALUES (
+	   SEQ_DEVICE_NO.NEXTVAL,
+	   TO_DATE (#{deviceReleaseDate}, 'YYYY-MM-DD'),
+	   #{deviceReleasePrice},
+	   #{deviceImg},
+	   #{deviceOs},
+	   #{deviceResolution},
+	   #{devicePixel},
+	   #{deviceFrontPixel},
+	   #{deviceBackPixel},
+	   DEFAULT, DEFAULT,
+	   #{deviceWeight},
+	   #{deviceBatteryCapacity},
+	   #{deviceName},
+	   #{deviceBuyingPrice},
+	   #{deviceSellingPrice},
+	   #{deviceBrand},
+	   #{ramCapacity},
+	   #{deviceCpuName},
+	   #{displaySize}
+	)
+	</insert>
+
+<!--DEVICENO 하나 가져오기 -->
+<select id="selectDeviceNo">
+	SELECT
+		MAX(DEVICE_NO)
+	FROM
+		DEVICE
+	ORDER BY 
+		DEVICE_NO DESC
+</select>
+
+
+<insert id="colorInsert">
+
+INSERT INTO
+	COLOR
+		(COLOR_NO, 
+		COLOR_NAME, 
+		COLOR_CODE, 
+		COLOR_DEVICE_IMG, 
+		DEVICE_NO)
+	VALUES
+		(SEQ_COLOR_NO.NEXTVAL, 
+		#{colorName}, 
+		#{colorCode}, 
+		#{colorDeviceImg}, 
+		#{deviceNo})
+</insert>
+
+
+<insert id="grade">
+INSERT INTO 
+	GRADE
+VALUES
+	(SEQ_GRADE_NO.NEXTVAL,
+	#{gradeTypeOrly},
+	#{gradePriceOrly},
+	#{gradeSellPriceOrly},
+	#{deviceGetNo})
+</insert>
+
+
+
+
+
 	
 	
 </mapper>

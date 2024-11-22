@@ -118,7 +118,8 @@
   
         <div class="popup-box">
           <span>휴대폰 번호</span>
-          <input type="text" name="clientTel" id="clientTel" placeholder="'-' 제외하고 입력해 주세요">
+          <input type="text" name="clientTel" id="clientTel" placeholder="'-' 제외하고 입력해 주세요" th:unless="${session.loginMember}">
+          <input type="text" name="clientTel" id="clientTel" placeholder="'-' 제외하고 입력해 주세요" th:if="${session.loginMember}" th:value="${session.loginMember.memberTel}">
         </div>
   
         <div class="popup-box">
@@ -169,6 +170,7 @@
 
   <script th:inline="javascript">
     const device = /*[[${device}]]*/ 기종;
+    const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
   </script>
 
   <script src="/js/deviceSelling/deviceSelling.js"></script>

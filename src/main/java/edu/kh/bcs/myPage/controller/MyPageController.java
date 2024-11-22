@@ -1,11 +1,16 @@
 package edu.kh.bcs.myPage.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @SessionAttributes({"loginMember"})
 @Controller
 @Slf4j
-@RequestMapping("/")
+@RequestMapping("myPage")
 @RequiredArgsConstructor
 public class MyPageController {
 	
@@ -35,7 +40,7 @@ public class MyPageController {
 	 * @param Model 데이터 전달용 객체(기본값 request scope)
 	 * @param resp : 응답 방법을 제공하는 객체
 	 */
-	@PostMapping("myPage/login")
+	@PostMapping("login")
 	public String login(
 			@RequestParam("memberId")String memberId,
 			@RequestParam("memberPw")String memberPw,
@@ -46,24 +51,24 @@ public class MyPageController {
 			HttpServletResponse resp
 			) {
 		
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberId : {}", memberId);
-		log.debug("memberPw : {}", memberPw);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberId : {}", memberId);
+//		log.debug("memberPw : {}", memberPw);
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(memberId, memberPw);
 		
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
-		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
+//		log.debug("loginMember {}", loginMember);
 		
 		
 		if(loginMember == null) { // 로그인이 실패
 			
-			log.debug("aaaaaaaaaa");
+//			log.debug("aaaaaaaaaa");
 			
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다!");
 			
@@ -77,6 +82,8 @@ public class MyPageController {
 			/* Model을 이용해서 Session scope에 값 추가하는 방법 */
 			// 1. model에 값 추가 (request)
 			model.addAttribute("loginMember", loginMember);
+			
+			ra.addFlashAttribute("message", "로그인 되었습니다!");
 			
 			log.debug("loginMember", loginMember);
 			
@@ -123,7 +130,7 @@ public class MyPageController {
 	 * @param status
 	 * @return
 	 */
-	@GetMapping("myPage/logout")
+	@GetMapping("logout")
 	public String logout(SessionStatus status) {
 		/* SessionStatus
 		 * - @SessionStatus를 이용해 등록된 객체(값)의 상태를
@@ -139,40 +146,221 @@ public class MyPageController {
 		return "redirect:/"; // 메인페이지
 	}
 	
-
+	
 	@GetMapping("myPage/myPageLogin")
+	/**
+	 * 아이디 뜨게하기
+	 * @param memberEmail
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("findId")
+	public String findId(
+			@RequestBody String memberEmail) {
+		
+		
+		return service.findId(memberEmail);
+	}
+	
+	/** 회원 탈퇴 기능
+	 * @param memberPw
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("withdrawal")
+	public String withdrawal(
+			@RequestParam("memberPw") String memberPw,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra,
+			SessionStatus status){
+		
+		int result = service.withdrawal(memberPw, loginMember);
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			message = "탈퇴 되었습니다."
+					+ "그동안 저희 BCS 홈페이지를 이용해주셔서 감사합니다.";
+			path = "/";
+			status.setComplete(); // 세션 만료 -> 로그아웃
+		} else {
+			message = "비밀번호가 일치하지 않습니다";
+			path = "withdrawal";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	/** 회원 탈퇴 페이지 호출
+	 * @return
+	 */
+	@GetMapping("withdrawal")
+	public String withdrawal() {
+		
+		return "myPage/withdrawal";
+	}
+	
+	/** 비밀번호 변경 기능
+	 * @param currentPw : 현재 비밀번호
+	 * @param newPw : 새로운 비밀번호
+	 * @param loginMember : 세션에서 얻어온 로그인 회원 정보
+	 * @param ra : 리다이렉트 시 request scope로 데이터 전달하는 객체
+	 * @return result
+	 */
+	@PostMapping("passwordChange")
+	public String passwordChange(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "currentPw", required = false) String currentPw,
+			@RequestParam(value = "newPw", required = false) String newPw,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "number", required = false) String number,
+			RedirectAttributes ra){
+		
+		
+		String message = null;
+		String path = null;
+		
+
+		
+		
+		int result = service.passwordChange(currentPw, newPw, loginMember);
+		if(result > 0) {
+			message = "비밀번호가 변경 되었습니다";
+			path = "/myPage/myPageMain"; // 마이페이지로 리다이렉트
+		} else {
+			message = "현재 비밀번호가 일치하지 않습니다";
+			path = "/myPage/myPageUpdate"; // 비밀번호 변경페이지로 리다이렉트
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+
+	/** 주소 변경
+	 * @param loginMember
+	 * @param address
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("addressChange")
+	public String addressChange(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "address", required = false) String address,
+			RedirectAttributes ra){
+		
+		System.out.println(address);
+		System.out.println(address);
+		System.out.println(address);
+		System.out.println(address);
+		
+		String message = null;
+		String path = null;
+		
+		int result1 = service.addressChange(address, loginMember.getMemberNo());
+		if
+		(result1 > 0) {
+			message = "주소가 변경 되었습니다";
+			path = "/myPage/myPageMain";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+	}
+	
+	/** 전번변경
+	 * @param loginMember
+	 * @param number
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("numberChange")
+	public String numberChange(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "phoneNumber", required = false) String number,
+			RedirectAttributes ra){
+		
+		System.out.println(number);
+		System.out.println(number);
+		System.out.println(number);
+		System.out.println(number);
+		
+		String message = null;
+		String path = null;
+		
+		int result2 = service.numberChange(number, loginMember.getMemberNo());
+		System.out.println(result2);
+		
+		if(result2 > 0) {
+			message = "전화번호가 변경 되었습니다";
+			path = "/myPage/myPageMain";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + path;
+		
+	}
+	
+	
+	@GetMapping("selectSellingList")
+	@ResponseBody
+	public Map<String, Object> selectSellingList(
+				@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+				@RequestParam("memberNo") int memberNo
+			) {
+		
+		Map<String, Object> map = service.selectSellingList(cp, memberNo);
+		
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		log.debug("map: {}", map);
+		
+		return map;
+	}
+	
+	
+	@GetMapping("myPageLogin")
 	public String myPageLogin() {
 		
 		return "myPage/myPageLogin";
 	}
 	
 	
-	@GetMapping("myPage/myPageMain")
+	@GetMapping("myPageMain")
 	public String myPageMain() {
 		
 		return "myPage/myPageMain";
 	}
 	
 	
-	@GetMapping("myPage/myPageUpdate")
+	@GetMapping("myPageUpdate")
 	public String myPageUpdate() {
 		
 		return "myPage/myPageupdate";
 	}
 	
-	@GetMapping("myPage/myPageOrderHistory")
+	@GetMapping("myPageOrderHistory")
 	public String myPageOrderHistory() {
 		
 		return "myPage/myPageOrderHistory";
 	}
 	
-	@GetMapping("myPage/myPageSalesHistory")
+	@GetMapping("myPageSalesHistory")
 	public String myPageSalesHistory() {
 		
 		return "myPage/myPageSalesHistory";
 	}
 	
-	@GetMapping("myPage/myPagePointHistory")
+	@GetMapping("myPagePointHistory")
 	public String myPagePointHistory() {
 		
 		return "myPage/myPagePointHistory";

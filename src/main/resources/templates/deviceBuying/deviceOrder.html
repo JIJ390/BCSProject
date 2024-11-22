@@ -4,20 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iPhone 16 주문 </title>
-  <link rel="stylesheet" href="/css/deviceBuying/deviceBuying.css">
+  <link rel="stylesheet" href="/css/deviceBuying/deviceOrder.css">
   <link rel="stylesheet" href="/css/common/header.css">
   <link rel="stylesheet" href="/css/common/footer.css">
 </head>
 <body>
   
   <header>
-    헤더
+    <th:block th:replace="~{common/header}"></th:block>
   </header>
   <main>
     <section class="left-section">
-      레프트 섹션
+
+      로그인 세션에 저장된 기본 정보 가져오기
+
+      요청 사항 80 자 제한 걸기
     </section>
-    <section class="main-section">
+    <section class="main-section" th:object="${orderBuyingDevice}">
       <div class="device-order-head">
         <span class="page-title">
           당신의 선택
@@ -27,54 +30,88 @@
 
         <img src="/images/sample_iphone16_blue.png" alt="">
         <div class="device-order-info">
-          <span class="order-info-title">iPhone 16</span>
-          <span class="order-info-sub">코발트 블루</span>
-          <span class="order-info-sub">128 GB</span>
-          <span class="order-info-sub">S 등급</span>
+          <span class="order-info-title" th:text="*{deviceName}">iPhone 16</span>
+          <span class="order-info-sub" th:text="*{colorName}">코발트 블루</span>
+          <span class="order-info-sub" th:text="*{capacityType}">128 GB</span>
+          <span class="order-info-sub" th:text="|*{gradeType} 등급|">S 등급</span>
         </div>
       </div>
 
-      <div class="status-container">
-        <span class="status-title">구매자 정보</span>
-        <div class="order-info">
-          <span>받는 분 이름</span>
-          <span>AAA</span>
-        </div>
-        <div class="order-info">
-          <span>받으시는 분 전화번호</span>
-          <span>010-1111-2222</span>
-        </div>
-      </div>
+      <form th:action="|/device/order/payment/*{buyingDeviceNo}|" 
+            method="POST" 
+            id="orderFrm">
 
-      <div class="status-container">
-        <span class="status-title">배송지 정보</span>
-        <div class="order-info">
-          <span>주소</span>
-          <span>카카오 api 사용!</span>
+        <div class="status-container">
+          <span class="status-title">구매자 정보</span>
+          <div class="order-info">
+            <span>받는 분 이름</span>
+            <input type="text" name="orderName" th:value="${session.loginMember.memberName}">
+          </div> 
+          <div class="order-info">
+            <span>받는 분 전화번호</span>
+            <input type="text" name="orderTel" th:value="${session.loginMember.memberTel}">
+          </div>
         </div>
-        <div class="order-info">
-          <span>요청 사항</span>
-          <input type="text">
-        </div>
-      </div>
-
+  
+        <div class="status-container">
+          <span class="status-title">배송지 정보</span>
+          <div class="order-info">
+            <span>주소</span>
+            <div class="adress-area">
       
-      <span class="price-span">결제 금액 1,234,567 ₩</span>
-      
-      <hr>
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                placeholder="우편번호" id="postcode">
+                <button type="button" id="findAddressBtn">검색</button>
+              </div>
+    
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                  placeholder="도로명/지번 주소" id="address">
+              </div>
+    
+              <div class="order-address">
+                <input type="text" name="orderAddress"
+                  placeholder="상세 주소" id="detailAddress">
+              </div>
+            </div>
+          </div>
+          <div class="order-info">
+            <span>요청 사항</span>
+            <textarea name="orderComment" placeholder="80 자 이내로 요청 사항을 작성해 주세요"></textarea>
+          </div>
+        </div>
 
-      <div class="btn-area">
-        <button class="order-btn">구매하기</button>
-      </div>
+        <span class="price-span"  th:text="|결제 금액 *{#numbers.formatInteger(buyingDevicePrice, 0, 'COMMA')} ₩|">결제 금액 1,234,567 ₩</span>
+      
+        <hr>
+        <div class="point-charge" th:if="${orderBuyingDevice.buyingDevicePrice > session.loginMember.memberPoint}">
+          <span>* 포인트가 부족합니다</span>
+          <a href="/point">충전하기</a>
+        </div>
+  
+        <div class="btn-area">
+          <button class="order-btn">구매하기</button>
+        </div>
+
+      </form>
 
     </section>
     <section class="right-section">
-      라이트 섹션
     </section>
   </main>
   <footer>
-    푸터
+    <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
+
+
+  <script th:inline="javascript">
+    const orderBuyingDevice = /*[[${orderBuyingDevice}]]*/ 기종;
+    const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
+  </script>
+
+  <script src="/js/deviceBuying/deviceOrder.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

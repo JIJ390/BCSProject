@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +46,7 @@
         <div class="notice-list-area">
           <div class="notice">
             <div class="list-wrapper">
-              <table class="list-table">
+              <table class="notice-table">
                   
                   <thead>
                       <tr>
@@ -70,7 +70,7 @@
                           <tr th:each="notice : ${noticeList}" th:object="${notice}">
                               <td th:text="*{noticeNumber}">게시글 번호</td>
                               <td> 
-                                 <a th:text="*{noticeTitle}">게시글 제목</a>
+                                 <a th:text="*{noticeTitle}" th:href="@{/help/noticeView/{noticeNumber} (noticeNumber=${notice.noticeNumber})}">게시글 제목</a>
                               </td>
                                <!-- 작성일 -->
                               <td th:text="*{noticeWriteDate}">2023-10-26</td>

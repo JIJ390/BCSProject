@@ -251,9 +251,9 @@ input[type="password"] input[type="phoneNumber"] {
 
 
 .login-box {
-  margin-top: 15%;
+  margin-top: 6%;
   width: 45%;
-  height: 75%;
+  height: 90%;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -310,11 +310,12 @@ input[type="password"] {
   background-color: #bbb;
 }
 
-.links {
+.idPwFind {
   font-size: 12px;
   color: #666;
   margin-top: 15px;
   align-self: center;
+  cursor: pointer;
 }
 
 .links a {
@@ -330,7 +331,7 @@ input[type="password"] {
 /* 로그인버튼 */
 .loginBtn {
   align-self: center;
-  margin-top: 40px;
+  margin-top: 20px;
   width: 70%;
   padding: 10px 20px;
   font-size: 16px;
@@ -346,6 +347,126 @@ input[type="password"] {
   background-color: #bcbcbc;
   /* 버튼에 마우스를 올렸을 때 색상 변화 */
 }
+/*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+.idPwText{
+  display: flex;
+  justify-content: space-between;
+}
+
+.idPwFind1{
+  margin-left: 205px;
+}
+
+.xBtn{
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.popup {
+  width: 550px;
+  margin: 100px auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: none;
+  margin-top: -332px;
+  margin-left: -93px;
+  z-index: 999;
+  background: white;
+}
+
+.popup-header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tab-button.active {
+  background: #e74c3c;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.form1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+input[type="text"] {
+  padding: 8px;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #e74c3c;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #c0392b;
+}
+
+button[type="button"] {
+  background: #3498db;
+}
+
+button[type="button"]:hover {
+  background: #2980b9;
+}
+
+/*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
+
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 팝업레이어 2 ㅡ ㅡㅡㅡㅡㅡㅡㅡㅡ*/
+.idConfirm{
+  width: 240px;
+  height: 100px;
+  /* margin: 100px auto; */
+  border: 1px solid #ccc;
+  display: none;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  margin-left: 52px;
+  top: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 1000;
+  background: beige;
+
+}
+
+
+
+
+
 
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 메인 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -363,16 +484,28 @@ input[type="password"] {
 .icon-grid {
   align-content: space-around;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-columns: repeat(3, 1fr); */
   gap: 20px;
-  max-width: 600px;
-  margin: 0 auto;
+  /* max-width: 600px; */
+  /* margin: 0 auto; */
+  
+  width: 102%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
 }
 
 .icon-item {
   margin: 30px;
-  width: 100%;
-  height: 70%;
+  width: 250px;
+  height: 150px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 100%; */
+  /* height: 70%; */
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -388,6 +521,7 @@ input[type="password"] {
 .icon-item img {
   width: 80px;
   height: auto;
+  /* margin-left: 43px; */
   margin-bottom: 10px;
 }
 
@@ -398,10 +532,13 @@ input[type="password"] {
   margin-top: 5px;
 }
 
+
+
 .mypageUpdate-box {
-  margin-top: 10%;
-  width: 50%;
-  height: 70%;
+  margin-top: 0%;
+  margin: auto;
+  width: 36%;
+  height: max-content;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
@@ -432,6 +569,7 @@ input[type="password"] {
   align-items: flex-start;
   position: relative;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .signup-button-update {
@@ -447,22 +585,38 @@ input[type="password"] {
   margin-left: 25px;
 }
 
+.signup-button-update:hover {
+  background-color: #bcbcbc;}
+
 .signup-button-delete {
   margin-top: 40px;
   width: 200px;
   padding: 10px 20px;
   font-size: 16px;
   color: #333;
-  background-color: var(--main-gray-color);
+  background-color: var(--main-gray-color) !important;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   margin-left: 25px;
 }
 
+.signup-button-delete:hover {
+  background-color: #bcbcbc !important;}
+
+
 .btn-container {
   display: flex;
   justify-content: center;
+
+}
+
+.withDraw{
+  font-size: 14px;
+  margin-top: 25px;
+  margin-left: 30px;
+  cursor: pointer;
+  width: 85px;
 }
 
 
@@ -472,11 +626,11 @@ input[type="password"] {
 .container {
   background-color: white;
   height: max-content;
-  width: 60%;
+  width: 80%;
   padding: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  margin-top: 30%;
+  margin-top: 15%;
 }
 
 h2 {
@@ -514,9 +668,18 @@ table {
 
 th,
 td {
-  padding: 8px;
-  text-align: left;
+  text-align: center;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+tr > td:first-child {
+  padding: 10px;
+  width: 50%;
+}
+
+tr > td:last-child {
+  width: 15%;
 }
 
 
@@ -543,3 +706,46 @@ td {
 main{
   width: auto !important;
 }
+
+/* 전번변경 */
+
+#number{
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signup-button-update1 {
+  margin-top: 40px;
+  width: 120px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #333;
+  background-color: var(--main-gray-color);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.signup-button-update1:hover {
+  background-color: #bcbcbc;}
+
+  .signup-button-delete1 {
+    margin-top: 40px;
+    width: 100px;
+    padding: 10px 20px ;
+    font-size: 16px;
+    color: #333;
+    background-color: var(--main-gray-color) !important;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 25px;
+  }
+  
+  .signup-button-delete1:hover {
+    background-color: #bcbcbc!important;}

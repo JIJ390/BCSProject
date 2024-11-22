@@ -33,7 +33,8 @@
       display: flex;
       align-items: center;
     }
-    .member-mamage-title >span{
+
+    .member-mamage-title>span {
       display: flex;
     }
 
@@ -54,7 +55,7 @@
       align-items: center;
     }
 
-    .member-manage-row > span{
+    .member-manage-row>span {
       text-align: center;
     }
 
@@ -141,32 +142,36 @@
       align-content: center;
 
     }
-    .admin-member-pagenation > button{
+
+    .admin-member-pagenation>button {
       border: 0;
       background-color: white;
       font-size: 20px;
       margin: 0 10px;
       padding: 5px;
+      cursor: pointer;
     }
-    .pnNumber>button{
+
+    .pnNumber>button {
       border: 0;
       background-color: white;
       font-size: 20px;
     }
 
 
-    .pnNumber{
+    .pnNumber {
       width: 200px;
       display: flex;
       justify-content: start;
       align-content: center;
     }
 
-    .pnNumber > button{
+    .pnNumber>button {
       padding: 10px;
+      cursor: pointer;
     }
 
-    .admin-member-detail{
+    .admin-member-detail {
       position: absolute;
       width: 700px;
       height: 700px;
@@ -186,14 +191,25 @@
       align-content: center;
     }
 
-    .팝업히든{
+    .팝업히든 {
       display: none;
     }
 
-    .admin-member-detail>div{
+    .admin-member-detail>div {
       width: 100%;
       height: max-content;
       border-bottom: 1px solid black;
+    }
+
+    .member-mamage-backBtn {
+      width: 100px;
+      height: 50px;
+      border: 1px solid rgb(134, 134, 134);
+      margin: auto;
+      margin-top: 20px;
+      padding: 15px 20px;
+      background-color: white;
+      cursor: pointer;
     }
   </style>
 
@@ -202,21 +218,61 @@
 
 <body>
 
+
   <th:block th:replace="~{common/header}"></th:block>
 
   <div class="admin-member-detail 팝업히든">
-    <div><div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i class="fa-solid fa-x"></i>X</button></div></div>
-    <div><p>회원번호</p><p class="admin-member-detail-no"></p></div>
-    <div><p>이름</p><p class="admin-member-detail-name"></p></div>
-    <div><p>이메일</p><p class="admin-member-detail-email"></p></div>
-    <div><p>전화번호</p><p class="admin-member-detail-tel"></p></div>
-    <div><p>주소</p><p class="admin-member-detail-address"></p></div>
-    <div><p>가입날짜</p><p class="admin-member-detail-date"></p></div>
-    <div><p>탈퇴여부</p><p class="admin-member-detail-fl"></p><button class="탈퇴처리">탈퇴처리</button></div>
-    <div><p>보유 포인트</p><p class="admin-member-detail-point"></p></div>
-    <div><p>관리자 권한</p><p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button></div>
-    <div><p>구매 횟수</p><p class="admin-member-detail-buy"></p></div>
-    <div><p>판매 횟수</p><p class="admin-member-detail-sell"></p></div>
+    [[${session.loginMember}]]
+    <div>
+      <div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button
+          class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i
+            class="fa-solid fa-x"></i>X</button></div>
+    </div>
+    <div>
+      <p>회원번호</p>
+      <p class="admin-member-detail-no"></p>
+    </div>
+    <div>
+      <p>이름</p>
+      <p class="admin-member-detail-name"></p>
+    </div>
+    <div>
+      <p>이메일</p>
+      <p class="admin-member-detail-email"></p>
+    </div>
+    <div>
+      <p>전화번호</p>
+      <p class="admin-member-detail-tel"></p>
+    </div>
+    <div>
+      <p>주소</p>
+      <p class="admin-member-detail-address"></p>
+    </div>
+    <div>
+      <p>가입날짜</p>
+      <p class="admin-member-detail-date"></p>
+    </div>
+    <div>
+      <p>탈퇴여부</p>
+      <p class="admin-member-detail-fl"></p><button class="탈퇴처리">탈퇴처리</button>
+    </div>
+    <div>
+      <p>보유 포인트</p>
+      <p class="admin-member-detail-point"></p>
+    </div>
+    <div>
+      <p>관리자 권한</p>
+      <p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button>
+    </div>
+    <div>
+      <p>구매 횟수</p>
+      <p class="admin-member-detail-buy"></p>
+    </div>
+    <div>
+      <p>판매 횟수</p>
+      <p class="admin-member-detail-sell"></p>
+    </div>
+    <div><button class="admin-member-login">로그인하기</button></div>
   </div>
 
   <div class="member-mamage-body">
@@ -226,41 +282,46 @@
           <p style="font-size: 40px;">회원 관리 페이지</p>
           <div class="member-manage-search">
             <button class="member-manage-category-menuBtn"
-            style="display: flex; justify-content: center; align-items: center;">
-            <p class="member-manage-category">회원번호</p>
-            <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
-            <div class="mamber-manage-search-category member-manage-category-hidden">
-              <p class="member-manage-search-list">회원번호</p>
-              <p class="member-manage-search-list">이름</p>
-              <p class="member-manage-search-list">이메일</p>
-              <p class="member-manage-search-list">전화번호</p>
-            </div>
-          </button>
-          <input type="text">
-          <button style="border: 1px solid black; width: 40px; height: 40px;">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+              style="display: flex; justify-content: center; align-items: center;">
+              <p class="member-manage-category">회원번호</p>
+              <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+              <div class="mamber-manage-search-category member-manage-category-hidden">
+                <p class="member-manage-search-list">회원번호</p>
+                <p class="member-manage-search-list">이름</p>
+                <p class="member-manage-search-list">이메일</p>
+                <p class="member-manage-search-list">전화번호</p>
+              </div>
+            </button>
+            <input type="text">
+            <button style="border: 1px solid black; width: 40px; height: 40px;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <hr>
-    <div class="member-mamage-title">
-      <span style="font-size: 20px; margin-left: 20px;">회원 번호<img class="넘버" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
-      <span style="font-size: 20px; margin-left: 115px;">이름<img class="이름"  style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
-      <span style="font-size: 20px; margin-left: 215px;">이메일<img class="이메일" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
-      <span style="font-size: 20px; margin-left: 215px;">전화 번호<img class="전화번호" style=" width: 20px; height: 20px;" src="/images/rlxk/위.png"></span>
-      <!-- <i class="fa-solid fa-caret-up"></i> -->
-    </div>
-    <div class="member-mamage-content">
-      <!-- <div class="member-manage-row">
+      <hr>
+      <div class="member-mamage-title">
+        <span style="font-size: 20px; margin-left: 20px;">회원 번호<img class="넘버" style=" width: 20px; height: 20px;"
+            src="/images/rlxk/위.png"></span>
+        <span style="font-size: 20px; margin-left: 115px;">이름<img class="이름" style=" width: 20px; height: 20px;"
+            src="/images/rlxk/위.png"></span>
+        <span style="font-size: 20px; margin-left: 215px;">이메일<img class="이메일" style=" width: 20px; height: 20px;"
+            src="/images/rlxk/위.png"></span>
+        <span style="font-size: 20px; margin-left: 215px;">전화 번호<img class="전화번호" style=" width: 20px; height: 20px;"
+            src="/images/rlxk/위.png"></span>
+        <!-- <i class="fa-solid fa-caret-up"></i> -->
+      </div>
+      <div class="member-mamage-content">
+        <!-- <div class="member-manage-row">
         <span style="font-size: 20px;">1</span>
         <span style="font-size: 20px;">홍길동</span>
         <span style="font-size: 20px;">member01@abc.co.kr</span>
         <span style="font-size: 20px;">010-1234-1234</span>
       </div> -->
-    </div>
-    <div class="admin-member-pagenation">
-      <!-- <button><i class="fa-solid fa-backward-fast"></i></button>
+      </div>
+      <div class="admin-member-pagenation">
+
+        <!-- <button><i class="fa-solid fa-backward-fast"></i></button>
       <button><i class="fa-solid fa-caret-left"></i></button>
       <button class="admin-member-page">1</button>
       <button class="admin-member-page">2</button>
@@ -271,20 +332,27 @@
       <button><i class="fa-solid fa-forward-fast"></i></i></div> -->
       </div>
     </div>
+    <div class="member-mamage-backBtn">뒤로가기</div>
+
   </div>
-  
+
+
   <th:block th:replace="~{common/footer}"></th:block>
   <script>
-    
+
     const memberManageCategory = document.querySelector(".mamber-manage-search-category");
     const memberManageCategoryBtn = document.querySelector(".member-manage-category-menuBtn");
-    
+    const backBtn = document.querySelector(".member-mamage-backBtn");
+    backBtn.addEventListener("click", () => {
+      location.href = "http://localhost/admin";
+    })
+
     $(function () {
       $(".member-manage-category-menuBtn").on("click", function () {
         $(".mamber-manage-search-category").slideToggle("fast"); // 2초에 걸쳐서 진행
       })
     })
-    
+
     const categoryList = document.querySelectorAll(".member-manage-search-list");
     for (let i = 0; i < categoryList.length; i++) {
       categoryList[i].addEventListener("click", () => {
@@ -297,7 +365,7 @@
 
       const detail = document.querySelector(".admin-member-detail");
       const closebtn = document.querySelector(".admin-member-detail-close");
-      closebtn.addEventListener("click" , () => {
+      closebtn.addEventListener("click", () => {
         setTimeout(() => {
           detail.classList.add("팝업히든")
         }, 100);
@@ -306,33 +374,33 @@
 
       const list = document.querySelectorAll(".member-manage-row");
 
-      for(let i = 0; i < list.length; i++){
+      for (let i = 0; i < list.length; i++) {
         list[i].addEventListener("click", (e) => {
           setTimeout(() => {
             detail.style.opacity = "1";
           }, 100);
           detail.classList.remove("팝업히든")
-          
+
           const data = e.target.closest(".member-manage-row");
 
-          if(data.dataset.memberAddress === undefined){
+          if (data.dataset.memberAddress === undefined) {
             data.dataset.memberAddress = "기본 주소 없음"
           }
-          if(data.dataset.memberAddress === ',,'){
+          if (data.dataset.memberAddress === ',,') {
             data.dataset.memberAddress = "기본 주소 없음"
           }
 
           document.querySelector(".admin-member-detail-no").innerText = data.dataset.memberNo;
-          document.querySelector(".admin-member-detail-name").innerText =  data.dataset.memberName;
-          document.querySelector(".admin-member-detail-email").innerText =  data.dataset.memberEmail;
-          document.querySelector(".admin-member-detail-tel").innerText =  data.dataset.memberTel;
-          document.querySelector(".admin-member-detail-address").innerText =  data.dataset.memberAddress;
-          document.querySelector(".admin-member-detail-date").innerText =  data.dataset.memberDate;
-          document.querySelector(".admin-member-detail-fl").innerText =  data.dataset.memberDelfl;
-          document.querySelector(".admin-member-detail-point").innerText =  data.dataset.memberPoint;
-          document.querySelector(".admin-member-detail-adminfl").innerText =  data.dataset.memberFl;
-          document.querySelector(".admin-member-detail-tel").innerText =  data.dataset.memberTel;
-          
+          document.querySelector(".admin-member-detail-name").innerText = data.dataset.memberName;
+          document.querySelector(".admin-member-detail-email").innerText = data.dataset.memberEmail;
+          document.querySelector(".admin-member-detail-tel").innerText = data.dataset.memberTel;
+          document.querySelector(".admin-member-detail-address").innerText = data.dataset.memberAddress;
+          document.querySelector(".admin-member-detail-date").innerText = data.dataset.memberDate;
+          document.querySelector(".admin-member-detail-fl").innerText = data.dataset.memberDelfl;
+          document.querySelector(".admin-member-detail-point").innerText = data.dataset.memberPoint;
+          document.querySelector(".admin-member-detail-adminfl").innerText = data.dataset.memberFl;
+          document.querySelector(".admin-member-detail-tel").innerText = data.dataset.memberTel;
+
           const memberNo = data.dataset.memberNo;
 
           getAdminMemberRef(memberNo);
@@ -344,157 +412,163 @@
 
     const getAdminMemberRef = (memberNo) => {
 
-      fetch("/admin/adminMemberDetail?memberNo="+memberNo)
-          .then(response => {
-            if(response.ok){
-              return response.json();
-            }
-          })  
-          .then(result => {
-            const map = new Map(Object.entries(result));
+      fetch("/admin/adminMemberDetail?memberNo=" + memberNo)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then(result => {
+          const map = new Map(Object.entries(result));
 
-            document.querySelector(".admin-member-detail-fl").innerText =  map.get('memberFl');
-            document.querySelector(".admin-member-detail-adminfl").innerText =  map.get('memberAdFl');
-            document.querySelector(".admin-member-detail-buy").innerText = map.get('memberBuy');
-            document.querySelector(".admin-member-detail-sell").innerText = map.get('memberSell');
+          document.querySelector(".admin-member-detail-fl").innerText = map.get('memberFl');
+          document.querySelector(".admin-member-detail-adminfl").innerText = map.get('memberAdFl');
+          document.querySelector(".admin-member-detail-buy").innerText = map.get('memberBuy');
+          document.querySelector(".admin-member-detail-sell").innerText = map.get('memberSell');
 
-          })
-          .catch(err => {
-            console.log(err);
-          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
 
     const adminMemberCngBtn = () => {
       const delBtn = document.querySelector(".탈퇴처리");
       const admBtn = document.querySelector(".권한변경");
-      
+
       delBtn?.addEventListener("click", () => {
-        const memberNo =Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
-        fetch("/admin/memberDelFlChange?memberNo="+memberNo)
-        .then(response => {
-          if(response.ok){
-            return response.text();
-          }
-          throw new Error("실패")
-        })
-        .then(result => {
-          getAdminMemberRef(memberNo)
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        const memberNo = Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
+        fetch("/admin/memberDelFlChange?memberNo=" + memberNo)
+          .then(response => {
+            if (response.ok) {
+              return response.text();
+            }
+            throw new Error("실패")
+          })
+          .then(result => {
+            getAdminMemberRef(memberNo)
+          })
+          .catch(err => {
+            console.log(err);
+          })
 
       })
 
       admBtn?.addEventListener("click", () => {
-        const memberNo =Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
-        fetch("/admin/memberFlChange?memberNo="+memberNo)
-        .then(response => {
-          if(response.ok){
-            return response.text();
-          }
-          throw new Error("실패")
-        })
-        .then(result => {
-          getAdminMemberRef(memberNo)
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        const memberNo = Number(document.querySelector(".admin-member-detail").children[1].children[1].innerText);
+        fetch("/admin/memberFlChange?memberNo=" + memberNo)
+          .then(response => {
+            if (response.ok) {
+              return response.text();
+            }
+            throw new Error("실패")
+          })
+          .then(result => {
+            getAdminMemberRef(memberNo)
+          })
+          .catch(err => {
+            console.log(err);
+          })
 
       })
 
 
 
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     const adminMemberNo = document.querySelector(".넘버");
     const adminMemberName = document.querySelector(".이름");
     const adminMemberEmail = document.querySelector(".이메일");
     const adminMemberTel = document.querySelector(".전화번호");
-    
+
     let cp = 1;
     let ud = 1;
     let searchType = '';
     let searchText = '';
     let searchAsc = '';
-    
+
     const getMemberPagenation = () => {
-      fetch("/admin/adminMemberPage?searchType="+searchType+"&searchText="+searchText+"&cp="+cp)
-      .then(response => {
-        if(response.ok){
-          return response.text();
-        }
-        throw new Error("cp 개수 조회 실패");
-      })
-      .then(html => {
-        document.querySelector(".admin-member-pagenation").innerHTML = html;
-        getPnEvent();
-        getMemberPnClick();
-   
-          const cpUnderLine = (cp-1) % 5;
+
+      console.log("pageNation");
+
+      fetch("/admin/adminMemberPage?searchType=" + searchType + "&searchText=" + searchText + "&cp=" + cp)
+        .then(response => {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error("cp 개수 조회 실패");
+        })
+        .then(html => {
+          document.querySelector(".admin-member-pagenation").innerHTML = html;
+          getPnEvent();
+          getMemberPnClick();
+
+          const cpUnderLine = (cp - 1) % 5;
           const pnValue = document.querySelectorAll(".pnValue");
-  
+
           pnValue[cpUnderLine].style.borderBottom = '1px solid black';
 
 
 
 
-      })
-      .catch(err => {
-        console.log(err);
-      })
+        })
+        .catch(err => {
+          console.log(err);
+        })
 
     }
 
 
     const getMemberSearchList = () => {
+
+      console.log("searchLIst");
+
       var numRegex = /^[0-9]*$/;
-      if(searchType === '회원번호'){
-        if(!numRegex.test(searchText)){
+      if (searchType === '회원번호') {
+        if (!numRegex.test(searchText)) {
           alert("형식에 맞게 입력해주세요")
           return;
         }
       }
 
-      if(searchType === '전화번호'){
-        if(!numRegex.test(searchText)){
+      if (searchType === '전화번호') {
+        if (!numRegex.test(searchText)) {
           alert("형식에 맞게 입력해주세요")
           return;
         }
       }
 
 
-      fetch("/admin/adminMemberSearch?cp="+cp+"&searchType="+searchType+"&searchText="+searchText+"&ud="+ud+"&searchAsc="+searchAsc)
-      .then(response => {
-        if(response.ok){
-          return response.text();
-        }
-        throw new Error("리스트 조회 실패");
-        
-      })
-      .then(html => {
-        document.querySelector(".member-mamage-content").innerHTML = html;
-        getMemberDetail();
-      })
-      .catch(err => { 
-        console.log(err);
-      })
+      fetch("/admin/adminMemberSearch?cp=" + cp + "&searchType=" + searchType + "&searchText=" + searchText + "&ud=" + ud + "&searchAsc=" + searchAsc)
+        .then(response => {
+          if (response.ok) {
+            return response.text();
+          }
+          throw new Error("리스트 조회 실패");
+
+        })
+        .then(html => {
+          document.querySelector(".member-mamage-content").innerHTML = html;
+          getMemberDetail();
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
 
     const getMemberAsc = () => {
       adminMemberNo.addEventListener("click", () => {
         searchAsc = '회원번호';
 
-        if(searchText === undefined){
-          searchText = '' ;
+        if (searchText === undefined) {
+          searchText = '';
         }
-        if(ud === 1){
+        if (ud === 1) {
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
@@ -512,10 +586,10 @@
       adminMemberName.addEventListener("click", () => {
         searchAsc = '이름'
 
-        if(searchText === undefined){
-          searchText = '' ;
+        if (searchText === undefined) {
+          searchText = '';
         }
-        if(ud === 1){
+        if (ud === 1) {
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
@@ -533,10 +607,10 @@
       adminMemberEmail.addEventListener("click", () => {
         searchAsc = '이메일'
 
-        if(searchText === undefined){
-          searchText = '' ;
+        if (searchText === undefined) {
+          searchText = '';
         }
-        if(ud === 1){
+        if (ud === 1) {
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
@@ -554,10 +628,10 @@
       adminMemberTel.addEventListener("click", () => {
         searchAsc = '전화번호'
 
-        if(searchText === undefined){
-          searchText = '' ;
+        if (searchText === undefined) {
+          searchText = '';
         }
-        if(ud === 1){
+        if (ud === 1) {
           ud = 2;
           getMemberPagenation();
           getMemberSearchList();
@@ -575,7 +649,7 @@
 
 
     const getPnEvent = () => {
-      
+
       document.querySelector(".pn-1").addEventListener("click", () => {
         cp = 1;
         getMemberPagenation();
@@ -583,7 +657,7 @@
       })
       document.querySelector(".pn-2").addEventListener("click", () => {
         cp--;
-        if(cp === 0){
+        if (cp === 0) {
           cp++;
         }
         getMemberPagenation();
@@ -591,7 +665,7 @@
       })
       document.querySelector(".pn-3").addEventListener("click", () => {
         cp++;
-        if(cp > Number(document.querySelector(".getCpCount").value)){
+        if (cp > Number(document.querySelector(".getCpCount").value)) {
           cp--;
         }
         getMemberPagenation();
@@ -625,17 +699,17 @@
       const pnBtn = document.querySelectorAll(".pnBtn");
       const pnValue = document.querySelectorAll(".pnValue");
 
-     
-        for(let i = 0; i < pnBtn.length; i++){
 
-          pnBtn[i].addEventListener("click", () => {
-            cp = Number(pnValue[i].innerText);
-            getMemberPagenation();
-            getMemberSearchList();
-          })
+      for (let i = 0; i < pnBtn.length; i++) {
 
-        }
-      
+        pnBtn[i].addEventListener("click", () => {
+          cp = Number(pnValue[i].innerText);
+          getMemberPagenation();
+          getMemberSearchList();
+        })
+
+      }
+
     }
 
 
@@ -649,6 +723,15 @@
       memberSearchBtn();
       getMemberAsc();
       adminMemberCngBtn();
+    })
+
+
+    document.querySelector(".admin-member-login").addEventListener("click", (e) => {
+
+      const memberNo = Number(e.target.closest(".admin-member-detail").children[1].children[1].innerText);
+      console.log(memberNo);
+
+      location.href = "/admin/memberLogin?memberNo=" + memberNo
     })
 
   </script>

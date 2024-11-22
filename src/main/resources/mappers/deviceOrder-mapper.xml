@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.kh.bcs.device.mapper.DeviceOrderMapper">
+  	
+	<select id="orderDeviceView">
+		SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE
+		FROM (
+			SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE,
+			BUYING_DEVICE_UPLOAD_DATE
+			FROM
+				BUYING_DEVICE BD
+			LEFT JOIN
+				COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+			LEFT JOIN
+				GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+			LEFT JOIN
+				CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+			LEFT JOIN
+				DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+			WHERE
+				BD.DEVICE_NO = #{deviceNo}
+			AND
+				BD.COLOR_NO = #{colorNo}
+			AND
+				BD.GRADE_NUMBER = #{gradeNumber}
+			AND
+				BD.CAPACITY_NUMBER = #{capacityNumber}
+			AND
+				SOLD_FL = 'N'
+			ORDER BY BUYING_DEVICE_UPLOAD_DATE ASC
+		)
+		WHERE
+			ROWNUM = 1
+	</select>
+	
+	
+	
+	<select id="oderDevicePrice">
+		SELECT
+			(
+				DEVICE_BUYING_PRICE + 
+				(SELECT GRADE_PRICE
+				 FROM GRADE
+				 WHERE
+				 	GRADE_NUMBER = #{gradeNumber}) +
+				(SELECT CAPACITY_PRICE
+				 FROM CAPACITY_PRICE
+				 WHERE 
+				 	DEVICE_NO = #{deviceNo}
+				 AND
+				 	CAPACITY_NUMBER = #{capacityNumber})
+			) AS "BUYING_DEVICE_PRICE"
+		FROM DEVICE
+		WHERE
+			DEVICE_NO = #{deviceNo}
+	</select>  	
+	
+	
+	
+	<!-- 잔여 포인트 조회 -->
+	<select id="pointCheck">
+		SELECT MEMBER_POINT
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	
+	<!-- 가격 조회 -->
+	<select id="priceCheck">
+		SELECT ((
+			SELECT GRADE_PRICE
+			FROM BUYING_DEVICE BD
+			JOIN GRADE G USING (GRADE_NUMBER)
+			WHERE 
+				BUYING_DEVICE_NO = #{buyingDeviceNo}
+			AND
+				G.DEVICE_NO = BD.DEVICE_NO
+		) + (
+			SELECT DEVICE_BUYING_PRICE
+			FROM BUYING_DEVICE BD
+			LEFT JOIN DEVICE D USING (DEVICE_NO)
+			WHERE 
+				BUYING_DEVICE_NO = #{buyingDeviceNo}
+		) + (
+			SELECT CAPACITY_PRICE
+			FROM BUYING_DEVICE BD
+			JOIN CAPACITY_PRICE CP USING (CAPACITY_NUMBER)
+			WHERE 
+				BUYING_DEVICE_NO = #{buyingDeviceNo}
+			AND
+				CP.DEVICE_NO = BD.DEVICE_NO
+		)) DEVICE_PRICE
+		FROM DUAL
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 회원 테이블 업데이트 -->
+	<update id="pointChange">
+  		UPDATE "MEMBER"
+  		SET 
+  			MEMBER_POINT = MEMBER_POINT - #{amount}
+  		WHERE 
+  			MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 포인트 내역 입력 -->
+	<insert id="insertPointLog">
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="pointLogNo">
+			SELECT SEQ_POINT_LOG_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "POINT_LOG"
+		VALUES (#{pointLogNo},
+				(SELECT MEMBER_POINT
+				 FROM "MEMBER"
+				 WHERE MEMBER_NO = #{memberNo}),
+				'핸드폰 구매', 
+				-#{amount}, DEFAULT, #{memberNo})
+	</insert>
+	
+	
+	<!-- 주문 정보 insert -->
+	<insert id="insertOrder">
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="orderNo">
+			SELECT SEQ_ORDER_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "ORDER"
+		VALUES (
+			#{orderNo},
+			#{orderName},
+			#{orderTel},
+			#{orderComment},
+			#{orderAddress},
+			#{memberNo},
+			1,
+			#{buyingDeviceNo},
+			DEFAULT,
+			#{pointLogNo}
+		)
+	</insert>
+	
+	
+	<!-- 매물 상태 판매 완료로 변경 -->
+	<update id="updateBuyingDevice">
+		UPDATE "BUYING_DEVICE"
+		SET 
+			SOLD_FL = 'Y',
+			BUYING_DEVICE_SOLD_DATE = CURRENT_DATE,
+			BUYING_DEVICE_PRICE = #{price}
+		WHERE
+			BUYING_DEVICE_NO = #{buyingDeviceNo}
+	</update>
+	
+	
+	
+	<!-- 주문 정보 가져오기 -->
+	<select id="selectOrder">
+		SELECT
+			ORDER_NAME,
+			REGEXP_REPLACE(ORDER_TEL, '(.{3})(.+)(.{4})', '\1-\2-\3') "ORDER_TEL",
+			ORDER_COMMENT,
+			ORDER_ADDRESS,
+			MEMBER_NO,
+			O.BUYING_DEVICE_NO AS "BUYING_DEVICE_NO",
+			D.DEVICE_NAME AS "DEVICE_NAME",
+			C.COLOR_NAME AS "COLOR_NAME",
+			CP.CAPACITY_TYPE AS "CAPACITY_TYPE",
+			G.GRADE_TYPE AS "GRADE_TYPE"
+		FROM "ORDER" O
+		LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+		LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+		LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+		LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+		LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+		WHERE ORDER_NO = #{orderNo}
+	</select>
+	
+	<!-- 포인트 정보 가져오기 -->
+	<select id="selectPointLog">
+		SELECT 
+			POINT_LOG_BALANCE AS "BALANCE",
+			POINT_LOG_AMOUNT AS "AMOUNT",
+			(POINT_LOG_BALANCE + POINT_LOG_AMOUNT) AS "ORIGINAL_POINT"
+		FROM POINT_LOG PL
+		LEFT JOIN "ORDER" O ON (PL.POINT_LOG_NO = O.POINT_LOG_NO)
+		WHERE
+			ORDER_NO = #{orderNo}
+	</select>
+	
+	
+</mapper>

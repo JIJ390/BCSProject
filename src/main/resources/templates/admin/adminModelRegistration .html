@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,119 +9,285 @@
 </head>
 
 <body>
-    
-<div class="title">
-        <!-- 메인 색 첨부 -->
+
+    <form action="adminModelRegistration/insert" method="post" enctype="multipart/form-data">
+        <div class="title">
+            <!-- 메인 색 첨부 -->
             <a href="http://localhost/admin" class="menu">←</a>
-    </div>
-    <h1>기종등록</h1>
-    <div class="main-img-container">
-        <p>메인 사진</p>
-        <div class="main-img-gray-bc">
-            <div class="main-img">
-                <input type="file">
+        </div>
+        <h1>기종등록</h1>
+        <div class="main-img-container">
+            <p>메인 사진</p>
+            <div class="main-img-gray-bc">
+                <div class="main-img">
+                    <img src="" class="preview">
+                </div>
+                <input type="file" class="input-img" name="divceImg">
+                <span class="delete_image">&times;</span>
             </div>
         </div>
-    </div>
 
-    <!-- 단일 색 첨부 -->
-    <div class="main-color-container">
-        <p>단일 색 사진</p>
-        <div class="main-color-img-bc">
-            <div class="main-color-first">
-                <div class="main-color-in-radios">
-                    <input type="file">
+        <!-- 단일 색 첨부 -->
+        <div class="main-color-container">
+            <p>단일 색 사진</p>
+            <div class="main-color-img-bc">
+                <div class="main-color-first">
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+
+                    <div class="colorText">
+                        <h2>왼쪽부터 순차적으로 입력</h2>
+                        <div>
+                            이름 :
+                            <!-- 색 이름 -->
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
+                        </div>
+                        <hr>
+                        <div>
+                            색상코드 :
+                            <!-- 색상 코드 -->
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                        </div>
+                        <p>*색상이 존재하지않으면 빈칸.</p>
+                    </div>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
+
+                <div class="main-color-last">
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="main-color-in-radios">
+                        <div class="main-img">
+                            <img src="" class="preview">
+                        </div>
+                        <div>
+                            <input type="file" class="input-img" name="colorImg">
+                            <span class="delete_image">&times;</span>
+                        </div>
+                    </div>
+                    <div class="colorText">
+                        <h2>왼쪽부터 순차적으로 입력</h2>
+                        <div>
+                            이름 :
+                            <!-- 색 이름 -->
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색"> 
+                        </div>
+                        <hr>
+                        <div>
+                            색상코드 :
+                            <!-- 색상 코드 -->
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000">
+                        </div>
+                        <p>*색상이 존재하지않으면 빈칸.</p>
+                    </div>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
-                </div>
+
             </div>
+        </div>
+        <!-------------- 상세 스펙 적는 ---------------->
+        <div class="main-content-container">
+            <p>상세 스펙</p>
+            <div class="main-content-arrow">
+                <!-- 제목 -->
+                <div class="main-content-right">
+                    <!-- 출시일 -->
+                    <p name="deviceReleaseDate">출시일</p>
 
-            <div class="main-color-last">
-                <div class="main-color-in-radios">
-                    <input type="file">
+                    <!-- 출고가 -->
+                    <p name="deviceReleasePrice">출고가</p>
+
+                    <!-- 운영체제 -->
+                    <p name="deviceOs">운영체제</p>
+
+                    <!-- 해상도 -->
+                    <p name="deviceResolution">해상도</p>
+
+                    <!-- 기종 화소 밀도 -->
+                    <p name="devicePixel">기종 화소 밀도</p>
+
+                    <!-- 기종 전면 화소 -->
+                    <p name="deviceFrontPixel">기종 전면 화소</p>
+
+                    <!-- 기종 후면 화소 -->
+                    <p name="deviceBackPixel">기종 후면 화소</p>
+
+                    <!-- 기종 무게 -->
+                    <p name="deviceWeight">기종 무게</p>
+
+                    <!-- 배터리 용량 -->
+                    <p name="deviceBatteryCapacity">배터리 용량</p>
+
+                    <!-- 디바이스 이름 -->
+                    <p name="deviceName">디바이스 이름</p>
+
+                    <!-- 내폰사기 -->
+                    <p name="deviceBuyingPrice">내폰사기</p>
+
+                    <!-- 내폰 팔기 -->
+                    <p name="deviceSellingPrice">내폰 팔기</p>
+
+                    <!-- cpu 이름 -->
+                    <p name="deviceCpuName">cpu 이름</p>
                 </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
-                </div>
-                <div class="main-color-in-radios">
-                    <input type="file">
+                <!-- 입력할 값 -->
+                <div class="main-content-left">
+                    <!-- 출시일 -->
+                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)"> 
+
+                    <!-- 출고가 -->
+                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
+
+                    <!-- 운영체제 -->
+                    <input type="text" name="deviceOs" placeholder="ex. ios 00">
+
+                    <!-- 해상도 -->
+                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080">
+
+                    <!-- 기종 화소 밀도 -->
+                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display">
+
+                    <!-- 기종 전면 화소 -->
+                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만">
+
+                    <!-- 기종 후면 화소 -->
+                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만">
+
+                    <!-- 기종 무게 -->
+                    <input type="text" name="deviceWeight" placeholder="ex. 100 g">
+
+                    <!-- 배터리 용량 -->
+                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh">
+
+                    <!-- 디바이스 이름 -->
+                    <input type="text" name="deviceName" placeholder="ex. iPhone 16">
+
+                    <!-- 내폰사기 -->
+                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000">
+
+                    <!-- 내폰 팔기 -->
+                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000">
+                    <!-- cpu 이름 -->
+                    <input type="text" name="deviceCpuName" placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
+
+
+
+
                 </div>
             </div>
 
         </div>
-    </div>
+<!-------------- 상세 스펙 적는 ---------------->
+        <div class="main-content-container-bottom">
 
-    <!-- 상세 스펙 -->
+            <!-- 램 -->
+            <h2>램 용량 선택</h2>
+            <select name="ramCapacity" id="ram">
+                <option value="1">2 GB</option>
+                <option value="2">4 GB</option>
+                <option value="3">6 GB</option>
+                <option value="4">8 GB</option>
+                <option value="5">12 GB</option>
+            </select>
+            <h2>기종 제조사</h2>
+            <select name="deviceBrand" id="brand">
+                <option>SAMSUNG</option>
+                <option>iPhone</option>
+                <option>Galaxy Tab</option>
+                <option>iPad</option>
+            </select>
 
+            <!-- 디스플레이 입력 -->
+            <h2>디스플레이 입력</h2>
+            <select name="displaySize" id="brand">
+                <option value="1">6.1</option>
+                <option value="2">6.06</option>
+                <option value="3">6.7</option>
+            </select>
+            <br>
+
+<div>
+    <p>등급</p>
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
+                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
     
+</div>
+<div>
+    <p>등록할 가격</p>
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+</div>
+<div>
+    <p>판매할 가격</p>
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+</div>
 
-    <div class="main-content-container">
-        <p>상세 스펙</p>
-        <div class="main-content-arrow">
-            <!-- 제목 -->
-            <div class="main-content-right">
-                <p>기종 번허</p>
-                <p>출시일</p>
-                <p>출고가</p>
-                <p>기본가격</p>
-                <p>기종 화소 밀도</p>
-                <p>기종 전면 화소</p>
-                <p>전면 화소</p>
-                <p>기종 무선충전</p>
-                <p>기종 급속 충전</p>
-                <p>기종 무게</p>
-                <p>배터리 용량</p>
-                <p>CPU코드</p>
-                <p>RAM코드</p>
-                <p>기종 화면 크기</p>
-                <p>해상도</p>
-            </div>
-            <!-- 입력할 값 -->
-            <div class="main-content-left">
-                <!-- 기종번호 -->
-                <input type="text">
-                <!-- 출시일 -->
-                <input type="text">
-                <!-- 출고가 -->
-                <input type="text">
-                <!-- 기본가격 -->
-                <input type="text">
-                <!-- 기종 화소 밀도 -->
-                <input type="text">
-                <!-- 기종 전면 화소 -->
-                <input type="text">
-                <!-- 전면 화소 -->
-                <input type="text">
-                <!-- 기종 무선충전 -->
-                <input type="text">
-                <!-- 기종 급속 충전 -->
-                <input type="text">
-                <!-- 기종 무게 -->
-                <input type="text">
-                <!-- 배터리 용량 -->
-                <input type="text">
-                <!-- CPU코드 -->
-                <input type="text">
-                <!-- RAM코드 -->
-                <input type="text">
-                <!-- 기종 화면 크기 -->
-                <input type="text">
-                <!-- 해상도 -->
-                <input type="text">
-            </div>
-        </div>            
-        <button>등록</button>
-    </div>
+
+        </div>
+<br><br>
+        <div class="insert-btn">
+            <button>등록</button>
+        </div>
+    </form>
 
 
 
 
 
-    
+
 
 </body>
+<script src="/js/adminJS/adminModelRegistration.js"></script>
+
 </html>

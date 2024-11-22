@@ -1,6 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.bcs.deviceList.mapper.DeviceListMapper">
+
+
+	<!-- 필터 기능 -->  	
+  <select id="selectFilterList" resultType="string">
+    SELECT DISTINCT 
+    <choose>
+        <when test="filterType == 'ram'">
+            RAM.DEVICE_RAM_CAPACITY
+        </when>
+        <when test="filterType == 'hdd'">
+            CAP.CAPACITY_TYPE
+        </when>
+        <when test="filterType == 'inch'">
+            DISP.DEVICE_DISPLAY_SIZE
+        </when>
+    </choose>
+	    FROM DEVICE D
+	    JOIN RAM ON D.DEVICE_RAM_CODE = RAM.DEVICE_RAM_CODE
+	    LEFT JOIN DISPLAY DISP ON D.DEVICE_DISPLAY_CODE = DISP.DEVICE_DISPLAY_CODE
+	    LEFT JOIN CAPACITY_PRICE CP ON D.DEVICE_NO = CP.DEVICE_NO
+	    LEFT JOIN CAPACITY CAP ON CP.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER
+	    WHERE 
+    <choose>
+        <when test="filterType == 'ram'">
+            RAM.DEVICE_RAM_CAPACITY IS NOT NULL
+        </when>
+        <when test="filterType == 'hdd'">
+            CAP.CAPACITY_TYPE IS NOT NULL
+        </when>
+        <when test="filterType == 'inch'">
+            DISP.DEVICE_DISPLAY_SIZE IS NOT NULL
+        </when>
+    </choose>
+	</select>
+
+
   	
   	
+
+
+
+	<!-- 필터를 이용한 검색 기능 -->
+	<select id="selectDeviceList">
+	
+	SELECT DISTINCT DEVICE_NO, DEVICE_NAME, DEVICE_BUYING_PRICE, DEVICE_RELEASE_DATE
+	FROM (
+	
+	
+		<if test="hddList.size > 0">
+			(
+			SELECT D.DEVICE_NO AS "DEVICE_NO", DEVICE_NAME, DEVICE_BUYING_PRICE, DEVICE_BRAND, DEVICE_RELEASE_DATE
+			FROM CAPACITY C 
+			JOIN CAPACITY_PRICE CP ON (C.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+			JOIN DEVICE D ON (CP.DEVICE_NO = D.DEVICE_NO)
+			WHERE CAPACITY_TYPE IN 
+			<foreach collection="hddList" item="item" open="(" separator="," close=")">
+	        	#{item}
+	   		</foreach>
+			) 
+			
+		</if>
+		
+		<if test="(hddList.size > 0 and ramList.size > 0)">
+			INTERSECT
+		</if>
+					
+		<if test="ramList.size > 0">
+		
+			(
+			SELECT DEVICE_NO, DEVICE_NAME, DEVICE_BUYING_PRICE, DEVICE_BRAND, DEVICE_RELEASE_DATE
+			FROM RAM
+			JOIN DEVICE USING (DEVICE_RAM_CODE)
+			WHERE DEVICE_RAM_CAPACITY IN 
+			<foreach collection="ramList" item="item" open="(" separator="," close=")">
+	        	#{item}
+	   		</foreach>
+			)
+			
+		</if>
+		
+		<if test="(ramList.size > 0  and inchList.size > 0) or (hddList.size > 0  and inchList.size > 0)">
+			INTERSECT
+		</if>
+		
+		<if test="inchList.size > 0">
+		
+			(
+			SELECT DEVICE_NO, DEVICE_NAME, DEVICE_BUYING_PRICE, DEVICE_BRAND, DEVICE_RELEASE_DATE
+			FROM DISPLAY
+			JOIN DEVICE USING (DEVICE_DISPLAY_CODE)
+			WHERE DEVICE_DISPLAY_SIZE IN 
+			<foreach collection="inchList" item="item" open="(" separator="," close=")">
+	        	#{item}
+	   		</foreach>
+			)
+		
+		</if>
+	
+		)
+		
+	WHERE DEVICE_BRAND = #{brand}
+	ORDER BY
+		DEVICE_RELEASE_DATE DESC
+	
+	
+	</select>
+	
+	
+
+	<!-- 헤더 구매하기 Device 호출 -->
+	<select id="phoneList">
+		SELECT DEVICE_NO, DEVICE_NAME, DEVICE_IMG
+		FROM DEVICE
+		WHERE DEVICE_BRAND = #{category}
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	
+	</select>  	
+	
+	
+	
+	
+	<select id="brandList">
+		SELECT 
+			DEVICE_NO, DEVICE_IMG, DEVICE_NAME, DEVICE_RELEASE_PRICE
+		FROM 
+			DEVICE
+		WHERE
+			DEVICE_BRAND = #{brand}
+		ORDER BY
+			DEVICE_RELEASE_DATE DESC
+	</select>
+	
+	
+	
+	
+	
 </mapper>
