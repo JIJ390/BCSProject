@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -25,5 +26,13 @@ public interface AdminService {
 
 	int memberDelFlChange(int memberNo);
 	int memberFlChange(int memberNo);
+
+	/** 관리자 상품 조회
+	 * 
+	 * @param device
+	 * @param color
+	 * @return
+	 */
+	List<Device> result(Device device, Color color);
 
 }

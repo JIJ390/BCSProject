@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -46,5 +47,13 @@ public interface AdminMapper {
 	int memberDelFlChange(int memberNo);
 
 	int memberFlChange(int memberNo);
+
+	/** 관리자 상품 조회
+	 *  
+	 * @param device
+	 * @param color
+	 * @return
+	 */
+	List<Device> deviceColorList(Device device, Color color);
 
 }

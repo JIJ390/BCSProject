@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.admin.service.AdminService;
+import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -76,7 +78,16 @@ public class AdminController {
 	
 	@GetMapping("adminProductinquiry")
 	public String adminProductinquiry(
+			Device device,
+			Color color,
+			Model model
 			) {
+		
+		List<Device> result = service.result(device,color);
+		
+		
+		model.addAttribute("deviceList", result);
+		
 		
 		return "admin/adminProductinquiry";
 	}

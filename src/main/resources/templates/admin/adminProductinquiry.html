@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <table class="container-in-content" style="border-collapse: collapse">
+            <table class="container-in-content" style="border-collapse: collapse" th:each= "deviceList:${deviceList}">
 
                 <colgroup>
                     <col style="width: 15%;">
@@ -60,12 +60,12 @@
 
                 <tbody>
                     <tr>
-                        <td><img src="/images/sample_iphone16_blue.png" alt=""></td>
-                        <td> 15 </td>
-                        <td> iPhone 22 </td>
+                        <td><img th:src="${deviceList.deviceImg}"></td>
+                        <td th:text="${deviceList.deviceNo}">  </td>
+                        <td th:text="${deviceList.deviceName}"> </td>
                         <td class="color-result">
-                            <p> 현재 개수      :  <th:block>22</th:block> </p>
-                            <p> 현재 주문 개수 :  <th:block>4</th:block> </p>
+                            <p> 현재 개수      :  <th:block th:text="${deviceList.deviceCount}">22</th:block> </p>
+                            <p> 현재 주문 개수 :  <th:block th:text="${deviceList.orderCount}">4</th:block> </p>
                             <p> 색상별 개수    :  <th:block>5</th:block> </p>
                             <div class="color">
                                 <div class="border-radius-color"></div>
@@ -73,7 +73,7 @@
                                 <div class="border-radius-color"></div>
                             </div>
                         </td>
-                        <td>출시일 22-01-13</td>
+                        <td th:text="${deviceList.deviceReleaseDate}"> </td>
                         <td class="td-btn">
                             <p>구매 현황</p>
                             <p>판매 현황</p>

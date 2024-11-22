@@ -43,4 +43,15 @@ public class Device {
 	private List<Color> colorList;
 	private List<Grade> gradeList;
 	private List<Capacity> capacityList;
+	
+	//주문 조회
+	private int orderCount;
+	//현재 개수
+	private int deviceCount;
+	
+	
+	
+	
+	
+	
 }

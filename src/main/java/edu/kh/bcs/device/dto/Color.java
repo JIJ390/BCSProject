@@ -19,4 +19,7 @@ public class Color {
 	private String colorCode;
 	private String colorDeviceImg;
 
+	//색상 총 조회
+	private int colorCount;
+	
 }
