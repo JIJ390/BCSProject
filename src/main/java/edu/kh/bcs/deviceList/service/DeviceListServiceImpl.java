@@ -24,6 +24,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	// 비동기 필터 조회
 	@Override
 	public List<String> selectFilterListByType(String filterType) {
+		
 	    return mapper.selectFilterList(filterType);
 	}
 	
@@ -41,6 +42,8 @@ public class DeviceListServiceImpl implements DeviceListService {
 		List<String> ramList = new ArrayList<>();
 		
 		List<String> inchList = new ArrayList<>();
+		
+		String brand = null;
 		
 //		List<Map<String, Object>> hddList = new ArrayList<>();
 //		
@@ -67,18 +70,26 @@ public class DeviceListServiceImpl implements DeviceListService {
 		    	hddList.add((String)entry.getValue());
 		    }
 		    
-		    else {
+		    else if (entry.getKey().contains("inch")) {
 		    	inchList.add((String)entry.getValue());
+		    }
+		    else {
+		    	brand = (String)entry.getValue();
 		    }
 
 		}
 		
 		
+		log.debug("brand : {}", brand);
+		log.debug("brand : {}", brand);
+		log.debug("brand : {}", brand);
+		log.debug("brand : {}", brand);
+		
 //		log.debug("ramList : {}", ramList);
 //		log.debug("hddList : {}", hddList);
 //		log.debug("inchList : {}", inchList);
 		
-		List<Device> deviceList = mapper.selectDeviceList(ramList, hddList, inchList);
+		List<Device> deviceList = mapper.selectDeviceList(ramList, hddList, inchList, brand);
 		
 //		log.debug("deviceList : {}", deviceList);
 //		log.debug("deviceList : {}", deviceList);
@@ -96,6 +107,24 @@ public class DeviceListServiceImpl implements DeviceListService {
 		
 //		log.debug("category : {}", category);
 		return mapper.phoneList(category);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<Device> brandList(String brand) {
+		
+		log.debug("브랜드 명 : {}", brand);
+		return mapper.brandList(brand);
 	}
 
 }

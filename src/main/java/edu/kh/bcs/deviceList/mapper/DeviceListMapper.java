@@ -26,13 +26,27 @@ public interface DeviceListMapper {
 	List<Device> selectDeviceList(
 			@Param("ramList") List<String> ramList, 
 			@Param("hddList") List<String> hddList,
-			@Param("inchList") List<String> inchList);
+			@Param("inchList") List<String> inchList,
+			@Param("brand") String brand);
 
 
 
 
 
 	List<Device> phoneList(String category);
+
+
+
+
+
+
+	List<Device> brandList(String brand);
+
+
+
+
+
+
 	
 
 

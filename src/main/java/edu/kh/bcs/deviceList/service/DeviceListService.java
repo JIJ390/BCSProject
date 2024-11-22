@@ -5,7 +5,6 @@ import java.util.Map;
 
 import edu.kh.bcs.device.dto.Device;
 
-
 public interface DeviceListService {
 
 	/** 비동기 필터 조회
@@ -24,6 +23,9 @@ public interface DeviceListService {
 
 
 	List<Device> phoneList(String category);
+
+
+	List<Device> brandList(String brand);
 
 
 	

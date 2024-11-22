@@ -250,7 +250,10 @@ main{
   line-height: 1;
 }
 
-
+.device-link{
+  text-decoration: none;
+  color: black;
+}
 
 
 
