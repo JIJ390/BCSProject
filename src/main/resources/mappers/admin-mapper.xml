@@ -139,7 +139,6 @@ WHERE MEMBER_NO = #{memberNo} OR ADMIN_NO = #{memberNo}
 	</select>
 	
 
-	</select>
 	
 	<select id="deviceColorList">
 SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
@@ -157,6 +156,7 @@ FROM DEVICE D
 ORDER BY 
 	DEVICE_RELEASE_DATE DESC
 
+	</select>
 	<update id="chatRead">
 UPDATE CHATTING_MESSAGE
 SET CHATTING_MESSAGE_READ_FL = 'Y'
