@@ -17,6 +17,7 @@ public interface DeviceListMapper {
 	 * @return
 	 */
 	List<String> selectFilterList(String filterType);
+	
 
 	
 	
@@ -32,7 +33,7 @@ public interface DeviceListMapper {
 
 
 	List<Device> phoneList(String category);
-
+	
 
 
 

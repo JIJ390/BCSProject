@@ -37,6 +37,8 @@ public class DeviceListController {
 	@GetMapping("selectFilterList")
 	@ResponseBody
 	public List<String> selectFilterList(@RequestParam("filterType") String filterType) {
+		
+		
 	    return service.selectFilterListByType(filterType);
 	}
 	
