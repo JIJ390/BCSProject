@@ -54,6 +54,13 @@ public interface DeviceListMapper {
 
 
 
+	List<Device> brandSellList(String brand);
+
+
+
+
+
+
 	
 
 

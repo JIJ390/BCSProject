@@ -34,6 +34,9 @@ public interface DeviceListService {
 	List<Device> sellList(String category);
 
 
+	List<Device> brandSellList(String brand);
+
+
 	
 	
 

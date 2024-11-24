@@ -31,6 +31,12 @@ public class DeviceListController {
 		return "deviceList/deviceList";
 	}
 	
+	/* 판매 페이지 */
+	@GetMapping("deviceSellList")
+	public String deviceSellList() {
+		return "deviceList/deviceSellList";
+	}
+	
 	
 
 	/* 비동기 필터 기능 */
@@ -94,6 +100,15 @@ public class DeviceListController {
 		
 		return service.sellList(category);
 		
+	}
+	
+	/* 브랜드별 판매 페이지 */
+	@PostMapping("brandSellList")
+	@ResponseBody
+	public List<Device> brandSellList(
+			@RequestParam("brand") String brand){
+		
+		return service.brandSellList(brand);
 	}
 	
 	

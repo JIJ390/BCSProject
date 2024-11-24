@@ -234,44 +234,53 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
     // 기존 내용을 초기화
     const itemsContainer = document.querySelector(".deviceList-items-container");
     itemsContainer.innerHTML = "";
-  
+
     // 새로운 데이터로 업데이트
     result.forEach(item => {
       // 데이터에서 필요한 정보 추출
       const deviceName = item.deviceName || "이름 없음";
       const devicePrice = item.deviceBuyingPrice ? `${item.deviceBuyingPrice.toLocaleString()}원` : "가격 정보 없음";
       const deviceImg = item.deviceImg || "/images/default_image.png"; // 기본 이미지 처리
-  
+      const deviceLink = `/device/buy/${item.deviceNo}`; // 동적 링크
+
       // 아이템 박스 생성
       const itemBox = document.createElement("div");
       itemBox.classList.add("deviceList-item-box");
-  
+
+      // 링크 요소 생성
+      const linkElement = document.createElement("a");
+      linkElement.href = deviceLink;
+      linkElement.classList.add("device-link"); // 필요하면 스타일링을 위해 클래스 추가
+
       // 아이템 섹션 생성
       const itemSection = document.createElement("div");
       itemSection.classList.add("deviceList-item-section");
-  
+
       // 이미지 요소 생성
       const imgElement = document.createElement("img");
       imgElement.src = deviceImg;
       imgElement.alt = deviceName;
-  
+
       // 이름 요소 생성
       const nameElement = document.createElement("div");
       nameElement.style.marginTop = "15px";
       nameElement.textContent = deviceName;
-  
+
       // 가격 요소 생성
       const priceElement = document.createElement("div");
       priceElement.textContent = devicePrice;
-  
+
       // 섹션에 요소 추가
       itemSection.appendChild(imgElement);
       itemSection.appendChild(nameElement);
       itemSection.appendChild(priceElement);
-  
-      // 박스에 섹션 추가
-      itemBox.appendChild(itemSection);
-  
+
+      // 링크에 섹션 추가
+      linkElement.appendChild(itemSection);
+
+      // 박스에 링크 추가
+      itemBox.appendChild(linkElement);
+
       // 컨테이너에 박스 추가
       itemsContainer.appendChild(itemBox);
     });
@@ -366,6 +375,8 @@ dataBrand.forEach(filter => {
     })
   })
 })
+
+
 
 
 
