@@ -124,7 +124,7 @@
 	
 	<select id="brandList">
 		SELECT 
-			DEVICE_NO, DEVICE_IMG, DEVICE_NAME, DEVICE_RELEASE_PRICE
+			DEVICE_NO, DEVICE_IMG, DEVICE_NAME, DEVICE_BUYING_PRICE
 		FROM 
 			DEVICE
 		WHERE
@@ -133,7 +133,7 @@
 			DEVICE_RELEASE_DATE DESC
 	</select>
 	
-		<!-- 헤더 구매하기 Device 호출 -->
+		<!-- 헤더 판매하기 Device 호출 -->
 	<select id="sellList">
 		SELECT DEVICE_NO, DEVICE_NAME, DEVICE_IMG
 		FROM DEVICE

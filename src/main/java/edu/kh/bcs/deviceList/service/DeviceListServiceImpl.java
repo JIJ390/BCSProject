@@ -119,6 +119,12 @@ public class DeviceListServiceImpl implements DeviceListService {
 	
 	
 	
+	@Override
+	public List<Device> brandSellList(String brand) {
+		
+		log.debug("브랜드 명 : {}", brand);
+		return mapper.brandSellList(brand);
+	}
 	
 	
 	
