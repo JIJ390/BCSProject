@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>중고물품 </title>
-  <link rel="stylesheet" href="/css/admin/delivery.css">
-  <link rel="stylesheet" href="/css/admin/header.css">
+  <link rel="stylesheet" href="/css/admin/sale.css">
 </head>
 
 <body>
@@ -15,77 +14,70 @@
   <main>
 
     <section class="main-section">
-      
-    <div class="title">
-      <h1>매입 목록</h1>
-    </div>
 
-     <div class="head">
+      <div class="head">
         <a href="http://localhost/admin">←</a>
       </div>
       <div class="delivery-list">
         <div class="box-title">
-          <h1>배송 목록</h1>
+          <!-- 최 상단 -->
+          <h1>구매 신청 목록</h1>
           <div>
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text">
           </div>
         </div>
-        <div class="list-category">
+        <div class="content">
+
           <table>
+
             <colgroup>
-              <col style="width: 11%;">
-              <col style="width: 10%;">
-              <col style="width: 20%;">
-              <col style="width: 30%;">
-              <col style="width: 20%;">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 20%">
             </colgroup>
+            <thead>
+              <th>
+              <td>주문번호</td>
+              <td>회원 번호</td>
+              <td>아이디</td>
+              <td>상품 명</td>
+              <td>선택 등급/색/용량</td>
+              <td>주문 일자</td>
+              <td>배송 상태</td>
+              <td>환불/교환</td>
+              </th>
+            </thead>
+            <tbody>
+              <th>
+              <td>20</td>
+              <td>12</td>
+              <td>TEST</td>
+              <td>아이폰</td>
+              <td>S등급/레드/256gb</td>
+              <td>2222/22/22</td>
+              <td><button>배송중</button></td>
+              <td><button>해당 없음</button></td>
+              </th>
 
-            <tr class="category" id="category-top">
-              <td><a href="">회원번호▼</a></td>
-              <td><a href="">이름▼</a></td>
-              <td><a href="">이메일▼</a></td>
-              <td><a href="">전화번호▼</a></td>
-              <td><a href="">매입 정보▼</a></td>
-            </tr>
-            <div class="category-inside">
-              <!-- 고객  -->
-              <tr class="category">
-                  <td>1</td>
-                  <td>김성민</td>
-                  <td>sungmin48601@gmail.com</td>
-                  <td>010-1234-4567</td>
-                  <td>
-                    <div class="list-btn">상태 없음</div><p class="arrow">△</p>
-                    <div class="status status-hiden">
-                      <p>결제중</p>
-                      <p>결제완료</p>
-                      <p>베송중</p>
-                      <p>배송완료</p>
-                    </div>
-                  </td>
-                </tr>  
+            </tbody>
 
-                <!-- 고객  -->
-              </div>
+
+
           </table>
-
         </div>
-
-
-
       </div>
-
-
 
 
 
     </section>
 
   </main>
-  <footer>
-    ㅁㄴㅇ
-  </footer>
 
 </body>
 <script src="/js/adminJS/listOverview.js"></script>
