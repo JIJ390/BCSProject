@@ -22,7 +22,7 @@
         <div class="box-title">
           <!-- 최 상단 -->
           <h1>구매 신청 목록</h1>
-          <div>
+          <div class="sarch-box">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text">
           </div>
@@ -32,44 +32,60 @@
           <table>
 
             <colgroup>
+              <col style="width: 7%">
+              <col style="width: 7%">
+              <col style="width: 8%">
+              <col style="width: 15%">
+              <col style="width: 25%">
               <col style="width: 10%">
               <col style="width: 10%">
               <col style="width: 10%">
-              <col style="width: 10%">
-              <col style="width: 10%">
-              <col style="width: 10%">
-              <col style="width: 10%">
-              <col style="width: 20%">
             </colgroup>
             <thead>
-              <th>
-              <td>주문번호</td>
-              <td>회원 번호</td>
-              <td>아이디</td>
-              <td>상품 명</td>
-              <td>선택 등급/색/용량</td>
-              <td>주문 일자</td>
-              <td>배송 상태</td>
-              <td>환불/교환</td>
-              </th>
+              <tr class="tr-board">
+                <td>주문번호</td>
+                <td>회원 번호</td>
+                <td>아이디</td>
+                <td>상품 명</td>
+                <td>선택 등급/색/용량</td>
+                <td>주문 일자</td>
+                <td>배송 상태</td>
+                <td>환불/교환</td>
+              </tr>
             </thead>
             <tbody>
-              <th>
-              <td>20</td>
-              <td>12</td>
-              <td>TEST</td>
-              <td>아이폰</td>
-              <td>S등급/레드/256gb</td>
-              <td>2222/22/22</td>
-              <td><button>배송중</button></td>
-              <td><button>해당 없음</button></td>
-              </th>
+              
+              <tr th:each= "listView:${listView}">
+                <td th:text="${listView.orderNo}">20</td>
+                <td th:text="${listView.memberNo}">12</td>
+                <td th:text="${listView.memberId}">TEST</td>
+                <td th:text="${listView.deviceName}">아이폰</td>
+                <td class="td-grade">
+                  <p th:text="${listView.gradeType}">S</p>
+                  <p>/</p>
+                  <p th:text="${listView.colorName}">레드</p>
+                  <p>/</p>
+                  <p th:text="${listView.capacityType}">용량</p>
+                </td>
+                <td th:text="${listView.orderDate}">2222/22/22</td>
+                <td><button class="deliverylive">배송중</button>▽</td>
+                <td><button>해당 없음</button></td>
+              </tr>
+
+
 
             </tbody>
 
 
 
           </table>
+
+          <div class="overlay" id="overlayBtn">
+            <p class="text" >접수중</p>
+            <p class="text" >입금완료</p>
+            <p class="text" >배송중</p>
+            <p class="text" >도착완료</p>
+          </div>
         </div>
       </div>
 
@@ -80,7 +96,7 @@
   </main>
 
 </body>
-<script src="/js/adminJS/listOverview.js"></script>
+<script src="/js/adminJS/delivery.js"></script>
 <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 
 </html>

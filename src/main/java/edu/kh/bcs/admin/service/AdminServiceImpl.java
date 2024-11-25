@@ -22,6 +22,7 @@ import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -318,18 +319,25 @@ public class AdminServiceImpl implements AdminService {
 				
 				
 				int grade = mapper.grade(gradePriceOrly,gradeSellPriceOrly,GradeTypeOrly,deviceGetNo);
-				
-				
 			}
-			
-
-			
-			
-			
-			
 		}
 		
 			return 1;
+	}
+	
+	@Override
+	public List<Order> adminSale() {
+		
+		
+		return mapper.adminSale();
+	}
+	
+	//상태 업데이트
+	@Override
+	public int delivery(String result) {
+		
+		
+		return mapper.delivery(result);
 	}
 
 }

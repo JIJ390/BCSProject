@@ -14,6 +14,7 @@ import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -92,6 +93,14 @@ public interface AdminService {
 	List<Device> galaxyA(String series);
 
 	List<Device> iPhone(String series);
+
+	//리스트 조회
+	List<Order> adminSale();
+	
+	//상태 업데이트
+	int delivery(String result);
+
+
 
 
 	

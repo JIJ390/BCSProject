@@ -14,6 +14,30 @@ html, body, main {
   margin: 0 auto;
 }
 
+.overlay{
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  right: 300px;
+  top: 300px;
+  border: 3px solid black;
+  background-color: #a47575;
+  border-radius: 30px;
+  width: 150px;
+  height: 250px;
+}
+
+.overlay > p{
+  cursor: pointer;
+}
+
+.td-grade{
+  display: flex;
+  justify-content: center
+}
+
 .head{
   display: flex;
   width: 100%;
@@ -33,12 +57,15 @@ html, body, main {
 
   margin-top: 30px;
   background-color: #fff;
-  width: 1652px;
+  width: 1500px;
   height: 1400px;
   border-radius: 30px;
   align-items: center;
   padding: 50px;
 }
+
+
+
 
 .list-category{
   width: 100%;
@@ -67,6 +94,9 @@ td{
   justify-content: center;
 }
 
+
+
+
 .filter-list{
   display: flex;
   font-weight: bold;
@@ -78,9 +108,11 @@ td{
 .box-title{
   display: flex;
   flex-direction: row;
-  border-bottom: 3px solid black;
-  width: 100%;
+  width: 90%;
   justify-content: space-between;
+  align-items: flex-end;
+
+
 }
 
 table{
@@ -101,6 +133,16 @@ td > a{
 input{
   border: none;
   
+}
+
+.deliverylive{
+  border: none;
+  background: none;
+}
+
+.tr-board{
+  border: 3px solid black;
+  background-color: #97fc85;
 }
 
 

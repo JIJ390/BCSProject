@@ -32,6 +32,7 @@ import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -140,11 +141,32 @@ public class AdminController {
 	
 	//구매 신청 
 	@GetMapping("adminSale")
-	public String adminSale() {
+	public List<Order> adminSale(
+			Model model
+			) {
+		
+		//리스트 조
+		List<Order> listView = service.adminSale();
+		
+		model.addAttribute("listView", listView);
 		
 		
-		return "admin/adminSale";
+		return listView;
 	}
+	
+	@ResponseBody
+	@PostMapping("/delivery")
+	public String delivery(
+			@RequestBody String result
+			) {
+		
+		//상태 업데이트
+		int delivery = service.delivery(result);
+		
+		
+		return result;
+	}
+	
 	
 	@GetMapping("androidPopUp")
 	public String androidPopUp() { 
