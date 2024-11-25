@@ -51,7 +51,7 @@ public interface AdminService {
 	Member getLoginMember(int memberNo);
 
 	List<ChattingRoomDto> adminChatCheck(int memberNo);
-
+ 
 	List<ChattingMessage> adminChattingList(int chattingRoomNo);
 
 	ChattingRoomDto chatroom(int chattingRoomNo);

@@ -124,5 +124,9 @@ public interface AdminMapper {
 
 	List<Device> iPad();
 
+	int checkRoomNo(int memberNo);
+
+	boolean checkRoomFl(int memberNo);
+
 
 }

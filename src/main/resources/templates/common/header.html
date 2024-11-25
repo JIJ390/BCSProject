@@ -161,7 +161,7 @@
     <th:block th:replace="~{common/sidebar}"></th:block> -->
                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
                 <a href="/myPage/myPageMain" class="sideItem">마이 페이지</a>
-                <a href="#" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a>
+                <a href="/admin" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a>
                 <a href="/myPage/logout" class="sideItem">로그아웃</a>
             </div>
         </div>
