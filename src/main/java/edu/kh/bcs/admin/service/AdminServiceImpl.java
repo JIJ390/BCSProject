@@ -161,7 +161,24 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int createChatRoom(int memberNo) {
 		
+		// 이미 있는지 조회
+		if(mapper.checkRoomNo(memberNo) > 0) {
+			return mapper.selectRoomNo(memberNo);
+		}
+		
+		// 관리자 13번이 눌렀는지 조회
+		if(mapper.checkRoomFl(memberNo)) {
+			return 0;
+		}
+
+		// 채팅방 만들기
 		int create = mapper.createChatRoom(memberNo);
+		
+		// 채팅방 생성 실패
+		if(create < 1) {
+			return 0;
+		}
+		
 		int roomNo = mapper.selectRoomNo(memberNo);
 		
 		return roomNo;

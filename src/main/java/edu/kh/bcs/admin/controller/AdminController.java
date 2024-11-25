@@ -359,10 +359,6 @@ public class AdminController {
 		
 		model.addAttribute("deviceList", deviceList);
 		
-		System.out.println(deviceList);
-		System.out.println(deviceList);
-		System.out.println(deviceList);
-		System.out.println(deviceList);
 		
 		return "admin/adminEvent/deviceType";
 	}

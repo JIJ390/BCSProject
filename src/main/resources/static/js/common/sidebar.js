@@ -16,6 +16,9 @@ sidebarButton.addEventListener('click', () => {
       sidebarDiv.style.transform = 'translate(0px, -10px)'
     }, 50);
     sidebarDiv.style.display = "block"
+    if(sidebarViewType === 5){
+      chatRead();
+    }
 
   }
   else {
@@ -256,7 +259,7 @@ const chatRead = () => {
           })
 
           sidebarBtnArCheck = 0;
-          document.querySelector(".sidebar-button").style.backgroundColor = "rgb(56, 56, 56)"
+          document.querySelector(".sidebar-button").style.backgroundColor = "#1d1d1f"
 }
 
 
@@ -576,6 +579,7 @@ const getMyMessageBtn = () => {
 
     // 채팅방 만들고 호출
     createChatRoom()
+    sidebarViewType = 5;
 
   })
 
@@ -596,7 +600,7 @@ const createChatRoom = () => {
 
     if(result > 0){
 
-
+      chattingRoomNo = result;
       fetch("/sidebar/adminChatDetail?ChattingRoomNo="+result)
         .then(Response => {
           if(Response.ok){
@@ -627,7 +631,9 @@ const createChatRoom = () => {
         })
 
     }
-
+    else{
+      alert("채팅방 생성 실패")
+    }
 
   })
   
@@ -799,9 +805,7 @@ if(chattingSock != undefined){
 
       
     }
-    setTimeout(() => {
       document.querySelector(".sidebar-chatting-detail-body-admin").lastChild.style.opacity=1;
-    }, 50);
 
     document.querySelector(".sidebar-chatting-detail-body-admin").scrollTop = document.querySelector(".sidebar-chatting-detail-body-admin").scrollHeight;
 
@@ -855,7 +859,11 @@ if(chattingSock != undefined){
   }
 
   if(sidebarViewType === 5){
-    chatRead();
+    if(document.querySelector(".sidebar-div ").classList.contains("divHidden")){
+       document.querySelector(".sidebar-button").style.backgroundColor = "red";
+       return;
+    }
+      chatRead();
   }
 
 
