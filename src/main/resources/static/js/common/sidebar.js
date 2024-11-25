@@ -579,6 +579,7 @@ const getMyMessageBtn = () => {
 
     // 채팅방 만들고 호출
     createChatRoom()
+    sidebarViewType = 5;
 
   })
 
