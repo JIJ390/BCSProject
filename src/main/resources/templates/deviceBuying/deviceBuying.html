@@ -218,7 +218,7 @@
       <div class="review-container">
         <div class="review-head-box">
 
-          <div class="review-title">고객 후기(37)</div>
+          <div class="review-title" th:text="|고객 후기 (${reviewCount})|">고객 후기(37)</div>
 
 
           <div class="star-container">
@@ -245,28 +245,75 @@
                 <img src="/images/review2/empty-star-right.png"alt="5점"   class="star" data-value="5">
               </div>
             </div>
-            <div class="star-text">4.0</div>
+            <div class="star-score" th:text="${avgScore}"></div>
           </div>
 
         </div>
 
-        <div class="review-content-box">
-          <div class="review-content-head">
-            <div>별</div>
-            <div class="review-content-info">
-              <div class="review-name"></div>
-              <div class="review-date"></div>
+        <th:block th:if="${#lists.isEmpty(reviewList)}">        
+          <div class="none-list">아직 후기가 작성되지 않았습니다</div>
+        </th:block>
+
+
+        <th:block th:each= "review:${reviewList}" th:object="${review}">
+
+          <div class="review-content-box">
+            <div class="review-content-head">
+              <div class="review-content-info">
+                <div class="review-name" th:text="*{memberName}">asd</div>
+
+                <!-- 리뷰 내 별 -->
+                <div class="review-star-container" th:data-value="*{reviewScore}">
+
+                  <div class="review-star-box">
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="0.5점" class="review-star" data-value="0.5">
+                      <img src="/images/review2/empty-star-right.png" alt="1점"   class="review-star" data-value="1">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="1.5점" class="review-star" data-value="1.5">
+                      <img src="/images/review2/empty-star-right.png" alt="2점"   class="review-star" data-value="2">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="2.5점" class="review-star" data-value="2.5">
+                      <img src="/images/review2/empty-star-right.png"alt="3점"   class="review-star" data-value="3">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="3.5점" class="review-star" data-value="3.5">
+                      <img src="/images/review2/empty-star-right.png"alt="4점"   class="review-star" data-value="4">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="4.5점" class="review-star" data-value="4.5">
+                      <img src="/images/review2/empty-star-right.png"alt="5점"   class="review-star" data-value="5">
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="review-date" th:text="*{reviewDate}">asdsa</div>
+              </div>
             </div>
+            
+            <div class="review-main-content">
+              <div class="review-img-box">
+                <img th:src="*{reviewImg}" alt="">
+              </div>
+              <!--style="white-space:pre;"" 공백과 개행문자가 모두 표현 -->
+              <div style="white-space:pre;" class="review-text-box" th:text="*{reviewContent}">asds</div>
+            </div>
+            <div class="review-device" th:text="|구매 기종 > *{deviceName} > *{colorName} > *{capacityType} > *{gradeType} 등급|"></div>
+
           </div>
 
-          <div class="review-main-content">
-            <div class="review-img-box"></div>
-            <div class="review-text-box"></div>
-          </div>
+        </th:block>
 
+        <div class="review-btn-area">
+
+          <button class="review-plus-btn" id="reviewPlutBtn">리뷰 더 보기</button>
         </div>
 
       </div>
+
 
     </section>
     <section class="right-section">
@@ -280,7 +327,6 @@
   <script th:inline="javascript">
     const device = /*[[${device}]]*/ 기종;
     const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
-
     const priceList = /*[[${priceList}]]*/ 시세정보;
   </script>
 

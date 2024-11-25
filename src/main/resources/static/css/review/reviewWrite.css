@@ -134,6 +134,12 @@ textarea:focus {
   cursor: pointer;
 }
 
+.star-score {
+  
+}
+
+
+
 #imgInput {
   display: none;
 }

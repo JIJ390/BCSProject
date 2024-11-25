@@ -91,7 +91,73 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
+  // 반올림
+  let avgScore = document.querySelector(".star-score").innerText;
+
+  avgScore = Math.round(avgScore * 2) / 2;
+
+  // 리뷰 전체 별점 부여
+  highlightStars(avgScore);
+
+
+
+
+  // 리뷰 목록 별점 부여 (초기 3개)
+  const reviewStarContainer = document.querySelectorAll(".review-star-container");
+
+  reviewStarContainer.forEach((reviewStar) => {
+    const score = reviewStar.getAttribute("data-value");
+
+    console.log(score);
+
+                  // 요소 내부에서 모두 찾기
+    const stars = reviewStar.querySelectorAll(".review-star");
+
+    console.log(stars);
+
+    stars.forEach((star, index) => {
+      if (star.dataset.value <= score) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+    });
+
+  })
+
 })
+
+
+
+
+// 별 채우기 함수
+const highlightStars = (rating) => {
+
+  console.log(rating);
+
+  const stars = document.querySelectorAll(".star-container .star");
+
+  stars.forEach((star, index) => {
+      if (star.dataset.value <= rating) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+  });
+}
+
 
 
 
@@ -290,10 +356,6 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
   }
 
 }
-
-
-
-
 
 
 
@@ -540,30 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // let maxPrice = 0;
-  // let minPrice = 9999999999;
-  
-
-  // console.log(priceList);
-
-  // priceList.forEach((item) => {
-  //   if (item.avgPrice > maxPrice) {
-  //     maxPrice = item.avgPrice
-  //   }
-
-  //   if (item.avgPrice < minPrice) {
-  //     minPrice = item.avgPrice
-  //   }
-  // })
-
-  // if (document.querySelector(".max-price") !== null) {
-  //   document.querySelector(".max-price").innerText = maxPrice.toLocaleString('ko-KR') + ' ₩';
-  // }
-
-  // if (document.querySelector(".min-price") !== null) {
-  //   document.querySelector(".min-price").innerText = minPrice.toLocaleString('ko-KR') + ' ₩';
-  // }
-
 
   const myChart = new Chart(ctx, {
       type: 'line',
@@ -626,3 +664,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 })
+
+
+
+
+
+
+// 리뷰 더 보기!!

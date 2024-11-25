@@ -96,6 +96,14 @@ public interface DeviceBuyingService {
 	Map<String, String> priceStatus(int deviceNo);
 
 
+	/**
+	 * 리뷰 정보(리뷰 리스트 + 전체 별점
+	 * @param deviceNo
+	 * @return
+	 */
+	Map<String, Object> selectReviewStatus(int deviceNo);
+
+
 
 
 

@@ -18,5 +18,15 @@ public class Review {
 	private String reviewContent;
 	private String reviewScore;
 	private String reviewDate;
+	private String memberName;
 	private int orderNo;
+	
+	
+	// 사용 편의를 위한 추가 필드
+	private String deviceName;
+	private String gradeType;
+	private String colorName;
+	private String capacityType;
+	
+	
 }

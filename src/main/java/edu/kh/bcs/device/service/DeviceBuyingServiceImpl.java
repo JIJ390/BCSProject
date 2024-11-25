@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.mapper.DeviceBuyingMapper;
+import edu.kh.bcs.review.dto.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,6 +89,23 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	public Map<String, String> priceStatus(int deviceNo) {
 		
 		return mapper.priceStatus(deviceNo);
+	}
+	
+	
+	
+	// 리뷰 정보 
+	@Override
+	public Map<String, Object> selectReviewStatus(int deviceNo) {
+
+		// 리뷰 개수 + 평점
+		Map<String, Object> reviewStatus = mapper.selectReviewStatus(deviceNo);
+		
+		List<Review> reviewList = mapper.selectReviewList(deviceNo);
+		
+		reviewStatus.put("reviewList", reviewList);
+		
+		
+		return reviewStatus;
 	}
 	
 	

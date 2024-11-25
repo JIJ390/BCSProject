@@ -47,17 +47,21 @@ public class DeviceBuyingController {
 		// 전체 
 		Map<String, String> priceStatus = service.priceStatus(deviceNo);
 		
+		// 리뷰 정보 가져오기
+		Map<String, Object> reviewStatus = service.selectReviewStatus(deviceNo);
 		
-		log.debug("priceStatus {} ", priceStatus);
-		log.debug("priceStatus {} ", priceStatus);
-		log.debug("priceStatus {} ", priceStatus);
-		log.debug("priceStatus {} ", priceStatus);
-		log.debug("priceStatus {} ", priceStatus);
 		
+		log.debug("asdsad : {}", reviewStatus.get("reviewList"));
+		log.debug("asdsad : {}", reviewStatus.get("reviewList"));
+		log.debug("asdsad : {}", reviewStatus.get("reviewList"));
+		log.debug("asdsad : {}", reviewStatus.get("reviewList"));
 		
 		model.addAttribute("device", device);
 		model.addAttribute("priceList", priceList);
 		model.addAttribute("priceStatus", priceStatus);
+		model.addAttribute("reviewList", reviewStatus.get("reviewList"));
+		model.addAttribute("reviewCount", reviewStatus.get("reviewCount"));
+		model.addAttribute("avgScore", reviewStatus.get("avgScore"));
 		
 		return "deviceBuying/deviceBuying";
 		
