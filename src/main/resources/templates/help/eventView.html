@@ -45,15 +45,15 @@
         </div>
         <div class="event-list-area">
           <div class="event">
-            <div th:object="${notice}">
-              <div class="notice-view-subject">
-                <div class="sub-icon"><img src="/images/help/sub-notice.png"></div>
-                <div class="sub-title" th:text="*{noticeTitle}">제목 영역</div>
-                <div class="sub-date" th:text="*{noticeWriteDate}">작성 게시일 영역</div>
+            <div th:object="${event}">
+              <div class="event-view-subject">
+                <div class="sub-icon"><img src="/images/help/sub-event.png"></div>
+                <div class="sub-title" th:text="*{eventTitle}">제목 영역</div>
+                <div class="sub-date" th:text="*{eventWriteDate}">작성 게시일 영역</div>
               </div>
               <hr>
-              <div class="event-view-image" th:text="*{noticeContent}">이벤트 이미지</div>
-              <div class="notice-view-content" th:text="*{noticeContent}">내용</div>
+              <img th:src="*{eventImage}" width="900px" class="event-view-image">
+              <div class="event-view-content" th:text="*{eventContent}">이벤트 이미지</div>
               <hr>
             </div>
             </div>
