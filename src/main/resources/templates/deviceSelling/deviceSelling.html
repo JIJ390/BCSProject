@@ -28,8 +28,34 @@
         </span>
       </div>
 
+      <!-- 이미지 영역 -->
       <div class="device-selling-container">
-        <img src="../../images/sample_iphone16.jpg" alt="">
+        <div class="device-selling-img-box">
+
+          <div class="slide-img-container">
+
+            <div>
+              <img th:src="${device.deviceImg}" class="img-slide" alt="">
+            </div>
+
+
+            <th:block th:each= "color:${device.colorList}" th:object="${color}">
+              <div>
+                <img th:src="*{colorDeviceImg}" class="img-slide" alt="">
+              </div>
+            </th:block>
+          </div>
+
+          
+          <div class="img-dot-container">
+            <span class="dot" onclick="showSlide(0)"></span>
+
+            <th:block th:each= "color, stat :${device.colorList}" th:object="${color}">
+              <span class="dot" th:onclick="showSlide([[${stat.count}]])" th:data-value="${stat.count}"></span>
+            </th:block>
+
+          </div>
+        </div>
 
         <div class="device-selling-info">
 
@@ -39,7 +65,7 @@
           </div>
           <div class="color-content" >
 
-            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}" th:each="color:${device.colorList}" th:object="${color}">
+            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}" th:data-value3="${stat.count}" th:each="color, stat :${device.colorList}" th:object="${color}">
             </div>
 
             <span class="color-name"></span>
@@ -160,6 +186,11 @@
       </form>
     
     </div>
+
+    <div class="close-popup img-popup">
+      <img th:src="${device.deviceImg}" alt="" class="popup-img">
+    </div>
+
     <div id="blackDisplay"></div>
   </main>
 

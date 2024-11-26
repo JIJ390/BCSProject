@@ -3,6 +3,9 @@ const capacityBox = document.querySelectorAll(".capacity-box");
 const gradeBox = document.querySelectorAll(".grade-box");
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  // 처음 페이지 로딩 시 
+  showSlide(0);
   
 
   // 색깔 선택
@@ -19,7 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
       circle.classList.add('selected-color');
 
       const colorName = circle.getAttribute("data-value2");
+      const index = circle.getAttribute("data-value3");
 
+      showSlide(index);
+      // 색상 클릭 시 이동
       document.querySelector(".color-name").innerText = colorName;
     })
   })
@@ -327,3 +333,96 @@ sellingFrm.addEventListener("submit", e => {
 
   
 })
+
+
+
+
+
+
+
+
+let currentIndex = 0;
+
+// 색상 슬라이드 기능
+const showSlide = (index) => {
+  const imgContainer = document.querySelector('.slide-img-container');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = document.querySelectorAll('.img-slide').length;
+
+
+  if (index >= totalSlides) {
+    currentIndex = 0;
+  } else if (index < 0) {
+    currentIndex = totalSlides - 1;
+  } else {
+    currentIndex = index;
+  }
+
+  // 슬라이드 개수로 나누기
+  const slateIndex = 100 / totalSlides;
+
+  imgContainer.style.transform = `translateX(-${currentIndex * slateIndex}%)`;
+
+  // 모든 dot을 비활성화하고 현재 슬라이드에 해당하는 dot만 활성화
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentIndex].classList.add('active');
+}
+
+
+
+
+// 이미지 팝업
+
+// 팝업
+const imgPopUp = document.querySelector(".img-popup");
+
+// 팝업 내부 이미지
+const popupImg = document.querySelector(".popup-img");
+
+const imgList = document.querySelectorAll(".img-slide");
+
+imgList.forEach((item, index) => {
+
+  item.addEventListener("click", e => {
+
+    console.log(item.src);
+
+    popupImg.src = item.src.substr(16);
+
+    e.stopPropagation(); // 이벤트 전파 방지 팝업이 열리면서 꺼지는 현상 방지
+    popupOpenImg();
+  })
+
+})
+
+
+
+
+// 팝업 열기
+const popupOpenImg = () => {
+
+
+  imgPopUp.classList.remove("close-popup");
+  document.querySelector("#blackDisplay").classList.add("overlay");
+
+}
+
+// 팝업 닫기
+const popupCloseImg = () => {
+  imgPopUp.classList.add("close-popup");
+  document.querySelector("#blackDisplay").classList.remove("overlay");
+}
+
+window.addEventListener("click", e => {
+
+  // 팝업 레이어 가 닫혀있지 않고 팝업 레이어 바깥을 눌렀을 때만 동작!!
+  if (!imgPopUp.classList.contains("close-popup")
+      && (e.target !== imgPopUp)) {
+      popupCloseImg();
+  }
+})
+
+// 팝업 내부 요소 클릭 시 이벤트 전파 막기
+imgPopUp.addEventListener("click", e => {
+  e.stopPropagation();
+});

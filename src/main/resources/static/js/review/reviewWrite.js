@@ -154,7 +154,6 @@ previewImgBox.addEventListener("click", e => {
 
 
 // 팝업
-
 const imgPopUp = document.querySelector(".preview-img-popup");
 
 // 팝업 열기

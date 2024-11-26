@@ -1,9 +1,5 @@
 
 
-
-
-
-
 // 색상 > 용량 > 등급 순으로 선택 하도록
 // 상위 필터 선택하지 않으면 클릭 이벤트 불가
 
@@ -24,6 +20,9 @@ capacityContent.classList.add("none-click");
 gradeContent.classList.add("none-click");
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  // 처음 페이지 로딩 시 
+  showSlide(0);
 
   // 색상 재고 확인 후 색상 회색 변경
   fetch("/device/buy/checkColor",  {
@@ -236,6 +235,11 @@ const checkSelectedColor = async (colorNo, circle) => {
     circle.classList.add('selected-color');
 
     const colorName = circle.getAttribute("data-value2");
+
+    // 색상 인덱스로 슬라이드 이동
+    const index = circle.getAttribute("data-value3");
+
+    showSlide(index);
 
     document.querySelector(".color-name").innerText = colorName;
 
@@ -673,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 리뷰 더 보기!!
 const reviewPlusBtn = document.querySelector("#reviewPlusBtn");
 
-reviewPlusBtn.addEventListener("click", () => {
+reviewPlusBtn?.addEventListener("click", () => {
 
   const reviewCount = document.querySelectorAll(".review-content-box").length;
 
@@ -742,3 +746,106 @@ reviewPlusBtn.addEventListener("click", () => {
   .catch(err => console.error(err));
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentIndex = 0;
+
+// 색상 슬라이드 기능
+const showSlide = (index) => {
+  const imgContainer = document.querySelector('.slide-img-container');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = document.querySelectorAll('.img-slide').length;
+
+
+  if (index >= totalSlides) {
+    currentIndex = 0;
+  } else if (index < 0) {
+    currentIndex = totalSlides - 1;
+  } else {
+    currentIndex = index;
+  }
+
+  // 슬라이드 개수로 나누기
+  const slateIndex = 100 / totalSlides;
+
+  imgContainer.style.transform = `translateX(-${currentIndex * slateIndex}%)`;
+
+  // 모든 dot을 비활성화하고 현재 슬라이드에 해당하는 dot만 활성화
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentIndex].classList.add('active');
+}
+
+
+
+
+// 이미지 팝업
+
+// 팝업
+const imgPopUp = document.querySelector(".img-popup");
+
+// 팝업 내부 이미지
+const popupImg = document.querySelector(".popup-img");
+
+const imgList = document.querySelectorAll(".img-slide");
+
+imgList.forEach((item, index) => {
+
+  item.addEventListener("click", e => {
+
+    console.log(item.src);
+
+    popupImg.src = item.src.substr(16);
+
+    e.stopPropagation(); // 이벤트 전파 방지 팝업이 열리면서 꺼지는 현상 방지
+    popupOpenImg();
+  })
+
+})
+
+
+
+
+// 팝업 열기
+const popupOpenImg = () => {
+
+
+  imgPopUp.classList.remove("close-popup");
+  document.querySelector("#blackDisplay").classList.add("overlay");
+
+}
+
+// 팝업 닫기
+const popupCloseImg = () => {
+  imgPopUp.classList.add("close-popup");
+  document.querySelector("#blackDisplay").classList.remove("overlay");
+}
+
+window.addEventListener("click", e => {
+
+  // 팝업 레이어 가 닫혀있지 않고 팝업 레이어 바깥을 눌렀을 때만 동작!!
+  if (!imgPopUp.classList.contains("close-popup")
+      && (e.target !== imgPopUp)) {
+      popupCloseImg();
+  }
+})
+
+// 팝업 내부 요소 클릭 시 이벤트 전파 막기
+imgPopUp.addEventListener("click", e => {
+  e.stopPropagation();
+});
