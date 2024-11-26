@@ -96,9 +96,14 @@ public interface AdminService {
 
 	//리스트 조회
 	List<Order> adminSale();
-	
+
 	//상태 업데이트
-	int delivery(String result);
+	int delivery(int orderNo, int orderStatusCode);
+
+	//검색 기능 필터
+	List<Order> serachFilter(String searchResult);
+
+	
 
 
 

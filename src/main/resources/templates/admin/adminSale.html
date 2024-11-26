@@ -22,10 +22,10 @@
         <div class="box-title">
           <!-- 최 상단 -->
           <h1>구매 신청 목록</h1>
-          <div class="sarch-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text">
-          </div>
+            <div class="sarch-box">
+              <button class="search-fiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+              <input type="text" name="search" placeholder="아이디,번호 등검색" id="search">
+            </div>
         </div>
         <div class="content">
 
@@ -39,7 +39,6 @@
               <col style="width: 25%">
               <col style="width: 10%">
               <col style="width: 10%">
-              <col style="width: 10%">
             </colgroup>
             <thead>
               <tr class="tr-board">
@@ -50,13 +49,12 @@
                 <td>선택 등급/색/용량</td>
                 <td>주문 일자</td>
                 <td>배송 상태</td>
-                <td>환불/교환</td>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="listView">
               
-              <tr th:each= "listView:${listView}">
-                <td th:text="${listView.orderNo}">20</td>
+              <tr class="tr-container" th:each= "listView:${listView}">
+                <td th:text="${listView.orderNo}" class="orderNo">20</td>
                 <td th:text="${listView.memberNo}">12</td>
                 <td th:text="${listView.memberId}">TEST</td>
                 <td th:text="${listView.deviceName}">아이폰</td>
@@ -68,8 +66,16 @@
                   <p th:text="${listView.capacityType}">용량</p>
                 </td>
                 <td th:text="${listView.orderDate}">2222/22/22</td>
-                <td><button class="deliverylive">배송중</button>▽</td>
-                <td><button>해당 없음</button></td>
+                <td>
+                    <select name="" id="" class="select-btn">
+                      <option value="0" th:text="|===현재상태: ${listView.orderStatusContent}===|" class="select-option-btn"></option>
+                      <option value="4" class="select-option-btn">접수중</option>
+                      <option value="5" class="select-option-btn">입금완료</option>
+                      <option value="2" class="select-option-btn">배송중</option>
+                      <option value="3" class="select-option-btn">배송완료</option>
+                    </select>
+
+                </td>
               </tr>
 
 
@@ -80,12 +86,6 @@
 
           </table>
 
-          <div class="overlay" id="overlayBtn">
-            <p class="text" >접수중</p>
-            <p class="text" >입금완료</p>
-            <p class="text" >배송중</p>
-            <p class="text" >도착완료</p>
-          </div>
         </div>
       </div>
 
@@ -96,7 +96,7 @@
   </main>
 
 </body>
-<script src="/js/adminJS/delivery.js"></script>
+<script src="/js/adminJS/adminSale.js"></script>
 <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
 
 </html>

@@ -334,10 +334,21 @@ public class AdminServiceImpl implements AdminService {
 	
 	//상태 업데이트
 	@Override
-	public int delivery(String result) {
+	public int delivery(int orderNo, int orderStatusCode) {
 		
+			int update = mapper.update(orderNo,orderStatusCode);
 		
-		return mapper.delivery(result);
+		return update;
 	}
-
+	
+	@Override
+	public List<Order> serachFilter(String searchResult) {
+		
+		List<Order> result = null;
+		
+			result = mapper.serachFilter(searchResult);
+			
+		
+		return result;
+	}
 }

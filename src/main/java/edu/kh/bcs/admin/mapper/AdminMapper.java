@@ -139,9 +139,14 @@ public interface AdminMapper {
 //구매 신청 리스트 조회
 	List<Order> adminSale();
 	
-	
-	//배송상태 업데이트
-	int delivery(String result);
+	//배송 상태 업데이트
+	int update(@Param("orderNo")int orderNo, 
+			   @Param("orderStatusCode")int orderStatusCode);
+
+	//검색 기능
+	List<Order> serachFilter(String searchResult);
+	//검색 결과 존재하지않을때에
+
 
 
 

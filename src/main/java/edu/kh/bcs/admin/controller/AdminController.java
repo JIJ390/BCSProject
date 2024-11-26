@@ -156,16 +156,50 @@ public class AdminController {
 	
 	@ResponseBody
 	@PostMapping("/delivery")
-	public String delivery(
-			@RequestBody String result
+	public int delivery(
+			@RequestBody Map<String, Integer> map
 			) {
 		
+		int orderNo = map.get("orderNo");
+		int orderStatusCode = map.get("orderStatusCode");
+		
+		
+		
+		log.debug("orderNoorderNoorderNo : {}", orderNo);
+		
+		log.debug("orderStatusCode : {}", orderStatusCode);
+		
+		
+		
+		
 		//상태 업데이트
-		int delivery = service.delivery(result);
-		
-		
-		return result;
+		int delivery = service.delivery(orderNo,orderStatusCode);
+		System.out.println("고객정보 업데이트 완료");
+		return delivery;
 	}
+	
+	@PostMapping("/serachFilter")
+	public String serachFilter(
+			@RequestBody String searchResult,
+			Model model
+			) {
+		
+		//구매 신청 목록 검색기능필터
+		List<Order> result = service.serachFilter(searchResult);
+		
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		
+		model.addAttribute("result", result);
+		
+		
+		return "admin/saleList";
+	}
+	
+	
 	
 	
 	@GetMapping("androidPopUp")
