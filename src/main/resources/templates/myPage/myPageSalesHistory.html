@@ -20,45 +20,37 @@
     <div class="container">
         <h2>내폰 구매내역</h2>
 
-        <table>
+        <table id="buyingTable">
             <thead>
                 <tr>
-                    <th>날짜</th>
-                    <th>휴대폰</th>
-                    <th>등급</th>
-                    <th>판매 상태</th>
+                    <th>기종 정보</th>
+                    <th>구매 일자</th>
+                    <th>구매 상태</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>24. 11. 11</td>
-                    <td>아이폰4s</td>
-                    <td>S+급</td>
-                    <td>입금완료</td>
-                </tr>
-                <tr>
-                    <td>24. 11. 08</td>
-                    <td>아이폰4s</td>
-                    <td>S+급</td>
-                    <td>입금중</td>
-                </tr>
-                <tr>
-                    <td>24. 11. 05</td>
-                    <td>아이폰4s</td>
-                    <td>S+급</td>
-                    <td>검수완료</td>
-                </tr>
-                <tr>
-                    <td>24. 11. 01</td>
-                    <td>아이폰4s</td>
-                    <td>S+급</td>
-                    <td>검수중</td>
+                    <td>아이폰5s</td>
+                    <td>24.11.26</td>
+                    <td>배송중</td>
                 </tr>
 
+                <tr>
+                    <td>폴드35</td>
+                    <td>24.11.26</td>
+                    <td>배송준비중</td>
+                </tr>
+                <tr>
+                    <td>베가레이서</td>
+                    <td>24.11.26</td>
+                    <td>배송안됨</td>
+                </tr>
+                
+                
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
-        <div class="pagination">
+        <div class="pagination" id="paginationBuyingBox">
             <a href="#">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
@@ -71,9 +63,15 @@
   <section class="right-section">
   </section>
 </main>
+
+<script th:inline="javascript">
+    const loginNo = /*[[${session.loginMember.memberNo}]]*/ false;
+    console.log(loginNo);
+  </script>
+
 <footer>
     <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
-<script src="/js/myPage/myPage.js"></script>
+<script src="/js/myPage/myPageSalesHistory.js"></script>
 </html>

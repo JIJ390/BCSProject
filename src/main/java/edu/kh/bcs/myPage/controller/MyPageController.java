@@ -308,7 +308,11 @@ public class MyPageController {
 		
 	}
 	
-	
+	/** 내폰 판매내역
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
 	@GetMapping("selectSellingList")
 	@ResponseBody
 	public Map<String, Object> selectSellingList(
@@ -318,14 +322,60 @@ public class MyPageController {
 		
 		Map<String, Object> map = service.selectSellingList(cp, memberNo);
 		
-		log.debug("map: {}", map);
-		log.debug("map: {}", map);
-		log.debug("map: {}", map);
-		log.debug("map: {}", map);
-		log.debug("map: {}", map);
+//		log.debug("map: {}", map);
+//		log.debug("map: {}", map);
+//		log.debug("map: {}", map);
+//		log.debug("map: {}", map);
+//		log.debug("map: {}", map);
 		
 		return map;
 	}
+	
+	/** 포인트 내역
+	 * @param memberNo
+	 * @return
+	 */
+	@GetMapping("selectPointList")
+	@ResponseBody
+	public Map<String, Object> selectPointList(
+			@RequestParam(value="cp", required=false, defaultValue="1")int cp,
+			@RequestParam("memberNo") int memberNo
+			){
+		
+//		log.debug("cp : {}", cp);
+		
+		Map<String, Object> map = service.selectPointList(cp, memberNo);
+		
+		return map;
+	}
+	
+	/** 구매 내역
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	@GetMapping("selectBuyingList")
+	@ResponseBody
+	public Map<String, Object> selectBuyingList(
+			@RequestParam(value="cp", required=false, defaultValue="1")int cp,
+			@RequestParam("memberNo") int memberNo
+			){
+		
+		System.out.println(cp);
+		System.out.println(cp);
+		System.out.println(cp);
+		System.out.println(cp);
+		log.debug("cp : {}", cp);
+		log.debug("cp : {}", cp);
+		log.debug("cp : {}", cp);
+		
+		Map<String, Object> map = service.selectBuyingList(cp, memberNo);
+		
+		return map;
+	}
+	
+	
+	
 	
 	
 	@GetMapping("myPageLogin")

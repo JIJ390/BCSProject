@@ -56,12 +56,12 @@
         <!-- 똑같은 녀석 하나더 복사 -->
       </div>
       
-            <div  class="mypageUpdate-box" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
+            <div  class="mypageUpdate-box2" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
                 <div class="mypageUpdate-title">내정보 수정 - 주소 변경</div><br>
         
                 <form action="addressChange" method="POST" name="pwChangeForm"  class="pwChangeForm">
       
-                  <div class="update-group">
+                  <div class="update-group2">
                       <label for="addressChange">주소</label>
                       <input type="text" id="postcode" name="address" placeholder="우편번호">
                       <button type="button" class="btn-address" id="findAddressBtn">검색</button>
@@ -69,7 +69,7 @@
                       <input type="text" id="detailAddress" name="address" placeholder="상세 주소">
                   </div>
         
-                  <div class="btn-container">
+                  <div class="btn-container2">
                     <button type="submit" class="signup-button-update">회원정보 수정</button>
                     <button type="button" class="signup-button-delete">취소</button>
                   </div>
@@ -77,16 +77,17 @@
               </form>
             </div>
       <!-- 전화번호 -->
-            <div  class="mypageUpdate-box" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
+            <div  class="mypageUpdate-box3" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
                 <div class="mypageUpdate-title">내정보 수정 - 번호 변경</div><br>
         
                 <form action="numberChange" method="POST" name="pwChangeForm" class="pwChangeForm">
       
-                  <div class="update-group">
+                  <div class="update-group3">
                       <label for="addressChange">전화번호</label>
                       <input type="number" id="number" name="phoneNumber" placeholder="전화번호입력" maxlength="11">
-        
-                  <div class="btn-container">
+                    </div>
+
+                  <div class="btn-container3">
                     <button type="submit" class="signup-button-update1" style="font-size: 14px;">회원정보 수정</button>
                     <button type="button" class="signup-button-delete1">취소</button>
                   </div>
