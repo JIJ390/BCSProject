@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
+import edu.kh.bcs.point.dto.Point;
 
 @Mapper
 public interface MyPageMapper {
@@ -104,11 +106,43 @@ public interface MyPageMapper {
 							@Param("number") String number, 
 							@Param("memberNo") int memberNo);
 
-	
+	/** 게시물 수
+	 * @return
+	 */
 	int selectSellingListCount();
 	
-
+	/** 내폰 판매내역
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
 	List<SellingDevice> selectSellingList(int memberNo, RowBounds rowBounds);
+	
+	/**
+	 *  게시물 수
+	 * @return
+	 */
+	int selectPointListCount();
+
+	/** 포인트 내역
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Point> selectPointList(int memberNo, RowBounds rowBounds);
+
+	/** 게시물 수
+	 * @return
+	 */
+	int selectBuyingListCount();
+
+	/** 구매 내역
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Order> selectBuyingList(int memberNo, RowBounds rowBounds);
+	
 
 
 

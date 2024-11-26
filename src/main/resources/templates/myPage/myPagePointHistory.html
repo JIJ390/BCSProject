@@ -21,11 +21,11 @@
         <h2>포인트 내역</h2>
         <div class="point-mid">
           <img class="point-icon" src="/images/myPage/points.png" alt="">
-          <h3>나의 포인트 : 20,000P</h3>
+          <h3 th:text="'나의 포인트 : ' + ${session.loginMember.memberPoint}">나의 포인트 : 20,000P</h3>
         </div>
-        <table>
-            <thead>
-                <tr>
+        <table id="pointTable">
+            <thead >
+                <tr class="pointTr">
                     <th>적립/차감내용</th>
                     <th>적립/차감일시</th>
                     <th>포인트</th>
@@ -55,7 +55,7 @@
                 <!-- Add more rows as needed -->
             </tbody>
         </table>
-        <div class="pagination">
+        <div class="pagination" id="paginationPointBox">
             <a href="#">1</a>
             <a href="#">2</a>
             <a href="#">3</a>
@@ -68,9 +68,14 @@
   <section class="right-section">
   </section>
 </main>
+
+<script th:inline="javascript">
+  const loginNo = /*[[${session.loginMember.memberNo}]]*/ false;
+</script>
+
 <footer>
   <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
-<script src="/js/myPage/myPage.js"></script>
+<script src="/js/myPage/myPagePointHistory.js"></script>
 </html>
