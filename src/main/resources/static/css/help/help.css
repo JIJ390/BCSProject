@@ -254,7 +254,7 @@ span {
 .notice-view-subject{
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  width: 900px;
   margin-top: 25px;
   margin-bottom: 7px;
 }
@@ -264,6 +264,10 @@ span {
   margin-left: 25px;
   font-size: large;
   font-weight: bold;
+}
+
+.sub-date{
+  margin-left: auto;
 }
 
 .notice-view-content{
@@ -332,14 +336,14 @@ span {
 .event-list-area{
   width: 900px;
   margin-top: 25px;
-  background-color: #fff;
 }
 
 .event-wrapper{
   display: inline-flex;
   width: 900px;
   justify-content: space-evenly;
-  flex-direction: row;
+  justify-content: row;
+  flex-wrap: wrap;
 }
 
 .row-wrapper{
@@ -347,13 +351,29 @@ span {
 }
 
 .event-item{
+  margin-top: 10px;
   min-width: 30%;
   height: 200px;
   background-color: #727272;
-  align-items: center;
   text-align: center;
+  flex : 0 1 auto;
 
   border: solid 1px #1d1d1f;
   border-radius: 8px;
   padding: 10px;
+}
+
+/* 이벤트 게시물 선택 시 */
+
+.event-view-subject{
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  margin-top: 25px;
+  margin-bottom: 7px;
+}
+
+.event-view-content{
+  padding: 20px;
+  margin-top: 25px;
 }

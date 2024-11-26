@@ -16,6 +16,9 @@ public interface EventMapper {
 	List<EventDto> selectEventList(RowBounds rowBounds);
 
 	int getListCount();
+
+//	이벤트 자세히 보기
+	EventDto detailViewEvent(int eventNo);
 	
 
 

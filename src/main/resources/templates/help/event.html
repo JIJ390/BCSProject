@@ -44,24 +44,23 @@
         </div>
         <div class="event-list-area">
           <div class="event">
+            <div class="event-wrapper">
             <th:block th:each="event, stat : ${eventList}" th:object="${event}">
               
-            <div class="event-wrapper">
-                <div class="event-item" 
-                th:href="@{/event/eventView/{eventNumber} (eventNumber=${eventNumber})}"
+                <a class="event-item" 
+                th:href="@{/help/eventView/{eventNumber} (eventNumber=*{eventNumber})}"
                 th:style="'background-image: url(' + *{eventThumbnail} + '); background-size: cover; 
                 background-position: center; height: 200px; width: 270px;'">
-                  <!-- <img th:src="*{eventThumbnail}"> -->
-                </div>
+                </a>
                 <!-- <div class="event-item">2</div>
                 <div class="event-item">3</div> -->
-              </div>
-              <!-- <div class="event-wrapper row-wrapper">
-                <div class="event-item">4</div>
-                <div class="event-item">5</div>
-                <div class="event-item">6</div>
-              </div> -->
-             </th:block>
+                <!--               <div class="event-wrapper row-wrapper">
+                  <div class="event-item">4</div>
+                  <div class="event-item">5</div>
+                  <div class="event-item">6</div>
+                </div> -->
+              </th:block>
+            </div>
           </div>
           </div>
         <div class="pagination-area" th:unless="${#lists.isEmpty(eventList)}">
@@ -93,11 +92,11 @@
               <li><a href="#">&gt;&gt;</a></li>
           </ul>
       </div> 
-      </div>
-
       <div class="eventWrite">
         <div class="writeBtn">이벤트 작성 예시</div>
       </div>
+      </div>
+
     </section>
   </main>
   <th:block th:replace="~{common/footer}"></th:block>
