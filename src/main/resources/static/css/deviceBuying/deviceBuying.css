@@ -47,12 +47,96 @@ main {
   justify-content: space-between;
 }
 
-.device-buying-container > img {
+
+
+
+
+
+.device-buying-img-box{
   margin: 10px;
   width: 560px;
   height: 480px;
   border-radius: 15px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: start;
+
+  overflow: hidden;
+
+
 }
+
+.slide-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+
+}
+
+
+.img-slide {
+  width: 400px;
+  z-index: 10;
+
+  margin: 0 80px;
+}
+
+
+
+
+/* 슬라이드 위치를 표시하는 점(dot) 스타일 */
+.img-dot-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active {
+  background-color: #717171;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .device-buying-info {
   width: 39%;
@@ -565,4 +649,68 @@ hr {
 .review-plus-btn:hover {
   border: 2px solid var(--main-color);
   cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 팝업 */
+.img-popup {
+  background-color: var(--white-color);
+  border-radius: 10px;
+
+  position: fixed; /* 브라우저에서 위치 고정 */
+
+  /* 브라우저 정가운데 배치 */
+  top: 120px;
+  left: 50%; /* 좌우 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데로 이동 */
+  
+  max-width: 1000px;
+
+  padding: 10px;
+  box-shadow: 0px 5px 6px -2px var(--border-color);
+  z-index: 2000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.close-popup {
+	display: none;
+}
+
+
+.popup-img {
+  display: block; /* 이미지를 블록화하여 간격 제거 */
+  width: auto; /* 원본 크기 유지 */
+  height: auto; 
+  max-width: 100%; /* 창 크기에 맞게 제한 */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+  z-index: 1000; /* 팝업이 항상 위로 오도록 설정 */
 }
