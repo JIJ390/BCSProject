@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.service.DeviceBuyingService;
+import edu.kh.bcs.review.dto.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -222,4 +223,33 @@ public class DeviceBuyingController {
 		// 매개 변수가 많아서(4 개) 묶어서 처리
 		return service.selectGrade(map);
 	}
+	
+	
+	
+	@PostMapping("reviewPlus")
+	public String reviewPlus(
+			@RequestBody Map<String, Integer> obj,
+			Model model) {
+		
+		log.debug("obj : {}", obj);
+		log.debug("obj : {}", obj);
+		log.debug("obj : {}", obj);
+		
+		int deviceNo = obj.get("deviceNo");
+		int reviewCount = obj.get("reviewCount");
+		
+		Review review = service.reviewPlus(deviceNo, reviewCount);
+		
+		model.addAttribute("review", review);
+		
+		return "deviceBuying/reviewPlus";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

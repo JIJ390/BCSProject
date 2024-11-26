@@ -109,5 +109,26 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	}
 	
 	
+	// 리뷰 추가해서 불러오기
+	@Override
+	public Review reviewPlus(int deviceNo, int reviewCount) {
+		
+		// 다음 리뷰가 존재 하는지 확인
+		Map<String, String> map = mapper.checkNextReview(deviceNo, reviewCount);
+		
+		log.debug("map : {}", map);
+		
+		Review review = mapper.reviewPlus(deviceNo, reviewCount);
+		
+		log.debug("review : {}", review.getReviewCheck());
+		
+		// 다음 리뷰가 존재하지 않을때
+		if(map == null) {
+			review.setReviewCheck(1);
+		}
+		
+		return mapper.reviewPlus(deviceNo, reviewCount);
+	}
+	
 
 }

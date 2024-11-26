@@ -299,43 +299,133 @@
 	
 	<!-- 리뷰 목록 -->
 	<select id="selectReviewList">
-		SELECT R.REVIEW_NO AS "REVIEW_NO", 
-		       R.REVIEW_IMG, 
-		       R.REVIEW_CONTENT, 
-		       R.REVIEW_SCORE, 
-		       R.ORDER_NO,
-		       M.MEMBER_NAME AS "MEMBER_NAME",
-		       D.DEVICE_NAME,
-		       G.GRADE_TYPE,
-		       C.COLOR_NAME,
-		       CAP.CAPACITY_TYPE,
-		       			<![CDATA[
-		  			CASE 
-						WHEN CURRENT_DATE - R.REVIEW_DATE < 1 / 24 / 60
-						THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60 * 60) || '초 전'
-						
-						WHEN CURRENT_DATE - R.REVIEW_DATE <  1 / 24 
-						THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60) || '분 전'
-						
-						WHEN CURRENT_DATE - R.REVIEW_DATE <  1 
-						THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24) || '시간 전'
-					
-						ELSE TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD')
-					END AS REVIEW_DATE
-					]]>
+		SELECT *
+		FROM (
+		
+			SELECT RE.*, ROWNUM AS "RN"
+			FROM (
+							SELECT R.REVIEW_NO AS "REVIEW_NO", 
+				       R.REVIEW_IMG, 
+				       R.REVIEW_CONTENT, 
+				       R.REVIEW_SCORE, 
+				       R.ORDER_NO,
+				       M.MEMBER_NAME AS "MEMBER_NAME",
+				       D.DEVICE_NAME,
+				       G.GRADE_TYPE,
+				       C.COLOR_NAME,
+				       CAP.CAPACITY_TYPE,
+		
+				       			<![CDATA[
+				  			CASE 
+								WHEN CURRENT_DATE - R.REVIEW_DATE < 1 / 24 / 60
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60 * 60) || '초 전'
+								
+								WHEN CURRENT_DATE - R.REVIEW_DATE <  1 / 24 
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60) || '분 전'
+								
+								WHEN CURRENT_DATE - R.REVIEW_DATE <  1 
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24) || '시간 전'
+							
+								ELSE TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD')
+								
+													]]>
+							END AS REVIEW_DATE
+							FROM REVIEW R
+							JOIN "ORDER" O ON R.ORDER_NO = O.ORDER_NO
+							JOIN BUYING_DEVICE BD ON O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO
+							JOIN DEVICE D ON BD.DEVICE_NO = D.DEVICE_NO
+							JOIN "MEMBER" M ON O.MEMBER_NO = M.MEMBER_NO
+							JOIN GRADE G ON BD.GRADE_NUMBER = G.GRADE_NUMBER
+							JOIN COLOR C ON BD.COLOR_NO = C.COLOR_NO
+							JOIN CAPACITY CAP ON BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER
+							WHERE D.DEVICE_NO = #{deviceNo}
+							ORDER BY REVIEW_NO DESC
+				) "RE"
 			
-		FROM REVIEW R
-		JOIN "ORDER" O ON R.ORDER_NO = O.ORDER_NO
-		JOIN BUYING_DEVICE BD ON O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO
-		JOIN DEVICE D ON BD.DEVICE_NO = D.DEVICE_NO
-		JOIN "MEMBER" M ON O.MEMBER_NO = M.MEMBER_NO
-		JOIN GRADE G ON BD.GRADE_NUMBER = G.GRADE_NUMBER
-	JOIN COLOR C ON BD.COLOR_NO = C.COLOR_NO
-	JOIN CAPACITY CAP ON BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER
-		WHERE D.DEVICE_NO = #{deviceNo}
-		  <![CDATA[
-		AND ROWNUM <= 3
-		    ]]>
-		ORDER BY R.REVIEW_DATE DESC
+			)
+		<![CDATA[
+			
+		WHERE RN <= 3
+		]]>
+		ORDER BY RN ASC
+
 	</select>
+	
+	
+	
+	<select id="reviewPlus">
+		SELECT *
+		FROM (
+		
+			SELECT RE.*, ROWNUM AS "RN"
+			FROM (
+							SELECT R.REVIEW_NO AS "REVIEW_NO", 
+				       R.REVIEW_IMG, 
+				       R.REVIEW_CONTENT, 
+				       R.REVIEW_SCORE, 
+				       R.ORDER_NO,
+				       M.MEMBER_NAME AS "MEMBER_NAME",
+				       D.DEVICE_NAME,
+				       G.GRADE_TYPE,
+				       C.COLOR_NAME,
+				       CAP.CAPACITY_TYPE,
+		
+				       			<![CDATA[
+				  			CASE 
+								WHEN CURRENT_DATE - R.REVIEW_DATE < 1 / 24 / 60
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60 * 60) || '초 전'
+								
+								WHEN CURRENT_DATE - R.REVIEW_DATE <  1 / 24 
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24 * 60) || '분 전'
+								
+								WHEN CURRENT_DATE - R.REVIEW_DATE <  1 
+								THEN FLOOR((CURRENT_DATE - R.REVIEW_DATE) * 24) || '시간 전'
+							
+								ELSE TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD')
+								
+													]]>
+							END AS REVIEW_DATE
+							FROM REVIEW R
+							JOIN "ORDER" O ON R.ORDER_NO = O.ORDER_NO
+							JOIN BUYING_DEVICE BD ON O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO
+							JOIN DEVICE D ON BD.DEVICE_NO = D.DEVICE_NO
+							JOIN "MEMBER" M ON O.MEMBER_NO = M.MEMBER_NO
+							JOIN GRADE G ON BD.GRADE_NUMBER = G.GRADE_NUMBER
+							JOIN COLOR C ON BD.COLOR_NO = C.COLOR_NO
+							JOIN CAPACITY CAP ON BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER
+							WHERE D.DEVICE_NO = #{deviceNo}
+							ORDER BY REVIEW_NO DESC
+				) "RE"
+			
+			)
+		<![CDATA[
+			
+		WHERE RN = #{reviewCount}
+		]]>
+		ORDER BY RN ASC
+	
+	</select>
+	
+	
+	<!-- 다음 리뷰가 존재하는 지 여부 확인 -->
+	<select id="checkNextReview">
+		SELECT *
+		FROM (
+		
+			SELECT RE.*, ROWNUM AS "rn"
+			FROM (
+							SELECT R.REVIEW_NO AS "reviewNo" 
+							FROM REVIEW R
+							JOIN "ORDER" O ON R.ORDER_NO = O.ORDER_NO
+							JOIN BUYING_DEVICE BD ON O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO
+							JOIN DEVICE D ON BD.DEVICE_NO = D.DEVICE_NO
+							WHERE D.DEVICE_NO = #{deviceNo}
+							ORDER BY "reviewNo" DESC
+				) "RE"
+			
+			)
+		WHERE "rn" = #{reviewCount} + 1
+		ORDER BY "rn" ASC
+	</select>
+	
 </mapper>

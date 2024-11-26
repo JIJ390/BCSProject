@@ -28,5 +28,7 @@ public class Review {
 	private String colorName;
 	private String capacityType;
 	
+	// 후순 리뷰 존재 판별
+	private int reviewCheck;
 	
 }

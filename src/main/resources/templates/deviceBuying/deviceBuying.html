@@ -306,14 +306,11 @@
           </div>
 
         </th:block>
-
-        <div class="review-btn-area">
-
-          <button class="review-plus-btn" id="reviewPlutBtn">리뷰 더 보기</button>
-        </div>
-
       </div>
 
+      <div class="review-btn-area">
+        <button class="review-plus-btn" id="reviewPlusBtn" th:unless="${#lists.isEmpty(reviewList)}">리뷰 더 보기</button>
+      </div>
 
     </section>
     <section class="right-section">

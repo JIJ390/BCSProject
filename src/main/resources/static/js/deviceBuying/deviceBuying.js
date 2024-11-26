@@ -671,3 +671,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // 리뷰 더 보기!!
+const reviewPlusBtn = document.querySelector("#reviewPlusBtn");
+
+reviewPlusBtn.addEventListener("click", () => {
+
+  const reviewCount = document.querySelectorAll(".review-content-box").length;
+
+  // 현재 화면 상의 리뷰 숫자와 기종 번호 비동기 통신으로 보내기
+  const obj = {
+    "reviewCount" : reviewCount + 1,
+    "deviceNo" : deviceNo
+  }
+
+  fetch("/device/buy/reviewPlus", {
+    method : "POST", 
+    headers: {"Content-Type": "application/json"}, 
+    body : JSON.stringify(obj)
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("리뷰 조회 실패 : " + response.status);
+  })
+  .then(html => {
+
+    const reviewContainer = document.querySelector(".review-container");
+
+    // div 에 응답 html 모두 넣기
+    const div = document.createElement("div");
+    div.innerHTML = html;
+
+    // div 내부 별점 컨테이너 위치 찾기
+    const reviewStar = div.querySelector(".review-star-container")
+
+    // 컨테이너 별점 value 얻기
+    const score = reviewStar.getAttribute("data-value");
+
+    // 요소 내부에서 모두 찾기
+    const stars = reviewStar.querySelectorAll(".review-star");
+
+    console.log(stars);
+
+    stars.forEach((star, index) => {
+      if (star.dataset.value <= score) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+    });
+
+
+    // reviewCheck 확인 확인
+    const reviewCheck = div.querySelector(".review-check");
+
+    /* review-check 가 존재하고 그 값이 1일떄 */
+    if ((reviewCheck !== null) && (reviewCheck.getAttribute("data-value") == 1)) {
+      reviewPlusBtn.remove();
+    }
+
+    reviewContainer.append(div);
+
+    
+    
+  })
+  .catch(err => console.error(err));
+
+})

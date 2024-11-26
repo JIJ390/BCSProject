@@ -128,6 +128,25 @@ public interface DeviceBuyingMapper {
 	List<Review> selectReviewList(int deviceNo);
 
 
+	/**
+	 * 리뷰 추가로 불러오기
+	 * @param deviceNo
+	 * @param reviewCount
+	 * @return
+	 */
+	Review reviewPlus(
+			@Param("deviceNo") int deviceNo,
+			@Param("reviewCount") int reviewCount);
+
+
+	
+	
+	
+	Map<String, String> checkNextReview(			
+			@Param("deviceNo") int deviceNo,
+			@Param("reviewCount") int reviewCount);
+
+
 
 	
 	

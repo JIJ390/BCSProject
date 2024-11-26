@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.review.dto.Review;
 
 public interface DeviceBuyingService {
 
@@ -102,6 +103,15 @@ public interface DeviceBuyingService {
 	 * @return
 	 */
 	Map<String, Object> selectReviewStatus(int deviceNo);
+
+
+	/**
+	 * 리뷰 정보 불러오기
+	 * @param deviceNo
+	 * @param reviewCount
+	 * @return
+	 */
+	Review reviewPlus(int deviceNo, int reviewCount);
 
 
 

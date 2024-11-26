@@ -27,14 +27,21 @@ main {
 }
 
 .page-title {
-  width: 100%;
+  display: inline-block;
+
+  width: 58%;
   font-size: 64px;
   font-weight: 900;
-  padding: 10px;
+  margin: 10px;
   text-align: left;
 }
 
 .page-title-sub {
+  display: inline-block;
+
+  width: 38%;
+  padding: 20px;
+
   font-size: 32px;
 }
 
