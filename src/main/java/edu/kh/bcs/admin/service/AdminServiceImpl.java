@@ -363,7 +363,7 @@ public class AdminServiceImpl implements AdminService {
 
 					File folder = new File(folderPathColor);
 					if (folder.exists() == false) { // 존재하지 않을때에
-						folder.mkdir(); // 폴더 생성 구문
+						folder.mkdirs(); // 폴더 생성 구문
 					}
 					colorImg.get(i).transferTo(new File(folderPathColor + rename));
 
