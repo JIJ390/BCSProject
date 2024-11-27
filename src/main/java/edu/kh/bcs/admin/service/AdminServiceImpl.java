@@ -23,6 +23,8 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +48,11 @@ public class AdminServiceImpl implements AdminService {
 	private String folderPathColor;
 	@Value("${my.deviceColor.web-path}")
 	private String webPathDeviceColor;
+	
+	@Value("${my.banner.web-path}")
+	private String webPathBanner;
+	@Value("${my.banner.folder-path}")
+	private String folderPathBanner;
 
 	@Override
 	public int getResultCount(String searchType, String searchText) {
@@ -204,7 +211,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		if(series.equals("A")) {
 			return mapper.galaxyA();
-		}
+		}  
 		if(series.equals("S")) {
 			return mapper.galaxyS();
 		}
@@ -232,6 +239,54 @@ public class AdminServiceImpl implements AdminService {
 		else {
 			return mapper.iPad();
 		}
+	}
+	
+	@Override
+	public List<EventDto> getEventList() {
+		return mapper.getEventLIst();
+	}
+	
+	@Override
+	public int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
+			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4) {
+		
+		String file1Path = FileUtil.rename(file1.getOriginalFilename());
+		String file2Path = FileUtil.rename(file2.getOriginalFilename());
+		String file3Path = FileUtil.rename(file3.getOriginalFilename());
+		String file4Path = FileUtil.rename(file4.getOriginalFilename());
+		
+		banner1.setMainBannerImg(webPathBanner + file1Path);
+		banner2.setMainBannerImg(webPathBanner + file2Path);
+		banner3.setMainBannerImg(webPathBanner + file3Path);
+		banner4.setMainBannerImg(webPathBanner + file4Path);
+		
+		int result1 = mapper.update1Banner(banner1);
+		int result2 = mapper.update2Banner(banner2);
+		int result3 = mapper.update3Banner(banner3);
+		int result4 = mapper.update4Banner(banner4);
+		
+		if(result1 + result2 + result3 + result4 != 4) {
+			return 0;
+		}
+		
+		
+		try {
+
+			File folder = new File(folderPathBanner);
+			if (folder.exists() == false) { // 존재하지 않을때에
+				folder.mkdir(); // 폴더 생성 구문
+			} 
+
+			file1.transferTo(new File(folderPathBanner + file1Path));
+			file2.transferTo(new File(folderPathBanner + file2Path));
+			file3.transferTo(new File(folderPathBanner + file3Path));
+			file4.transferTo(new File(folderPathBanner + file4Path));
+
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return result1+result2+result3+result4;
+		
 	}
 
 

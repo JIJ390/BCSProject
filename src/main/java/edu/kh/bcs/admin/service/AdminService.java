@@ -15,6 +15,8 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
@@ -92,6 +94,11 @@ public interface AdminService {
 	List<Device> galaxyA(String series);
 
 	List<Device> iPhone(String series);
+
+	List<EventDto> getEventList();
+
+	int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
+			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4);
 
 
 	

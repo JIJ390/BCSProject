@@ -349,6 +349,47 @@ ORDER BY
 	DEVICE_DATE DESC
 	</select>
 	
+	<update id="update1Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 1
+	</update>
+	<update id="update2Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 2
+	</update>
+	<update id="update3Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 3
+	</update>
+	<update id="update4Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 4
+	</update>
+	
 	
 	
 	
@@ -379,6 +420,17 @@ ORDER BY
 	   #{displaySize}
 	)
 	</insert>
+	
+	<select id="getEventLIst">
+		SELECT *
+		FROM EVENT
+		ORDER BY EVENT_NUMBER DESC
+	</select>
+	
+	
+	
+	
+	
 
 <!--DEVICENO 하나 가져오기 -->
 <select id="selectDeviceNo">
