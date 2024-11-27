@@ -37,6 +37,13 @@ public interface DeviceListService {
 	List<Device> brandSellList(String brand);
 
 
+	List<Device> searchDevices(String query);
+
+
+	
+	
+
+
 	
 	
 

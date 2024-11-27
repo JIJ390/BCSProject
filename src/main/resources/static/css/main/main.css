@@ -57,6 +57,7 @@ main div{
   font-size: 35px;
   margin-left: 30px;
   color: #6E6E73;
+  font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
 }
 
 .viewImg{
@@ -124,9 +125,6 @@ a {
 }
 
 .slideFontSize{
-  font-size: 100px;
-  margin-right: 50vw;
-  margin-top: 30vh;
 }
 
 
@@ -279,7 +277,7 @@ a {
   margin-top: 50px; 
   width: 100%; 
   height: 700px; 
-  background-color: white
+  background-color: white;
 }
 
 .subItem-box{
@@ -288,7 +286,7 @@ a {
 }
 
 .subItem-1{
-  width: 40%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -308,10 +306,16 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 450px !important;
 }
 
 .subItem-4{
   display: flex;
+}
+
+.subItem-4 img{
+  margin-left: 50px !important;
+  scale: 0.8;
 }
 
 
@@ -353,7 +357,7 @@ a {
 }
 
 .items {
-  flex: 0 0 30%; /* 이미지 너비 고정 */
+  flex: 0 0 450px; /* 이미지 너비 고정 */
 }
 
 .items img {
@@ -386,4 +390,43 @@ a {
   right: 5px;
 
 }
+
+
+
+
+
+/* Add this to the existing @media (max-width: 768px) section in main.css */
+@media (max-width: 1465px) {
+
+  .subItem-4 img{
+    width: 100% !important;
+  }
+
+  .mainFoot2 img{
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  
+
+
+}
+
+/* 기본 폰트 크기 반응형 설정 */
+html {
+  font-size: 16px; /* 기본값 */
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 

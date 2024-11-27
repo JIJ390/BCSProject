@@ -48,13 +48,24 @@
       
 
       <div class="deviceList-items-container">
-        <div class="deviceList-item-box">
-          <div class="deviceList-item-section">
-            <div class="deviceList-items"></div>
-            <div style="margin-top: 15px;"></div>
-            <div></div>
+
+        <th:block th:each="device:${searchResults}" th:object="${device}">
+          <div class="deviceList-item-box">
+            <a th:href="|@{device/buy/}*{deviceNo}|">
+              <div class="devuceList-item-section">
+                <img th:src="*{deviceImg}" th:alt="*{deviceName}">
+                <div style="margin-top: 15px" th:text="*{deviceName}"></div>
+                <div th:text="*{deviceBuyingPrice}"></div>
+              </div>
+            </a>
           </div>
-        </div>
+        </th:block>
+
+
+
+      </div>
+
+
     </div>
 
     
