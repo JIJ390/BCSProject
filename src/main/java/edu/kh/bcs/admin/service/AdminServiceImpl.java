@@ -273,7 +273,7 @@ public class AdminServiceImpl implements AdminService {
 		try {
 
 			File folder = new File(folderPathBanner);
-			if (folder.exists() == false) { // 존재하지 않을때에
+			if (!folder.exists()) { // 존재하지 않을때에
 				folder.mkdir(); // 폴더 생성 구문
 			} 
 
