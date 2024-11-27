@@ -376,9 +376,16 @@ buyingFrm.addEventListener("submit", e => {
     e.preventDefault();
 
     alert("로그인 후 이용해 주세요");
+
     if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      urlBackup = location.pathname;
       location.href = "/myPage/myPageLogin";
     }
+
+    if(loginMember !== null) {
+      location.href = `/device/buy/${deviceNo}`;
+    }
+
     return;
   }
 

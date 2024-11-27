@@ -116,7 +116,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public Map<String, Object> selectSellingList(int cp, int memberNo) {
 		
 			  // 게시물 수
-	     	int completedListCount = mapper.selectSellingListCount();
+	     	int completedListCount = mapper.selectSellingListCount(memberNo);
 	     
 //	      log.debug("completedListCount : {}", completedListCount);
 	      
@@ -148,7 +148,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public Map<String, Object> selectPointList(int cp, int memberNo) {
 		
 	  // 게시물 수
-   	int selectPointListCount = mapper.selectPointListCount();
+   	int selectPointListCount = mapper.selectPointListCount(memberNo);
    
 //    log.debug("selectPointListCount : {}", selectPointListCount);
     
@@ -180,12 +180,14 @@ public class MyPageServiceImpl implements MyPageService{
 	public Map<String, Object> selectBuyingList(int cp, int memberNo) {
 	
 		 // 게시물 수
-   	int selectBuyingListCount = mapper.selectBuyingListCount();
+   	int selectBuyingListCount = mapper.selectBuyingListCount(memberNo);
    
-   	System.out.println(memberNo);
-   	System.out.println(memberNo);
-   	System.out.println(memberNo);
-   	System.out.println(memberNo);
+   	log.debug("selectBuyingListCount : {}", selectBuyingListCount);
+   	
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
     log.debug("selectBuyingListCount : {}", selectBuyingListCount);
     
     Pagination pagination = new Pagination(cp, selectBuyingListCount, 10, 5);
@@ -202,11 +204,16 @@ public class MyPageServiceImpl implements MyPageService{
     
     List<Order> selectBuyingList = mapper.selectBuyingList(memberNo, rowBounds);
     
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    
     
     Map<String, Object> map = Map.of("selectBuyingList", selectBuyingList, "pagination", pagination);
     
-    System.out.println(selectBuyingList);
-    System.out.println(pagination);
+//    System.out.println(selectBuyingList);
+//    System.out.println(pagination);
     
     return map;
 	}

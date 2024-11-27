@@ -237,6 +237,12 @@ input[type="password"] input[type="phoneNumber"] {
   font-size: 12px;
   letter-spacing: -1px;
 }
+.signUp-message1 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
 
 /* 메세지 색상 지정 */
 .confirm {
@@ -464,9 +470,10 @@ button[type="button"]:hover {
 }
 
 
-
-
-
+main {
+  display: flex;
+  justify-content: center;
+}
 
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 메인 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -565,6 +572,8 @@ button[type="button"]:hover {
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  z-index: 100;
 }
 
 
@@ -662,7 +671,7 @@ button[type="button"]:hover {
 
 .btn-container3 {
   display: flex;
-  margin-top: 58px;
+  margin-top: 28px;
   justify-content: center;
 }
 
@@ -803,3 +812,10 @@ main{
   
   .signup-button-delete1:hover {
     background-color: #bcbcbc!important;}
+
+    /*  */
+    .address-input{
+
+      width: 100% !important;
+
+    }

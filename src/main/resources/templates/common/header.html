@@ -147,6 +147,10 @@
     <script src="/js/common/header.js"></script>
     <th:block th:replace="~{common/sidebar}"></th:block>
     <script th:inline="javascript">
+        let urlBackup = "";
+        if(url != ''){
+            location.href = url;
+        }
         const notificationLoginCheck = /*[[${session.loginMember} ? true : false ]]*/ false;
         const notificationLoginNo = /*[[${session.loginMember} ? ${session.loginMember.memberNo} : 0 ]]*/ 0;
     </script>

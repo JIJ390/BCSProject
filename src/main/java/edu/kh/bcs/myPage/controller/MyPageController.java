@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.myPage.service.MyPageService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,7 +50,8 @@ public class MyPageController {
 										required=false)String saveId,
 			RedirectAttributes ra,
 			Model model,
-			HttpServletResponse resp
+			HttpServletResponse resp,
+			HttpSession session
 			) {
 		
 //		log.debug("memberId : {}", memberId);
@@ -123,7 +126,16 @@ public class MyPageController {
 		}
 		
 		
-		return "redirect:/"; // 메인 페이지 리다이렉트
+		if(loginMember == null) {
+			return "redirect:loginPage";
+		}else {
+			String prevPage = (String)session.getAttribute("prevPage");
+			
+			session.removeAttribute("prevPage");
+			
+			return "redirect:" + prevPage;
+		}
+		
 	}
 	
 	/** 로그아웃 기능
@@ -379,8 +391,14 @@ public class MyPageController {
 	
 	
 	@GetMapping("myPageLogin")
-	public String myPageLogin() {
+	public String myPageLogin(@RequestHeader("referer") String prevPage, HttpSession session) {
 		
+		// prevPage 에 로그인 페이지 가 담길 경우 세션 동기화 없이 바로 보냄
+		if (prevPage.contains("myPageLogin")) {
+			return "myPage/myPageLogin";
+		}
+		
+		session.setAttribute("prevPage", prevPage);
 		return "myPage/myPageLogin";
 	}
 	

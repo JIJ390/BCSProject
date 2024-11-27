@@ -23,38 +23,40 @@
           <img class="point-icon" src="/images/myPage/points.png" alt="">
           <h3 th:text="'나의 포인트 : ' + ${session.loginMember.memberPoint}">나의 포인트 : 20,000P</h3>
         </div>
-        <table id="pointTable">
-            <thead >
-                <tr class="pointTr">
-                    <th>적립/차감내용</th>
-                    <th>적립/차감일시</th>
-                    <th>포인트</th>
-                    <th>총 포인트</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>휴대폰 구매 포인트</td>
-                    <td>24.11.08</td>
-                    <td>+12,000P</td>
-                    <td>20,000P</td>
-                </tr>
-                <tr>
-                    <td>배송비차감</td>
-                    <td>24.11.05</td>
-                    <td>-2,000P</td>
-                    <td>8,000P</td>
-                </tr>
-                <tr>
-                    <td>회원가입 축하포인트</td>
-                    <td>24.11.01</td>
-                    <td>+10,000P</td>
-                    <td>10,000P</td>
-                </tr>
 
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
+          
+          <table id="pointTable">
+              <thead >
+                  <tr class="pointTr">
+                      <th>적립/차감내용</th>
+                      <th>적립/차감일시</th>
+                      <th>포인트</th>
+                      <th>총 포인트</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>휴대폰 구매 포인트</td>
+                      <td>24.11.08</td>
+                      <td>+12,000P</td>
+                      <td>20,000P</td>
+                  </tr>
+                  <tr>
+                      <td>배송비차감</td>
+                      <td>24.11.05</td>
+                      <td>-2,000P</td>
+                      <td>8,000P</td>
+                  </tr>
+                  <tr>
+                      <td>회원가입 축하포인트</td>
+                      <td>24.11.01</td>
+                      <td>+10,000P</td>
+                      <td>10,000P</td>
+                  </tr>
+  
+                  <!-- Add more rows as needed -->
+              </tbody>
+          </table>
         <div class="pagination" id="paginationPointBox">
             <a href="#">1</a>
             <a href="#">2</a>
