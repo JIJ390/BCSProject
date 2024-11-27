@@ -12,7 +12,9 @@
 
 }
 
-
+.sidebar-div p{
+  text-align: start;
+}
 
 .sidebar-div {
   width: 350px;
@@ -284,7 +286,11 @@
 }
 
 .sidebar-chatting-detail-body-admin::-webkit-scrollbar {
-  display: none;
+  background-color:rgb(56, 56, 56);
+}
+.sidebar-chatting-detail-body-admin::-webkit-scrollbar-thumb {
+  background-color:rgb(85, 85, 85);
+  border-radius: 10px;
 }
 
 .sidebar-chatting-detail-input {

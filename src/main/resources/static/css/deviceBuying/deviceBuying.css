@@ -714,3 +714,74 @@ hr {
   background: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
   z-index: 1000; /* 팝업이 항상 위로 오도록 설정 */
 }
+
+
+.recent-list-container {
+  position: fixed;
+
+  
+  top: 13%;
+  right: 8%; /* 좌우 가운데 정렬 */
+
+  background-color: white;
+  border-radius: 15px;
+
+  padding: 10px;
+
+
+  width: 120px;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 10;
+
+}
+
+.recent-list-container > span {
+  margin-top : 10px;
+}
+
+.recent-box {
+  width: 100px;
+  height: 120px;
+
+
+  text-align: center;
+  font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-decoration-line: none;
+
+}
+
+.recent-box a {
+  text-decoration-line: none;
+  text-decoration: none;
+
+  color: black;
+}
+
+.recent-box img {
+  width: 90px;
+  height: 90px;
+
+  display: inline-block;
+
+}
+
+.recent-img {
+  width: 30px;
+  height: 30px;
+
+  margin: 10px 0;
+}
+

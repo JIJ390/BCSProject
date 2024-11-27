@@ -46,5 +46,18 @@
 		WHERE EVENT_NUMBER > 0
 		ORDER BY EVENT_NUMBER DESC
 	</select>
+	
+		<!-- 이벤트 게시글 상세 조회 -->
+		<select id="detailViewEvent">
+		SELECT
+			EVENT_NUMBER,
+			EVENT_IMAGE,
+			EVENT_TITLE,
+			TO_CHAR(EVENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일"') AS EVENT_WRITE_DATE,
+			EVENT_CONTENT		
+		FROM EVENT
+		WHERE EVENT_NUMBER > 0
+		AND   EVENT_NUMBER = #{eventNumber}
+	</select>
   	
 </mapper>

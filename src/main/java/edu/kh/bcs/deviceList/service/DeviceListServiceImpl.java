@@ -122,7 +122,7 @@ public class DeviceListServiceImpl implements DeviceListService {
 	@Override
 	public List<Device> brandSellList(String brand) {
 		
-		log.debug("브랜드 명 : {}", brand);
+//		log.debug("브랜드 명 : {}", brand);
 		return mapper.brandSellList(brand);
 	}
 	
@@ -139,5 +139,27 @@ public class DeviceListServiceImpl implements DeviceListService {
 //		log.debug("브랜드 명 : {}", brand);
 		return mapper.brandList(brand);
 	}
-
+	
+	
+	
+	@Override
+	public List<Device> searchDevices(String query) {
+		
+		// 한글 체크: 유니코드 범위 확인
+        boolean isKorean = 
+        		query.chars().allMatch(c -> 
+        		(c >= '\uAC00' && c <= '\uD7A3') || // 한글
+                (c >= '0' && c <= '9') ||			// 숫자 포함
+                (c == '\u0020'));  					// 띄어쓰기 포함
+                
+        
+        // 한글일 경우 한글로 검색해서 반환
+        if (isKorean) {
+        	return mapper.searchDevicesKor(query);
+        }
+		
+        // 한글이 포함되지 않은 경우
+		log.debug("검색 : {}", query);
+		return mapper.searchDevices(query);
+	}
 }

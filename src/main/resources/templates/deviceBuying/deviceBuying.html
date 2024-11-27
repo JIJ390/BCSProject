@@ -337,9 +337,35 @@
         <button class="review-plus-btn" id="reviewPlusBtn" th:unless="${#lists.isEmpty(reviewList)}">리뷰 더 보기</button>
       </div>
 
+
+
     </section>
     <section class="right-section">
+
+
+      <!-- 최근 본 목록 -->
+      <div class="recent-list-container">
+        <img class="recent-img" src="/images/buyingDevice/recentDevice.png" alt="">
+        <span>최근 본 상품</span>
+
+        <th:block th:if= "${recentDeviceList}" th:each= "recentDevice:${recentDeviceList}" th:object="${recentDevice}">
+      
+          <div class="recent-box">
+            <a th:href="|@{/device/buy/}*{deviceNo}|">
+              <div>
+                <img th:src="*{deviceImg}" alt="">
+                <span th:text="*{deviceName}"></span>
+              </div>
+            </a>
+          </div>
+        </th:block>
+      </div>
+
+
     </section>
+
+
+
 
     <div class="close-popup img-popup">
       <img th:src="${device.deviceImg}" alt="" class="popup-img">
@@ -350,6 +376,8 @@
   <footer>
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
+
+
 
 
   <script th:inline="javascript">
