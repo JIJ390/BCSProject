@@ -61,6 +61,20 @@ public interface DeviceListMapper {
 
 
 
+	List<Device> searchDevices(String query);
+
+
+
+
+
+	// 한글로 검색
+	List<Device> searchDevicesKor(String query);
+
+
+
+
+	
+
 	
 
 

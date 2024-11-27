@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -110,6 +111,27 @@ public class DeviceListController {
 		
 		return service.brandSellList(brand);
 	}
+	
+	
+	
+	@GetMapping("searchDevice")
+	public String searchDevice(@RequestParam("query") String query, Model model) {
+		
+		String trimmedQuery = query.trim();
+		
+        log.debug("trimmedQuery {} : ", trimmedQuery);
+		
+        List<Device> searchResults = service.searchDevices(trimmedQuery);
+
+        // 검색어와 결과를 모델에 추가
+        model.addAttribute("query", query); // 검색어
+        model.addAttribute("searchResults", searchResults); // 검색 결과
+        
+        log.debug("searchResults {} : ", searchResults);
+
+        // deviceList.html 페이지 반환
+        return "deviceList/deviceList";
+    }
 	
 	
 }
