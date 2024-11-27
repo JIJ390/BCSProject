@@ -13,6 +13,8 @@ import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
@@ -138,6 +140,13 @@ public interface AdminMapper {
 	int checkRoomNo(int memberNo);
 
 	boolean checkRoomFl(int memberNo);
+
+	List<EventDto> getEventLIst();
+
+	int update1Banner(MainBannerDto banner1);
+	int update2Banner(MainBannerDto banner2);
+	int update3Banner(MainBannerDto banner3);
+	int update4Banner(MainBannerDto banner4);
 
 
 
