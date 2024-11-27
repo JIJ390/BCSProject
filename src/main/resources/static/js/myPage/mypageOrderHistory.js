@@ -18,14 +18,42 @@ const selectSellingList = (cp) => {
     })
     .then(data => {
     
-      const selectSellingList = data.selectSellingList;
-      const pagination = data.pagination;
+      // 비었을 때
+      if (data.selectSellingList.length == 0) {
+        const tableBody = document.querySelector("#orderTable tbody");
+        tableBody.innerHTML = ""; 
 
-      // 판매 리스트 업데이트
-      updateCompletedList(selectSellingList);
+        // 행 생성
+        const row = document.createElement("tr");
 
-      // 페이지네이션 업데이트
-      updatePagination(pagination);
+        // 기종 정보 셀
+        const modelCell = document.createElement("td");
+
+        modelCell.innerText = "조회된 판매 내역이 없습니다";
+
+
+        modelCell.setAttribute('colspan', '3')
+
+        row.append(modelCell);
+
+        tableBody.appendChild(row);
+
+        const paginationBox = document.getElementById("paginationBox");
+        paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
+      } 
+      else {
+
+        const selectSellingList = data.selectSellingList;
+        const pagination = data.pagination;
+  
+        // 판매 리스트 업데이트
+        updateCompletedList(selectSellingList);
+  
+        // 페이지네이션 업데이트
+        updatePagination(pagination);
+
+      }
+
     })
     
     .catch(error => console.error("Error fetching completed list:", error));

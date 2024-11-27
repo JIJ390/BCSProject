@@ -50,7 +50,6 @@
               <button type="submit" class="signup-button-update">회원정보 수정</button>
               <button type="button" class="signup-button-delete">취소</button>
             </div>
-            <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
         </form>
           
         <!-- 똑같은 녀석 하나더 복사 -->
@@ -60,36 +59,35 @@
                 <div class="mypageUpdate-title">내정보 수정 - 주소 변경</div><br>
         
                 <form action="addressChange" method="POST" name="pwChangeForm"  class="pwChangeForm">
-      
                   <div class="update-group2">
                       <label for="addressChange">주소</label>
-                      <input type="text" id="postcode" name="address" placeholder="우편번호">
+                      <input type="text" class="address-input" id="postcode" name="address" placeholder="우편번호">
                       <button type="button" class="btn-address" id="findAddressBtn">검색</button>
-                      <input type="text" id="address" name="address" placeholder="도로명 / 지번주소" >
-                      <input type="text" id="detailAddress" name="address" placeholder="상세 주소">
+                      <input type="text" class="address-input" id="address" name="address" placeholder="도로명 / 지번주소" >
+                      <input type="text" class="address-input" id="detailAddress" name="address" placeholder="상세 주소">
                   </div>
         
                   <div class="btn-container2">
                     <button type="submit" class="signup-button-update">회원정보 수정</button>
                     <button type="button" class="signup-button-delete">취소</button>
                   </div>
-                  <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
               </form>
             </div>
       <!-- 전화번호 -->
             <div  class="mypageUpdate-box3" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
                 <div class="mypageUpdate-title">내정보 수정 - 번호 변경</div><br>
         
-                <form action="numberChange" method="POST" name="pwChangeForm" class="pwChangeForm">
+                <form action="numberChange" method="POST" name="telChangeForm" class="pwChangeForm">
       
                   <div class="update-group3">
                       <label for="addressChange">전화번호</label>
                       <input type="number" id="number" name="phoneNumber" placeholder="전화번호입력" maxlength="11">
                     </div>
+                    <span class="signUp-message1" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
 
                   <div class="btn-container3">
                     <button type="submit" class="signup-button-update1" style="font-size: 14px;">회원정보 수정</button>
-                    <button type="button" class="signup-button-delete1">취소</button>
+                    <button type="button" class="signup-button-delete">취소</button>
                   </div>
                   <a href="withdrawal" style="text-decoration-line: none; color: #333;"><div class="withDraw">회원 탈퇴하기</div></a>
               </form>

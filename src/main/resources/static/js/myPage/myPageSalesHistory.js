@@ -20,7 +20,35 @@ const selectBuyingList = (cp) => {
       throw new Error("AJAX 통신 실패");
     })
     .then(data => {
-      
+
+          // 비었을 때
+          if (data.selectBuyingList.length == 0) {
+            const tableBody = document.querySelector("#buyingTable tbody");
+            tableBody.innerHTML = ""; 
+    
+            // 행 생성
+            const row = document.createElement("tr");
+    
+            // 기종 정보 셀
+            const modelCell = document.createElement("td");
+    
+            modelCell.innerText = "조회된 구매 내역이 없습니다";
+    
+    
+            modelCell.setAttribute('colspan', '3')
+    
+            row.append(modelCell);
+    
+            tableBody.appendChild(row);
+    
+            const paginationBox = document.getElementById("paginationBuyingBox");
+            paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
+            
+          }      else {
+
+          console.log("asdasdasdas");
+
+
       const selectBuyingList = data.selectBuyingList;
       const pagination = data.pagination;
 
@@ -32,8 +60,11 @@ const selectBuyingList = (cp) => {
 
       // 페이지네이션 업데이트
       updatePagination2(pagination);
+      
+      }
+      
+          
     })
-    
     .catch(error => console.error("Error fetching completed list:", error));
 };
 
@@ -101,6 +132,9 @@ const updatePagination2 = (pagination) => {
   // <<, < 버튼
   paginationBox.appendChild(createPageButton(1, "<<"));
   paginationBox.appendChild(createPageButton(pagination.prevPage, "<"));
+
+  console.log(pagination.startPage);
+  console.log(pagination.endPage);
 
   // 동적 페이지 번호 버튼
   for (let i = pagination.startPage; i <= pagination.endPage; i++) {
