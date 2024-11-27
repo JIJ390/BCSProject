@@ -137,7 +137,7 @@ public interface AdminMapper {
 	List<Device> iPad();
 
 //구매 신청 리스트 조회
-	List<Order> adminSale();
+	List<Order> adminSale(String deviceNo);
 	
 	//배송 상태 업데이트
 	int update(@Param("orderNo")int orderNo, 
@@ -145,7 +145,19 @@ public interface AdminMapper {
 
 	//검색 기능
 	List<Order> serachFilter(String searchResult);
-	//검색 결과 존재하지않을때에
+
+	//상품조회 기기 버튼별 검색 보기
+	List<Device> brandFilter(String brandFilter);
+
+	//구매 신청목록 화면 처음 조회
+	List<Order> adminSaleFirst();
+
+	//용량 인서트
+	int capacity(
+			@Param("caNo") String caNo, 
+			@Param("caPrice") String caPrice, 
+			@Param("caSellPrice") String caSellPrice,
+			@Param("deviceGetNo") int deviceGetNo);
 
 
 

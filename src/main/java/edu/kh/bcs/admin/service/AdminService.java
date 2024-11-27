@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -20,6 +20,12 @@ import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
 
+	int textContent(Device device, Color color, String gradeType, String gradePrice,
+			String gradeSellPrice, List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber,
+			String capacityPrice, String capacitySellPrice);
+
+
+	
 	int getResultCount(String searchType, String searchText);
 
 	List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc);
@@ -86,16 +92,13 @@ public interface AdminService {
 	 * @param colorImg img 6 개 
 	 * @return
 	 */
-	int textContent(Device device, Color color, 
-			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
-			MultipartFile divceImg);
 
 	List<Device> galaxyA(String series);
 
 	List<Device> iPhone(String series);
 
 	//리스트 조회
-	List<Order> adminSale();
+	List<Order> adminSale(String deviceNo);
 
 	//상태 업데이트
 	int delivery(int orderNo, int orderStatusCode);
@@ -103,7 +106,15 @@ public interface AdminService {
 	//검색 기능 필터
 	List<Order> serachFilter(String searchResult);
 
+	//상품조회 기기별 보기 버튼
+	List<Device> brandFilter(String brandFilter);
+
 	
+
+	//adminSale 처음 화면 전환
+	List<Order> adminSaleFirst();
+
+
 
 
 

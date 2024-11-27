@@ -138,6 +138,7 @@ WHERE MEMBER_NO = #{memberNo} OR ADMIN_NO = #{memberNo}
 		AND CHATTING_MESSAGE_READ_FL = 'N'
 	</select>
 	
+	
 
 	
 	<select id="deviceColorList">
@@ -364,7 +365,8 @@ ORDER BY
 	   #{deviceBrand},
 	   #{ramCapacity},
 	   #{deviceCpuName},
-	   #{displaySize}
+	   #{displaySize},
+	   #{deviceNameKor}
 	)
 	</insert>
 
@@ -411,7 +413,7 @@ VALUES
 
 <!-- 구매 정보 리스트 조회 -->
 <select id="adminSale">
-	SELECT
+	SELECT 
 		o.ORDER_NO,
 		O.MEMBER_NO,
 		MEMBER_ID,
@@ -429,6 +431,9 @@ VALUES
 		LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
 		LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
 		LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+	WHERE 
+		D.DEVICE_NO = #{deviceNo}
+		
 </select>
 
 <update id="update">
@@ -473,6 +478,60 @@ VALUES
 		ORDER_NO LIKE '%'||#{searchResult}||'%'
 </select>
 	
+	<!-- 상품조회 버튼별 기기 조회하기 -->
+	<select id="brandFilter">
+	SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,DEVICE_BRAND,
+   NVL((SELECT COUNT(*)
+    FROM "ORDER"
+    JOIN BUYING_DEVICE USING (BUYING_DEVICE_NO)
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    GROUP BY DEVICE_NO), 0) AS "ORDER_COUNT",
+   NVL((SELECT COUNT(*)
+    FROM "BUYING_DEVICE"
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    AND SOLD_FL = 'N'
+    GROUP BY DEVICE_NO), 0) AS "DEVICE_COUNT"
+FROM DEVICE D
+WHERE 
+	DEVICE_BRAND = #{brandFilter}
+ORDER BY 
+	DEVICE_RELEASE_DATE DESC
+	</select>
+	
+	<select id="adminSaleFirst">
+		SELECT 
+		o.ORDER_NO,
+		O.MEMBER_NO,
+		MEMBER_ID,
+		DEVICE_NAME,
+		COLOR_NAME,
+		GRADE_TYPE,
+		CAPACITY_TYPE,
+		order_date,
+		ORDER_STATUS_CONTENT
+	FROM "ORDER" O
+		LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+		LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+		LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+		LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+		LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+		LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
+		LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+	ORDER BY
+		o.ORDER_NO DESC
+	</select>
+	
+<insert id="capacity">
+INSERT INTO 
+	"CAPACITY_PRICE"
+VALUES
+(
+	#{deviceGetNo},
+	#{caNo},
+	#{caPrice},
+	#{caSellPrice}
+)
+</insert>	
 	
 	
 </mapper>

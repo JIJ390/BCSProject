@@ -35,6 +35,7 @@ public class Device {
 	private String deviceWeight;
 	private String deviceBatteryCapacity;
 	private String deviceName;
+	private String deviceNameKor;
 	private int deviceBuyingPrice;
 	private int deviceSellingPrice;
 	private String deviceBrand;

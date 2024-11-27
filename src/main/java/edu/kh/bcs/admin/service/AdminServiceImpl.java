@@ -18,7 +18,7 @@ import edu.kh.bcs.admin.mapper.AdminMapper;
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.common.util.FileUtil;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -26,6 +26,7 @@ import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -221,9 +222,11 @@ public class AdminServiceImpl implements AdminService {
 
 	// ============================================기종 등록
 	@Override
-	public int textContent(Device device, Color color, 
-			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
-			MultipartFile divceImg) {
+	public int textContent(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
+			String capacitySellPrice){
+		
+		
 		// device파일 리네임
 		String divceImge = divceImg.getOriginalFilename();
 
@@ -244,7 +247,7 @@ public class AdminServiceImpl implements AdminService {
 
 				File folder = new File(folderPathDevice);
 				if (folder.exists() == false) { // 존재하지 않을때에
-					folder.mkdir(); // 폴더 생성 구문
+					folder.mkdirs(); // 폴더 생성 구문
 				}
 
 				divceImg.transferTo(new File(folderPathDevice + deviceRename));
@@ -255,6 +258,8 @@ public class AdminServiceImpl implements AdminService {
 
 			// SELECT해서 DEVICE_NO 가져오기
 			int deviceGetNo = mapper.selectDeviceNo();
+			
+			
 
 			// colorImg 6개 사진 들어감
 			// colorimg 필터
@@ -292,7 +297,7 @@ public class AdminServiceImpl implements AdminService {
 
 					File folder = new File(folderPathColor);
 					if (folder.exists() == false) { // 존재하지 않을때에
-						folder.mkdir(); // 폴더 생성 구문
+						folder.mkdirs(); // 폴더 생성 구문
 					}
 					colorImg.get(i).transferTo(new File(folderPathColor + rename));
 
@@ -320,16 +325,42 @@ public class AdminServiceImpl implements AdminService {
 				
 				int grade = mapper.grade(gradePriceOrly,gradeSellPriceOrly,GradeTypeOrly,deviceGetNo);
 			}
+			
+			//자르기
+			String[] capacityNo1 = capacityNumber.split(",");
+			String[] capacityPrice1 = capacityPrice.split(",");
+			String[] capacitySellPrice1 = capacitySellPrice.split(",");
+			
+			
+			
+			for(int i = 0; i < capacityNo1.length ; i++) {
+				
+				String caNo = capacityNo1[i];
+				String caPrice = capacityPrice1[i];
+				String caSellPrice = capacitySellPrice1[i];
+				
+				//용량 인서트
+				int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
+				
+			}
+			System.out.println("등록 완료");
 		}
 		
 			return 1;
 	}
 	
 	@Override
-	public List<Order> adminSale() {
+	public List<Order> adminSale(String deviceNo) {
+		
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
 		
 		
-		return mapper.adminSale();
+		return mapper.adminSale(deviceNo);
 	}
 	
 	//상태 업데이트
@@ -351,4 +382,26 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+	
+	@Override
+	public List<Device> brandFilter(String brandFilter) {
+		
+		
+		
+		return mapper.brandFilter(brandFilter);
+	}
+	@Override
+	public List<Order> adminSaleFirst() {
+		
+		
+		List<Order> result = mapper.adminSaleFirst();
+				
+		
+		
+		return result;
+	}
+	
+	
+	 
+	
 }

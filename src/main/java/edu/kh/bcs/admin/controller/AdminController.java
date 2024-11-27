@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.bcs.admin.service.AdminService;
 
 import edu.kh.bcs.common.util.FileUtil;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
@@ -130,6 +131,26 @@ public class AdminController {
 		
 		return "admin/adminProductinquiry";
 	}
+	@PostMapping("adminBrandFilter")
+	public String brandFilter(
+			@RequestBody String brandFilter,
+			Device device,
+			Color color,
+			Model model
+			) {
+		
+		
+		
+		List<Device> brandFilter1 = service.brandFilter(brandFilter);
+		
+		
+		model.addAttribute("brandFilter", brandFilter1);
+		
+		log.debug("asdasdadad : {}", brandFilter1);
+		
+		return "admin/adminProducktinquiryList";
+	}
+	
 	
 	
 	@GetMapping("adminChatList")
@@ -140,18 +161,34 @@ public class AdminController {
 	}
 	
 	//구매 신청 
-	@GetMapping("adminSale")
-	public List<Order> adminSale(
-			Model model
+	@GetMapping("adminSale/{deviceNo}")
+	public String adminSale(
+			Model model,
+			@PathVariable("deviceNo") String deviceNo
 			) {
 		
-		//리스트 조
-		List<Order> listView = service.adminSale();
+		log.debug("controller device 값 : {}", deviceNo);
+		log.debug("controller device 값 : {}", deviceNo);
+		log.debug("controller device 값 : {}", deviceNo);
 		
+		
+		log.debug("controller device split 값 : {}", deviceNo);
+		log.debug("controller device split 값 : {}", deviceNo);
+		log.debug("controller device split 값 : {}", deviceNo);
+		
+		
+		
+		//리스트 조
+		List<Order> listView = service.adminSale(deviceNo);
+		
+		
+		log.debug("결과 값 : {}", listView);
+		log.debug("결과 값 : {}", listView);
+		log.debug("결과 값 : {}", listView);
 		model.addAttribute("listView", listView);
 		
 		
-		return listView;
+		return "admin/adminSale";
 	}
 	
 	@ResponseBody
@@ -210,6 +247,23 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("adminSale")
+	public String adminSaleFirst(
+			Model model
+			) { 
+		
+		
+		List<Order> result = service.adminSaleFirst();
+		
+		
+		model.addAttribute("listView", result);
+		
+		
+		return "admin/adminSale";
+		
+	}
+	
+	
 	//매물 등록
 	@GetMapping("adminRegistration")
 	public String adminRegistration() {
@@ -229,15 +283,21 @@ public class AdminController {
 	        @RequestParam("gradePrice") String gradePrice,
 	        @RequestParam("gradeSellPrice") String gradeSellPrice,
 	        @RequestParam("gradeType") String gradeType,
+	        @RequestParam("capacityNumber") String capacityNumber,
+	        @RequestParam("capacityPrice") String capacityPrice,
+	        @RequestParam("capacitySellPrice") String capacitySellPrice,
 	        RedirectAttributes rs
 			) {
 		
 		
+		
+		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
-		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,colorImg,divceImg);
+		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,
+				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice);
 		
-		return "redirect:/admin/adminBoard";
+		return "redirect:/admin/adminProductinquiry";
 	}
 	
 	
@@ -422,6 +482,7 @@ public class AdminController {
 		
 		return "admin/adminEvent/deviceType";
 	}
+	
 	
 	
 	
