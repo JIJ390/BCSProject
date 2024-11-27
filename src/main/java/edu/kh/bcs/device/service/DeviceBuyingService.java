@@ -114,6 +114,14 @@ public interface DeviceBuyingService {
 	Review reviewPlus(int deviceNo, int reviewCount);
 
 
+	/**
+	 * 최근 본 기종 정보
+	 * @param recentDeviceNo
+	 * @return
+	 */
+	Device selectRecentDevice(int recentDeviceNo);
+
+
 
 
 

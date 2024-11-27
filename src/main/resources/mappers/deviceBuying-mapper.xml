@@ -428,4 +428,18 @@
 		ORDER BY "rn" ASC
 	</select>
 	
+	
+	<!-- 최근 본 목록 정보-->
+	<select id="selectRecentDevice">
+		SELECT 
+			DEVICE_NO,
+			DEVICE_NAME,
+			DEVICE_IMG
+		FROM "DEVICE"
+		WHERE DEVICE_NO = #{recentDeviceNo}
+	
+	</select>
+	
+	
+	
 </mapper>

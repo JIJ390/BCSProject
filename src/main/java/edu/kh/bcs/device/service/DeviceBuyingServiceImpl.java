@@ -131,4 +131,11 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	}
 	
 
+	// 
+	@Override
+	public Device selectRecentDevice(int recentDeviceNo) {
+		return mapper.selectRecentDevice(recentDeviceNo);
+	}
+	
+	
 }

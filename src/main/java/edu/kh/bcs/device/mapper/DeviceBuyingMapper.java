@@ -147,6 +147,12 @@ public interface DeviceBuyingMapper {
 			@Param("reviewCount") int reviewCount);
 
 
+	/**
+	 * 
+	 * @param recentDeviceNo
+	 * @return
+	 */
+	Device selectRecentDevice(int recentDeviceNo);
 
 	
 	
