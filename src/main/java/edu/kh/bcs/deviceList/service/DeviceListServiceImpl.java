@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.mapper.DeviceListMapper;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oracle.net.aso.c;
@@ -161,5 +162,16 @@ public class DeviceListServiceImpl implements DeviceListService {
         // 한글이 포함되지 않은 경우
 		log.debug("검색 : {}", query);
 		return mapper.searchDevices(query);
+	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<MainBannerDto> bannerList() {
+		
+		return mapper.bannerList();
 	}
 }

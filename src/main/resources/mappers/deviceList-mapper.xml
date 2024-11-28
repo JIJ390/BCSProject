@@ -150,6 +150,8 @@
 			DEVICE
 		WHERE
 			LOWER(DEVICE_NAME) LIKE LOWER('%' || #{query} || '%')
+		ORDER BY
+			DEVICE_RELEASE_DATE DESC
 	</select>
 	
 	
@@ -161,5 +163,20 @@
 			DEVICE
 		WHERE
 			DEVICE_NAME_KOR LIKE '%' || #{query} || '%'
+			
+		ORDER BY
+			DEVICE_RELEASE_DATE DESC
+			
+	</select>
+	
+	
+	
+	
+	<select id="bannerList">
+		SELECT *
+		FROM
+			MAIN_BANNER
+		ORDER BY
+			MAIN_BANNER_NO ASC
 	</select>
 </mapper>

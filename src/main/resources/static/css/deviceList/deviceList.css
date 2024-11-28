@@ -143,6 +143,10 @@ main{
   justify-content: center;
 }
 
+.deviceList-item-box a{
+  text-decoration: none;
+}
+
 .deviceList-item-section{
   display: flex;
   flex-direction: column;

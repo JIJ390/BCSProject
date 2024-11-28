@@ -78,6 +78,17 @@ public class FileConfig implements WebMvcConfigurer{
 	@Value("${my.review.resource-location}")
 	private String reviewResourceLocation;		// 
 	
+	
+	// ----------------------------------------------
+	
+	
+	// 리뷰 
+	@Value("${my.banner.resource-handler}")
+	private String bannerResourceHandler;			//
+	
+	@Value("${my.banner.resource-location}")
+	private String bannerResourceLocation;		// 
+	
 
 	/* MultipartResolver 설정 */
 	@Bean
@@ -139,6 +150,11 @@ public class FileConfig implements WebMvcConfigurer{
 		registry
 		.addResourceHandler(deviceResourceHandler)			// /images/test/**
 		.addResourceLocations(deviceResourceLocation);  // file:///C:/uploadFiles/test/	
+		
+		
+		registry
+		.addResourceHandler(bannerResourceHandler)			// /images/test/**
+		.addResourceLocations(bannerResourceLocation);  
 		
 	}
 	

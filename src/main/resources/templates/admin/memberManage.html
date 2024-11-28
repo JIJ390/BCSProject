@@ -217,125 +217,124 @@
 </head>
 
 <body>
-
-
   <th:block th:replace="~{common/header}"></th:block>
 
-  <div class="admin-member-detail 팝업히든">
-    [[${session.loginMember}]]
-    <div>
-      <div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button
-          class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i
-            class="fa-solid fa-x"></i>X</button></div>
+  
+    <div class="admin-member-detail 팝업히든">
+      [[${session.loginMember}]]
+      <div>
+        <div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button
+            class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i
+              class="fa-solid fa-x"></i>X</button></div>
+      </div>
+      <div>
+        <p>회원번호</p>
+        <p class="admin-member-detail-no"></p>
+      </div>
+      <div>
+        <p>이름</p>
+        <p class="admin-member-detail-name"></p>
+      </div>
+      <div>
+        <p>이메일</p>
+        <p class="admin-member-detail-email"></p>
+      </div>
+      <div>
+        <p>전화번호</p>
+        <p class="admin-member-detail-tel"></p>
+      </div>
+      <div>
+        <p>주소</p>
+        <p class="admin-member-detail-address"></p>
+      </div>
+      <div>
+        <p>가입날짜</p>
+        <p class="admin-member-detail-date"></p>
+      </div>
+      <div>
+        <p>탈퇴여부</p>
+        <p class="admin-member-detail-fl"></p><button class="탈퇴처리">탈퇴처리</button>
+      </div>
+      <div>
+        <p>보유 포인트</p>
+        <p class="admin-member-detail-point"></p>
+      </div>
+      <div>
+        <p>관리자 권한</p>
+        <p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button>
+      </div>
+      <div>
+        <p>구매 횟수</p>
+        <p class="admin-member-detail-buy"></p>
+      </div>
+      <div>
+        <p>판매 횟수</p>
+        <p class="admin-member-detail-sell"></p>
+      </div>
+      <div><button class="admin-member-login">로그인하기</button></div>
     </div>
-    <div>
-      <p>회원번호</p>
-      <p class="admin-member-detail-no"></p>
-    </div>
-    <div>
-      <p>이름</p>
-      <p class="admin-member-detail-name"></p>
-    </div>
-    <div>
-      <p>이메일</p>
-      <p class="admin-member-detail-email"></p>
-    </div>
-    <div>
-      <p>전화번호</p>
-      <p class="admin-member-detail-tel"></p>
-    </div>
-    <div>
-      <p>주소</p>
-      <p class="admin-member-detail-address"></p>
-    </div>
-    <div>
-      <p>가입날짜</p>
-      <p class="admin-member-detail-date"></p>
-    </div>
-    <div>
-      <p>탈퇴여부</p>
-      <p class="admin-member-detail-fl"></p><button class="탈퇴처리">탈퇴처리</button>
-    </div>
-    <div>
-      <p>보유 포인트</p>
-      <p class="admin-member-detail-point"></p>
-    </div>
-    <div>
-      <p>관리자 권한</p>
-      <p class="admin-member-detail-adminfl"></p><button class="권한변경">권한변경</button>
-    </div>
-    <div>
-      <p>구매 횟수</p>
-      <p class="admin-member-detail-buy"></p>
-    </div>
-    <div>
-      <p>판매 횟수</p>
-      <p class="admin-member-detail-sell"></p>
-    </div>
-    <div><button class="admin-member-login">로그인하기</button></div>
-  </div>
-
-  <div class="member-mamage-body">
-    <div class="member-manage">
-      <div style="width: 100%;">
-        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-          <p style="font-size: 40px;">회원 관리 페이지</p>
-          <div class="member-manage-search">
-            <button class="member-manage-category-menuBtn"
-              style="display: flex; justify-content: center; align-items: center;">
-              <p class="member-manage-category">회원번호</p>
-              <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
-              <div class="mamber-manage-search-category member-manage-category-hidden">
-                <p class="member-manage-search-list">회원번호</p>
-                <p class="member-manage-search-list">이름</p>
-                <p class="member-manage-search-list">이메일</p>
-                <p class="member-manage-search-list">전화번호</p>
-              </div>
-            </button>
-            <input type="text">
-            <button style="border: 1px solid black; width: 40px; height: 40px;">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
+  
+    <div class="member-mamage-body">
+      <div class="member-manage">
+        <div style="width: 100%;">
+          <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+            <p style="font-size: 40px;">회원 관리 페이지</p>
+            <div class="member-manage-search">
+              <button class="member-manage-category-menuBtn"
+                style="display: flex; justify-content: center; align-items: center;">
+                <p class="member-manage-category">회원번호</p>
+                <i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+                <div class="mamber-manage-search-category member-manage-category-hidden">
+                  <p class="member-manage-search-list">회원번호</p>
+                  <p class="member-manage-search-list">이름</p>
+                  <p class="member-manage-search-list">이메일</p>
+                  <p class="member-manage-search-list">전화번호</p>
+                </div>
+              </button>
+              <input type="text">
+              <button style="border: 1px solid black; width: 40px; height: 40px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
           </div>
         </div>
+        <hr>
+        <div class="member-mamage-title">
+          <span style="font-size: 20px; margin-left: 20px;">회원 번호<img class="넘버" style=" width: 20px; height: 20px;"
+              src="/images/rlxk/위.png"></span>
+          <span style="font-size: 20px; margin-left: 115px;">이름<img class="이름" style=" width: 20px; height: 20px;"
+              src="/images/rlxk/위.png"></span>
+          <span style="font-size: 20px; margin-left: 215px;">이메일<img class="이메일" style=" width: 20px; height: 20px;"
+              src="/images/rlxk/위.png"></span>
+          <span style="font-size: 20px; margin-left: 215px;">전화 번호<img class="전화번호" style=" width: 20px; height: 20px;"
+              src="/images/rlxk/위.png"></span>
+          <!-- <i class="fa-solid fa-caret-up"></i> -->
+        </div>
+        <div class="member-mamage-content">
+          <!-- <div class="member-manage-row">
+          <span style="font-size: 20px;">1</span>
+          <span style="font-size: 20px;">홍길동</span>
+          <span style="font-size: 20px;">member01@abc.co.kr</span>
+          <span style="font-size: 20px;">010-1234-1234</span>
+        </div> -->
+        </div>
+        <div class="admin-member-pagenation">
+  
+          <!-- <button><i class="fa-solid fa-backward-fast"></i></button>
+        <button><i class="fa-solid fa-caret-left"></i></button>
+        <button class="admin-member-page">1</button>
+        <button class="admin-member-page">2</button>
+        <button class="admin-member-page">3</button>
+        <button class="admin-member-page">4</button>
+        <button class="admin-member-page">5</button>
+        <button><i class="fa-solid fa-caret-right"></i></button>
+        <button><i class="fa-solid fa-forward-fast"></i></i></div> -->
+        </div>
       </div>
-      <hr>
-      <div class="member-mamage-title">
-        <span style="font-size: 20px; margin-left: 20px;">회원 번호<img class="넘버" style=" width: 20px; height: 20px;"
-            src="/images/rlxk/위.png"></span>
-        <span style="font-size: 20px; margin-left: 115px;">이름<img class="이름" style=" width: 20px; height: 20px;"
-            src="/images/rlxk/위.png"></span>
-        <span style="font-size: 20px; margin-left: 215px;">이메일<img class="이메일" style=" width: 20px; height: 20px;"
-            src="/images/rlxk/위.png"></span>
-        <span style="font-size: 20px; margin-left: 215px;">전화 번호<img class="전화번호" style=" width: 20px; height: 20px;"
-            src="/images/rlxk/위.png"></span>
-        <!-- <i class="fa-solid fa-caret-up"></i> -->
-      </div>
-      <div class="member-mamage-content">
-        <!-- <div class="member-manage-row">
-        <span style="font-size: 20px;">1</span>
-        <span style="font-size: 20px;">홍길동</span>
-        <span style="font-size: 20px;">member01@abc.co.kr</span>
-        <span style="font-size: 20px;">010-1234-1234</span>
-      </div> -->
-      </div>
-      <div class="admin-member-pagenation">
-
-        <!-- <button><i class="fa-solid fa-backward-fast"></i></button>
-      <button><i class="fa-solid fa-caret-left"></i></button>
-      <button class="admin-member-page">1</button>
-      <button class="admin-member-page">2</button>
-      <button class="admin-member-page">3</button>
-      <button class="admin-member-page">4</button>
-      <button class="admin-member-page">5</button>
-      <button><i class="fa-solid fa-caret-right"></i></button>
-      <button><i class="fa-solid fa-forward-fast"></i></i></div> -->
-      </div>
+      <div class="member-mamage-backBtn">뒤로가기</div>
+  
     </div>
-    <div class="member-mamage-backBtn">뒤로가기</div>
-
-  </div>
-
+  
 
   <th:block th:replace="~{common/footer}"></th:block>
   <script>
