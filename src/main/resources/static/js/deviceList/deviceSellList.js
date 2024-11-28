@@ -239,9 +239,9 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
     result.forEach(item => {
       // 데이터에서 필요한 정보 추출
       const deviceName = item.deviceName || "이름 없음";
-      const devicePrice = item.deviceBuyingPrice ? `${item.deviceBuyingPrice.toLocaleString()}원` : "가격 정보 없음";
+      const devicePrice = item.deviceSellingPrice ? `${item.deviceSellingPrice.toLocaleString()}원` : "가격 정보 없음";
       const deviceImg = item.deviceImg || "/images/default_image.png"; // 기본 이미지 처리
-      const deviceLink = `/device/buy/${item.deviceNo}`; // 동적 링크
+      const deviceLink = `/device/sell/${item.deviceNo}`; // 동적 링크
 
       // 아이템 박스 생성
       const itemBox = document.createElement("div");
@@ -323,9 +323,9 @@ dataBrand.forEach(filter => {
     result.forEach(item => {
       // 데이터에서 필요한 정보 추출
       const deviceName = item.deviceName || "이름 없음";
-      const devicePrice = item.deviceBuyingPrice ? `${item.deviceBuyingPrice.toLocaleString()}원` : "가격 정보 없음";
+      const devicePrice = item.deviceSellingPrice ? `${item.deviceSellingPrice.toLocaleString()}원` : "가격 정보 없음";
       const deviceImg = item.deviceImg || "/images/default_image.png"; // 기본 이미지 처리
-      const deviceLink = `/device/buy/${item.deviceNo}`; // 동적 링크
+      const deviceLink = `/device/sell/${item.deviceNo}`; // 동적 링크
 
       // 아이템 박스 생성
       const itemBox = document.createElement("div");
@@ -406,9 +406,9 @@ fetch(`/brandList?category=${category}`)
     result.forEach(item => {
       // 데이터에서 필요한 정보 추출
       const deviceName = item.deviceName || "이름 없음";
-      const devicePrice = item.deviceBuyingPrice ? `${item.deviceBuyingPrice.toLocaleString()}원` : "가격 정보 없음";
+      const devicePrice = item.deviceSellingPrice ? `${item.deviceSellingPrice.toLocaleString()}원` : "가격 정보 없음";
       const deviceImg = item.deviceImg || "/images/default_image.png"; // 기본 이미지 처리
-      const deviceLink = `/device/buy/${item.deviceNo}`; // 동적 링크
+      const deviceLink = `/device/sell/${item.deviceNo}`; // 동적 링크
 
       // 아이템 박스 생성
       const itemBox = document.createElement("div");

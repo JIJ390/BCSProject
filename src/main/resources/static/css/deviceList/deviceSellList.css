@@ -78,30 +78,8 @@ main{
   cursor: pointer;
 }
 
-/* 필터 섹션 */
-.filter-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 70%;
-}
 
-.filter-section{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 80%;
-  width: 95%;
-  font-size: 25px;
-  
-}
 
-.filter-items{
-  padding: 10px;
-  cursor: pointer;
-  font-size: 26px;
-}
 
 /* 필터 선택 섹션 */
 .filter-check-container{
@@ -132,13 +110,6 @@ main{
   height: 200px;
   width: 150px;
   margin-top: 50px;
-}
-
-.deviceList-item-section img{
-  height: 150px;
-  width: 150px;
-  margin-top: 50px;
-  border-radius: 10px;
 }
 
 .deviceList-item-box{
@@ -174,37 +145,8 @@ main{
   gap: 20px; /* 아이템 간격 추가 (선택 사항) */
 }
 
-/* 검색 영역 */
-.search-container{
-  display: flex;
-  height: 7vh;
-  width: 70%;
-}
 
-.search-filter{
-  height: 100%;
-  width: 90%;
-  border: 1px solid black;
-  border-radius: 10px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 5px; /* 선택 항목 간 간격 */
-}
 
-.search-Btn{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10vw;
-  border: 1px solid black;
-  border-radius: 10px;
-  margin-left: 10px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
 
 .device-item {
   cursor: pointer;
@@ -286,4 +228,11 @@ main{
 
 .inch {
   border: 2px solid green;
+}
+
+.deviceList-item-section img{
+  height: 150px;
+  width: 150px;
+  margin-top: 50px;
+  border-radius: 10px;
 }

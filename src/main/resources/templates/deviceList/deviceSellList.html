@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DeviceSellList</title>
-  <link rel="stylesheet" href="css/deviceList/deviceList.css">
+  <link rel="stylesheet" href="css/deviceList/deviceSellList.css">
 </head>
 <body>
   <!-- Header Section -->
@@ -29,16 +29,44 @@
         </div>
       </div>
 
-      <div class="deviceList-items-container">
-        <div class="deviceList-item-box">
-          <div class="deviceList-item-section">
-            <div class="deviceList-items"></div>
-            <div style="margin-top: 15px;"></div>
-            <div></div>
-          </div>
+      <div class="filter-container">
+        <div class="filter-section">
+          <div class="filter-items" id="ram-filter"></div>
+          <div class="filter-items" id="hdd-filter"></div>
+          <div class="filter-items" id="inch-filter"></div>
         </div>
+      </div>
+
+
+      <div class="search-container">
+        <div class="search-filter"></div>
+        <div class="search-Btn" id="searchBtn"></div>
+      </div>
+      
+
+      <div class="deviceList-items-container">
+
+        <th:block th:each="device:${searchResults}" th:object="${device}">
+          <div class="deviceList-item-box">
+            <a th:href="|@{device/sell/}*{deviceNo}|">
+              <div class="devuceList-item-section">
+                <img th:src="*{deviceImg}" th:alt="*{deviceName}">
+                <div style="margin-top: 15px" th:text="*{deviceName}"></div>
+                <div 
+                th:text="|*{#numbers.formatInteger(deviceBuyingPrice, 0, 'COMMA')}원|"></div>
+              </div>
+            </a>
+          </div>
+        </th:block>
+
+
+
+      </div>
+
+
     </div>
 
+    
     
 
 
@@ -47,7 +75,7 @@
 
 
 
-    <script src="/js/deviceList/deviceList.js"></script>
+    <script src="/js/deviceList/deviceSellList.js"></script>
 
 
   </main>
