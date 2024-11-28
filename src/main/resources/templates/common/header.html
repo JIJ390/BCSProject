@@ -129,7 +129,6 @@
             </div>
 
         </div>
-
         </div>
     </header>
 
@@ -145,13 +144,13 @@
             </div>
         </div>
     </header>
-
-    <script src="/js/common/header.js"></script>
     <th:block th:replace="~{common/sidebar}"></th:block>
+
     <script th:inline="javascript">
         const notificationLoginCheck = /*[[${session.loginMember} ? true : false ]]*/ false;
         const notificationLoginNo = /*[[${session.loginMember} ? ${session.loginMember.memberNo} : 0 ]]*/ 0;
     </script>
+    <script src="/js/common/header.js"></script>
     <script src="/js/common/sidebar.js"></script>
     <script src="/js/sse/sse.js"></script>
 </body>

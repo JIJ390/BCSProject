@@ -892,366 +892,61 @@ phoneInput?.addEventListener('input', function () {
     }
 });
 
-// 포커스 해제 시 길이 검증
-phoneInput?.addEventListener('blur', function () {
-    if (phoneInput.value.length !== 11) {
-        errorMessage.style.display = 'block';
-    } else {
-        errorMessage.style.display = 'none';
-    }
-});
-
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 내폰 판매내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
 
-// 리스트 조회 및 페이지네이션
-const selectSellingList = (cp) => {
 
-  fetch(`/myPage/selectSellingList?cp=${cp}&memberNo=${loginNo}`)
-    .then(response => {
-      if (response.ok) return response.json();
-      throw new Error("AJAX 통신 실패");
-    })
-    .then(data => {
-    
-      const selectSellingList = data.selectSellingList;
-      const pagination = data.pagination;
+// 전화번호 유효성 검사 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ //
+const telChangeForm = document.querySelector("[name=telChangeForm]");
 
-      // 판매 리스트 업데이트
-      updateCompletedList(selectSellingList);
+const memberTel = document.querySelector("[name=phoneNumber]");
+const telMessage = document.querySelector("#telMessage");
 
-      // 페이지네이션 업데이트
-      updatePagination(pagination);
-    })
-    
-    .catch(error => console.error("Error fetching completed list:", error));
-};
+const telMessageObj ={};
+telMessageObj.normal = "전화번호를 입력해주세요.(- 제외)";
+telMessageObj.invaild = "유효하지 않은 전화번호 형식입니다.";
+telMessageObj.check = "유효한 전화번호 형식입니다.";
 
+memberTel?.addEventListener("input", () => {
 
-// 리스트 업데이트 함수
-const updateCompletedList = (completedList) => {
-  const tableBody = document.querySelector("#orderTable tbody"); // 테이블 본문 선택
-  tableBody.innerHTML = ""; // 기존 데이터 초기화
+  const inputTel = memberTel.value.trim();
 
-  completedList.forEach(item => {
-    console.log(item);
-
-    // 행 생성
-    const row = document.createElement("tr");
-
-    // 기종 정보 셀
-    const modelCell = document.createElement("td");
-    modelCell.textContent = 
-      `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
-
-    // 주문일자 셀
-    const dateCell = document.createElement("td");
-    dateCell.textContent = item.sellingDeviceDate || "날짜 없음"; // 날짜가 없을 경우 기본값
-
-    // 상태 셀
-    const statusCell = document.createElement("td");
-    statusCell.textContent = item.statusContent || "상태 없음"; // 상태가 없을 경우 기본값
-
-    // 행에 셀 추가
-    row.appendChild(modelCell);
-    row.appendChild(dateCell);
-    row.appendChild(statusCell);
-
-    // 테이블 본문에 행 추가
-    tableBody.appendChild(row);
-  });
-};
-
-
-// 페이지네이션 업데이트 함수
-const updatePagination = (pagination) => {
-  const paginationBox = document.getElementById("paginationBox");
-  paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
-
-  const createPageButton = (page, text, isActive = false) => {
-    const button = document.createElement("a");
-    button.href = "#";
-    button.classList.add("page-btn");
-    button.dataset.page = page > 0 ? page : 1; // 0 이하일 경우 1로 보정
-    button.textContent = text;
-
-    if (isActive) button.classList.add("active");
-
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const cp = parseInt(event.target.dataset.page); // 클릭된 버튼의 페이지 번호 추출
-      selectSellingList(cp); // 리스트만 업데이트
-    });
-
-    return button;
-  };
-
-  // <<, < 버튼
-  paginationBox.appendChild(createPageButton(1, "<<"));
-  paginationBox.appendChild(createPageButton(pagination.prevPage, "<"));
-
-  // 동적 페이지 번호 버튼
-  for (let i = pagination.startPage; i <= pagination.endPage; i++) {
-    const isActive = i === pagination.currentPage;
-    paginationBox.appendChild(createPageButton(i, i, isActive));
+  if(inputTel.length === 0){
+    telMessage.innerText = telMessageObj.normal;
+    telMessage.classList.remove("confirm", "error");
+    checkObj.memberTel = false;
+    memberTel.value = "";
+    return;
   }
 
-  // >, >> 버튼
-  paginationBox.appendChild(createPageButton(pagination.nextPage, ">"));
-  paginationBox.appendChild(createPageButton(pagination.maxPage, ">>"));
-};
+  const regEx = /^010[0-9]{8}$/; // 090으로 시작, 이후 숫자 8개 (총 11자)
 
-// 초기 실행
-document.addEventListener("DOMContentLoaded", () => {
-  selectSellingList(1); // 페이지 1번부터 시작
-  // console.log(loginNo);
-});
-
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 포인트 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-
-// 포인트 조회 및 페이지네이션
-const selectPointList = (cp) => {
-
-
-  fetch(`/myPage/selectPointList?cp=${cp}&memberNo=${loginNo}`)
-    .then(response => {
-      if (response.ok) return response.json();
-      throw new Error("AJAX 통신 실패");
-    })
-    .then(data => {
-      
-      const selectPointList = data.selectPointList;
-      const pagination = data.pagination;
-
-      // console.log(selectPointList);
-      // console.log(pagination);
-
-      // 포인트 내역 업데이트
-      updatePointList(selectPointList);
-
-      // 페이지네이션 업데이트
-      updatePagination1(pagination);
-    })
-    
-    .catch(error => console.error("Error fetching completed list:", error));
-};
-
-
-// 리스트 업데이트 함수
-const updatePointList = (pointList) => {
-  const tableBody = document.querySelector("#pointTable tbody"); // 테이블 본문 선택
-  tableBody.innerHTML = ""; // 기존 데이터 초기화
-
-  pointList.forEach(item => {
-    console.log(item);
-
-    // 행 생성
-    const row = document.createElement("tr");
-
-    // 포인트 내역
-    const logContent = document.createElement("td");
-    logContent.textContent = item.pointLogContent || "내용 없음"; // 포인트 내역 없을 경우 기본값
-
-    // 적립/차감일시
-    const logDate = document.createElement("td");
-    logDate.textContent = item.pointLogDate || "날짜 없음"; // 날짜가 없을 경우 기본값
-
-    // 포인트 +/-
-    const logAmount = document.createElement("td");
-    logAmount.textContent = item.pointLogAmount || "내역 없음"; // 내역 없을 경우 기본값
-
-    // 총 포인트
-    const logBalance = document.createElement("td");
-    logBalance.textContent = item.pointLogBalance || "내역 없음"; // 내역 없을 경우 기본값
-
-    // 행에 셀 추가
-    row.appendChild(logContent);
-    row.appendChild(logDate);
-    row.appendChild(logAmount);
-    row.appendChild(logBalance);
-
-    // 테이블 본문에 행 추가
-    tableBody.appendChild(row);
-  });
-};
-
-
-// 페이지네이션 업데이트 함수
-const updatePagination1 = (pagination) => {
-  const paginationBox = document.getElementById("paginationPointBox");
-  paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
-
-  const createPageButton = (page, text, isActive = false) => {
-    const button = document.createElement("a");
-    button.href = "#";
-    button.classList.add("page-btn");
-    button.dataset.page = page > 0 ? page : 1; // 0 이하일 경우 1로 보정
-    button.textContent = text;
-
-    if (isActive) button.classList.add("active");
-
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const cp = parseInt(event.target.dataset.page); // 클릭된 버튼의 페이지 번호 추출
-      selectPointList(cp); // 리스트만 업데이트
-    });
-
-    return button;
-  };
-
-  // <<, < 버튼
-  paginationBox.appendChild(createPageButton(1, "<<"));
-  paginationBox.appendChild(createPageButton(pagination.prevPage, "<"));
-
-  // 동적 페이지 번호 버튼
-  for (let i = pagination.startPage; i <= pagination.endPage; i++) {
-    const isActive = i === pagination.currentPage;
-    paginationBox.appendChild(createPageButton(i, i, isActive));
+  if(regEx.test(inputTel) === false){
+    telMessage.innerText = telMessageObj.invaild;
+    telMessage.classList.remove("confirm");
+    telMessage.classList.add("error");
+    checkObj.memberTel = false;
+    return;
   }
 
-  // >, >> 버튼
-  paginationBox.appendChild(createPageButton(pagination.nextPage, ">"));
-  paginationBox.appendChild(createPageButton(pagination.maxPage, ">>"));
-};
+  telMessage.innerText = telMessageObj.check;
+  telMessage.classList.remove("error");
+  telMessage.classList.add("confirm");
+  checkObj.memberTel = true;
 
-// 초기 실행
-document.addEventListener("DOMContentLoaded", () => {
-  selectPointList(1); // 페이지 1번부터 시작
 });
 
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 구매 내역 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-
-// 구매내역 조회 및 페이지네이션
-const selectBuyingList = (cp) => {
-
-  console.log(cp);
-  console.log(cp);
-  console.log(loginNo);
-  console.log(loginNo);
-  console.log(loginNo);
-  console.log(loginNo);
-  console.log(loginNo);
-  console.log(loginNo);
-  
-  fetch(`/myPage/selectBuyingList?cp=${cp}&memberNo=${loginNo}`)
-  .then(response => {
-      if (response.ok) return response.json();
-      throw new Error("AJAX 통신 실패");
-    })
-    .then(data => {
-      
-      const selectBuyingList = data.selectBuyingList;
-      const pagination = data.pagination;
-
-      console.log(selectBuyingList);
-      console.log(pagination);
-
-      // 구매 내역 업데이트
-      updateBuyingList(selectBuyingList);
-
-      // 페이지네이션 업데이트
-      updatePagination2(pagination);
-    })
-    
-    .catch(error => console.error("Error fetching completed list:", error));
-};
+telChangeForm.addEventListener("submit", e => {
 
 
-// 리스트 업데이트 함수
-const updateBuyingList = (buyingList) => {
-  const tableBody = document.querySelector("#buyingTable tbody"); // 테이블 본문 선택
-  tableBody.innerHTML = ""; // 기존 데이터 초기화
-
-  buyingList.forEach(item => {
-    console.log(item);
-
-    // 행 생성
-    const row = document.createElement("tr");
-
-   // 기종 정보 셀
-   const phoneInfo = document.createElement("td");
-   phoneInfo.textContent = 
-     `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
-
-    // 구매일자
-    const buyingDate = document.createElement("td");
-    buyingDate.textContent = item.orderDate || "날짜 없음"; // 날짜가 없을 경우 기본값
-
-    // 구매상태
-    const buyingStatus = document.createElement("td");
-    buyingStatus.textContent = item.orderStatusContent || "구매내역 없음"; // 내역 없을 경우 기본값
-
-
-    // 행에 셀 추가
-    row.appendChild(phoneInfo);
-    row.appendChild(buyingDate);
-    row.appendChild(buyingStatus);
-
-
-    // 테이블 본문에 행 추가
-    tableBody.appendChild(row);
-  });
-};
-
-
-// 페이지네이션 업데이트 함수
-const updatePagination2 = (pagination) => {
-  const paginationBox = document.getElementById("paginationBuyingBox");
-  paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
-
-  const createPageButton = (page, text, isActive = false) => {
-    const button = document.createElement("a");
-    button.href = "#";
-    button.classList.add("page-btn");
-    button.dataset.page = page > 0 ? page : 1; // 0 이하일 경우 1로 보정
-    button.textContent = text;
-
-    if (isActive) button.classList.add("active");
-
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      const cp = parseInt(event.target.dataset.page); // 클릭된 버튼의 페이지 번호 추출
-      updateBuyingList(cp); // 리스트만 업데이트
-    });
-
-    return button;
-  };
-
-  // <<, < 버튼
-  paginationBox.appendChild(createPageButton(1, "<<"));
-  paginationBox.appendChild(createPageButton(pagination.prevPage, "<"));
-
-  // 동적 페이지 번호 버튼
-  for (let i = pagination.startPage; i <= pagination.endPage; i++) {
-    const isActive = i === pagination.currentPage;
-    paginationBox.appendChild(createPageButton(i, i, isActive));
+  if(checkObj.memberTel) {
+    e.target.submit();
   }
 
-  // >, >> 버튼
-  paginationBox.appendChild(createPageButton(pagination.nextPage, ">"));
-  paginationBox.appendChild(createPageButton(pagination.maxPage, ">>"));
-};
+  else {
+    e.preventDefault();
+    alert("유효한 전화번호를 입력해주세요");
+  }
 
-// 초기 실행
-document.addEventListener("DOMContentLoaded", () => {
-  updateBuyingList(1); // 페이지 1번부터 시작
-  console.log(loginNo);
-});
+  return;
+
+})

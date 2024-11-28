@@ -109,7 +109,7 @@ public interface MyPageMapper {
 	/** 게시물 수
 	 * @return
 	 */
-	int selectSellingListCount();
+	int selectSellingListCount(int memberNo);
 	
 	/** 내폰 판매내역
 	 * @param memberNo
@@ -122,7 +122,7 @@ public interface MyPageMapper {
 	 *  게시물 수
 	 * @return
 	 */
-	int selectPointListCount();
+	int selectPointListCount(int memberNo);
 
 	/** 포인트 내역
 	 * @param memberNo
@@ -134,7 +134,7 @@ public interface MyPageMapper {
 	/** 게시물 수
 	 * @return
 	 */
-	int selectBuyingListCount();
+	int selectBuyingListCount(int memberNo);
 
 	/** 구매 내역
 	 * @param memberNo

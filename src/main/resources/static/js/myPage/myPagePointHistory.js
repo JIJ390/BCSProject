@@ -16,6 +16,30 @@ const selectPointList = (cp) => {
       throw new Error("AJAX 통신 실패");
     })
     .then(data => {
+
+            // 비었을 때
+            if (data.selectPointList.length == 0) {
+              const tableBody = document.querySelector("#pointTable tbody");
+              tableBody.innerHTML = ""; 
+      
+              // 행 생성
+              const row = document.createElement("tr");
+      
+              // 기종 정보 셀
+              const modelCell = document.createElement("td");
+      
+              modelCell.innerText = "조회된 포인트 내역이 없습니다";
+      
+      
+              modelCell.setAttribute('colspan', '4')
+      
+              row.append(modelCell);
+      
+              tableBody.appendChild(row);
+      
+              const paginationBox = document.getElementById("paginationPointBox");
+              paginationBox.innerHTML = ""; // 기존 페이지네이션 초기화
+            } else{
       
       const selectPointList = data.selectPointList;
       const pagination = data.pagination;
@@ -28,7 +52,11 @@ const selectPointList = (cp) => {
 
       // 페이지네이션 업데이트
       updatePagination1(pagination);
+
+      }
+
     })
+    
     
     .catch(error => console.error("Error fetching completed list:", error));
 };
