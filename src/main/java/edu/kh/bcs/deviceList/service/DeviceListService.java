@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.help.dto.MainBannerDto;
 
 public interface DeviceListService {
 
@@ -38,6 +39,9 @@ public interface DeviceListService {
 
 
 	List<Device> searchDevices(String query);
+
+
+	List<MainBannerDto> bannerList();
 
 
 	

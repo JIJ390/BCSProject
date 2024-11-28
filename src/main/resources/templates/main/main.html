@@ -20,13 +20,20 @@
   <div class="mainPage">
     <div class="slider">
       <div class="slides">
-        <div class="slide" style="background-image: url(/images/mainPage/banner.jpg);">
-          <div class="slideFont1">
-            <span class="FontTitle"></span>
-            <span class="FontContent"></span>
+
+        <th:block th:if="${bannerList}" th:each="banner:${bannerList}" th:object="${banner}">
+          <div class="slide" th:style="'background-image : url(' + *{mainBannerImg} + '); background-size : cover;'">
+            <div class="slideFont1">
+              <span class="FontTitle" th:text="*{mainBannerTitle}"></span>
+              <span class="FontContent" th:text="*{mainBannerContent}"></span>
+              <div>
+                <a th:href="|@{help/eventView/}*{mainBannerLink}|">aaasdasadsdsaa</a>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="slide" style="background-image: url(/images/mainPage/banner1.jpg);">
+        </th:block>
+
+        <!-- <div class="slide" style="background-image: url(/images/mainPage/banner1.jpg);">
           <div class="slideFont1">
           </div>
         </div>
@@ -37,7 +44,7 @@
         <div class="slide" style="background-image: url(/images/mainPage/mainImg1.jpg);">
           <div class="slideFont1">
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- 좌우 화살표 버튼 -->
       <button class="prev" onclick="prevSlide()">&#10094;</button>
