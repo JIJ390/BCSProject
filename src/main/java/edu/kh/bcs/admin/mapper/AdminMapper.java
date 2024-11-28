@@ -43,7 +43,7 @@ public interface AdminMapper {
 	String adminMemberSell(int memberNo);
 
 
-	List<Member> searchMemberList(
+	List<Member> searchMemberList( 
 			@Param("cp")int cp, 
 			@Param("searchType")String searchType, 
 			@Param("searchText")String searchText, 
