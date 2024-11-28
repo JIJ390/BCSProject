@@ -53,8 +53,16 @@ FROM
 			<when test="searchType == '이메일'">MEMBER_EMAIL</when>
 			<when test="searchType == '전화번호'">MEMBER_TEL</when>
 		</choose>
-		LIKE '%' || #{searchText} || '%'
-		ORDER BY 
+		<choose>
+			<when test="searchType == '회원번호'">= #{searchText} ORDER BY</when>
+			<when test="searchType == '이름'">		LIKE '%' || #{searchText} || '%'
+		ORDER BY </when>
+			<when test="searchType == '이메일'">		LIKE '%' || #{searchText} || '%'
+		ORDER BY </when>
+			<when test="searchType == '전화번호'">		LIKE '%' || #{searchText} || '%'
+		ORDER BY </when>
+		</choose>
+ 
 		<choose>
 			<when test="searchAsc == '회원번호'">MEMBER_NO</when>
 			<when test="searchAsc == '이름'">MEMBER_NAME</when>
