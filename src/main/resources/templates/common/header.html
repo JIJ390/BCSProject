@@ -140,6 +140,7 @@
                 <p class="sideP" th:text="${session.loginMember.memberName}"></p>
                 <a href="/myPage/myPageMain" class="sideItem">마이 페이지</a>
                 <a href="/admin" class="sideItem" th:if="${#strings.equals((session.loginMember.memberFl), '2')}">관리자 페이지</a>
+                <a href="/point"><img src="/images/myPage/pointChargeHeader.png" alt="포인트 충전" class="headerPoint"></a>
                 <a href="/myPage/logout" class="sideItem">로그아웃</a>
             </div>
         </div>
