@@ -82,8 +82,15 @@ const updateBuyingList = (buyingList) => {
 
    // 기종 정보 셀
    const phoneInfo = document.createElement("td");
-   phoneInfo.textContent = 
-     `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
+   const link = document.createElement("a");
+
+   link.innerText =  `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
+
+   link.href = `/device/order/compl/${item.orderNo}`;
+
+   link.classList.add("no-deco");
+
+   phoneInfo.append(link);
 
     // 구매일자
     const buyingDate = document.createElement("td");
@@ -93,11 +100,52 @@ const updateBuyingList = (buyingList) => {
     const buyingStatus = document.createElement("td");
     buyingStatus.textContent = item.orderStatusContent || "구매내역 없음"; // 내역 없을 경우 기본값
 
+    const reviewStatus = document.createElement("td");
+
+    // 상품 배송 완료 시
+    if (item.orderStatusContent === '배송 완료') {
+
+      // 리뷰 작성 여부 확인
+      if (item.reviewNo !== 0) {
+
+        const reviewUpdateBtn = document.createElement("button");
+        reviewUpdateBtn.innerText = "리뷰 수정";
+  
+        reviewStatus.append(reviewUpdateBtn);
+  
+        reviewUpdateBtn.addEventListener("click", () => {
+          location.href = `/review/change/${item.reviewNo}`; 
+        })
+      }
+
+      else {
+
+        const reviewPlusBtn = document.createElement("button");
+        reviewPlusBtn.innerText = "리뷰 등록";
+  
+        console.log(`aaa : ${item.reviewNo}`);
+  
+        reviewStatus.append(reviewPlusBtn);
+  
+        reviewPlusBtn.addEventListener("click", () => {
+          location.href = `/review/write/${item.orderNo}`; 
+        })
+
+      }
+
+
+    } else {
+      reviewStatus.innerText = "-";
+    }
+
+
+    
 
     // 행에 셀 추가
     row.appendChild(phoneInfo);
     row.appendChild(buyingDate);
     row.appendChild(buyingStatus);
+    row.appendChild(reviewStatus);
 
 
     // 테이블 본문에 행 추가

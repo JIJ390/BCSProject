@@ -43,13 +43,23 @@ public class ReviewController {
 		
 		
 		// 로그인 세션에서 가져오기
-//		int memberNo = 1;
+		// int memberNo = 1;
 		
 		Order orderDevice = orderService.selectOrder(orderNo);
 		
 		if (orderDevice.getMemberNo() != loginMember.getMemberNo()) {
 			ra.addFlashAttribute("message", "잘못된 접근입니다");
 			return "redirect:/";
+		}
+
+		if (orderDevice.getOrderStatusCode() != 3) {
+			ra.addFlashAttribute("message", "상품을 받으신 뒤 리뷰를 작성해 주세요");
+			return "redirect:/myPage/myPageSalesHistory";
+		}
+		
+		if (orderDevice.getReviewNo() != 0) {
+			ra.addFlashAttribute("message", "이미 리뷰가 작성되었습니다");
+			return "redirect:/myPage/myPageSalesHistory";
 		}
 		
 		orderDevice.setOrderNo(orderNo);
@@ -80,19 +90,26 @@ public class ReviewController {
 		
 		loginMember.setMemberPoint(result);
 		
-		return "redirect:/";
+		return "redirect:/myPage/myPageSalesHistory";
 	}
 	
 	
 	@GetMapping("change/{reviewNo}")
 	public String ReviewUpdateView(
 			@PathVariable("reviewNo") int reviewNo,
+			@SessionAttribute("loginMember") Member loginMember,
 			Model model,
 			RedirectAttributes ra
 			) {
 		
 		Review review = reviewService.selectReview(reviewNo);
 		Order orderDevice = orderService.selectOrder(review.getOrderNo());
+		
+		// 본인 아닐 시 차단
+		if (orderDevice.getMemberNo() != loginMember.getMemberNo()) {
+			ra.addFlashAttribute("message", "잘못된 접근입니다");
+			return "redirect:/";
+		}
 		
 		
 		model.addAttribute("review", review);
@@ -117,6 +134,6 @@ public class ReviewController {
 			ra.addFlashAttribute("message", "수정 실패");
 		}
 		
-		return "redirect:/";
+		return "redirect:/myPage/myPageSalesHistory";
 	}
 }

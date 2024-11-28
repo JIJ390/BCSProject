@@ -34,7 +34,7 @@ public class Order {
 	private String memberId;
 
 	private String colorDeviceImg;
+	private int reviewNo;
 
-	
 
 }

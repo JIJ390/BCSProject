@@ -349,7 +349,7 @@
       </div>
 
       <div class="review-btn-area">
-        <button class="review-plus-btn" id="reviewPlusBtn" th:unless="${#lists.isEmpty(reviewList)}">리뷰 더 보기</button>
+        <button th:if="${reviewCount > 3}" class="review-plus-btn" id="reviewPlusBtn" th:unless="${#lists.isEmpty(reviewList)}">리뷰 더 보기</button>
       </div>
 
 

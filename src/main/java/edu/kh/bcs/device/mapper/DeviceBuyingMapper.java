@@ -154,7 +154,6 @@ public interface DeviceBuyingMapper {
 	 */
 	Device selectRecentDevice(int recentDeviceNo);
 
-	
-	
+
 
 }
