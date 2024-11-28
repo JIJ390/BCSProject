@@ -3,6 +3,7 @@ package edu.kh.bcs.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +31,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.bcs.admin.service.AdminService;
 
 import edu.kh.bcs.common.util.FileUtil;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -139,6 +142,26 @@ public class AdminController {
 		
 		return "admin/adminProductinquiry";
 	}
+	@PostMapping("adminBrandFilter")
+	public String brandFilter(
+			@RequestBody String brandFilter,
+			Device device,
+			Color color,
+			Model model
+			) {
+		
+		
+		
+		List<Device> brandFilter1 = service.brandFilter(brandFilter);
+		
+		
+		model.addAttribute("brandFilter", brandFilter1);
+		
+		log.debug("asdasdadad : {}", brandFilter1);
+		
+		return "admin/adminProducktinquiryList";
+	}
+	
 	
 	
 	@GetMapping("adminChatList")
@@ -149,18 +172,106 @@ public class AdminController {
 	}
 	
 	//구매 신청 
-	@GetMapping("adminSale")
-	public String adminSale() {
+	@GetMapping("adminSale/{deviceNo}")
+	public String adminSale(
+			Model model,
+			@PathVariable("deviceNo") String deviceNo
+			) {
+		
+		log.debug("controller device 값 : {}", deviceNo);
+		log.debug("controller device 값 : {}", deviceNo);
+		log.debug("controller device 값 : {}", deviceNo);
+		
+		
+		log.debug("controller device split 값 : {}", deviceNo);
+		log.debug("controller device split 값 : {}", deviceNo);
+		log.debug("controller device split 값 : {}", deviceNo);
+		
+		
+		
+		//리스트 조
+		List<Order> listView = service.adminSale(deviceNo);
+		
+		
+		log.debug("결과 값 : {}", listView);
+		log.debug("결과 값 : {}", listView);
+		log.debug("결과 값 : {}", listView);
+		model.addAttribute("listView", listView);
 		
 		
 		return "admin/adminSale";
 	}
+	
+	@ResponseBody
+	@PostMapping("/delivery")
+	public int delivery(
+			@RequestBody Map<String, Integer> map
+			) {
+		
+		int orderNo = map.get("orderNo");
+		int orderStatusCode = map.get("orderStatusCode");
+		
+		
+		
+		log.debug("orderNoorderNoorderNo : {}", orderNo);
+		
+		log.debug("orderStatusCode : {}", orderStatusCode);
+		
+		
+		
+		
+		//상태 업데이트
+		int delivery = service.delivery(orderNo,orderStatusCode);
+		System.out.println("고객정보 업데이트 완료");
+		return delivery;
+	}
+	
+	@PostMapping("/serachFilter")
+	public String serachFilter(
+			@RequestBody String searchResult,
+			Model model
+			) {
+		
+		//구매 신청 목록 검색기능필터
+		List<Order> result = service.serachFilter(searchResult);
+		
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		log.debug("asdasdasdasd : {}", result);
+		
+		model.addAttribute("result", result);
+		
+		
+		return "admin/saleList";
+	}
+	
+	
+	
 	
 	@GetMapping("androidPopUp")
 	public String androidPopUp() { 
 		
 		
 		return "admin/androidPopUp";
+	}
+	
+	
+	@GetMapping("adminSale")
+	public String adminSaleFirst(
+			Model model
+			) { 
+		
+		
+		List<Order> result = service.adminSaleFirst();
+		
+		
+		model.addAttribute("listView", result);
+		
+		
+		return "admin/adminSale";
+		
 	}
 	
 	
@@ -183,15 +294,21 @@ public class AdminController {
 	        @RequestParam("gradePrice") String gradePrice,
 	        @RequestParam("gradeSellPrice") String gradeSellPrice,
 	        @RequestParam("gradeType") String gradeType,
+	        @RequestParam("capacityNumber") String capacityNumber,
+	        @RequestParam("capacityPrice") String capacityPrice,
+	        @RequestParam("capacitySellPrice") String capacitySellPrice,
 	        RedirectAttributes rs
 			) {
 		
 		
+		
+		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
-		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,colorImg,divceImg);
+		int text = service.textContent(device,color,gradeType,gradePrice,gradeSellPrice,
+				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice);
 		
-		return "redirect:/admin/adminBoard";
+		return "redirect:/admin/adminProductinquiry";
 	}
 	
 	
@@ -487,6 +604,58 @@ public class AdminController {
 		return "admin/adminEvent/deviceType";
 	}
 	
+
+	//update 화면 전환
+	@GetMapping("adminUpdate/{deviceNo}")
+	public String update(
+			Model model,
+			@PathVariable("deviceNo") String deviceNo
+			) {
+		
+//		log.debug("deviceNo : {}", deviceNo);
+		Map<String, Object> reload = service.reload(deviceNo);
+		
+		log.debug("asdasdasdasd : {}", reload);
+		
+		reload.get("device");
+		reload.get("grade");
+		reload.get("color");
+		reload.get("capacityPrice");
+		
+		
+		
+		
+		
+		
+		log.debug("device : {}", reload.get("device"));
+		log.debug("grade : {}", reload.get("grade").getClass().getName());
+		log.debug("color : {}", reload.get("color"));
+		log.debug("capacityPrice : {}", reload.get("capacityPrice"));
+		
+		
+		List<Color>	colorList = (List<Color>)reload.get("color");
+		
+		int colorLength = colorList.size();
+		
+		log.debug("colorLength : {}", colorLength);
+		
+		for(int i = colorLength; i < 6; i++) {
+			colorList.add(null);
+		}
+		
+		
+		model.addAttribute("device", reload.get("device"));
+		model.addAttribute("grade", reload.get("grade"));
+		model.addAttribute("colorResultList", colorList);
+		model.addAttribute("capacityPrice", reload.get("capacityPrice"));
+		
+		
+		
+		return "admin/adminUpdate";
+	}
+	
+	
+
 	@GetMapping("eventList")
 	public String eventList(
 			Model model
@@ -565,6 +734,7 @@ public class AdminController {
 		
 		return result;
 	}
+
 	
 	
 	

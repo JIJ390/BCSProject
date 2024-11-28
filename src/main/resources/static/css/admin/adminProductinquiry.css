@@ -20,6 +20,12 @@
     display: flex;
 }
 
+.filter-btn{
+    cursor: pointer;
+}
+.filter-btn:hover{
+    scale: 0.9;
+}
 
 html,
 body,

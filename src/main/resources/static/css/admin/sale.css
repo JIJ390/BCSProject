@@ -14,6 +14,13 @@ html, body, main {
   margin: 0 auto;
 }
 
+
+
+.td-grade{
+  display: flex;
+  justify-content: center
+}
+
 .head{
   display: flex;
   width: 100%;
@@ -33,17 +40,22 @@ html, body, main {
 
   margin-top: 30px;
   background-color: #fff;
-  width: 1000px;
-  height: 1020px;
+  width: 1500px;
+  height: 1400px;
   border-radius: 30px;
   align-items: center;
   padding: 50px;
 }
 
+
+
+
 .list-category{
   width: 100%;
 }
-
+thead{
+  font-weight: bold;
+}
 
 .text-list{
   width: 100%;
@@ -67,10 +79,23 @@ td{
 
 
 
+
+.filter-list{
+  display: flex;
+  font-weight: bold;
+  width: 80%;
+  justify-content: space-around;
+  
+}
+
 .box-title{
   display: flex;
-  width: 100%;
+  flex-direction: row;
+  width: 90%;
   justify-content: space-between;
+  align-items: flex-end;
+
+
 }
 
 table{
@@ -93,6 +118,16 @@ input{
   
 }
 
+.deliverylive{
+  border: none;
+  background: none;
+}
+
+.tr-board{
+  border: 3px solid black;
+  background-color: #97fc85;
+}
+
 
 ul{
   position: absolute;
@@ -110,23 +145,10 @@ ul{
   background-color: var(--main-gray-color);
   cursor: pointer;
 }
-.status > p{
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
-.status-hiden{
-  display: none;
-}
 .list-btn{
   cursor: pointer;
   justify-content: center;
 }
-
-#category-top{
-  padding-bottom: 10px;
-}
-
-
 .list-btn, .arrow {
   display: inline-block;
 }
@@ -144,6 +166,11 @@ li {
   margin: 15px;
 }
 
+table{
+  width: 100%;
+}
+
+
 .post-title {
   font-size: 20px;
 }
@@ -152,6 +179,15 @@ li {
   font-size: 15px;
   padding: 15px;
 }
+.content-box{
+  width: 100%;
+
+}
+.content{
+  width: 90%;
+}
+
+
 
 .pagination-container {
   display: flex;

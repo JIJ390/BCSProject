@@ -21,15 +21,17 @@ import net.coobird.thumbnailator.Thumbnails;
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.common.util.FileUtil;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -425,9 +427,11 @@ public class AdminServiceImpl implements AdminService {
 
 	// ============================================기종 등록
 	@Override
-	public int textContent(Device device, Color color, 
-			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
-			MultipartFile divceImg) {
+	public int textContent(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
+			String capacitySellPrice){
+		
+		
 		// device파일 리네임
 		String divceImge = divceImg.getOriginalFilename();
 
@@ -459,6 +463,8 @@ public class AdminServiceImpl implements AdminService {
 
 			// SELECT해서 DEVICE_NO 가져오기
 			int deviceGetNo = mapper.selectDeviceNo();
+			
+			
 
 			// colorImg 6개 사진 들어감
 			// colorimg 필터
@@ -523,18 +529,120 @@ public class AdminServiceImpl implements AdminService {
 				
 				
 				int grade = mapper.grade(gradePriceOrly,gradeSellPriceOrly,GradeTypeOrly,deviceGetNo);
-				
-				
 			}
 			
-
+			//자르기
+			String[] capacityNo1 = capacityNumber.split(",");
+			String[] capacityPrice1 = capacityPrice.split(",");
+			String[] capacitySellPrice1 = capacitySellPrice.split(",");
 			
 			
 			
-			
+			for(int i = 0; i < capacityNo1.length ; i++) {
+				
+				String caNo = capacityNo1[i];
+				String caPrice = capacityPrice1[i];
+				String caSellPrice = capacitySellPrice1[i];
+				
+				//용량 인서트
+				int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
+				
+			}
+			System.out.println("등록 완료");
 		}
 		
 			return 1;
 	}
+	
+	@Override
+	public List<Order> adminSale(String deviceNo) {
+		
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		log.debug("device번호 : {}",deviceNo);
+		
+		
+		return mapper.adminSale(deviceNo);
+	}
+	
+	//상태 업데이트
+	@Override
+	public int delivery(int orderNo, int orderStatusCode) {
+		
+			int update = mapper.update(orderNo,orderStatusCode);
+		
+		return update;
+	}
+	
+	@Override
+	public List<Order> serachFilter(String searchResult) {
+		
+		List<Order> result = null;
+		
+			result = mapper.serachFilter(searchResult);
+			
+		
+		return result;
+	}
+	
+	@Override
+	public List<Device> brandFilter(String brandFilter) {
+		
+		
+		
+		return mapper.brandFilter(brandFilter);
+	}
+	@Override
+	public List<Order> adminSaleFirst() {
+		
+		
+		List<Order> result = mapper.adminSaleFirst();
+				
+		
+		
+		return result;
+	}
+	
+//	화면 리로드
+	@Override
+	public Map<String, Object> reload(String deviceNo) {
+		
+		Device device =  mapper.reloadDevice(deviceNo);
+		
+		List<Grade> grade =  mapper.reloadGrade(deviceNo);
+		
+		List<Color> color =  mapper.reloadColor(deviceNo);
+		
+		List<Capacity> capacityPrice =  mapper.reloadCapacityPrice(deviceNo);
+		log.debug("serviceImpl : {}", grade);
+		log.debug("serviceImpl : {}", color);
+		log.debug("serviceImpl : {}", capacityPrice);
 
+		
+		
+		
+		
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		
+		result.put("device", device);
+		result.put("grade", grade);
+		result.put("color", color);
+		result.put("capacityPrice", capacityPrice);
+		
+		
+		
+		
+		
+		return result;
+	}
+	
+	
+	 
+	
 }

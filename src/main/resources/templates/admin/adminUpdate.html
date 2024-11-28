@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/adminModelRegistration.css">
-    <title>기종등록</title>
+    <title>기종 업데이트</title>
 </head>
 
 <body>
 
-    <form action="adminModelRegistration/insert" method="post" enctype="multipart/form-data">
+    [[${device}]]
+    [[${colorResultList}]]
+    <form action="adminModelRegistration/update" method="post" enctype="multipart/form-data" >
         <div class="title">
             <!-- 메인 색 첨부 -->
             <a href="http://localhost/admin" class="menu">←</a>
@@ -20,21 +22,29 @@
             <p>메인 사진</p>
             <div class="main-img-gray-bc">
                 <div class="main-img">
-                    <img src="" class="preview">
+                    <img th:src="${device.deviceImg}" class="preview">
                 </div>
                 <input type="file" class="input-img" name="divceImg">
                 <span class="delete_image">&times;</span>
             </div>
         </div>
 
+
         <!-- 단일 색 첨부 -->
         <div class="main-color-container">
             <p>단일 색 사진</p>
             <div class="main-color-img-bc">
                 <div class="main-color-first">
+
+
+
+            
+
+
+
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(0)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
@@ -43,7 +53,7 @@
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(1)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
@@ -52,13 +62,14 @@
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(2)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
                             <span class="delete_image">&times;</span>
                         </div>
                     </div>
+
 
                     <div class="colorText">
                         <h2>왼쪽부터 순차적으로 입력</h2>
@@ -84,7 +95,7 @@
                 <div class="main-color-last">
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(3)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
@@ -93,7 +104,7 @@
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(4)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
@@ -102,7 +113,7 @@
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img th:src="${colorResultList.get(5)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
@@ -316,7 +327,7 @@
         </div>
         <br><br>
         <div class="insert-btn">
-            <button>등록</button>
+            <button>수정하기</button>
         </div>
     </form>
 
@@ -328,5 +339,9 @@
 
 </body>
 <script src="/js/adminJS/adminModelRegistration.js"></script>
+
+<script th:inline="javascript">
+
+</script>
 
 </html>

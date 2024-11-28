@@ -9,9 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -136,6 +138,38 @@ public interface AdminMapper {
 	List<Device> iPhoneX();
 
 	List<Device> iPad();
+
+
+//구매 신청 리스트 조회
+	List<Order> adminSale(String deviceNo);
+	
+	//배송 상태 업데이트
+	int update(@Param("orderNo")int orderNo, 
+			   @Param("orderStatusCode")int orderStatusCode);
+
+	//검색 기능
+	List<Order> serachFilter(String searchResult);
+
+	//상품조회 기기 버튼별 검색 보기
+	List<Device> brandFilter(String brandFilter);
+
+	//구매 신청목록 화면 처음 조회
+	List<Order> adminSaleFirst();
+
+	//용량 인서트
+	int capacity(
+			@Param("caNo") String caNo, 
+			@Param("caPrice") String caPrice, 
+			@Param("caSellPrice") String caSellPrice,
+			@Param("deviceGetNo") int deviceGetNo);
+
+	//업데이트 select
+	Device reloadDevice(String deviceNo);
+	List<Grade> reloadGrade(String deviceNo);
+	List<Color> reloadColor(String deviceNo);
+	List<Capacity> reloadCapacityPrice(String deviceNo);
+
+
 
 	int checkRoomNo(int memberNo);
 
