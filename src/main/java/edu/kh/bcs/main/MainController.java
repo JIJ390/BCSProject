@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.deviceList.service.DeviceListService;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +27,23 @@ public class MainController {
 		
 		List<MainBannerDto> bannerList = service.bannerList();
 		
-		log.debug("bannerList {} :", bannerList);
+//		log.debug("bannerList {} :", bannerList);
 		
 		model.addAttribute("bannerList",bannerList);
 		
 		return "main/main";
 	}
 
-	
-	
+	@GetMapping("/bestView")
+	public String bestView(
+			Model model) {
+		
+		List<Device> images = service.images();
+		
+		log.debug("images {} :", images);
+		// 모델에 데이터 추가
+        model.addAttribute("images", images);
+		
+		return "bestView";
+	}
 }

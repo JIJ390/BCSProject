@@ -172,6 +172,36 @@ public class DeviceListServiceImpl implements DeviceListService {
 	@Override
 	public List<MainBannerDto> bannerList() {
 		
-		return mapper.bannerList();
+		List<MainBannerDto> bannerList =  mapper.bannerList();
+		
+		for (MainBannerDto banner : bannerList) {
+			
+			// 왼쪽일 경우에
+			if (banner.getMainBannerLr().equals("left")) {
+				banner.setMainBannerCheck(true);
+			} else {
+				banner.setMainBannerCheck(false);
+			} 
+			
+			if (banner.getMainBannerFontColor().equals("black")) {
+				banner.setMainBannerColor(true);
+			} else {
+				banner.setMainBannerColor(false);
+			}
+					
+			
+		}
+
+		
+		return bannerList;
 	}
+	
+	
+	@Override
+	public List<Device> images() {
+		return images();
+	}
+	
+	
+	
 }

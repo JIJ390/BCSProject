@@ -21,4 +21,7 @@ public class MainBannerDto {
 	private String mainBannerFontColor;
 	private String mainBannerLr;
 	
+	private boolean mainBannerCheck;
+	private boolean mainBannerColor;
+	
 }

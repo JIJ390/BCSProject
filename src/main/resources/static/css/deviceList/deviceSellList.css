@@ -13,33 +13,6 @@
   font-family: 'Pretendard-Regular';
 }
 
-/* 드롭다운 스타일 */
-.header-nav .dep1 .dropdown {
-  display: none;
-  position: fixed; /* 화면 전체 기준으로 위치 설정 */
-  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
-  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
-  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
-  background-color: var(--main-gray-color) !important;
-  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
-  z-index: 1000;
-  font-size: 43px;
-  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 430px;
-}
-.header-nav .dep2 .dropdown {
-  display: none;
-  position: fixed; /* 화면 전체 기준으로 위치 설정 */
-  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
-  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
-  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
-  background-color: var(--main-gray-color) !important;
-  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
-  z-index: 1000;
-  font-size: 43px;
-  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
-  height: 430px;
-}
 
 main{
   display: flex;
@@ -49,7 +22,7 @@ main{
 
 .deviceList-container{
   height: 100%;
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,30 +78,8 @@ main{
   cursor: pointer;
 }
 
-/* 필터 섹션 */
-.filter-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 70%;
-}
 
-.filter-section{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 80%;
-  width: 95%;
-  font-size: 25px;
-  
-}
 
-.filter-items{
-  padding: 10px;
-  cursor: pointer;
-  font-size: 26px;
-}
 
 /* 필터 선택 섹션 */
 .filter-check-container{
@@ -161,13 +112,6 @@ main{
   margin-top: 50px;
 }
 
-.deviceList-item-section img{
-  height: 200px;
-  width: 200px;
-  margin-top: 50px;
-  border-radius: 10px;
-}
-
 .deviceList-item-box{
   display: flex;
   flex-basis: calc(25% - 20px); /* 한 줄에 4개씩 배치 (간격 제외) */
@@ -194,44 +138,15 @@ main{
 
 .deviceList-items-container{
   height: auto; /* 높이는 내용에 따라 자동으로 */
-  width: 70%;
+  width: 900px;
   display: flex;
   justify-content: start;
   flex-wrap: wrap; /* 줄 바꿈 허용 */
   gap: 20px; /* 아이템 간격 추가 (선택 사항) */
 }
 
-/* 검색 영역 */
-.search-container{
-  display: flex;
-  height: 7vh;
-  width: 70%;
-}
 
-.search-filter{
-  height: 100%;
-  width: 90%;
-  border: 1px solid black;
-  border-radius: 10px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 5px; /* 선택 항목 간 간격 */
-}
 
-.search-Btn{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10vw;
-  border: 1px solid black;
-  border-radius: 10px;
-  margin-left: 10px;
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
 
 .device-item {
   cursor: pointer;
@@ -315,81 +230,39 @@ main{
   border: 2px solid green;
 }
 
-
-
-
-
-
-
-
-
-.recent-list-container {
-  position: fixed;
-
-  
-  top: 13%;
-  right: 8%; /* 좌우 가운데 정렬 */
-
-  background-color: white;
-  border-radius: 15px;
-
-  padding: 10px;
-
-
-  width: 120px;
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: space-between;
-  align-items: center;
-
-  z-index: 10;
-
+.deviceList-item-section img{
+  height: 150px;
+  width: 150px;
+  margin-top: 50px;
+  border-radius: 10px;
 }
 
-.recent-list-container > span {
-  margin-top : 10px;
+/* 드롭다운 스타일 */
+.header-nav .dep1 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
 }
-
-.recent-box {
-  width: 100px;
-  height: 120px;
-
-
-  text-align: center;
-  font-size: 12px;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  text-decoration-line: none;
-
-}
-
-.recent-box a {
-  text-decoration-line: none;
-  text-decoration: none;
-
-  color: black;
-}
-
-.recent-box img {
-  width: 90px;
-  height: 90px;
-
-  display: inline-block;
-
-}
-
-.recent-img {
-  width: 30px;
-  height: 30px;
-
-  margin: 10px 0;
+.header-nav .dep2 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
 }
 
 
