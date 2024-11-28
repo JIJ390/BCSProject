@@ -31,6 +31,7 @@ public class Order {
 	private String capacityType;
 	private String gradeType;
 	private String colorDeviceImg;
+	private int reviewNo;
 	
 
 }

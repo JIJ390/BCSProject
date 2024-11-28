@@ -131,7 +131,7 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	}
 	
 
-	// 
+	// 최근 기종
 	@Override
 	public Device selectRecentDevice(int recentDeviceNo) {
 		return mapper.selectRecentDevice(recentDeviceNo);

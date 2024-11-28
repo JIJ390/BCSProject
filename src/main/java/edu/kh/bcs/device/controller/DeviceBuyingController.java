@@ -65,6 +65,8 @@ public class DeviceBuyingController {
 		Map<String, Object> reviewStatus = service.selectReviewStatus(deviceNo);
 		
 		
+		
+		
 //		기종 번호 담을 리스트 선언
 		List<String> deviceNoList = new ArrayList<String> ();
 		
