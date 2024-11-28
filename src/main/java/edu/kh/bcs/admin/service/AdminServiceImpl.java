@@ -1,6 +1,8 @@
 package edu.kh.bcs.admin.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import net.coobird.thumbnailator.Thumbnails;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
@@ -28,6 +31,7 @@ import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +57,12 @@ public class AdminServiceImpl implements AdminService {
 	private String webPathBanner;
 	@Value("${my.banner.folder-path}")
 	private String folderPathBanner;
+	
+	@Value("${my.event.web-path}")
+	private String webPath;
+
+	@Value("${my.event.folder-path}")
+	private String folderPath;
 
 	@Override
 	public int getResultCount(String searchType, String searchText) {
@@ -247,6 +257,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<EventDto> getEventList(int cp) {
+		return mapper.getEventLIstCp(cp);
+	}
+	
+	@Override
+	public int geteventListCount() {
+		return mapper.geteventListCount();
+	}
+	
+	@Override
 	public int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
 			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4) {
 		
@@ -288,6 +308,114 @@ public class AdminServiceImpl implements AdminService {
 		return result1+result2+result3+result4;
 		
 	}
+	
+	@Override
+	public int eventImgUpdate(MultipartFile img, int eventNo) {
+		
+		
+		String originalRename = FileUtil.rename(img.getOriginalFilename());
+		String thumbRename = FileUtil.rename(img.getOriginalFilename());
+
+		
+		// DB 에 저장되는 경로
+		String url1 = webPath + originalRename;
+		String url2 = webPath + thumbRename;
+		
+		try {
+    	
+      File originalImage = new File(img.getOriginalFilename());
+      originalImage.createNewFile();
+      
+      //  MultipartFile을 file 로 변환하기
+    FileOutputStream fos = new FileOutputStream(originalImage);
+    fos.write(img.getBytes());
+    fos.close();
+      
+      
+      File resizedImage = new File(folderPath + thumbRename);
+      
+      
+  	// 원본 파일명 뒤에서 부터 검색해서 처음 찾은 "."의 index
+	int index = img.getOriginalFilename().lastIndexOf(".") + 1;
+	
+	// 원본 파일명 "." 부터 끝까지 잘라낸 문자열 == .확장자
+	String ext = img.getOriginalFilename().substring(index);
+      
+      
+        // 이미지를 리사이즈하여 출력 경로에 저장
+        Thumbnails.of(originalImage)
+            .size(270, 200)  // 썸네일 크기 (너비 150px, 높이 150px)
+            .outputFormat(ext)
+            .toFile(resizedImage);
+        
+
+        System.out.println("Thumbnail created successfully!");
+
+    } catch (IOException e) {
+        System.err.println("Error creating thumbnail: " + e.getMessage());
+        e.printStackTrace();
+    }
+		
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		
+		int result = mapper.eventUpdate(url1, url2, eventNo);
+		
+		if (result == 0) return 0;
+		try {
+			// C에 폴더가 없으면 생성
+			File folder = new File(folderPath);
+			if (!folder.exists())
+				folder.mkdirs();
+
+		
+			
+			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+			img.transferTo(new File(folderPath + originalRename));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	
+	@Override
+	public int eventTitleUpdate(String eventTitle, int eventNo) {
+		return mapper.eventTitleUpdate(eventTitle, eventNo);
+	}
+	
+	@Override
+	public int eventContentUpdate(String eventContent, int eventNo) {
+		return mapper.eventContentUpdate(eventContent, eventNo);
+	}
+	
+	@Override
+	public String eventFlUpdate(int eventNo) {
+		
+		int result = mapper.eventFlUpdate(eventNo);
+		
+		
+		if(result > 0) {
+			return mapper.eventFlSearch(eventNo);
+		}
+		
+		return "";
+	}
+	
+	
 
 
 	// ============================================기종 등록

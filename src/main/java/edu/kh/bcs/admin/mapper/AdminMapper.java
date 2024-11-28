@@ -148,6 +148,20 @@ public interface AdminMapper {
 	int update3Banner(MainBannerDto banner3);
 	int update4Banner(MainBannerDto banner4);
 
+	int geteventListCount();
+
+	List<EventDto> getEventLIstCp(int cp);
+
+	int eventUpdate(@Param("url1")String url1, @Param("url2")String url2, @Param("eventNo")int eventNo);
+
+	int eventTitleUpdate(@Param("eventTitle")String eventTitle, @Param("eventNo")int eventNo);
+
+	int eventContentUpdate(@Param("eventContent")String eventContent, @Param("eventNo")int eventNo);
+
+	int eventFlUpdate(int eventNo);
+
+	String eventFlSearch(int eventNo);
+
 
 
 }
