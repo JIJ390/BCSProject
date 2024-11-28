@@ -641,6 +641,22 @@ main {
 .signup-button-update:hover {
   background-color: #bcbcbc;}
 
+.signup-button-updateApi {
+  margin-top: 40px;
+  width: 200px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #333;
+  background-color: var(--main-gray-color);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.signup-button-updateApi:hover {
+  background-color: #bcbcbc;}
+
 .signup-button-delete {
   margin-top: 40px;
   width: 200px;
@@ -705,7 +721,7 @@ h2 {
 
 .point-mid {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-bottom: 10px;
 }
 
@@ -719,7 +735,7 @@ h2 {
 }
 
 .point-icon {
-  width: 10%;
+  width: 6%;
   margin-right: 10px;
   margin-top: -11px;
 }
@@ -768,6 +784,20 @@ tr > td:last-child {
 
 main{
   width: auto !important;
+}
+
+.backDiv{
+
+  margin: 10px;
+
+
+}
+
+#backBtn{
+  margin: 10px;
+  position: relative;
+  right: -88%;
+  cursor: pointer;
 }
 
 /* 전번변경 */

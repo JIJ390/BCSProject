@@ -58,7 +58,7 @@
             <div  class="mypageUpdate-box2" style="margin-left: 60px;"> <!-- 개인정보수정 박스 -->
                 <div class="mypageUpdate-title">내정보 수정 - 주소 변경</div><br>
         
-                <form action="addressChange" method="POST" name="pwChangeForm"  class="pwChangeForm">
+                <form action="addressChange" method="POST" name="pwChangeForm"  class="pwChangeForm" id="addressChangeFrm">
                   <div class="update-group2">
                       <label for="addressChange">주소</label>
                       <input type="text" class="address-input" id="postcode" name="address" placeholder="우편번호">
@@ -68,7 +68,7 @@
                   </div>
         
                   <div class="btn-container2">
-                    <button type="submit" class="signup-button-update">회원정보 수정</button>
+                    <button type="submit" class="signup-button-updateApi">회원정보 수정</button>
                     <button type="button" class="signup-button-delete">취소</button>
                   </div>
               </form>

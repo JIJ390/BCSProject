@@ -877,6 +877,34 @@ function findAddress() {
 document.querySelector("#findAddressBtn")
   ?.addEventListener("click", findAddress);
 
+/* 주소 회원정보 수정버튼 클릭 시 */
+const addressChangeFrm = document.querySelector("#addressChangeFrm");
+const postcode = document.querySelector("#postcode");
+const address = document.querySelector("#address");
+const detailAddress = document.querySelector("#detailAddress");
+
+addressChangeFrm.addEventListener("submit", e =>{
+
+  if(postcode.value.trim() == ""){
+    alert("우편번호칸을 모두 입력해주세요")
+    e.preventDefault();
+    return;
+  }
+  if(address.value.trim() == ""){
+    alert("도로명 / 지번주소 입력해주세요")
+    e.preventDefault();
+    return;
+  }
+  if(detailAddress.value.trim() == ""){
+    alert("상세주소를 빈칸없이 모두 입력해주세요")
+    e.preventDefault();
+    return;
+  }
+
+  addressChangeFrm.submit();
+})
+
+
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  폰유효성?  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 
 const phoneInput = document.getElementById('number');
