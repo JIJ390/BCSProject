@@ -392,6 +392,7 @@ public class AdminController {
 	
 	
 	
+	
 	@GetMapping("adminMemberSearch")
 	public String adminMemberSearch(
 			Model model,
