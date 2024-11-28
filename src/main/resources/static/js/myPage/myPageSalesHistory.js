@@ -82,8 +82,15 @@ const updateBuyingList = (buyingList) => {
 
    // 기종 정보 셀
    const phoneInfo = document.createElement("td");
-   phoneInfo.textContent = 
-     `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
+   const link = document.createElement("a");
+
+   link.innerText =  `${item.deviceName} / ${item.colorName} / ${item.capacityType}/ ${item.gradeType} 등급` || "정보 없음"; // 기종 정보가 없을 경우 기본값
+
+   link.href = `/device/order/compl/${item.orderNo}`;
+
+   link.classList.add("no-deco");
+
+   phoneInfo.append(link);
 
     // 구매일자
     const buyingDate = document.createElement("td");

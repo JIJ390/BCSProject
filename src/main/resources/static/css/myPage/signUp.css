@@ -849,3 +849,11 @@ main{
       width: 100% !important;
 
     }
+
+
+
+.no-deco {
+  text-decoration: none;
+
+  color: black;
+}
