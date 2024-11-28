@@ -152,3 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
   selectBuyingList(1); // 페이지 1번부터 시작
   console.log(loginNo);
 });
+
+//ㅡㅡㅡㅡㅡㅡㅡ 뒤로가기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
+
+const backBtn = document.querySelector("#backBtn");
+
+backBtn.addEventListener("click", () => {
+
+
+    location.href = "myPageMain";
+
+
+})

@@ -76,7 +76,7 @@ const updatePointList = (pointList) => {
     // 포인트 내역
     const logContent = document.createElement("td");
     logContent.textContent = item.pointLogContent || "내용 없음"; // 포인트 내역 없을 경우 기본값
-
+    logContent.style.width = "30%";
     // 적립/차감일시
     const logDate = document.createElement("td");
     logDate.textContent = item.pointLogDate || "날짜 없음"; // 날짜가 없을 경우 기본값
@@ -143,3 +143,15 @@ const updatePagination1 = (pagination) => {
 document.addEventListener("DOMContentLoaded", () => {
   selectPointList(1); // 페이지 1번부터 시작
 });
+
+//ㅡㅡㅡㅡㅡㅡㅡ 뒤로가기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
+
+const backBtn = document.querySelector("#backBtn");
+
+backBtn.addEventListener("click", () => {
+
+
+    location.href = "myPageMain";
+
+
+})

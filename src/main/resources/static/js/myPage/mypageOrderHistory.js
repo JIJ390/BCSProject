@@ -140,4 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+//ㅡㅡㅡㅡㅡㅡㅡ 뒤로가기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
 
+const backBtn = document.querySelector("#backBtn");
+
+backBtn.addEventListener("click", () => {
+
+
+    location.href = "myPageMain";
+
+
+})
