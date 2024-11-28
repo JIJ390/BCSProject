@@ -60,6 +60,18 @@ main div{
   font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
 }
 
+.newDevice{
+  min-width: 200px;
+}
+
+.SClass{
+  min-width: 300px;
+  font-size: 35px;
+  margin-left: 30px;
+  color: #6E6E73;
+  font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
+}
+
 .viewImg{
   margin-left: 50px;
 }
@@ -301,7 +313,7 @@ a {
 }
 
 .subItem-3{
-  width: 70%;
+  min-width: 300px;
   height: 80%;
   display: flex;
   flex-direction: column;

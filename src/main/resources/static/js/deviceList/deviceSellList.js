@@ -298,8 +298,15 @@ dataBrand.forEach(filter => {
   filter.addEventListener("click", () => {
     brand = filter.getAttribute("data-brand"); // 클릭된 요소의 data-brand 값 가져오기
 
-    // 기존 선택 초기화
-    dataBrand.forEach(el => el.classList.remove("selected"));
+    // 기존 선택 초기화 (밑줄 제거)
+    dataBrand.forEach(el => {
+      el.classList.remove("selected");
+    });
+
+    // 클릭된 요소에 스타일 추가 (밑줄과 굵은 글씨)
+    filter.classList.add("selected");
+    
+
 
     // 콘솔 출력
     console.log(brand); 
@@ -388,7 +395,7 @@ const categoryMapping = {
 
 category = categoryMapping[category] || category;
 
-fetch(`/brandList?category=${category}`)
+fetch(`/brandSellList?category=${category}`)
     .then(response => {
       if(response.ok) {
         return response.json();
@@ -452,11 +459,76 @@ fetch(`/brandList?category=${category}`)
       itemsContainer.appendChild(itemBox);
     });
 
-  })
+   })
     .catch(error => {
       console.error(err);
     })
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+
+    if (category) {
+        console.log(`조회된 카테고리: ${category}`);
+
+        fetch(`/brandList?category=${category}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('데이터 요청 실패');
+            })
+            .then(result => {
+                console.log('조회된 결과:', result);
+
+                // 데이터 표시 로직
+                const itemsContainer = document.querySelector('.deviceList-items-container');
+                itemsContainer.innerHTML = '';
+
+                result.forEach(item => {
+                    const deviceName = item.deviceName || '이름 없음';
+                    const devicePrice = item.deviceBuyingPrice
+                        ? `${item.deviceBuyingPrice.toLocaleString()}원`
+                        : '가격 정보 없음';
+                    const deviceImg = item.deviceImg || '/images/default_image.png';
+                    const deviceLink = `/device/buy/${item.deviceNo}`;
+
+                    const itemBox = document.createElement('div');
+                    itemBox.classList.add('deviceList-item-box');
+
+                    const linkElement = document.createElement('a');
+                    linkElement.href = deviceLink;
+                    linkElement.classList.add('device-link');
+
+                    const itemSection = document.createElement('div');
+                    itemSection.classList.add('deviceList-item-section');
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = deviceImg;
+                    imgElement.alt = deviceName;
+
+                    const nameElement = document.createElement('div');
+                    nameElement.style.marginTop = '15px';
+                    nameElement.textContent = deviceName;
+
+                    const priceElement = document.createElement('div');
+                    priceElement.textContent = devicePrice;
+
+                    itemSection.appendChild(imgElement);
+                    itemSection.appendChild(nameElement);
+                    itemSection.appendChild(priceElement);
+                    linkElement.appendChild(itemSection);
+                    itemBox.appendChild(linkElement);
+                    itemsContainer.appendChild(itemBox);
+                });
+            })
+            .catch(error => console.error('데이터 요청 실패:', error));
+    } else {
+        console.log('카테고리가 전달되지 않았습니다.');
+    }
+});
 
 
 

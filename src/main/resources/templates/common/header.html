@@ -53,7 +53,7 @@
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
                                 <ul class="grid-list" id="buy_phoneModels_galaxy" style="display: none;"></ul>
-                                <a href="/deviceList/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
+                                <a href="/deviceList" class="more-button" id="moreButton" style="display: none;">더보기 +</a>
                             </div>
                             <div class="sideMenu2" id="iphone-content">
                                 <ul class="grid-list" id="buy_phoneModels_iphone" style="display: none;"></ul>
@@ -89,9 +89,7 @@
                             </div>
                             <div class="sideMenu2" id="galaxy-content">
                                 <ul class="grid-list" id="sell_phoneModels_galaxy" style="display: none;"></ul>
-                                <form>
-                                    <a href="/deviceList/deviceSellList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
-                                </form>
+                                <a href="/deviceSellList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
                             <div class="sideMenu2" id="iphone-content">
                                 <ul class="grid-list" id="sell_phoneModels_iphone" style="display: none;"></ul>
@@ -99,11 +97,11 @@
                             </div>
                             <div class="sideMenu2" id="galaxytab-content">
                                 <ul class="grid-list" id="sell_phoneModels_galaxytab" style="display: none;"></ul>
-                                <a href="/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
+                                <a href="/deviceSellList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
                             <div class="sideMenu2" id="ipad-content">
                                 <ul class="grid-list" id="sell_phoneModels_ipad" style="display: none;"></ul>
-                                <a href="/deviceList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
+                                <a href="/deviceSellList" class="more-button" id="sellmoreButton" style="display: none;">더보기 +</a>
                             </div>
                         </div>
                     </div>
@@ -118,7 +116,7 @@
                     <button class="searchB" id="searchB"><img src="/images/search.png" alt=""></button>
                 </form>
             </div>
-            <div th:unless="${session.loginMember}">
+            <div class="loginSignUp" th:unless="${session.loginMember}">
                 <a href="/myPage/myPageLogin">로그인</a> | <a href="/signUp/signUpAccount">회원가입</a>
             </div>
             <div class="menu-container" th:if="${session.loginMember}">

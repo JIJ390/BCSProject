@@ -138,7 +138,7 @@ main{
 
 .deviceList-items-container{
   height: auto; /* 높이는 내용에 따라 자동으로 */
-  width: 70%;
+  width: 900px;
   display: flex;
   justify-content: start;
   flex-wrap: wrap; /* 줄 바꿈 허용 */
@@ -208,7 +208,7 @@ main{
   color: black;
 }
 
-.devuceList-item-section{
+.deviceList-item-section{
   text-decoration: none;
   color: black;
   text-align: center;
@@ -235,4 +235,57 @@ main{
   width: 150px;
   margin-top: 50px;
   border-radius: 10px;
+}
+
+/* 드롭다운 스타일 */
+.header-nav .dep1 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
+.header-nav .dep2 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
+
+
+
+/* 밑줄 애니메이션 */
+.underline-animation {
+  position: relative; /* 밑줄 애니메이션을 위한 상대 위치 */
+  display: inline-block; /* 텍스트 크기에 맞춰 작동 */
+  text-underline-offset: 10px; /* 밑줄 위치를 조정 */
+}
+
+.underline-animation::after {
+  content: ""; /* 밑줄 요소 생성 */
+  position: absolute;
+  bottom: -5px; /* 텍스트 바로 아래 위치 */
+  left: 0;
+  width: 0; /* 초기 너비 0 */
+  height: 3px; /* 밑줄 두께 */
+  background-color: black; /* 밑줄 색상 */
+  transition: width 0.3s ease-in-out; /* 애니메이션 효과 */
+  text-underline-offset: 10px; /* 밑줄 위치를 조정 */
+}
+
+.underline-animation.selected::after {
+  width: 100%; /* 밑줄이 좌에서 우로 확장 */
 }

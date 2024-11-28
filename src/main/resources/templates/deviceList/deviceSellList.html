@@ -16,16 +16,16 @@
     <div class="deviceList-container">
       <div class="deviceList-header-section">
         <div class="deviceList-header-1">
-          <div class="deviceList-galaxy" id="galaxyFilter" data-brand="SAMSUNG"><span>Galaxy</span></div>
+          <div class="deviceList-galaxy underline-animation" id="galaxyFilter" data-brand="SAMSUNG"><span>Galaxy</span></div>
         </div>
         <div class="deviceList-header-2">
-          <div class="deviceList-galaxy" id="galaxyTabFilter" data-brand="SAMSUNGTAB"><span>Galaxy Tab</span></div>
+          <div class="deviceList-galaxy underline-animation" id="galaxyTabFilter" data-brand="SAMSUNGTAB"><span>Galaxy Tab</span></div>
         </div>
         <div class="deviceList-header-3">
-          <div class="deviceList-iPhone" id="iPhoneFilter" data-brand="Apple"><span>iPhone</span></div>
+          <div class="deviceList-iPhone underline-animation" id="iPhoneFilter" data-brand="Apple"><span>iPhone</span></div>
         </div>
         <div class="deviceList-header-4">
-          <div class="deviceList-iPhone" id="iPadFilter" data-brand="AppleTab"><span>iPad</span></div>
+          <div class="deviceList-iPhone underline-animation" id="iPadFilter" data-brand="AppleTab"><span>iPad</span></div>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         <th:block th:each="device:${searchResults}" th:object="${device}">
           <div class="deviceList-item-box">
             <a th:href="|@{device/sell/}*{deviceNo}|">
-              <div class="devuceList-item-section">
+              <div class="deviceList-item-section">
                 <img th:src="*{deviceImg}" th:alt="*{deviceName}">
                 <div style="margin-top: 15px" th:text="*{deviceName}"></div>
                 <div 

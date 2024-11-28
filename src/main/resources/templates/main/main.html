@@ -58,14 +58,18 @@
       <span class="dot" onclick="currentSlide(2)"></span>
       <span class="dot" onclick="currentSlide(3)"></span>
     </div>
-    <div class="bestView">신상품
-      <p class="bestView-2">최상위 S급 중고폰
-        <div class="viewImg1"><img src="/images/sample.png" alt=""></div>
-        <div class="viewImg"><img src="/images/sample.png" alt=""></div>
-        <div class="viewImg"><img src="/images/sample.png" alt=""></div>
-        <div class="viewImg"><img src="/images/sample.png" alt=""></div>
-      </p>
-    </div>
+
+
+      <div class="bestView">
+        <div class="newDevice">신상품</div>
+        <p class="bestView-2">
+            <div class="SClass">최상위 S급 중고폰</div>
+            <div th:each="image : *{deviceImg}" class="viewImg">
+                <img th:src="*{deviceImg}" alt="">
+            </div>
+        </p>
+     </div>
+  
 
     <div class="subItem-box">
       <div class="subItem-1">

@@ -112,7 +112,7 @@
 
 	<!-- 헤더 구매하기 Device 호출 -->
 	<select id="phoneList">
-		SELECT DEVICE_NO, DEVICE_NAME, DEVICE_IMG
+		SELECT DEVICE_NO, DEVICE_NAME, DEVICE_IMG, DEVICE_BUYING_PRICE, DEVICE_SELLING_PRICE
 		FROM DEVICE
 		WHERE DEVICE_BRAND = #{category}
 		ORDER BY DEVICE_RELEASE_DATE DESC
@@ -179,4 +179,16 @@
 		ORDER BY
 			MAIN_BANNER_NO ASC
 	</select>
+	
+	
+	<select id="images">
+		SELECT 
+			DEVICE_NO, DEVICE_IMG
+		FROM
+			DEVICE
+		ORDER BY
+			DEVICE_RELEASE_DATE DESC
+	</select>
+	
+	
 </mapper>

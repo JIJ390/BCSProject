@@ -195,4 +195,13 @@ public class DeviceListServiceImpl implements DeviceListService {
 		
 		return bannerList;
 	}
+	
+	
+	@Override
+	public List<Device> images() {
+		return images();
+	}
+	
+	
+	
 }
