@@ -37,11 +37,24 @@ main {
   justify-content: space-between;
 }
 
-.device-order-container > img {
+
+.order-img-box {
+  background-color: white;
+
+
   margin:20px;
   width: 500px;
-  height: auto;
+  min-height: 400px;
   border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.order-img-box > img {
+  width: 480px;
 }
 
 .device-order-info {

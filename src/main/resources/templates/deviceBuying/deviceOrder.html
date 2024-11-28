@@ -28,7 +28,9 @@
       </div>
       <div class="device-order-container">
 
-        <img src="/images/sample_iphone16_blue.png" alt="">
+        <div class="order-img-box">
+          <img th:src="*{colorDeviceImg}" alt="">
+        </div>
         <div class="device-order-info">
           <span class="order-info-title" th:text="*{deviceName}">iPhone 16</span>
           <span class="order-info-sub" th:text="*{colorName}">코발트 블루</span>

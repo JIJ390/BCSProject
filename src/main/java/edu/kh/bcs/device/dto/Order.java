@@ -30,6 +30,7 @@ public class Order {
 	private String colorName;
 	private String capacityType;
 	private String gradeType;
+	private String colorDeviceImg;
 	
 
 }

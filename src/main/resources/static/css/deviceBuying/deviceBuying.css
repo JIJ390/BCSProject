@@ -16,6 +16,25 @@ main {
   margin-top: 150px;
 }
 
+
+
+.head-nav {
+  width: 100%;
+  padding-left: 10px;
+
+  font-size: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+.head-nav > a {
+
+  color: var(--font-color);
+  text-decoration-line: none; 
+}
+
+
 .device-buying-head {
   width: 100%;
 }

@@ -37,4 +37,13 @@ public interface DeviceOrderService {
 	 */
 	Point selectPointLog(int orderNo);
 
+
+	
+	/**
+	 * 변동 후 포인트 세팅을 위한 정보
+	 * @param memberNo
+	 * @return
+	 */
+	int selectCurrnetPoint(int memberNo);
+
 }

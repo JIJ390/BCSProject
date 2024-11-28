@@ -40,4 +40,50 @@
 			REVIEW_NO = #{reviewNo}
 	</update>
   	
+  	
+  	
+  	<!-- 적립 금액 계산 판매 가격의 1 퍼센트 -->
+  	<select id="selectPlusPoint">
+  	
+	  	SELECT ROUND((BD.BUYING_DEVICE_PRICE / 100), -2) AS "plusPoint"
+		FROM "ORDER" O
+		JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+		WHERE ORDER_NO = #{orderNo}
+  	</select>
+  	
+  	
+  		<!-- 회원 테이블 업데이트 -->
+	<update id="pointChange">
+  		UPDATE "MEMBER"
+  		SET 
+  			MEMBER_POINT = MEMBER_POINT + #{amount}
+  		WHERE 
+  			MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 포인트 내역 입력 -->
+	<insert id="insertPointLog">
+		<selectKey order="BEFORE"
+				   resultType="_int"
+				   keyProperty="pointLogNo">
+			SELECT SEQ_POINT_LOG_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "POINT_LOG"
+		VALUES (#{pointLogNo},
+				(SELECT MEMBER_POINT
+				 FROM "MEMBER"
+				 WHERE MEMBER_NO = #{memberNo}),
+				'리뷰 작성 보너스', 
+				#{amount}, DEFAULT, #{memberNo})
+	</insert>
+	
+	
+	<!-- 세션 동기화 위한 현재 포인트 -->
+	<select id="selectMemberPoint">
+		SELECT MEMBER_POINT AS "currentPoint"
+		FROM "MEMBER"
+		WHERE "MEMBER_NO" = #{memberNo}
+	</select>
+  	
 </mapper>

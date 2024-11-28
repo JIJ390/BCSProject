@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.bcs.device.dto.BuyingDevice;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("device/order")
+@SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
 public class DeviceOrderController {
 	
@@ -96,6 +98,10 @@ public class DeviceOrderController {
 		order.setMemberNo(memberNo);
 		
 		int orderNo = service.orderDevicePayment(order);
+		
+		// 세션 동기화
+		int currentPoint = service.selectCurrnetPoint(memberNo);
+		loginMember.setMemberPoint(currentPoint);
 		
 		// 잔액 부족 시 구매 페이지 리다이렉트
 		if (orderNo < 0) {

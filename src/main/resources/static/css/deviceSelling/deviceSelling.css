@@ -18,6 +18,21 @@ main {
 }
 
 
+.head-nav {
+  width: 100%;
+  padding-left: 10px;
+
+  font-size: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+.head-nav > a {
+
+  color: var(--font-color);
+  text-decoration-line: none; 
+}
 
 
 

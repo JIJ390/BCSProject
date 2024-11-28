@@ -295,6 +295,8 @@ sellingFrm.addEventListener("submit", e => {
   const accountNo = document.querySelector("#accountNo");
   const clientTel = document.querySelector("#clientTel");
 
+  const requestComment = document.querySelector("[name=requestComment]")
+
   if (telTest.test(clientTel.value.trim()) === false) {
     alert("사용할 수 있는 전화번호를 입력해 주세요");
 
@@ -319,6 +321,13 @@ sellingFrm.addEventListener("submit", e => {
     e.preventDefault();
     clientName.focus();
 
+    return;
+  }
+
+
+  if ((requestComment.value.trim().length >= 80)) {
+    alert("요청 사항은 80자 이내로 작성해 주세요");
+    e.preventDefault();
     return;
   }
 

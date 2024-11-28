@@ -92,4 +92,12 @@ public interface DeviceOrderMapper {
 	 */
 	Point selectPointLog(int orderNo);
 
+
+	/**
+	 * 현재 포인트
+	 * @param memberNo
+	 * @return
+	 */
+	int selectCurrnetPoint(int memberNo);
+
 }
