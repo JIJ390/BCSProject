@@ -111,10 +111,17 @@ public class AdminController {
 	
 	//이벤트 관리
 	@GetMapping("adminMainBanner")  
-	public String adminEvent() {
+	public String adminBanner() {
 		
 		
 		return "admin/adminMainBanner";
+	}
+	//이벤트 관리
+	@GetMapping("adminEvent")  
+	public String adminEvent() {
+		
+		
+		return "admin/adminEvent";
 	}
 	
 	@GetMapping("adminProductinquiry")
@@ -270,6 +277,120 @@ public class AdminController {
 		
 		return "admin/adminMember/adminMemberPage";
 	}
+	
+	
+	@GetMapping("getEventPagenation")
+	public String adminEventPage(
+			Model model,
+			@RequestParam("cp") int cp
+			) {
+		
+		int resultCount = service.geteventListCount();
+		
+		int cpCount = resultCount / 6;
+		int cp1 = resultCount % 6;
+		
+		int pn1 = (cp -1) / 5;
+		List<String> pnList = new ArrayList<>();
+	
+		
+		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
+			if(i > cpCount+1) {
+				break;
+			}
+			pnList.add(""+i);
+		}
+		
+		if(cp1 != 0) {
+			cpCount++;
+		}
+		
+		model.addAttribute("pnList", pnList);
+		model.addAttribute("cpCount", cpCount);
+		
+		for(int i = 0; i < pnList.size(); i++) {
+			if(pnList.get(i).equals(""+cpCount)) {
+				model.addAttribute("lastIndex", 1);
+			}
+			else {
+				model.addAttribute("lastIndex",0);
+			}
+		}
+		
+		return "admin/adminMember/adminMemberPage";
+	}
+	
+	@GetMapping("getEventList")
+	public String getEventList(
+			@RequestParam("cp") int cp,
+			Model model
+			) {
+		
+		List<EventDto> eventList = service.getEventList(cp);
+				
+		model.addAttribute("eventList",eventList);
+		System.out.println(eventList);
+		System.out.println(eventList);
+		System.out.println(eventList);
+		
+		return "admin/adminEvent/eventList";
+	}
+	
+	@ResponseBody
+	@PostMapping("eventImgUpdate")
+	public int eventImgUpdate(
+			@RequestParam("img") MultipartFile img,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventImgUpdate(img,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventTitleUpdate")
+	public int eventTitleUpdate(
+			@RequestParam("eventTitle") String eventTitle,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventTitleUpdate(eventTitle,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventContentUpdate")
+	public int eventContentUpdate(
+			@RequestParam("eventContent") String eventContent,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventContentUpdate(eventContent,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventFlUpdate")
+	public String eventFlUpdate(
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		String result = service.eventFlUpdate(eventNo);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@GetMapping("adminMemberSearch")

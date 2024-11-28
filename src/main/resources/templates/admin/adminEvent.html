@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트 관리</title>
+  <style>
+    .event-object {
+      width: 200px;
+      height: 200px;
+      margin: 0 60px;
+
+    }
+
+    .event-list {
+      height: 100%;
+      height: 85%;
+    }
+
+    .event-content {
+      height: 100%;
+      height: 85%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .event-add-btn {
+      border: 1px solid gray;
+      background-color: white;
+      width: 100px;
+      height: 50px;
+      margin: 20px;
+      font-size: 20px;
+    }
+
+    .add-event-popup {
+      width: 700px;
+      height: 700px;
+      border: 1px solid black;
+      background-color: white;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+
+    .add-event-popup-hidden {
+      display: none;
+    }
+
+    .add-event-popup-X {
+      font-size: 40px;
+      width: 50px;
+      height: 50px;
+      border: 0;
+      margin: 10px;
+      background-color: white;
+    }
+
+    .update-event-popup-X {
+      font-size: 40px;
+      width: 50px;
+      height: 50px;
+      border: 0;
+      margin: 10px;
+      background-color: white;
+    }
+
+    .add-event-popup-content {
+      width: 100%;
+      height: 90%;
+
+      display: flex;
+      flex-direction: row;
+      padding: 30px;
+    }
+
+    .update-event-popup-content {
+      width: 100%;
+      height: 90%;
+
+      display: flex;
+      flex-wrap: wrap;
+      padding: 30px;
+    }
+
+    .update-event-popup-content>div {
+      width: 100%;
+      height: max-content;
+      display: flex;
+      align-items: center;
+    }
+
+    .add-event-popup-content * {
+      margin: 0 auto;
+    }
+
+    .event-title {
+      width: 500px;
+      height: 50px;
+      padding: 10px;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .preview {
+      width: 150px;
+      height: 150px;
+      border: 1px solid gray;
+      background-color: white;
+      margin: 0;
+    }
+
+    .event-btn-area {
+      margin: 30 auto;
+    }
+
+    .event-btn-area>button {
+      width: 60px;
+      height: 30px;
+      border: 1px solid gray;
+      background-color: white;
+    }
+
+    .event-pagenation {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .event-pagenation>button {
+
+      width: 30px;
+      height: 30px;
+      border: 0;
+      background-color: white;
+      font-size: 20px;
+
+    }
+
+    .event-pagenation>div>button {
+
+      width: 30px;
+      height: 30px;
+      border: 0;
+      background-color: white;
+      font-size: 20px;
+
+    }
+
+    .update-event-popup {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border: 1px solid black;
+      background-color: white;
+
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+
+    .update-event-popup-hidden {
+      display: none;
+    }
+
+    .update-event-title {
+      width: 300px;
+      height: 40px;
+      padding: 5px;
+      margin-right: 10px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: 1px solid gray;
+    }
+
+    .update-event-content {
+      width: 300px;
+      height: 60px;
+      padding: 5px;
+      margin-right: 10px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: 1px solid gray;
+    }
+
+    .eventInputFile {
+      width: 150px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid gray;
+      margin-right: 30px;
+      padding: 10px;
+    }
+
+    .update-event-date {
+      font-size: 25px;
+    }
+
+    .update-event-fl {
+      font-size: 20px;
+      color: gray;
+      margin-right: 15px;
+    }
+
+    .update-event-fl-btn {
+      width: 100px;
+      height: 40px;
+      border: 1px solid gray;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .update-event-img-btn {
+      width: 70px;
+      height: 30px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .update-event-title-btn {
+      width: 70px;
+      height: 30px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .update-event-content-btn {
+      width: 70px;
+      height: 30px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <th:block th:replace="~{common/header}"></th:block>
+
+  <!-- 이벤트 추가 팝업 -->
+  <div class="add-event-popup add-event-popup-hidden">
+    <div
+      style="width: 100%; height: 10%; display: flex; justify-content: space-between; border-bottom: 1px solid gray;">
+      <p style="font-size: 30px; margin: 20px;">이벤트 추가</p>
+      <button class="add-event-popup-X">&times;</button>
+    </div>
+    <div class="add-event-popup-content">
+      <th:block th:replace="~{help/eventWrite}"></th:block>
+    </div>
+  </div>
+
+
+  <!-- 이벤트 클릭시 수정 팝업 -->
+  <div class="update-event-popup update-event-popup-hidden">
+    <div
+      style="width: 100%; height: 10%; display: flex; justify-content: space-between; border-bottom: 1px solid gray;">
+      <p style="font-size: 30px; margin: 20px;">이벤트 수정</p>
+      <button class="update-event-popup-X">&times;</button>
+    </div>
+    <div class="update-event-popup-content">
+      <div><img class="update-event-img"
+          style="width: 600px; height: 300px; border: 1px solid black; margin-bottom: 15px;" src="" alt=""></div>
+
+      <div>
+        <input type="file" id="file" style="display: none;" onchange="eventThumbnailUpload1(this)">
+        <label for="file" class="eventInputFile">변경할 이미지 선택</label>
+        <button class="update-event-img-btn">변경하기</button>
+      </div>
+
+      <div><input type="text" class="update-event-title" value="이벤트 제목"><button
+          class="update-event-title-btn">변경하기</button></button>
+      </div>
+      <div><input type="text" class="update-event-content" value="이벤트 내용"><button
+          class="update-event-content-btn">변경하기</button></button>
+      </div>
+      <div>
+        <p class="update-event-date">2022-11-11에 등록됨</p>
+      </div>
+      <div>
+        <p style="font-size: 25px; margin-right: 10px;">이벤트 삭제여부</p>
+        <p class="update-event-fl">삭제됨</p>
+        <button class="update-event-fl-btn">삭제 여부 변경</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div style="width: 1000px; height: 700px; border: 1px solid black; margin: 200px auto 0; background-color: white;">
+
+    <div style="width: 100%; height: 15%;  display: flex; justify-content: space-between;">
+      <p style="padding: 20px; font-size: 30px;">이벤트 관리</p>
+      <button class="event-add-btn">이벤트 추가</button>
+    </div>
+    <div class="event-list">
+      <div class="event-content">
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+        <div class="event-object">
+          <img src="/images/help/event.png" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+          <p style="text-align: center;"> 이벤트 제목 </p>
+        </div>
+      </div>
+      <div class="event-pagenation"></div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <script>
+
+    /* 이벤트 추가 팝업 열기/닫기 */
+    const eventAddBtn = document.querySelector(".event-add-btn");
+    const eventAddPopup = document.querySelector(".add-event-popup");
+    const addEventPopupX = document.querySelector(".add-event-popup-X");
+
+    eventAddBtn.addEventListener('click', () => {
+      if (eventAddPopup.classList.contains("add-event-popup-hidden")) {
+        eventAddPopup.classList.remove("add-event-popup-hidden")
+        document.querySelector('body').style.pointerEvents = 'none';
+        addEventPopupX.style.pointerEvents = 'auto';
+        eventAddPopup.style.pointerEvents = 'auto';
+        return;
+      }
+    })
+
+    addEventPopupX.addEventListener("click", () => {
+      eventAddPopup.classList.add("add-event-popup-hidden")
+      document.querySelector('body').style.pointerEvents = 'auto';
+    })
+
+    /* 이벤트 수정 팝업 열기/닫기 */
+    const eventUpdatePopup = () => {
+      const eventList = document.querySelectorAll(".event-object")
+      const eventUpdateX = document.querySelector(".update-event-popup-X");
+      const eventUpdatePopup = document.querySelector(".update-event-popup");
+      for (let i = 0; i < eventList.length; i++) {
+        eventList[i]?.addEventListener("click", (e) => {
+
+          if (eventUpdatePopup.classList.contains("update-event-popup-hidden")) {
+            eventUpdatePopup.classList.remove("update-event-popup-hidden")
+            document.querySelector('body').style.pointerEvents = 'none';
+            eventUpdateX.style.pointerEvents = 'auto';
+            eventUpdatePopup.style.pointerEvents = 'auto';
+            updateEventView(e);
+          }
+
+        })
+      }
+      eventUpdateX.addEventListener("click", () => {
+        document.querySelector(".update-event-popup").classList.add("update-event-popup-hidden")
+        document.querySelector('body').style.pointerEvents = 'auto';
+      })
+    }
+
+
+    /* 이벤트 이미지 프리뷰 */
+    const eventThumbnailUpload = (file) => {
+
+      const thumbnail = document.querySelector(".preview");
+
+      if (file.files && file.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          thumbnail.src = e.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
+      }
+      else {
+        thumbnail.src = "/images/help/파일업로드.png";
+        imageInput2 = '';
+      }
+
+    }
+
+
+
+
+
+    /* 이벤트 목록 조회 */
+    let cp = 1;
+
+
+    /* 페이지네이션 */
+    const getEventPageantion = () => {
+      fetch("/admin/getEventPagenation?cp=" + cp)
+        .then(Response => {
+          if (Response.ok) {
+            return Response.text();
+          }
+          throw new Error("페이지네이션 조회 실패")
+        })
+        .then(html => {
+          document.querySelector(".event-pagenation").innerHTML = html;
+
+          /* 페이지네이션 밑줄 */
+          const cpUnderLine = (cp - 1) % 5;
+          const pnValue = document.querySelectorAll(".pnValue");
+
+          pnValue[cpUnderLine].style.borderBottom = '1px solid black';
+
+          getEventPageNumClick();
+          getEventPageMoveClick();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+
+
+    /* 이벤트 */
+    const getEventList = () => {
+
+      fetch("/admin/getEventList?cp=" + cp)
+        .then(Response => {
+          if (Response.ok) {
+            return Response.text();
+          }
+          throw new Error("이벤트 리스트 조회 실패")
+        })
+        .then(html => {
+          document.querySelector(".event-content").innerHTML = html;
+
+          eventUpdatePopup();
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+
+
+    /* 페이지네이션 숫자 클릭 이벤트  */
+    const getEventPageNumClick = () => {
+      const numbers = document.querySelectorAll(".pnBtn")
+      for (let i = 0; i < numbers.length; i++) {
+        numbers[i]?.addEventListener('click', () => {
+
+          const cpNumber = numbers[i].children[0].innerText;
+          cp = cpNumber
+          getEventPageantion();
+          getEventList();
+        })
+      }
+
+      const maxNumber = document.querySelector(".pn-5")
+      maxNumber?.addEventListener('click', () => {
+        cp = maxNumber.children[0].innerText;
+        getEventPageantion();
+        getEventList();
+      })
+
+    }
+
+
+    /* 페이지네이션 화살표 이벤트 */
+    const getEventPageMoveClick = () => {
+      const moveBtn1 = document.querySelector(".pn-1")
+      const moveBtn2 = document.querySelector(".pn-2")
+      const moveBtn3 = document.querySelector(".pn-3")
+      const moveBtn4 = document.querySelector(".pn-4")
+
+      document.querySelector(".pn-1").addEventListener("click", () => {
+        cp = 1;
+        getEventPageantion();
+        getEventList();
+      })
+      document.querySelector(".pn-2").addEventListener("click", () => {
+        cp--;
+        if (cp === 0) {
+          cp++;
+        }
+        getEventPageantion();
+        getEventList();
+      })
+      document.querySelector(".pn-3").addEventListener("click", () => {
+        cp++;
+        if (cp > Number(document.querySelector(".getCpCount").value)) {
+          cp--;
+        }
+        getEventPageantion();
+        getEventList();
+      })
+      document.querySelector(".pn-4").addEventListener("click", () => {
+        cp = Number(document.querySelector(".getCpCount").value);
+        getEventPageantion();
+        getEventList();
+      })
+    }
+
+
+
+
+    /* 이벤트 수정 창 열때 이벤트 상세 정보 조회 */
+    const updateEventView = (e) => {
+      const data = e.target.closest(".event-object");
+      eventNoBackup = data.dataset.eventNo;
+      document.querySelector(".update-event-img").src = data.dataset.eventImg;
+      imgBackup = data.dataset.eventImg;
+      document.querySelector(".update-event-title").value = data.dataset.eventTitle;
+      document.querySelector(".update-event-content").value = data.dataset.eventContent;
+      document.querySelector(".update-event-date").innerText = data.dataset.eventDate + "에 등록됨";
+      document.querySelector(".update-event-fl").innerText = data.dataset.eventFl;
+
+    }
+
+
+    let imgBackup = '';
+    let eventNoBackup = 0;
+
+    /* 수정 팝업 이벤트 변경 */
+    const eventThumbnailUpload1 = (file) => {
+
+      const thumbnail = document.querySelector(".update-event-img");
+
+      if (file.files && file.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          imageInput1 = file.files[0];
+          thumbnail.src = e.target.result;
+        }
+        reader.readAsDataURL(file.files[0]);
+      }
+      else {
+        thumbnail.src = imgBackup;
+        imageInput1 = '';
+      }
+
+    }
+
+    let imageInput1 = '';
+    /* 이벤트 수정하기 버튼 이벤트 */
+    const getUpdateBtn = () => {
+      const imgBtn = document.querySelector(".update-event-img-btn")
+      const titleBtn = document.querySelector(".update-event-title-btn")
+      const contentBtn = document.querySelector(".update-event-content-btn")
+      const flBtn = document.querySelector(".update-event-fl-btn")
+
+      imgBtn.addEventListener("click", () => {
+
+
+        if (confirm("이미지를 수정하시겠습니까?") === true) {
+
+          if(imageInput1 === ''){
+            alert("바꿀 이미지를 선택해주세요")
+          }
+
+          const formData = new FormData();
+          formData.append("img", imageInput1);
+          formData.append("eventNo", eventNoBackup);
+
+          fetch("/admin/eventImgUpdate", {
+            method: "POST",
+            body: formData
+          })
+            .then(Response => {
+              if (Response.ok) {
+                return Response.text();
+              }
+              throw new Error("이벤트 이미지 실패")
+            })
+            .then(result => {
+                alert("이벤트 이미지 변경 성공")
+                getEventList()
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+      })
+
+      titleBtn.addEventListener("click", () => {
+        if (confirm("제목를 수정하시겠습니까?") === true) {
+          if(document.querySelector(".update-event-title").value.trim()===''){
+            alert("내용을 입력해주세요");
+            return;
+          }
+          const formData = new FormData();
+          formData.append("eventTitle", document.querySelector(".update-event-title").value);
+          formData.append("eventNo", eventNoBackup);
+
+          fetch("/admin/eventTitleUpdate", {
+            method: "POST",
+            body: formData
+          })
+            .then(Response => {
+              if (Response.ok) {
+                return Response.text();
+              }
+              throw new Error("이벤트 제목 실패")
+            })
+            .then(result => {
+                alert("이벤트 제목 변경 성공")
+                getEventList()
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+      })
+
+      contentBtn.addEventListener("click", () => {
+        if (confirm("내용를 수정하시겠습니까?") === true) {
+          if(document.querySelector(".update-event-content").value.trim() === ''){
+            alert("내용을 입력해주세요")
+            return;
+          }
+          const formData = new FormData();
+          formData.append("eventContent", document.querySelector(".update-event-content").value);
+          formData.append("eventNo", eventNoBackup);
+
+          fetch("/admin/eventContentUpdate", {
+            method: "POST",
+            body: formData
+          })
+            .then(Response => {
+              if (Response.ok) {
+                return Response.text();
+              }
+              throw new Error("이벤트 내용 실패")
+            })
+            .then(result => {
+                alert("이벤트 내용 변경 성공")
+                getEventList()
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+      })
+
+      flBtn.addEventListener("click", () => {
+        if (confirm("삭제여부를 수정하시겠습니까?") === true) {
+          const formData = new FormData();
+          formData.append("eventNo", eventNoBackup);
+
+          fetch("/admin/eventFlUpdate", {
+            method: "POST",
+            body: formData
+          })
+            .then(Response => {
+              if (Response.ok) {
+                return Response.text();
+              }
+              throw new Error("이벤트 삭제여부 실패")
+            })
+            .then(result => {
+                alert("이벤트 삭제여부 변경 성공")
+                document.querySelector(".update-event-fl").innerText = result;
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+
+
+
+      })
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      getEventPageantion();
+      getEventList();
+      getUpdateBtn();
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

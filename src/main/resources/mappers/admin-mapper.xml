@@ -31,7 +31,10 @@
 		FROM MEMBER
 	</select>
 	
-	
+	<select id="geteventListCount">
+		SELECT COUNT(*)
+		FROM EVENT
+	</select>
 	
 	
 	
@@ -426,7 +429,46 @@ ORDER BY
 		FROM EVENT
 		ORDER BY EVENT_NUMBER DESC
 	</select>
+	<select id="getEventLIstCp">
+		SELECT *
+		FROM
+			(SELECT E.*, ROWNUM "RN"
+			FROM
+				(SELECT *
+				FROM EVENT
+				ORDER BY EVENT_NUMBER DESC) E)
+		WHERE RN BETWEEN 1 + ((#{cp}-1)*6) AND 6 + ((#{cp}-1)*6)
+	</select>
 	
+	<update id="eventUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_IMAGE = #{url1},
+			EVENT_THUMBNAIL = #{url2}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventTitleUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_TITLE = #{eventTitle}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventContentUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_CONTENT = #{eventContent}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventFlUpdate">
+		UPDATE "EVENT"
+		SET EVENT_DEL_FL = CASE WHEN EVENT_DEL_FL = 'Y' THEN 'N' ELSE 'Y' END
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<select id="eventFlSearch">
+		SELECT EVENT_DEL_FL
+		FROM EVENT
+		WHERE EVENT_NUMBER = #{eventNo}
+	</select>
 	
 	
 	

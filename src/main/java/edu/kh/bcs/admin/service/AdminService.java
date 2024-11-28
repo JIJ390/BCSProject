@@ -100,6 +100,18 @@ public interface AdminService {
 	int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
 			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4);
 
+	int geteventListCount();
+
+	List<EventDto> getEventList(int cp);
+
+	int eventImgUpdate(MultipartFile img, int eventNo);
+
+	int eventTitleUpdate(String eventTitle, int eventNo);
+
+	int eventContentUpdate(String eventContent, int eventNo);
+
+	String eventFlUpdate(int eventNo);
+
 
 	
 	
