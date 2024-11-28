@@ -116,6 +116,11 @@ public interface AdminService {
 
 
 
+	//update
+	Map<String, Object> reload(String deviceNo);
+
+
+
 
 
 

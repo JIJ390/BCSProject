@@ -532,6 +532,42 @@ VALUES
 	#{caSellPrice}
 )
 </insert>	
+
+<select id="reloadDevice">
+SELECT 
+*
+FROM 
+	DEVICE D
+WHERE
+	D.DEVICE_NO = #{deviceNo}
+</select>
+<select id="reloadGrade">
+SELECT 
+	*
+FROM GRADE g
+WHERE 
+DEVICE_NO = #{deviceNo}
+
+</select>
+<select id="reloadColor">
+SELECT 
+	*
+FROM 
+	COLOR c 
+WHERE 
+	DEVICE_NO = #{deviceNo}
+</select>
+
+<select id="reloadCapacityPrice">
+SELECT *
+FROM 
+	CAPACITY_PRICE cp 
+WHERE DEVICE_NO = #{deviceNo}
+</select>
+
+
+
+
 	
 	
 </mapper>

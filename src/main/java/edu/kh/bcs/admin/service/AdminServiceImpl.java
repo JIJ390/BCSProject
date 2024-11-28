@@ -401,6 +401,42 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+//	화면 리로드
+	@Override
+	public Map<String, Object> reload(String deviceNo) {
+		
+		Device device =  mapper.reloadDevice(deviceNo);
+		
+		List<Grade> grade =  mapper.reloadGrade(deviceNo);
+		
+		List<Color> color =  mapper.reloadColor(deviceNo);
+		
+		List<Capacity> capacityPrice =  mapper.reloadCapacityPrice(deviceNo);
+		log.debug("serviceImpl : {}", grade);
+		log.debug("serviceImpl : {}", color);
+		log.debug("serviceImpl : {}", capacityPrice);
+
+		
+		
+		
+		
+		
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		
+		result.put("device", device);
+		result.put("grade", grade);
+		result.put("color", color);
+		result.put("capacityPrice", capacityPrice);
+		
+		
+		
+		
+		
+		return result;
+	}
+	
 	
 	 
 	

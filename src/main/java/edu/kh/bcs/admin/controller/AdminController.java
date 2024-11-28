@@ -2,6 +2,7 @@ package edu.kh.bcs.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -481,6 +482,55 @@ public class AdminController {
 		System.out.println(deviceList);
 		
 		return "admin/adminEvent/deviceType";
+	}
+	
+	//update 화면 전환
+	@GetMapping("adminUpdate/{deviceNo}")
+	public String update(
+			Model model,
+			@PathVariable("deviceNo") String deviceNo
+			) {
+		
+//		log.debug("deviceNo : {}", deviceNo);
+		Map<String, Object> reload = service.reload(deviceNo);
+		
+		log.debug("asdasdasdasd : {}", reload);
+		
+		reload.get("device");
+		reload.get("grade");
+		reload.get("color");
+		reload.get("capacityPrice");
+		
+		
+		
+		
+		
+		
+		log.debug("device : {}", reload.get("device"));
+		log.debug("grade : {}", reload.get("grade").getClass().getName());
+		log.debug("color : {}", reload.get("color"));
+		log.debug("capacityPrice : {}", reload.get("capacityPrice"));
+		
+		
+		List<Color>	colorList = (List<Color>)reload.get("color");
+		
+		int colorLength = colorList.size();
+		
+		log.debug("colorLength : {}", colorLength);
+		
+		for(int i = colorLength; i < 6; i++) {
+			colorList.add(null);
+		}
+		
+		
+		model.addAttribute("device", reload.get("device"));
+		model.addAttribute("grade", reload.get("grade"));
+		model.addAttribute("colorResultList", colorList);
+		model.addAttribute("capacityPrice", reload.get("capacityPrice"));
+		
+		
+		
+		return "admin/adminUpdate";
 	}
 	
 	

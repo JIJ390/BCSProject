@@ -9,9 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
@@ -158,6 +159,12 @@ public interface AdminMapper {
 			@Param("caPrice") String caPrice, 
 			@Param("caSellPrice") String caSellPrice,
 			@Param("deviceGetNo") int deviceGetNo);
+
+	//업데이트 select
+	Device reloadDevice(String deviceNo);
+	List<Grade> reloadGrade(String deviceNo);
+	List<Color> reloadColor(String deviceNo);
+	List<Capacity> reloadCapacityPrice(String deviceNo);
 
 
 
