@@ -522,7 +522,20 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-
+		System.out.println("cp"+cp);
+		System.out.println("searchType:"+searchType);
+		System.out.println("searchText"+searchText);
+		System.out.println("ud"+ud);
+		System.out.println("cp"+cp);
+		System.out.println("searchType:"+searchType);
+		System.out.println("searchText"+searchText);
+		System.out.println("ud"+ud);
+		
+		System.out.println(memberList);
+		System.out.println(memberList);
+		System.out.println(memberList);
+		System.out.println(memberList);
+		System.out.println(memberList);
 
 		
 		if(memberList.isEmpty()) {

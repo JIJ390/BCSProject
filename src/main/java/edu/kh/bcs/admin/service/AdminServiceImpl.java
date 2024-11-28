@@ -89,7 +89,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc) {
 
-		List<Member> memberList = null;
+		List<Member> memberList = null; 
 
 		memberList = mapper.searchMemberList(cp, searchType, searchText, ud, searchAsc);
 
