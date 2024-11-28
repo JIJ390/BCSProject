@@ -11,9 +11,10 @@ public interface ReviewService {
 	 * 이미지 별점 내용을 담아 리뷰 insert
 	 * @param review
 	 * @param imgInput
+	 * @param memberNo 
 	 * @return
 	 */
-	int reviewInsert(Review review, MultipartFile imgInput);
+	int reviewInsert(Review review, MultipartFile imgInput, int memberNo);
 
 	/**
 	 *  리뷰 정보 select 

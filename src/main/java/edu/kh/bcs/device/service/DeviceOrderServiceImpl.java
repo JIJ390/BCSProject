@@ -98,4 +98,10 @@ public class DeviceOrderServiceImpl implements DeviceOrderService {
 	public Point selectPointLog(int orderNo) {
 		return mapper.selectPointLog(orderNo);
 	}
+	
+	// 포인트 변동 세션에 반영
+	@Override
+	public int selectCurrnetPoint(int memberNo) {
+		return mapper.selectCurrnetPoint(memberNo);
+	}
 }

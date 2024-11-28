@@ -19,6 +19,21 @@
 
     </section>
     <section class="main-section">
+
+      <div class="head-nav">
+        <a href="/deviceList">
+          <span>구매하기</span>
+        </a>
+        <span> > </span>
+        <a th:href="|/deviceList?category=${device.deviceBrand}|">
+          <span th:text="|${device.deviceBrand}|"></span>
+        </a>
+        <span> > </span>
+        <a th:href="|/device/buy/${device.deviceNo}|">
+          <span th:text="${device.deviceName}"></span>
+        </a>
+      </div>
+
       <div class="device-selling-head">
         <span class="page-title" th:text="${device.deviceName}">
           iPhone 16
