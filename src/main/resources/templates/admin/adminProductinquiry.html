@@ -23,10 +23,11 @@
                     <p>상품조회</p>
                 </div>
                 <div class="container-in-title-btn">
-                    <div>SamSung</div>
-                    <div>Galaxy Tab</div>
-                    <div>Apple</div>
-                    <div>Ipad</div>
+                    <div class="filter-btn" value="1">SAMSUNG</div>
+                    <div class="filter-btn" value="2">Galaxy Tab</div>
+                    <div class="filter-btn" value="3">Apple</div>
+                    <div class="filter-btn" value="4">Ipad</div>
+                    <a href="">초기화</a>
                 </div>
                 <div class="container-in-title-search">
                     <div>
@@ -35,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <table class="container-in-content" style="border-collapse: collapse" th:each= "deviceList:${deviceList}">
+            <table class="container-in-content" style="border-collapse: collapse" >
 
                 <colgroup>
                     <col style="width: 15%;">
@@ -60,26 +61,26 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
+                <tbody  class="deviceListColorBody">
+                    <tr th:each= "deviceList:${deviceList}">
                         <td><img th:src="${deviceList.deviceImg}"></td>
                         <td th:text="${deviceList.deviceNo}">  </td>
                         <td th:text="${deviceList.deviceName}"> </td>
                         <td class="color-result">
                             <p> 현재 개수      :  <th:block th:text="${deviceList.deviceCount}">22</th:block> </p>
                             <p> 현재 주문 개수 :  <th:block th:text="${deviceList.orderCount}">4</th:block> </p>
-                            <p> 색상별 개수    :  <th:block>5</th:block> </p>
-                            <div class="color">
-                                <div class="border-radius-color"></div>
-                                <div class="border-radius-color"></div>
-                                <div class="border-radius-color"></div>
-                            </div>
                         </td>
                         <td th:text="${deviceList.deviceReleaseDate}"> </td>
                         <td class="td-btn">
-                            <p>구매 현황</p>
-                            <p>판매 현황</p>
-                            <p>상세보기</p>
+                            <form th:action="@{/admin/adminSale/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                                <button><p>구매 현황</p></button>
+                            </form>
+                            <form>
+                                <button><p>판매 현황</p></button>
+                            </form>
+                            <form th:action="@{/admin/adminUpdate/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                                <button><p>수정버튼</p></button>
+                            </form>
                         </td>
                     </tr>
 
@@ -88,7 +89,7 @@
 
 
             <div class="container-in-btn">
-                <a href="">상품 전체 보기</a>
+                <a href="/admin/adminSale">상품 전체 보기</a>
                 <a href="/admin/adminModelRegistration">기종 등록하기</a>
             </div>
             <div class="container-in-page-nation">
@@ -104,6 +105,6 @@
 
 </body>
 <script src="https://kit.fontawesome.com/83d69cfe2d.js" crossorigin="anonymous"></script>
-
+<script src="/js/adminJS/adminProductinquiry.js"></script>
 
 </html>

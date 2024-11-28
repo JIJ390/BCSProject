@@ -124,7 +124,7 @@ public class EventServiceImpl implements EventService {
 				// C에 폴더가 없으면 생성
 				File folder = new File(folderPath);
 				if (!folder.exists())
-					folder.mkdir();
+					folder.mkdirs();
 
 			
 				

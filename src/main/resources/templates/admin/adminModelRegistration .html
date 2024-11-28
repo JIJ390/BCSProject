@@ -116,7 +116,7 @@
                             <!-- 색 이름 -->
                             <input type="text" name="colorName" placeholder="검정색">
                             <input type="text" name="colorName" placeholder="검정색">
-                            <input type="text" name="colorName" placeholder="검정색"> 
+                            <input type="text" name="colorName" placeholder="검정색">
                         </div>
                         <hr>
                         <div>
@@ -166,7 +166,10 @@
                     <p name="deviceBatteryCapacity">배터리 용량</p>
 
                     <!-- 디바이스 이름 -->
-                    <p name="deviceName">디바이스 이름</p>
+                    <p name="deviceName">기종 이름</p>
+
+                    <!-- 디바이스 이름 -->
+                    <p name="deviceNameKor">디바이스 한글 이름</p>
 
                     <!-- 내폰사기 -->
                     <p name="deviceBuyingPrice">내폰사기</p>
@@ -180,7 +183,7 @@
                 <!-- 입력할 값 -->
                 <div class="main-content-left">
                     <!-- 출시일 -->
-                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)"> 
+                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)">
 
                     <!-- 출고가 -->
                     <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
@@ -209,13 +212,17 @@
                     <!-- 디바이스 이름 -->
                     <input type="text" name="deviceName" placeholder="ex. iPhone 16">
 
+                    <!-- 디바이스 한글 이름 -->
+                    <input type="text" name="deviceNameKor" placeholder="ex. 아이폰 16">
+
                     <!-- 내폰사기 -->
                     <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000">
 
                     <!-- 내폰 팔기 -->
                     <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000">
                     <!-- cpu 이름 -->
-                    <input type="text" name="deviceCpuName" placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
+                    <input type="text" name="deviceCpuName"
+                        placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
 
 
 
@@ -224,7 +231,7 @@
             </div>
 
         </div>
-<!-------------- 상세 스펙 적는 ---------------->
+        <!-------------- 상세 스펙 적는 ---------------->
         <div class="main-content-container-bottom">
 
             <!-- 램 -->
@@ -253,29 +260,61 @@
             </select>
             <br>
 
-<div>
-    <p>등급</p>
-                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
-                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
-                <input type="text" name="gradeType" placeholder="등급 B,A,S !!대문자!!입력해주세요.">
-    
-</div>
-<div>
-    <p>등록할 가격</p>
+            <div>
+                <pre style="background-color: aquamarine;">등급                             ** 변경 불가 **</pre>
+                <input type="text" name="gradeType" placeholder="바꾸지마시오" value="B" readonly>
+                <input type="text" name="gradeType" placeholder="바꾸지마시오" value="A" readonly>
+                <input type="text" name="gradeType" placeholder="바꾸지마시오" value="S" readonly>
+
+            </div>
+            <div>
+                <p>등록할 가격</p>
                 <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
                 <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
                 <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
-</div>
-<div>
-    <p>판매할 가격</p>
+            </div>
+            <div>
+                <p>판매할 가격</p>
                 <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
                 <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
                 <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
-</div>
+            </div>
+
+            <div>
+                <p style="background-color: rgb(200, 255, 0); display: flex; justify-content: center;">용량 별 가격</p>
+                <input type="text" placeholder="바꾸지마시오" value="64GB" readonly>
+                <input type="text" placeholder="바꾸지마시오" value="128GB" readonly>
+                <input type="text" placeholder="바꾸지마시오" value="256GB" readonly>
+                <input type="text" placeholder="바꾸지마시오" value="512GB" readonly>
+                <input type="text" placeholder="바꾸지마시오" value="1TB" readonly>
+
+                <input type="hidden" name="capacityNumber" value="1">
+                <input type="hidden" name="capacityNumber" value="2">
+                <input type="hidden" name="capacityNumber" value="3">
+                <input type="hidden" name="capacityNumber" value="4">
+                <input type="hidden" name="capacityNumber" value="5">
+            </div>
+
+            <div>
+                <p>용량 별 가격</p>
+                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+            </div>
+            <div>
+                <p>내 폰 팔기 가격</p>
+                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+            </div>
 
 
         </div>
-<br><br>
+        <br><br>
         <div class="insert-btn">
             <button>등록</button>
         </div>

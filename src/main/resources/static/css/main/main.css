@@ -60,6 +60,18 @@ main div{
   font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
 }
 
+.newDevice{
+  min-width: 200px;
+}
+
+.SClass{
+  min-width: 300px;
+  font-size: 35px;
+  margin-left: 30px;
+  color: #6E6E73;
+  font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
+}
+
 .viewImg{
   margin-left: 50px;
 }
@@ -123,8 +135,8 @@ a {
   height: 100vh;
   width: 100vw;
 }
-
-.slideFontSize{
+.slideFont1 * {
+  width: 100vw;
 }
 
 
@@ -301,7 +313,7 @@ a {
 }
 
 .subItem-3{
-  width: 70%;
+  min-width: 300px;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -429,4 +441,91 @@ html {
   }
 }
 
+.bannerTitle{
+  font-size: 80px;
+  font-weight: bold;
+}
 
+.bannerContent{
+  font-size: 30px;
+}
+
+.slideFont1{
+  display: flex;
+  flex-direction: column;
+}
+
+.eventBtn{
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: black;
+  font-size: 25px;
+}
+.eventBtn a{
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+.left-font {
+  text-align: start;
+  padding-left: 150px;
+}
+
+.right-font {
+  text-align: end;
+  padding-right: 200px;
+
+}
+
+.eventBtn {
+  display: flex;
+  color: white;
+
+  border-radius: 15px;
+
+  font-size: 22px;
+  
+  background-color: black;
+  text-align: center;
+  width: 100%;
+  height: 120%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.left-box {
+  display: flex;
+
+  justify-content: start;
+}
+
+.right-box {
+  display: flex;
+
+  justify-content: end;
+}
+
+.btn-banner-area > a{
+
+  display: inline-block;
+  width: 100px;
+  margin-top: 20px;
+}
+
+.black-font{
+  color: black;
+}
+
+.white-font{
+  color: white;
+}

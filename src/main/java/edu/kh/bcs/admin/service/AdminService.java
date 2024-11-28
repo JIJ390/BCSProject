@@ -10,10 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
-
+import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -21,6 +22,12 @@ import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
 
+	int textContent(Device device, Color color, String gradeType, String gradePrice,
+			String gradeSellPrice, List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber,
+			String capacityPrice, String capacitySellPrice);
+
+
+	
 	int getResultCount(String searchType, String searchText);
 
 	List<Member> getMemberList(int cp, String searchType, String searchText, int ud, String searchAsc);
@@ -87,18 +94,55 @@ public interface AdminService {
 	 * @param colorImg img 6 개 
 	 * @return
 	 */
-	int textContent(Device device, Color color, 
-			String gradeType, String gradePrice, String gradeSellPrice, List<MultipartFile> colorImg,
-			MultipartFile divceImg);
 
 	List<Device> galaxyA(String series);
 
 	List<Device> iPhone(String series);
 
+
+	//리스트 조회
+	List<Order> adminSale(String deviceNo);
+
+	//상태 업데이트
+	int delivery(int orderNo, int orderStatusCode);
+
+	//검색 기능 필터
+	List<Order> serachFilter(String searchResult);
+
+	//상품조회 기기별 보기 버튼
+	List<Device> brandFilter(String brandFilter);
+
+	
+
+	//adminSale 처음 화면 전환
+	List<Order> adminSaleFirst();
+
+
+
+	//update
+	Map<String, Object> reload(String deviceNo);
+
+
+
+
+
 	List<EventDto> getEventList();
 
 	int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
 			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4);
+
+	int geteventListCount();
+
+	List<EventDto> getEventList(int cp);
+
+	int eventImgUpdate(MultipartFile img, int eventNo);
+
+	int eventTitleUpdate(String eventTitle, int eventNo);
+
+	int eventContentUpdate(String eventContent, int eventNo);
+
+	String eventFlUpdate(int eventNo);
+
 
 
 	

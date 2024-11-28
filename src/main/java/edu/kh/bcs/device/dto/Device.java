@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Grade;
+import edu.kh.bcs.myPage.dto.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class Device {
 	private String deviceWeight;
 	private String deviceBatteryCapacity;
 	private String deviceName;
+	private String deviceNameKor;
 	private int deviceBuyingPrice;
 	private int deviceSellingPrice;
 	private String deviceBrand;
@@ -50,7 +52,12 @@ public class Device {
 	private List<Grade> gradeList;
 	private List<Capacity> capacityList;
 	
+	private List<BuyingDevice> buyingDevice;
+	private List<Order> order;
+	private List<Member> member;
 
+	
+	
 	//주문 조회
 	private int orderCount;
 	//현재 개수

@@ -290,20 +290,24 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
 
 
 const dataBrand = document.querySelectorAll("[data-brand]");
-
-let brand
+let brand;
 
 dataBrand.forEach(filter => {
   // 각 요소에 클릭 이벤트 리스너 추가
   filter.addEventListener("click", () => {
     brand = filter.getAttribute("data-brand"); // 클릭된 요소의 data-brand 값 가져오기
 
-    // 기존 선택 초기화
-    dataBrand.forEach(el => el.classList.remove("selected"));
+    // 기존 선택 초기화 (밑줄 제거)
+    dataBrand.forEach(el => {
+      el.classList.remove("selected");
+    });
+
+    // 클릭된 요소에 스타일 추가 (밑줄과 굵은 글씨)
+    filter.classList.add("selected");
+
 
     // 콘솔 출력
     console.log(brand); 
-    
 
     fetch(`/brandList?brand=${brand}`)
     .then(response => {
@@ -367,8 +371,24 @@ dataBrand.forEach(filter => {
 
       // 컨테이너에 박스 추가
       itemsContainer.appendChild(itemBox);
-    });
 
+      // 선택된 항목 초기화
+      selectedItems = [];
+
+      // 모든 필터 항목의 밑줄 제거
+      document.querySelectorAll(".device-item").forEach(el => {
+        el.style.textDecoration = "none";
+        el.style.fontWeight = 'normal';
+      });
+
+      // search-filter 초기화 (태그만 제거)
+      searchFilter.querySelectorAll(".filter-tag").forEach(tag => {
+        searchFilter.removeChild(tag);
+      });
+
+      // 전체 취소 버튼 숨김
+      clearAllBtn.style.display = "none";
+    });
   })
     .catch(error => {
       console.error(err);
@@ -379,8 +399,4 @@ dataBrand.forEach(filter => {
 
 
 
-
-
-
-
-
+  

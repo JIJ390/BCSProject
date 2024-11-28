@@ -13,6 +13,33 @@
   font-family: 'Pretendard-Regular';
 }
 
+/* 드롭다운 스타일 */
+.header-nav .dep1 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
+.header-nav .dep2 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
 
 main{
   display: flex;
@@ -22,7 +49,7 @@ main{
 
 .deviceList-container{
   height: 100%;
-  width: 100%;
+  width: 92%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,8 +60,8 @@ main{
 
 .deviceList-header-section{
   margin-top: 30px;
-  height: 18vh;
-  width: 70%;
+  height: 111px;
+  width: 65%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,13 +97,11 @@ main{
 }
 
 .deviceList-galaxy {
-  padding: 20px;
-  font-size: 45px;
+  font-size: 40px;
   cursor: pointer;
 }
 .deviceList-iPhone {
-  padding: 20px;
-  font-size: 45px;
+  font-size: 40px;
   cursor: pointer;
 }
 
@@ -85,7 +110,7 @@ main{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 10vh;
+  height: 60px;
   width: 70%;
 }
 
@@ -102,6 +127,7 @@ main{
 .filter-items{
   padding: 10px;
   cursor: pointer;
+  font-size: 26px;
 }
 
 /* 필터 선택 섹션 */
@@ -109,7 +135,7 @@ main{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 15vh;
+  height: 80px;
   width: 70%;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -133,6 +159,13 @@ main{
   height: 200px;
   width: 150px;
   margin-top: 50px;
+}
+
+.deviceList-item-section img{
+  height: 200px;
+  width: 200px;
+  margin-top: 50px;
+  border-radius: 10px;
 }
 
 .deviceList-item-box{
@@ -202,12 +235,13 @@ main{
 
 .device-item {
   cursor: pointer;
-  margin: 5px 0;
+  margin: 18px 0;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center;
   margin-top: 20px;
+  font-size: 20px;
 }
 
 .device-item:hover {
@@ -259,7 +293,7 @@ main{
   color: black;
 }
 
-.devuceList-item-section{
+.deviceList-item-section{
   text-decoration: none;
   color: black;
   text-align: center;
@@ -279,4 +313,106 @@ main{
 
 .inch {
   border: 2px solid green;
+}
+
+
+
+
+
+
+
+
+
+.recent-list-container {
+  position: fixed;
+
+  
+  top: 13%;
+  right: 8%; /* 좌우 가운데 정렬 */
+
+  background-color: white;
+  border-radius: 15px;
+
+  padding: 10px;
+
+
+  width: 120px;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 10;
+
+}
+
+.recent-list-container > span {
+  margin-top : 10px;
+}
+
+.recent-box {
+  width: 100px;
+  height: 120px;
+
+
+  text-align: center;
+  font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-decoration-line: none;
+
+}
+
+.recent-box a {
+  text-decoration-line: none;
+  text-decoration: none;
+
+  color: black;
+}
+
+.recent-box img {
+  width: 90px;
+  height: 90px;
+
+  display: inline-block;
+
+}
+
+.recent-img {
+  width: 30px;
+  height: 30px;
+
+  margin: 10px 0;
+}
+
+
+
+/* 밑줄 애니메이션 */
+.underline-animation {
+  position: relative; /* 밑줄 애니메이션을 위한 상대 위치 */
+  display: inline-block; /* 텍스트 크기에 맞춰 작동 */
+  text-underline-offset: 10px; /* 밑줄 위치를 조정 */
+}
+
+.underline-animation::after {
+  content: ""; /* 밑줄 요소 생성 */
+  position: absolute;
+  bottom: -5px; /* 텍스트 바로 아래 위치 */
+  left: 0;
+  width: 0; /* 초기 너비 0 */
+  height: 3px; /* 밑줄 두께 */
+  background-color: black; /* 밑줄 색상 */
+  transition: width 0.3s ease-in-out; /* 애니메이션 효과 */
+  text-underline-offset: 10px; /* 밑줄 위치를 조정 */
+}
+
+.underline-animation.selected::after {
+  width: 100%; /* 밑줄이 좌에서 우로 확장 */
 }

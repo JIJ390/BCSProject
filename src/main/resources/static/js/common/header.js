@@ -205,7 +205,7 @@ document.querySelectorAll(".dep2 .info li a").forEach((link) => {
 
                 // "더보기 +" 버튼 표시 및 링크 설정
                 moreButton.style.display = "block";
-                moreButton.href = `/sellList?category=${encodeURIComponent(category)}`; // 동적 링크 설정
+                moreButton.href = `/deviceSellList?category=${encodeURIComponent(category)}`; // 동적 링크 설정
             })
             .catch((error) => {
                 console.error("Error fetching devices:", error);
@@ -239,4 +239,5 @@ document.querySelectorAll(".dropdownContainor").forEach((dropdown) => {
         }
     });
 });
+
 
