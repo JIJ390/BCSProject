@@ -16,19 +16,45 @@ main {
   margin-top: 150px;
 }
 
+
+
+.head-nav {
+  width: 100%;
+  padding-left: 10px;
+
+  font-size: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+.head-nav > a {
+
+  color: var(--font-color);
+  text-decoration-line: none; 
+}
+
+
 .device-buying-head {
   width: 100%;
 }
 
 .page-title {
-  width: 100%;
+  display: inline-block;
+
+  width: 58%;
   font-size: 64px;
   font-weight: 900;
-  padding: 10px;
+  margin: 10px;
   text-align: left;
 }
 
 .page-title-sub {
+  display: inline-block;
+
+  width: 39%;
+  padding: 20px;
+
   font-size: 32px;
 }
 
@@ -40,12 +66,96 @@ main {
   justify-content: space-between;
 }
 
-.device-buying-container > img {
+
+
+
+
+
+.device-buying-img-box{
   margin: 10px;
   width: 560px;
   height: 480px;
   border-radius: 15px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: start;
+
+  overflow: hidden;
+
+
 }
+
+.slide-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+
+}
+
+
+.img-slide {
+  width: 400px;
+  z-index: 10;
+
+  margin: 0 80px;
+}
+
+
+
+
+/* 슬라이드 위치를 표시하는 점(dot) 스타일 */
+.img-dot-container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot.active {
+  background-color: #717171;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .device-buying-info {
   width: 39%;
@@ -364,3 +474,333 @@ hr {
 
   color: gray;
 }
+
+
+.review-container {
+  width: 940px;
+
+  margin-top: 20px;
+
+}
+
+.review-head-box {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 40px;
+}
+
+.review-title {
+  font-size: 48px;
+
+  font-weight: bold;
+
+
+}
+
+.star-container {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 32px;
+
+}
+
+.star-text {
+  padding-top: 14px;
+}
+
+.star-score {
+  padding-top: 14px;
+}
+
+.star-star{
+  display: flex;
+  margin: 1px;
+}
+
+.star-box {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.star {
+  width: 16px;
+}
+
+.review-content-box {
+  width: 100%;
+  
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+
+  padding: 20px;
+  margin: 40px 0;
+}
+
+
+
+
+
+.review-content-info {
+  width: 100%;
+  display: flex;
+
+  font-size: 20px;
+  
+}
+
+.review-name {
+  flex-grow: 5;
+}
+
+.review-star-container {
+  flex-grow: 60;
+}
+
+.review-date {
+  flex-grow: 20;
+  text-align: right;
+
+  font-family: 'Pretendard-Thin';
+}
+
+.review-device {
+  font-size: 20px;
+
+  font-family: 'Pretendard-Thin';
+}
+
+.review-main-content {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+}
+
+.review-text-box {
+  width: 660px;
+  margin: 20px;
+
+  font-size: 16px;
+}
+
+.review-img-box {
+  width: 200px;
+  height: 200px;
+}
+
+.review-img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
+.review-star-container {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+
+.review-star-star{
+  display: flex;
+  margin: 1px;
+}
+
+.review-star-box {
+  display: flex;
+}
+
+.review-star {
+  width: 12px;
+}
+
+.none-list {
+  width: 100%;
+  text-align: center;
+
+  font-size: 40px;
+  color: var(--font-gray-color);
+
+  margin: 100px 0;
+}
+
+
+
+.review-btn-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.review-plus-btn {
+  width: 600px;
+  height: 60px;
+
+  background-color: var(--white-color);
+
+  border: 2px solid var(--white-color);
+  border-radius: 15px;
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  font-size: 22px;
+
+  
+  transition-duration: 0.1s;
+}
+
+
+.review-plus-btn:hover {
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 팝업 */
+.img-popup {
+  background-color: var(--white-color);
+  border-radius: 10px;
+
+  position: fixed; /* 브라우저에서 위치 고정 */
+
+  /* 브라우저 정가운데 배치 */
+  top: 120px;
+  left: 50%; /* 좌우 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데로 이동 */
+  
+  max-width: 1000px;
+
+  padding: 10px;
+  box-shadow: 0px 5px 6px -2px var(--border-color);
+  z-index: 2000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.close-popup {
+	display: none;
+}
+
+
+.popup-img {
+  display: block; /* 이미지를 블록화하여 간격 제거 */
+  width: auto; /* 원본 크기 유지 */
+  height: auto; 
+  max-width: 100%; /* 창 크기에 맞게 제한 */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+  z-index: 1000; /* 팝업이 항상 위로 오도록 설정 */
+}
+
+
+.recent-list-container {
+  position: fixed;
+
+  
+  top: 13%;
+  right: 8%; /* 좌우 가운데 정렬 */
+
+  background-color: white;
+  border-radius: 15px;
+
+  padding: 10px;
+
+
+  width: 120px;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 10;
+
+}
+
+.recent-list-container > span {
+  margin-top : 10px;
+}
+
+.recent-box {
+  width: 100px;
+  height: 120px;
+
+
+  text-align: center;
+  font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  text-decoration-line: none;
+
+}
+
+.recent-box a {
+  text-decoration-line: none;
+  text-decoration: none;
+
+  color: black;
+}
+
+.recent-box img {
+  width: 90px;
+  height: 90px;
+
+  display: inline-block;
+
+}
+
+.recent-img {
+  width: 30px;
+  height: 30px;
+
+  margin: 10px 0;
+}
+

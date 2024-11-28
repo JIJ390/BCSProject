@@ -16,6 +16,8 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
 public interface AdminService {
@@ -70,7 +72,7 @@ public interface AdminService {
 	Member getLoginMember(int memberNo);
 
 	List<ChattingRoomDto> adminChatCheck(int memberNo);
-
+ 
 	List<ChattingMessage> adminChattingList(int chattingRoomNo);
 
 	ChattingRoomDto chatroom(int chattingRoomNo);
@@ -97,6 +99,7 @@ public interface AdminService {
 
 	List<Device> iPhone(String series);
 
+
 	//리스트 조회
 	List<Order> adminSale(String deviceNo);
 
@@ -121,6 +124,24 @@ public interface AdminService {
 
 
 
+
+
+	List<EventDto> getEventList();
+
+	int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
+			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4);
+
+	int geteventListCount();
+
+	List<EventDto> getEventList(int cp);
+
+	int eventImgUpdate(MultipartFile img, int eventNo);
+
+	int eventTitleUpdate(String eventTitle, int eventNo);
+
+	int eventContentUpdate(String eventContent, int eventNo);
+
+	String eventFlUpdate(int eventNo);
 
 
 

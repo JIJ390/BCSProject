@@ -58,29 +58,6 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
   public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
     sessions.remove(session); // 목록에서 제거
     System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
-    System.out.println("연결 끊김");
   }
 
   // 클라이언트로 부터

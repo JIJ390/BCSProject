@@ -20,4 +20,9 @@ public class Point {
 	private int pointLogNo;
 	private int memberNo;
 	private int originalPoint;
+	
+	private int pointLogAmount;
+	private int pointLogBalance;
+	private String pointLogContent;
+	private String pointLogDate;
 }

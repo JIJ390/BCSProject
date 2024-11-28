@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 관리</title>
+
+    <style>
+        .admin-event-main {
+            width: 1000px;
+            height: max-content;
+            background-color: white;
+            margin: auto;
+            margin-top: 100px;
+            padding: 30px;
+        }
+
+        .admin-event-main-header {
+            width: 100%;
+            text-align: start;
+            border-bottom: 1px solid black;
+        }
+
+        .admin-event-main-header>p {
+            font-size: 40px;
+        }
+
+        .admin-event-main-body-1 {
+            width: 100%;
+            border-bottom: 1px solid black;
+            padding: 20px 5px;
+
+            display: flex;
+            justify-content: space-between;
+            align-content: end;
+        }
+
+        .admin-event-main-body-1>p {
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .admin-event-main-body-1>button {
+            width: 70px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+        .admin-event-main-content {
+            width: 100%;
+            height: max-content;
+        }
+
+        .member-mamage-backBtn {
+            width: 100px;
+            height: 50px;
+            border: 1px solid rgb(134, 134, 134);
+            margin: auto;
+            margin-top: 20px;
+            padding: 15px 20px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .event-add-popup {
+            width: 500px;
+            height: 630px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            
+            left: 0;
+            right: 0;
+            margin: 50px auto;
+            transition: all 0.2s;
+            opacity: 0;
+            
+        }
+
+        .event-add-popup-hidden {
+            display: none;
+        }
+
+        .event-link-popup{
+            width: 700px;
+            height: 300px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: white;
+            display: flex;
+
+            flex-direction: column;
+            padding: 15px;
+            left: 0;
+            right: 0;
+            margin: 174px auto;
+            transition: all 0.2s;
+            opacity: 0;
+            z-index: 3;
+        }
+
+        .event-link-popup-hidden {
+            display: none;
+        }
+
+        .event-link-popup1{
+            width: 700px;
+            height: 300px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: white;
+            display: flex;
+
+            flex-direction: column;
+            padding: 15px;
+            left: 0;
+            right: 0;
+            margin: 174px auto;
+            transition: all 0.2s;
+            opacity: 0;
+            z-index: 3;
+        }
+
+        .event-link-popup-hidden1 {
+            display: none;
+        }
+
+        .event-popup-X{
+            background-color: white;
+            border: 0;
+            width: 100px;
+            height: 50px;
+            font-size: 30px;
+        }
+
+        .event-update-btn{
+            margin: auto; 
+            width: 100px; 
+            height: 40px; 
+            border: 1px solid gray; 
+            border-radius: 10px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .event-thumbnail-img1{
+            width: 60%; 
+            height: 250px; 
+            margin: 0 auto;
+            text-align: end;
+            padding: 10px;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+        .event-thumbnail-img2{
+            width: 60%; 
+            height: 250px; 
+            margin: 0 auto;
+            text-align: end;
+            padding: 10px;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+        }
+        .event-thumbnail-img3{
+            width: 60%; 
+            height: 250px; 
+            margin: 0 auto;
+            text-align: end;
+            padding: 10px;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+        }
+        .event-thumbnail-img4{
+            width: 60%; 
+            height: 250px; 
+            margin: 0 auto;
+            text-align: end;
+            padding: 10px;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+        }
+
+        .event-thumbnail-X{
+            font-size: 30px;
+        }
+
+        .event-link-select{
+            width: 25%;
+            height: 100%;
+
+            overflow-y: auto;
+            border-right: 1px solid gray;
+        }
+        .event-link-select::-webkit-scrollbar{
+            display: none;
+        }
+
+        .event-link-select-button1{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button1:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button2{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button2:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button3{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button3:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 20px;
+        }
+        .event-link-select-button4{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 15px;
+
+        }
+        .event-link-select-button4:hover{
+            width: 100%;
+            height: 20%;
+            border-bottom: 1px solid gray;
+            border-radius: 10px;
+            background-color: rgb(201, 201, 201);
+            text-align: center;
+            padding-top: 10px;
+            font-size: 15px;
+
+        }
+
+
+        .admin-banner-container{
+            margin: 20px auto; 
+            width: 80%; 
+            height: max-content; 
+
+            border: 1px solid gray;
+        }
+
+        .banner-1{
+            height: 50px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner-1 > p{
+            font-size: 20px;
+        }
+
+        .banner-2{
+            height: 50px; 
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .banner-2 > p{
+            font-size: 20px;
+            margin: 0 20px;
+        }
+        
+        .banner-3{
+            height: 50px; 
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .banner-3 > p{
+            font-size: 20px;
+            margin: 0 20px;
+        }
+
+        .banner-4{
+            height: 50px; 
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .banner-5{
+            height: max-content; 
+            padding: 0 20px;
+        }
+
+        .bannerImg-inner-text{
+            width: max-content;
+            height: max-content;
+            margin: 80px 40px;
+            text-align: start;
+            color: black;
+            float: left;
+        }
+        .bannerImg-inner-text2{
+            width: max-content;
+            height: max-content;
+            margin: 80px 40px;
+            text-align: start;
+            color: black;
+            float: left;
+        }
+        .bannerImg-inner-text3{
+            width: max-content;
+            height: max-content;
+            margin: 80px 40px;
+            text-align: start;
+            color: black;
+            float: left;
+        }
+        .bannerImg-inner-text4{
+            width: max-content;
+            height: max-content;
+            margin: 80px 40px;
+            text-align: start;
+            color: black;
+            float: left;
+        }
+
+        .banner-font-black{
+            width: 50px; 
+            height: 50px;
+            border-radius: 25px; 
+            background-color: black; 
+            border: 1px solid gray;
+        }
+        .banner-font-white{
+            width: 50px; 
+            height: 50px; 
+            border-radius: 25px; 
+            background-color: white; 
+            border: 1px solid gray;
+        }
+        .banner-font-black2{
+            width: 50px; 
+            height: 50px;
+            border-radius: 25px; 
+            background-color: black; 
+            border: 1px solid gray;
+        }
+        .banner-font-white2{
+            width: 50px; 
+            height: 50px; 
+            border-radius: 25px; 
+            background-color: white; 
+            border: 1px solid gray;
+        }
+        .banner-font-black3{
+            width: 50px; 
+            height: 50px;
+            border-radius: 25px; 
+            background-color: black; 
+            border: 1px solid gray;
+        }
+        .banner-font-white3{
+            width: 50px; 
+            height: 50px; 
+            border-radius: 25px; 
+            background-color: white; 
+            border: 1px solid gray;
+        }
+        .banner-font-black4{
+            width: 50px; 
+            height: 50px;
+            border-radius: 25px; 
+            background-color: black; 
+            border: 1px solid gray;
+        }
+        .banner-font-white4{
+            width: 50px; 
+            height: 50px; 
+            border-radius: 25px; 
+            background-color: white; 
+            border: 1px solid gray;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .banner-left{
+            width: 50px; 
+            height: 50px; 
+            border: 1px solid gray; 
+            border-radius: 25px;
+            background-color: white;
+        }
+        .banner-right{
+            width: 50px; 
+            height: 50px; 
+            border: 1px solid gray; 
+            border-radius: 25px;
+            background-color: white;
+        }
+
+        .banner-content-input, .banner-content-input2, .banner-content-input3, .banner-content-input4{
+            resize: none;
+        }
+
+        .event-selectDevice{
+            width: 100px; 
+            height: 30px; 
+            border: 1px solid gray; 
+            background-color: white;
+        }
+
+        .event-search-div{
+            width: 600px;   
+            height: 800px;
+            border: 1px solid black;
+            background-color: white;
+
+            position: fixed;
+
+            top: 100px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+
+            overflow-y: auto;
+        }
+        .event-search-div::-webkit-scrollbar{
+            display: none;
+        }
+
+        .banner-event-list{
+            width: 100%;
+            height: 90%;
+            border: 1px solid magenta;
+            overflow-y: auto;
+        }
+
+        .banner-event-content{
+            width: 100%;
+            height: 10%;
+            border-bottom: 1px solid gray;
+            
+            
+            display: flex;
+            justify-content: start;
+            align-items: center;
+
+        }
+        .banner-event-content:hover{
+            width: 100%;
+            height: 10%;
+            border-bottom: 1px solid gray;
+            background-color: rgb(223, 223, 223);
+            overflow-y: auto;
+            
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .banner-event-content > p{
+
+            font-size: 20px;
+            margin: 0 10px;
+
+        }
+
+        .event-list-X{
+            font-size: 40px;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            background-color: white;
+        }
+
+        .event-search-div-hidden{
+            display: none;
+        }
+
+        .event-selectEvent{
+            border: 1px solid gray;
+            background-color: white;
+        }
+        .event-selectEvent2{
+            border: 1px solid gray;
+            background-color: white;
+        }
+        .event-selectEvent3{
+            border: 1px solid gray;
+            background-color: white;
+        }
+        .event-selectEvent4{
+            border: 1px solid gray;
+            background-color: white;
+        }
+
+        .inner-banner-title{
+            color: black;
+        }
+        .inner-banner-title2{
+            color: black;
+        }
+        .inner-banner-title3{
+            color: black;
+        }
+        .inner-banner-title4{
+            color: black;
+        }
+        .inner-banner-content{
+            color: black;
+        }
+        .inner-banner-content2{
+            color: black;
+        }
+        .inner-banner-content3{
+            color: black;
+        }
+        .inner-banner-content4{
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <!-- <div class="event-add-popup event-add-popup-hidden">
+        <div style="display: flex; justify-content: space-between;"><p style="font-size: 30px; ">이벤트 추가하기</p> <button class="event-popup-X">X</button></div>
+        <div style="font-size: 30px; margin-bottom: 10px;">제목 : <input style="border: 1px solid gray; width: 70%; height: 30px; " type="text"></div>
+        <img class="event-thumbnail-img" src="/images/help/파일업로드.png"></img>
+        <div style="margin-bottom: 20px;"><p style="font-size: 25px;">썸내일 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload(this)" accept="image/*"></div>
+        <div><p>이벤트 상세 내용</p></div>
+        <div><textarea style="width: 400px; height: 100px; resize: none;  outline: none;"></textarea></div>
+        <div style="display: flex;"><p>배너 클릭시 링크 연결</p><button class="event-selectDevice" style="width: 40px; height: 20px; border: 1px solid gray; background-color: white;">+</button></div>
+        <div><p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 제품 번호</p></div>
+        <div><p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 제품 이름</p></div>
+        <div class="event-update-btn" style="margin: auto; width: 100px; height: 40px; border: 1px solid gray; border-radius: 10px; display: flex; justify-content: center; align-items: center;">추가하기</div>
+    </div> -->
+
+    <!-- <div class="event-link-popup event-link-popup-hidden">
+        <div style="width: 100%; height: 16%; display: flex; justify-content: space-between; border-bottom: 1px solid gray;"><p style="font-size: 30px;">디바이스 선택</p><p class="link-popup-X" style="font-size: 30px;">X</p></div>
+        <div style="width: 100%; height: 84%;  display: flex; ">
+            <div class="event-link-select">
+                <div class="event-link-select-button1">Samsung</div>
+                <div class="event-link-select-button1">Apple</div>
+            </div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+        </div>
+    </div> -->
+
+    <!-- 디바이스 링크 팝업 -->
+    <!-- <div class="event-link-popup1 event-link-popup-hidden1">
+        <div style="width: 100%; height: 16%; display: flex; justify-content: space-between; border-bottom: 1px solid gray;"><p style="font-size: 30px;">디바이스 선택</p><p class="link-popup-X" style="font-size: 30px;">X</p></div>
+        <div style="width: 100%; height: 84%;  display: flex; ">
+            <div class="event-link-select">
+                <div class="event-link-select-button1">Samsung</div>
+                <div class="event-link-select-button1">Apple</div>
+            </div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+            <div class="event-link-select"></div>
+        </div>
+    </div> -->
+
+    <div class="admin-event-main">
+        <div class="admin-event-main-header">
+            <p>메인 배너</p>
+        </div>
+        <div class="admin-event-main-body-1">
+            <p>매인 배너 수정하기</p>
+            <!-- <button class="admin-event-add"  style="background-color: white; border: 1px solid gray;">+</button> -->
+        </div>
+
+        <div class="admin-event-main-content">
+
+            
+            <div class="event-search-div event-search-div-hidden">
+                <div style=" width: 100%; height: 10%; border-bottom: 1px solid gray; font-size: 40px; padding: 20px 10px 0; display: flex; justify-content: space-between;"><p>이벤트 목록</p><button class="event-list-X">X</button></div>
+                <div class="banner-event-list">
+
+
+
+                    <!-- 비동기로 목록 조회 -->
+                    <!-- <div class="banner-event-content"><p>1</p><p>아이폰 15 100% 할인</p></div>
+                    <div class="banner-event-content"><p>2</p><p>갤럭시 1 + 1 이벤트</p></div> -->
+
+                </div>
+            </div>
+
+
+            <div class="admin-banner-container">
+                <div class="banner-1"><p>1번 배너</p></div>
+                <div class="event-thumbnail-img1" style="background-image: url(/images/help/파일업로드.png)">
+                    <div class="bannerImg-inner-text">
+                        <p class="inner-banner-title" style="font-size: 20px;"></p>
+                        <p class="inner-banner-content" style="font-size: 15px;"></p>
+                    </div>
+                </div>
+                <div class="banner-2"><p>배너 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload1(this)" accept="image/*"></div>
+                <div class="banner-5">
+                    <div><p>배너 제목</p><input class="banner-title-input" type="text"></div>    
+                    <div><p>배너 내용</p><textarea class="banner-content-input" ></textarea></div>
+                    <div>
+                        <p>폰트 색상</p>
+                        <button class="banner-font-black" ></button>
+                        <button class="banner-font-white"></button>
+                    </div>
+                    <div>
+                        <p>정렬 방식</p>
+                        <button class="banner-left" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">left</button>
+                        <button class="banner-right" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">right</button>
+                    </div>
+                </div>
+                <div class="banner-3"><p>이벤트 링크 연결하기</p><button class="event-selectEvent">이벤트 목록 조회</button></div>
+                <div class="banner-4">
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 번호</p>
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 이름</p>
+                    <p>* 배너 클릭 시 해당 이벤트 상세조회 페이지로 연결됩니다</p>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="admin-banner-container">
+                <div class="banner-1"><p>2번 배너</p></div>
+                <div class="event-thumbnail-img2" style="background-image: url(/images/help/파일업로드.png)">
+                    <div class="bannerImg-inner-text2">
+                        <p class="inner-banner-title2" style="font-size: 20px;"></p>
+                        <p class="inner-banner-content2" style="font-size: 15px;"></p>
+                    </div>
+                </div>
+                <div class="banner-2"><p>배너 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload2(this)" accept="image/*"></div>
+                <div class="banner-5">
+                    <div><p>배너 제목</p><input class="banner-title-input2" type="text"></div>    
+                    <div><p>배너 내용</p><textarea class="banner-content-input2" ></textarea></div>
+                    <div>
+                        <p>폰트 색상</p>
+                        <button class="banner-font-black2" ></button>
+                        <button class="banner-font-white2"></button>
+                    </div>
+                    <div>
+                        <p>정렬 방식</p>
+                        <button class="banner-left2" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">left</button>
+                        <button class="banner-right2" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">right</button>
+                    </div>
+                </div>
+                <div class="banner-3"><p>이벤트 링크 연결하기</p><button class="event-selectEvent2">이벤트 목록 조회</button></div>
+                <div class="banner-4">
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 번호</p>
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 이름</p>
+                    <p>* 배너 클릭 시 해당 이벤트 상세조회 페이지로 연결됩니다</p>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="admin-banner-container">
+                <div class="banner-1"><p>3번 배너</p></div>
+                <div class="event-thumbnail-img3" style="background-image: url(/images/help/파일업로드.png)">
+                    <div class="bannerImg-inner-text3">
+                        <p class="inner-banner-title3" style="font-size: 20px;"></p>
+                        <p class="inner-banner-content3" style="font-size: 15px;"></p>
+                    </div>
+                </div>
+                <div class="banner-2"><p>배너 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload3(this)" accept="image/*"></div>
+                <div class="banner-5">
+                    <div><p>배너 제목</p><input class="banner-title-input3" type="text"></div>    
+                    <div><p>배너 내용</p><textarea class="banner-content-input3" ></textarea></div>
+                    <div>
+                        <p>폰트 색상</p>
+                        <button class="banner-font-black3" ></button>
+                        <button class="banner-font-white3"></button>
+                    </div>
+                    <div>
+                        <p>정렬 방식</p>
+                        <button class="banner-left3" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">left</button>
+                        <button class="banner-right3" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">right</button>
+                    </div>
+                </div>
+                <div class="banner-3"><p>이벤트 링크 연결하기</p><button class="event-selectEvent3">이벤트 목록 조회</button></div>
+                <div class="banner-4">
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 번호</p>
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 이름</p>
+                    <p>* 배너 클릭 시 해당 이벤트 상세조회 페이지로 연결됩니다</p>
+                </div>
+            </div>
+
+
+
+            <div class="admin-banner-container">
+                <div class="banner-1"><p>4번 배너</p></div>
+                <div class="event-thumbnail-img4" style="background-image: url(/images/help/파일업로드.png)">
+                    <div class="bannerImg-inner-text4">
+                        <p class="inner-banner-title4" style="font-size: 20px;"></p>
+                        <p class="inner-banner-content4" style="font-size: 15px;"></p>
+                    </div>
+                </div>
+                <div class="banner-2"><p>배너 이미지 등록</p><input type="file" class="eventImage" onchange="eventThumbnailUpload4(this)" accept="image/*"></div>
+                <div class="banner-5">
+                    <div><p>배너 제목</p><input class="banner-title-input4" type="text"></div>    
+                    <div><p>배너 내용</p><textarea class="banner-content-input4" ></textarea></div>
+                    <div>
+                        <p>폰트 색상</p>
+                        <button class="banner-font-black4" ></button>
+                        <button class="banner-font-white4"></button>
+                    </div>
+                    <div>
+                        <p>정렬 방식</p>
+                        <button class="banner-left4" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">left</button>
+                        <button class="banner-right4" style="width: 50px; height: 50px; border: 1px solid gray; border-radius: 25px;">right</button>
+                    </div>
+                </div>
+                <div class="banner-3"><p>이벤트 링크 연결하기</p><button class="event-selectEvent4">이벤트 목록 조회</button></div>
+                <div class="banner-4">
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 번호</p>
+                    <p class="admin-event-link" style="width: max-content; height: max-content; padding: 5px; border: 1px solid black; color: gray;">링크 연결할 이벤트 이름</p>
+                    <p>* 배너 클릭 시 해당 이벤트 상세조회 페이지로 연결됩니다</p>
+                </div>
+            </div>
+
+
+
+
+            <button class="banner-upload" style="width: 100px; height: 50px; border: 1px solid gray; background-color: white; margin: 0 420px;">변경하기</button>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="member-mamage-backBtn">뒤로가기</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script>
+
+        /* 뒤로가기 */
+        const backBtn = document.querySelector(".member-mamage-backBtn");
+        backBtn.addEventListener("click", () => {
+            location.href = "http://localhost/admin";
+        })
+        
+        // /* 팝업 열고 닫기 */
+        // const addBtn = document.querySelector('.admin-event-add');
+        // const popup = document.querySelector(".event-add-popup");
+
+        // addBtn.addEventListener("click", () => {
+        //     if (popup.classList.contains("event-add-popup-hidden")) {
+        //         setTimeout(() => {
+        //             popup.style.opacity = 1;
+        //         }, 50);
+        //         popup.classList.remove("event-add-popup-hidden");
+        //         return;
+        //     }
+        //     if(!popup.classList.contains("event-add-popup-hidden") && !linkpopup.classList.contains("event-link-popup-hidden")){
+        //         preventDefault();
+        //     }
+        //     popup.style.opacity = 0;
+        //     setTimeout(() => {
+        //         popup.classList.add("event-add-popup-hidden");
+        //     }, 150);
+        // })
+
+        // /* X 버튼 팝업 닫기 */
+        // const popupXbtn = document.querySelector(".event-popup-X");
+        // popupXbtn.addEventListener("click", () => {
+        //     if(!popup.classList.contains("event-add-popup-hidden") && !linkpopup.classList.contains("event-link-popup-hidden")){
+        //         preventDefault();
+        //     }
+        //     popup.style.opacity = 0;
+        //     setTimeout(() => {
+        //         popup.classList.add("event-add-popup-hidden");
+        //     }, 150);
+        // })
+
+
+
+        
+        /* 이미지 파일 변수 */
+        let imageInput1 = '';
+        let imageInput2 = '';
+        let imageInput3 = '';
+        let imageInput4 = '';
+
+        /* 파일 이미지 업로드 시 썸네일 화면 미리보기 출력 */
+        const eventThumbnailUpload1 = (file) => {
+
+            const thumbnail = document.querySelector(".event-thumbnail-img1");
+            
+            if(file.files && file.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    imageInput1 = file.files[0];
+                    thumbnail.style.backgroundImage = "url("+ e.target.result + ")";
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else{
+                thumbnail.style.backgroundImage ="url(/images/help/파일업로드.png)";
+                imageInput1 = '';
+            }
+
+        }
+        const eventThumbnailUpload2 = (file) => {
+
+            const thumbnail = document.querySelector(".event-thumbnail-img2");
+            
+            if(file.files && file.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    imageInput2 = file.files[0];
+                    thumbnail.style.backgroundImage = "url("+ e.target.result + ")";
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else{
+                thumbnail.style.backgroundImage ="url(/images/help/파일업로드.png)";
+                imageInput2 = '';
+            }
+
+        }
+        const eventThumbnailUpload3 = (file) => {
+
+            const thumbnail = document.querySelector(".event-thumbnail-img3");
+
+            if(file.files && file.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    imageInput3 = file.files[0];
+                    thumbnail.style.backgroundImage = "url("+ e.target.result + ")";
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else{
+                thumbnail.style.backgroundImage ="url(/images/help/파일업로드.png)";
+                imageInput3 = '';
+            }
+
+        }
+        const eventThumbnailUpload4 = (file) => {
+
+            const thumbnail = document.querySelector(".event-thumbnail-img4");
+
+            if(file.files && file.files[0]){
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    imageInput4 = file.files[0];
+                    thumbnail.style.backgroundImage = "url("+ e.target.result + ")";
+                }
+                reader.readAsDataURL(file.files[0]);
+            }
+            else{
+                thumbnail.style.backgroundImage ="url(/images/help/파일업로드.png)";
+                imageInput4 = '';
+            }
+
+        }
+      
+
+        /* 배너 제목, 내용 수정 */
+        // 배너 제목
+        const bannerTitle = document.querySelector(".banner-title-input");
+        bannerTitle.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-title").innerText = e.target.value;
+        })
+
+        // 배너 내용
+        const bannerContent = document.querySelector(".banner-content-input");
+        bannerContent.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-content").innerText = e.target.value;
+        })
+        // 배너 제목
+        const bannerTitle2 = document.querySelector(".banner-title-input2");
+        bannerTitle2.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-title2").innerText = e.target.value;
+        })
+
+        // 배너 내용
+        const bannerContent2 = document.querySelector(".banner-content-input2");
+        bannerContent2.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-content2").innerText = e.target.value;
+        })
+        // 배너 제목
+        const bannerTitle3 = document.querySelector(".banner-title-input3");
+        bannerTitle3.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-title3").innerText = e.target.value;
+        })
+
+        // 배너 내용
+        const bannerContent3 = document.querySelector(".banner-content-input3");
+        bannerContent3.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-content3").innerText = e.target.value;
+        })
+        // 배너 제목
+        const bannerTitle4 = document.querySelector(".banner-title-input4");
+        bannerTitle4.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-title4").innerText = e.target.value;
+        })
+
+        // 배너 내용
+        const bannerContent4 = document.querySelector(".banner-content-input4");
+        bannerContent4.addEventListener("input", (e) => {
+            document.querySelector(".inner-banner-content4").innerText = e.target.value;
+        })
+
+
+
+
+
+
+
+
+
+        /* 배너 폰트 색상, 정렬 방식 */
+        const bannerFontBlack = document.querySelector(".banner-font-black");
+        const bannerFontWhite = document.querySelector(".banner-font-white");
+        const bannerFontBlack2 = document.querySelector(".banner-font-black2");
+        const bannerFontWhite2 = document.querySelector(".banner-font-white2");
+        const bannerFontBlack3 = document.querySelector(".banner-font-black3");
+        const bannerFontWhite3 = document.querySelector(".banner-font-white3");
+        const bannerFontBlack4 = document.querySelector(".banner-font-black4");
+        const bannerFontWhite4 = document.querySelector(".banner-font-white4");
+
+
+        
+
+        bannerFontBlack.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title").style.color = 'black';
+            document.querySelector(".inner-banner-content").style.color = 'black';
+        })
+
+        bannerFontWhite.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title").style.color = 'white';
+            document.querySelector(".inner-banner-content").style.color = 'white';
+        })
+        bannerFontBlack2.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title2").style.color = 'black';
+            document.querySelector(".inner-banner-content2").style.color = 'black';
+        })
+
+        bannerFontWhite2.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title2").style.color = 'white';
+            document.querySelector(".inner-banner-content2").style.color = 'white';
+        })
+        bannerFontBlack3.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title3").style.color = 'black';
+            document.querySelector(".inner-banner-content3").style.color = 'black';
+        })
+
+        bannerFontWhite3.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title3").style.color = 'white';
+            document.querySelector(".inner-banner-content3").style.color = 'white';
+        })
+        bannerFontBlack4.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title4").style.color = 'black';
+            document.querySelector(".inner-banner-content4").style.color = 'black';
+        })
+
+        bannerFontWhite4.addEventListener("click", () => {
+            document.querySelector(".inner-banner-title4").style.color = 'white';
+            document.querySelector(".inner-banner-content4").style.color = 'white';
+        })
+
+
+
+
+
+
+
+
+
+
+
+        /* 배너 텍스트 정렬 방식 */
+        const bannerLeft = document.querySelector(".banner-left");
+        const bannerRight = document.querySelector(".banner-right");
+        const bannerLeft2 = document.querySelector(".banner-left2");
+        const bannerRight2 = document.querySelector(".banner-right2");
+        const bannerLeft3 = document.querySelector(".banner-left3");
+        const bannerRight3 = document.querySelector(".banner-right3");
+        const bannerLeft4 = document.querySelector(".banner-left4");
+        const bannerRight4 = document.querySelector(".banner-right4");
+
+
+
+        bannerLeft.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text").style.float = 'left'
+        })
+        bannerRight.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text").style.float = 'right'
+        })
+        bannerLeft2.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text2").style.float = 'left'
+        })
+        bannerRight2.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text2").style.float = 'right'
+        })
+        bannerLeft3.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text3").style.float = 'left'
+        })
+        bannerRight3.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text3").style.float = 'right'
+        })
+        bannerLeft4.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text4").style.float = 'left'
+        })
+        bannerRight4.addEventListener("click", () => {
+            document.querySelector(".bannerImg-inner-text4").style.float = 'right'
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+        /* 이벤트 목록 조회 열기 */
+        const eventListPopup = document.querySelector(".event-search-div");
+        const selectEvent = document.querySelector(".event-selectEvent");
+        const selectEvent2 = document.querySelector(".event-selectEvent2");
+        const selectEvent3 = document.querySelector(".event-selectEvent3");
+        const selectEvent4 = document.querySelector(".event-selectEvent4");
+
+        
+
+        selectEvent.addEventListener("click", (e) => {
+            if(eventListPopup.classList.contains("event-search-div-hidden")){
+                eventListPopup.classList.remove("event-search-div-hidden")
+                getEventList(e);
+                bannerXBtn();
+                document.querySelector('body').style.pointerEvents='none';
+                eventListPopup.style.pointerEvents = 'auto';
+                return;
+            }
+            eventListPopup.classList.add("event-search-div-hidden");
+            document.querySelector('body').style.pointerEvents='auto';
+        })
+        selectEvent2.addEventListener("click", (e) => {
+            if(eventListPopup.classList.contains("event-search-div-hidden")){
+                eventListPopup.classList.remove("event-search-div-hidden")
+                getEventList(e);
+                bannerXBtn();
+                document.querySelector('body').style.pointerEvents='none';
+                eventListPopup.style.pointerEvents = 'auto';
+                return;
+            }
+            eventListPopup.classList.add("event-search-div-hidden");
+            document.querySelector('body').style.pointerEvents='auto';
+        })
+        selectEvent3.addEventListener("click", (e) => {
+            if(eventListPopup.classList.contains("event-search-div-hidden")){
+                eventListPopup.classList.remove("event-search-div-hidden")
+                getEventList(e);
+                bannerXBtn();
+                document.querySelector('body').style.pointerEvents='none';
+                eventListPopup.style.pointerEvents = 'auto';
+                return;
+            }
+            eventListPopup.classList.add("event-search-div-hidden");
+            document.querySelector('body').style.pointerEvents='auto';
+        })
+        selectEvent4.addEventListener("click", (e) => {
+            if(eventListPopup.classList.contains("event-search-div-hidden")){
+                eventListPopup.classList.remove("event-search-div-hidden")
+                getEventList(e);
+                bannerXBtn();
+                document.querySelector('body').style.pointerEvents='none';
+                eventListPopup.style.pointerEvents = 'auto';
+                return;
+            }
+            eventListPopup.classList.add("event-search-div-hidden");
+            document.querySelector('body').style.pointerEvents='auto';
+        })
+
+
+
+        /* 이벤트 목록 X 닫기 */
+        const bannerXBtn = () => {
+            const bannerX = document.querySelector(".event-list-X");
+            bannerX.addEventListener("click", () => {
+                eventListPopup.classList.add("event-search-div-hidden");
+                document.querySelector('body').style.pointerEvents='auto';
+            })
+        }
+
+
+        /* 이벤트 목록 읽어오기 */
+        const getEventList = (e) => {
+
+            fetch("/admin/eventList")
+            .then(Response => {
+                if(Response.ok){
+                    return Response.text();
+                }
+                throw new Error("이벤트 리스트 조회 실패")
+            })
+            .then(html => {
+
+                eventListPopup.innerHTML = html;
+                bannerXBtn();
+                getEventListClick(e);
+            })
+
+        }
+
+
+        /* 이벤트 목록 조회 후 클릭 이벤트 */
+        const getEventListClick = (e) => {
+
+            const eventList = document.querySelectorAll(".banner-event-content");
+            for(let i = 0; i < eventList.length; i++){
+                eventList[i].addEventListener("click", () => {
+
+                    const eventNo = eventList[i].children[0].innerText;
+                    const eventTitle = eventList[i].children[1].innerText;
+
+                    e.target.closest(".admin-banner-container").children[5].children[0].innerText = eventNo;
+                    e.target.closest(".admin-banner-container").children[5].children[1].innerText = eventTitle;
+
+                    document.querySelector(".event-list-X").click();
+
+                })
+            }
+
+        }
+
+
+
+        /* 변경하기(완료) 버튼 클릭 시 */
+        const updateBtn = document.querySelector(".banner-upload");
+        updateBtn.addEventListener("click", () => {
+
+            const formData = new FormData();
+
+            if(imageInput1 === ''){
+                alert("1번 배너 이미지 선택")
+                return;
+            }
+            if(imageInput2 === ''){
+                alert("2번 배너 이미지 선택")
+                return;
+            }
+            if(imageInput3 === ''){
+                alert("3번 배너 이미지 선택")
+                return;
+            }
+            if(imageInput4 === ''){
+                alert("4번 배너 이미지 선택")
+                return;
+            }
+            
+            let title1 = document.querySelector(".inner-banner-title").innerText;
+            if(title1 === ''){
+                alert("1번 배너 제목 입력")
+                return;
+            }
+            let title2 = document.querySelector(".inner-banner-title2").innerText;
+            if(title2 === ''){
+                alert("2번 배너 제목 입력")
+                return;
+            }
+            let title3 = document.querySelector(".inner-banner-title3").innerText;
+            if(title3 === ''){
+                alert("3번 배너 제목 입력")
+                return;
+            }
+            let title4 = document.querySelector(".inner-banner-title4").innerText;
+            if(title4 === ''){
+                alert("4번 배너 제목 입력")
+                return;
+            }
+
+            let color1 = document.querySelector(".inner-banner-title").style.color;
+            if(color1 === ''){
+                color1 = 'black'
+            }
+            let color2 = document.querySelector(".inner-banner-title2").style.color;
+            if(color2 === ''){
+                color2 = 'black'
+            }
+            let color3 = document.querySelector(".inner-banner-title3").style.color;
+            if(color3 === ''){
+                color3 = 'black'
+            }
+            let color4 = document.querySelector(".inner-banner-title4").style.color;
+            if(color4 === ''){
+                color4 = 'black'
+            }
+
+            let lr1 = document.querySelector(".bannerImg-inner-text").style.float;
+            if(lr1 === ''){
+                lr1 = 'left'
+            }
+            let lr2 = document.querySelector(".bannerImg-inner-text2").style.float;
+            if(lr2 === ''){
+                lr2 = 'left'
+            }
+            let lr3 = document.querySelector(".bannerImg-inner-text3").style.float;
+            if(lr3 === ''){
+                lr3 = 'left'
+            }
+            let lr4 = document.querySelector(".bannerImg-inner-text4").style.float;
+            if(lr4 === ''){
+                lr4 = 'left'
+            }
+
+            let linkNo1 = document.querySelectorAll(".admin-banner-container")[0].children[5].children[0].innerText;
+            if(linkNo1 === '링크 연결할 이벤트 번호'){
+                alert("1번 배너 이벤트 링크 선택")
+                return;
+            }
+            let linkNo2 = document.querySelectorAll(".admin-banner-container")[1].children[5].children[0].innerText;
+            if(linkNo2 === '링크 연결할 이벤트 번호'){
+                alert("2번 배너 이벤트 링크 선택")
+                return;
+            }
+            let linkNo3 = document.querySelectorAll(".admin-banner-container")[2].children[5].children[0].innerText;
+            if(linkNo3 === '링크 연결할 이벤트 번호'){
+                alert("3번 배너 이벤트 링크 선택")
+                return;
+            }
+            let linkNo4 = document.querySelectorAll(".admin-banner-container")[3].children[5].children[0].innerText;
+            if(linkNo4 === '링크 연결할 이벤트 번호'){
+                alert("4번 배너 이벤트 링크 선택")
+                return;
+            }
+
+            
+            
+
+            formData.append("image1", imageInput1)
+            formData.append("title1", document.querySelector(".inner-banner-title").innerText)
+            formData.append("content1", document.querySelector(".inner-banner-content").innerText)
+            formData.append("color1",color1)
+            formData.append("lr1", lr1)
+            formData.append("linkNo1", linkNo1)
+            
+            formData.append("image2", imageInput2)
+            formData.append("title2", document.querySelector(".inner-banner-title2").innerText)
+            formData.append("content2", document.querySelector(".inner-banner-content2").innerText)
+            formData.append("color2",color2)
+            formData.append("lr2", lr2)
+            formData.append("linkNo2", linkNo2)
+            
+            formData.append("image3", imageInput3)
+            formData.append("title3", document.querySelector(".inner-banner-title3").innerText)
+            formData.append("content3", document.querySelector(".inner-banner-content3").innerText)
+            formData.append("color3",color3)
+            formData.append("lr3",lr3)
+            formData.append("linkNo3", linkNo3)
+            
+            formData.append("image4", imageInput4)
+            formData.append("title4", document.querySelector(".inner-banner-title4").innerText)
+            formData.append("content4", document.querySelector(".inner-banner-content4").innerText)
+            formData.append("color4",color4)
+            formData.append("lr4", lr4)
+            formData.append("linkNo4", linkNo4)
+
+
+            fetch("/admin/mainBannerInsert", {
+                method : "POST",
+                body : formData
+            })
+            .then(Response => {
+                if(Response.ok){
+                    return Response.text();
+                }
+                throw new Error("베너 변경 실패")
+            })
+            .then(result => {
+                if(result > 0){
+                    alert("메인 베너 변경 성공")
+                    location.href = "/";
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
+
+
+
+            // alert(formData.get("image1"))
+            // alert(formData.get("title1"))
+            // alert(formData.get("content1"))
+            // alert(formData.get("color1"))
+            // alert(formData.get("lr1"))
+            // alert(formData.get("linkNo1"))
+            // alert(formData.get("linkTitle1"))
+            
+            // alert(formData.get("image2"))
+            // alert(formData.get("title2"))
+            // alert(formData.get("content2"))
+            // alert(formData.get("color2"))
+            // alert(formData.get("lr2"))
+            // alert(formData.get("linkNo2"))
+            // alert(formData.get("linkTitle2"))
+            
+            // alert(formData.get("image3"))
+            // alert(formData.get("title3"))
+            // alert(formData.get("content3"))
+            // alert(formData.get("color3"))
+            // alert(formData.get("lr3"))
+            // alert(formData.get("linkNo3"))
+            // alert(formData.get("linkTitle3"))
+            
+            // alert(formData.get("image4"))
+            // alert(formData.get("title4"))
+            // alert(formData.get("content4"))
+            // alert(formData.get("color4"))
+            // alert(formData.get("lr4"))
+            // alert(formData.get("linkNo4"))
+            // alert(formData.get("linkTitle4"))
+
+        })
+
+
+
+
+
+
+
+        // /* 링크 걸기 위해 디바이스 찾는 팝업 열기 */
+        // const linkBtn1 = document.querySelector(".event-selectDevice1");
+        // const linkpopup1 = document.querySelector(".event-link-popup1");
+        // linkBtn1.addEventListener("click", () => {
+        //     if (linkpopup1.classList.contains("event-link-popup-hidden1")) {
+        //         setTimeout(() => {
+        //             linkpopup1.style.opacity = 1;
+        //         }, 50);
+        //         linkpopup1.classList.remove("event-link-popup-hidden1");
+        //         return;
+        //     }
+        //     linkpopup1.style.opacity = 0;
+        //     setTimeout(() => {
+        //         linkpopup1.classList.add("event-link-popup-hidden1");
+        //     }, 150);
+        // })
+
+        // /* 링크 팝업 닫기 버튼  */
+        // const linkXBtn = document.querySelector(".link-popup-X");
+        // linkXBtn.addEventListener("click", () => {
+        //     linkpopup.style.opacity = 0;
+        //     setTimeout(() => {
+        //         linkpopup.classList.add("event-link-popup-hidden");
+        //     }, 150);
+        // })
+
+
+        // /* 기종 선택 화면 삼성,애플 선택버튼 */
+        // const selectArea = document.querySelectorAll(".event-link-select");
+        // const button1 = document.querySelectorAll(".event-link-select-button1");
+
+        // // 삼성
+        // button1[0].addEventListener('click', () => {
+
+        //     // 갤럭시 갤럭시탭
+        //     const galaxy = document.createElement("div");
+        //     const galaxyTab = document.createElement("div");
+
+        //     galaxy.classList.add("event-link-select-button2")
+        //     galaxy.innerText = 'Galaxy'
+        //     galaxyTab.innerText = 'Galaxy Tab'
+        //     galaxyTab.classList.add("event-link-select-button2")
+
+        //     // 클릭 시 이벤트
+        //     galaxy.addEventListener("click", () => {
+
+        //         // 갤럭시 a, s, fold, filp 시리즈 출력
+        //         const galaxyA = document.createElement("div");
+        //         const galaxyS = document.createElement("div");
+        //         const galaxyFilp = document.createElement("div");
+        //         const galaxyFold = document.createElement("div");
+
+        //         galaxyA.classList.add("event-link-select-button3")
+        //         galaxyA.innerText = "galaxy A"
+        //         galaxyS.classList.add("event-link-select-button3")
+        //         galaxyS.innerText = "galaxy S"
+        //         galaxyFilp.classList.add("event-link-select-button3")
+        //         galaxyFilp.innerText = "galaxy Filp"
+        //         galaxyFold.classList.add("event-link-select-button3")
+        //         galaxyFold.innerText = "galaxy Fold"
+
+        //             // 버튼 클릭 시 갤럭시 시리즈별로 출력 
+        //             galaxyA.addEventListener("click" , () => {
+        //                 fetch("/admin/event/galaxy?series=A")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //             })
+        //             galaxyS.addEventListener("click" , () => {
+        //                 fetch("/admin/event/galaxy?series=S")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //             })
+        //             galaxyFilp.addEventListener("click" , () => {
+        //                 fetch("/admin/event/galaxy?series=Filp")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //             })
+        //             galaxyFold.addEventListener("click" , () => {
+        //                 fetch("/admin/event/galaxy?series=Fold")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //             })
+
+
+
+
+
+
+        //         selectArea[2].replaceChildren();
+        //         selectArea[3].replaceChildren();
+
+        //         selectArea[2].append(galaxyA)
+        //         selectArea[2].append(galaxyS)
+        //         selectArea[2].append(galaxyFilp)
+        //         selectArea[2].append(galaxyFold)
+
+        //     })
+
+
+        //     galaxyTab.addEventListener("click", () => {
+
+        //         // 갤탭 시리즈 출력
+        //         const galaxyTab = document.createElement("div");
+
+        //         galaxyTab.classList.add("event-link-select-button3")
+        //         galaxyTab.innerText = "galaxy Tab S"
+
+        //         selectArea[2].replaceChildren();
+        //         selectArea[3].replaceChildren();
+
+        //         galaxyTab.addEventListener("click" , () => {
+        //                 fetch("/admin/event/galaxy?series=Tab")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //             })
+
+        //         selectArea[2].append(galaxyTab)
+
+        //     })
+
+
+        //     selectArea[1].replaceChildren();
+        //     selectArea[2].replaceChildren();
+        //     selectArea[3].replaceChildren();
+
+        //     selectArea[1].append(galaxy)
+        //     selectArea[1].append(galaxyTab)
+
+        // })
+        // // 애플
+        // button1[1].addEventListener('click', () => {
+
+        //     // 아이폰 아이패드
+        //     const Iphone = document.createElement("div");
+        //     const Ipad = document.createElement("div");
+
+        //     Iphone.classList.add("event-link-select-button2")
+        //     Iphone.innerText = 'iPhone'
+        //     Ipad.innerText = 'iPad'
+        //     Ipad.classList.add("event-link-select-button2")
+
+        //     //  클릭 시 이벤트
+        //     Iphone.addEventListener("click", () => {
+
+        //         // 아이폰 숫자, X 시리즈 출력
+        //         const iPhone1 = document.createElement("div");
+        //         const iPhoneX = document.createElement("div");
+
+        //         iPhone1.classList.add("event-link-select-button3")
+        //         iPhone1.innerText = "iPhone"
+        //         iPhoneX.classList.add("event-link-select-button3")
+        //         iPhoneX.innerText = "iPhone X"
+
+        //         iPhone1.addEventListener("click", () => {
+        //             fetch("/admin/event/iPhone?series=number")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //         })
+        //         iPhoneX.addEventListener("click", () => {
+        //             fetch("/admin/event/iPhone?series=X")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //         })
+
+
+
+
+
+        //         selectArea[2].replaceChildren();
+        //         selectArea[3].replaceChildren();
+
+        //         selectArea[2].append(iPhone1)
+        //         selectArea[2].append(iPhoneX)
+
+
+        //     })
+
+        //     Ipad.addEventListener("click", () => {
+
+        //         // 아이패드 시리즈 출력
+        //         const iPad = document.createElement("div");
+
+        //         iPad.classList.add("event-link-select-button3")
+        //         iPad.innerText = "iPad"
+
+        //         iPad.addEventListener("click", () => {
+        //             fetch("/admin/event/iPhone?series=Pad")
+        //                 .then(Response => {
+        //                     if(Response.ok){
+        //                         return Response.text();
+        //                     }
+        //                     throw new Error("시리즈 조회 실패")
+        //                 })
+        //                 .then(html => {
+        //                     selectArea[3].innerHTML = html;
+        //                     getDeviceLink();
+        //                 })
+        //         })
+
+        //         selectArea[2].replaceChildren();
+        //         selectArea[3].replaceChildren();
+
+        //         selectArea[2].append(iPad)
+
+        //     })
+
+
+        //     selectArea[1].replaceChildren();
+        //     selectArea[2].replaceChildren();
+        //     selectArea[3].replaceChildren();
+
+        //     selectArea[1].append(Iphone)
+        //     selectArea[1].append(Ipad)
+
+        // })
+
+
+        // /* 이벤트 링크 기종 선택 시 이벤트 */
+        // const getDeviceLink = () => {
+
+        //     const deviceBtn = document.querySelectorAll(".event-link-select-button4");
+        //     for(let i = 0; i < deviceBtn.length; i++){
+        //         deviceBtn[i].addEventListener("click", () => {
+        //             if(deviceBtn[i].innerText === '검색 결과 없음'){
+        //                 return;
+        //             }
+        //             document.querySelectorAll(".admin-event-link")[0].innerText = deviceBtn[i].dataset.deviceNo;
+        //             document.querySelectorAll(".admin-event-link")[1].innerText = deviceBtn[i].dataset.deviceName;
+        //             document.querySelector(".link-popup-X").click();
+        //         })
+        //     }
+
+        // }
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.point.dto.Point;
 import edu.kh.bcs.review.dto.Review;
 import edu.kh.bcs.review.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class ReviewServiewImpl implements ReviewService {
 	
 	// 리뷰 정보 insert
 	@Override
-	public int reviewInsert(Review review, MultipartFile imgInput) {
+	public int reviewInsert(Review review, MultipartFile imgInput, int memberNo) {
 		
 		// 파일 업로드 확인
 		if (imgInput.isEmpty()) {
@@ -51,6 +52,23 @@ public class ReviewServiewImpl implements ReviewService {
 		// DB UPDATE
 		int result = mapper.reviewInsert(review);
 		
+		int orderNo = review.getOrderNo();
+		
+		int plusPoint = mapper.selectPlusPoint(orderNo);
+		
+		// 포인트 적립
+		Point point = new Point();
+		
+		point.setAmount(plusPoint);
+		point.setMemberNo(memberNo);
+		
+		// 주문 고객 포인트 체크
+		
+		// 주문 고객 포인트 내리기
+		int result1 = mapper.pointChange(point);
+		int result2 = mapper.insertPointLog(point);
+		
+		
 		
 		// 로컬 저장소 업로드
 		try {
@@ -66,8 +84,9 @@ public class ReviewServiewImpl implements ReviewService {
 			throw new Error("이미지 입력 실패");
 		}
 		
+		int currentPoint = mapper.selectMemberPoint(memberNo);
 		
-		return result;
+		return currentPoint;
 	}
 
 	

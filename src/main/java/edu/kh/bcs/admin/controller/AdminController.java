@@ -1,3 +1,4 @@
+
 package edu.kh.bcs.admin.controller;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -109,6 +112,13 @@ public class AdminController {
 	}
 	
 	
+	//이벤트 관리
+	@GetMapping("adminMainBanner")  
+	public String adminBanner() {
+		
+		
+		return "admin/adminMainBanner";
+	}
 	//이벤트 관리
 	@GetMapping("adminEvent")  
 	public String adminEvent() {
@@ -386,6 +396,120 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("getEventPagenation")
+	public String adminEventPage(
+			Model model,
+			@RequestParam("cp") int cp
+			) {
+		
+		int resultCount = service.geteventListCount();
+		
+		int cpCount = resultCount / 6;
+		int cp1 = resultCount % 6;
+		
+		int pn1 = (cp -1) / 5;
+		List<String> pnList = new ArrayList<>();
+	
+		
+		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
+			if(i > cpCount+1) {
+				break;
+			}
+			pnList.add(""+i);
+		}
+		
+		if(cp1 != 0) {
+			cpCount++;
+		}
+		
+		model.addAttribute("pnList", pnList);
+		model.addAttribute("cpCount", cpCount);
+		
+		for(int i = 0; i < pnList.size(); i++) {
+			if(pnList.get(i).equals(""+cpCount)) {
+				model.addAttribute("lastIndex", 1);
+			}
+			else {
+				model.addAttribute("lastIndex",0);
+			}
+		}
+		
+		return "admin/adminMember/adminMemberPage";
+	}
+	
+	@GetMapping("getEventList")
+	public String getEventList(
+			@RequestParam("cp") int cp,
+			Model model
+			) {
+		
+		List<EventDto> eventList = service.getEventList(cp);
+				
+		model.addAttribute("eventList",eventList);
+		System.out.println(eventList);
+		System.out.println(eventList);
+		System.out.println(eventList);
+		
+		return "admin/adminEvent/eventList";
+	}
+	
+	@ResponseBody
+	@PostMapping("eventImgUpdate")
+	public int eventImgUpdate(
+			@RequestParam("img") MultipartFile img,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventImgUpdate(img,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventTitleUpdate")
+	public int eventTitleUpdate(
+			@RequestParam("eventTitle") String eventTitle,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventTitleUpdate(eventTitle,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventContentUpdate")
+	public int eventContentUpdate(
+			@RequestParam("eventContent") String eventContent,
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		int result = service.eventContentUpdate(eventContent,eventNo);
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("eventFlUpdate")
+	public String eventFlUpdate(
+			@RequestParam("eventNo") int eventNo
+			) {
+		
+		String result = service.eventFlUpdate(eventNo);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("adminMemberSearch")
 	public String adminMemberSearch(
 			Model model,
@@ -476,14 +600,11 @@ public class AdminController {
 		
 		model.addAttribute("deviceList", deviceList);
 		
-		System.out.println(deviceList);
-		System.out.println(deviceList);
-		System.out.println(deviceList);
-		System.out.println(deviceList);
 		
 		return "admin/adminEvent/deviceType";
 	}
 	
+
 	//update 화면 전환
 	@GetMapping("adminUpdate/{deviceNo}")
 	public String update(
@@ -534,6 +655,86 @@ public class AdminController {
 	}
 	
 	
+
+	@GetMapping("eventList")
+	public String eventList(
+			Model model
+			) {
+		
+		List<EventDto> eventList = service.getEventList();
+		
+		model.addAttribute("eventList", eventList);
+		
+		return "/admin/adminEvent/bannerEvent";
+	}
+	
+	@ResponseBody
+	@PostMapping("mainBannerInsert")
+	public int mainBannerInsert(
+			@RequestParam("image1") MultipartFile file1,
+			@RequestParam("title1") String title1,
+			@RequestParam("content1") String content1,
+			@RequestParam("color1") String color1,
+			@RequestParam("lr1") String lr1,
+			@RequestParam("linkNo1") String linkNo1,
+			@RequestParam("image2") MultipartFile file2,
+			@RequestParam("title2") String title2,
+			@RequestParam("content2") String content2,
+			@RequestParam("color2") String color2,
+			@RequestParam("lr2") String lr2,
+			@RequestParam("linkNo2") String linkNo2,
+			@RequestParam("image3") MultipartFile file3,
+			@RequestParam("title3") String title3,
+			@RequestParam("content3") String content3,
+			@RequestParam("color3") String color3,
+			@RequestParam("lr3") String lr3,
+			@RequestParam("linkNo3") String linkNo3,
+			@RequestParam("image4") MultipartFile file4,
+			@RequestParam("title4") String title4,
+			@RequestParam("content4") String content4,
+			@RequestParam("color4") String color4,
+			@RequestParam("lr4") String lr4,
+			@RequestParam("linkNo4") String linkNo4
+			) {
+		
+		MainBannerDto banner1 = new MainBannerDto();
+		banner1.setMainBannerTitle(title1);
+		banner1.setMainBannerContent(content1);
+		banner1.setMainBannerFontColor(color1);
+		banner1.setMainBannerLr(lr1);
+		banner1.setMainBannerLink(linkNo1);
+		
+		MainBannerDto banner2 = new MainBannerDto();
+		banner2.setMainBannerTitle(title2);
+		banner2.setMainBannerContent(content2);
+		banner2.setMainBannerFontColor(color2);
+		banner2.setMainBannerLr(lr2);
+		banner2.setMainBannerLink(linkNo2);
+		
+		MainBannerDto banner3 = new MainBannerDto();
+		banner3.setMainBannerTitle(title3);
+		banner3.setMainBannerContent(content3);
+		banner3.setMainBannerFontColor(color3);
+		banner3.setMainBannerLr(lr3);
+		banner3.setMainBannerLink(linkNo3);
+		
+		MainBannerDto banner4 = new MainBannerDto();
+		banner4.setMainBannerTitle(title4);
+		banner4.setMainBannerContent(content4);
+		banner4.setMainBannerFontColor(color4);
+		banner4.setMainBannerLr(lr4);
+		banner4.setMainBannerLink(linkNo4);
+		
+		int result = service.updateBanner(banner1,banner2,banner3,banner4,file1,file2,file3,file4);
+		
+		System.out.println(banner1);
+		System.out.println(banner2);
+		System.out.println(banner3);
+		System.out.println(banner4);
+		
+		return result;
+	}
+
 	
 	
 	

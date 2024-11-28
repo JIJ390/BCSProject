@@ -143,6 +143,10 @@ main{
   justify-content: center;
 }
 
+.deviceList-item-box a{
+  text-decoration: none;
+}
+
 .deviceList-item-section{
   display: flex;
   flex-direction: column;
@@ -253,6 +257,12 @@ main{
 .device-link{
   text-decoration: none;
   color: black;
+}
+
+.devuceList-item-section{
+  text-decoration: none;
+  color: black;
+  text-align: center;
 }
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.review.dto.Review;
 
 @Mapper
 public interface DeviceBuyingMapper {
@@ -111,6 +112,47 @@ public interface DeviceBuyingMapper {
 	Map<String, String> priceStatus(int deviceNo);
 
 
+	/**
+	 * 리뷰 정보1
+	 * @param deviceNo
+	 * @return
+	 */
+	Map<String, Object> selectReviewStatus(int deviceNo);
+
+
+	/**
+	 * 리뷰 목록
+	 * @param deviceNo
+	 * @return
+	 */
+	List<Review> selectReviewList(int deviceNo);
+
+
+	/**
+	 * 리뷰 추가로 불러오기
+	 * @param deviceNo
+	 * @param reviewCount
+	 * @return
+	 */
+	Review reviewPlus(
+			@Param("deviceNo") int deviceNo,
+			@Param("reviewCount") int reviewCount);
+
+
+	
+	
+	
+	Map<String, String> checkNextReview(			
+			@Param("deviceNo") int deviceNo,
+			@Param("reviewCount") int reviewCount);
+
+
+	/**
+	 * 
+	 * @param recentDeviceNo
+	 * @return
+	 */
+	Device selectRecentDevice(int recentDeviceNo);
 
 	
 	

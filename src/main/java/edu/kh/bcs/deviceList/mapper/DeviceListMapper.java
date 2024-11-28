@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.help.dto.MainBannerDto;
 
 @Mapper
 public interface DeviceListMapper {
@@ -53,6 +54,34 @@ public interface DeviceListMapper {
 
 
 
+
+	List<Device> brandSellList(String brand);
+
+
+
+
+
+
+	List<Device> searchDevices(String query);
+
+
+
+
+
+	// 한글로 검색
+	List<Device> searchDevicesKor(String query);
+
+
+
+
+
+
+	List<MainBannerDto> bannerList();
+
+
+
+
+	
 
 	
 

@@ -50,6 +50,10 @@ public class SidebarController {
 		List<ChattingRoomDto> chatList = service.adminChatCheck(memberNo);
 		model.addAttribute("chatList", chatList);
 		
+		System.out.println(chatList);
+		System.out.println(chatList);
+		System.out.println(chatList);
+		
 		return "common/sidebar/adminChat";
 	}
 	
@@ -69,6 +73,7 @@ public class SidebarController {
 		return "common/sidebar/adminChatDetail";
 	}
 	
+	// 채팅방 생성
 	@ResponseBody
 	@GetMapping("sidebar/createChatRoom")
 	public int createChatRoom(
@@ -98,17 +103,17 @@ public class SidebarController {
 			@RequestParam("memberNo") int memberNo
 			) {
 		
-		int result = service.firstArCheck(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
+		System.out.println(memberNo);
 		
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
+		int result = service.firstArCheck(memberNo);
 		
 		return result;
 	}

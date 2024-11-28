@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.kh.bcs.device.dto.Device;
+import edu.kh.bcs.help.dto.MainBannerDto;
 
 public interface DeviceListService {
 
@@ -32,6 +33,19 @@ public interface DeviceListService {
 	
 	/* 드롭다운 판매 브랜드별 필터 */
 	List<Device> sellList(String category);
+
+
+	List<Device> brandSellList(String brand);
+
+
+	List<Device> searchDevices(String query);
+
+
+	List<MainBannerDto> bannerList();
+
+
+	
+	
 
 
 	

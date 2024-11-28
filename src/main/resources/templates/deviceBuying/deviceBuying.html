@@ -17,6 +17,21 @@
     <section class="left-section">
     </section>
     <section class="main-section">
+
+      <div class="head-nav">
+        <a href="/deviceList">
+          <span>구매하기</span>
+        </a>
+        <span> > </span>
+        <a th:href="|/deviceList?category=${device.deviceBrand}|">
+          <span th:text="|${device.deviceBrand}|"></span>
+        </a>
+        <span> > </span>
+        <a th:href="|/device/buy/${device.deviceNo}|">
+          <span th:text="${device.deviceName}"></span>
+        </a>
+      </div>
+
       <div class="device-buying-head">
         <span class="page-title" th:text="${device.deviceName}">
           iPhone 16
@@ -27,7 +42,32 @@
       </div>
 
       <div class="device-buying-container">
-        <img src="/images/sample_iphone16.jpg" alt="">
+        <div class="device-buying-img-box">
+
+          <div class="slide-img-container">
+
+            <div>
+              <img th:src="${device.deviceImg}" class="img-slide" alt="">
+            </div>
+
+
+            <th:block th:each= "color:${device.colorList}" th:object="${color}">
+              <div>
+                <img th:src="*{colorDeviceImg}" class="img-slide" alt="">
+              </div>
+            </th:block>
+          </div>
+
+          
+          <div class="img-dot-container">
+            <span class="dot" onclick="showSlide(0)"></span>
+
+            <th:block th:each= "color, stat :${device.colorList}" th:object="${color}">
+              <span class="dot" th:onclick="showSlide([[${stat.count}]])" th:data-value="${stat.count}"></span>
+            </th:block>
+
+          </div>
+        </div>
 
         <div class="device-buying-info">
 
@@ -36,7 +76,7 @@
             <span>색상을 선택하세요</span>
           </div>
           <div class="color-content">
-            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}" th:each="color:${device.colorList}" th:object="${color}">
+            <div class="color-circle" th:style="|background-color: *{colorCode};|" th:data-value="*{colorNo}" th:data-value2="*{colorName}"  th:data-value3="${stat.count}" th:each="color, stat :${device.colorList}" th:object="${color}">
             </div>
 
             <span class="color-name"></span>
@@ -215,19 +255,149 @@
 
       <hr>
 
+      <div class="review-container">
+        <div class="review-head-box">
+
+          <div class="review-title" th:text="|고객 후기 (${reviewCount})|">고객 후기(37)</div>
+
+
+          <div class="star-container">
+            <div class="star-text">평점</div>
+            <div class="star-box">
+              <div class="star-star">
+                <img src="/images/review2/empty-star-left.png" alt="0.5점" class="star" data-value="0.5">
+                <img src="/images/review2/empty-star-right.png" alt="1점"   class="star" data-value="1">
+              </div>
+              <div class="star-star">
+                <img src="/images/review2/empty-star-left.png" alt="1.5점" class="star" data-value="1.5">
+                <img src="/images/review2/empty-star-right.png" alt="2점"   class="star" data-value="2">
+              </div>
+              <div class="star-star">
+                <img src="/images/review2/empty-star-left.png" alt="2.5점" class="star" data-value="2.5">
+                <img src="/images/review2/empty-star-right.png"alt="3점"   class="star" data-value="3">
+              </div>
+              <div class="star-star">
+                <img src="/images/review2/empty-star-left.png" alt="3.5점" class="star" data-value="3.5">
+                <img src="/images/review2/empty-star-right.png"alt="4점"   class="star" data-value="4">
+              </div>
+              <div class="star-star">
+                <img src="/images/review2/empty-star-left.png" alt="4.5점" class="star" data-value="4.5">
+                <img src="/images/review2/empty-star-right.png"alt="5점"   class="star" data-value="5">
+              </div>
+            </div>
+            <div class="star-score" th:text="${avgScore}"></div>
+          </div>
+
+        </div>
+
+        <th:block th:if="${#lists.isEmpty(reviewList)}">        
+          <div class="none-list">아직 후기가 작성되지 않았습니다</div>
+        </th:block>
+
+
+        <th:block th:each= "review:${reviewList}" th:object="${review}">
+
+          <div class="review-content-box">
+            <div class="review-content-head">
+              <div class="review-content-info">
+                <div class="review-name" th:text="*{memberName}">asd</div>
+
+                <!-- 리뷰 내 별 -->
+                <div class="review-star-container" th:data-value="*{reviewScore}">
+
+                  <div class="review-star-box">
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="0.5점" class="review-star" data-value="0.5">
+                      <img src="/images/review2/empty-star-right.png" alt="1점"   class="review-star" data-value="1">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="1.5점" class="review-star" data-value="1.5">
+                      <img src="/images/review2/empty-star-right.png" alt="2점"   class="review-star" data-value="2">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="2.5점" class="review-star" data-value="2.5">
+                      <img src="/images/review2/empty-star-right.png"alt="3점"   class="review-star" data-value="3">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="3.5점" class="review-star" data-value="3.5">
+                      <img src="/images/review2/empty-star-right.png"alt="4점"   class="review-star" data-value="4">
+                    </div>
+                    <div class="review-star-star">
+                      <img src="/images/review2/empty-star-left.png" alt="4.5점" class="review-star" data-value="4.5">
+                      <img src="/images/review2/empty-star-right.png"alt="5점"   class="review-star" data-value="5">
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="review-date" th:text="*{reviewDate}">asdsa</div>
+              </div>
+            </div>
+            
+            <div class="review-main-content">
+              <div class="review-img-box">
+                <img th:src="*{reviewImg}" alt="">
+              </div>
+              <!--style="white-space:pre;"" 공백과 개행문자가 모두 표현 -->
+              <div style="white-space:pre;" class="review-text-box" th:text="*{reviewContent}">asds</div>
+            </div>
+            <div class="review-device" th:text="|구매 기종 > *{deviceName} > *{colorName} > *{capacityType} > *{gradeType} 등급|"></div>
+
+          </div>
+
+        </th:block>
+      </div>
+
+      <div class="review-btn-area">
+        <button class="review-plus-btn" id="reviewPlusBtn" th:unless="${#lists.isEmpty(reviewList)}">리뷰 더 보기</button>
+      </div>
+
+
+
     </section>
     <section class="right-section">
+
+
+      <!-- 최근 본 목록 -->
+      <div class="recent-list-container">
+        <img class="recent-img" src="/images/buyingDevice/recentDevice.png" alt="">
+        <span>최근 본 상품</span>
+
+        <th:block th:if= "${recentDeviceList}" th:each= "recentDevice:${recentDeviceList}" th:object="${recentDevice}">
+      
+          <div class="recent-box">
+            <a th:href="|@{/device/buy/}*{deviceNo}|">
+              <div>
+                <img th:src="*{deviceImg}" alt="">
+                <span th:text="*{deviceName}"></span>
+              </div>
+            </a>
+          </div>
+        </th:block>
+      </div>
+
+
     </section>
+
+
+
+
+    <div class="close-popup img-popup">
+      <img th:src="${device.deviceImg}" alt="" class="popup-img">
+    </div>
+
+    <div id="blackDisplay"></div>
   </main>
   <footer>
     <th:block th:replace="~{common/footer}"></th:block>
   </footer>
 
 
+
+
   <script th:inline="javascript">
     const device = /*[[${device}]]*/ 기종;
     const loginMember = /*[[${session.loginMember}]]*/ 로그인회원;
-
     const priceList = /*[[${priceList}]]*/ 시세정보;
   </script>
 

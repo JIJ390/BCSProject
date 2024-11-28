@@ -1,9 +1,5 @@
 
 
-
-
-
-
 // 색상 > 용량 > 등급 순으로 선택 하도록
 // 상위 필터 선택하지 않으면 클릭 이벤트 불가
 
@@ -24,6 +20,9 @@ capacityContent.classList.add("none-click");
 gradeContent.classList.add("none-click");
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  // 처음 페이지 로딩 시 
+  showSlide(0);
 
   // 색상 재고 확인 후 색상 회색 변경
   fetch("/device/buy/checkColor",  {
@@ -91,7 +90,73 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
+  // 반올림
+  let avgScore = document.querySelector(".star-score").innerText;
+
+  avgScore = Math.round(avgScore * 2) / 2;
+
+  // 리뷰 전체 별점 부여
+  highlightStars(avgScore);
+
+
+
+
+  // 리뷰 목록 별점 부여 (초기 3개)
+  const reviewStarContainer = document.querySelectorAll(".review-star-container");
+
+  reviewStarContainer.forEach((reviewStar) => {
+    const score = reviewStar.getAttribute("data-value");
+
+    console.log(score);
+
+                  // 요소 내부에서 모두 찾기
+    const stars = reviewStar.querySelectorAll(".review-star");
+
+    console.log(stars);
+
+    stars.forEach((star, index) => {
+      if (star.dataset.value <= score) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+    });
+
+  })
+
 })
+
+
+
+
+// 별 채우기 함수
+const highlightStars = (rating) => {
+
+  console.log(rating);
+
+  const stars = document.querySelectorAll(".star-container .star");
+
+  stars.forEach((star, index) => {
+      if (star.dataset.value <= rating) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+  });
+}
+
 
 
 
@@ -170,6 +235,11 @@ const checkSelectedColor = async (colorNo, circle) => {
     circle.classList.add('selected-color');
 
     const colorName = circle.getAttribute("data-value2");
+
+    // 색상 인덱스로 슬라이드 이동
+    const index = circle.getAttribute("data-value3");
+
+    showSlide(index);
 
     document.querySelector(".color-name").innerText = colorName;
 
@@ -296,10 +366,6 @@ const checkSelectedGrade = async (colorNo, capacityNumber, gradeNumber, grade) =
 
 
 
-
-
-
-
 const buyingFrm = document.querySelector("#buyingFrm");
 
 // 유효성 검사
@@ -310,9 +376,16 @@ buyingFrm.addEventListener("submit", e => {
     e.preventDefault();
 
     alert("로그인 후 이용해 주세요");
+
     if (confirm("로그인 페이지로 이동하시겠습니까?")) {
+      urlBackup = location.pathname;
       location.href = "/myPage/myPageLogin";
     }
+
+    if(loginMember !== null) {
+      location.href = `/device/buy/${deviceNo}`;
+    }
+
     return;
   }
 
@@ -540,30 +613,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // let maxPrice = 0;
-  // let minPrice = 9999999999;
-  
-
-  // console.log(priceList);
-
-  // priceList.forEach((item) => {
-  //   if (item.avgPrice > maxPrice) {
-  //     maxPrice = item.avgPrice
-  //   }
-
-  //   if (item.avgPrice < minPrice) {
-  //     minPrice = item.avgPrice
-  //   }
-  // })
-
-  // if (document.querySelector(".max-price") !== null) {
-  //   document.querySelector(".max-price").innerText = maxPrice.toLocaleString('ko-KR') + ' ₩';
-  // }
-
-  // if (document.querySelector(".min-price") !== null) {
-  //   document.querySelector(".min-price").innerText = minPrice.toLocaleString('ko-KR') + ' ₩';
-  // }
-
 
   const myChart = new Chart(ctx, {
       type: 'line',
@@ -626,3 +675,184 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 })
+
+
+
+
+
+
+// 리뷰 더 보기!!
+const reviewPlusBtn = document.querySelector("#reviewPlusBtn");
+
+reviewPlusBtn?.addEventListener("click", () => {
+
+  const reviewCount = document.querySelectorAll(".review-content-box").length;
+
+  // 현재 화면 상의 리뷰 숫자와 기종 번호 비동기 통신으로 보내기
+  const obj = {
+    "reviewCount" : reviewCount + 1,
+    "deviceNo" : deviceNo
+  }
+
+  fetch("/device/buy/reviewPlus", {
+    method : "POST", 
+    headers: {"Content-Type": "application/json"}, 
+    body : JSON.stringify(obj)
+  })
+  .then(response => {
+    if(response.ok) return response.text();
+    throw new Error("리뷰 조회 실패 : " + response.status);
+  })
+  .then(html => {
+
+    const reviewContainer = document.querySelector(".review-container");
+
+    // div 에 응답 html 모두 넣기
+    const div = document.createElement("div");
+    div.innerHTML = html;
+
+    // div 내부 별점 컨테이너 위치 찾기
+    const reviewStar = div.querySelector(".review-star-container")
+
+    // 컨테이너 별점 value 얻기
+    const score = reviewStar.getAttribute("data-value");
+
+    // 요소 내부에서 모두 찾기
+    const stars = reviewStar.querySelectorAll(".review-star");
+
+    console.log(stars);
+
+    stars.forEach((star, index) => {
+      if (star.dataset.value <= score) {
+        
+        // 0.5 단위
+        if (index % 2 !== 0) {
+          star.src = "/images/review2/filled-star-right.png";
+        }
+        else {
+          star.src = "/images/review2/filled-star-left.png";
+        }
+
+      }
+    });
+
+
+    // reviewCheck 확인 확인
+    const reviewCheck = div.querySelector(".review-check");
+
+    /* review-check 가 존재하고 그 값이 1일떄 */
+    if ((reviewCheck !== null) && (reviewCheck.getAttribute("data-value") == 1)) {
+      reviewPlusBtn.remove();
+    }
+
+    reviewContainer.append(div);
+
+    
+    
+  })
+  .catch(err => console.error(err));
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let currentIndex = 0;
+
+// 색상 슬라이드 기능
+const showSlide = (index) => {
+  const imgContainer = document.querySelector('.slide-img-container');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = document.querySelectorAll('.img-slide').length;
+
+
+  if (index >= totalSlides) {
+    currentIndex = 0;
+  } else if (index < 0) {
+    currentIndex = totalSlides - 1;
+  } else {
+    currentIndex = index;
+  }
+
+  // 슬라이드 개수로 나누기
+  const slateIndex = 100 / totalSlides;
+
+  imgContainer.style.transform = `translateX(-${currentIndex * slateIndex}%)`;
+
+  // 모든 dot을 비활성화하고 현재 슬라이드에 해당하는 dot만 활성화
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentIndex].classList.add('active');
+}
+
+
+
+
+// 이미지 팝업
+
+// 팝업
+const imgPopUp = document.querySelector(".img-popup");
+
+// 팝업 내부 이미지
+const popupImg = document.querySelector(".popup-img");
+
+const imgList = document.querySelectorAll(".img-slide");
+
+imgList.forEach((item, index) => {
+
+  item.addEventListener("click", e => {
+
+    console.log(item.src);
+
+    popupImg.src = item.src.substr(16);
+
+    e.stopPropagation(); // 이벤트 전파 방지 팝업이 열리면서 꺼지는 현상 방지
+    popupOpenImg();
+  })
+
+})
+
+
+
+
+// 팝업 열기
+const popupOpenImg = () => {
+
+
+  imgPopUp.classList.remove("close-popup");
+  document.querySelector("#blackDisplay").classList.add("overlay");
+
+}
+
+// 팝업 닫기
+const popupCloseImg = () => {
+  imgPopUp.classList.add("close-popup");
+  document.querySelector("#blackDisplay").classList.remove("overlay");
+}
+
+window.addEventListener("click", e => {
+
+  // 팝업 레이어 가 닫혀있지 않고 팝업 레이어 바깥을 눌렀을 때만 동작!!
+  if (!imgPopUp.classList.contains("close-popup")
+      && (e.target !== imgPopUp)) {
+      popupCloseImg();
+  }
+})
+
+// 팝업 내부 요소 클릭 시 이벤트 전파 막기
+imgPopUp.addEventListener("click", e => {
+  e.stopPropagation();
+});

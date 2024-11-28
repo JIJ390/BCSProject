@@ -21,7 +21,7 @@ import edu.kh.bcs.help.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
+@RequestMapping("help")
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -31,14 +31,14 @@ public class EventController {
 	
 	
 	// 글쓰기 화면
-	@GetMapping("help/eventWriteView")
+	@GetMapping("eventWriteView")
 	public String eventWriteGo() {
 		return "/help/eventWrite";
 	}
 	
 	
 	// 이벤트 리스트 보기
-	@GetMapping("help/event")
+	@GetMapping("event")
 	public String selectEventList(
 			@RequestParam(value="cp", required = false, defaultValue="1") int cp,
 			Model model
@@ -60,7 +60,7 @@ public class EventController {
 	
 	
 
-	@PostMapping("help/eventWrite")
+	@PostMapping("eventWrite")
 	public String eventWrite(
 			@ModelAttribute EventDto inputEvent,
 			@RequestParam("eventImage2") MultipartFile eventImage2,
@@ -83,7 +83,7 @@ public class EventController {
 			path = "insert";
 			message = "게시글 작성 실패";
 		} else {
-			path = "/help/event/" + eventNo; // 상세조회 주소
+			path = "eventView/" + eventNo; // 상세조회 주소
 			message = "게시글이 작성 되었습니다";
 		}
 		
@@ -95,6 +95,22 @@ public class EventController {
 	}
 	
 	
+	// 이벤트 게시물 상세 보기
+	@GetMapping("eventView/{eventNumber:[0-9]+}")
+	public String detailViewEvent(
+			@PathVariable("eventNumber") int eventNo,
+			Model model,
+			RedirectAttributes ra
+			) {
+		
+		EventDto detailviewEvent = service.detailViewEvent(eventNo);
+				
+		
+		model.addAttribute("event", detailviewEvent);
+
+		
+		return "help/eventView";
+	}
 	
 	
 	

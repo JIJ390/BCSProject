@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/myPage/signUp.css">
     <link rel="stylesheet" href="/css/common/header.css">
     <link rel="stylesheet" href="/css/common/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body class="orderHistoryBody">
   <header>
@@ -18,27 +20,33 @@
     <section class="main-section">
 
     <div class="container">
-        <h2>내폰 판매내역</h2>
+        <h2>내 폰 판매내역</h2>
  
 
-        <table>
-            <thead>
-                <tr>
-                    <th>해당 기종 정보</th>
-                    <th>주문일자</th>
-                    <th>상태</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>아이폰 4s 황금색 S급 8GB</td>
-                    <td>24년11월22일</td>
-                    <td>판매신청/검수중/송금/반려</td>
-                </tr>
-          
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
+            <table id="orderTable">
+                <thead>
+                    <tr>
+                        <th>해당 기종 정보</th>
+                        <th>판매일자</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>아이폰 4s 황금색 S급 8GB</td>
+                        <td>24년11월22일</td>
+                        <td>판매신청/검수중/송금/반려</td>
+                    </tr>
+              
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+
+        <div class="backDiv">
+            <div id="backBtn">뒤로<i class="fa-solid fa-rotate-right"></i></div>
+        </div>
+
+
         <div class="pagination" id="paginationBox">
             <a href="#">1</a>
             <a href="#">2</a>
@@ -64,5 +72,5 @@
     <th:block th:replace="~{common/footer}"></th:block>
 </footer>
 </body>
-<script src="/js/myPage/myPage.js"></script>
+<script src="/js/myPage/mypageOrderHistory.js"></script>
 </html>

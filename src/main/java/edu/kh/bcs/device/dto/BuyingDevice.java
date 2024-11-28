@@ -30,6 +30,7 @@ public class BuyingDevice {
 	private String gradeType;
 	private String colorName;
 	private String deviceName;
+	private String colorDeviceImg;
 	
 	
 

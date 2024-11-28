@@ -1,0 +1,56 @@
+<th:block th:object="${review}">
+
+  <div class="review-content-box">
+    <div class="review-content-head">
+      <div class="review-content-info">
+        <div class="review-name" th:text="*{memberName}">asd</div>
+
+        <!-- 리뷰 내 별 -->
+        <div class="review-star-container" th:data-value="*{reviewScore}">
+
+          <div class="review-star-box">
+            <div class="review-star-star">
+              <img src="/images/review2/empty-star-left.png" alt="0.5점" class="review-star" data-value="0.5">
+              <img src="/images/review2/empty-star-right.png" alt="1점"   class="review-star" data-value="1">
+            </div>
+            <div class="review-star-star">
+              <img src="/images/review2/empty-star-left.png" alt="1.5점" class="review-star" data-value="1.5">
+              <img src="/images/review2/empty-star-right.png" alt="2점"   class="review-star" data-value="2">
+            </div>
+            <div class="review-star-star">
+              <img src="/images/review2/empty-star-left.png" alt="2.5점" class="review-star" data-value="2.5">
+              <img src="/images/review2/empty-star-right.png"alt="3점"   class="review-star" data-value="3">
+            </div>
+            <div class="review-star-star">
+              <img src="/images/review2/empty-star-left.png" alt="3.5점" class="review-star" data-value="3.5">
+              <img src="/images/review2/empty-star-right.png"alt="4점"   class="review-star" data-value="4">
+            </div>
+            <div class="review-star-star">
+              <img src="/images/review2/empty-star-left.png" alt="4.5점" class="review-star" data-value="4.5">
+              <img src="/images/review2/empty-star-right.png"alt="5점"   class="review-star" data-value="5">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="review-date" th:text="*{reviewDate}">asdsa</div>
+      </div>
+    </div>
+    
+    <div class="review-main-content">
+      <div class="review-img-box">
+        <img th:src="*{reviewImg}" alt="">
+      </div>
+      <!--style="white-space:pre;"" 공백과 개행문자가 모두 표현 -->
+      <div style="white-space:pre;" class="review-text-box" th:text="*{reviewContent}">asds</div>
+    </div>
+    <div class="review-device" th:text="|구매 기종 > *{deviceName} > *{colorName} > *{capacityType} > *{gradeType} 등급|"></div>
+
+  </div>
+
+  <!-- div -->
+  <div th:if= "*{reviewCheck} == 1" th:data-value = "*{reviewCheck}" class="review-check none-list">
+    더 작성된 리뷰가 없습니다
+  </div>
+
+</th:block>

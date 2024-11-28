@@ -25,12 +25,16 @@ public class Order {
 	private int pointLogNo;
 	
 	// 추가 필드
+	private String orderStatusContent;
 	private String deviceName;
 	private String colorName;
 	private String capacityType;
 	private String gradeType;
+
 	private String memberId;
-	private String orderStatusContent;
+
+	private String colorDeviceImg;
+
 	
 
 }

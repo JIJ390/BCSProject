@@ -12,4 +12,6 @@ public interface EventService {
 
 	Map<String, Object> selectEventList(int cp);
 
+	EventDto detailViewEvent(int eventNo);
+
 }

@@ -50,7 +50,25 @@ public interface MyPageService {
 	 */
 	int numberChange(String number, int memberNo);
 
-
+	/** 판매내역
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
 	Map<String, Object> selectSellingList(int cp, int memberNo);
+
+	/** 포인트내역
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	Map<String, Object> selectPointList(int cp, int memberNo);
+
+	/** 판매내역
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	Map<String, Object> selectBuyingList(int cp, int memberNo);
 
 }

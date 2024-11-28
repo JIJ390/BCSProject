@@ -31,7 +31,10 @@
 		FROM MEMBER
 	</select>
 	
-	
+	<select id="geteventListCount">
+		SELECT COUNT(*)
+		FROM EVENT
+	</select>
 	
 	
 	
@@ -107,21 +110,23 @@ SELECT E.*, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO = E.MEMBER_NO) "ME
 	SELECT CHATTING_MESSAGE_CONTENT
 	FROM 
 		(
-			SELECT CHATTING_MESSAGE_CONTENT, ROWNUM "RN"
+			SELECT CHATTING_MESSAGE_CONTENT
 			FROM CHATTING_MESSAGE
 			WHERE CHATTING_ROOM_NO = E.CHATTING_ROOM_NO
 			ORDER BY CHATTING_MESSAGE_NO DESC
 		) "E"
-	WHERE RN = 1
+	WHERE ROWNUM = 1
 ) "LAST_MESSAGE",
 (
 	SELECT COUNT(*) 
 	FROM CHATTING_MESSAGE 
 	WHERE RECEIVER_NO = #{memberNo}
 	AND CHATTING_MESSAGE_READ_FL = 'N' 
+	AND CHATTING_ROOM_NO = E.CHATTING_ROOM_NO
 ) "NO_READ_COUNT"
 FROM CHATTING_ROOM "E"
 WHERE MEMBER_NO = #{memberNo} OR ADMIN_NO = #{memberNo}
+ORDER BY NO_READ_COUNT DESC
 	</select>
 	
 	<select id="adminChattingList">
@@ -261,6 +266,16 @@ AND CHATTING_ROOM_NO = #{chattingRoomNo}
 		ORDER BY DEVICE_RELEASE_DATE DESC
 	</select>
 	
+	<select id="checkRoomNo">
+		SELECT COUNT(*)
+		FROM CHATTING_ROOM	
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	<select id="checkRoomFl">
+		SELECT COUNT(*)
+		FROM CHATTING_ROOM
+		WHERE ADMIN_NO = #{memberNo}
+	</select>
 	
 	<select id="deviceList" resultType="Device">
 SELECT 
@@ -338,6 +353,47 @@ ORDER BY
 	DEVICE_DATE DESC
 	</select>
 	
+	<update id="update1Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 1
+	</update>
+	<update id="update2Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 2
+	</update>
+	<update id="update3Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 3
+	</update>
+	<update id="update4Banner">
+		UPDATE MAIN_BANNER
+		SET MAIN_BANNER_IMG = #{mainBannerImg}
+		, MAIN_BANNER_TITLE = #{mainBannerTitle}
+		, MAIN_BANNER_CONTENT = #{mainBannerContent}
+		, MAIN_BANNER_LINK = #{mainBannerLink}
+		, MAIN_BANNER_FONT_COLOR = #{mainBannerFontColor}
+		, MAIN_BANNER_LR = #{mainBannerLr}
+		WHERE MAIN_BANNER_NO = 4
+	</update>
+	
 	
 	
 	
@@ -369,6 +425,56 @@ ORDER BY
 	   #{deviceNameKor}
 	)
 	</insert>
+	
+	<select id="getEventLIst">
+		SELECT *
+		FROM EVENT
+		ORDER BY EVENT_NUMBER DESC
+	</select>
+	<select id="getEventLIstCp">
+		SELECT *
+		FROM
+			(SELECT E.*, ROWNUM "RN"
+			FROM
+				(SELECT *
+				FROM EVENT
+				ORDER BY EVENT_NUMBER DESC) E)
+		WHERE RN BETWEEN 1 + ((#{cp}-1)*6) AND 6 + ((#{cp}-1)*6)
+	</select>
+	
+	<update id="eventUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_IMAGE = #{url1},
+			EVENT_THUMBNAIL = #{url2}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventTitleUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_TITLE = #{eventTitle}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventContentUpdate">
+		UPDATE EVENT
+		SET 
+			EVENT_CONTENT = #{eventContent}
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<update id="eventFlUpdate">
+		UPDATE "EVENT"
+		SET EVENT_DEL_FL = CASE WHEN EVENT_DEL_FL = 'Y' THEN 'N' ELSE 'Y' END
+		WHERE EVENT_NUMBER = #{eventNo}
+	</update>
+	<select id="eventFlSearch">
+		SELECT EVENT_DEL_FL
+		FROM EVENT
+		WHERE EVENT_NUMBER = #{eventNo}
+	</select>
+	
+	
+	
+	
 
 <!--DEVICENO 하나 가져오기 -->
 <select id="selectDeviceNo">

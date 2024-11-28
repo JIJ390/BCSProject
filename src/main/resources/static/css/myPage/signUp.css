@@ -237,6 +237,12 @@ input[type="password"] input[type="phoneNumber"] {
   font-size: 12px;
   letter-spacing: -1px;
 }
+.signUp-message1 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
 
 /* 메세지 색상 지정 */
 .confirm {
@@ -464,9 +470,10 @@ button[type="button"]:hover {
 }
 
 
-
-
-
+main {
+  display: flex;
+  justify-content: center;
+}
 
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 메인 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
@@ -514,6 +521,52 @@ button[type="button"]:hover {
   transition: transform 0.3s;
 }
 
+.icon-item-point{
+  margin: 30px;
+  width: 250px;
+  height: 150px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 100%; */
+  /* height: 70%; */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+
+}
+
+.icon-item-point p {
+  position: absolute;
+  top: 79%;
+  width: 100%;
+  text-align: center;
+  left: -1%;
+  font-size: 18px;
+  z-index: 100;
+}
+
+.pointSize{
+
+  display: inline-block;
+
+  position: relative;
+  top: -67px;
+
+
+}
+
+.icon-item-point img {
+
+  width: 200px;
+  height: auto;
+  /* margin-left: 43px; */
+}
+
 .icon-item:hover {
   transform: scale(1.05);
 }
@@ -538,12 +591,38 @@ button[type="button"]:hover {
   margin-top: 0%;
   margin: auto;
   width: 36%;
-  height: max-content;
+  height: 500px;
   padding: 40px;
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.mypageUpdate-box2 {
+  margin-top: 0%;
+  margin: auto;
+  width: 36%;
+  height: 500px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mypageUpdate-box3 {
+  margin-top: 0%;
+  margin: auto;
+  width: 36%;
+  height: 500px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  z-index: 100;
+}
+
+
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 마이페이지 수정 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
@@ -559,7 +638,18 @@ button[type="button"]:hover {
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 80px;
+  
+}
+
+.update-group3 {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  margin-top: 100px;
+  
 }
 
 .update-group-1 {
@@ -570,6 +660,15 @@ button[type="button"]:hover {
   position: relative;
   margin-bottom: 10px;
   font-size: 12px;
+}
+
+.update-group2 {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  margin-top: 50px;
 }
 
 .signup-button-update {
@@ -586,6 +685,22 @@ button[type="button"]:hover {
 }
 
 .signup-button-update:hover {
+  background-color: #bcbcbc;}
+
+.signup-button-updateApi {
+  margin-top: 40px;
+  width: 200px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #333;
+  background-color: var(--main-gray-color);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.signup-button-updateApi:hover {
   background-color: #bcbcbc;}
 
 .signup-button-delete {
@@ -608,7 +723,18 @@ button[type="button"]:hover {
 .btn-container {
   display: flex;
   justify-content: center;
+}
 
+.btn-container2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.btn-container3 {
+  display: flex;
+  margin-top: 28px;
+  justify-content: center;
 }
 
 .withDraw{
@@ -630,7 +756,7 @@ button[type="button"]:hover {
   padding: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 h2 {
@@ -641,7 +767,7 @@ h2 {
 
 .point-mid {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-bottom: 10px;
 }
 
@@ -655,7 +781,7 @@ h2 {
 }
 
 .point-icon {
-  width: 10%;
+  width: 6%;
   margin-right: 10px;
   margin-top: -11px;
 }
@@ -682,7 +808,6 @@ tr > td:last-child {
   width: 15%;
 }
 
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -707,6 +832,20 @@ main{
   width: auto !important;
 }
 
+.backDiv{
+
+  margin: 10px;
+
+
+}
+
+#backBtn{
+  margin: 10px;
+  position: relative;
+  right: -88%;
+  cursor: pointer;
+}
+
 /* 전번변경 */
 
 #number{
@@ -720,7 +859,7 @@ main{
 
 .signup-button-update1 {
   margin-top: 40px;
-  width: 120px;
+  width: 161px;
   padding: 10px 20px;
   font-size: 16px;
   color: #333;
@@ -749,3 +888,10 @@ main{
   
   .signup-button-delete1:hover {
     background-color: #bcbcbc!important;}
+
+    /*  */
+    .address-input{
+
+      width: 100% !important;
+
+    }

@@ -8,9 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.kh.bcs.common.dto.Pagination;
+import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.myPage.mapper.MyPageMapper;
+import edu.kh.bcs.point.dto.Point;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -114,9 +116,9 @@ public class MyPageServiceImpl implements MyPageService{
 	public Map<String, Object> selectSellingList(int cp, int memberNo) {
 		
 			  // 게시물 수
-	     	int completedListCount = mapper.selectSellingListCount();
+	     	int completedListCount = mapper.selectSellingListCount(memberNo);
 	     
-	      log.debug("completedListCount : {}", completedListCount);
+//	      log.debug("completedListCount : {}", completedListCount);
 	      
 	      Pagination pagination = new Pagination(cp, completedListCount, 10, 5);
 
@@ -135,12 +137,86 @@ public class MyPageServiceImpl implements MyPageService{
 	      
 	      Map<String, Object> map = Map.of("selectSellingList", selectSellingList, "pagination", pagination);
 	      
-	      System.out.println(selectSellingList);
-	      System.out.println(pagination);
+//	      System.out.println(selectSellingList);
+//	      System.out.println(pagination);
 	      
 		return map;
 	}
+
+	// 포인트 내역
+	@Override
+	public Map<String, Object> selectPointList(int cp, int memberNo) {
+		
+	  // 게시물 수
+   	int selectPointListCount = mapper.selectPointListCount(memberNo);
+   
+//    log.debug("selectPointListCount : {}", selectPointListCount);
+    
+    Pagination pagination = new Pagination(cp, selectPointListCount, 10, 5);
+
+    // ex) 현재 페이지 2 - 1 = 1
+    // 1 * 5 = 5
+    // 해당 인덱스 부터 게시물 가져오는 값
+    int offset = (cp - 1) * pagination.getLimit();
+    
+    // 페이징 처리를 위해 제공하는 API
+    // offset: 조회 시작 위치를 지정 (0부터 시작)
+    // limit: 조회할 데이터의 개수를 지정
+    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+    
+    List<Point> selectPointList = mapper.selectPointList(memberNo, rowBounds);
+    
+    
+    Map<String, Object> map = Map.of("selectPointList", selectPointList, "pagination", pagination);
+    
+//    System.out.println(selectPointList);
+//    System.out.println(pagination);
+    
+    return map;
+	}
 	
+	// 내폰 구매내역
+	@Override
+	public Map<String, Object> selectBuyingList(int cp, int memberNo) {
+	
+		 // 게시물 수
+   	int selectBuyingListCount = mapper.selectBuyingListCount(memberNo);
+   
+   	log.debug("selectBuyingListCount : {}", selectBuyingListCount);
+   	
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
+//   	System.out.println(memberNo);
+    log.debug("selectBuyingListCount : {}", selectBuyingListCount);
+    
+    Pagination pagination = new Pagination(cp, selectBuyingListCount, 10, 5);
+
+    // ex) 현재 페이지 2 - 1 = 1
+    // 1 * 5 = 5
+    // 해당 인덱스 부터 게시물 가져오는 값
+    int offset = (cp - 1) * pagination.getLimit();
+    
+    // 페이징 처리를 위해 제공하는 API
+    // offset: 조회 시작 위치를 지정 (0부터 시작)
+    // limit: 조회할 데이터의 개수를 지정
+    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+    
+    List<Order> selectBuyingList = mapper.selectBuyingList(memberNo, rowBounds);
+    
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    log.debug("pagination : {}", pagination);
+    
+    
+    Map<String, Object> map = Map.of("selectBuyingList", selectBuyingList, "pagination", pagination);
+    
+//    System.out.println(selectBuyingList);
+//    System.out.println(pagination);
+    
+    return map;
+	}
 	
 	
 	

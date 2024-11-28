@@ -15,6 +15,8 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
@@ -137,6 +139,7 @@ public interface AdminMapper {
 
 	List<Device> iPad();
 
+
 //구매 신청 리스트 조회
 	List<Order> adminSale(String deviceNo);
 	
@@ -167,6 +170,31 @@ public interface AdminMapper {
 	List<Capacity> reloadCapacityPrice(String deviceNo);
 
 
+
+	int checkRoomNo(int memberNo);
+
+	boolean checkRoomFl(int memberNo);
+
+	List<EventDto> getEventLIst();
+
+	int update1Banner(MainBannerDto banner1);
+	int update2Banner(MainBannerDto banner2);
+	int update3Banner(MainBannerDto banner3);
+	int update4Banner(MainBannerDto banner4);
+
+	int geteventListCount();
+
+	List<EventDto> getEventLIstCp(int cp);
+
+	int eventUpdate(@Param("url1")String url1, @Param("url2")String url2, @Param("eventNo")int eventNo);
+
+	int eventTitleUpdate(@Param("eventTitle")String eventTitle, @Param("eventNo")int eventNo);
+
+	int eventContentUpdate(@Param("eventContent")String eventContent, @Param("eventNo")int eventNo);
+
+	int eventFlUpdate(int eventNo);
+
+	String eventFlSearch(int eventNo);
 
 
 

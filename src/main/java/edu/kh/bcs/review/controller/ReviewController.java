@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.service.DeviceOrderService;
+import edu.kh.bcs.myPage.dto.Member;
 import edu.kh.bcs.review.dto.Review;
 import edu.kh.bcs.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("review")
+@SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
 public class ReviewController {
 
@@ -34,6 +38,7 @@ public class ReviewController {
 	public String ReviewWriteView(
 			@PathVariable("orderNo") int orderNo,
 			RedirectAttributes ra,
+			@SessionAttribute("loginMember") Member loginMember,
 			Model model) {
 		
 		
@@ -42,10 +47,10 @@ public class ReviewController {
 		
 		Order orderDevice = orderService.selectOrder(orderNo);
 		
-//		if (orderDevice.getMemberNo() != memberNo) {
-//			ra.addFlashAttribute("message", "잘못된 접근입니다");
-//			return "redirect:/";
-//		}
+		if (orderDevice.getMemberNo() != loginMember.getMemberNo()) {
+			ra.addFlashAttribute("message", "잘못된 접근입니다");
+			return "redirect:/";
+		}
 		
 		orderDevice.setOrderNo(orderNo);
 		
@@ -60,17 +65,20 @@ public class ReviewController {
 	public String ReviewInsert(
 			@ModelAttribute Review review,
 			@RequestParam("imgInput") MultipartFile imgInput,
-			RedirectAttributes ra
-//			@session
+			RedirectAttributes ra,
+			@SessionAttribute("loginMember") Member loginMember
 			) {
 		
-		int memberNo = 1;
+		int memberNo = loginMember.getMemberNo();
 		
-		int result = reviewService.reviewInsert(review, imgInput);
+		// result == currentPoint
+		int result = reviewService.reviewInsert(review, imgInput, memberNo);
 		
 		if (result == 0) {
 			ra.addFlashAttribute("message", "등록 실패");
 		}
+		
+		loginMember.setMemberPoint(result);
 		
 		return "redirect:/";
 	}

@@ -75,10 +75,17 @@ public class EventServiceImpl implements EventService {
 		        File resizedImage = new File(folderPath + thumbRename);
 		        
 		        
+		    	// 원본 파일명 뒤에서 부터 검색해서 처음 찾은 "."의 index
+				int index = eventImage.getOriginalFilename().lastIndexOf(".") + 1;
+				
+				// 원본 파일명 "." 부터 끝까지 잘라낸 문자열 == .확장자
+				String ext = eventImage.getOriginalFilename().substring(index);
+		        
+		        
 	            // 이미지를 리사이즈하여 출력 경로에 저장
 	            Thumbnails.of(originalImage)
 	                .size(270, 200)  // 썸네일 크기 (너비 150px, 높이 150px)
-	                .outputFormat("jpg")
+	                .outputFormat(ext)
 	                .toFile(resizedImage);
 	            
 
@@ -117,7 +124,7 @@ public class EventServiceImpl implements EventService {
 				// C에 폴더가 없으면 생성
 				File folder = new File(folderPath);
 				if (!folder.exists())
-					folder.mkdir();
+					folder.mkdirs();
 
 			
 				
@@ -154,6 +161,13 @@ public class EventServiceImpl implements EventService {
 		
 		return map;
 		}
+	
+	
+	
+	@Override
+	public EventDto detailViewEvent(int eventNo) {
+		return mapper.detailViewEvent(eventNo);
+	}
 	
 	
 } // end

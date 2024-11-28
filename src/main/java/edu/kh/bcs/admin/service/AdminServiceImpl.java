@@ -1,6 +1,8 @@
 package edu.kh.bcs.admin.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
+import net.coobird.thumbnailator.Thumbnails;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
@@ -24,10 +27,13 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +54,17 @@ public class AdminServiceImpl implements AdminService {
 	private String folderPathColor;
 	@Value("${my.deviceColor.web-path}")
 	private String webPathDeviceColor;
+	
+	@Value("${my.banner.web-path}")
+	private String webPathBanner;
+	@Value("${my.banner.folder-path}")
+	private String folderPathBanner;
+	
+	@Value("${my.event.web-path}")
+	private String webPath;
+
+	@Value("${my.event.folder-path}")
+	private String folderPath;
 
 	@Override
 	public int getResultCount(String searchType, String searchText) {
@@ -163,7 +180,24 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int createChatRoom(int memberNo) {
 		
+		// 이미 있는지 조회
+		if(mapper.checkRoomNo(memberNo) > 0) {
+			return mapper.selectRoomNo(memberNo);
+		}
+		
+		// 관리자 13번이 눌렀는지 조회
+		if(mapper.checkRoomFl(memberNo)) {
+			return 0;
+		}
+
+		// 채팅방 만들기
 		int create = mapper.createChatRoom(memberNo);
+		
+		// 채팅방 생성 실패
+		if(create < 1) {
+			return 0;
+		}
+		
 		int roomNo = mapper.selectRoomNo(memberNo);
 		
 		return roomNo;
@@ -189,7 +223,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		if(series.equals("A")) {
 			return mapper.galaxyA();
-		}
+		}  
 		if(series.equals("S")) {
 			return mapper.galaxyS();
 		}
@@ -218,6 +252,177 @@ public class AdminServiceImpl implements AdminService {
 			return mapper.iPad();
 		}
 	}
+	
+	@Override
+	public List<EventDto> getEventList() {
+		return mapper.getEventLIst();
+	}
+	
+	@Override
+	public List<EventDto> getEventList(int cp) {
+		return mapper.getEventLIstCp(cp);
+	}
+	
+	@Override
+	public int geteventListCount() {
+		return mapper.geteventListCount();
+	}
+	
+	@Override
+	public int updateBanner(MainBannerDto banner1, MainBannerDto banner2, MainBannerDto banner3, MainBannerDto banner4,
+			MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4) {
+		
+		String file1Path = FileUtil.rename(file1.getOriginalFilename());
+		String file2Path = FileUtil.rename(file2.getOriginalFilename());
+		String file3Path = FileUtil.rename(file3.getOriginalFilename());
+		String file4Path = FileUtil.rename(file4.getOriginalFilename());
+		
+		banner1.setMainBannerImg(webPathBanner + file1Path);
+		banner2.setMainBannerImg(webPathBanner + file2Path);
+		banner3.setMainBannerImg(webPathBanner + file3Path);
+		banner4.setMainBannerImg(webPathBanner + file4Path);
+		
+		int result1 = mapper.update1Banner(banner1);
+		int result2 = mapper.update2Banner(banner2);
+		int result3 = mapper.update3Banner(banner3);
+		int result4 = mapper.update4Banner(banner4);
+		
+		if(result1 + result2 + result3 + result4 != 4) {
+			return 0;
+		}
+		
+		
+		try {
+
+			File folder = new File(folderPathBanner);
+
+			
+			
+			
+			if (!folder.exists()) { // 존재하지 않을때에
+				folder.mkdirs(); // 폴더 생성 구문
+
+			} 
+
+			file1.transferTo(new File(folderPathBanner + file1Path));
+			file2.transferTo(new File(folderPathBanner + file2Path));
+			file3.transferTo(new File(folderPathBanner + file3Path));
+			file4.transferTo(new File(folderPathBanner + file4Path));
+
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return result1+result2+result3+result4;
+		
+	}
+	
+	@Override
+	public int eventImgUpdate(MultipartFile img, int eventNo) {
+		
+		
+		String originalRename = FileUtil.rename(img.getOriginalFilename());
+		String thumbRename = FileUtil.rename(img.getOriginalFilename());
+
+		
+		// DB 에 저장되는 경로
+		String url1 = webPath + originalRename;
+		String url2 = webPath + thumbRename;
+		
+		try {
+    	
+      File originalImage = new File(img.getOriginalFilename());
+      originalImage.createNewFile();
+      
+      //  MultipartFile을 file 로 변환하기
+    FileOutputStream fos = new FileOutputStream(originalImage);
+    fos.write(img.getBytes());
+    fos.close();
+      
+      
+      File resizedImage = new File(folderPath + thumbRename);
+      
+      
+  	// 원본 파일명 뒤에서 부터 검색해서 처음 찾은 "."의 index
+	int index = img.getOriginalFilename().lastIndexOf(".") + 1;
+	
+	// 원본 파일명 "." 부터 끝까지 잘라낸 문자열 == .확장자
+	String ext = img.getOriginalFilename().substring(index);
+      
+      
+        // 이미지를 리사이즈하여 출력 경로에 저장
+        Thumbnails.of(originalImage)
+            .size(270, 200)  // 썸네일 크기 (너비 150px, 높이 150px)
+            .outputFormat(ext)
+            .toFile(resizedImage);
+        
+
+        System.out.println("Thumbnail created successfully!");
+
+    } catch (IOException e) {
+        System.err.println("Error creating thumbnail: " + e.getMessage());
+        e.printStackTrace();
+    }
+		
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url1);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(url2);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		System.out.println(eventNo);
+		
+		int result = mapper.eventUpdate(url1, url2, eventNo);
+		
+		if (result == 0) return 0;
+		try {
+			// C에 폴더가 없으면 생성
+			File folder = new File(folderPath);
+			if (!folder.exists())
+				folder.mkdirs();
+
+		
+			
+			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+			img.transferTo(new File(folderPath + originalRename));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	
+	@Override
+	public int eventTitleUpdate(String eventTitle, int eventNo) {
+		return mapper.eventTitleUpdate(eventTitle, eventNo);
+	}
+	
+	@Override
+	public int eventContentUpdate(String eventContent, int eventNo) {
+		return mapper.eventContentUpdate(eventContent, eventNo);
+	}
+	
+	@Override
+	public String eventFlUpdate(int eventNo) {
+		
+		int result = mapper.eventFlUpdate(eventNo);
+		
+		
+		if(result > 0) {
+			return mapper.eventFlSearch(eventNo);
+		}
+		
+		return "";
+	}
+	
+	
 
 
 	// ============================================기종 등록

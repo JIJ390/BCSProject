@@ -126,14 +126,15 @@ textarea:focus {
 
 .star-box {
   display: flex;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 40px;
 }
 .star {
   width: 35px;
-
   cursor: pointer;
 }
+
+
 
 #imgInput {
   display: none;
@@ -177,19 +178,16 @@ textarea:focus {
   position: fixed; /* 브라우저에서 위치 고정 */
 
   /* 브라우저 정가운데 배치 */
-  margin: auto;
   top: 120px;
-  left: 0;
-  right: 0;
+  left: 50%; /* 좌우 가운데 정렬 */
+  transform: translateX(-50%); /* 가운데로 이동 */
 
 
-  width: 500px;
-  height: 500px;
+  max-width: 1000px;
 
   padding: 10px;
   box-shadow: 0px 5px 6px -2px var(--border-color);
   z-index: 2000;
-
 
   
   display: flex;
@@ -203,8 +201,10 @@ textarea:focus {
 
 
 .preview-img2 {
-  width: 480px;
-  height: 480px;
+  display: block; /* 이미지를 블록화하여 간격 제거 */
+  width: auto; /* 원본 크기 유지 */
+  height: auto; 
+  max-width: 100%; /* 창 크기에 맞게 제한 */
 }
 
 

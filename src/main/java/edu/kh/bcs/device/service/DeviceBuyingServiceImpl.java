@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.mapper.DeviceBuyingMapper;
+import edu.kh.bcs.review.dto.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,5 +92,50 @@ public class DeviceBuyingServiceImpl implements DeviceBuyingService {
 	}
 	
 	
+	
+	// 리뷰 정보 
+	@Override
+	public Map<String, Object> selectReviewStatus(int deviceNo) {
 
+		// 리뷰 개수 + 평점
+		Map<String, Object> reviewStatus = mapper.selectReviewStatus(deviceNo);
+		
+		List<Review> reviewList = mapper.selectReviewList(deviceNo);
+		
+		reviewStatus.put("reviewList", reviewList);
+		
+		
+		return reviewStatus;
+	}
+	
+	
+	// 리뷰 추가해서 불러오기
+	@Override
+	public Review reviewPlus(int deviceNo, int reviewCount) {
+		
+		// 다음 리뷰가 존재 하는지 확인
+		Map<String, String> map = mapper.checkNextReview(deviceNo, reviewCount);
+		
+		log.debug("map : {}", map);
+		
+		Review review = mapper.reviewPlus(deviceNo, reviewCount);
+		
+		log.debug("review : {}", review.getReviewCheck());
+		
+		// 다음 리뷰가 존재하지 않을때
+		if(map == null) {
+			review.setReviewCheck(1);
+		}
+		
+		return mapper.reviewPlus(deviceNo, reviewCount);
+	}
+	
+
+	// 
+	@Override
+	public Device selectRecentDevice(int recentDeviceNo) {
+		return mapper.selectRecentDevice(recentDeviceNo);
+	}
+	
+	
 }
