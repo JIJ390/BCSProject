@@ -14,7 +14,7 @@ const orderNo = document.querySelectorAll(".orderNo");
 for (let i = 0; i < selectBtn.length; i++) {
 
 
-    selectBtn[i].addEventListener("click", () => {
+    selectBtn[i].addEventListener("change", () => {
 
         const orderNober = orderNo[i].textContent;
 
