@@ -567,6 +567,10 @@ main {
   /* margin-left: 43px; */
 }
 
+.icon-item-point:hover {
+  transform: scale(1.05);
+}
+
 .icon-item:hover {
   transform: scale(1.05);
 }
@@ -577,6 +581,7 @@ main {
   /* margin-left: 43px; */
   margin-bottom: 10px;
 }
+
 
 .icon-item span {
   display: block;
