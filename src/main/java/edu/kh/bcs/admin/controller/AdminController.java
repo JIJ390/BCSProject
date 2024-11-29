@@ -301,7 +301,7 @@ public class AdminController {
 			) {
 		
 		
-		
+		log.debug("capacityPrice : {}", capacityPrice);
 		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
