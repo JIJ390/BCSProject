@@ -30,25 +30,29 @@ function findAddress() {
 
 findAddressBtn.addEventListener("click", findAddress);
 
-
-
 // 회원 세션에 저장된 주소지 정보 가져오기
 const memberAddressBtn = document.querySelector("#memberAddressBtn");
-memberAddressBtn.addEventListener("click", bringAddress);
 
-const bringAddress = () => {
+memberAddressBtn.addEventListener("click", () => {
 
-  fetch("/device/order/getAddress")
-  .then(resp => {
-    if (resp.ok) return resp.json
-    throw new Error("조회 실패 : " + resp.status);
-  })
-  .then(result => {
+  if (loginMember.memberAddress === null) {
+    alert("등록된 주소가 없습니다");
+    return;
+  }
 
-    console.log(result);
-  })
-  .catch(err => console.error(err));
-}
+  const result = loginMember.memberAddress.split(",");
+
+  if (result[0].trim().length === 0) {
+    alert("등록된 주소가 없습니다");
+    return;
+  }
+
+
+  document.getElementById('postcode').value = result[0];
+  document.getElementById("address").value = result[1];
+  document.getElementById("detailAddress").value = result[2];
+
+});
 
 
 
