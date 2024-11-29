@@ -1,0 +1,29 @@
+.input-img[type="file"] {
+}
+.input-img{
+    border: 0;
+    outline: 0;
+    position: relative;
+    font-size: 10px;
+}
+
+
+.file-box .input-img{
+    display: flex;
+    
+    height: 20px;
+    padding: 0 10px;
+    border: 1px solid #dddddd;
+    width: 20px;
+    color: #999999;
+}
+label{
+    display: flex;
+    width: 100%;
+
+
+}
+
+.p-name{
+    font-size: 10px;
+}
