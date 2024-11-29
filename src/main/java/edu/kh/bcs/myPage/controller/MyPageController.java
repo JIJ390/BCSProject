@@ -283,6 +283,10 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
+		loginMember.setMemberAddress(address);
+		
+		
+		
 		return "redirect:" + path;
 	}
 	
@@ -315,6 +319,8 @@ public class MyPageController {
 		}
 		
 		ra.addFlashAttribute("message", message);
+		
+		loginMember.setMemberTel(number);
 		
 		return "redirect:" + path;
 		
@@ -413,7 +419,10 @@ public class MyPageController {
 	@GetMapping("myPageUpdate")
 	public String myPageUpdate() {
 		
-		return "myPage/myPageupdate";
+		
+		
+		
+		return "myPage/myPageUpdate";
 	}
 	
 	@GetMapping("myPageOrderHistory")
