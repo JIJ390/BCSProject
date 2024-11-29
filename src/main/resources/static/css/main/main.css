@@ -50,7 +50,8 @@ main div{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    padding-top: 98px;
+    padding-bottom: 40px;
 }
 
 .bestView-container{
@@ -75,7 +76,6 @@ main div{
     align-items: center;
     width: 150px; /* 카드 너비 */
     margin: 10px;
-    box-shadow: 1px 2px 0px 1px rgba(160, 159, 159, 0.1);
 
 }
 
@@ -83,12 +83,14 @@ main div{
     width: 100%; /* 이미지 크기를 카드에 맞춤 */
     height: auto;
     border-radius: 10px;
+    box-shadow: 1px 2px 0px 1px rgba(160, 159, 159, 0.1);
 }
 
 .device-name {
     margin-top: 10px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 
@@ -138,7 +140,7 @@ a {
 .slider {
   width: 100%;
   max-width: 1900px;
-  height: 800px;
+  height: 730px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -269,11 +271,17 @@ a {
 
 .mainFoot{
   height: 500px;
-  width: 600px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+  align-items: center;
+}
+
+.mainFoot2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .a1{
@@ -282,7 +290,7 @@ a {
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 650px;
+  min-width: 500px;
 }
 .a2{
   display: flex;
@@ -345,7 +353,6 @@ a {
 }
 
 .subItem-1{
-  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -372,7 +379,6 @@ a {
 }
 
 .subItem-4 img{
-  margin-left: 50px !important;
   scale: 0.8;
 }
 
@@ -496,6 +502,7 @@ html {
 
 .bannerContent{
   font-size: 30px;
+  min-width: 500px;
 }
 
 .slideFont1{
@@ -525,12 +532,12 @@ html {
 
 .left-font {
   text-align: start;
-  padding-left: 150px;
+  padding-left: 280px;
 }
 
 .right-font {
   text-align: end;
-  padding-right: 200px;
+  padding-right: 330px;
 
 }
 

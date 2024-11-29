@@ -25,7 +25,7 @@
           <div class="slide" th:style="'background-image : url(' + *{mainBannerImg} + '); background-size : cover;'">
             <div class="slideFont1" th:classappend="*{mainBannerCheck} ? ' left-font' : ' right-font'">
                 <span class="fontBanner bannerTitle" th:text="*{mainBannerTitle}" th:classappend="*{mainBannerColor} ? 'black-font' : 'white-font'"></span>
-                <span class="fontBanner bannerContent" th:text="*{mainBannerContent}" th:classappend="*{mainBannerColor} ? 'black-font' : 'white-font'"></span>
+                <div class="fontBanner bannerContent" th:text="*{mainBannerContent}" th:classappend="*{mainBannerColor} ? 'black-font' : 'white-font'"></div>
                 <div class="btn-banner-area" th:classappend="*{mainBannerCheck} ? ' left-box' : ' right-box'">
                     <a th:href="|@{help/eventView/}*{mainBannerLink}|"><div class="eventBtn">혜택 보기</div></a>
                 </div>
@@ -168,7 +168,6 @@
         <div class="mainFoot2"><img src="/images/mainPage/mainPage2.png" alt="" style="width: 845px;height: 510px;"></div>
       </div>
     </div>
-  </div>
 </main>
 
 <!-- Footer Section -->
