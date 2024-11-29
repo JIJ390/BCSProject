@@ -158,8 +158,11 @@ main {
 
 
 .device-buying-info {
-  width: 39%;
-  padding: 12px;
+  width: 400px;
+  padding: 12px 24px;
+
+  /* width: 450px;
+  padding: 12px 36px; */
 }
 
 .info-title >span{

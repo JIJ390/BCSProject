@@ -135,8 +135,8 @@ main {
 
 
 .device-selling-info {
-  width: 39%;
-  padding: 12px;
+  width: 400px;
+  padding: 12px 24px;
 }
 
 .info-title >span{

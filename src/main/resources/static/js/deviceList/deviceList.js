@@ -19,12 +19,14 @@ clearAllBtn.addEventListener("click", () => {
   // 모든 필터 항목의 밑줄 제거
   document.querySelectorAll(".device-item").forEach(el => {
     el.style.textDecoration = "none";
+    el.style.fontWeight = 'normal'
   });
 
   // search-filter 초기화 (태그만 제거)
   searchFilter.querySelectorAll(".filter-tag").forEach(tag => {
     searchFilter.removeChild(tag);
   });
+
 
   // 전체 취소 버튼 숨김
   clearAllBtn.style.display = "none";
@@ -62,6 +64,13 @@ const selectFilterList = (filterType) => {
         const listItem = document.createElement("div");
         listItem.textContent = item;
         listItem.classList.add("device-item");
+
+         // 기존 선택된 항목인지 확인
+         if (selectedItems.includes(item)) {
+          listItem.style.textDecoration = "underline"; // 밑줄 추가
+          listItem.style.fontWeight = "bold"; // 두꺼운 글씨 추가
+        }
+
 
         // 클릭 이벤트 추가 (다중 선택)
         listItem.addEventListener("click", () => {

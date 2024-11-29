@@ -228,7 +228,7 @@ public class DeviceListController {
 		
 		String trimmedQuery = query.trim();
 		
-        log.debug("trimmedQuery {} : ", trimmedQuery);
+//        log.debug("trimmedQuery {} : ", trimmedQuery);
 		
         List<Device> searchResults = service.searchDevices(trimmedQuery);
 
@@ -236,7 +236,7 @@ public class DeviceListController {
         model.addAttribute("query", query); // 검색어
         model.addAttribute("searchResults", searchResults); // 검색 결과
         
-        log.debug("searchResults {} : ", searchResults);
+//        log.debug("searchResults {} : ", searchResults);
 
         // deviceList.html 페이지 반환
         return "deviceList/deviceList";

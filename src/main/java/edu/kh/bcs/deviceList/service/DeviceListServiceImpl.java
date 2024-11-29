@@ -160,7 +160,7 @@ public class DeviceListServiceImpl implements DeviceListService {
         }
 		
         // 한글이 포함되지 않은 경우
-		log.debug("검색 : {}", query);
+//		log.debug("검색 : {}", query);
 		return mapper.searchDevices(query);
 	}
 	
@@ -198,9 +198,10 @@ public class DeviceListServiceImpl implements DeviceListService {
 	
 	
 	@Override
-	public List<Device> images() {
-		return images();
+	public List<Device> newDevice() {
+		return mapper.newDevice();
 	}
+	
 	
 	
 	
