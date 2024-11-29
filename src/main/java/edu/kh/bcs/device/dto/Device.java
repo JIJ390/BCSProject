@@ -41,6 +41,11 @@ public class Device {
 	private String deviceBrand;
 	private String deviceCpuName;
 	
+	
+	private String deviceDisplayCode;
+	
+	private int deviceRamCode;
+	
 	private String ramCapacity;
 	private String displaySize;
 	
