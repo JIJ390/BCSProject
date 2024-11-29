@@ -978,3 +978,28 @@ telChangeForm.addEventListener("submit", e => {
   return;
 
 })
+
+
+
+/* 주소값 수정화면에서 불러오기 */
+document.addEventListener("DOMContentLoaded", () => {
+
+  console.log(loginMember);
+
+  if (loginMember.memberAddress === null) {
+    return;
+  }
+  const result = loginMember.memberAddress.split(",");
+
+  if (result[0].trim().length === 0) {
+    return;
+  }
+
+
+  document.getElementById('postcode').value = result[0];
+  document.getElementById("address").value = result[1];
+  document.getElementById("detailAddress").value = result[2];
+
+})
+
+
