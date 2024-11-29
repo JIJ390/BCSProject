@@ -120,21 +120,6 @@ public class DeviceListController {
 		}
 			
 
-			
-			
-		try {
-			// cookie 에 , 포함 될 경우 에러 해결 위해 인코딩
-			// 쿠키 제거  문자열 배열을 이어붙이기
-			String cookieValue = URLEncoder.encode(String.join(",", deviceNoList), StandardCharsets.UTF_8.name());
-				
-			Cookie cookie = new Cookie("deviceNoList", cookieValue);
-			cookie.setMaxAge(60 * 60 * 24 * 7);
-			cookie.setPath("/");
-			resp.addCookie(cookie);
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 		model.addAttribute("recentDeviceList", recentDeviceList);
