@@ -1,3 +1,3 @@
-const submitForm = () => {
+const adminSubmitForm = () => {
     document.querySelector('form').submit();
 }
