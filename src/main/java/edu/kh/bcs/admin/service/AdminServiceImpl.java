@@ -544,8 +544,18 @@ public class AdminServiceImpl implements AdminService {
 				String caPrice = capacityPrice1[i];
 				String caSellPrice = capacitySellPrice1[i];
 				
+				
+				log.debug("caPrice : {}", caPrice);
+				log.debug("capacityPrice1[i] : {}", capacityPrice1[i]);
+				log.debug("capacityPrice1[i] : {}", 1);
+				
+				if (!caPrice.equals("null")) {
+					
+					int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
+				}
+					
+				
 				//용량 인서트
-				int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
 				
 			}
 			System.out.println("등록 완료");

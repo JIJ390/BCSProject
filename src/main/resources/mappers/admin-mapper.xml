@@ -436,7 +436,9 @@ ORDER BY
 	   #{deviceBrand},
 	   #{ramCapacity},
 	   #{deviceCpuName},
-	   #{displaySize}
+	   #{displaySize},
+	   #{deviceNameKor}
+	   
 	)
 	</insert>
 	
