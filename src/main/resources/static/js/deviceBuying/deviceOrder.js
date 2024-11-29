@@ -28,9 +28,27 @@ function findAddress() {
   }).open();
 }
 
-/* 주소 검색 버튼 클릭 시 */
-/* 버튼 있을 때만!!! 활성화 */
 findAddressBtn.addEventListener("click", findAddress);
+
+
+
+// 회원 세션에 저장된 주소지 정보 가져오기
+const memberAddressBtn = document.querySelector("#memberAddressBtn");
+memberAddressBtn.addEventListener("click", bringAddress);
+
+const bringAddress = () => {
+
+  fetch("/device/order/getAddress")
+  .then(resp => {
+    if (resp.ok) return resp.json
+    throw new Error("조회 실패 : " + resp.status);
+  })
+  .then(result => {
+
+    console.log(result);
+  })
+  .catch(err => console.error(err));
+}
 
 
 
