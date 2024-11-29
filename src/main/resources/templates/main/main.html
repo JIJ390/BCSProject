@@ -60,84 +60,113 @@
     </div>
 
 
-      <div class="bestView">
+    <div class="bestView">
+      <div class="bestView-container">
         <div class="newDevice">신상품</div>
-        <p class="bestView-2">
-            <div class="SClass">최상위 S급 중고폰</div>
-            <div th:each="image : *{deviceImg}" class="viewImg">
-                <img th:src="*{deviceImg}" alt="">
+        <div class="SClass">최상위 S급 중고폰</div>
+        <div class="viewImg">
+            <!-- 기기 정보를 반복 출력 -->
+            <div class="device-row">
+                <div th:each="device : ${newDevice}" class="device-item">
+                    <!-- 구매 페이지로 이동하는 링크 -->
+                    <a th:href="@{'/device/buy/' + ${device.deviceNo}}" class="device-link">
+                        <!-- 기기 이미지 -->
+                        <img th:src="${device.deviceImg}" alt="Device Image" class="device-image">
+                    </a>
+                    <!-- 기기명 -->
+                    <div class="device-name" th:text="${device.deviceName}"></div>
+                </div>
             </div>
-        </p>
-     </div>
+        </div>
+      </div>
+   </div>
+  
+  
   
 
     <div class="subItem-box">
-      <div class="subItem-1">
-        <div class="subItem-3">
-          <span style="font-size: 35px; font-weight: bold;">섬세한 고객 관리</span>
-          <span style="margin-top: 30px; font-size: 20px;">30일간의 전액 환불 보증뿐만 아니라,</span>
-          <span style="font-size: 20px;">1년 간 제품 보증이 되기 때문에</span>
-          <span style="font-size: 20px;">만일의 경우에도 안심하고 구입하실 수 있습니다.</span>
-          <span style="margin-top: 35px;"> (보증의 범위에 대한 자세한 내용은 FAQ 에서 확인 하시길 바랍니다)</span>
+      <div class="subItem-container">
+        <div class="subItem-1">
+          <div class="subItem-3">
+            <span style="font-size: 35px; font-weight: bold;">섬세한 고객 관리</span>
+            <span style="margin-top: 30px; font-size: 20px;">30일간의 전액 환불 보증뿐만 아니라,</span>
+            <span style="font-size: 20px;">1년 간 제품 보증이 되기 때문에</span>
+            <span style="font-size: 20px;">만일의 경우에도 안심하고 구입하실 수 있습니다.</span>
+            <span style="margin-top: 35px;"> (보증의 범위에 대한 자세한 내용은 FAQ 에서 확인 하시길 바랍니다)</span>
+          </div>
         </div>
-      </div>
-      <div class="subItem-2">
-        <div class="subItem-4" style="margin-left: 50px;">
-          <img src="/images/mainPage/serviceImg.png" alt="">
+        <div class="subItem-2">
+          <div class="subItem-4" style="margin-left: 50px;">
+            <img src="/images/mainPage/serviceImg.png" alt="">
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 서브 슬라이드 구역 -->
-    <div class="sub-slider-box">
-      <div class="sub-slider">
-        <div class="sub-slide-box">
-          <div class="sub-slide">
-            <div class="items"><img src="/images/mainPage/event1.png" alt=""></div>
-            <div class="items"><img src="/images/mainPage/event2.png" alt=""></div>
-            <div class="items"><img src="/images/mainPage/event3.png" alt=""></div>
-            <div class="items"><img src="/images/mainPage/event4.png" alt=""></div>
-            <div class="items"><img src="/images/mainPage/event5.png" alt=""></div>
-            <div class="items"><img src="/images/mainPage/event6.png" alt=""></div>
-          </div>
-          <button class="prev2" onclick="prevSlide2()">&#10094;</button>
-          <button class="next2" onclick="nextSlide2()">&#10095;</button>
-        </div>
+      <div class="BCSFlow">
+        <div class="FlowTitle">BCS FLOW</div>
+        <div class="FlowContent">We makes perfect for you</div>
       </div>
-    </div>
+          <div class="items">
+              <div class="items-main-container">
+                <div class="items-container">
+                  <div class="flowImg"><img src="/images/mainPage/견적문의.png" alt=""></div>
+                  <div class="flowContent-1">견적 문의</div>
+                </div>
+                <div class="items-container">
+                  <div class="flowImg"><img src="/images/mainPage/제품수거.png" alt=""></div>
+                  <div class="flowContent-1">제품 수거</div>
+                </div>
+                <div class="items-container">
+                  <div class="flowImg"><img src="/images/mainPage/제품검수.png" alt=""></div>
+                  <div class="flowContent-1">제품 검수</div>
+                </div>
+                <div class="items-container">
+                  <div class="flowImg"><img src="/images/mainPage/상품화.png" alt=""></div>
+                  <div class="flowContent-1">상품화</div>
+                </div>
+                <div class="items-container">
+                  <div class="flowImg"><img src="/images/mainPage/고객전달.png" alt=""></div>
+                  <div class="flowContent-1">고객 전달</div>
+                </div>
+              </div>
+          </div>
 
 
     
 
     <div class="mainPageFoot">
-      <div class="mainFoot">
-        <div class="a1">
-          <h1>배최성에 대하여</h1>
-          <pre>
-
-    글로벌 중고 플랫폼 1위 목표
-    리퍼비시 전자기기 전문 마켓 플레이
-          </pre>
-          
-        </div>
-        <div class="a2">
-          <h1 style="margin-left: 60px;">고품질 리퍼비시 제품</h1>
-          <pre>
+      <div class="mainPageFooter-container">
+        <div class="mainFoot">
+          <div class="a1">
+            <h1>배최성에 대하여</h1>
+            <pre>
+  
+      글로벌 중고 플랫폼 1위 목표
+      리퍼비시 전자기기 전문 마켓 플레이
+            </pre>
             
-    지구에도 지갑에도 좋은 리퍼 제품
-    절대 안전 제품 품질 보증
-          </pre>
+          </div>
+          <div class="a2">
+            <h1 style="margin-left: 60px;">고품질 리퍼비시 제품</h1>
+            <pre>
+              
+      지구에도 지갑에도 좋은 리퍼 제품
+      절대 안전 제품 품질 보증
+            </pre>
+          </div>
+          <div class="a3">
+            <h1 style="margin-left: 40px;">국내 최고 매입가</h1>
+            <pre>
+              
+      중간 수수료 없이
+      소중한 제품 금액가 그대로
+            </pre>
+          </div>
         </div>
-        <div class="a3">
-          <h1 style="margin-left: 40px;">국내 최고 매입가</h1>
-          <pre>
-            
-    중간 수수료 없이
-    소중한 제품 금액가 그대로
-          </pre>
-        </div>
+        <div class="mainFoot2"><img src="/images/mainPage/mainPage2.png" alt="" style="width: 845px;height: 510px;"></div>
       </div>
-      <div class="mainFoot2"><img src="/images/mainPage/mainPage2.png" alt="" style="width: 845px;height: 510px;"></div>
     </div>
   </div>
 </main>

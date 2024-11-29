@@ -31,19 +31,16 @@ public class MainController {
 		
 		model.addAttribute("bannerList",bannerList);
 		
+		
+		
+		
+		List<Device> newDevice = service.newDevice();
+		
+		log.debug("newDevice {} :", newDevice);
+		// 모델에 데이터 추가
+        model.addAttribute("newDevice", newDevice);
+		
 		return "main/main";
 	}
 
-	@GetMapping("/bestView")
-	public String bestView(
-			Model model) {
-		
-		List<Device> images = service.images();
-		
-		log.debug("images {} :", images);
-		// 모델에 데이터 추가
-        model.addAttribute("images", images);
-		
-		return "bestView";
-	}
 }

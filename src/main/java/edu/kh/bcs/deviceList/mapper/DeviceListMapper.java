@@ -83,8 +83,15 @@ public interface DeviceListMapper {
 
 
 
-	List<Device> images();
+	List<Device> newDevice();
 
+
+
+
+
+
+
+	
 
 
 
