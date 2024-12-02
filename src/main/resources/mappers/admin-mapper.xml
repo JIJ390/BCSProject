@@ -735,7 +735,6 @@ WHERE RECEIVER_NO = #{memberNo}
 	</insert>
 	
 	
-=======
 <update id="deviceUpdate">
 UPDATE 
 	"DEVICE"

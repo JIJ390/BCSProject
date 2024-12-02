@@ -23,10 +23,14 @@ function showSlide(index) {
 
 function nextSlide() {
   showSlide(currentIndex + 1);
+  clearInterval(interval);
+  interval = setInterval(nextSlide, 5000);
 }
 
 function prevSlide() {
   showSlide(currentIndex - 1);
+  clearInterval(interval);
+  interval = setInterval(nextSlide, 5000);
 }
 
 function currentSlide(index) {
@@ -34,10 +38,12 @@ function currentSlide(index) {
 }
 
 // 일정 시간마다 자동으로 다음 슬라이드로 넘어가도록 설정
-setInterval(nextSlide, 5000);
+let interval = setInterval(nextSlide, 5000);
 
 // 페이지 로드 시 첫 슬라이드를 표시
 showSlide(currentIndex);
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  interval();
+})
 
