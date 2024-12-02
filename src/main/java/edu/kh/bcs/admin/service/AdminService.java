@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -165,6 +166,22 @@ public interface AdminService {
 
 
 	int deteleReviewRN(int orderNo);
+
+
+	/** 브랜드명 찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+
+
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
 
 

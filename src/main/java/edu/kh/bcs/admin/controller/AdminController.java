@@ -31,18 +31,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.bcs.admin.service.AdminService;
 
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.device.service.DeviceSellingService;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @SessionAttributes("loginMember")
 @Controller
@@ -54,6 +57,8 @@ public class AdminController {
 	private static final int Device = 0;
 	
 	private final AdminService service; 
+	
+	private final DeviceSellingService sellingService;
 	
 	// localhost/admin 접속 시 admin/adminMain.html 매핑
 	@RequestMapping("")
@@ -778,7 +783,65 @@ public class AdminController {
 		return result;
 	}
 
-
+	@GetMapping("modelSelect/{brandName}")
+	public String modelSelect(
+			@PathVariable("brandName") String brandName
+			, Model model) {
+		
+		List<Device> deviceList = service.modelSelect(brandName);
+		
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		return "admin/adminRegist/adminDevice";
+	}
+	
+	
+	@GetMapping("admin/selectDeviceInfo/{deviceNo}")
+	@ResponseBody
+	public Device selectDeviceInfo(
+			@PathVariable("deviceNo") int deviceNo) {
+		
+		
+		return sellingService.selectDetailDevice(deviceNo);
+	}
+	
+	
+	
+	@PostMapping("registrationChange")
+	public String insertBuyingDevice(
+			@RequestParam("deviceNo") String deviceNo,
+			@RequestParam("gradeSelect") String gradeNumber,
+			@RequestParam("colorSelect") String colorNo,
+			@RequestParam("capacitySelect") String capacityNumber
+			) {
+		
+		log.debug("deviceNo : {} ", deviceNo);
+		log.debug("gradeNumber : {} ", gradeNumber);
+		log.debug("colorNo : {} ", colorNo);
+		log.debug("capacityNumber : {} ", capacityNumber);
+		
+		BuyingDevice newBuyingDevice = new BuyingDevice();
+		
+		newBuyingDevice.setCapacityNumber(Integer.parseInt(capacityNumber));
+		newBuyingDevice.setGradeNumber(gradeNumber);
+		newBuyingDevice.setDeviceNo(Integer.parseInt(deviceNo));
+		newBuyingDevice.setColorNo(colorNo);
+		
+		
+		int result = service.insertBuyingDevice(newBuyingDevice);
+		
+		System.out.println("등록");
+		
+		
+		return "admin/adminRegistration";
+		
+	}
 	
 	
 	

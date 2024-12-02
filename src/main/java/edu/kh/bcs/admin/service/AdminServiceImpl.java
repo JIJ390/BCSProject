@@ -21,6 +21,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -834,7 +835,21 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+	// 모델명찾기
+	@Override
+	public List<Device> modelSelect(String brandName) {
+
+		
+		
+		return mapper.modelSelect(brandName);
+	}
 	
+	
+	// 매물 등록
+	@Override
+	public int insertBuyingDevice(BuyingDevice newBuyingDevice) {
+		return mapper.insertBuyingDevice(newBuyingDevice);
+	}
 	 
 	
 }

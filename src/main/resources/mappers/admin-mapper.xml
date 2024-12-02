@@ -735,7 +735,6 @@ WHERE RECEIVER_NO = #{memberNo}
 	</insert>
 	
 	
-=======
 <update id="deviceUpdate">
 UPDATE 
 	"DEVICE"
@@ -803,5 +802,39 @@ AND
 	CAPACITY_NUMBER = #{caNo}
 </update> -->
 
+	
+	<select id="modelSelect">
+		SELECT DEVICE_NAME, DEVICE_NO
+		FROM "DEVICE"
+		WHERE DEVICE_BRAND = #{brandName}
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	
+	</select>
+	
+	
+	<!-- 구매기기 삽입 -->
+	<insert id="insertBuyingDevice">
+		INSERT INTO BUYING_DEVICE
+		VALUES(SEQ_BUYING_DEVICE_NO.NEXTVAL, <!-- 번호 -->
+		DEFAULT,                             <!-- 등록일 -->
+		NULL,								<!-- 판매일 -->
+		NULL,								<!-- 최종구매가 -->
+		#{capacityNumber},									<!-- 용량 -->
+		#{deviceNo}, 									<!-- 기종 -->
+		#{gradeNumber},						<!-- 등급 -->
+		'N',		
+		#{colorNo}							<!-- 색상 -->
+		)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>
