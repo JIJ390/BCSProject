@@ -15,6 +15,7 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -142,6 +143,22 @@ public interface AdminService {
 	int eventContentUpdate(String eventContent, int eventNo);
 
 	String eventFlUpdate(int eventNo);
+
+
+
+	int insertReviewNoti(String orderNo, String memberNo);
+
+
+
+	String uploadImg(MultipartFile img);
+
+
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+
+
+	int deteleReviewRN(int orderNo);
 
 
 

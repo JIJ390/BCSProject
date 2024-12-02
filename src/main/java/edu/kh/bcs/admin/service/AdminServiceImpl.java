@@ -26,6 +26,7 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -59,6 +60,12 @@ public class AdminServiceImpl implements AdminService {
 	private String webPathBanner;
 	@Value("${my.banner.folder-path}")
 	private String folderPathBanner;
+	
+	// 채팅 이미지
+	@Value("${my.chatting.web-path}")
+	private String webPathchatting;
+	@Value("${my.chatting.folder-path}")
+	private String folderPathchatting;
 	
 	@Value("${my.event.web-path}")
 	private String webPath;
@@ -202,6 +209,60 @@ public class AdminServiceImpl implements AdminService {
 		
 		return roomNo;
 	}
+	
+	@Override
+	public int insertReviewNoti(String orderNo, String memberNo) {
+		
+		// 리뷰알림 있는지 조회
+		int check = mapper.checkRN(orderNo, memberNo);
+		
+		// 리뷰 있으면
+		if(check > 0) {
+			return 0;
+		}
+		
+		// 리뷰 없으면
+		return mapper.insertReviewNoti(orderNo,memberNo);
+	}
+	
+	
+	
+	
+	@Override
+	public String uploadImg(MultipartFile img) {
+		
+		String fileRename = FileUtil.rename(img.getOriginalFilename());
+		
+		try {
+
+			File folder = new File(folderPathchatting);
+			
+			if (!folder.exists()) { // 존재하지 않을때에
+				folder.mkdirs(); // 폴더 생성 구문
+
+			} 
+
+			img.transferTo(new File(folderPathchatting + fileRename));
+
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		
+		return webPathchatting + fileRename;
+	}
+	
+	
+	@Override
+	public List<reviewRNDto> getOrderList(int memberNo) {
+		
+		return mapper.getOrderList(memberNo);
+	}
+	
+	@Override
+	public int deteleReviewRN(int orderNo) {
+		return mapper.deleteReviewRN(orderNo);
+	}
+	
 	
 	@Override
 	public int firstArCheck(int memberNo) {

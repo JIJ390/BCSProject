@@ -7,7 +7,8 @@
       <div style="width: 80%; height: 100%; margin-top: 5px;">
         <p style="color: rgb(179, 179, 179);" th:text="${session.loginMember.memberName} == ${chat.memberName} ? '관리자' : ${chat.memberName} ">관리자</p>
         <th:block th:if= "${chat.noReadCount}>0"><p style="width: max-content; padding: 3px; border-radius:5px; background-color: rgb(161, 66, 66); color: white; font-size: 13px;" th:text="|안 읽은 메시지${chat.noReadCount}개|"></p></th:block>
-        <p style="color: rgb(179, 179, 179);" th:text="${chat.lastMessage}">채팅 내용</p>
+        <p style="color: rgb(179, 179, 179); word-wrap: break-word; width:100%; height: 300px;" th:if="${chat.lastMessage.startsWith('/images')}">사진</p>
+        <p style="color: rgb(179, 179, 179); word-wrap: break-word; width:100%; height: 300px;" th:unless="${chat.lastMessage.startsWith('/images')}" th:text="${chat.lastMessage}"></p>
       </div>
     </div>
   </th:block>

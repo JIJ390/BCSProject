@@ -446,9 +446,6 @@ public class AdminController {
 		List<EventDto> eventList = service.getEventList(cp);
 				
 		model.addAttribute("eventList",eventList);
-		System.out.println(eventList);
-		System.out.println(eventList);
-		System.out.println(eventList);
 		
 		return "admin/adminEvent/eventList";
 	}
@@ -522,21 +519,6 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-		System.out.println("cp"+cp);
-		System.out.println("searchType:"+searchType);
-		System.out.println("searchText"+searchText);
-		System.out.println("ud"+ud);
-		System.out.println("cp"+cp);
-		System.out.println("searchType:"+searchType);
-		System.out.println("searchText"+searchText);
-		System.out.println("ud"+ud);
-		
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
@@ -739,11 +721,6 @@ public class AdminController {
 		banner4.setMainBannerLink(linkNo4);
 		
 		int result = service.updateBanner(banner1,banner2,banner3,banner4,file1,file2,file3,file4);
-		
-		System.out.println(banner1);
-		System.out.println(banner2);
-		System.out.println(banner3);
-		System.out.println(banner4);
 		
 		return result;
 	}

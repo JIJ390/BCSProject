@@ -5,7 +5,7 @@
 	<insert id="insertMessage">
 		INSERT INTO CHATTING_MESSAGE
 		VALUES(SEQ_CHATTING_MESSAGE_NO.NEXTVAL, #{chattingMessageContent}, 
-		'N', DEFAULT, #{senderNo}, #{chattingRoomNo}, #{receiverNo})
+		'N', DEFAULT, #{senderNo}, #{chattingRoomNo}, #{receiverNo}, #{chattingMessageImgCheck})
 	</insert>
 
 	<select id="getSenderName">

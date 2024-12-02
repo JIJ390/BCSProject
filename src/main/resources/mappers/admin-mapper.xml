@@ -689,7 +689,48 @@ FROM
 WHERE DEVICE_NO = #{deviceNo}
 </select>
 
+<select id="getOrderList">
+SELECT R.*,
+(
+	SELECT DEVICE_NAME
+	FROM DEVICE
+	WHERE DEVICE_NO =
+	(SELECT DEVICE_NO
+	FROM BUYING_DEVICE
+	WHERE BUYING_DEVICE_NO = 
+		(
+			SELECT BUYING_DEVICE_NO
+			FROM "ORDER"
+			WHERE ORDER_NO = R.ORDER_NO
+		))
+) "DEVICE_NAME" 
+FROM REVIEW_NOTI "R"
+WHERE RECEIVER_NO = #{memberNo}
+</select>
 
+	<delete id="deleteReviewRN">
+		DELETE
+		FROM REVIEW_NOTI
+		WHERE ORDER_NO  =#{orderNo}
+	</delete>
+	
+	
+	
+	
+	<select id="checkRN">
+		SELECT COUNT(*)
+		FROM REVIEW_NOTI
+		WHERE ORDER_NO = #{orderNo}
+		AND RECEIVER_NO = #{memberNo}
+	</select>
+	
+	<insert id="insertReviewNoti">
+		INSERT INTO REVIEW_NOTI
+		VALUES (
+			REVIEW_NOTI_SEQ.NEXTVAL, DEFAULT, #{orderNo}, #{memberNo}
+		)
+	</insert>
+	
 	
 	
 </mapper>
