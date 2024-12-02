@@ -535,7 +535,11 @@ const getMyMessageBtn = () => {
       area.append(img);
 
       const div = document.createElement("div");
-      div.innerText = "상단의 판매하기 메뉴에서 원하시는 기종 선택 후 클릭하시면 판매 페이지로 이동할 수 있습니다"
+      div.innerText = "상단의 판매하기 메뉴에서 원하시는 기종 선택 후 클릭하시면 판매 페이지로 이동할 수 있습니다" + "  "
+      const a = document.createElement("a")
+      a.href = "/deviceSellList"
+      a.innerText = "바로가기" 
+      div.append(a);
       div.classList.add("chatting-left")
 
       area.append(div)
