@@ -26,15 +26,17 @@
                     <div class="filter-btn" value="1">SAMSUNG</div>
                     <div class="filter-btn" value="2">Galaxy Tab</div>
                     <div class="filter-btn" value="3">Apple</div>
-                    <div class="filter-btn" value="4">Ipad</div>
-                    <a href="">초기화</a>
+                    <div class="filter-btn" value="4">iPad</div>
                 </div>
-                <div class="container-in-title-search">
-                    <div>
-                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="text" placeholder="검색">
+                <form action="/admin/adminProductinquiry/search" method="get">
+                    <div class="container-in-title-search">
+                        <div>
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" name="search" placeholder="검색">
+                            <a href="">초기화</a>
+                        </div>
                     </div>
-                </div>
+</form>
             </div>
             <table class="container-in-content" style="border-collapse: collapse" >
 
@@ -75,7 +77,7 @@
                             <form th:action="@{/admin/adminSale/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                                 <button><p>구매 현황</p></button>
                             </form>
-                            <form>
+                            <form th:action="@{/admin/adminSellList/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                                 <button><p>판매 현황</p></button>
                             </form>
                             <form th:action="@{/admin/adminUpdate/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
@@ -89,7 +91,7 @@
 
 
             <div class="container-in-btn">
-                <a href="/admin/adminSale">상품 전체 보기</a>
+                <a href="/admin/adminAllList">상품 전체 보기</a>
                 <a href="/admin/adminModelRegistration">기종 등록하기</a>
             </div>
             <div class="container-in-page-nation">

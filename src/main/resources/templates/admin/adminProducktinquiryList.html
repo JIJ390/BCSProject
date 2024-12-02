@@ -6,23 +6,17 @@
         <td class="color-result">
             <p> 현재 개수      :  <th:block th:text="${deviceList.deviceCount}">22</th:block> </p>
             <p> 현재 주문 개수 :  <th:block th:text="${deviceList.orderCount}">4</th:block> </p>
-            <p> 색상별 개수    :  <th:block>5</th:block> </p>
-            <div class="color">
-                <div class="border-radius-color"></div>
-                <div class="border-radius-color"></div>
-                <div class="border-radius-color"></div>
-            </div>
         </td>
         <td th:text="${deviceList.deviceReleaseDate}"> </td>
         <td class="td-btn">
             <form th:action="@{/admin/adminSale/deviceNo={deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                 <button><p>구매 현황</p></button>
             </form>
-            <form>
+            <form th:action="@{/admin/adminSellList/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                 <button><p>판매 현황</p></button>
             </form>
-            <form>
-                <button><p>상세보기</p></button>
+            <form th:action="@{/admin/adminUpdate/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                <button><p>수정하기</p></button>
             </form>
         </td>
     </tr>

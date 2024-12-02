@@ -723,7 +723,7 @@ WHERE
 </update>
 
 
-<!-- <update id="colorUpdate">
+<update id="colorUpdate">
 	UPDATE 
 		"COLOR"
 	SET
@@ -733,8 +733,8 @@ WHERE
 		COLOR_DEVICE_IMG = #{colorDeviceImg}
 	</if>
 	WHERE 
-		DEVICE_NO = #{deviceNo}
-</update> -->
+		COLOR_NO = #{colorNo}
+</update>
 
 <update id="gradeUpdate">
 	UPDATE 
@@ -746,18 +746,106 @@ WHERE
 		DEVICE_NO = #{deviceNo}
 	AND GRADE_TYPE = #{gradeTypeOrly}
 </update>
-<!-- 
-<update id="capacityUpdate">
-UPDATE  
-	"CAPACITY_PRICE"
-SET
-	CAPACITY_PRICE = #{caPrice},
-	CAPACITY_SELL_PRICE = #{caSellPrice}
-WHERE 
-	DEVICE_NO = #{deviceUpdateNo}
-AND
-	CAPACITY_NUMBER = #{caNo}
-</update> -->
 
+
+
+
+<delete id="capacityDelete">
+
+DELETE 
+	CAPACITY_PRICE
+WHERE
+	DEVICE_NO = #{deviceNo}
+
+</delete>
+
+<insert id="capacityInsert">
+INSERT INTO 
+	"CAPACITY_PRICE"
+VALUES
+(
+	#{deviceNo},
+	#{caNo},
+	#{caPrice},
+	#{caSellPrice}
+)
+</insert>
+
+
+<delete id="colorDelete">
+	DELETE 
+		COLOR
+	WHERE 
+		COLOR_NO = #{colorNoCodeOut}
+
+</delete>
+
+<select id="selectBuyingDeviceList">
+SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE,
+			BUYING_DEVICE_UPLOAD_DATE,
+			BUYING_DEVICE_SOLD_DATE,
+			SOLD_FL
+			FROM
+				BUYING_DEVICE BD
+			LEFT JOIN
+				COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+			LEFT JOIN
+				GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+			LEFT JOIN
+				CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+			LEFT JOIN
+				DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+			ORDER BY BUYING_DEVICE_UPLOAD_DATE DESC
+</select>
+
+<select id="adminAllListSearch">
+
+SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE,
+			BUYING_DEVICE_UPLOAD_DATE,
+			BUYING_DEVICE_SOLD_DATE,
+			SOLD_FL
+			FROM
+				BUYING_DEVICE BD
+			LEFT JOIN
+				COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+			LEFT JOIN
+				GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+			LEFT JOIN
+				CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+			LEFT JOIN
+				DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+			WHERE 
+				LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+			ORDER BY BUYING_DEVICE_UPLOAD_DATE DESC
+</select>
+
+<select id="productinquirySearch">
+SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
+   NVL((SELECT COUNT(*)
+    FROM "ORDER"
+    JOIN BUYING_DEVICE USING (BUYING_DEVICE_NO)
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    GROUP BY DEVICE_NO), 0) AS "ORDER_COUNT",
+   NVL((SELECT COUNT(*)
+    FROM "BUYING_DEVICE"
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    AND SOLD_FL = 'N'
+    GROUP BY DEVICE_NO), 0) AS "DEVICE_COUNT"
+FROM DEVICE D
+WHERE 
+	LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+ORDER BY 
+	DEVICE_RELEASE_DATE DESC
+	</select>
 	
 </mapper>

@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.bcs.admin.service.AdminService;
 
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -235,12 +236,6 @@ public class AdminController {
 		//구매 신청 목록 검색기능필터
 		List<Order> result = service.serachFilter(searchResult);
 		
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		
 		model.addAttribute("result", result);
 		
 		
@@ -258,20 +253,34 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("adminSale")
-	public String adminSaleFirst(
+	@GetMapping("adminAllList")
+	public String adminAllList(
 			Model model
 			) { 
 		
 		
-		List<Order> result = service.adminSaleFirst();
+		List<BuyingDevice> buyingDeviceList = (List<BuyingDevice>)service.selectBuyingDeviceList();
 		
 		
-		model.addAttribute("listView", result);
+		model.addAttribute("buyingDeviceList", buyingDeviceList);
 		
 		
-		return "admin/adminSale";
+		return "admin/adminAllList";
 		
+	}
+	
+	@GetMapping("adminAllList/search")
+	public String adminAllList(
+			@RequestParam(name = "search", required = false) String search,
+			Model model
+			) {
+		
+		List<BuyingDevice> adminAllListSearch = (List<BuyingDevice>)service.adminAllListSearch(search);
+		
+		
+		model.addAttribute("buyingDeviceList", adminAllListSearch);
+		
+		return "admin/adminAllList";
 	}
 	
 	
@@ -339,26 +348,18 @@ public class AdminController {
 	        @RequestParam("capacityPrice") String capacityPrice,
 	        @RequestParam("capacitySellPrice") String capacitySellPrice,
 	        @RequestParam("deviceNo") String deviceNo,
-	        RedirectAttributes rs
-	        
-	        
+	        @RequestParam("colorStatus") String colorStatus,
+	        @RequestParam("colorNoCode") String colorNoCode,
+	        RedirectAttributes rs,
+	        Model model
 			) {
 	
-		
-		log.debug("device : {}", device);
-		log.debug("color : {}", color);
-		log.debug("gradePrice : {}", gradePrice);
-		log.debug("gradeSellPrice : {}", gradeSellPrice);
-		log.debug("gradeType : {}", gradeType);
-		log.debug("capacityNumber : {}", capacityNumber);
-		log.debug("capacityPrice : {}", capacityPrice);
-		log.debug("capacitySellPrice : {}", capacitySellPrice);
-		log.debug("deviceNo : {}", deviceNo);
 		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
 		int text = service.textContentUpdate(device,color,gradeType,gradePrice,gradeSellPrice,
-				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice);
+				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice, colorStatus, colorNoCode);
+		
 		
 		return "/admin/adminProductinquiry";
 	}
@@ -681,7 +682,6 @@ public class AdminController {
 //		log.debug("deviceNo : {}", deviceNo);
 		Map<String, Object> reload = service.reload(deviceNo);
 		
-		log.debug("asdasdasdasd : {}", reload);
 		
 		reload.get("device");
 		reload.get("grade");
@@ -801,7 +801,18 @@ public class AdminController {
 		return result;
 	}
 
-
+	@GetMapping("adminProductinquiry/search")
+	public String adminProductinquiry(
+			Model model,
+			@RequestParam("search") String search
+			) {
+		
+		List<Device> ListView = service.productinquirySearch(search);
+		model.addAttribute("deviceList", ListView);
+		
+		return "admin/adminProductinquiry";
+	}
+	
 	
 	
 	

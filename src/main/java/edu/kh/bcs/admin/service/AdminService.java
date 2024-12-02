@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -146,8 +147,22 @@ public interface AdminService {
 
 //업데이트
 	int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
-			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
-			String capacitySellPrice);
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice, 
+			String capacitySellPrice, String colorStatus, String colorNoCode);
+
+
+
+	//전체 매물 목록 조회
+	List<BuyingDevice> selectBuyingDeviceList();
+
+
+
+	// adminAllList 검색
+	List<BuyingDevice> adminAllListSearch(String search);
+
+
+	//ProductinquirySearch
+	List<Device> productinquirySearch(String search);
 
 
 
