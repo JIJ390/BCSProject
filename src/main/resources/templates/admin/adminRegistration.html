@@ -10,12 +10,14 @@
 
 <body>
     <!-- 등록 박스 -->
+    
+
     <div class="decalcomanie" style="display: flex;">
         <div class="adminRegistration-box">
             <div class="mypageUpdate-title">매물등록</div><br>
             <div class="mypageUpdate-title" style="margin-bottom: 40px; font-size: 20px;">상세스펙</div>
             
-            <form action="registrationChange" method="POST" name="registrationForm" class="registrationForm">
+            <form action="/admin/registrationChange" method="POST" name="registrationForm" class="registrationForm">
                 <section class="imgText">
                     <div>
                         <img src="/images/sample_iphone16_blue.png" alt="" class="imgBox">
@@ -25,19 +27,25 @@
                     <div>
                         <div class="registration">
                             <label for="registrationNumber">기종번호</label>
-                            <input type="text" id="registrationNumber" name="registrationNumber" placeholder="기종번호 입력">
+                            <input type="text" id="registrationNumber" name="deviceNo" placeholder="기종번호" readonly>
                         </div>
                         <div class="registration">
-                            <label for="registrationGrade">등급</label>
-                            <input type="text" id="registrationGrade" name="registrationGrade" placeholder="등급 입력">
+                            <span>등급</span>
+                            <select name="gradeSelect" id="gradeSelect">
+                                <option value="">선택</option>
+                            </select>
                         </div>
                         <div class="registration">
-                            <label for="registrationCapacity">용량</label>
-                            <input type="text" id="registrationCapacity" name="registrationCapacity" placeholder="용량 입력">
+                            <span>색상</span>
+                            <select name="colorSelect" id="colorSelect">
+                                <option value="">선택</option>
+                            </select>
                         </div>
                         <div class="registration">
-                            <label for="registrationColor">색상</label>
-                            <input type="text" id="registrationColor" name="registrationColor" placeholder="색상 입력">
+                            <span>용량</span>
+                            <select name="capacitySelect" id="capacitySelect">
+                                <option value="">선택</option>
+                            </select>
                         </div>
                     </div>
                 </section>
@@ -58,7 +66,7 @@
                 <div class="company">
                     <h3>제조사</h3>
                     <ul id="manufacturer-list">
-                        <li class="buttonChoice">APPLE</li>
+                        <li class="buttonChoice">Apple</li>
                         <li class="buttonChoice">SAMSUNG</li>
                         <li class="buttonChoice">iPad</li>
                         <li class="buttonChoice">Galaxy Tab</li>
@@ -67,15 +75,7 @@
                 <div class="model">
                     <h3>모델</h3>
                     <ul id="model-list">
-                        <li class="buttonChoice1">아이폰 15Pro</li>
-                        <li class="buttonChoice1">갤럭시 Z 플립 7</li>
-                        <li class="buttonChoice1">iPad Pro 4세대</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
-                        <li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+                        <!-- <li class="buttonChoice1"></li> -->
                     </ul>
                 </div>
             </div>

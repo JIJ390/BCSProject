@@ -1,0 +1,15 @@
+<!-- <li class="buttonChoice1">아이폰 15Pro</li>
+<li class="buttonChoice1">갤럭시 Z 플립 7</li>
+<li class="buttonChoice1">iPad Pro 4세대</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li>
+<li class="buttonChoice1">Galaxy Tab S7 Ultra</li> -->
+
+<th:block th:each= "device:${deviceList}">
+
+  <li class="buttonChoice1" th:text="${device.deviceName}" onclick="deviceSelectBtn(this)" th:data-value="${device.deviceNo}"></li>
+
+</th:block>

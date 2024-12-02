@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -223,6 +224,20 @@ public interface AdminMapper {
 			@Param("caPrice") String caPrice, 
 			@Param("caSellPrice") String caSellPrice, 
 			@Param("deviceUpdateNo") int deviceUpdateNo);
+
+	/** 모델명찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+	
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
 
 
