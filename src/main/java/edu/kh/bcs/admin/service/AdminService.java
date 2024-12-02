@@ -15,6 +15,7 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -148,6 +149,22 @@ public interface AdminService {
 	int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
 			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
 			String capacitySellPrice);
+
+
+
+	int insertReviewNoti(String orderNo, String memberNo);
+
+
+
+	String uploadImg(MultipartFile img);
+
+
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+
+
+	int deteleReviewRN(int orderNo);
 
 
 

@@ -2,7 +2,7 @@
 
 <div style="width: 100%; height: 100%; ">
   <div class="sidebar-chatting-detail-header" style="width: 100%; height: 10%;  padding: 20px; display: flex;" >
-    <div class="sidebar-chatting-back" style="font-size: 30px; color: rgb(179, 179, 179); margin-right: 15px;"><</div>
+    <div class="sidebar-chatting-back" style="font-size: 30px; color: rgb(179, 179, 179); margin-right: 15px; cursor: pointer;"><</div>
     <p style="font-size: 30px; color: rgb(179, 179, 179);">채팅 내용</p>
   </div>
   <div class="sidebar-chatting-detail-body-admin">
@@ -12,7 +12,10 @@
       <input type="hidden" class="getChatRoomNo" th:value="${message.chattingRoomNo}">
         <div class="chattingAreaAdmin">
           <th:block th:if= "${loginMember.memberName} == ${message.senderName}">
-            <div class="chatting-receiver-area" style="width: max-content; max-width: 260px; height: max-content; float: right; padding: 10px; border: 1px solid gray; color: white; border-radius: 10px;" th:text="${message.chattingMessageContent}"></div>
+            <!-- <th:block th:if= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-div1"  style="width: max-content; max-width: 260px; height: max-content; float: right; padding: 10px; border: 1px solid gray; color: white; border-radius: 10px;"  th:text="${message.chattingMessageContent}"></div></th:block>
+            <th:block th:unless= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-div1"  style="width: max-content; max-width: 260px; height: max-content; float: right; padding: 10px; border: 1px solid gray; color: white; border-radius: 10px;" ><img th:src="${message.chattingMessageContent}" style="width: 150px; height: 150px;"></div></th:block> -->
+            <th:block th:if= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-area" style="width: max-content; max-width: 260px; height: max-content; float: right; padding: 10px; border: 1px solid gray; color: white; border-radius: 10px;" th:text="${message.chattingMessageContent}"></div></th:block>
+            <th:block th:unless= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-area" style="width: max-content; max-width: 260px; height: max-content; float: right; padding: 10px; border: 1px solid gray; color: white; border-radius: 10px;"><img th:src="${message.chattingMessageContent}" style="width: 150px; height: 150px;"></div></th:block>
           </th:block>
           <th:block th:unless= "${loginMember.memberName} == ${message.senderName}">
             <div >
@@ -20,7 +23,8 @@
                 <img class="chatting-receiver-img1"  src="/images/상담.jpg">
                 <div class="chatting-sender-name" th:text="${message.senderName}"></div>
              </div>
-              <div class="chatting-receiver-div2"  th:text="${message.chattingMessageContent}"></div>
+              <th:block th:if= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-div2"  th:text="${message.chattingMessageContent}"></div></th:block>
+              <th:block th:unless= "${message.chattingMessageImgCheck == 'N'}"><div class="chatting-receiver-div2"><img th:src="${message.chattingMessageContent}" style="width: 150px; height: 150px;"></div></th:block>
             </div>
           </th:block>
      
@@ -31,6 +35,8 @@
   </div>
   <div class="sidebar-chatting-detail-input">
     <textarea class="sidebar-chatting-detail-inputbar" spellcheck="false"></textarea>
+    <label class="sidebar-chatting-detail-imginputbtn" for="sidebarImg" ><img src="/images/help/clip.png"  style="width: 25px; height: 25px;"></label>
+    <input  type="file" style="display: none;" accept="image/*" id="sidebarImg" onchange="chattingUpload(this)">
     <button class="sidebar-chatting-detail-inputbutton">보내기</button>
   </div>
 </div>

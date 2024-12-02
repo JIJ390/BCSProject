@@ -14,6 +14,7 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -196,7 +197,13 @@ public interface AdminMapper {
 
 	String eventFlSearch(int eventNo);
 
-	/*=================================수정==========================================*/
+	int checkRN(@Param("orderNo")String orderNo, @Param("memberNo") String memberNo);
+
+	int insertReviewNoti(@Param("orderNo")String orderNo, @Param("memberNo") String memberNo);
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+	int deleteReviewRN(int orderNo);
 	int deviceUpdate(
 			Device device);
 	int colorUpdate(

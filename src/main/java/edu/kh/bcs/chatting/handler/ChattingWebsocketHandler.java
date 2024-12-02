@@ -77,8 +77,6 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
     ChattingMessage msg 
       = objectMapper.readValue(message.getPayload(), ChattingMessage.class);
 
-
-
 //    // 채팅을 보낸 회원의 회원 번호 얻어오기
 //    // -> 로그인한 회원 번호(session)
 //    //  -> WebSocketSession에 담겨있음!!! (인터셉터 참고)
@@ -93,15 +91,6 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
 //    
 //    msg.setSenderNo(senderNo); // Message 객체에 세팅
     
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-    System.out.println(msg);
-
     // ----------- DB INSERT ------------------
     
     // 1) ChattingService 의존성 주입 받기(필드)

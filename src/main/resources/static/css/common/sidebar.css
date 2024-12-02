@@ -60,16 +60,18 @@
 
 
 .sidebar-profile-updateBtn {
-  border: 0;
+  border: 0 !important;
   border-radius: 10px;
   background-color: rgb(71, 71, 71);
   width: 100px;
-  height: 30px;
-  font-size: 15px;
-  color: rgb(202, 202, 202);
-  text-align: center;
-  margin-top: 30px;
+  height: 30px !important;
+  font-size: 15px !important;
+  color: rgb(202, 202, 202) !important;
+  text-align: center !important;
+  margin-top: 30px !important;
   transition: 0.1s;
+
+  padding: 0px !important;
 }
 
 .sidebar-profile-loginBtn {
@@ -155,7 +157,16 @@
   justify-content: center;
   /* opacity: 0; */
   transition: 0.3s;
+  flex-wrap: wrap;
+  overflow: auto;
 
+}
+.sidebar-div-content-body::-webkit-scrollbar {
+  background-color: rgb(56, 56, 56);
+}
+.sidebar-div-content-body::-webkit-scrollbar-thumb {
+  background-color: rgb(117, 117, 117);
+  border-radius: 10px;
 }
 
 .sidebar-div-content-chatting {
@@ -306,23 +317,50 @@
   resize: none;
   overflow: hidden;
   background-color: rgb(85, 85, 85);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   outline: none;
   color: white;
   padding: 5px;
   font-size: 15px;
-  margin: 0 10px;
+  border: 0;
+  margin-left: 5px;
+}
+.sidebar-chatting-detail-imginputbtn{
+  background-color: rgb(85, 85, 85);
+  color: white;
+  border: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
-.sidebar-chatting-detail-inputbutton {
-  width: 15%;
+.sidebar-chatting-detail-inputbutton{
+  width: 15% !important;
   height: 100%;
   background-color: rgb(65, 65, 65);
   color: white;
-  font-size: 15px;
+  font-size: 15px !important;
   border: 0;
   border-radius: 10px;
-  margin-right: 5px;
+  margin-right: 5px !important;
+
+  padding: 0px !important;
+}
+.sidebar-chatting-detail-inputbutton:hover {
+  padding: 0px !important;
+  width: 15% !important;
+  height: 100%;
+  background-color: rgb(65, 65, 65);
+  color: white;
+  font-size: 15px !important;
+  border: 0;
+  border-radius: 10px;
+  margin-right: 5px !important;
 }
 
 
@@ -410,7 +448,7 @@
   border: 1px solid gray;
   color: white;
   border-radius: 10px;
-
+  word-wrap: break-word;
 }
 
 .chatting-receiver-div1 {
@@ -435,6 +473,7 @@
   background-color: rgb(179, 179, 179);
   color: rgb(0, 0, 0);
   border-radius: 10px;
+  word-wrap: break-word;
 }
 
 .chatting-receiver-img1 {
@@ -449,6 +488,7 @@
   border-radius: 10px;
   display: flex;
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .chatting-admin-area:hover {
@@ -458,8 +498,46 @@
   display: flex;
   margin-bottom: 10px;
   background-color: rgb(85, 85, 85);
+  overflow: hidden;
 }
 
 .sidebar-2-ar{
   color: rgb(56, 56, 56);
+}
+
+.sidebar-div-content-body-2{
+  width: 90%;
+  height: 40%;
+  background-color: rgb(82, 82, 82);
+  margin: auto;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.sidebar-review_btn1{
+  border: 0;
+  border-radius: 20px;
+  background-color: var(--main-color);
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  color: black;
+  text-align: center;
+  padding: 0 10px;
+  margin-right: 20px;
+  position: relative;
+}
+.sidebar-review-btn2{
+  border: 0;
+  border-radius: 20px;
+  background-color: rgb(185, 185, 185);
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  color: rgb(87, 87, 87);
+
+  text-align: center;
+  padding: 0 15px;
 }

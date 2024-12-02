@@ -10,13 +10,11 @@
         <p style="color: #afafaf; font-size: 20px;" th:text="${session.loginMember.memberName}">사용자 이름</p>
       </div>
       <div>
-        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="${session.loginMember.memberTel}">연락처 : </p>
+        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="${session.loginMember.memberTel.substring(0, 3) + '-' +session.loginMember.memberTel.substring(3, 7) + '-' + session.loginMember.memberTel.substring(7)}">연락처 : </p>
       </div>
+
       <div>
-        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="${session.loginMember.memberAddress}">주소 : </p>
-      </div>
-      <div>
-        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="|${session.loginMember.memberPoint}포인트|">포인트 : </p>
+        <p style="color: rgb(146, 146, 146); font-size: 17px;" th:text="|${#numbers.formatInteger(session.loginMember.memberPoint, 0, 'COMMA')} 포인트|">포인트 : </p>
       </div>
       <button class="sidebar-profile-updateBtn"><i class="fa-solid fa-pen-to-square" style="margin-right: 10px;"></i>수정하기</button>
  </th:block>

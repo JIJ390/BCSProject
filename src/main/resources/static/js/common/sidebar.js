@@ -99,6 +99,7 @@ const getHomeContent = () => {
         document.querySelector(".sidebar-div-content").innerHTML = html;
         document.querySelector(".sidebar-div-content").classList.add('sidebar-div-content-view');
         getHomeMessageBtn();
+        getReviewBtn();
   
       }, 100);
       sidebarViewType = 1;
@@ -106,6 +107,49 @@ const getHomeContent = () => {
     .catch(err => {
       console.log(err);
     })
+}
+
+/* 리뷰 작성 알림 네, 아니요 버튼 */
+const getReviewBtn = () => {
+  const reviewBtn1 = document.querySelectorAll(".sidebar-review_btn1");
+  const reviewBtn2 = document.querySelectorAll(".sidebar-review-btn2");
+
+  for(let i = 0; i < reviewBtn1.length; i++){
+
+    reviewBtn1[i]?.addEventListener("click", (e) => {
+      const orderNo =Number(e.target.closest(".sidebar-div-content-body-2").dataset.orderNo);
+
+      location.href = `/review/write/${orderNo}`; 
+
+    })
+    reviewBtn2[i]?.addEventListener("click", (e) => {
+      const orderNo = e.target.closest(".sidebar-div-content-body-2").dataset.orderNo;
+
+      fetch("/sidebar/deleteReviewRN",{
+        method : "DELETE",
+        headers : {"Content-Type" : "application/json"},
+        body : orderNo
+      })
+      .then(Response => {
+        if(Response.ok){
+          return Response.text();
+        }
+        throw new Error("리뷰알림 삭제 실패");
+      })
+      .then(result => {
+        if(result > 0){
+          getHomeContent()
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+    })
+
+  }
+
+
 }
 
 const getChatContent = () => {
@@ -254,12 +298,14 @@ const chatRead = () => {
             }
             throw new Error("읽기 실패")
           })
+          .then(result => {
+            getAr();
+          })
           .catch(err => {
             console.log(err);
           })
 
-          sidebarBtnArCheck = 0;
-          document.querySelector(".sidebar-button").style.backgroundColor = "#1d1d1f"
+
 }
 
 
@@ -644,7 +690,34 @@ const createChatRoom = () => {
 }
 
 
+const getAr = () => {
+  fetch("/sidebar/firstArCheck?memberNo="+notificationLoginNo)
+  .then(Response => {
+    if(Response.ok){
+      return Response.text();
+    }
+    throw new Error("알림 조회 실패")
+  })
+  .then(result => {
 
+    if(result > 0){
+
+      /* 알림 있으면 사이드바 버튼과 사이드바 채팅버튼, 안읽은 메시지 개수(자동) 조회 */
+      sidebarBtnArCheck = 1;
+      sidebarBtnAr();
+      document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
+      document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+    }
+    else {
+      sidebarBtnArCheck = 0;
+      sidebarBtnAr();
+      document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(56, 56, 56);";
+      document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(56, 56, 56);";
+    }
+
+
+  })
+}
 
 
 
@@ -666,6 +739,7 @@ const sidebarBtnAr = () => {
     document.querySelector(".sidebar-button").style.backgroundColor = "red"
   }
   else{
+    document.querySelector(".sidebar-button").style.backgroundColor = "#1d1d1f"
     return;
   }
 }
@@ -679,25 +753,10 @@ if(notificationLoginCheck){ // common.html에 선언된 전역 변수
   chattingSock = new SockJS("/chattingSock");
 
   /* 비동기로 안읽은 채팅 개수 가져와서 있으면 알림 */
-  fetch("/sidebar/firstArCheck?memberNo="+notificationLoginNo)
-  .then(Response => {
-    if(Response.ok){
-      return Response.text();
-    }
-    throw new Error("알림 조회 실패")
-  })
-  .then(result => {
+  getAr();
 
-    if(result > 0){
-
-      /* 알림 있으면 사이드바 버튼과 사이드바 채팅버튼, 안읽은 메시지 개수(자동) 조회 */
-      sidebarBtnArCheck = 1;
-      sidebarBtnAr();
-      document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-      document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
-    }
-
-  })
+  /* 비동기로 리뷰 알림 개수 조회 후 표시 */
+  // fetch("/sidebar/reviewNRCheck")
 
 
 
@@ -730,7 +789,8 @@ const sendMessage = () => {
     "receiverNo" : receiverNo,
     "chattingMessageContent" : msg,
     "chattingRoomNo" : chattingRoomNo,
-    "senderNo" : senderNo
+    "senderNo" : senderNo,
+    "chattingMessageImgCheck" : 'N'
   }
 
   console.log(chattingObj);
@@ -767,9 +827,19 @@ if(chattingSock != undefined){
     // 내가 보냄
     if(msg.senderNo == notificationLoginNo){
 
+
       const div = document.createElement("div");
       div.classList.add("chatting-receiver-area")
-      div.innerText = msg.chattingMessageContent;
+      if(msg.chattingMessageImgCheck === 'N'){
+        div.innerText = msg.chattingMessageContent;
+      }
+      else{
+        const chatImg = document.createElement("img")
+        chatImg.src = msg.chattingMessageContent;
+        chatImg.style.width = "150px"
+        chatImg.style.height = "150px"
+        div.append(chatImg);
+      }
 
       chatArea.append(div)
       document.querySelector(".sidebar-chatting-detail-body-admin").append(chatArea)
@@ -795,7 +865,16 @@ if(chattingSock != undefined){
 
       const div4 = document.createElement("div");
       div4.classList.add("chatting-receiver-div2")
-      div4.innerText = msg.chattingMessageContent;
+      if(msg.chattingMessageImgCheck === 'N'){
+        div4.innerText = msg.chattingMessageContent;
+      }
+      else{
+        const chatImg = document.createElement("img")
+        chatImg.src = msg.chattingMessageContent;
+        chatImg.style.width = "150px"
+        chatImg.style.height = "150px"
+        div4.append(chatImg);
+      }
 
       div1.append(div4)
 
@@ -951,8 +1030,78 @@ if(chattingSock != undefined){
 
 
 
+/* 채팅 이미지 업로드 함수 */
+const chattingUpload = (file) => {
+
+  console.log("이미지 업로드");
+
+  const senderNo = notificationLoginNo;
+  let receiverNo = 0;
+
+  if(document.querySelector(".chat-room-member1").value == senderNo){
+    receiverNo = document.querySelector(".chat-room-member2").value;
+  }
+  else{
+    receiverNo = document.querySelector(".chat-room-member1").value;
+  }
+  const img = file.files[0];
+  console.log(img);
+  console.log(receiverNo);
+  console.log(chattingRoomNo);
+  console.log(senderNo);
+
+  const formData = new FormData();
+  formData.append("img", img)
+
+  fetch("/sidebar/chattingImg", {
+    method : "POST",
+    body : formData
+  })
+  .then(Response => {
+    if(Response.ok){
+      return Response.text();
+    }
+    throw new Error("이미지 업로드 실패 채팅")
+  })
+  .then(result => {
+    /* 채팅 업로드 성공시 채팅 웹소켓 진행 */
+    /* 이미지 경로 반환 */
+    const chattingObj = {
+      "receiverNo" : receiverNo,
+      "chattingMessageContent" : result,
+      "chattingRoomNo" : chattingRoomNo,
+      "senderNo" : senderNo,
+      "chattingMessageImgCheck" : 'Y'
+    }
+    chattingSock.send( JSON.stringify(chattingObj) );
+    console.log(chattingObj);
+  })
 
 
+
+  // document.querySelector(".sidebar-chatting-detail-inputbar").value = '';
+
+}
+
+
+// const eventThumbnailUpload1 = (file) => {
+
+//   const thumbnail = document.querySelector(".event-thumbnail-img1");
+  
+//   if(file.files && file.files[0]){
+//       var reader = new FileReader();
+//       reader.onload = (e) => {
+//           imageInput1 = file.files[0];
+//           thumbnail.style.backgroundImage = "url("+ e.target.result + ")";
+//       }
+//       reader.readAsDataURL(file.files[0]);
+//   }
+//   else{
+//       thumbnail.style.backgroundImage ="url(/images/help/파일업로드.png)";
+//       imageInput1 = '';
+//   }
+
+// }
 
 
 

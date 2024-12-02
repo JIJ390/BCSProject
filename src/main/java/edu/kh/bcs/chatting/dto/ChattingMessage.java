@@ -16,4 +16,5 @@ public class ChattingMessage {
   private int receiverNo;
   private int chattingRoomNo;
   private String chattingMessageSendDate;
+  private String chattingMessageImgCheck;
 }
