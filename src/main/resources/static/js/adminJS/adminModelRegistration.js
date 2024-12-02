@@ -78,6 +78,34 @@ for (let i = 0; i < inputImg.length; i++) {
 }
 
 
+const deviceInsertFrm = document.querySelector("#deviceInsertFrm");
+
+
+deviceInsertFrm.addEventListener("submit", e => {
+
+    const capacityPrice = document.querySelectorAll("[name=capacityPrice]");
+
+    capacityPrice.forEach((price, index) => {
+        
+        if (price.value.trim().length === 0) {
+            price.value = "null";
+        }
+        price.type = "hidden";
+    })
+
+    const capacitySellPrice = document.querySelectorAll("[name=capacitySellPrice]");
+
+    capacitySellPrice.forEach((sellPrice, index) => {
+        
+        if (sellPrice.value.trim().length === 0) {
+            sellPrice.value = "null"
+        }
+        sellPrice.type = "hidden";
+    })
+
+
+})
+
 
 
 

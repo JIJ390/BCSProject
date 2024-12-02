@@ -120,21 +120,6 @@ public class DeviceListController {
 		}
 			
 
-			
-			
-		try {
-			// cookie 에 , 포함 될 경우 에러 해결 위해 인코딩
-			// 쿠키 제거  문자열 배열을 이어붙이기
-			String cookieValue = URLEncoder.encode(String.join(",", deviceNoList), StandardCharsets.UTF_8.name());
-				
-			Cookie cookie = new Cookie("deviceNoList", cookieValue);
-			cookie.setMaxAge(60 * 60 * 24 * 7);
-			cookie.setPath("/");
-			resp.addCookie(cookie);
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 		model.addAttribute("recentDeviceList", recentDeviceList);
@@ -243,7 +228,7 @@ public class DeviceListController {
 		
 		String trimmedQuery = query.trim();
 		
-        log.debug("trimmedQuery {} : ", trimmedQuery);
+//        log.debug("trimmedQuery {} : ", trimmedQuery);
 		
         List<Device> searchResults = service.searchDevices(trimmedQuery);
 
@@ -251,7 +236,7 @@ public class DeviceListController {
         model.addAttribute("query", query); // 검색어
         model.addAttribute("searchResults", searchResults); // 검색 결과
         
-        log.debug("searchResults {} : ", searchResults);
+//        log.debug("searchResults {} : ", searchResults);
 
         // deviceList.html 페이지 반환
         return "deviceList/deviceList";

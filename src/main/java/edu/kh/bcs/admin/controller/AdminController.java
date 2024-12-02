@@ -301,7 +301,18 @@ public class AdminController {
 			) {
 		
 		
+		String[] capacityNo1 = capacityNumber.split(",");
+		String[] capacityPrice1 = capacityPrice.split(",");
+		String[] capacitySellPrice1 = capacitySellPrice.split(",");
 		
+		System.out.println(capacityNo1.toString());
+		System.out.println(capacityPrice1.toString());
+		System.out.println(capacitySellPrice1.toString());
+		System.out.println(capacityNo1.length);
+		System.out.println(capacityPrice1.length);
+		System.out.println(capacitySellPrice1.length);
+		
+		log.debug("capacityPrice : {}", capacityPrice);
 		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
@@ -310,6 +321,48 @@ public class AdminController {
 		
 		return "redirect:/admin/adminProductinquiry";
 	}
+	
+	
+	
+	@PostMapping("adminUpdate/{deviceNo}")
+	public String deviceUpdate(
+			//메인사진
+	        @RequestParam(name = "divceImg", required = false) MultipartFile  divceImg,
+	        //6개 사진 담겨있음
+	        @RequestParam(name = "colorImg", required = false) List<MultipartFile> colorImg,
+	        @ModelAttribute Color color,
+	        @ModelAttribute Device device,
+	        @RequestParam("gradePrice") String gradePrice,
+	        @RequestParam("gradeSellPrice") String gradeSellPrice,
+	        @RequestParam("gradeType") String gradeType,
+	        @RequestParam("capacityNumber") String capacityNumber,
+	        @RequestParam("capacityPrice") String capacityPrice,
+	        @RequestParam("capacitySellPrice") String capacitySellPrice,
+	        @RequestParam("deviceNo") String deviceNo,
+	        RedirectAttributes rs
+	        
+	        
+			) {
+	
+		
+		log.debug("device : {}", device);
+		log.debug("color : {}", color);
+		log.debug("gradePrice : {}", gradePrice);
+		log.debug("gradeSellPrice : {}", gradeSellPrice);
+		log.debug("gradeType : {}", gradeType);
+		log.debug("capacityNumber : {}", capacityNumber);
+		log.debug("capacityPrice : {}", capacityPrice);
+		log.debug("capacitySellPrice : {}", capacitySellPrice);
+		log.debug("deviceNo : {}", deviceNo);
+		
+		//divce 객체로 넣어줄거 
+		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
+		int text = service.textContentUpdate(device,color,gradeType,gradePrice,gradeSellPrice,
+				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice);
+		
+		return "/admin/adminProductinquiry";
+	}
+	
 	
 	
 //	기종 등록
@@ -725,8 +778,7 @@ public class AdminController {
 		return result;
 	}
 
-	
-	
+
 	
 	
 	

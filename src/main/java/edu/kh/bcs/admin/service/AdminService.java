@@ -145,6 +145,12 @@ public interface AdminService {
 	String eventFlUpdate(int eventNo);
 
 
+//업데이트
+	int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
+			String capacitySellPrice);
+
+
 
 	int insertReviewNoti(String orderNo, String memberNo);
 

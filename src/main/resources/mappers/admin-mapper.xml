@@ -436,7 +436,9 @@ ORDER BY
 	   #{deviceBrand},
 	   #{ramCapacity},
 	   #{deviceCpuName},
-	   #{displaySize}
+	   #{displaySize},
+	   #{deviceNameKor}
+	   
 	)
 	</insert>
 	
@@ -671,6 +673,7 @@ SELECT
 FROM GRADE g
 WHERE 
 DEVICE_NO = #{deviceNo}
+ORDER BY GRADE_PRICE ASC
 </select>
 
 <select id="reloadColor">
@@ -732,5 +735,73 @@ WHERE RECEIVER_NO = #{memberNo}
 	</insert>
 	
 	
+=======
+<update id="deviceUpdate">
+UPDATE 
+	"DEVICE"
+SET
+	DEVICE_RELEASE_DATE = TO_DATE(#{deviceReleaseDate}, 'YYYY-MM-DD'),
+	DEVICE_RELEASE_PRICE = #{deviceReleasePrice},
+	<if test="deviceImg != null and !deviceImg.equals('')">
+		DEVICE_IMG = #{deviceImg},
+	</if>
+	DEVICE_OS = #{deviceOs},
+	DEVICE_RESOLUTION = #{deviceResolution},
+	DEVICE_PIXEL =#{devicePixel},
+	DEVICE_FRONT_PIXEL = #{deviceFrontPixel},
+	DEVICE_BACK_PIXEL = #{deviceBackPixel},
+	DEVICE_WEIGHT = #{deviceWeight},
+	DEVICE_BATTERY_CAPACITY = #{deviceBatteryCapacity},
+	DEVICE_NAME = #{deviceName},
+	DEVICE_BUYING_PRICE = #{deviceBuyingPrice},
+	DEVICE_SELLING_PRICE = #{deviceSellingPrice},
+	DEVICE_BRAND = #{deviceBrand},
+	DEVICE_CPU_NAME = #{deviceCpuName},
+	DEVICE_RAM_CODE = #{ramCapacity},
+	DEVICE_DISPLAY_CODE = #{displaySize},
+	DEVICE_NAME_KOR = #{deviceNameKor}
+WHERE 
+	DEVICE_NO = #{deviceNo}
+
+
+</update>
+
+
+<!-- <update id="colorUpdate">
+	UPDATE 
+		"COLOR"
+	SET
+		COLOR_NAME = #{colorName}, 
+		COLOR_CODE = #{colorCode}, 
+	<if test="colorDeviceImg != null and !colorDeviceImg.equals('')">
+		COLOR_DEVICE_IMG = #{colorDeviceImg}
+	</if>
+	WHERE 
+		DEVICE_NO = #{deviceNo}
+</update> -->
+
+<update id="gradeUpdate">
+	UPDATE 
+		"GRADE"
+	SET
+		GRADE_PRICE = #{gradePriceOrly},
+		GRADE_SELL_PRICE = #{gradeSellPriceOrly}
+	WHERE 
+		DEVICE_NO = #{deviceNo}
+	AND GRADE_TYPE = #{gradeTypeOrly}
+</update>
+<!-- 
+<update id="capacityUpdate">
+UPDATE  
+	"CAPACITY_PRICE"
+SET
+	CAPACITY_PRICE = #{caPrice},
+	CAPACITY_SELL_PRICE = #{caSellPrice}
+WHERE 
+	DEVICE_NO = #{deviceUpdateNo}
+AND
+	CAPACITY_NUMBER = #{caNo}
+</update> -->
+
 	
 </mapper>

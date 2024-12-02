@@ -5,16 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/adminModelRegistration.css">
+    <link rel="stylesheet" href="/css/admin/adminUpdate.css">
     <title>기종 업데이트</title>
 </head>
 
 <body>
-
-    [[${device}]]
-    [[${colorResultList}]]
-    <form action="adminModelRegistration/update" method="post" enctype="multipart/form-data" >
+    <form action="/admin/adminUpdate/update" method="POST" enctype="multipart/form-data" id="deviceUpdateFrm">
         <div class="title">
             <!-- 메인 색 첨부 -->
+             <input type="hidden" name="deviceNo" th:value="${device.deviceNo}">
             <a href="http://localhost/admin" class="menu">←</a>
         </div>
         <h1>기종등록</h1>
@@ -37,36 +36,44 @@
                 <div class="main-color-first">
 
 
-
             
 
 
 
                     <div class="main-color-in-radios">
-                        <div class="main-img">
+                        <div class="main-img"> 
                             <img th:src="${colorResultList.get(0)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file1">
+                                <input id="file1" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(0)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
                             <img th:src="${colorResultList.get(1)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file2">
+                                <input id="file2" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(1)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
                             <img th:src="${colorResultList.get(2)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file3">
+                                <input id="file3" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(2)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
 
@@ -76,17 +83,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="검정색">
-                            <input type="text" name="colorName" placeholder="검정색">
-                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(0)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(1)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(2)?.colorName ?: ''}">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="#0000">
-                            <input type="text" name="colorCode" placeholder="#0000">
-                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(0)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(1)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(2)?.colorCode ?: ''}">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -97,27 +104,36 @@
                         <div class="main-img">
                             <img th:src="${colorResultList.get(3)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file4">
+                                <input id="file4" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(3)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
                             <img th:src="${colorResultList.get(4)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file5">
+                                <input id="file5" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(4)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
                         <div class="main-img">
                             <img th:src="${colorResultList.get(5)?.colorDeviceImg ?: ''}" class="preview">
                         </div>
-                        <div>
-                            <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                        <div class="file-box">
+                            <label for="file6">
+                                <input id="file6" type="file" class="input-img" name="colorImg" style="display: none;"> 
+                                <p th:text="${colorResultList.get(5)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                            </label>
+                            <span class="delete_image">(1) &times;</span>
                         </div>
                     </div>
                     <div class="colorText">
@@ -125,17 +141,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="검정색">
-                            <input type="text" name="colorName" placeholder="검정색">
-                            <input type="text" name="colorName" placeholder="검정색">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(3)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(4)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(5)?.colorName ?: ''}">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="#0000">
-                            <input type="text" name="colorCode" placeholder="#0000">
-                            <input type="text" name="colorCode" placeholder="#0000">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(3)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(4)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(5)?.colorCode ?: ''}">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -192,48 +208,48 @@
                     <p name="deviceCpuName">cpu 이름</p>
                 </div>
                 <!-- 입력할 값 -->
-                <div class="main-content-left">
+                <div class="main-content-left" th:object="${device}">
                     <!-- 출시일 -->
-                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)">
+                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)" th:value="*{deviceReleaseDate}">
 
                     <!-- 출고가 -->
-                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
+                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외" th:value="*{deviceReleasePrice}">
 
                     <!-- 운영체제 -->
-                    <input type="text" name="deviceOs" placeholder="ex. ios 00">
+                    <input type="text" name="deviceOs" placeholder="ex. ios 00" th:value="*{deviceOs}">
 
                     <!-- 해상도 -->
-                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080">
+                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080" th:value="*{deviceResolution}">
 
                     <!-- 기종 화소 밀도 -->
-                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display">
+                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display" th:value="*{devicePixel}">
 
                     <!-- 기종 전면 화소 -->
-                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만">
+                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만" th:value="*{deviceFrontPixel}">
 
                     <!-- 기종 후면 화소 -->
-                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만">
+                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만" th:value="*{deviceBackPixel}">
 
                     <!-- 기종 무게 -->
-                    <input type="text" name="deviceWeight" placeholder="ex. 100 g">
+                    <input type="text" name="deviceWeight" placeholder="ex. 100 g" th:value="*{deviceWeight}">
 
                     <!-- 배터리 용량 -->
-                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh">
+                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh" th:value="*{deviceBatteryCapacity}">
 
                     <!-- 디바이스 이름 -->
-                    <input type="text" name="deviceName" placeholder="ex. iPhone 16">
+                    <input type="text" name="deviceName" placeholder="ex. iPhone 16" th:value="*{deviceName}">
 
                     <!-- 디바이스 한글 이름 -->
-                    <input type="text" name="deviceNameKor" placeholder="ex. 아이폰 16">
+                    <input type="text" name="deviceNameKor" placeholder="ex. 아이폰 16" th:value="*{deviceNameKor}">
 
                     <!-- 내폰사기 -->
-                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000">
+                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000" th:value="*{deviceBuyingPrice}">
 
                     <!-- 내폰 팔기 -->
-                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000">
+                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000" th:value="*{deviceSellingPrice}">
                     <!-- cpu 이름 -->
                     <input type="text" name="deviceCpuName"
-                        placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
+                        placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz" th:value="*{deviceCpuName}">
 
 
 
@@ -245,29 +261,30 @@
         <!-------------- 상세 스펙 적는 ---------------->
         <div class="main-content-container-bottom">
 
+            <div th:text="${device.ramCapacity}"></div>
             <!-- 램 -->
             <h2>램 용량 선택</h2>
             <select name="ramCapacity" id="ram">
-                <option value="1">2 GB</option>
-                <option value="2">4 GB</option>
-                <option value="3">6 GB</option>
-                <option value="4">8 GB</option>
-                <option value="5">12 GB</option>
+                <option value="1" th:selected="${device.deviceRamCode == 1}">2 GB</option>
+                <option value="2" th:selected="${device.deviceRamCode == 2}">4 GB</option>
+                <option value="3" th:selected="${device.deviceRamCode == 3}">6 GB</option>
+                <option value="4" th:selected="${device.deviceRamCode == 4}">8 GB</option>
+                <option value="5" th:selected="${device.deviceRamCode == 5}">12 GB</option>
             </select>
             <h2>기종 제조사</h2>
             <select name="deviceBrand" id="brand">
-                <option>SAMSUNG</option>
-                <option>iPhone</option>
-                <option>Galaxy Tab</option>
-                <option>iPad</option>
+                <option value="SAMSUNG" th:selected="${device.deviceBrand == 'SAMSUNG'}">SAMSUNG</option>
+                <option value="Apple" th:selected="${device.deviceBrand == 'Apple'}">Apple</option>
+                <option value="Galaxy Tab" th:selected="${device.deviceBrand == 'Galaxy Tab'}">Galaxy Tab</option>
+                <option value="iPad" th:selected="${device.deviceBrand == 'iPad'}">iPad</option>
             </select>
 
             <!-- 디스플레이 입력 -->
             <h2>디스플레이 입력</h2>
             <select name="displaySize" id="brand">
-                <option value="1">6.1</option>
-                <option value="2">6.06</option>
-                <option value="3">6.7</option>
+                <option value="1" th:selected="${device.deviceDisplayCode == '1'}">6.1</option>
+                <option value="2" th:selected="${device.deviceDisplayCode == '2'}">6.06</option>
+                <option value="3" th:selected="${device.deviceDisplayCode == '3'}">6.7</option>
             </select>
             <br>
 
@@ -280,15 +297,15 @@
             </div>
             <div>
                 <p>등록할 가격</p>
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(0).gradePrice}">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(1).gradePrice}">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(2).gradePrice}">
             </div>
             <div>
                 <p>판매할 가격</p>
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(0).gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(1).gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(2).gradeSellPrice}">
             </div>
 
             <div>
@@ -308,21 +325,23 @@
 
             <div>
                 <p>용량 별 가격</p>
-                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacityPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacityPrice" placeholder="10000">
+                <input type="text" name="capacityPrice" placeholder="10000">
+                <input type="text" name="capacityPrice" placeholder="10000">
+                <input type="text" name="capacityPrice" placeholder="10000">
+                <input type="text" name="capacityPrice" placeholder="10000">
             </div>
             <div>
                 <p>내 폰 팔기 가격</p>
-                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
-                <input type="text" name="capacitySellPrice" placeholder="바꾸지마시오">
+                <input type="text" name="capacitySellPrice" placeholder="10000">
+                <input type="text" name="capacitySellPrice" placeholder="10000">
+                <input type="text" name="capacitySellPrice" placeholder="10000">
+                <input type="text" name="capacitySellPrice" placeholder="10000">
+                <input type="text" name="capacitySellPrice" placeholder="10000">
             </div>
 
+
+            
 
         </div>
         <br><br>
@@ -338,10 +357,11 @@
 
 
 </body>
-<script src="/js/adminJS/adminModelRegistration.js"></script>
+<script src="/js/adminJS/adminModelUpdate.js"></script>
 
 <script th:inline="javascript">
-
+    const capacityPrice = /*[[${capacityPrice}]]*/ "capacityPrice";
+    const colorResultList = /*[[${colorResultList}]]*/ "colorResultList";
 </script>
 
 </html>

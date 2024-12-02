@@ -44,7 +44,9 @@ public interface DeviceListService {
 	List<MainBannerDto> bannerList();
 
 
-	List<Device> images();
+	List<Device> newDevice();
+
+
 
 
 

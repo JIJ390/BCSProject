@@ -204,6 +204,25 @@ public interface AdminMapper {
 	List<reviewRNDto> getOrderList(int memberNo);
 
 	int deleteReviewRN(int orderNo);
+	int deviceUpdate(
+			Device device);
+	int colorUpdate(
+			@Param("color2") Color color2,
+			@Param("deviceUpdateNo") int deviceUpdateNo
+			);
+	int colorUpdate(Color color2);
+
+	int gradeUpdate(
+			@Param("gradePriceOrly") String gradePriceOrly, 
+			@Param("gradeSellPriceOrly") String gradeSellPriceOrly,
+			@Param("gradeTypeOrly") String gradeTypeOrly, 
+			@Param("deviceNo") int deviceNo);
+
+	int capacityUpdate(
+			@Param("caNo") String caNo, 
+			@Param("caPrice") String caPrice, 
+			@Param("caSellPrice") String caSellPrice, 
+			@Param("deviceUpdateNo") int deviceUpdateNo);
 
 
 

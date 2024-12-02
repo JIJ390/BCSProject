@@ -458,6 +458,7 @@ public class AdminServiceImpl implements AdminService {
 		return 0;
 	}
 	
+
 	
 	
 	@Override
@@ -614,6 +615,136 @@ public class AdminServiceImpl implements AdminService {
 		
 			return 1;
 	}
+	
+	@Override
+	public int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
+			String capacitySellPrice) {
+		
+		// if 문 밖에서 선언
+		String deviceRename = null;
+		
+		// device파일 리네임
+		if (!divceImg.isEmpty()) {
+			
+			String divceImge = divceImg.getOriginalFilename();
+			
+			log.debug("divceImge : {}", divceImge);
+
+			deviceRename = FileUtil.rename(divceImge);
+
+			device.setDeviceImg(webPathDevice + deviceRename);
+		}
+
+
+		// 스펙 수정
+		int deviceUpdate = mapper.deviceUpdate(device);
+
+		// insert 실패할경우
+		if (deviceUpdate == 0) {
+			System.out.println("상세 정보에 값이 제대로 들어오지 않았습니다.");
+			// 0 주고 탈출
+			return 0;
+		} else {
+			try {
+
+				File folder = new File(folderPathDevice);
+				if (folder.exists() == false) { // 존재하지 않을때에
+					folder.mkdirs(); // 폴더 생성 구문
+				}
+				
+				if (!divceImg.isEmpty()) {
+					
+					divceImg.transferTo(new File(folderPathDevice + deviceRename));
+					
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			
+			
+
+			// colorImg 6개 사진 들어감
+			// colorimg 필터
+			/*
+			 * for (int i = 0; i < colorImg.size(); i++) { // 없을 경우 // 분기문중 없는 경우 다음 숫자 if
+			 * (colorImg.get(i).isEmpty()) continue;
+			 * 
+			 * // 이미지가 있을 경우 원본명 얻어오기 String textImg =
+			 * colorImg.get(i).getOriginalFilename();
+			 * 
+			 * // 변경된 파일명 중복되지않게끔 // 만들어둔 FileUtil 사용하기 String rename =
+			 * FileUtil.rename(textImg);
+			 * 
+			 * String[] colorNameList = color.getColorName().split(","); String[]
+			 * colorCodeList = color.getColorCode().split(","); String colorNameOut =
+			 * colorNameList[i]; String colorCodeOut = colorCodeList[i];
+			 * 
+			 * // Color color2 = new Color();
+			 * 
+			 * // deviceCode 빨간색 color2.setColorName(colorNameOut); // deviceCode #23123
+			 * color2.setColorCode(colorCodeOut);
+			 * color2.setColorDeviceImg(webPathDeviceColor + rename);
+			 * 
+			 * try { int colorUpdate = mapper.colorUpdate(color2);
+			 * 
+			 * File folder = new File(folderPathColor); if (folder.exists() == false) { //
+			 * 존재하지 않을때에 folder.mkdirs(); // 폴더 생성 구문 } colorImg.get(i).transferTo(new
+			 * File(folderPathColor + rename));
+			 * 
+			 * } catch (Exception e) { e.printStackTrace(); return 0; } }
+			 */// for 문 끝남
+			
+			int deviceNo = device.getDeviceNo();
+			
+			String[] gradeTypeSplit = gradeType.split(",");
+			String[] gradePriceSplit = gradePrice.split(",");
+			String[] gradeSellPriceSplit = gradeSellPrice.split(",");
+				
+			//3개
+			for(int i = 0 ; i < gradeTypeSplit.length; i++) {
+				
+				//자른거
+				
+				//자른거 완성
+				String gradePriceOrly = gradePriceSplit[i];
+				String gradeSellPriceOrly = gradeSellPriceSplit[i];
+				String gradeTypeOrly = gradeTypeSplit[i];
+				
+				
+				int gradeUpdate = mapper.gradeUpdate(gradePriceOrly,gradeSellPriceOrly, gradeTypeOrly, deviceNo);
+			}
+//			
+//			//자르기
+//			String[] capacityNo1 = capacityNumber.split(",");
+//			String[] capacityPrice1 = capacityPrice.split(",");
+//			String[] capacitySellPrice1 = capacitySellPrice.split(",");
+//			
+//			
+//			
+//			for(int i = 0; i < capacityNo1.length ; i++) {
+//				
+//				String caNo = capacityNo1[i];
+//				String caPrice = capacityPrice1[i];
+//				String caSellPrice = capacitySellPrice1[i];
+//				
+//				//용량 인서트
+//				int capacityUpdate = mapper.capacityUpdate(caNo,caPrice,caSellPrice,DeviceUpdateNo);
+//				
+//			}
+//			System.out.println("등록 완료");
+		}
+		
+			return 1;
+	}
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public List<Order> adminSale(String deviceNo) {

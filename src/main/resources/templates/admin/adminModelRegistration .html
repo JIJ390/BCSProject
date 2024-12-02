@@ -10,7 +10,7 @@
 
 <body>
 
-    <form action="adminModelRegistration/insert" method="post" enctype="multipart/form-data">
+    <form action="adminModelRegistration/insert" method="post" enctype="multipart/form-data" id="deviceInsertFrm">
         <div class="title">
             <!-- 메인 색 첨부 -->
             <a href="http://localhost/admin" class="menu">←</a>
@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">1 &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -47,7 +47,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">2 &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">3 &times;</span>
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">4 &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -97,7 +97,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">5 &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -106,7 +106,7 @@
                         </div>
                         <div>
                             <input type="file" class="input-img" name="colorImg">
-                            <span class="delete_image">&times;</span>
+                            <span class="delete_image">6 &times;</span>
                         </div>
                     </div>
                     <div class="colorText">
@@ -183,7 +183,7 @@
                 <!-- 입력할 값 -->
                 <div class="main-content-left">
                     <!-- 출시일 -->
-                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYYMMDD)">
+                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYY-MM-DD)">
 
                     <!-- 출고가 -->
                     <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
@@ -246,7 +246,7 @@
             <h2>기종 제조사</h2>
             <select name="deviceBrand" id="brand">
                 <option>SAMSUNG</option>
-                <option>iPhone</option>
+                <option>Apple</option>
                 <option>Galaxy Tab</option>
                 <option>iPad</option>
             </select>
@@ -257,6 +257,12 @@
                 <option value="1">6.1</option>
                 <option value="2">6.06</option>
                 <option value="3">6.7</option>
+                <option value="4">7.6</option>
+                <option value="5">8.3</option>
+                <option value="6">11</option>
+                <option value="7">12.4</option>
+                <option value="8">13</option>
+                <option value="9">14.6</option>
             </select>
             <br>
 
