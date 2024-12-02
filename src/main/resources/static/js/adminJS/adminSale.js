@@ -34,9 +34,6 @@ for (let i = 0; i < selectBtn.length; i++) {
             "memberNo": trCon[i].children[1].innerText
         }
         
-        alert(map1)
-        alert(orderNober)
-        alert(trCon[i].children[1].innerText)
         fetch("/admin/delivery", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
