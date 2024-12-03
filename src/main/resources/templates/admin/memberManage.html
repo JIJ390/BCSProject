@@ -221,11 +221,10 @@
 
   
     <div class="admin-member-detail 팝업히든">
-      [[${session.loginMember}]]
       <div>
         <div style="width: 100%; display: flex; justify-content: space-between; font-size: 40px;">회원 정보 <button
             class="admin-member-detail-close" style="border: 0; background-color: white; font-size: 40px;"><i
-              class="fa-solid fa-x"></i>X</button></div>
+              class="fa-solid fa-x"></i></button></div>
       </div>
       <div>
         <p>회원번호</p>
@@ -271,7 +270,6 @@
         <p>판매 횟수</p>
         <p class="admin-member-detail-sell"></p>
       </div>
-      <div><button class="admin-member-login">로그인하기</button></div>
     </div>
   
     <div class="member-mamage-body">
@@ -724,14 +722,6 @@
       adminMemberCngBtn();
     })
 
-
-    document.querySelector(".admin-member-login").addEventListener("click", (e) => {
-
-      const memberNo = Number(e.target.closest(".admin-member-detail").children[1].children[1].innerText);
-      console.log(memberNo);
-
-      location.href = "/admin/memberLogin?memberNo=" + memberNo
-    })
 
   </script>
 </body>

@@ -416,3 +416,16 @@ main{
 .underline-animation.selected::after {
   width: 100%; /* 밑줄이 좌에서 우로 확장 */
 }
+
+
+.recent-list-container > hr {
+  margin-bottom: 12px;
+  margin-top: 10px;
+
+  background:rgb(184, 184, 184);
+  height:1px;
+  border:0;
+
+  width: 65px;
+
+}

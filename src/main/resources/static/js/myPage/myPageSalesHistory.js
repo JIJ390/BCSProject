@@ -35,7 +35,7 @@ const selectBuyingList = (cp) => {
             modelCell.innerText = "조회된 구매 내역이 없습니다";
     
     
-            modelCell.setAttribute('colspan', '3')
+            modelCell.setAttribute('colspan', '4')
     
             row.append(modelCell);
     

@@ -25,6 +25,7 @@ public class SellingDevice {
 	private int memberNo;
 	private String clientName;
 	private String clientTel;
+	private String statusCode;
 	
 	private String deviceName;
 	private String capacityType;
@@ -33,6 +34,7 @@ public class SellingDevice {
 	private String statusContent;
 	
 	private String memberName;
+	private String memberId;
 	
 
 }
