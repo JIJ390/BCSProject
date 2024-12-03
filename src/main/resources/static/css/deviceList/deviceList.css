@@ -418,6 +418,20 @@ main{
 }
 
 
+.tab {
+  position: relative; /* 부모 요소를 기준으로 자식 요소의 위치를 설정 */
+}
+
+.tab img {
+  position: absolute;
+  top: -10px; /* 글씨 기준으로 조정 */
+  right: -30px; /* 글씨 기준으로 조정 */
+  pointer-events: none; /* 이미지를 클릭할 수 없도록 설정 */
+  scale: 0.7;
+}
+
+
+
 .recent-list-container > hr {
   margin-bottom: 12px;
   margin-top: 10px;
@@ -429,3 +443,4 @@ main{
   width: 65px;
 
 }
+

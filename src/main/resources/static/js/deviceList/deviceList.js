@@ -70,6 +70,27 @@ const selectFilterList = (filterType) => {
           listItem.style.textDecoration = "underline"; // 밑줄 추가
           listItem.style.fontWeight = "bold"; // 두꺼운 글씨 추가
         }
+        if (filterType == 'inch' && item > 8) {
+          listItem.classList.add('tab')
+
+          if (filterType == 'inch' && item > 8) {
+            listItem.classList.add('tab');
+        
+            // 이미지 요소 추가
+            const imgElement = document.createElement("img");
+            imgElement.src = '/images/tab.png'; // 이미지 경로
+            imgElement.alt = item; // 대체 텍스트
+            imgElement.classList.add('tab-image'); // CSS 적용을 위한 클래스 추가
+        
+            // 이미지 삽입
+            listItem.appendChild(imgElement);
+        }
+      }
+
+        
+      
+
+        
 
 
         // 클릭 이벤트 추가 (다중 선택)
@@ -237,7 +258,7 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
     }
     throw new Error("조회 실패");
   })
-  .then(result => {
+  .then(result => {z
     console.log(result); // 가져온 데이터 확인
   
     // 기존 내용을 초기화
@@ -292,6 +313,7 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
 
       // 컨테이너에 박스 추가
       itemsContainer.appendChild(itemBox);
+
     });
   })
   .catch(err => console.error(err));
