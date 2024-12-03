@@ -159,7 +159,7 @@ public class MyPageController {
 	}
 	
 	
-	@GetMapping("myPage/myPageLogin")
+//	@GetMapping("myPage/myPageLogin")
 	/**
 	 * 아이디 뜨게하기
 	 * @param memberEmail
@@ -170,6 +170,8 @@ public class MyPageController {
 	public String findId(
 			@RequestBody String memberEmail) {
 		
+		System.out.println(memberEmail);
+		System.out.println(memberEmail);
 		
 		return service.findId(memberEmail);
 	}

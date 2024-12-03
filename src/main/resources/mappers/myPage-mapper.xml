@@ -26,6 +26,8 @@
   			AND   MEMBER_DEL_FL = 'N'
   	</select>
   	
+  	
+  	<!-- 아이디 확인하기 -->
   	<select id="findId">
   		SELECT
   			MEMBER_ID
@@ -42,9 +44,7 @@
   			"MEMBER"
   		WHERE
   			MEMBER_EMAIL = #{email}
-  		AND
-  			MEMBER_NAME = #{name}
-  	
+
   	</select>
   	
   	<!-- 비번찾기 -->
