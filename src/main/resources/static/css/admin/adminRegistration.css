@@ -242,3 +242,18 @@ button {
     background-color: #bcbcbc}
 
 /* 팝업 레이어 */
+
+
+
+.popup-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-header > p{
+    scale: 2.9;
+    position: relative;
+    left: 189px;
+    cursor: pointer;
+}

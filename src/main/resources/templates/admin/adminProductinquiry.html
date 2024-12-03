@@ -33,7 +33,7 @@
                     <div class="container-in-title-search">
                         <div>
                             <button class="productinquirySearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input type="text" name="search" placeholder="검색">
+                            <input type="text" name="search" placeholder="휴대폰 검색">
                             <a href="">초기화</a>
                         </div>
                     </div>
@@ -78,7 +78,6 @@
                             <form th:action="@{/admin/adminSale/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                                 <button><p>구매 현황</p></button>
                             </form>
-
                             <form th:action="@{/admin/adminBuy/{deviceNo}(deviceNo=${deviceList.deviceNo})}">
                                 <button><p>판매 현황</p></button>
                             </form>
