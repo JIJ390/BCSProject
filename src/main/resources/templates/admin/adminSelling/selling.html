@@ -1,0 +1,65 @@
+<th:block th:if= "${deviceList}">
+<th:block th:each= "device:${deviceList}" th:object="${device}">
+  <tr class="tr-container" 
+    th:data-member-id="*{memberId}"
+    th:data-member-name="*{clientName}"
+    th:data-member-account="*{accountNo}"
+    th:data-member-tel="*{clientTel}"
+    th:data-member-req="*{requestComment}"
+    th:data-device-no="*{deviceNo}"
+    th:data-device-color="*{colorNo}"
+    th:data-device-capacity="*{capacityNumber}"
+    th:data-device-grade="*{gradeNumber}"
+    th:data-order-no="*{sellingDeviceNo}"
+  >
+    <td th:text="*{sellingDeviceNo}">12</td>
+    <td th:text="*{memberNo}">TEST</td>
+    <td th:text="*{memberId}">아이디</td>
+    <td th:text="*{deviceName}"></td>
+    <td class="td-grade">
+      <p th:text="*{gradeType}">S</p>
+      <p>/</p>
+      <p th:text="*{colorName}">레드</p>
+      <p>/</p>
+      <p th:text="*{capacityType}">용량</p>
+    </td>
+    <td th:text="*{sellingDeviceDate}">2222/22/22</td>
+    <td>
+        <th:block th:if= "*{statusCode == '1'}">
+          <select name="" id="" class="select-btn" >
+            <option value="1" class="select-option-btn" selected>신청</option>
+            <option value="2" class="select-option-btn">반려</option>
+            <option value="3" class="select-option-btn">송금</option>
+          </select>
+        </th:block>
+        <th:block th:if= "*{statusCode == '2'}">
+          <select name="" id="" class="select-btn" >
+            <option value="1" class="select-option-btn" >신청</option>
+            <option value="2" class="select-option-btn" selected>반려</option>
+            <option value="3" class="select-option-btn">송금</option>
+          </select>
+        </th:block>
+        <th:block th:if= "*{statusCode == '3'}">
+          <p style="font-size: 15px;">송금완료</p>
+        </th:block>
+        <th:block th:if= "*{statusCode == '4'}">
+          <p style="font-size: 15px;">등록됨</p>
+        </th:block>
+    
+    </td>
+    <td><button class="selDevDet" style="width: 70px; height: 30px; border: 1px solid gray; background-color: white;">상세정보</button></td>
+    <th:block th:if= "*{statusCode == '1'}" >
+      <td><button style="width: 70px; height: 30px; border: 1px solid rgb(184, 184, 184); background-color: white; color: rgb(192, 192, 192);">매물등록</button></td>
+    </th:block>
+    <th:block th:if= "*{statusCode == '2'}" >
+      <td><button style="width: 70px; height: 30px; border: 1px solid rgb(184, 184, 184); background-color: white; color: rgb(192, 192, 192);">매물등록</button></td>
+    </th:block>
+    <th:block th:if= "*{statusCode == '3'}" >
+      <td><button class="addBuyDevice" style="width: 70px; height: 30px; border: 1px solid gray; background-color: white;">매물등록</button></td>
+    </th:block>
+    <th:block th:if= "*{statusCode == '4'}" >
+      <td><button style="width: 70px; height: 30px; border: 1px solid rgb(184, 184, 184); background-color: white; color: rgb(192, 192, 192);">매물등록</button></td>
+    </th:block>
+    </tr>
+</th:block>
+</th:block>

@@ -43,7 +43,4 @@ let interval = setInterval(nextSlide, 5000);
 // 페이지 로드 시 첫 슬라이드를 표시
 showSlide(currentIndex);
 
-document.addEventListener("DOMContentLoaded", () => {
-  interval();
-})
 

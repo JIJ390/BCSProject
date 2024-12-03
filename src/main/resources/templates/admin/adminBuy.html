@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>판매 현황</title>
+  <link rel="stylesheet" href="/css/admin/sale.css">
+
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+
+
+    .seldetpopup{
+      position: absolute;
+      width: 300px;
+      height: 420px;
+      border: 1px solid black;
+      background-color: white;
+      border-radius: 20px;
+
+      left: 0;
+      right: 0; 
+      margin: 200px auto;
+
+      padding: 0 20px;
+    }
+
+    .seldetpopup-hidden{
+      display: none;
+    }
+
+    .pageNation{
+      width: 100%;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items:  center;
+    }
+    .pageNation > button{
+      width: 40px;
+      height: 40px;
+      border: 0;
+      background-color: white;
+      font-size: 25px;
+    }
+    .pageNation > div{
+      width: 40px;
+      height: 40px;
+      border: 0;
+      background-color: white;
+      display: flex
+;
+    justify-content: center;
+    align-items: center;
+    }
+    .pageNation > div > button{
+      width: 40px;
+    height: 40px;
+    border: 0;
+    background-color: white;
+    font-size: 25px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <th:block th:replace= "~{common/header}"></th:block> -->
+  <main>
+
+    <input type="hidden" class="getDeviceNo" th:value="${deviceNo}">
+
+    <section class="main-section">
+
+      <div class="seldetpopup seldetpopup-hidden">
+
+        <div style="width: 100%; height: 70px; display: flex; justify-content: space-between; align-content: center; font-size: 20px;" >
+          <p>상세 정보</p><p class="seldetpopupX">&times;</p>
+        </div>
+        <div style="width: 100%; height: 70px;  display: flex"><p style="margin-right: 30px;">아이디</p><p class="seldetId">1</p></div>
+        <div style="width: 100%; height: 70px;  display: flex"><p style="margin-right: 30px;">이름</p><p class="seldetName">2</p></div>
+        <div style="width: 100%; height: 70px;  display: flex"><p style="margin-right: 30px;">전화번호</p><p class="seldetTel">3</p></div>
+        <div style="width: 100%; height: 70px;  display: flex"><p style="margin-right: 30px;">계좌번호</p ><p class="seldetAcc">4</p></div>
+        <div style="width: 100%; height: 70px;  display: flex"><p style="margin-right: 30px;">요청사항</p><p class="seldetReq">5</p></div>
+
+      </div>
+
+      <div class="head">
+        <a href="/admin/adminProductinquiry">←</a>
+      </div>
+      <div class="delivery-list">
+        <div class="box-title">
+          <!-- 최 상단 -->
+          <h1>판매 신청 목록</h1>
+          <div class="sarch-box">
+            <input type="text" name="search" placeholder="아이디 검색" id="search">
+            <button class="search-fiter">검색</button>
+          </div>
+        </div>
+        <div class="content">
+
+          <table>
+
+            <colgroup>
+              <col style="width: 7%">
+              <col style="width: 8%">
+              <col style="width: 8%">
+              <col style="width: 15%">
+              <col style="width: 25%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+            </colgroup>
+            <thead>
+              <tr class="tr-board">
+                <td>주문번호</td>
+                <td>회원 번호</td>
+                <td>아이디</td>
+                <td>상품 명</td>
+                <td>선택 등급/색/용량</td>
+                <td>주문 일자</td>
+                <td>배송 상태</td>
+                <td>상세정보</td>
+                <td>매물 등록</td>
+              </tr>
+            </thead>
+            <tbody class="listView">
+
+              <tr class="tr-container">
+                <!-- <td class="orderNo">20</td>
+                <td >12</td>
+                <td >TEST</td>
+                <td >아이폰</td>
+                <td class="td-grade">
+                  <p >S</p>
+                  <p>/</p>
+                  <p >레드</p>
+                  <p>/</p>
+                  <p >용량</p>
+                </td>
+                <td >2222/22/22</td>
+                <td>
+                    <select name="" id="" class="select-btn">
+                      <option  class="select-option-btn"></option>
+                      <option value="0" class="select-option-btn">신청</option>
+                      <option value="4" class="select-option-btn">반려</option>
+                      <option value="5" class="select-option-btn">송금</option>
+                    </select>
+
+                </td>
+                <td>상세정보</td>
+                <td>매물등록</td> -->
+              </tr>
+
+
+
+            </tbody>
+
+
+
+          </table>
+
+          <div class="pageNation"></div>
+
+        </div>
+      </div>
+
+
+
+    </section>
+
+  </main>
+
+
+  <!-- <th:block th:replace= "~{common/footer}"></th:block> -->
+  <script>
+
+    let cp = 1;
+    let searchText = '';
+
+    const getPageNation = () => {
+
+      console.log("getPageNation 실행");
+      const deviceNo = document.querySelector(".getDeviceNo").value;
+      fetch("/admin/adminBuy/searchDevicePage?deviceNo="+deviceNo+"&cp="+cp+"&searchText="+searchText)
+      .then(Response => {
+        if(Response.ok){
+          return Response.text();
+        }
+        throw new Error("페이지네이션 조회 실패")
+
+      })
+      .then(html => {
+        document.querySelector(".pageNation").innerHTML = html;
+        getEventPageNumClick();
+        getEventPageMoveClick();
+
+                  /* 페이지네이션 밑줄 */
+                  const cpUnderLine = (cp - 1) % 5;
+          const pnValue = document.querySelectorAll(".pnValue");
+
+          pnValue[cpUnderLine].style.borderBottom = '1px solid black';
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+
+    /* 페이지네이션 숫자 클릭 이벤트  */
+    const getEventPageNumClick = () => {
+      const numbers = document.querySelectorAll(".pnBtn")
+      for (let i = 0; i < numbers.length; i++) {
+        numbers[i]?.addEventListener('click', () => {
+
+          const cpNumber = numbers[i].children[0].innerText;
+          cp = cpNumber
+          getPageNation();
+          getDeviceList();
+        })
+      }
+
+      const maxNumber = document.querySelector(".pn-5")
+      maxNumber?.addEventListener('click', () => {
+        cp = maxNumber.children[0].innerText;
+        getPageNation();
+        getDeviceList();
+      })
+
+    }
+
+
+    /* 페이지네이션 화살표 이벤트 */
+    const getEventPageMoveClick = () => {
+      const moveBtn1 = document.querySelector(".pn-1")
+      const moveBtn2 = document.querySelector(".pn-2")
+      const moveBtn3 = document.querySelector(".pn-3")
+      const moveBtn4 = document.querySelector(".pn-4")
+
+      document.querySelector(".pn-1").addEventListener("click", () => {
+        cp = 1;
+        getPageNation();
+        getDeviceList();
+      })
+      document.querySelector(".pn-2").addEventListener("click", () => {
+        cp--;
+        if (cp === 0) {
+          cp++;
+        }
+        getPageNation();
+        getDeviceList();
+      })
+      document.querySelector(".pn-3").addEventListener("click", () => {
+        cp++;
+        if (cp > Number(document.querySelector(".getCpCount").value)) {
+          cp--;
+        }
+        getPageNation();
+        getDeviceList();
+      })
+      document.querySelector(".pn-4").addEventListener("click", () => {
+        cp = Number(document.querySelector(".getCpCount").value);
+        getPageNation();
+        getDeviceList();
+      })
+    }
+
+
+    document.querySelector(".search-fiter").addEventListener("click", () => {
+      searchText = document.querySelector("#search").value;
+      cp = 1
+      getDeviceList();
+      getPageNation();
+    })
+
+
+
+
+    const getDeviceList = () => {
+      const deviceNo = document.querySelector(".getDeviceNo").value;
+      console.log(deviceNo);
+      fetch("/admin/adminBuy/searchDevice?deviceNo="+deviceNo+"&cp="+cp+"&searchText="+searchText)
+      .then(Response => {
+        if(Response.ok){
+          return Response.text();
+        }
+        throw new Error("실패");
+      })
+      .then(html => {
+        document.querySelector(".listView").innerHTML = html;
+        getStatus();
+        getSelDevDet();
+        getAddBuyDevice();
+        console.log("getDeviceList 실행");
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+
+    /* 상태 변경 */
+    const getStatus = () => {
+      const status = document.querySelectorAll(".select-btn");
+
+      for(let i = 0; i < status.length; i++){
+        status[i]?.addEventListener("change", (e) => {
+
+          if(e.target.value == '3'){
+            if(!confirm("송금 상태로 변경하시겠습니까? (한변 변경 후 변경불가)")){
+              return;
+            }
+          }
+
+          const sellingDeviceNo = e.target.closest(".tr-container").children[0].innerText;
+          const statusCode = e.target.value;
+          const map = {
+            "sellingDeviceNo" : sellingDeviceNo,
+            "statusCode" : statusCode
+          }
+
+          fetch("/admin/adminBuy/updateStatue", {
+            method : "POST",
+            headers: { "Content-Type": "application/json" },
+            body : JSON.stringify(map)
+          })
+          .then(Response => {
+            if(Response.ok){
+              return Response.text();
+            }
+            throw new Error("실패")
+          })
+          .then(result => {
+            if(result > 0){
+              console.log("변경 성공");
+            }
+            getDeviceList();
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        })
+      }
+    }
+
+    const seldetpopupX = document.querySelector(".seldetpopupX");
+    seldetpopupX.addEventListener("click", () => {
+      document.querySelector(".seldetpopup").classList.add("seldetpopup-hidden")
+    })
+
+    /* 상세 정보 조회 버튼 */
+    const getSelDevDet = () => {
+      const selDevDet = document.querySelectorAll(".selDevDet");
+
+      for(let i = 0; i < selDevDet.length; i++){
+        selDevDet[i]?.addEventListener("click", (e) => {
+          if(document.querySelector(".seldetpopup").classList.contains("seldetpopup-hidden")){
+            document.querySelector(".seldetpopup").classList.remove("seldetpopup-hidden");
+          }
+          document.querySelector(".seldetId").innerText = e.target.closest(".tr-container").dataset.memberId;
+          document.querySelector(".seldetName").innerText = e.target.closest(".tr-container").dataset.memberName;
+          document.querySelector(".seldetAcc").innerText = e.target.closest(".tr-container").dataset.memberAccount;
+          document.querySelector(".seldetTel").innerText = e.target.closest(".tr-container").dataset.memberTel;
+          document.querySelector(".seldetReq").innerText = e.target.closest(".tr-container").dataset.memberReq;
+
+        })
+      }
+    }
+
+    /* 매물 등록 버튼 */
+    const getAddBuyDevice = () => {
+      
+      const addBuyDevice = document.querySelectorAll(".addBuyDevice");
+      for(let i = 0; i < addBuyDevice.length; i++){
+        addBuyDevice[i]?.addEventListener("click", (e) => {
+          if(!confirm("매물로 등록하시겠습니까?")){
+            return;
+          }
+
+          const map = {
+            "deviceNo" : e.target.closest(".tr-container").dataset.deviceNo,
+            "colorNo" : e.target.closest(".tr-container").dataset.deviceColor,
+            "capacityNumber" : e.target.closest(".tr-container").dataset.deviceCapacity,
+            "gradeNumber" : e.target.closest(".tr-container").dataset.deviceGrade,
+            "orderNo" : e.target.closest(".tr-container").dataset.orderNo,
+          }
+
+          console.log(map);
+
+          fetch("/admin/adminBuy/addBuyDevice", {
+            method : "POST",
+            headers: { "Content-Type": "application/json" },
+            body : JSON.stringify(map)
+          })
+          .then(Response => {
+            if(Response.ok) {
+              return Response.text();
+            }
+            throw new Error("실패")
+          })
+          .then(result => {
+            if(result > 0){
+              console.log("성공");  
+            }
+            else if(result == 0){
+              alert("이미 등록되있음")
+            }
+            else{
+              console.log("실패");
+            }
+            getDeviceList();
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        })
+      }
+
+    }
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      getDeviceList();
+      getPageNation();
+    })
+  </script>
+</body>
+
+</html>

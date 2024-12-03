@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -165,6 +166,22 @@ public interface AdminService {
 
 
 	int deteleReviewRN(int orderNo);
+
+
+
+	List<SellingDevice> getBuyingList(String deviceNo, int cp, String searchText);
+
+
+
+	int updateStatue(String sellingDeviceNo, String statusCode);
+
+
+
+	int addBuyDevice(String deviceNo, String colorNo, String capacityNumber, String gradeNumber, String orderNo);
+
+
+
+	int getDeviceResultCount(String searchText, String searchText2);
 
 
 

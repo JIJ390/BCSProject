@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.bcs.admin.service.AdminService;
 
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -201,6 +202,134 @@ public class AdminController {
 		
 		return "admin/adminSale";
 	}
+	
+	
+	
+	// 판매 신청
+	@GetMapping("adminBuy/{deviceNo}")
+	public String adminBuy(
+			Model model,
+			@PathVariable("deviceNo") String deviceNo
+			) {
+		
+		model.addAttribute("deviceNo", deviceNo);
+		
+		return "admin/adminBuy";
+	}
+	
+	
+	
+	@GetMapping("adminBuy/searchDevice")
+	public String searchDevice(
+			@RequestParam("deviceNo") String deviceNo,
+			@RequestParam("cp") int cp,
+			@RequestParam("searchText") String searchText,
+			Model model
+			) {
+		
+		List<SellingDevice> deviceList = service.getBuyingList(deviceNo,cp,searchText);
+		
+		model.addAttribute("deviceList",deviceList);
+		
+		return "admin/adminSelling/selling";
+	}
+	
+	@GetMapping("adminBuy/searchDevicePage")
+	public String searchDevicePage(
+			@RequestParam("deviceNo") String deviceNo,
+			@RequestParam("cp") int cp,
+			@RequestParam("searchText") String searchText,
+			Model model
+			) {
+		
+		// 조건에 맞게 검색 후 개수 조회
+		int resultCount = service.getDeviceResultCount(deviceNo,searchText);
+		
+		
+		
+		int cpCount = resultCount / 10;
+		int cp1 = resultCount % 10;
+		
+		int pn1 = (cp -1) / 5;
+		List<String> pnList = new ArrayList<>();
+	
+		
+		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
+			if(i > cpCount+1) {
+				break;
+			}
+			pnList.add(""+i);
+		}
+		
+		if(cp1 != 0) {
+			cpCount++;
+		}
+
+		model.addAttribute("pnList", pnList);
+		model.addAttribute("cpCount", cpCount);
+		
+		for(int i = 0; i < pnList.size(); i++) {
+			if(pnList.get(i).equals(""+cpCount)) {
+				model.addAttribute("lastIndex", 1);
+			}
+			else {
+				model.addAttribute("lastIndex",0);
+			}
+		}
+		
+		
+		return "admin/adminMember/adminMemberPage";
+	}
+	
+	
+	
+	
+	
+	
+	@ResponseBody
+	@PostMapping("adminBuy/updateStatue")
+	public int updateStatus(
+			@RequestBody Map<String, String> map
+			) {
+
+		int result 
+			= service.updateStatue(map.get("sellingDeviceNo"), map.get("statusCode"));
+		
+		return result;
+	}
+	@ResponseBody
+	@PostMapping("adminBuy/addBuyDevice")
+	public int addBuyDevice(
+			@RequestBody Map<String, String> map
+			) {
+		
+		System.out.println(map);
+		System.out.println(map);
+		System.out.println(map);
+		System.out.println(map);
+		
+		String deviceNo = map.get("deviceNo");
+		String colorNo = map.get("colorNo");
+		String capacityNumber = map.get("capacityNumber");
+		String gradeNumber = map.get("gradeNumber");
+		String orderNo = map.get("orderNo");
+		
+		int result = service.addBuyDevice(deviceNo,colorNo,capacityNumber,gradeNumber,orderNo);
+		
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		System.out.println(result);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@ResponseBody
 	@PostMapping("/delivery")

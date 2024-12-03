@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
@@ -223,6 +224,25 @@ public interface AdminMapper {
 			@Param("caPrice") String caPrice, 
 			@Param("caSellPrice") String caSellPrice, 
 			@Param("deviceUpdateNo") int deviceUpdateNo);
+
+	List<SellingDevice> getBuyingList(
+			@Param("deviceNo") String deviceNo, 
+			@Param("cp") int cp,
+			@Param("searchText") String searchText);
+
+	int updateStatue(@Param("sellingDeviceNo") String sellingDeviceNo, @Param("statusCode") String statusCode);
+
+	int checkBuyDevice(String orderNo);
+
+	int addBuyDevice(
+			@Param("deviceNo") String deviceNo, 
+			@Param("colorNo")String colorNo, 
+			@Param("capacityNumber")String capacityNumber, 
+			@Param("gradeNumber")String gradeNumber);
+
+	int statusChange(String orderNo);
+
+	int getDeviceResultCount(@Param("deviceNo")String deviceNo, @Param("searchText")String searchText);
 
 
 
