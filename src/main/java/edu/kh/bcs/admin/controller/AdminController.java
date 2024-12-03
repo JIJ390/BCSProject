@@ -307,11 +307,6 @@ public class AdminController {
 			@RequestBody Map<String, String> map
 			) {
 		
-		System.out.println(map);
-		System.out.println(map);
-		System.out.println(map);
-		System.out.println(map);
-		
 		String deviceNo = map.get("deviceNo");
 		String colorNo = map.get("colorNo");
 		String capacityNumber = map.get("capacityNumber");
@@ -319,11 +314,6 @@ public class AdminController {
 		String orderNo = map.get("orderNo");
 		
 		int result = service.addBuyDevice(deviceNo,colorNo,capacityNumber,gradeNumber,orderNo);
-		
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
-		System.out.println(result);
 		
 		return result;
 	}
