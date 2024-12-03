@@ -183,16 +183,6 @@ public class AdminController {
 			@PathVariable("deviceNo") String deviceNo
 			) {
 		
-		log.debug("controller device 값 : {}", deviceNo);
-		log.debug("controller device 값 : {}", deviceNo);
-		log.debug("controller device 값 : {}", deviceNo);
-		
-		
-		log.debug("controller device split 값 : {}", deviceNo);
-		log.debug("controller device split 값 : {}", deviceNo);
-		log.debug("controller device split 값 : {}", deviceNo);
-		
-		
 		
 		//리스트 조
 		List<Order> listView = service.adminSale(deviceNo);
@@ -425,16 +415,14 @@ public class AdminController {
 		int pn1 = (cp -1) / 5;
 		List<String> pnList = new ArrayList<>();
 	
-		
+		if(cp1 != 0) {
+			cpCount++;
+		}
 		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
-			if(i > cpCount+1) {
+			if(i > cpCount) {
 				break;
 			}
 			pnList.add(""+i);
-		}
-		
-		if(cp1 != 0) {
-			cpCount++;
 		}
 
 		
@@ -471,16 +459,14 @@ public class AdminController {
 		int pn1 = (cp -1) / 5;
 		List<String> pnList = new ArrayList<>();
 	
-		
+		if(cp1 != 0) {
+			cpCount++;
+		}
 		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
-			if(i > cpCount+1) {
+			if(i > cpCount) {
 				break;
 			}
 			pnList.add(""+i);
-		}
-		
-		if(cp1 != 0) {
-			cpCount++;
 		}
 		
 		model.addAttribute("pnList", pnList);
@@ -858,7 +844,160 @@ public class AdminController {
 		return "admin/adminRegistration";
 		
 	}
+	
+	
+	@GetMapping("adminSalePageNation")
+	public String salePageNation(
+			@RequestParam("cp") int cp,
+			@RequestParam("deviceNo") int deviceNo,
+			@RequestParam("search") String search,
+			Model model
+			) {
+		//전체 조회 총 개수
+		int result = service.result(deviceNo, search);
+		int cpCount = result / 10;
+		int cp1 = result % 10;
+		
+		System.out.println(result);
+		System.out.println(cpCount);
+		System.out.println(cp1);
+		
+		int pn1 = (cp -1) / 5;
+		List<String> pnList = new ArrayList<>();
+	
+		if(cp1 != 0) {
+			cpCount++;
+		}
+		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
+			if(i > cpCount) {
+				break;
+			}
+			pnList.add(""+i);
+		}
 
+		
+		model.addAttribute("pnList", pnList);
+		model.addAttribute("cpCount", cpCount);
+		
+		System.out.println(pnList);
+		System.out.println(cpCount);
+		System.out.println(pnList);
+		System.out.println(cpCount);
+		
+		for(int i = 0; i < pnList.size(); i++) {
+			if(pnList.get(i).equals(""+cpCount)) {
+				model.addAttribute("lastIndex", 1);
+			}
+			else {
+				model.addAttribute("lastIndex",0);
+			}
+		}
+		
+		return "admin/adminMember/adminMemberPage";
+	}
+	
+	
+	@GetMapping("adminSalePage")
+	public String adminSalePage(
+			@RequestParam("cp") int cp,
+			@RequestParam("deviceNo") int deviceNo,
+			@RequestParam("search") String search,
+			Model model
+			) {
+		
+		List<Order> saleList = service.saleListSelect(cp,deviceNo,search);
+		
+		
+		
+		model.addAttribute("listView", saleList);
+		
+		return "admin/adminRegist/sale";
+	}
+	
+	
+	@GetMapping("adminProductPageNation")
+	public String adminProductPageNation(
+			@RequestParam("cp") int cp,
+			@RequestParam("search") String search,
+			Model model
+			) {
+		
+		//전체 개수 조회해오기
+		int result = service.resultAll(search);
+		
+		int cpCount = result / 10;
+		int cp1 = result % 10;
+		
+		System.out.println(result);
+		System.out.println(cpCount);
+		System.out.println(cp1);
+		
+		int pn1 = (cp -1) / 5;
+		List<String> pnList = new ArrayList<>();
+	
+		if(cp1 != 0) {
+			cpCount++;
+		}
+		for(int i = 1 + (pn1 * 5); i <= 5 + (pn1 * 5); i++) {
+			if(i > cpCount) {
+				break;
+			}
+			pnList.add(""+i);
+		}
+		
+	
+
+		
+		model.addAttribute("pnList", pnList);
+		model.addAttribute("cpCount", cpCount);
+		
+		System.out.println(pnList);
+		System.out.println(cpCount);
+		System.out.println(pnList);
+		System.out.println(cpCount);
+		
+		for(int i = 0; i < pnList.size(); i++) {
+			if(pnList.get(i).equals(""+cpCount)) {
+				model.addAttribute("lastIndex", 1);
+			}
+			else {
+				model.addAttribute("lastIndex",0);
+			}
+		}
+		
+		return "admin/adminMember/adminMemberPage";
+	}
+	
+	@GetMapping("adminProductPage")
+	public String adminProductPage(
+			@RequestParam("cp") int cp,
+			@RequestParam("search") String search,
+			Model model
+			) {
+		
+		log.debug("cp : {}",cp);
+		log.debug("search : {}",search);
+		log.debug("cp : {}",cp);
+		log.debug("search : {}",search);
+		
+		//rowNum
+		List<Device> list = service.list(cp,search);
+		
+		log.debug("List : {}", list);
+		log.debug("List : {}", list);
+		
+		model.addAttribute("deviceList", list);
+		
+		System.out.println(list.size());
+		System.out.println(list.size());
+		System.out.println(list.size());
+		System.out.println(list.size());
+		
+		return "admin/productList";
+	}
+	
+	
+	
 	
 	
 	

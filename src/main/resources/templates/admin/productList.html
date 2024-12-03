@@ -1,0 +1,23 @@
+<th:block th:if= "${deviceList}">
+        <tr th:each= "deviceList:${deviceList}" class="deviceList">
+            <td><img th:src="${deviceList.deviceImg}"></td>
+            <td th:text="${deviceList.deviceNo}">  </td>
+            <td th:text="${deviceList.deviceName}"> </td>
+            <td class="color-result">
+                <p> 현재 개수      :  <th:block th:text="${deviceList.deviceCount}">22</th:block> </p>
+                <p> 현재 주문 개수 :  <th:block th:text="${deviceList.orderCount}">4</th:block> </p>
+            </td>
+            <td th:text="${deviceList.deviceReleaseDate}"> </td>
+            <td class="td-btn">
+                <form th:action="@{/admin/adminSale/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                    <button><p>구매 현황</p></button>
+                </form>
+                <form th:action="@{/admin/adminSellList/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                    <button><p>판매 현황</p></button>
+                </form>
+                <form th:action="@{/admin/adminUpdate/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+                    <button><p>수정버튼</p></button>
+                </form>
+            </td>
+        </tr>
+</th:block>

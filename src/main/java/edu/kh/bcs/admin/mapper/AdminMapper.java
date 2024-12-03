@@ -264,6 +264,39 @@ public interface AdminMapper {
 	 */
 	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
+	/** 전체 조회 총 개수
+	 * 
+	 * @param deviceNo
+	 * @param search
+	 * @return
+	 */
+	int result(
+			@Param("deviceNo") int deviceNo, 
+			@Param("search") String search);
+
+	
+	List<Order> saleListSelect(
+			@Param("cp")int cp, 
+			@Param("deviceNo")int deviceNo, 
+			@Param("search")String search);
+
+	/** adminProductinquiry 전체 개수 조회
+	 * 
+	 * @param search
+	 * @return
+	 */
+	int resultAll(String search);
+
+	/** product 로우 넘
+	 * 
+	 * @param cp
+	 * @param search
+	 * @return
+	 */
+	List<Device> productList(
+			@Param("cp") int cp, 
+			@Param("search") String search);
+
 
 
 }

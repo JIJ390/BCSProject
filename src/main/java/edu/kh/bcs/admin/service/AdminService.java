@@ -198,6 +198,36 @@ public interface AdminService {
 	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
 
+	/** 전체 조회 총 개수
+	 * 
+	 * @param deviceNo
+	 * @param search
+	 * @return
+	 */
+	int result(int deviceNo, String search);
+
+
+
+	List<Order> saleListSelect(int cp, int deviceNo, String search);
+
+
+	/** adminProductinquiry전체 개수 조회
+	 * 
+	 * @param search
+	 * @return
+	 */
+	int resultAll(String search);
+
+
+	/** product rowNum
+	 * 
+	 * @param cp
+	 * @param search
+	 * @return
+	 */
+	List<Device> list(int cp, String search);
+
+
 
 	
 	
