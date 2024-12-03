@@ -60,7 +60,7 @@ public class PointController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		int beforeChangePoints = 0;	// 로그인 세션에 담긴 값 가져오기
+		int beforeChangePoints = loginMember.getMemberPoint();	// 로그인 세션에 담긴 값 가져오기
 		
 		int result = service.pointCharge(amount, memberNo);
 		
