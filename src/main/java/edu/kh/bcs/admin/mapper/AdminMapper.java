@@ -207,10 +207,7 @@ public interface AdminMapper {
 	int deleteReviewRN(int orderNo);
 	int deviceUpdate(
 			Device device);
-	int colorUpdate(
-			@Param("color2") Color color2,
-			@Param("deviceUpdateNo") int deviceUpdateNo
-			);
+	
 	int colorUpdate(Color color2);
 
 	int gradeUpdate(
@@ -219,11 +216,39 @@ public interface AdminMapper {
 			@Param("gradeTypeOrly") String gradeTypeOrly, 
 			@Param("deviceNo") int deviceNo);
 
-	int capacityUpdate(
+
+	
+	
+	
+	
+// 용량별 가격
+	
+	int capacityDelete(int deviceNo);
+	
+	int capacityInsert(
 			@Param("caNo") String caNo, 
 			@Param("caPrice") String caPrice, 
 			@Param("caSellPrice") String caSellPrice, 
-			@Param("deviceUpdateNo") int deviceUpdateNo);
+			@Param("deviceNo") int deviceNo);
+
+	
+	//color 사진/코드
+	
+	// 삭제
+	int colorDelete(String colorNoCodeOut);
+
+	//전체 매물 목록
+	List<BuyingDevice> selectBuyingDeviceList();
+
+	//adminAllList 검색 
+	List<BuyingDevice> adminAllListSearch(String search);
+
+	// productinquiry 검색
+	List<Device> productinquirySearch(String search);
+
+
+
+
 
 	/** 모델명찾기
 	 * @param brandName

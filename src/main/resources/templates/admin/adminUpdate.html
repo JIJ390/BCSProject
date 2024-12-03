@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+   
     <form action="/admin/adminUpdate/update" method="POST" enctype="multipart/form-data" id="deviceUpdateFrm">
         <div class="title">
             <!-- 메인 색 첨부 -->
@@ -36,8 +38,6 @@
                 <div class="main-color-first">
 
 
-            
-
 
 
                     <div class="main-color-in-radios">
@@ -49,7 +49,7 @@
                                 <input id="file1" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(0)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(0)?.colorNo ?: '0'}">(1) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -61,7 +61,7 @@
                                 <input id="file2" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(1)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(1)?.colorNo ?: '0'}">(2) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -73,7 +73,7 @@
                                 <input id="file3" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(2)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(2)?.colorNo ?: '0'}">(3) &times;</span>
                         </div>
                     </div>
 
@@ -109,7 +109,7 @@
                                 <input id="file4" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(3)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(3)?.colorNo ?: '0'}">(4) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -121,7 +121,7 @@
                                 <input id="file5" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(4)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(4)?.colorNo ?: '0'}">(5) &times;</span>
                         </div>
                     </div>
                     <div class="main-color-in-radios">
@@ -133,7 +133,7 @@
                                 <input id="file6" type="file" class="input-img" name="colorImg" style="display: none;"> 
                                 <p th:text="${colorResultList.get(5)?.colorDeviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
                             </label>
-                            <span class="delete_image">(1) &times;</span>
+                            <span class="delete_image" th:data-value="${colorResultList.get(5)?.colorNo ?: '0'}">(6) &times;</span>
                         </div>
                     </div>
                     <div class="colorText">
@@ -297,15 +297,15 @@
             </div>
             <div>
                 <p>등록할 가격</p>
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(0).gradePrice}">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(1).gradePrice}">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(2).gradePrice}">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(0)?.gradePrice}">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(1)?.gradePrice}">
+                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(2)?.gradePrice}">
             </div>
             <div>
                 <p>판매할 가격</p>
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(0).gradeSellPrice}">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(1).gradeSellPrice}">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(2).gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(0)?.gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(1)?.gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(2)?.gradeSellPrice}">
             </div>
 
             <div>
@@ -342,6 +342,21 @@
 
 
             
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+            <input type="hidden" name="colorStatus" class="color-status" value="0">
+
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(0)?.colorNo ?: '0'}">
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(1)?.colorNo ?: '0'}">
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(2)?.colorNo ?: '0'}">
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(3)?.colorNo ?: '0'}">
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(4)?.colorNo ?: '0'}">
+            <input type="hidden" name="colorNoCode" th:value="${colorResultList.get(5)?.colorNo ?: '0'}">
+
+
 
         </div>
         <br><br>
