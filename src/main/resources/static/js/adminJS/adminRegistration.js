@@ -169,3 +169,17 @@ closeBtn.addEventListener("click", () => {
 
 
 });
+
+
+
+const popupCloseBtn = document.querySelector(".popup-closeBtn");
+
+
+popupCloseBtn.addEventListener("click", () => {
+    document.getElementById('popup-layer').classList.add('hidden');
+
+
+})
+
+
+

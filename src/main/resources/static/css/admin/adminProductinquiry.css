@@ -77,6 +77,8 @@ main {
 
 
 .container-in-title-title{
+    margin: 4px;
+    padding: 10px;
     width: 20%;
 }
 .container-in-title-title > p{
@@ -175,7 +177,18 @@ thead{
 }
 .td-btn{
     flex-direction: column;
-    margin: 10px;
+    align-items: right;
+}
+
+
+.td-btn > button{
+    width: 10px;
+    height: 10px;
+}
+.td-btn > form{
+    width: 100%;
+    height: 100%;
+    scale: 1.4;
 }
 .td-btn > p{
     margin: 20px;
@@ -261,3 +274,11 @@ td > img{
   justify-content: center;
   align-items: center;
   }
+
+.td-btn > form{
+    margin: 15px 0;
+}
+
+.td-btn button{
+    width: 60px;
+}
