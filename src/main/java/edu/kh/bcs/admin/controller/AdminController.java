@@ -38,12 +38,14 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.device.service.DeviceSellingService;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @SessionAttributes("loginMember")
 @Controller
@@ -55,6 +57,8 @@ public class AdminController {
 	private static final int Device = 0;
 	
 	private final AdminService service; 
+	
+	private final DeviceSellingService sellingService;
 	
 	// localhost/admin 접속 시 admin/adminMain.html 매핑
 	@RequestMapping("")
@@ -364,12 +368,6 @@ public class AdminController {
 		//구매 신청 목록 검색기능필터
 		List<Order> result = service.serachFilter(searchResult);
 		
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		log.debug("asdasdasdasd : {}", result);
-		
 		model.addAttribute("result", result);
 		
 		
@@ -387,20 +385,34 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("adminSale")
-	public String adminSaleFirst(
+	@GetMapping("adminAllList")
+	public String adminAllList(
 			Model model
 			) { 
 		
 		
-		List<Order> result = service.adminSaleFirst();
+		List<BuyingDevice> buyingDeviceList = (List<BuyingDevice>)service.selectBuyingDeviceList();
 		
 		
-		model.addAttribute("listView", result);
+		model.addAttribute("buyingDeviceList", buyingDeviceList);
 		
 		
-		return "admin/adminSale";
+		return "admin/adminAllList";
 		
+	}
+	
+	@GetMapping("adminAllList/search")
+	public String adminAllList(
+			@RequestParam(name = "search", required = false) String search,
+			Model model
+			) {
+		
+		List<BuyingDevice> adminAllListSearch = (List<BuyingDevice>)service.adminAllListSearch(search);
+		
+		
+		model.addAttribute("buyingDeviceList", adminAllListSearch);
+		
+		return "admin/adminAllList";
 	}
 	
 	
@@ -468,26 +480,18 @@ public class AdminController {
 	        @RequestParam("capacityPrice") String capacityPrice,
 	        @RequestParam("capacitySellPrice") String capacitySellPrice,
 	        @RequestParam("deviceNo") String deviceNo,
-	        RedirectAttributes rs
-	        
-	        
+	        @RequestParam("colorStatus") String colorStatus,
+	        @RequestParam("colorNoCode") String colorNoCode,
+	        RedirectAttributes rs,
+	        Model model
 			) {
 	
-		
-		log.debug("device : {}", device);
-		log.debug("color : {}", color);
-		log.debug("gradePrice : {}", gradePrice);
-		log.debug("gradeSellPrice : {}", gradeSellPrice);
-		log.debug("gradeType : {}", gradeType);
-		log.debug("capacityNumber : {}", capacityNumber);
-		log.debug("capacityPrice : {}", capacityPrice);
-		log.debug("capacitySellPrice : {}", capacitySellPrice);
-		log.debug("deviceNo : {}", deviceNo);
 		
 		//divce 객체로 넣어줄거 
 		// gradeSellPrice, gradeSellPrice dto 인트라서 한번에 안얻어져와 String으로 requestParam으로 받음
 		int text = service.textContentUpdate(device,color,gradeType,gradePrice,gradeSellPrice,
-				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice);
+				colorImg,divceImg,capacityNumber,capacityPrice,capacitySellPrice, colorStatus, colorNoCode);
+		
 		
 		return "/admin/adminProductinquiry";
 	}
@@ -576,6 +580,9 @@ public class AdminController {
 		
 		return "admin/adminMember/adminMemberPage";
 	}
+	
+	  
+	
 	
 	
 	@GetMapping("getEventPagenation")
@@ -792,7 +799,6 @@ public class AdminController {
 //		log.debug("deviceNo : {}", deviceNo);
 		Map<String, Object> reload = service.reload(deviceNo);
 		
-		log.debug("asdasdasdasd : {}", reload);
 		
 		reload.get("device");
 		reload.get("grade");
@@ -907,6 +913,79 @@ public class AdminController {
 		return result;
 	}
 
+
+	@GetMapping("adminProductinquiry/search")
+	public String adminProductinquiry(
+			Model model,
+			@RequestParam("search") String search
+			) {
+		
+		List<Device> ListView = service.productinquirySearch(search);
+		model.addAttribute("deviceList", ListView);
+		
+		return "admin/adminProductinquiry";
+	}
+	
+
+	@GetMapping("modelSelect/{brandName}")
+	public String modelSelect(
+			@PathVariable("brandName") String brandName
+			, Model model) {
+		
+		List<Device> deviceList = service.modelSelect(brandName);
+		
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		return "admin/adminRegist/adminDevice";
+	}
+	
+	
+	@GetMapping("admin/selectDeviceInfo/{deviceNo}")
+	@ResponseBody
+	public Device selectDeviceInfo(
+			@PathVariable("deviceNo") int deviceNo) {
+		
+		
+		return sellingService.selectDetailDevice(deviceNo);
+	}
+	
+	
+	
+	@PostMapping("registrationChange")
+	public String insertBuyingDevice(
+			@RequestParam("deviceNo") String deviceNo,
+			@RequestParam("gradeSelect") String gradeNumber,
+			@RequestParam("colorSelect") String colorNo,
+			@RequestParam("capacitySelect") String capacityNumber
+			) {
+		
+		log.debug("deviceNo : {} ", deviceNo);
+		log.debug("gradeNumber : {} ", gradeNumber);
+		log.debug("colorNo : {} ", colorNo);
+		log.debug("capacityNumber : {} ", capacityNumber);
+		
+		BuyingDevice newBuyingDevice = new BuyingDevice();
+		
+		newBuyingDevice.setCapacityNumber(Integer.parseInt(capacityNumber));
+		newBuyingDevice.setGradeNumber(gradeNumber);
+		newBuyingDevice.setDeviceNo(Integer.parseInt(deviceNo));
+		newBuyingDevice.setColorNo(colorNo);
+		
+		
+		int result = service.insertBuyingDevice(newBuyingDevice);
+		
+		System.out.println("등록");
+		
+		
+		return "admin/adminRegistration";
+		
+	}
 
 	
 	

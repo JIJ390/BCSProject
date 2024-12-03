@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="main-section">
+
+        <div class="head">
+            <a href="/admin/adminProductinquiry">←</a>
+        </div>
+        <div class="delivery-list">
+            <div class="box-title">
+                <!-- 최 상단 -->
+                <h1>구매 신청 목록</h1>
+                <div class="sarch-box">
+                    <button class="search-fiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" name="search" placeholder="아이디,번호 등검색" id="search">
+                </div>
+            </div>
+            <div class="content">
+
+                <table>
+
+                    <colgroup>
+                        <col style="width: 7%">
+                        <col style="width: 7%">
+                        <col style="width: 8%">
+                        <col style="width: 15%">
+                        <col style="width: 25%">
+                        <col style="width: 10%">
+                        <col style="width: 10%">
+                    </colgroup>
+                    <thead>
+                        <tr class="tr-board">
+                            <td>주문번호</td>
+                            <td>회원 번호</td>
+                            <td>아이디</td>
+                            <td>상품 명</td>
+                            <td>선택 등급/색/용량</td>
+                            <td>주문 일자</td>
+                            <td>배송 상태</td>
+                        </tr>
+                    </thead>
+                    <tbody class="listView">
+
+                        <tr class="tr-container" th:each="listView:${listView}">
+                            <td th:text="${listView.orderNo}" class="orderNo">20</td>
+                            <td th:text="${listView.memberNo}">12</td>
+                            <td th:text="${listView.memberId}">TEST</td>
+                            <td th:text="${listView.deviceName}">아이폰</td>
+                            <td class="td-grade">
+                                <p th:text="${listView.gradeType}">S</p>
+                                <p>/</p>
+                                <p th:text="${listView.colorName}">레드</p>
+                                <p>/</p>
+                                <p th:text="${listView.capacityType}">용량</p>
+                            </td>
+                            <td th:text="${listView.orderDate}">2222/22/22</td>
+                            <td>
+                                <select name="" id="" class="select-btn">
+                                    <option th:text="|===현재상태: ${listView.orderStatusContent}===|"
+                                        class="select-option-btn"></option>
+                                    <option value="0" class="select-option-btn">해당없음</option>
+                                    <option value="4" class="select-option-btn">접수중</option>
+                                    <option value="5" class="select-option-btn">입금완료</option>
+                                    <option value="2" class="select-option-btn">배송중</option>
+                                    <option value="3" class="select-option-btn">배송완료</option>
+                                </select>
+
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+
+
+
+                </table>
+
+            </div>
+        </div>
+
+
+
+    </section>
+</body>
+
+</html>

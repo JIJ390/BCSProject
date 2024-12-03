@@ -5,42 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/adminRegistration.css">
-    <title> 매물 등록</title>
+    <title>매물 등록</title>
 </head>
 
 <body>
+    <!-- 등록 박스 -->
+    
 
-    <h1>매물 등록</h1>
+    <div class="decalcomanie" style="display: flex;">
+        <div class="adminRegistration-box">
+            <div class="mypageUpdate-title">매물등록</div><br>
+            <div class="mypageUpdate-title" style="margin-bottom: 40px; font-size: 20px;">상세스펙</div>
+            
+            <form action="/admin/registrationChange" method="POST" name="registrationForm" class="registrationForm">
+                <section class="imgText">
+                    <div>
+                        <img src="/images/sample_iphone16_blue.png" alt="" class="imgBox">
+                        <button type="button" class="choiceBtn" id="open-popup">기종선택하기</button>
+                    </div>
 
-    <div class="white">
-        <h2>상세 스펙</h2>
-        <div class="white-in">
-            <div class="arrow">
-                <!-- 제목 -->
-                <div class="right">
-                    <p>기종번호</p>
-                    <p>등급</p>
-                    <p>용량</p>
-                    <p>색상</p>
+                    <div>
+                        <div class="registration">
+                            <label for="registrationNumber">기종번호</label>
+                            <input type="text" id="registrationNumber" name="deviceNo" placeholder="기종번호" readonly>
+                        </div>
+                        <div class="registration">
+                            <span>등급</span>
+                            <select name="gradeSelect" id="gradeSelect">
+                                <option value="">선택</option>
+                            </select>
+                        </div>
+                        <div class="registration">
+                            <span>색상</span>
+                            <select name="colorSelect" id="colorSelect">
+                                <option value="">선택</option>
+                            </select>
+                        </div>
+                        <div class="registration">
+                            <span>용량</span>
+                            <select name="capacitySelect" id="capacitySelect">
+                                <option value="">선택</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="btn-container">
+                    <button type="submit" class="registrationUpdate">매물등록</button>
+                    <button type="button" class="registrationDelete">취소</button>
                 </div>
-                <!-- 스펙 -->
-                <div class="left">
-                    <!-- 기종번호 입력 -->
-                    <input type="text">
-                    <!-- 등급 입력 -->
-                    <input type="text">
-                    <!-- 용량 입력 -->
-                    <input type="text">
-                    <!-- 색상 입력 -->
-                    <input type="text">
-                </div>
-            </div>
+            </form>
         </div>
-        <BUtton>제출하기</BUtton>
     </div>
 
+    <!-- 팝업 레이어 -->
+    <div id="popup-layer" class="popup hidden">
+        <div class="popup-content">
+            <h2>휴대기기 선택</h2>
+            <div class="popup-grid">
+                <div class="company">
+                    <h3>제조사</h3>
+                    <ul id="manufacturer-list">
+                        <li class="buttonChoice">Apple</li>
+                        <li class="buttonChoice">SAMSUNG</li>
+                        <li class="buttonChoice">iPad</li>
+                        <li class="buttonChoice">Galaxy Tab</li>
+                    </ul>
+                </div>
+                <div class="model">
+                    <h3>모델</h3>
+                    <ul id="model-list">
+                        <!-- <li class="buttonChoice1"></li> -->
+                    </ul>
+                </div>
+            </div>
+            <button id="close-popup" type="button">적용하기</button>
+        </div>
+    </div>
+    <!-- 팝업 레이어 -->
 
-
+    <script src="/js/adminJs/adminRegistration.js"></script>
 </body>
 
 </html>

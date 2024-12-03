@@ -148,8 +148,22 @@ public interface AdminService {
 
 //업데이트
 	int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
-			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
-			String capacitySellPrice);
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice, 
+			String capacitySellPrice, String colorStatus, String colorNoCode);
+
+
+
+	//전체 매물 목록 조회
+	List<BuyingDevice> selectBuyingDeviceList();
+
+
+
+	// adminAllList 검색
+	List<BuyingDevice> adminAllListSearch(String search);
+
+
+	//ProductinquirySearch
+	List<Device> productinquirySearch(String search);
 
 
 
@@ -166,6 +180,22 @@ public interface AdminService {
 
 
 	int deteleReviewRN(int orderNo);
+
+
+	/** 브랜드명 찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+
+
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
 
 

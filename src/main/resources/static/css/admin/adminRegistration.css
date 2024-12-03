@@ -1,82 +1,244 @@
-
-.main-section {
-    width: 1600px;
-    background-color: #D9D9D9;
-    margin: 0 auto;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
+.mypageUpdate-title {
+    text-align: center;
+    font-size: 30px;
+  
+  }
 
 
-.white{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
+
+  
+.adminRegistration-box {
+    margin-top: 10%;
+    /* margin: auto; */
+    width: 36%;
+    height: 700px;
+    width: 600px;
+    padding: 40px;
+    background-color: white;
     border-radius: 30px;
-    width: 900px;
-    height: 783px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 30%;
 }
 
-.white-in{
-    display: flex;
-    width: 50%;
-    height:60%;
-}
-.arrow{
-    display: flex;
-    width: 100%;
-    height: 80%;
+.imgBox{
+    width: 200px;
+    height: 200px;
 }
 
-.right{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-right: 3px solid black;
-    width: 50%;
-    height: 100%;
+.choiceBtn{
+    margin-top: 40px;
+    width: 150px;
+    height: 50px;
+    font-size: 13px;
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 25px;
 }
 
-.left{
+.choiceBtn:hover {
+    background-color: #bcbcbc;}
+
+.imgText{
     display: flex;
-    width: 50%;
-    height: 100%;
+    
 }
 
-.right > p {
+.pwChangeForm{
+    
+}
+  
+
+.registration {
+    /* display: flex
+; */
+width: 385px;
+flex-direction: column;
+align-items: flex-start;
+position: relative;
+margin-bottom: 10px;
+font-size: 12px;
+}
+  
+
+  .btn-container {
+    margin-top: 100px;
     display: flex;
     justify-content: center;
-    font-size: 30px;
-    border-bottom: 2px solid black;
-    width: 100%;
+  }
+
+input[type="text"],
+input[type="password"] {
+  width: 60%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  background: transparent;
+  outline: none;
 }
 
-.left > input{
-    height: 68px;
+.registrationUpdate {
+    margin-top: 40px;
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
     border: none;
-    border-bottom: 2px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 25px;
+  }
+  
+  .registrationUpdate:hover {
+    background-color: #bcbcbc;}
+
+  .registrationDelete {
+        margin-top: 40px;
+        width: 200px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #333;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-left: 25px;
+      }
+      
+   .registrationDelete:hover {
+    background-color: #bcbcbc}
+
+/* 팝업레이어 */
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    font-size: 20px;
-}
-
-
-.left{
-    justify-content: space-between;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
 }
 
-BUtton{
-    position: relative;
-    left: 300px;
-    border: none;
-    border: #d9d9d9;
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 80px;
-    height: 50px;
+.popup.hidden {
+    display: none;
 }
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    height: 400px;
+    width: 600px;
+    text-align: center;
+}
+
+.company{
+    width: 300px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-left: 1px solid #f4f4f4; 
+
+}
+
+.model{
+ width: 300px;
+ height: 250px;
+ overflow-y: scroll;
+ overflow-x: hidden;
+ border: 1px solid #ccc;
+ border-left: 1px solid #f4f4f4;
+
+}
+
+.popup-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 5px;
+    width: 220px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.buttonChoice.active{
+    background: #a7a2a2;
+}
+
+.buttonChoice1.active{
+    background: #a7a2a2;
+}
+
+
+
+ul li:hover {
+   
+}
+
+/* 버튼 */
+button {
+    cursor: pointer;
+}
+
+/* 일반 등록 박스 */
+.adminRegistration-box {
+    margin-top: 10%;
+    width: 600px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imgBox {
+    width: 200px;
+    height: 200px;
+}
+
+.choiceBtn {
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.choiceBtn:hover {
+    background-color: #bcbcbc;
+}
+
+#close-popup{
+    margin-top: 40px;
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 25px;
+}
+
+#close-popup:hover {
+    background-color: #bcbcbc}
+
+/* 팝업 레이어 */
