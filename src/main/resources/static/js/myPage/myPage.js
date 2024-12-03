@@ -398,7 +398,6 @@ sendAuthKeyBtn?.addEventListener("click", () => {
 
   const obj2 = {
     "email" : memberEmail.value, // 입력한 이메일
-    "name" : memberName.value    // 입력한 인증번호
   };
   // 2) 비동기로 서버에서 작성된 이메일로 인증코드 발송(AJAX)
   fetch("/email/emailName", {
@@ -417,7 +416,7 @@ sendAuthKeyBtn?.addEventListener("click", () => {
   .then(result => {
     console.log(result);
     if(result == 0){
-      alert("이메일과 이름이 일치하지 않습니다!")
+      alert("이메일!")
     }else{
       
     }

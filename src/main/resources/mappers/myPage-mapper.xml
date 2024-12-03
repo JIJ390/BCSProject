@@ -44,9 +44,7 @@
   			"MEMBER"
   		WHERE
   			MEMBER_EMAIL = #{email}
-  		AND
-  			MEMBER_NAME = #{name}
-  	
+
   	</select>
   	
   	<!-- 비번찾기 -->
