@@ -242,6 +242,27 @@ public class DeviceListController {
         return "deviceList/deviceList";
     }
 	
+	/* 판매 검색 기능 */
+	@GetMapping("searchSellDevice")
+	public String searchSellDevice(@RequestParam("query") String query, Model model) {
+		
+		String trimmedQuery = query.trim();
+		
+      log.debug("trimmedQuery {} : ", trimmedQuery);
+		
+      List<Device> searchResults = service.searchDevices(trimmedQuery);
+
+      // 검색어와 결과를 모델에 추가
+      model.addAttribute("query", query); // 검색어
+      model.addAttribute("searchResults", searchResults); // 검색 결과
+      
+//      log.debug("searchResults {} : ", searchResults);
+
+      // deviceList.html 페이지 반환
+		
+		return "deviceList/deviceSellList";
+	}
+	
 	
 }
 	
