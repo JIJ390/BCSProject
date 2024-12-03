@@ -1107,17 +1107,17 @@ const chattingUpload = (file) => {
 
 // }
 
-const haederNav =  document.getElementsByClassName("sidebar-button")[0];
-const pageInfoSpan = document.querySelector(".sidebarAr");
+const haederNav1 =  document.getElementsByClassName("sidebar-button")[0];
+const pageInfoSpan1 = document.querySelector(".sidebarAr");
 
-const movePageIngo = () => {
-  const rect = haederNav.getBoundingClientRect();
-  pageInfoSpan.style.marginLeft = rect.x + 'px';
-}
+// const movePageIngo1 = () => {
+//   const rect = haederNav1.getBoundingClientRect();
+//   pageInfoSpan1.style.marginLeft = rect.x + 'px';
+// }
 
-window.addEventListener("resize", movePageIngo);
+// window.addEventListener("resize", movePageIngo1);
 
-movePageIngo();
+// movePageIngo1();
 
 
 document.addEventListener("DOMContentLoaded", () => {
