@@ -44,29 +44,65 @@ main div{
   position: relative;
 }
 
-.bestView{
+.bestView {
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 98px;
+    padding-bottom: 40px;
+}
+
+.bestView-container{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  font-size: 70px;
-  margin-top: 50px;
+  width: 1400px;
 }
 
-.bestView-2{
-  font-size: 35px;
-  margin-left: 30px;
-  color: #6E6E73;
-  font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
+
+
+.device-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* 아이템 간 간격 */
 }
+
+.device-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px; /* 카드 너비 */
+    margin: 10px;
+
+}
+
+.device-image {
+    width: 100%; /* 이미지 크기를 카드에 맞춤 */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 1px 2px 0px 1px rgba(160, 159, 159, 0.1);
+}
+
+.device-name {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
 
 .newDevice{
+  font-size: 80px;
+  font-weight: bold;
   min-width: 200px;
 }
 
 .SClass{
   min-width: 300px;
-  font-size: 35px;
+  font-size: 25px;
   margin-left: 30px;
   color: #6E6E73;
   font-size: clamp(18px, 3vw, 35px); /* 글자 크기 반응형 */
@@ -80,12 +116,6 @@ main div{
 }
 
 
-.viewImg,
-.viewImg1 {
-  padding: 20px; /* 이미지 주위 여백 */
-  box-shadow: 1px 3px 0px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 15px; /* 모서리를 둥글게 */
-}
 
 
 
@@ -110,7 +140,7 @@ a {
 .slider {
   width: 100%;
   max-width: 1900px;
-  height: 800px;
+  height: 730px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -228,15 +258,30 @@ a {
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.mainPageFooter-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .mainFoot{
   height: 500px;
-  width: 600px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+  align-items: center;
+}
+
+.mainFoot2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .a1{
@@ -245,7 +290,7 @@ a {
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 650px;
+  min-width: 500px;
 }
 .a2{
   display: flex;
@@ -290,6 +335,16 @@ a {
   width: 100%; 
   height: 700px; 
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subItem-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .subItem-box{
@@ -298,7 +353,6 @@ a {
 }
 
 .subItem-1{
-  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -318,7 +372,6 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 450px !important;
 }
 
 .subItem-4{
@@ -326,81 +379,82 @@ a {
 }
 
 .subItem-4 img{
-  margin-left: 50px !important;
   scale: 0.8;
 }
 
 
-/* 서브 슬라이드 구역 */
-
-.sub-slider-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 600px;
-  width: 100%;
-  background-color: var(--main-gray-color);
-  overflow: hidden; /* 슬라이드 영역을 벗어난 부분 숨기기 */
-}
-
-.sub-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80%;
-  width: 100%;
-  position: relative;
-}
-
-.sub-slide-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 90%; /* 버튼 영역 제외한 크기 */
-  overflow: hidden; /* 슬라이드 영역을 벗어난 부분 숨기기 */
-}
-
-.sub-slide {
-  display: flex;
-  gap: 80px; /* 이미지 간격 */
-  transition: transform 0.5s ease-in-out;
-  width: max-content;
-}
+/* BCS FLOW */
 
 .items {
-  flex: 0 0 450px; /* 이미지 너비 고정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
+  height: 400px;
+  padding-bottom: 80px;
+}
+
+.items-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(156, 156, 156);
+  border-radius: 10px;
+  height: 180px;
+  width: 180px;
+  box-shadow: 5px 5px 5px rgba(172, 171, 171, 0.2);
+  
 }
 
 .items img {
-  width: 100%;
-  height: 100%;
+  width: 45px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  margin-right: 80px;
+  margin-bottom: 50px;
 }
 
-/* 좌우 버튼 스타일 */
-.prev2, .next2 {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 24px;
-  background-color: rgba(0, 0, 0, 0.5);
+@font-face {
+  font-family: 'Cafe24SsurroundAir';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.flowContent-1{
+  margin-bottom: 22px;
+  font-size: 18px;
+  font-family: 'Cafe24SsurroundAir';
+}
+
+@font-face {
+  font-family: 'RixYeoljeongdo_Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/RixYeoljeongdo_Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.FlowTitle{
+  font-size: 38px;
+  font-family: 'RixYeoljeongdo_Regular';
+  color: #6E6E73;
+  margin-left: 100px;
+}
+
+.FlowContent{
+  font-size: 25px;
   color: white;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-  padding: 10px;
+  margin-right: 100px;
 }
 
-.prev2 {
-  left: 5px;
-}
-
-.next2 {
-  right: 5px;
-
+.items-main-container{
+  width: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 
@@ -448,6 +502,7 @@ html {
 
 .bannerContent{
   font-size: 30px;
+  min-width: 500px;
 }
 
 .slideFont1{
@@ -477,12 +532,12 @@ html {
 
 .left-font {
   text-align: start;
-  padding-left: 150px;
+  padding-left: 280px;
 }
 
 .right-font {
   text-align: end;
-  padding-right: 200px;
+  padding-right: 330px;
 
 }
 
@@ -529,3 +584,13 @@ html {
 .white-font{
   color: white;
 }
+
+
+.BCSFlow{
+  background : linear-gradient(to right, #FBFBD4 0%, #FAE4C8 46%, #DFD9E1 75%, #B7D7D5 100%) ;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+

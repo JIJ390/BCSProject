@@ -38,12 +38,14 @@ import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
+import edu.kh.bcs.device.service.DeviceSellingService;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @SessionAttributes("loginMember")
 @Controller
@@ -55,6 +57,8 @@ public class AdminController {
 	private static final int Device = 0;
 	
 	private final AdminService service; 
+	
+	private final DeviceSellingService sellingService;
 	
 	// localhost/admin 접속 시 admin/adminMain.html 매핑
 	@RequestMapping("")
@@ -503,9 +507,6 @@ public class AdminController {
 		List<EventDto> eventList = service.getEventList(cp);
 				
 		model.addAttribute("eventList",eventList);
-		System.out.println(eventList);
-		System.out.println(eventList);
-		System.out.println(eventList);
 		
 		return "admin/adminEvent/eventList";
 	}
@@ -579,21 +580,6 @@ public class AdminController {
 		
 		List<Member> memberList = service.getMemberList(cp, searchType, searchText,ud, searchAsc);
 		
-		System.out.println("cp"+cp);
-		System.out.println("searchType:"+searchType);
-		System.out.println("searchText"+searchText);
-		System.out.println("ud"+ud);
-		System.out.println("cp"+cp);
-		System.out.println("searchType:"+searchType);
-		System.out.println("searchText"+searchText);
-		System.out.println("ud"+ud);
-		
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-		System.out.println(memberList);
-
 		
 		if(memberList.isEmpty()) {
 			return "admin/adminMember/adminMemberListX";
@@ -796,13 +782,9 @@ public class AdminController {
 		
 		int result = service.updateBanner(banner1,banner2,banner3,banner4,file1,file2,file3,file4);
 		
-		System.out.println(banner1);
-		System.out.println(banner2);
-		System.out.println(banner3);
-		System.out.println(banner4);
-		
 		return result;
 	}
+
 
 	@GetMapping("adminProductinquiry/search")
 	public String adminProductinquiry(
@@ -816,6 +798,67 @@ public class AdminController {
 		return "admin/adminProductinquiry";
 	}
 	
+
+	@GetMapping("modelSelect/{brandName}")
+	public String modelSelect(
+			@PathVariable("brandName") String brandName
+			, Model model) {
+		
+		List<Device> deviceList = service.modelSelect(brandName);
+		
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+//		System.out.println(deviceList);
+		
+		model.addAttribute("deviceList", deviceList);
+		
+		return "admin/adminRegist/adminDevice";
+	}
+	
+	
+	@GetMapping("admin/selectDeviceInfo/{deviceNo}")
+	@ResponseBody
+	public Device selectDeviceInfo(
+			@PathVariable("deviceNo") int deviceNo) {
+		
+		
+		return sellingService.selectDetailDevice(deviceNo);
+	}
+	
+	
+	
+	@PostMapping("registrationChange")
+	public String insertBuyingDevice(
+			@RequestParam("deviceNo") String deviceNo,
+			@RequestParam("gradeSelect") String gradeNumber,
+			@RequestParam("colorSelect") String colorNo,
+			@RequestParam("capacitySelect") String capacityNumber
+			) {
+		
+		log.debug("deviceNo : {} ", deviceNo);
+		log.debug("gradeNumber : {} ", gradeNumber);
+		log.debug("colorNo : {} ", colorNo);
+		log.debug("capacityNumber : {} ", capacityNumber);
+		
+		BuyingDevice newBuyingDevice = new BuyingDevice();
+		
+		newBuyingDevice.setCapacityNumber(Integer.parseInt(capacityNumber));
+		newBuyingDevice.setGradeNumber(gradeNumber);
+		newBuyingDevice.setDeviceNo(Integer.parseInt(deviceNo));
+		newBuyingDevice.setColorNo(colorNo);
+		
+		
+		int result = service.insertBuyingDevice(newBuyingDevice);
+		
+		System.out.println("등록");
+		
+		
+		return "admin/adminRegistration";
+		
+	}
+
 	
 	
 	

@@ -16,6 +16,7 @@ import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -163,6 +164,38 @@ public interface AdminService {
 
 	//ProductinquirySearch
 	List<Device> productinquirySearch(String search);
+
+
+
+	int insertReviewNoti(String orderNo, String memberNo);
+
+
+
+	String uploadImg(MultipartFile img);
+
+
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+
+
+	int deteleReviewRN(int orderNo);
+
+
+	/** 브랜드명 찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+
+
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
 
 

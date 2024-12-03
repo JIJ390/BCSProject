@@ -318,11 +318,11 @@ main{
 
 
 .menu-container{
-  min-width: 60%;
+  min-width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 
@@ -415,7 +415,7 @@ main{
 
 /*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ헤더 포인트충전ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 .headerPoint{
-  width: 40px;
+  width: 30px;
 }
 
 
@@ -423,6 +423,7 @@ main{
 .loginSignUp{
   min-width: 100px;
 }
+
 
 
 
