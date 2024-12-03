@@ -361,6 +361,11 @@
 
   <script>
 
+  const backBtn = document.querySelector(".member-mamage-backBtn");
+    backBtn.addEventListener("click", () => {
+      location.href = "/admin";
+    })
+
     /* 이벤트 추가 팝업 열기/닫기 */
     const eventAddBtn = document.querySelector(".event-add-btn");
     const eventAddPopup = document.querySelector(".add-event-popup");

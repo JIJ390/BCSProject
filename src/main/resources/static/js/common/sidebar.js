@@ -709,8 +709,8 @@ const getAr = () => {
       /* 알림 있으면 사이드바 버튼과 사이드바 채팅버튼, 안읽은 메시지 개수(자동) 조회 */
       sidebarBtnArCheck = 1;
       sidebarBtnAr();
-      document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-      document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+      document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(235, 255, 51)";
+      document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(235, 255, 51)";
     }
     else {
       sidebarBtnArCheck = 0;
@@ -740,10 +740,10 @@ let sidebarBtnArCheck = 0;
 const sidebarBtnAr = () => {
 
   if(sidebarBtnArCheck === 1){
-    document.querySelector(".sidebar-button").style.backgroundColor = "red"
+    document.querySelector(".sidebarAr").style.opacity = "1"
   }
   else{
-    document.querySelector(".sidebar-button").style.backgroundColor = "#1d1d1f"
+    document.querySelector(".sidebarAr").style.opacity = "0"
     return;
   }
 }
@@ -898,8 +898,8 @@ if(chattingSock != undefined){
   if(sidebarViewType === 1){
 
     // 채팅이랑 사이드바 알림 표시
-    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(235, 255, 51)";
+    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(235, 255, 51)";
 
     sidebarBtnArCheck = 1;
     sidebarBtnAr();
@@ -910,8 +910,8 @@ if(chattingSock != undefined){
   if(sidebarViewType === 2){
 
     // 채팅이랑 사이드바 알림 표시
-    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(235, 255, 51)";
+    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(235, 255, 51)";
 
     getAdminChatList();
 
@@ -922,8 +922,8 @@ if(chattingSock != undefined){
   if(sidebarViewType === 3){
 
     // 채팅이랑 사이드바 알림 표시
-    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(235, 255, 51)";
+    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(235, 255, 51)";
 
     sidebarBtnArCheck = 1;
     sidebarBtnAr();
@@ -933,8 +933,8 @@ if(chattingSock != undefined){
   if(sidebarViewType === 4){
 
     // 채팅이랑 사이드바 알림 표시
-    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "red";
-    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "red";
+    document.querySelectorAll(".sidebar-2-ar")[0].style.color = "rgb(235, 255, 51)";
+    document.querySelectorAll(".sidebar-2-ar")[1].style.color = "rgb(235, 255, 51)";
 
     sidebarBtnArCheck = 1;
     sidebarBtnAr();
@@ -943,7 +943,7 @@ if(chattingSock != undefined){
 
   if(sidebarViewType === 5){
     if(document.querySelector(".sidebar-div ").classList.contains("divHidden")){
-       document.querySelector(".sidebar-button").style.backgroundColor = "red";
+           document.querySelector(".sidebarAr").style.opacity = "1"
        return;
     }
       chatRead();
@@ -1107,6 +1107,17 @@ const chattingUpload = (file) => {
 
 // }
 
+const haederNav =  document.getElementsByClassName("sidebar-button")[0];
+const pageInfoSpan = document.querySelector(".sidebarAr");
+
+const movePageIngo = () => {
+  const rect = haederNav.getBoundingClientRect();
+  pageInfoSpan.style.marginLeft = rect.x + 'px';
+}
+
+window.addEventListener("resize", movePageIngo);
+
+movePageIngo();
 
 
 document.addEventListener("DOMContentLoaded", () => {
