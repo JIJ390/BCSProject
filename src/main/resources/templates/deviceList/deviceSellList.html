@@ -62,7 +62,7 @@
                 <img th:src="*{deviceImg}" th:alt="*{deviceName}">
                 <div style="margin-top: 15px" th:text="*{deviceName}"></div>
                 <div 
-                th:text="|*{#numbers.formatInteger(deviceBuyingPrice, 0, 'COMMA')}원|"></div>
+                th:text="|*{#numbers.formatInteger(deviceSellingPrice, 0, 'COMMA')}원|"></div>
               </div>
             </a>
           </div>
