@@ -872,6 +872,72 @@ SELECT
 			ORDER BY BUYING_DEVICE_UPLOAD_DATE DESC
 </select>
 
+
+<select id="getBuyingList">
+SELECT *
+FROM
+(
+	SELECT SS.*, ROWNUM "RN"
+	FROM 
+	(
+		SELECT S.*,
+			(
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) "MEMBER_ID",
+			(
+				SELECT DEVICE_NAME
+				FROM DEVICE
+				WHERE DEVICE_NO = S.DEVICE_NO
+			) "DEVICE_NAME",
+			(
+				SELECT GRADE_TYPE
+				FROM GRADE
+				WHERE GRADE_NUMBER = S.GRADE_NUMBER
+			) "GRADE_TYPE" ,
+			(
+				SELECT COLOR_NAME
+				FROM COLOR
+				WHERE COLOR_NO = S.COLOR_NO
+			) "COLOR_NAME" ,
+			(
+				SELECT CAPACITY_TYPE
+				FROM CAPACITY
+				WHERE CAPACITY_NUMBER = S.CAPACITY_NUMBER
+			) "CAPACITY_TYPE",
+			(
+				SELECT SELLING_DEVICE_STATUS_CONTENT
+				FROM SELLING_DEVICE_STATUS
+				WHERE SELLING_DEVICE_STATUS_CODE = STATUS_CODE
+			) "STATUS_TYPE"
+		FROM SELLING_DEVICE "S"
+		WHERE DEVICE_NO = #{deviceNo}
+		AND(
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) LIKE '%' || #{searchText} || '%'
+	) "SS"
+)
+WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
+</select>
+
+<update id="updateStatue">
+UPDATE SELLING_DEVICE
+SET STATUS_CODE = #{statusCode}
+WHERE SELLING_DEVICE_NO = #{sellingDeviceNo}
+</update>
+	
+	
+<select id="checkBuyDevice">
+SELECT 
+	(
+		SELECT SELLING_DEVICE_STATUS_CODE
+		FROM SELLING_DEVICE_STATUS
+		WHERE SELLING_DEVICE_STATUS_CODE = E.STATUS_CODE
+	)
+
 <select id="productinquirySearch">
 SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
    NVL((SELECT COUNT(*)
@@ -922,7 +988,36 @@ ORDER BY
 	
 	
 	
+
 	
-	
-	
+FROM SELLING_DEVICE "E"
+WHERE SELLING_DEVICE_NO = #{orderNo}
+</select>
+
+
+<insert id="addBuyDevice">
+INSERT INTO BUYING_DEVICE
+VALUES (
+	SEQ_BUYING_DEVICE_NO.NEXTVAL, DEFAULT, NULL, NULL, #{capacityNumber}, 
+	#{deviceNo}, #{gradeNumber}, DEFAULT, #{colorNo}
+)
+</insert>
+
+<update id="statusChange">
+UPDATE SELLING_DEVICE
+SET STATUS_CODE = 4
+WHERE SELLING_DEVICE_NO = #{orderNo}
+</update>
+
+<select id="getDeviceResultCount">
+	SELECT COUNT(*)
+	FROM SELLING_DEVICE "S"
+	WHERE DEVICE_NO = #{deviceNo}
+	AND (
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) LIKE '%' || #{searchText} || '%'
+</select>
+
 </mapper>

@@ -264,6 +264,25 @@ public interface AdminMapper {
 	 */
 	int insertBuyingDevice(BuyingDevice newBuyingDevice);
 
+	List<SellingDevice> getBuyingList(
+			@Param("deviceNo") String deviceNo, 
+			@Param("cp") int cp,
+			@Param("searchText") String searchText);
+
+	int updateStatue(@Param("sellingDeviceNo") String sellingDeviceNo, @Param("statusCode") String statusCode);
+
+	int checkBuyDevice(String orderNo);
+
+	int addBuyDevice(
+			@Param("deviceNo") String deviceNo, 
+			@Param("colorNo")String colorNo, 
+			@Param("capacityNumber")String capacityNumber, 
+			@Param("gradeNumber")String gradeNumber);
+
+	int statusChange(String orderNo);
+
+	int getDeviceResultCount(@Param("deviceNo")String deviceNo, @Param("searchText")String searchText);
+
 
 
 }

@@ -199,6 +199,22 @@ public interface AdminService {
 
 
 
+	List<SellingDevice> getBuyingList(String deviceNo, int cp, String searchText);
+
+
+
+	int updateStatue(String sellingDeviceNo, String statusCode);
+
+
+
+	int addBuyDevice(String deviceNo, String colorNo, String capacityNumber, String gradeNumber, String orderNo);
+
+
+
+	int getDeviceResultCount(String searchText, String searchText2);
+
+
+
 	
 	
 

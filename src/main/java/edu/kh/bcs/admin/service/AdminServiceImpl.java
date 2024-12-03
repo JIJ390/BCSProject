@@ -422,20 +422,6 @@ public class AdminServiceImpl implements AdminService {
         e.printStackTrace();
     }
 		
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		
 		int result = mapper.eventUpdate(url1, url2, eventNo);
 		
 		if (result == 0) return 0;
@@ -484,6 +470,55 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 
+	@Override
+	public List<SellingDevice> getBuyingList(String deviceNo, int cp, String searchText) {
+		return mapper.getBuyingList(deviceNo,cp,searchText); 
+	}
+	
+	
+	@Override
+	public int getDeviceResultCount(String deviceNo,String searchText) {
+		
+		return mapper.getDeviceResultCount(deviceNo,searchText);
+	}
+	
+	
+	
+	@Override
+	public int updateStatue(String sellingDeviceNo, String statusCode) {
+		return mapper.updateStatue(sellingDeviceNo,statusCode);
+	}
+	
+	
+	@Override
+	public int addBuyDevice(
+			String deviceNo, String colorNo, String capacityNumber, 
+			String gradeNumber, String orderNo) {
+		
+		// 있는지 체크
+		int result = 0;
+		result = mapper.checkBuyDevice(orderNo);
+		
+		// 있으면 리턴
+		if(result == 4) {
+			return 0;
+		}
+		
+		result = mapper.addBuyDevice(deviceNo,colorNo,capacityNumber,gradeNumber);
+		
+		// 등록완료 상태코드로 변경
+		mapper.statusChange(orderNo);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// ============================================기종 등록
 	@Override
