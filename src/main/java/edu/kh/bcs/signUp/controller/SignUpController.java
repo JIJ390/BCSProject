@@ -101,7 +101,7 @@ public class SignUpController {
 		if(result > 0) {
 			path = "/";
 			message
-			 	= inputMember.getMemberId() + "님의 가입을 환영합니다^^";
+			 	= inputMember.getMemberName() + "님의 가입을 환영합니다^^";
 		}
 		
 		ra.addFlashAttribute("message", message);
