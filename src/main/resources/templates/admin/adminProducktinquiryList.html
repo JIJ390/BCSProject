@@ -9,7 +9,7 @@
         </td>
         <td th:text="${deviceList.deviceReleaseDate}"> </td>
         <td class="td-btn">
-            <form th:action="@{/admin/adminSale/deviceNo={deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
+            <form th:action="@{/admin/adminSale/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">
                 <button><p>구매 현황</p></button>
             </form>
             <form th:action="@{/admin/adminSellList/{deviceNo}(deviceNo=${deviceList.deviceNo})}" method="get">

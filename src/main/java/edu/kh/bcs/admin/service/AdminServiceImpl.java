@@ -982,4 +982,32 @@ public class AdminServiceImpl implements AdminService {
 	}
 	 
 	
+	//전체 조회 총 개수
+	@Override
+	public int result(int deviceNo, String search) {
+		
+		
+		return mapper.result(deviceNo,search);
+	}
+	
+	@Override
+	public List<Order> saleListSelect(int cp, int deviceNo, String search) {
+		
+		
+		
+		return mapper.saleListSelect(cp, deviceNo, search);
+	}
+	//adminProductinquiry 전체 개수 조회
+	@Override
+	public int resultAll(String search) {
+		
+		return mapper.resultAll(search);
+	}
+	@Override
+	public List<Device> list(int cp, String search) {
+		
+		return mapper.productList(cp, search);
+	}
+	
+	
 }

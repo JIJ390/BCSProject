@@ -23,20 +23,21 @@
                     <p>상품조회</p>
                 </div>
                 <div class="container-in-title-btn">
-                    <div class="filter-btn" value="1">SAMSUNG</div>
+                    <div class="filter-btn" value="1">Galaxy</div>
                     <div class="filter-btn" value="2">Galaxy Tab</div>
-                    <div class="filter-btn" value="3">Apple</div>
+                    <div class="filter-btn" value="3">iPhone</div>
                     <div class="filter-btn" value="4">iPad</div>
                 </div>
-                <form action="/admin/adminProductinquiry/search" method="get">
+                <!-- action="/admin/adminProductinquiry/search" -->
+                <div class="productinquirySearch">
                     <div class="container-in-title-search">
                         <div>
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="productinquirySearchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
                             <input type="text" name="search" placeholder="검색">
                             <a href="">초기화</a>
                         </div>
                     </div>
-</form>
+                </div>
             </div>
             <table class="container-in-content" style="border-collapse: collapse" >
 
@@ -64,7 +65,7 @@
                 </thead>
 
                 <tbody  class="deviceListColorBody">
-                    <tr th:each= "deviceList:${deviceList}">
+                    <tr th:each= "deviceList:${deviceList}" class="deviceList">
                         <td><img th:src="${deviceList.deviceImg}"></td>
                         <td th:text="${deviceList.deviceNo}">  </td>
                         <td th:text="${deviceList.deviceName}"> </td>
@@ -90,14 +91,17 @@
                 </tbody>
             </table>
 
+            <div class="adminSalePagination">
+            
+            </div>
+
 
             <div class="container-in-btn">
                 <a href="/admin/adminAllList">상품 전체 보기</a>
                 <a href="/admin/adminModelRegistration">기종 등록하기</a>
             </div>
-            <div class="container-in-page-nation">
 
-            </div>
+
         </div>
     </div>
 
