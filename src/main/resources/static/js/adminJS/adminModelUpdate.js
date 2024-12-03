@@ -2,11 +2,14 @@ const inputImg = document.getElementsByClassName("input-img");
 const previewList = document.getElementsByClassName("preview");
 const deleteImage = document.getElementsByClassName("delete_image");
 
+
+const colorStatus = document.querySelectorAll(".color-status");
+
 const validFile = [null, null, null, null, null, null, null]
 
 
 
-    const updatePreview = (file, order) => {
+const updatePreview = (file, order) => {
 
         //선택된 이미지 백업하기
         validFile[order] = file;
@@ -20,7 +23,7 @@ const validFile = [null, null, null, null, null, null, null]
         reader.addEventListener("load", e => {
             previewList[order].src = e.target.result;
             /* 파일이 형변환된 주소 형태 문자열 */
-    })
+        })
     
 }
 
@@ -51,15 +54,23 @@ for (let i = 0; i < inputImg.length; i++) {
 
             return;
         } 
-
-
-
-
-
-
-
-
         updatePreview(file, i);
+
+        if (i > 0) {
+
+            const colorNo = deleteImage[i].getAttribute("data-value");
+
+            console.log(colorNo);
+
+            if (colorNo !== "0") {
+                colorStatus[i-1].value = 1; // 수정
+            }
+            else {
+                colorStatus[i-1].value = 2; // insert
+            }
+        }
+
+
 
     })
 
@@ -69,6 +80,24 @@ for (let i = 0; i < inputImg.length; i++) {
         previewList[i].src = ""; //미리보기 삭제
         inputImg[i].value = ""; // 선택된 파일 삭제
         validFile[i] = null; //백업본 없앰
+
+
+        if (i > 0) {
+
+            const colorNo = deleteImage[i].getAttribute("data-value");
+
+            console.log(colorNo);
+
+            if (colorNo !== "0") {
+                colorStatus[i-1].value = 3; // 삭제
+            }
+
+            // insert -> delete
+            if (colorStatus[i-1].value === '2') {
+                colorStatus[i-1].value = 0; // 초기값
+            }
+        }
+    
 
     })
 
@@ -234,7 +263,5 @@ imgInput6.addEventListener("change", e => {
 
     pName[5].innerText = fileName;
 })
-
-
 
 

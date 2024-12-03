@@ -33,8 +33,7 @@ public interface MyPageMapper {
 	 * @param memberEmail
 	 * @return
 	 */
-	int findIdReal(@Param("email") String email,
-					       @Param("name") String name);
+	int findIdReal(@Param("email") String email);
 
 	/** 비번찾기
 	 * @param id

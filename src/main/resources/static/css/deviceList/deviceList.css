@@ -417,6 +417,7 @@ main{
   width: 100%; /* 밑줄이 좌에서 우로 확장 */
 }
 
+
 .tab {
   position: relative; /* 부모 요소를 기준으로 자식 요소의 위치를 설정 */
 }
@@ -427,5 +428,19 @@ main{
   right: -30px; /* 글씨 기준으로 조정 */
   pointer-events: none; /* 이미지를 클릭할 수 없도록 설정 */
   scale: 0.7;
+}
+
+
+
+.recent-list-container > hr {
+  margin-bottom: 12px;
+  margin-top: 10px;
+
+  background:rgb(184, 184, 184);
+  height:1px;
+  border:0;
+
+  width: 65px;
+
 }
 

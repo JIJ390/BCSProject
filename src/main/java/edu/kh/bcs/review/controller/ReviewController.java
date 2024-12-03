@@ -90,6 +90,10 @@ public class ReviewController {
 		
 		loginMember.setMemberPoint(result);
 		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "리뷰가 등록되었습니다. 포인트가 적립되었습니다.");
+		}
+		
 		return "redirect:/myPage/myPageSalesHistory";
 	}
 	
@@ -133,6 +137,11 @@ public class ReviewController {
 		if (result == 0) {
 			ra.addFlashAttribute("message", "수정 실패");
 		}
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "리뷰가 수정되었습니다");
+		}
+		
 		
 		return "redirect:/myPage/myPageSalesHistory";
 	}

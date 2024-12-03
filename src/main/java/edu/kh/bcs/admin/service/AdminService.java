@@ -10,11 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -146,8 +148,100 @@ public interface AdminService {
 
 //업데이트
 	int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
-			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
-			String capacitySellPrice);
+			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice, 
+			String capacitySellPrice, String colorStatus, String colorNoCode);
+
+
+
+	//전체 매물 목록 조회
+	List<BuyingDevice> selectBuyingDeviceList();
+
+
+
+	// adminAllList 검색
+	List<BuyingDevice> adminAllListSearch(String search);
+
+
+	//ProductinquirySearch
+	List<Device> productinquirySearch(String search);
+
+
+
+	int insertReviewNoti(String orderNo, String memberNo);
+
+
+
+	String uploadImg(MultipartFile img);
+
+
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+
+
+	int deteleReviewRN(int orderNo);
+
+
+	/** 브랜드명 찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+
+
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
+
+
+	/** 전체 조회 총 개수
+	 * 
+	 * @param deviceNo
+	 * @param search
+	 * @return
+	 */
+	int result(int deviceNo, String search);
+
+
+
+	List<Order> saleListSelect(int cp, int deviceNo, String search);
+
+
+	/** adminProductinquiry전체 개수 조회
+	 * 
+	 * @param search
+	 * @return
+	 */
+	int resultAll(String search);
+
+
+	/** product rowNum
+	 * 
+	 * @param cp
+	 * @param search
+	 * @return
+	 */
+	List<Device> list(int cp, String search);
+
+
+
+	List<SellingDevice> getBuyingList(String deviceNo, int cp, String searchText);
+
+
+
+	int updateStatue(String sellingDeviceNo, String statusCode);
+
+
+
+	int addBuyDevice(String deviceNo, String colorNo, String capacityNumber, String gradeNumber, String orderNo);
+
+
+
+	int getDeviceResultCount(String searchText, String searchText2);
 
 
 

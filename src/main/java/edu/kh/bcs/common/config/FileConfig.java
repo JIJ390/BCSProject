@@ -88,6 +88,12 @@ public class FileConfig implements WebMvcConfigurer{
 	
 	@Value("${my.banner.resource-location}")
 	private String bannerResourceLocation;		// 
+	// 채팅이미지
+	@Value("${my.chatting.resource-handler}")
+	private String chattingResourceHandler;			//
+	
+	@Value("${my.chatting.resource-location}")
+	private String chattingResourceLocation;		// 
 	
 
 	/* MultipartResolver 설정 */
@@ -155,6 +161,9 @@ public class FileConfig implements WebMvcConfigurer{
 		registry
 		.addResourceHandler(bannerResourceHandler)			// /images/test/**
 		.addResourceLocations(bannerResourceLocation);  
+		registry
+		.addResourceHandler(chattingResourceHandler)			// /images/test/**
+		.addResourceLocations(chattingResourceLocation);  
 		
 	}
 	

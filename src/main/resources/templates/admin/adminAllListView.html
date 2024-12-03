@@ -1,0 +1,8 @@
+<tr th:each= "buyingDevice:${buyingDeviceList}" th:object="${buyingDevice}">
+    <td th:text="*{buyingDeviceNo}"></td>
+    <td th:text="*{deviceName}"></td>
+    <td th:text="|*{gradeType} 등급 / *{colorName} / *{capacityType}|"></td>
+    <td th:text="*{buyingDeviceUploadDate}">등록일</td>
+    <td th:text="*{buyingDeviceSoldDate} ?: '-'"></td>
+    <td th:text="*{soldFl}"></td>
+  </tr>

@@ -9,11 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
@@ -196,13 +198,16 @@ public interface AdminMapper {
 
 	String eventFlSearch(int eventNo);
 
-	/*=================================수정==========================================*/
+	int checkRN(@Param("orderNo")String orderNo, @Param("memberNo") String memberNo);
+
+	int insertReviewNoti(@Param("orderNo")String orderNo, @Param("memberNo") String memberNo);
+
+	List<reviewRNDto> getOrderList(int memberNo);
+
+	int deleteReviewRN(int orderNo);
 	int deviceUpdate(
 			Device device);
-	int colorUpdate(
-			@Param("color2") Color color2,
-			@Param("deviceUpdateNo") int deviceUpdateNo
-			);
+	
 	int colorUpdate(Color color2);
 
 	int gradeUpdate(
@@ -211,11 +216,107 @@ public interface AdminMapper {
 			@Param("gradeTypeOrly") String gradeTypeOrly, 
 			@Param("deviceNo") int deviceNo);
 
-	int capacityUpdate(
+
+	
+	
+	
+	
+// 용량별 가격
+	
+	int capacityDelete(int deviceNo);
+	
+	int capacityInsert(
 			@Param("caNo") String caNo, 
 			@Param("caPrice") String caPrice, 
 			@Param("caSellPrice") String caSellPrice, 
-			@Param("deviceUpdateNo") int deviceUpdateNo);
+			@Param("deviceNo") int deviceNo);
+
+	
+	//color 사진/코드
+	
+	// 삭제
+	int colorDelete(String colorNoCodeOut);
+
+	//전체 매물 목록
+	List<BuyingDevice> selectBuyingDeviceList();
+
+	//adminAllList 검색 
+	List<BuyingDevice> adminAllListSearch(String search);
+
+	// productinquiry 검색
+	List<Device> productinquirySearch(String search);
+
+
+
+
+
+	/** 모델명찾기
+	 * @param brandName
+	 * @return
+	 */
+	List<Device> modelSelect(String brandName);
+
+	
+	/**
+	 * 매물 등록
+	 * @param newBuyingDevice
+	 * @return
+	 */
+	int insertBuyingDevice(BuyingDevice newBuyingDevice);
+
+
+	/** 전체 조회 총 개수
+	 * 
+	 * @param deviceNo
+	 * @param search
+	 * @return
+	 */
+	int result(
+			@Param("deviceNo") int deviceNo, 
+			@Param("search") String search);
+
+	
+	List<Order> saleListSelect(
+			@Param("cp")int cp, 
+			@Param("deviceNo")int deviceNo, 
+			@Param("search")String search);
+
+	/** adminProductinquiry 전체 개수 조회
+	 * 
+	 * @param search
+	 * @return
+	 */
+	int resultAll(String search);
+
+	/** product 로우 넘
+	 * 
+	 * @param cp
+	 * @param search
+	 * @return
+	 */
+	List<Device> productList(
+			@Param("cp") int cp, 
+			@Param("search") String search);
+
+	List<SellingDevice> getBuyingList(
+			@Param("deviceNo") String deviceNo, 
+			@Param("cp") int cp,
+			@Param("searchText") String searchText);
+
+	int updateStatue(@Param("sellingDeviceNo") String sellingDeviceNo, @Param("statusCode") String statusCode);
+
+	int checkBuyDevice(String orderNo);
+
+	int addBuyDevice(
+			@Param("deviceNo") String deviceNo, 
+			@Param("colorNo")String colorNo, 
+			@Param("capacityNumber")String capacityNumber, 
+			@Param("gradeNumber")String gradeNumber);
+
+	int statusChange(String orderNo);
+
+	int getDeviceResultCount(@Param("deviceNo")String deviceNo, @Param("searchText")String searchText);
+
 
 
 

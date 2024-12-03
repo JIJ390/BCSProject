@@ -537,25 +537,39 @@ ORDER BY
 <!-- 구매 정보 리스트 조회 -->
 <select id="adminSale">
 	SELECT 
-		o.ORDER_NO,
-		O.MEMBER_NO,
-		MEMBER_ID,
-		DEVICE_NAME,
-		COLOR_NAME,
-		GRADE_TYPE,
-		CAPACITY_TYPE,
-		order_date,
-		ORDER_STATUS_CONTENT
-	FROM "ORDER" O
-		LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
-		LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
-		LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
-		LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
-		LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
-		LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
-		LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+		*
+	FROM 
+	(
+		SELECT 
+			OO.*, ROWNUM "RN"
+		FROM 
+		(
+			SELECT 
+				o.ORDER_NO,
+				O.MEMBER_NO,
+				MEMBER_ID,
+				DEVICE_NAME,
+				COLOR_NAME,
+				GRADE_TYPE,
+				CAPACITY_TYPE,
+				order_date,
+				ORDER_STATUS_CONTENT
+			FROM "ORDER" O
+				LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+				LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+				LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+				LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+				LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+				LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
+				LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+			WHERE 
+				D.DEVICE_NO = #{deviceNo}
+		) "OO"
+	) 
 	WHERE 
-		D.DEVICE_NO = #{deviceNo}
+		RN BETWEEN 1 AND 10
+	
+		
 		
 </select>
 
@@ -692,6 +706,49 @@ FROM
 WHERE DEVICE_NO = #{deviceNo}
 </select>
 
+<select id="getOrderList">
+SELECT R.*,
+(
+	SELECT DEVICE_NAME
+	FROM DEVICE
+	WHERE DEVICE_NO =
+	(SELECT DEVICE_NO
+	FROM BUYING_DEVICE
+	WHERE BUYING_DEVICE_NO = 
+		(
+			SELECT BUYING_DEVICE_NO
+			FROM "ORDER"
+			WHERE ORDER_NO = R.ORDER_NO
+		))
+) "DEVICE_NAME" 
+FROM REVIEW_NOTI "R"
+WHERE RECEIVER_NO = #{memberNo}
+</select>
+
+	<delete id="deleteReviewRN">
+		DELETE
+		FROM REVIEW_NOTI
+		WHERE ORDER_NO  =#{orderNo}
+	</delete>
+	
+	
+	
+	
+	<select id="checkRN">
+		SELECT COUNT(*)
+		FROM REVIEW_NOTI
+		WHERE ORDER_NO = #{orderNo}
+		AND RECEIVER_NO = #{memberNo}
+	</select>
+	
+	<insert id="insertReviewNoti">
+		INSERT INTO REVIEW_NOTI
+		VALUES (
+			REVIEW_NOTI_SEQ.NEXTVAL, DEFAULT, #{orderNo}, #{memberNo}
+		)
+	</insert>
+	
+	
 <update id="deviceUpdate">
 UPDATE 
 	"DEVICE"
@@ -723,7 +780,7 @@ WHERE
 </update>
 
 
-<!-- <update id="colorUpdate">
+<update id="colorUpdate">
 	UPDATE 
 		"COLOR"
 	SET
@@ -733,8 +790,8 @@ WHERE
 		COLOR_DEVICE_IMG = #{colorDeviceImg}
 	</if>
 	WHERE 
-		DEVICE_NO = #{deviceNo}
-</update> -->
+		COLOR_NO = #{colorNo}
+</update>
 
 <update id="gradeUpdate">
 	UPDATE 
@@ -746,18 +803,359 @@ WHERE
 		DEVICE_NO = #{deviceNo}
 	AND GRADE_TYPE = #{gradeTypeOrly}
 </update>
-<!-- 
-<update id="capacityUpdate">
-UPDATE  
+
+
+
+
+<delete id="capacityDelete">
+
+DELETE 
+	CAPACITY_PRICE
+WHERE
+	DEVICE_NO = #{deviceNo}
+
+</delete>
+
+<insert id="capacityInsert">
+INSERT INTO 
 	"CAPACITY_PRICE"
-SET
-	CAPACITY_PRICE = #{caPrice},
-	CAPACITY_SELL_PRICE = #{caSellPrice}
+VALUES
+(
+	#{deviceNo},
+	#{caNo},
+	#{caPrice},
+	#{caSellPrice}
+)
+</insert>
+
+
+<delete id="colorDelete">
+	DELETE 
+		COLOR
+	WHERE 
+		COLOR_NO = #{colorNoCodeOut}
+
+</delete>
+
+<select id="selectBuyingDeviceList">
+SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE,
+			BUYING_DEVICE_UPLOAD_DATE,
+			BUYING_DEVICE_SOLD_DATE,
+			SOLD_FL
+			FROM
+				BUYING_DEVICE BD
+			LEFT JOIN
+				COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+			LEFT JOIN
+				GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+			LEFT JOIN
+				CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+			LEFT JOIN
+				DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+			ORDER BY BUYING_DEVICE_UPLOAD_DATE DESC
+</select>
+
+<select id="adminAllListSearch">
+
+SELECT 
+			BUYING_DEVICE_NO,
+			COLOR_NAME,
+			DEVICE_NAME,
+			CAPACITY_TYPE,
+			GRADE_TYPE,
+			BUYING_DEVICE_UPLOAD_DATE,
+			BUYING_DEVICE_SOLD_DATE,
+			SOLD_FL
+			FROM
+				BUYING_DEVICE BD
+			LEFT JOIN
+				COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+			LEFT JOIN
+				GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+			LEFT JOIN
+				CAPACITY CAP ON (BD.CAPACITY_NUMBER = CAP.CAPACITY_NUMBER)
+			LEFT JOIN
+				DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+			WHERE 
+				LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+			ORDER BY BUYING_DEVICE_UPLOAD_DATE DESC
+</select>
+
+
+<select id="getBuyingList">
+SELECT *
+FROM
+(
+	SELECT SS.*, ROWNUM "RN"
+	FROM 
+	(
+		SELECT S.*,
+			(
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) "MEMBER_ID",
+			(
+				SELECT DEVICE_NAME
+				FROM DEVICE
+				WHERE DEVICE_NO = S.DEVICE_NO
+			) "DEVICE_NAME",
+			(
+				SELECT GRADE_TYPE
+				FROM GRADE
+				WHERE GRADE_NUMBER = S.GRADE_NUMBER
+			) "GRADE_TYPE" ,
+			(
+				SELECT COLOR_NAME
+				FROM COLOR
+				WHERE COLOR_NO = S.COLOR_NO
+			) "COLOR_NAME" ,
+			(
+				SELECT CAPACITY_TYPE
+				FROM CAPACITY
+				WHERE CAPACITY_NUMBER = S.CAPACITY_NUMBER
+			) "CAPACITY_TYPE",
+			(
+				SELECT SELLING_DEVICE_STATUS_CONTENT
+				FROM SELLING_DEVICE_STATUS
+				WHERE SELLING_DEVICE_STATUS_CODE = STATUS_CODE
+			) "STATUS_TYPE"
+		FROM SELLING_DEVICE "S"
+		WHERE DEVICE_NO = #{deviceNo}
+		AND(
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) LIKE '%' || #{searchText} || '%'
+		ORDER BY SELLING_DEVICE_NO DESC
+	) "SS"
+)
+WHERE RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
+</select>
+
+<update id="updateStatue">
+UPDATE SELLING_DEVICE
+SET STATUS_CODE = #{statusCode}
+WHERE SELLING_DEVICE_NO = #{sellingDeviceNo}
+</update>
+	
+	
+<select id="checkBuyDevice">
+SELECT 
+	(
+		SELECT SELLING_DEVICE_STATUS_CODE
+		FROM SELLING_DEVICE_STATUS
+		WHERE SELLING_DEVICE_STATUS_CODE = E.STATUS_CODE
+	)
+
+FROM SELLING_DEVICE "E"
+WHERE SELLING_DEVICE_NO = #{orderNo}
+</select>
+
+<select id="productinquirySearch">
+SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
+   NVL((SELECT COUNT(*)
+    FROM "ORDER"
+    JOIN BUYING_DEVICE USING (BUYING_DEVICE_NO)
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    GROUP BY DEVICE_NO), 0) AS "ORDER_COUNT",
+   NVL((SELECT COUNT(*)
+    FROM "BUYING_DEVICE"
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    AND SOLD_FL = 'N'
+    GROUP BY DEVICE_NO), 0) AS "DEVICE_COUNT"
+FROM DEVICE D
 WHERE 
-	DEVICE_NO = #{deviceUpdateNo}
-AND
-	CAPACITY_NUMBER = #{caNo}
-</update> -->
+	LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+ORDER BY 
+	DEVICE_RELEASE_DATE DESC
+	</select>
+	
+	<select id="modelSelect">
+		SELECT DEVICE_NAME, DEVICE_NO
+		FROM "DEVICE"
+		WHERE DEVICE_BRAND = #{brandName}
+		ORDER BY DEVICE_RELEASE_DATE DESC
+	
+	</select>
+	
+	
+	<!-- 구매기기 삽입 -->
+	<insert id="insertBuyingDevice">
+		INSERT INTO BUYING_DEVICE
+		VALUES(SEQ_BUYING_DEVICE_NO.NEXTVAL, <!-- 번호 -->
+		DEFAULT,                             <!-- 등록일 -->
+		NULL,								<!-- 판매일 -->
+		NULL,								<!-- 최종구매가 -->
+		#{capacityNumber},									<!-- 용량 -->
+		#{deviceNo}, 									<!-- 기종 -->
+		#{gradeNumber},						<!-- 등급 -->
+		'N',		
+		#{colorNo}							<!-- 색상 -->
+		)
+	</insert>
+	
+	
+	<select id="result">
+	SELECT 
+		COUNT(*)
+	FROM "ORDER" O
+		LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+		LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+		LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+		LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+		LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+		LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
+		LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+		WHERE 
+			D.DEVICE_NO = #{deviceNo}
+		AND 
+			MEMBER_ID LIKE '%'||#{search}||'%'
+	ORDER BY
+		o.ORDER_NO DESC
+	</select>
+	
+	
+	<select id="saleListSelect">
+	
+		SELECT 
+		*
+	FROM 
+	(
+		SELECT 
+			OO.*, ROWNUM "RN"
+		FROM 
+		(
+			SELECT 
+				o.ORDER_NO,
+				O.MEMBER_NO,
+				MEMBER_ID,
+				DEVICE_NAME,
+				COLOR_NAME,
+				GRADE_TYPE,
+				CAPACITY_TYPE,
+				order_date,
+				ORDER_STATUS_CONTENT
+			FROM "ORDER" O
+				LEFT JOIN BUYING_DEVICE BD ON (O.BUYING_DEVICE_NO = BD.BUYING_DEVICE_NO)
+				LEFT JOIN DEVICE D ON (BD.DEVICE_NO = D.DEVICE_NO)
+				LEFT JOIN COLOR C ON (BD.COLOR_NO = C.COLOR_NO)
+				LEFT JOIN CAPACITY CP ON (BD.CAPACITY_NUMBER = CP.CAPACITY_NUMBER)
+				LEFT JOIN GRADE G ON (BD.GRADE_NUMBER = G.GRADE_NUMBER)
+				LEFT JOIN "MEMBER" m ON (o.MEMBER_NO = m.MEMBER_NO)
+				LEFT JOIN "ORDER_STATUS" OS ON (O.ORDER_STATUS_CODE = OS.ORDER_STATUS_CODE)
+			WHERE 
+				D.DEVICE_NO = #{deviceNo}
+			AND
+				MEMBER_ID LIKE '%'||#{search}||'%'
+		) "OO"
+	) 
+	WHERE 
+		RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
 
 	
+	</select>
+	
+	
+	<select id="resultAll">
+	
+SELECT
+	COUNT(*)
+	FROM
+	(
+SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
+   NVL((SELECT COUNT(*)
+    FROM "ORDER"
+    JOIN BUYING_DEVICE USING (BUYING_DEVICE_NO)
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    GROUP BY DEVICE_NO), 0) AS "ORDER_COUNT",
+   NVL((SELECT COUNT(*)
+    FROM "BUYING_DEVICE"
+    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+    AND SOLD_FL = 'N'
+    GROUP BY DEVICE_NO), 0) AS "DEVICE_COUNT"
+FROM DEVICE D
+WHERE
+	LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+	<if test="search.equals('Galaxy')">
+	AND 
+		DEVICE_BRAND = 'SAMSUNG'
+	</if>
+ORDER BY 
+	DEVICE_RELEASE_DATE DESC
+)R
+	</select>
+
+	
+	<select id="productList">
+SELECT 
+*
+FROM
+(
+	SELECT 
+		A.*, ROWNUM "RN"
+	FROM
+	(
+		SELECT D.DEVICE_NO, DEVICE_RELEASE_DATE,DEVICE_NAME,DEVICE_IMG,
+		   NVL((SELECT COUNT(*)
+		    FROM "ORDER"
+		    JOIN BUYING_DEVICE USING (BUYING_DEVICE_NO)
+		    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+		    GROUP BY DEVICE_NO), 0) AS "ORDER_COUNT",
+		   NVL((SELECT COUNT(*)
+		    FROM "BUYING_DEVICE"
+		    WHERE D.DEVICE_NO = BUYING_DEVICE.DEVICE_NO
+		    AND SOLD_FL = 'N'
+		    GROUP BY DEVICE_NO), 0) AS "DEVICE_COUNT"
+		FROM DEVICE D
+		WHERE 
+			LOWER(DEVICE_NAME) LIKE LOWER('%'||#{search}||'%')
+			<if test="search.equals('Galaxy')">
+			AND 
+			DEVICE_BRAND = 'SAMSUNG'
+			</if>
+		ORDER BY 
+			DEVICE_RELEASE_DATE DESC
+	)"A"
+)
+WHERE 
+	RN BETWEEN 1 + ((#{cp}-1)*10) AND 10 + ((#{cp}-1)*10)
+	</select>
+	
+	
+
+
+
+
+<insert id="addBuyDevice">
+INSERT INTO BUYING_DEVICE
+VALUES (
+	SEQ_BUYING_DEVICE_NO.NEXTVAL, DEFAULT, NULL, NULL, #{capacityNumber}, 
+	#{deviceNo}, #{gradeNumber}, DEFAULT, #{colorNo}
+)
+</insert>
+
+<update id="statusChange">
+UPDATE SELLING_DEVICE
+SET STATUS_CODE = 4
+WHERE SELLING_DEVICE_NO = #{orderNo}
+</update>
+
+<select id="getDeviceResultCount">
+	SELECT COUNT(*)
+	FROM SELLING_DEVICE "S"
+	WHERE DEVICE_NO = #{deviceNo}
+	AND (
+				SELECT MEMBER_ID
+				FROM "MEMBER"
+				WHERE MEMBER_NO = S.MEMBER_NO
+			) LIKE '%' || #{searchText} || '%'
+</select>
+
+
 </mapper>

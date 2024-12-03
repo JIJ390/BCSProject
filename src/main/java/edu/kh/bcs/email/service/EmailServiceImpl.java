@@ -51,16 +51,9 @@ public class EmailServiceImpl implements EmailService {
 		try {
 		
 		String email = obj2.get("email");
-		String name = obj2.get("name");
+	
 		
-		int emailName = mapper.findIdReal(email, name);
-		
-		System.out.println(name);
-		System.out.println(name);
-		System.out.println(name);
-		System.out.println(name);
-		System.out.println(name);
-		System.out.println(name);
+		int emailName = mapper.findIdReal(email);
 		
 		
 		String authKey = createAuthKey(); // 생성된 인증 번호
@@ -84,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
 		helper.setText(loadHtml(authKey, htmlName), true); // 이메일 내용 세팅
 
 		// CID(Content-ID)를 이용해 메일에 이미지 첨부
-		helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+		helper.addInline("logo", new ClassPathResource("static/images/logo_big_default.png"));
 		
 		// 메일 발송하기
 		mailSender.send(mimeMessage);
@@ -127,7 +120,7 @@ public class EmailServiceImpl implements EmailService {
 			helper.setText(loadHtml(authKey, htmlName), true); // 이메일 내용 세팅
 
 			// CID(Content-ID)를 이용해 메일에 이미지 첨부
-			helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+			helper.addInline("logo", new ClassPathResource("static/images/logo_big_default.png"));
 			
 			// 메일 발송하기
 			mailSender.send(mimeMessage);
@@ -193,7 +186,7 @@ public class EmailServiceImpl implements EmailService {
 			// 변환된 String을 메일 내용으로 세팅
 
 			// CID(Content-ID)를 이용해 메일에 이미지 첨부
-			helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+			helper.addInline("logo", new ClassPathResource("static/images/logo_big_default.png"));
 
 			// 메일 발송하기
 			mailSender.send(mimeMessage);
@@ -359,7 +352,7 @@ public class EmailServiceImpl implements EmailService {
       helper.setText(loadHtml(tempPW, htmlName), true); // 이메일 내용 세팅
 
       // CID(Content-ID)를 이용해 메일에 이미지 첨부
-      helper.addInline("logo", new ClassPathResource("static/images/sample_iphone16.jpg"));
+      helper.addInline("logo", new ClassPathResource("static/images/logo_big_default.png"));
 
       // 메일 발송
       mailSender.send(mimeMessage);

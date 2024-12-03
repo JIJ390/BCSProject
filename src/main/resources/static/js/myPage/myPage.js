@@ -4,7 +4,7 @@ function getCookie(key) {
 
   const cookies = document.cookie; // "K=V;K=V;..."
 
-  const arr = cookies.split(";");
+  const arr = cookies.split("; ");
 
   const cookieObj = {};
 
@@ -32,7 +32,8 @@ const checkObj = {
   "memberTel": false,
   "authKey": false,
   "memberName" : false,
-  "authKey3" : false
+  "authKey3" : false,
+  "memberName1" :false
   };
 
 /* ---------- 이메일 유효성 검사 --------- */
@@ -119,12 +120,12 @@ memberEmail?.addEventListener('input', e => {
 
 
 
-/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  이름 입력  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  이름 입력 아이디찾기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 const memberName = document.querySelector(".memberName");
 const nameMessage = document.querySelector(".nameMessage");
 
 const nameMessageObj = {};
-nameMessageObj.normal = "전화번호를 입력해주세요.(- 제외)";
+nameMessageObj.normal = "이름을 입력해주세요.";
 nameMessageObj.invaild = "이름형식이 유효하지 않습니다.";
 nameMessageObj.check = "유효한 이름입니다.";
 
@@ -132,8 +133,8 @@ memberName?.addEventListener("input", () => {
 
   const inputName = memberName.value.trim();
 
-  if (inputName === 0) {
-    nameMessage.innerText = "한글로 입력해주세요."
+  if (inputName.length === 0) {
+    nameMessage.innerText = nameMessageObj.normal;
     nameMessage.classList.remove("confirm", "error");
     checkObj.memberName = false;
     memberName.value = "";
@@ -146,14 +147,51 @@ memberName?.addEventListener("input", () => {
     nameMessage.innerText = nameMessageObj.invaild;
     nameMessage.classList.remove("confirm");
     nameMessage.classList.add("error");
-    checkObj.memberTel = false;
+    checkObj.memberName = false;
     return;
   }
 
   nameMessage.innerText = nameMessageObj.check;
   nameMessage.classList.remove("error");
   nameMessage.classList.add("confirm");
-  checkObj.memberTel = true;
+  checkObj.memberName = true;
+
+})
+/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  이름 입력 비밀번호찾기  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+const memberName1 = document.querySelector(".memberName1");
+const nameMessage1 = document.querySelector(".nameMessage2");
+
+const nameMessageObj1 = {};
+nameMessageObj1.normal = "이름을 입력해주세요.";
+nameMessageObj1.invaild = "이름형식이 유효하지 않습니다.";
+nameMessageObj1.check = "유효한 이름입니다.";
+
+memberName1?.addEventListener("input", () => {
+
+  const inputName = memberName1.value.trim();
+
+  if (inputName.length === 0) {
+    nameMessage1.innerText = nameMessageObj1.normal;
+    nameMessage1.classList.remove("confirm", "error");
+    checkObj.memberName1 = false;
+    memberName1.value = "";
+    return;
+  }
+
+  const regEx = /^[가-힣]+$/;
+
+  if (regEx.test(inputName) === false) {
+    nameMessage1.innerText = nameMessageObj1.invaild;
+    nameMessage1.classList.remove("confirm");
+    nameMessage1.classList.add("error");
+    checkObj.memberName1 = false;
+    return;
+  }
+
+  nameMessage1.innerText = nameMessageObj1.check;
+  nameMessage1.classList.remove("error");
+  nameMessage1.classList.add("confirm");
+  checkObj.memberName1 = true;
 
 })
 
@@ -219,6 +257,13 @@ const findId = document.querySelector(".findId");
 const getNumber = document.querySelector(".getNumber");
 const authKey = document.querySelector(".AuthKey");
 const checkAuthKeyBtn = document.querySelector("#checkAuthKeyBtn");
+
+idConfirmBtn?.addEventListener("click", ()=>{
+
+  idConfirm.style.display = "none";
+
+})
+
 
 
 findId?.addEventListener("click", () => {
@@ -302,9 +347,12 @@ findId?.addEventListener("click", () => {
     })
     .then(findId => {
       idResult.innerText = findId
+      console.log(findId);
+      console.log(findId);
+      console.log(findId);
     })
     .catch(err=>console.error(err));
-
+    
 })
 
 //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 아이디 불러오기ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
@@ -350,7 +398,6 @@ sendAuthKeyBtn?.addEventListener("click", () => {
 
   const obj2 = {
     "email" : memberEmail.value, // 입력한 이메일
-    "name" : memberName.value    // 입력한 인증번호
   };
   // 2) 비동기로 서버에서 작성된 이메일로 인증코드 발송(AJAX)
   fetch("/email/emailName", {
@@ -369,7 +416,7 @@ sendAuthKeyBtn?.addEventListener("click", () => {
   .then(result => {
     console.log(result);
     if(result == 0){
-      alert("이메일과 이름이 일치하지 않습니다!")
+      alert("이메일!")
     }else{
       
     }
@@ -522,7 +569,7 @@ getNumberBtn?.addEventListener("click", ()=>{
 
   const obj3 = {
     "id" : memberId.value, // 입력한 아이디
-    "name" : memberName2.value    // 입력한 인증번호
+    "name" : memberName1.value    // 입력한 이름
   };
   // 2) 비동기로 서버에서 작성된 이메일로 인증코드 발송(AJAX)
   fetch("/email/emailPw", {
@@ -594,6 +641,11 @@ getNumberBtn?.addEventListener("click", ()=>{
 });
 
 //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ//
+
+
+
+
+
 
 
 // -------------------------------------------
@@ -883,7 +935,7 @@ const postcode = document.querySelector("#postcode");
 const address = document.querySelector("#address");
 const detailAddress = document.querySelector("#detailAddress");
 
-addressChangeFrm.addEventListener("submit", e =>{
+addressChangeFrm?.addEventListener("submit", e =>{
 
   if(postcode.value.trim() == ""){
     alert("우편번호칸을 모두 입력해주세요")
@@ -963,7 +1015,7 @@ memberTel?.addEventListener("input", () => {
 
 });
 
-telChangeForm.addEventListener("submit", e => {
+telChangeForm?.addEventListener("submit", e => {
 
 
   if(checkObj.memberTel) {
@@ -983,8 +1035,6 @@ telChangeForm.addEventListener("submit", e => {
 
 /* 주소값 수정화면에서 불러오기 */
 document.addEventListener("DOMContentLoaded", () => {
-
-  console.log(loginMember);
 
   if (loginMember.memberAddress === null) {
     return;

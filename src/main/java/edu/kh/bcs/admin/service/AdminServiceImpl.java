@@ -8,11 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.bcs.admin.mapper.AdminMapper;
@@ -21,17 +19,18 @@ import net.coobird.thumbnailator.Thumbnails;
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
 import edu.kh.bcs.common.util.FileUtil;
+import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
 import edu.kh.bcs.device.dto.Color;
 import edu.kh.bcs.device.dto.Device;
 import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.device.dto.Order;
+import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -59,6 +58,12 @@ public class AdminServiceImpl implements AdminService {
 	private String webPathBanner;
 	@Value("${my.banner.folder-path}")
 	private String folderPathBanner;
+	
+	// 채팅 이미지
+	@Value("${my.chatting.web-path}")
+	private String webPathchatting;
+	@Value("${my.chatting.folder-path}")
+	private String folderPathchatting;
 	
 	@Value("${my.event.web-path}")
 	private String webPath;
@@ -202,6 +207,60 @@ public class AdminServiceImpl implements AdminService {
 		
 		return roomNo;
 	}
+	
+	@Override
+	public int insertReviewNoti(String orderNo, String memberNo) {
+		
+		// 리뷰알림 있는지 조회
+		int check = mapper.checkRN(orderNo, memberNo);
+		
+		// 리뷰 있으면
+		if(check > 0) {
+			return 0;
+		}
+		
+		// 리뷰 없으면
+		return mapper.insertReviewNoti(orderNo,memberNo);
+	}
+	
+	
+	
+	
+	@Override
+	public String uploadImg(MultipartFile img) {
+		
+		String fileRename = FileUtil.rename(img.getOriginalFilename());
+		
+		try {
+
+			File folder = new File(folderPathchatting);
+			
+			if (!folder.exists()) { // 존재하지 않을때에
+				folder.mkdirs(); // 폴더 생성 구문
+
+			} 
+
+			img.transferTo(new File(folderPathchatting + fileRename));
+
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		
+		return webPathchatting + fileRename;
+	}
+	
+	
+	@Override
+	public List<reviewRNDto> getOrderList(int memberNo) {
+		
+		return mapper.getOrderList(memberNo);
+	}
+	
+	@Override
+	public int deteleReviewRN(int orderNo) {
+		return mapper.deleteReviewRN(orderNo);
+	}
+	
 	
 	@Override
 	public int firstArCheck(int memberNo) {
@@ -363,20 +422,6 @@ public class AdminServiceImpl implements AdminService {
         e.printStackTrace();
     }
 		
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url1);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(url2);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		System.out.println(eventNo);
-		
 		int result = mapper.eventUpdate(url1, url2, eventNo);
 		
 		if (result == 0) return 0;
@@ -425,6 +470,55 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 
+	@Override
+	public List<SellingDevice> getBuyingList(String deviceNo, int cp, String searchText) {
+		return mapper.getBuyingList(deviceNo,cp,searchText); 
+	}
+	
+	
+	@Override
+	public int getDeviceResultCount(String deviceNo,String searchText) {
+		
+		return mapper.getDeviceResultCount(deviceNo,searchText);
+	}
+	
+	
+	
+	@Override
+	public int updateStatue(String sellingDeviceNo, String statusCode) {
+		return mapper.updateStatue(sellingDeviceNo,statusCode);
+	}
+	
+	
+	@Override
+	public int addBuyDevice(
+			String deviceNo, String colorNo, String capacityNumber, 
+			String gradeNumber, String orderNo) {
+		
+		// 있는지 체크
+		int result = 0;
+		result = mapper.checkBuyDevice(orderNo);
+		
+		// 있으면 리턴
+		if(result == 4) {
+			return 0;
+		}
+		
+		result = mapper.addBuyDevice(deviceNo,colorNo,capacityNumber,gradeNumber);
+		
+		// 등록완료 상태코드로 변경
+		mapper.statusChange(orderNo);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// ============================================기종 등록
 	@Override
@@ -466,6 +560,8 @@ public class AdminServiceImpl implements AdminService {
 			int deviceGetNo = mapper.selectDeviceNo();
 			
 			
+			String[] colorNameList = color.getColorName().split(",");
+			String[] colorCodeList = color.getColorCode().split(",");
 
 			// colorImg 6개 사진 들어감
 			// colorimg 필터
@@ -482,8 +578,6 @@ public class AdminServiceImpl implements AdminService {
 				// 만들어둔 FileUtil 사용하기
 				String rename = FileUtil.rename(textImg);
 
-				String[] colorNameList = color.getColorName().split(",");
-				String[] colorCodeList = color.getColorCode().split(",");
 				String colorNameOut = colorNameList[i];
 				String colorCodeOut = colorCodeList[i];
 
@@ -546,7 +640,10 @@ public class AdminServiceImpl implements AdminService {
 				String caSellPrice = capacitySellPrice1[i];
 				
 				//용량 인서트
-				int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
+				
+				if (!caPrice.equals("null")) {
+					int capacity = mapper.capacity(caNo,caPrice,caSellPrice,deviceGetNo);
+				}
 				
 			}
 			System.out.println("등록 완료");
@@ -558,7 +655,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int textContentUpdate(Device device, Color color, String gradeType, String gradePrice, String gradeSellPrice,
 			List<MultipartFile> colorImg, MultipartFile divceImg, String capacityNumber, String capacityPrice,
-			String capacitySellPrice) {
+			String capacitySellPrice, String colorStatus, String colorNoCode) {
 		
 		// if 문 밖에서 선언
 		String deviceRename = null;
@@ -568,7 +665,6 @@ public class AdminServiceImpl implements AdminService {
 			
 			String divceImge = divceImg.getOriginalFilename();
 			
-			log.debug("divceImge : {}", divceImge);
 
 			deviceRename = FileUtil.rename(divceImge);
 
@@ -603,38 +699,107 @@ public class AdminServiceImpl implements AdminService {
 			}
 
 			
+
+			String[] colorNameList = color.getColorName().split(",");
+			String[] colorCodeList = color.getColorCode().split(",");
+			String[] colorStatusList = colorStatus.split(",");
+			String[] colorNoCodeList = colorNoCode.split(",");
 			
 
 			// colorImg 6개 사진 들어감
 			// colorimg 필터
-			/*
-			 * for (int i = 0; i < colorImg.size(); i++) { // 없을 경우 // 분기문중 없는 경우 다음 숫자 if
-			 * (colorImg.get(i).isEmpty()) continue;
-			 * 
-			 * // 이미지가 있을 경우 원본명 얻어오기 String textImg =
-			 * colorImg.get(i).getOriginalFilename();
-			 * 
-			 * // 변경된 파일명 중복되지않게끔 // 만들어둔 FileUtil 사용하기 String rename =
-			 * FileUtil.rename(textImg);
-			 * 
-			 * String[] colorNameList = color.getColorName().split(","); String[]
-			 * colorCodeList = color.getColorCode().split(","); String colorNameOut =
-			 * colorNameList[i]; String colorCodeOut = colorCodeList[i];
-			 * 
-			 * // Color color2 = new Color();
-			 * 
-			 * // deviceCode 빨간색 color2.setColorName(colorNameOut); // deviceCode #23123
-			 * color2.setColorCode(colorCodeOut);
-			 * color2.setColorDeviceImg(webPathDeviceColor + rename);
-			 * 
-			 * try { int colorUpdate = mapper.colorUpdate(color2);
-			 * 
-			 * File folder = new File(folderPathColor); if (folder.exists() == false) { //
-			 * 존재하지 않을때에 folder.mkdirs(); // 폴더 생성 구문 } colorImg.get(i).transferTo(new
-			 * File(folderPathColor + rename));
-			 * 
-			 * } catch (Exception e) { e.printStackTrace(); return 0; } }
-			 */// for 문 끝남
+			for (int i = 0; i < colorImg.size(); i++) {
+				// 없을 경우
+				// 분기문중 없는 경우 다음 숫자
+				if (colorImg.get(i).isEmpty())
+					continue;
+
+				// 이미지가 있을 경우 원본명 얻어오기
+				String textImg = colorImg.get(i).getOriginalFilename();
+
+				// 변경된 파일명 중복되지않게끔
+				// 만들어둔 FileUtil 사용하기
+				String rename = FileUtil.rename(textImg);
+
+				String colorNameOut = colorNameList[i];
+				String colorCodeOut = colorCodeList[i];
+				String colorStatusOut = colorStatusList[i];
+				String colorNoCodeOut = colorNoCodeList[i];
+				
+				//
+				Color color2 = new Color();
+
+				// deviceCode 빨간색
+				color2.setColorName(colorNameOut);
+				// deviceCode #23123
+				color2.setColorCode(colorCodeOut);
+				// deviceGetNo select 해서 가져온 값
+				color2.setColorDeviceImg(webPathDeviceColor + rename);
+
+				color2.setColorNo(Integer.parseInt(colorNoCodeOut));
+				//color = deviceNo
+				color2.setDeviceNo(device.getDeviceNo());
+				
+				log.debug("colorStatusOut checkkkkk: {}", colorStatusOut);
+				log.debug("colorStatusOut checkkkkk: {}", colorStatusOut);
+				log.debug("colorStatusOut checkkkkk: {}", colorStatusOut);
+				log.debug("colorStatusOut checkkkkk: {}", colorStatusOut);
+				
+				
+				// 수정
+				if (colorStatusOut.equals("1")) {
+					
+					
+					try {
+						int colorUpdate = mapper.colorUpdate(color2);
+
+						File folder = new File(folderPathColor);
+						if (folder.exists() == false) { // 존재하지 않을때에
+							folder.mkdirs(); // 폴더 생성 구문
+						}
+						colorImg.get(i).transferTo(new File(folderPathColor + rename));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return 0;
+					}
+					
+					// 등록
+				} else if (colorStatusOut.equals("2")) {
+					
+					try {
+						int colorUpdate = mapper.colorInsert(color2);
+
+						File folder = new File(folderPathColor);
+						if (folder.exists() == false) { // 존재하지 않을때에
+							folder.mkdirs(); // 폴더 생성 구문
+						}
+						colorImg.get(i).transferTo(new File(folderPathColor + rename));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						return 0;
+					}
+					
+					
+				} else {
+					
+					log.debug("check out: {}", colorStatusOut);
+					continue;
+				}
+
+			} // for 문 끝남
+			
+			
+			
+			for (int i = 0; i < 6; i++) {
+				if (colorStatusList[i].equals("3")) {
+					
+					String colorNoCodeOut = colorNoCodeList[i];
+					int result = mapper.colorDelete(colorNoCodeOut);
+				}
+
+			}
 			
 			int deviceNo = device.getDeviceNo();
 			
@@ -655,25 +820,32 @@ public class AdminServiceImpl implements AdminService {
 				
 				int gradeUpdate = mapper.gradeUpdate(gradePriceOrly,gradeSellPriceOrly, gradeTypeOrly, deviceNo);
 			}
-//			
-//			//자르기
-//			String[] capacityNo1 = capacityNumber.split(",");
-//			String[] capacityPrice1 = capacityPrice.split(",");
-//			String[] capacitySellPrice1 = capacitySellPrice.split(",");
-//			
-//			
-//			
-//			for(int i = 0; i < capacityNo1.length ; i++) {
-//				
-//				String caNo = capacityNo1[i];
-//				String caPrice = capacityPrice1[i];
-//				String caSellPrice = capacitySellPrice1[i];
-//				
-//				//용량 인서트
-//				int capacityUpdate = mapper.capacityUpdate(caNo,caPrice,caSellPrice,DeviceUpdateNo);
-//				
-//			}
-//			System.out.println("등록 완료");
+			
+			
+			
+			
+			
+			
+			
+			//자르기
+			String[] capacityNo1 = capacityNumber.split(",");
+			String[] capacityPrice1 = capacityPrice.split(",");
+			String[] capacitySellPrice1 = capacitySellPrice.split(",");
+			
+			int capacityDelete = mapper.capacityDelete(deviceNo);
+			
+			for(int i = 0; i < capacityNo1.length ; i++) {
+				
+				String caNo = capacityNo1[i];
+				String caPrice = capacityPrice1[i];
+				String caSellPrice = capacitySellPrice1[i];
+				
+				//용량 인서트
+				if (!caPrice.equals("null")) {
+				int capacityInsert = mapper.capacityInsert(caNo,caPrice,caSellPrice,deviceNo);
+				}
+			}
+			System.out.println("등록 완료");
 		}
 		
 			return 1;
@@ -773,7 +945,69 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
+
+	@Override
+	public List<BuyingDevice> selectBuyingDeviceList() {
+		
+		return mapper.selectBuyingDeviceList();
+	}
 	
+	@Override
+	public List<BuyingDevice> adminAllListSearch(String search) {
+		
+		return mapper.adminAllListSearch(search);
+	}
+	
+	@Override
+	public List<Device> productinquirySearch(String search) {
+		
+		return mapper.productinquirySearch(search);
+	}
+
+	// 모델명찾기
+	@Override
+	public List<Device> modelSelect(String brandName) {
+
+		
+		
+		return mapper.modelSelect(brandName);
+	}
+
+  
+	
+	// 매물 등록
+	@Override
+	public int insertBuyingDevice(BuyingDevice newBuyingDevice) {
+		return mapper.insertBuyingDevice(newBuyingDevice);
+	}
 	 
+	
+	//전체 조회 총 개수
+	@Override
+	public int result(int deviceNo, String search) {
+		
+		
+		return mapper.result(deviceNo,search);
+	}
+	
+	@Override
+	public List<Order> saleListSelect(int cp, int deviceNo, String search) {
+		
+		
+		
+		return mapper.saleListSelect(cp, deviceNo, search);
+	}
+	//adminProductinquiry 전체 개수 조회
+	@Override
+	public int resultAll(String search) {
+		
+		return mapper.resultAll(search);
+	}
+	@Override
+	public List<Device> list(int cp, String search) {
+		
+		return mapper.productList(cp, search);
+	}
+	
 	
 }

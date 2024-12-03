@@ -237,6 +237,17 @@
       border-radius: 5px;
       background-color: white;
     }
+
+    .member-mamage-backBtn {
+      width: 100px;
+      height: 50px;
+      border: 1px solid rgb(134, 134, 134);
+      margin: auto;
+      margin-top: 20px;
+      padding: 15px 20px;
+      background-color: white;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -330,6 +341,7 @@
       </div>
       <div class="event-pagenation"></div>
     </div>
+    <div class="member-mamage-backBtn">뒤로가기</div>
 
   </div>
 
@@ -393,6 +405,7 @@
       })
     }
 
+    imgUrl = '';
 
     /* 이벤트 이미지 프리뷰 */
     const eventThumbnailUpload = (file) => {
@@ -403,16 +416,39 @@
         var reader = new FileReader();
         reader.onload = (e) => {
           thumbnail.src = e.target.result;
+          imgUrl = thumbnail.src;
         }
         reader.readAsDataURL(file.files[0]);
       }
       else {
         thumbnail.src = "/images/help/파일업로드.png";
-        imageInput2 = '';
+        imgUrl = "/images/help/파일업로드.png";
       }
 
     }
 
+
+    document.querySelector(".event-write").addEventListener("submit", (e) => {
+      const title = document.querySelector(".event-title");
+      const img = imgUrl;
+      const content = document.querySelector(".eventContent");
+
+      if(title.value.trim() === ''){
+        alert("제목 입력")
+        e.preventDefault();
+      }
+
+      if(img === "/images/help/파일업로드.png" || img === ""){
+        alert("이미지 입력")
+        e.preventDefault();
+      }
+
+      if(content.value.trim() === ''){
+        alert("내용 입력")
+        e.preventDefault();
+      }
+
+    })
 
 
 
