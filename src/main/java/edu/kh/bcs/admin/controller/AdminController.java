@@ -449,6 +449,9 @@ public class AdminController {
 		return "admin/adminMember/adminMemberPage";
 	}
 	
+	  
+	
+	
 	
 	@GetMapping("getEventPagenation")
 	public String adminEventPage(
