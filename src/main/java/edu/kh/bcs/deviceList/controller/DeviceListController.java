@@ -224,7 +224,11 @@ public class DeviceListController {
 	
 	/* 검색 기능 */
 	@GetMapping("searchDevice")
-	public String searchDevice(@RequestParam("query") String query, Model model) {
+	public String searchDevice(
+			@RequestParam("query") String query,
+			HttpServletRequest req, 
+			HttpServletResponse resp,
+			Model model) {
 		
 		String trimmedQuery = query.trim();
 		
@@ -237,6 +241,72 @@ public class DeviceListController {
         model.addAttribute("searchResults", searchResults); // 검색 결과
         
 //        log.debug("searchResults {} : ", searchResults);
+        
+//		기종 번호 담을 리스트 선언
+		List<String> deviceNoList = new ArrayList<String> ();
+		
+		
+		// 모든 쿠키에서 최근 본 기기 번호 리스트 꺼내기
+	    Cookie[] cookies = req.getCookies();
+	    // 쿠키가 존재할 시 
+	    if (cookies != null) {
+	    	
+	    	// 각 쿠키마다
+	        for (Cookie cookie : cookies) {
+	        	// 쿠키 번호 목록 이름이 일치 하는 쿠키 값 꺼내서 리스트에 삽입
+	            if ("deviceNoList".equals(cookie.getName())) {
+	            	
+	            	
+	            	 	try {
+	            	 		
+	            	 		// 쿠키값 디코딩
+										String decodedValue = URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.name());
+		                String value = decodedValue;
+										
+		                deviceNoList = new ArrayList<>(Arrays.asList(value.split(",")));
+									} catch (UnsupportedEncodingException e) {
+										e.printStackTrace();
+									}
+
+	                
+	                // ',' 구분자 배열로 만들기
+
+	            }
+	        }
+	    }
+			
+	 
+	    
+	    
+	    // 최대 크기 5 초과 시 마지막 상품 제거
+	    if (deviceNoList.size() > 5) {
+	    	deviceNoList.remove(deviceNoList.size() - 1);
+	    }
+			
+	    // 최근 본 상품 목록(번호, 이미지, 이름)
+	    List<Map<String, String>> recentDeviceList = new ArrayList<Map<String, String>>();
+			
+	    
+	    // 쿠키 기반으로 recentDeviceList 에 값 삽입
+		for(String recentDeviceNo : deviceNoList) {
+				
+			// 쿠키 번호로 기종 정보 가져오기
+			Device recentDevice = buyingService.selectRecentDevice(Integer.parseInt(recentDeviceNo));
+					
+			// 불러온 기종 정보 세팅
+			Map<String, String> recentDeviceMap = new HashMap<String, String>();
+					
+			recentDeviceMap.put("deviceNo", String.valueOf(recentDevice.getDeviceNo()));
+			recentDeviceMap.put("deviceImg", recentDevice.getDeviceImg());
+			recentDeviceMap.put("deviceName", recentDevice.getDeviceName());
+					
+			recentDeviceList.add(recentDeviceMap);
+		}
+			
+
+		
+		
+		model.addAttribute("recentDeviceList", recentDeviceList);
 
         // deviceList.html 페이지 반환
         return "deviceList/deviceList";
