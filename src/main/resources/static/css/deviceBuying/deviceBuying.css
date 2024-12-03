@@ -807,3 +807,50 @@ hr {
   margin: 10px 0;
 }
 
+
+
+.recent-list-container > hr {
+  margin-bottom: 12px;
+  margin-top: 10px;
+
+  background:rgb(184, 184, 184);
+  height:1px;
+  border:0;
+
+  width: 65px;
+
+}
+
+
+
+
+/* --------------------- */
+
+
+/* 드롭다운 스타일 */
+.header-nav .dep1 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
+.header-nav .dep2 .dropdown {
+  display: none;
+  position: fixed; /* 화면 전체 기준으로 위치 설정 */
+  top: 60px; /* "쇼핑하기" 아래로 메뉴를 띄우기 위해 적절한 값으로 설정 */
+  left: 0; /* 화면의 왼쪽 끝에 맞춤 */
+  right: 0; /* 화면의 오른쪽 끝에 맞춤 */
+  background-color: var(--main-gray-color) !important;
+  border-radius: 0; /* 좌우 여백을 꽉 채우기 위해 경계선 둥글기 제거 */
+  z-index: 1000;
+  font-size: 43px;
+  padding: 10px 0; /* 드롭다운 메뉴 아이템의 상하 여백 추가 */
+  height: 430px;
+}
