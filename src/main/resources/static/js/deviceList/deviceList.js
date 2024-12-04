@@ -258,7 +258,7 @@ const searchBtn = document.querySelector("#searchBtn").addEventListener("click",
     }
     throw new Error("조회 실패");
   })
-  .then(result => {z
+  .then(result => {
     console.log(result); // 가져온 데이터 확인
   
     // 기존 내용을 초기화
