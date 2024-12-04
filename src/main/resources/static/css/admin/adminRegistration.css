@@ -173,7 +173,7 @@ ul {
 ul li {
     padding: 5px;
     width: 220px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     margin-bottom: 5px;
     cursor: pointer;
 }
