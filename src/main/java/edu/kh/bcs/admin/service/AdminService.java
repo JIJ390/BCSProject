@@ -19,6 +19,7 @@ import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -242,6 +243,51 @@ public interface AdminService {
 
 
 	int getDeviceResultCount(String searchText, String searchText2);
+
+
+
+	/**
+	 * 공지사항 목록 가져오기
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectNoticeList(int cp);
+
+
+
+	/**
+	 * 공지 사항 등록
+	 * @param notice
+	 * @return
+	 */
+	int adminNoticeInsert(HelpDto notice);
+
+
+
+	/**
+	 * 공지 사항 수정 화면 공지 불러오기
+	 * @param noticeNumber
+	 * @return
+	 */
+	HelpDto adminNoticeUpdateView(int noticeNumber);
+
+
+
+	/**
+	 * 공지 수정
+	 * @param notice
+	 * @return
+	 */
+	int adminNoticeUpdate(HelpDto notice);
+
+
+
+	/**
+	 * 공지 삭제 
+	 * @param noticeNumber
+	 * @return
+	 */
+	int adminNoticeDelete(int noticeNumber);
 
 
 

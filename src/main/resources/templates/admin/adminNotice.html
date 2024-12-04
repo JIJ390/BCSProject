@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 관리</title>
+  <link rel="stylesheet" href="/css/admin/header.css">
+  <link rel="stylesheet" href="/css/admin/adminNotice.css">
+</head>
+
+<body>
+
+
+
+  <div class="blur-box">
+    <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
+    <!-- Header -->
+    <th:block th:replace="~{common/header}"></th:block>
+  </div>
+  <main>
+    <!-- <section class="left-section">
+      레프트 섹션
+    </section> -->
+
+    <section class="main-section">
+
+
+      <div class="main-container">
+        <div class="page-title">
+          <div class="page-head">
+            공지 관리
+            <button id="noticeInsertBtn">공지 등록</button>
+          </div>
+          <hr>
+        </div>
+
+          <table class="notice-table">
+            <thead>
+              <tr>
+                <th>
+                  공지번호
+                </th>
+                <th>
+                  공지 제목
+                </th>
+                <th>
+                  작성일
+                </th>
+                <th colspan="2">
+                  -
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <th:block th:each= "notice:${noticeList}" th:object="${notice}">
+                <tr>
+                  <td th:text="*{noticeNumber}"></td>
+                  <td th:text="*{noticeTitle}"></td>
+                  <td th:text="*{noticeWriteDate}"></td>
+                  <td><button class="update-btn">수정</button></td>
+                  <td><button class="delete-btn">삭제</button></td>
+                </tr>
+              </th:block>
+            </tbody>
+
+          </table>
+
+
+                  <!-- 페이지 네이션 -->
+        <div class="pagination-area" th:unless="${#lists.isEmpty(noticeList)}">
+
+          <ul class="pagination" th:object="${noticePagination}">
+            <li><a href="#">&lt;&lt;</a></li>
+            <li><a href="#">&lt;</a></li>
+
+            <th:block th:each="i : *{#numbers.sequence(startPage, endPage)}" >
+              
+              <li th:if= "${i} == *{currentPage}">
+                <a class="current" th:text="${i}">현재 페이지</a>
+              </li>
+      
+              <li th:unless= "${i} == *{currentPage}"> 
+                <a href="#" th:text="${i}">이동할 수 있는 페이지</a>   <!-- th:href="|?cp=${i}|" -->
+              </li>
+            </th:block>
+
+            <li><a href="#">&gt;</a></li>
+            <li><a href="#">&gt;&gt;</a></li>
+          </ul>
+
+        </div>
+
+
+      </div>
+  
+      <div class="back-btn">
+        뒤로 가기
+      </div>
+    </section>
+
+    <!-- <section class="right-section">
+      라이트 섹션
+    </section>  -->
+  </main>
+
+  <script th:inline="javascript">
+
+    const noticePagination = /*[[${noticePagination}]]*/ "페이지네이션";
+  </script>
+
+  <script src="/js/adminJS/adminNotice.js"></script>
+
+  
+  <script th:inline="javascript">
+    const message =  /*[[${message}]]*/ "전달 받은 message";
+  
+    if(message != null) alert(message);
+  </script>
+  
+
+</body>
+
+</html>

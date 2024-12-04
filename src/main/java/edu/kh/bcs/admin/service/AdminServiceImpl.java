@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 import edu.kh.bcs.chatting.dto.ChattingMessage;
 import edu.kh.bcs.chatting.dto.ChattingRoomDto;
+import edu.kh.bcs.common.dto.Pagination;
 import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
@@ -28,6 +30,7 @@ import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -1010,4 +1013,59 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	// 공지사항 목록
+	@Override
+	public Map<String, Object> selectNoticeList(int cp) {
+		int listCount = mapper.getNoticeListCount();
+		
+		Pagination pagination = new Pagination(cp, listCount);
+			
+		int limit = pagination.getLimit();
+		int offset = (cp - 1)* limit;
+			
+		RowBounds rowBounds = new RowBounds(offset, limit);
+			
+		List<HelpDto> noticeList = mapper.selectNoticeList(rowBounds);
+			
+		Map<String, Object> map = 
+					Map.of("noticeList", noticeList, "pagination", pagination);
+				
+		return map;
+	}
+	
+	
+	
+	
+	// 공지 사항 등록
+	@Override
+	public int adminNoticeInsert(HelpDto notice) {
+		return mapper.adminNoticeInsert(notice);
+	}
+	
+	
+	// 공지 수정 화면 불러오기
+	@Override
+	public HelpDto adminNoticeUpdateView(int noticeNumber) {
+		return mapper.adminNoticeUpdateView(noticeNumber);
+	}
+	
+	
+	// 공지 수정
+	@Override
+	public int adminNoticeUpdate(HelpDto notice) {
+		return mapper.adminNoticeUpdate(notice);
+	}
+	
+	
+	// 공지 삭제
+	@Override
+	public int adminNoticeDelete(int noticeNumber) {
+		return mapper.adminNoticeDelete(noticeNumber);
+	}
 }

@@ -21,7 +21,8 @@ public class HelpDto {
 	private String noticeTitle;
 	private String noticeContent;
 	private String noticeWriteDate;
-	private String max;
+	
+	private String noticeDelFl;
 	
 
 }

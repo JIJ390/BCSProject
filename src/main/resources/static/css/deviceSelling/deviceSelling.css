@@ -435,6 +435,7 @@ h1 {
   color: var(--font-gray-color);
 
   border: none;
+  resize: vertical;
 }
 
 .bank-box {
