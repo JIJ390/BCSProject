@@ -32,6 +32,8 @@
   	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM "EVENT"
+		WHERE EVENT_NUMBER > 0
+		AND EVENT_DEL_FL = 'N'
 	</select>
 	
 	
@@ -44,6 +46,7 @@
 			EVENT_THUMBNAIL
 		FROM EVENT
 		WHERE EVENT_NUMBER > 0
+		AND EVENT_DEL_FL = 'N'
 		ORDER BY EVENT_NUMBER DESC
 	</select>
 	
