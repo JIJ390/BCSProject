@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+    
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/admin/adminModelRegistration.css">
@@ -11,21 +11,24 @@
 
 <body>
 
-   
+    
     <form action="/admin/adminUpdate/update" method="POST" enctype="multipart/form-data" id="deviceUpdateFrm">
         <div class="title">
             <!-- 메인 색 첨부 -->
              <input type="hidden" name="deviceNo" th:value="${device.deviceNo}">
-            <a href="http://localhost/admin" class="menu">←</a>
-        </div>
-        <h1>기종등록</h1>
+             <a href="http://localhost/admin" class="menu">←</a>
+            </div>
+            <h1>기종 수정</h1>
         <div class="main-img-container">
             <p>메인 사진</p>
             <div class="main-img-gray-bc">
                 <div class="main-img">
                     <img th:src="${device.deviceImg}" class="preview">
                 </div>
-                <input type="file" class="input-img" name="divceImg">
+                <label for="file0">
+                    <input id="file0" type="file" class="input-img" name="divceImg" style="display: none">
+                    <p th:text="${device?.deviceImg ?: '파일 선택해주세요.'}" class="p-name">파일을 선택해주세요</p>
+                </label>
                 <span class="delete_image">&times;</span>
             </div>
         </div>
@@ -38,8 +41,7 @@
                 <div class="main-color-first">
 
 
-
-
+                    
                     <div class="main-color-in-radios">
                         <div class="main-img"> 
                             <img th:src="${colorResultList.get(0)?.colorDeviceImg ?: ''}" class="preview">
@@ -83,17 +85,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(0)?.colorName ?: ''}">
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(1)?.colorName ?: ''}">
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(2)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="1. ex.검정색" th:value="${colorResultList.get(0)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="2. ex.검정색" th:value="${colorResultList.get(1)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="3. ex.검정색" th:value="${colorResultList.get(2)?.colorName ?: ''}">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(0)?.colorCode ?: ''}">
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(1)?.colorCode ?: ''}">
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(2)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="1. ex.#0000" th:value="${colorResultList.get(0)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="2. ex.#0000" th:value="${colorResultList.get(1)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="3. ex.#0000" th:value="${colorResultList.get(2)?.colorCode ?: ''}">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -141,17 +143,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(3)?.colorName ?: ''}">
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(4)?.colorName ?: ''}">
-                            <input type="text" name="colorName" placeholder="검정색" th:value="${colorResultList.get(5)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="4. ex.검정색" th:value="${colorResultList.get(3)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="5. ex.검정색" th:value="${colorResultList.get(4)?.colorName ?: ''}">
+                            <input type="text" name="colorName" placeholder="6. ex.검정색" th:value="${colorResultList.get(5)?.colorName ?: ''}">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(3)?.colorCode ?: ''}">
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(4)?.colorCode ?: ''}">
-                            <input type="text" name="colorCode" placeholder="#0000" th:value="${colorResultList.get(5)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="4. ex.#0000" th:value="${colorResultList.get(3)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="5. ex.#0000" th:value="${colorResultList.get(4)?.colorCode ?: ''}">
+                            <input type="text" name="colorCode" placeholder="6. ex.#0000" th:value="${colorResultList.get(5)?.colorCode ?: ''}">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -297,24 +299,24 @@
             </div>
             <div>
                 <p>등록할 가격</p>
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(0)?.gradePrice}">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(1)?.gradePrice}">
-                <input type="text" name="gradePrice" placeholder="등급 해당 가격 입력해주세요." th:value="${grade.get(2)?.gradePrice}">
+                <input type="text" name="gradePrice" placeholder="B등급 해당 가격 입력해주세요." th:value="${grade.get(0)?.gradePrice}">
+                <input type="text" name="gradePrice" placeholder="A등급 해당 가격 입력해주세요." th:value="${grade.get(1)?.gradePrice}">
+                <input type="text" name="gradePrice" placeholder="S등급 해당 가격 입력해주세요." th:value="${grade.get(2)?.gradePrice}">
             </div>
             <div>
                 <p>판매할 가격</p>
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(0)?.gradeSellPrice}">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(1)?.gradeSellPrice}">
-                <input type="text" name="gradeSellPrice" placeholder="등급 판매 가격 입력해주세요." th:value="${grade.get(2)?.gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="B등급 판매 가격 입력해주세요." th:value="${grade.get(0)?.gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="A등급 판매 가격 입력해주세요." th:value="${grade.get(1)?.gradeSellPrice}">
+                <input type="text" name="gradeSellPrice" placeholder="S등급 판매 가격 입력해주세요." th:value="${grade.get(2)?.gradeSellPrice}">
             </div>
 
             <div>
                 <p style="background-color: rgb(200, 255, 0); display: flex; justify-content: center;">용량 별 가격</p>
-                <input type="text" placeholder="바꾸지마시오" value="64GB" readonly>
-                <input type="text" placeholder="바꾸지마시오" value="128GB" readonly>
-                <input type="text" placeholder="바꾸지마시오" value="256GB" readonly>
-                <input type="text" placeholder="바꾸지마시오" value="512GB" readonly>
-                <input type="text" placeholder="바꾸지마시오" value="1TB" readonly>
+                <input type="text" placeholder="10,000" value="64GB" readonly>
+                <input type="text" placeholder="10,000" value="128GB" readonly>
+                <input type="text" placeholder="10,000" value="256GB" readonly>
+                <input type="text" placeholder="10,000" value="512GB" readonly>
+                <input type="text" placeholder="10,000" value="1TB" readonly>
 
                 <input type="hidden" name="capacityNumber" value="1">
                 <input type="hidden" name="capacityNumber" value="2">
@@ -325,21 +327,20 @@
 
             <div>
                 <p>용량 별 가격</p>
-                <input type="text" name="capacityPrice" placeholder="10000">
-                <input type="text" name="capacityPrice" placeholder="10000">
-                <input type="text" name="capacityPrice" placeholder="10000">
-                <input type="text" name="capacityPrice" placeholder="10000">
-                <input type="text" name="capacityPrice" placeholder="10000">
+                <input type="text" name="capacityPrice" placeholder="용량별 가격 ex. 100000">
+                <input type="text" name="capacityPrice" placeholder="용량별 가격 ex. 200000">
+                <input type="text" name="capacityPrice" placeholder="용량별 가격 ex. 300000">
+                <input type="text" name="capacityPrice" placeholder="용량별 가격 ex. 400000">
+                <input type="text" name="capacityPrice" placeholder="용량별 가격 ex. 500000">
             </div>
             <div>
                 <p>내 폰 팔기 가격</p>
-                <input type="text" name="capacitySellPrice" placeholder="10000">
-                <input type="text" name="capacitySellPrice" placeholder="10000">
-                <input type="text" name="capacitySellPrice" placeholder="10000">
-                <input type="text" name="capacitySellPrice" placeholder="10000">
-                <input type="text" name="capacitySellPrice" placeholder="10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
             </div>
-
 
             
             <input type="hidden" name="colorStatus" class="color-status" value="0">
