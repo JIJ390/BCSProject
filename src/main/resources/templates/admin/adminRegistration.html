@@ -9,8 +9,8 @@
 </head>
 
 <body>
+    <th:block th:replace="~{common/header}"></th:block>
     <!-- 등록 박스 -->
-    
 
     <div class="decalcomanie" style="display: flex;">
         <div class="adminRegistration-box">
@@ -88,6 +88,12 @@
     <!-- 팝업 레이어 -->
 
     <script src="/js/adminJs/adminRegistration.js"></script>
+
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+      
+        if(message != null) alert(message);
+      </script>
 </body>
 
 </html>

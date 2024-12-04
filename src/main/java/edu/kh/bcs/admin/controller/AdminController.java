@@ -938,7 +938,8 @@ public class AdminController {
 			@RequestParam("deviceNo") String deviceNo,
 			@RequestParam("gradeSelect") String gradeNumber,
 			@RequestParam("colorSelect") String colorNo,
-			@RequestParam("capacitySelect") String capacityNumber
+			@RequestParam("capacitySelect") String capacityNumber,
+			RedirectAttributes ra
 			) {
 		
 		log.debug("deviceNo : {} ", deviceNo);
@@ -956,10 +957,12 @@ public class AdminController {
 		
 		int result = service.insertBuyingDevice(newBuyingDevice);
 		
-		System.out.println("등록");
 		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "매물이 등록되었습니다.");
+		}
 		
-		return "admin/adminRegistration";
+		return "redirect:/admin/adminRegistration";
 		
 	}
 	

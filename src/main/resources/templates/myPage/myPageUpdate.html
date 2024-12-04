@@ -81,7 +81,7 @@
       
                   <div class="update-group3">
                       <label for="addressChange">전화번호</label>
-                      <input type="number" id="number" name="phoneNumber" maxlength="11" placeholder="전화번호입력" th:value="${session.loginMember.memberTel}">
+                      <input type="text" inputmode="numeric" id="number" name="phoneNumber" maxlength="11" placeholder="전화번호입력" th:value="${session.loginMember.memberTel}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                     </div>
                     <span class="signUp-message1" id="telMessage">전화번호를 입력해주세요.(- 제외)</span>
 

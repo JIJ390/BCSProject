@@ -122,7 +122,8 @@ const checkObj = {
   "memberPwConfirm" : false,
   "memberId"        : false,
   "memberTel"       : false,
-  "authKey"         : false
+  "authKey"         : false,
+  "memberName"      : false
 };
 
 
@@ -435,14 +436,14 @@ memberName?.addEventListener("input", () => {
     nameMessage.innerText = nameMessageObj.invaild;
     nameMessage.classList.remove("confirm");
     nameMessage.classList.add("error");
-    checkObj.memberTel = false;
+    checkObj.memberName = false;
     return;
   }
 
   nameMessage.innerText = nameMessageObj.check;
   nameMessage.classList.remove("error");
   nameMessage.classList.add("confirm");
-  checkObj.memberTel = true;
+  checkObj.memberName = true;
 
 })
 
@@ -470,9 +471,12 @@ let sec = initSec;
 let authTimer; // 타이머 역할의 setInterval을 저장할 변수
         // -> 타이머를 멈추는 clearInterval 수행을 위해 필요
 
-
+const target = document.getElementById("memberEmail");
 // 인증번호 받기버튼 클릭 시
 sendAuthKeyBtn?.addEventListener("click", () => {
+
+  target.readOnly = true;
+
 
   checkObj.authKey = false; // 인증안된 상태로 기록
   authKeyMessage.innerText = ""; // 인증관련 메시지 삭제
@@ -506,6 +510,11 @@ sendAuthKeyBtn?.addEventListener("click", () => {
     console.log(result);
   })
   .catch(err => console.error(err));
+
+
+
+ 
+
 
   // 3) 이메일 발송 메시지 출력 + 5분타이머 출력
   alert("인증번호가 발송되었습니다!")
@@ -551,7 +560,11 @@ sendAuthKeyBtn?.addEventListener("click", () => {
 const authKey = document.querySelector("#authKey");
 const checkAuthKeyBtn = document.querySelector("#checkAuthKeyBtn");
 
+
+
 checkAuthKeyBtn?.addEventListener("click", () => {
+
+
 
   // + (추가조건) 타이머 00:00인 경우 버튼클릭 막기
   if(min === 0 && sec === 0){
@@ -639,7 +652,7 @@ signUpForm?.addEventListener("submit", e => {
 
       switch(key){
         case "memberEmail"     : str = "이메일이 유효하지않습니다."; break;
-        case "memberNickname"  : str = "닉네임이 유효하지않습니다."; break;
+        case "memberName"  : str = "이름이 유효하지않습니다."; break;
         case "memberPw"        : str = "비밀번호가 유효하지않습니다."; break;
         case "memberPwConfirm" : str = "비밀번호 확인이 일치하지않습니다."; break;
         case "memberTel"       : str = "전화번호가 유효하지 않습니다."; break;

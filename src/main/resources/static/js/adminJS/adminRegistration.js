@@ -131,6 +131,9 @@ closeBtn.addEventListener("click", () => {
     capacitySelect.innerText = "";
 
 
+    const imgBox = document.querySelector(".imgBox");
+
+    imgBox.src = result.deviceImg
     
         
     result.colorList.forEach((item, index) => {
@@ -183,3 +186,18 @@ popupCloseBtn.addEventListener("click", () => {
 
 
 
+
+const registrationForm = document.querySelector("[name=registrationForm]")
+
+registrationForm.addEventListener("submit", e => {
+  
+  const registrationNumber = document.querySelector("#registrationNumber");
+
+  if (registrationNumber.value.trim().length == 0) {
+    e.preventDefault();
+
+    alert("기종을 선택해 주세요");
+    return;
+  }
+  
+})
