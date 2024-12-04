@@ -20,19 +20,19 @@ chargeBox2.addEventListener('click', () => {
 }) 
 
 chargeBox3.addEventListener('click', () => {
-  requestPay(50000)
-}) 
-
-chargeBox4.addEventListener('click', () => {
   requestPay(100000)
 }) 
 
+chargeBox4.addEventListener('click', () => {
+  requestPay(300000)
+}) 
+
 chargeBox5.addEventListener('click', () => {
-  requestPay(200000)
+  requestPay(500000)
 }) 
 
 chargeBox6.addEventListener('click', () => {
-  requestPay(300000)
+  requestPay(1000000)
 }) 
 
 
