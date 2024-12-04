@@ -48,12 +48,12 @@
                 <td>상품 명</td>
                 <td>선택 등급/색/용량</td>
                 <td>주문 일자</td>
-                <td>배송 상태</td>
+                <td>현재 상태</td>
               </tr>
             </thead>
             <tbody class="listView">
               
-              <tr class="tr-container" th:each= "listView:${listView}">
+             <!--  <tr class="tr-container" th:each= "listView:${listView}">
                 <td th:text="${listView.orderNo}" class="orderNo">20</td>
                 <td th:text="${listView.memberNo}">12</td>
                 <td th:text="${listView.memberId}">TEST</td>
@@ -68,7 +68,7 @@
                 <td th:text="${listView.orderDate}">2222/22/22</td>
                 <td>
                     <select name="" id="" class="select-btn">
-                      <option th:text="|===현재상태: ${listView.orderStatusContent}===|" class="select-option-btn"></option>
+                      <option th:text="|===${listView.orderStatusContent}===|" class="select-option-btn"></option>
                       <option value="0" class="select-option-btn">해당없음</option>
                       <option value="4" class="select-option-btn">접수중</option>
                       <option value="5" class="select-option-btn">입금완료</option>
@@ -77,7 +77,7 @@
                     </select>
 
                 </td>
-              </tr>
+              </tr> -->
 
 
 

@@ -13,7 +13,7 @@
     <td th:text="${listView.orderDate}">2222/22/22</td>
     <td>
         <select name="" id="" class="select-btn">
-            <option value="0" th:text="|===현재상태: ${listView.orderStatusContent}===|" class="select-option-btn"></option>
+            <option value="0" th:text="|===${listView.orderStatusContent}===|" class="select-option-btn"></option>
             <option value="4" class="select-option-btn">접수중</option>
             <option value="5" class="select-option-btn">입금완료</option>
             <option value="2" class="select-option-btn">배송중</option>

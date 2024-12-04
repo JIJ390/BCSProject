@@ -34,7 +34,6 @@ main {
     background-color: #D9D9D9;
     margin: 0 auto;
     align-items: center;
-    display: flex;
     flex-direction: column;
 }
 
@@ -65,7 +64,7 @@ main {
     margin-top: 100px;
     background-color: #fff;
     border-radius: 30px;
-    width: 1400px;
+    width: 100%;
     height: max-content;
 }
 
