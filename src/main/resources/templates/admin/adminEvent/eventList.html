@@ -8,7 +8,7 @@
       th:data-event-content="${event.eventContent}"
       th:data-event-img="${event.eventImage}"
       >
-      <img th:src="${event.eventImage}" style="width: 100%;height: 90%; border: 1px solid black;"></img>
+      <img th:src="${event.eventThumbnail}" style="width: 100%;height: 90%; border: 1px solid black;"></img>
       <p style="text-align: center;" th:text="${event.eventTitle}"> 이벤트 제목 </p>
     </div>
   </th:block>

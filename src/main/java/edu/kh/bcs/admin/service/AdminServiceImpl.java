@@ -389,14 +389,14 @@ public class AdminServiceImpl implements AdminService {
 		
 		try {
     	
-      File originalImage = new File(img.getOriginalFilename());
-      originalImage.createNewFile();
+//    File originalImage = new File(folderPath + eventImage.getOriginalFilename());
+    File originalImage = new File(folderPath + originalRename);
+    originalImage.createNewFile();
       
-      //  MultipartFile을 file 로 변환하기
+    //  MultipartFile을 file 로 변환하기
     FileOutputStream fos = new FileOutputStream(originalImage);
     fos.write(img.getBytes());
     fos.close();
-      
       
       File resizedImage = new File(folderPath + thumbRename);
       
@@ -425,19 +425,19 @@ public class AdminServiceImpl implements AdminService {
 		int result = mapper.eventUpdate(url1, url2, eventNo);
 		
 		if (result == 0) return 0;
-		try {
-			// C에 폴더가 없으면 생성
-			File folder = new File(folderPath);
-			if (!folder.exists())
-				folder.mkdirs();
-
-		
-			
-			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
-			img.transferTo(new File(folderPath + originalRename));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			// C에 폴더가 없으면 생성
+//			File folder = new File(folderPath);
+//			if (!folder.exists())
+//				folder.mkdirs();
+//
+//		
+//			
+//			// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+//			img.transferTo(new File(folderPath + originalRename));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		return 0;
 	}

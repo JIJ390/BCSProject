@@ -51,12 +51,29 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
     // -> 연결된 클라이언트를 목록화
 //  	log.info("클라이언트 연결 : {} ", session.getId() );
     sessions.add(session);
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
+    System.out.println("클라이언트 연결됨");
   }
 
   // 클라이언트와의 연결이 종료 되었을 때
   @Override
   public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
     sessions.remove(session); // 목록에서 제거
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
+    System.out.println("연결 끊김");
     System.out.println("연결 끊김");
   }
 

@@ -539,6 +539,7 @@ const getMyMessageBtn = () => {
       const a = document.createElement("a")
       a.href = "/deviceSellList"
       a.innerText = "바로가기" 
+      a.style.color= "magenta"
       div.append(a);
       div.classList.add("chatting-left")
 

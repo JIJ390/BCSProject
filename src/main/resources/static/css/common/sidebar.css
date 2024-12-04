@@ -6,6 +6,7 @@
   position: fixed;
   bottom: 70px;
   right: 70px;
+  z-index: 400;
 
   /* overflow: hidden; */
   background-color: #1d1d1f;
@@ -72,9 +73,11 @@
   transition: 0.1s;
 
   padding: 0px !important;
+  cursor: pointer;
 }
 
 .sidebar-profile-loginBtn {
+  cursor: pointer;
   border: 0;
   border-radius: 10px;
   background-color: rgb(71, 71, 71);
@@ -88,6 +91,7 @@
 }
 
 .sidebar-profile-updateBtn:hover {
+  cursor: pointer;
   border: 0;
   border-radius: 10px;
   background-color: rgb(214, 214, 214);
@@ -101,6 +105,7 @@
 }
 
 .sidebar-profile-loginBtn:hover {
+  cursor: pointer;
   border: 0;
   border-radius: 10px;
   background-color: rgb(214, 214, 214);
@@ -217,6 +222,8 @@
   color: rgb(165, 165, 165);
   text-align: start;
   padding-left: 10px;
+
+  cursor: pointer;
 }
 
 .sidebar-messageBtn:hover {
@@ -230,15 +237,19 @@
   transition: 0.2s;
   text-align: start;
   padding-left: 10px;
+
+  cursor: pointer;
 }
 
 .sidebar-div-footer>div {
   width: 33%;
   color: rgb(177, 177, 177);
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .sidebar-div-footer>div:hover {
+  cursor: pointer;
   width: 33%;
   color: rgb(255, 255, 255);
   transition: 0.3s;
@@ -489,9 +500,11 @@
   display: flex;
   margin-bottom: 10px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .chatting-admin-area:hover {
+  cursor: pointer;
   width: 95%;
   height: 70px;
   border-radius: 10px;

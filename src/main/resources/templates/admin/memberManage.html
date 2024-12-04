@@ -53,6 +53,8 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
+
+      cursor: pointer;
     }
 
     .member-manage-row>span {
@@ -235,6 +237,10 @@
         <p class="admin-member-detail-name"></p>
       </div>
       <div>
+        <p>아이디</p>
+        <p class="admin-member-detail-id"></p>
+      </div>
+      <div>
         <p>이메일</p>
         <p class="admin-member-detail-email"></p>
       </div>
@@ -270,6 +276,7 @@
         <p>판매 횟수</p>
         <p class="admin-member-detail-sell"></p>
       </div>
+
     </div>
   
     <div class="member-mamage-body">
@@ -397,6 +404,7 @@
           document.querySelector(".admin-member-detail-point").innerText = data.dataset.memberPoint;
           document.querySelector(".admin-member-detail-adminfl").innerText = data.dataset.memberFl;
           document.querySelector(".admin-member-detail-tel").innerText = data.dataset.memberTel;
+          document.querySelector(".admin-member-detail-id").innerText = data.dataset.memberId;
 
           const memberNo = data.dataset.memberNo;
 
