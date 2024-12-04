@@ -43,7 +43,7 @@
                             <td>상품 명</td>
                             <td>선택 등급/색/용량</td>
                             <td>주문 일자</td>
-                            <td>배송 상태</td>
+                            <td>현재 상태</td>
                         </tr>
                     </thead>
                     <tbody class="listView">
@@ -63,7 +63,7 @@
                             <td th:text="${listView.orderDate}">2222/22/22</td>
                             <td>
                                 <select name="" id="" class="select-btn">
-                                    <option th:text="|===현재상태: ${listView.orderStatusContent}===|"
+                                    <option th:text="|===${listView.orderStatusContent}===|"
                                         class="select-option-btn"></option>
                                     <option value="0" class="select-option-btn">해당없음</option>
                                     <option value="4" class="select-option-btn">접수중</option>

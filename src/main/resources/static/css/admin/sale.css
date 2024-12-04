@@ -1,13 +1,20 @@
-:root{
-  --main-color : rgba(0, 255, 156, 1);        /* 사이트 대표 컬러 */
-  --main-gray-color : rgba(240, 240, 240, 1); /* 어두운 페이지 배경색 */
-  --white-color : white;                      /* 흰색 */
+:root {
+  --main-color: rgba(0, 255, 156, 1);
+  /* 사이트 대표 컬러 */
+  --main-gray-color: rgba(240, 240, 240, 1);
+  /* 어두운 페이지 배경색 */
+  --white-color: white;
+  /* 흰색 */
 
-  --font-color : rgba(29, 29, 31, 1);         /* 글자색 */
-  --font-gray-color : rgba(110, 110, 115, 1); /* 글자 옅은 회색 */
+  --font-color: rgba(29, 29, 31, 1);
+  /* 글자색 */
+  --font-gray-color: rgba(110, 110, 115, 1);
+  /* 글자 옅은 회색 */
 }
 
-html, body, main {
+html,
+body,
+main {
   width: 1600px;
   height: 100%;
   background-color: #D9D9D9;
@@ -16,25 +23,26 @@ html, body, main {
 
 
 
-.td-grade{
+.td-grade {
   display: flex;
   justify-content: center
 }
 
-.head{
+.head {
   display: flex;
   width: 100%;
   position: relative;
   left: 30px;
   font-size: 70px;
-  
+
 }
-.head > a{
+
+.head>a {
   text-decoration-line: none;
   color: red;
 }
 
-.delivery-list{
+.delivery-list {
   display: flex;
   flex-direction: column;
 
@@ -50,26 +58,28 @@ html, body, main {
 
 
 
-.list-category{
+.list-category {
   width: 100%;
 }
-thead{
+
+thead {
   font-weight: bold;
 }
 
-.text-list{
+.text-list {
   width: 100%;
 }
 
-.list-box{
+.list-box {
   width: 100%;
 }
 
 
-td{
+td {
   text-align: center;
 }
-.title{
+
+.title {
   display: flex;
   width: 100%;
   height: 10%;
@@ -80,15 +90,15 @@ td{
 
 
 
-.filter-list{
+.filter-list {
   display: flex;
   font-weight: bold;
   width: 80%;
   justify-content: space-around;
-  
+
 }
 
-.box-title{
+.box-title {
   display: flex;
   flex-direction: row;
   width: 90%;
@@ -98,42 +108,42 @@ td{
 
 }
 
-table{
+table {
   border-top: 3px solid black;
   padding: 30px;
 }
 
-tr{
+tr {
   font-size: 20px;
 }
 
-td > a{
+td>a {
   color: rgb(54, 115, 202);
   text-decoration-line: none;
 }
 
 
-input{
+input {
   border: none;
-  
+
 }
 
-.deliverylive{
+.deliverylive {
   border: none;
   background: none;
 }
 
-.tr-board{
+.tr-board {
   border: 3px solid black;
   background-color: #97fc85;
 }
 
 
-ul{
+ul {
   position: absolute;
 }
 
-.status{
+.status {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -145,11 +155,14 @@ ul{
   background-color: var(--main-gray-color);
   cursor: pointer;
 }
-.list-btn{
+
+.list-btn {
   cursor: pointer;
   justify-content: center;
 }
-.list-btn, .arrow {
+
+.list-btn,
+.arrow {
   display: inline-block;
 }
 
@@ -166,7 +179,7 @@ li {
   margin: 15px;
 }
 
-table{
+table {
   width: 100%;
 }
 
@@ -179,11 +192,13 @@ table{
   font-size: 15px;
   padding: 15px;
 }
-.content-box{
+
+.content-box {
   width: 100%;
 
 }
-.content{
+
+.content {
   width: 90%;
 }
 
@@ -196,37 +211,61 @@ table{
 
 
 /* ========================== */
-.adminSalePagination{
+.adminSalePagination {
   width: 100%;
   height: 150px;
   display: flex;
   justify-content: center;
-  align-items:  center;
+  align-items: center;
 }
-.adminSalePagination > button{
+
+.adminSalePagination>button {
   width: 40px;
   height: 40px;
   border: 0;
   background-color: white;
   font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.adminSalePagination > div{
+
+.adminSalePagination>div {
   width: 40px;
   height: 40px;
   border: 0;
   background-color: white;
-  display: flex
-;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.adminSalePagination > div > button{
-width: 40px;
-height: 40px;
-border: 0;
-background-color: white;
-font-size: 25px;
-display: flex;
-justify-content: center;
-align-items: center;
+
+.adminSalePagination>div>button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-color: white;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.topBtn {
+  width: 70px;
+  height:70px;
+  background-color: bisque;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.topBtn > p {
+  font-size: 20px;
+  color: rgba(1, 194, 253, 0.651);
+  align-items: center;
 }

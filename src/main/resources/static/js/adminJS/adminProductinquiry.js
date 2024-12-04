@@ -65,6 +65,10 @@ const adminProductPageNation = () => {
             document.querySelector(".adminSalePagination").innerHTML = result;
             getEventPageMoveClick()
             getEventPageNumClick()
+            const cpUnderLine = (cp - 1) % 5;
+            const pnValue = document.querySelectorAll(".pnValue");
+  
+            pnValue[cpUnderLine].style.borderBottom = '2px solid black';
         })
 }
 
