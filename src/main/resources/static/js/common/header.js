@@ -241,3 +241,13 @@ document.querySelectorAll(".dropdownContainor").forEach((dropdown) => {
 });
 
 
+// 검색 공백일 경우
+document.getElementById("searchDevice").addEventListener("submit", function (event) {
+    const searchInput = document.getElementById("searchInput").value.trim();
+    if (searchInput === "") {
+        alert("검색어를 입력해주세요.");
+        event.preventDefault(); // 폼 제출 방지
+    }
+});
+
+
