@@ -52,3 +52,6 @@ faqDivs.forEach((faqDiv, index) => {
   })
 })
 
+
+
+
