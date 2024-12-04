@@ -317,7 +317,7 @@ public class DeviceListController {
 		
 		String trimmedQuery = query.trim();
 		
-      log.debug("trimmedQuery {} : ", trimmedQuery);
+//      log.debug("trimmedQuery {} : ", trimmedQuery);
 		
       List<Device> searchResults = service.searchDevices(trimmedQuery);
 

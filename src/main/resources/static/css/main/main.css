@@ -155,9 +155,13 @@ a {
 
 .slide {
   min-width: 100%;
+  min-height: 100%; /* 슬라이드 높이 */
   box-sizing: border-box;
-  background-size: 100vw;
+  background-size: cover; /* 이미지를 슬라이드에 맞게 크기 조정 */
+  background-position: center; /* 이미지를 슬라이드의 중심에 배치 */
+  background-repeat: no-repeat; /* 이미지 반복 방지 */
 }
+
 
 
 .slideFont1{

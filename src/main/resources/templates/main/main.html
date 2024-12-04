@@ -22,7 +22,7 @@
       <div class="slides">
 
         <th:block th:if="${bannerList}" th:each="banner:${bannerList}" th:object="${banner}">
-          <div class="slide" th:style="'background-image : url(' + *{mainBannerImg} + '); background-size : cover;'">
+          <div class="slide" th:style="'background-image : url(' + *{mainBannerImg} + ');'">
             <div class="slideFont1" th:classappend="*{mainBannerCheck} ? ' left-font' : ' right-font'">
                 <span class="fontBanner bannerTitle" th:text="*{mainBannerTitle}" th:classappend="*{mainBannerColor} ? 'black-font' : 'white-font'"></span>
                 <div class="fontBanner bannerContent" th:text="*{mainBannerContent}" th:classappend="*{mainBannerColor} ? 'black-font' : 'white-font'"></div>
