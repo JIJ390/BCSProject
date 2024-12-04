@@ -176,7 +176,9 @@ const getChatContent = () => {
           }
           document.querySelector(".chat-message-backup").innerHTML = backUpStr;
         }
+        if(notificationLoginCheck == true){
           getAdminChatList();
+        }
 
       }, 100);
       sidebarViewType = 2;

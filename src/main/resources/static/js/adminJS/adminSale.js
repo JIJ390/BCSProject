@@ -242,4 +242,5 @@ const getEventPageNumClick = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     adminSalePageNation()
+    adminSalePage()
 })
