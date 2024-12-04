@@ -92,9 +92,9 @@
               <li><a href="#">&gt;&gt;</a></li>
           </ul>
       </div> 
-      <div class="eventWrite">
+<!--       <div class="eventWrite">
         <div class="writeBtn">이벤트 작성 예시</div>
-      </div>
+      </div> -->
       </div>
 
     </section>
@@ -115,6 +115,9 @@
     window.addEventListener("resize", movePageIngo);
 
     movePageIngo();
+  </script>
+    <script th:inline="javascript">
+      const pagination = /*[[${pagination}]]*/ "페이지네이션객체";
   </script>
 </body>
 </html>

@@ -11,11 +11,22 @@ pageNoList?.forEach((item, index) => {
 
     const pathname = location.pathname;
 
+    let prevPage = Number(pagination.currentPage) - 1
+    let nextPage = Number(pagination.currentPage) + 1
+
+    if (pagination.currentPage == 1) {
+      prevPage = 1;
+    }
+
+    if (pagination.currentPage == pagination.maxPage) {
+      nextPage = pagination.maxPage;
+    }
+
     // 클릭 버튼 << , < , > , >> 일 때 
     switch(item.innerText){
       case '<<' : location.href = pathname + "?cp=1"; break;
-      case '<'  : location.href = pathname + "?cp=" + pagination.prevPage; break;
-      case '>'  : location.href = pathname + "?cp=" + pagination.nextPage; break;
+      case '<'  : location.href = pathname + "?cp=" + prevPage; break;
+      case '>'  : location.href = pathname + "?cp=" + nextPage; break;
       case '>>' : location.href = pathname + "?cp=" + pagination.maxPage; break;
       default : location.href = pathname + "?cp=" + item.innerText; // 클릭 페이지 이동
     }
@@ -44,10 +55,10 @@ faqDivs.forEach((faqDiv, index) => {
 // -------------------------------------------
 
 // event 작성하기
-const eventWrite = document.querySelector(".writeBtn");
+/* const eventWrite = document.querySelector(".writeBtn");
 
 eventWrite.addEventListener("click", ()=>{
   location.href = '/help/eventWriteView';
 })
 
-console.log(eventList);
+console.log(eventList); */
