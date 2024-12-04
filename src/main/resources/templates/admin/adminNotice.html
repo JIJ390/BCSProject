@@ -53,6 +53,12 @@
               </tr>
             </thead>
             <tbody>
+              <tr th:if="${#lists.isEmpty(noticeList)}">
+                <td colspan="5" style="color: var(--font-gray-color);">
+                  조회된 공지가 없습니다
+                </td>
+              </tr>
+
               <th:block th:each= "notice:${noticeList}" th:object="${notice}">
                 <tr>
                   <td th:text="*{noticeNumber}"></td>
@@ -102,7 +108,9 @@
     <!-- <section class="right-section">
       라이트 섹션
     </section>  -->
+
   </main>
+  <th:block th:replace="~{common/footer}"></th:block>
 
   <script th:inline="javascript">
 
@@ -112,13 +120,6 @@
   <script src="/js/adminJS/adminNotice.js"></script>
 
   
-  <script th:inline="javascript">
-    const message =  /*[[${message}]]*/ "전달 받은 message";
-  
-    if(message != null) alert(message);
-  </script>
-  
-
 </body>
 
 </html>
