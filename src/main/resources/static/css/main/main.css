@@ -300,7 +300,7 @@ a {
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 650px;
+  min-width: 500px;
 }
 .a3{
   display: flex;
@@ -308,7 +308,7 @@ a {
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: 620px;
+  min-width: 500px;
 }
 
 .viewer1{
