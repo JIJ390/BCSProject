@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 수정</title>
+  <link rel="stylesheet" href="/css/admin/header.css">
+  <link rel="stylesheet" href="/css/admin/adminNoticeWriteView.css">
+</head>
+
+<body>
+
+
+
+  <div class="blur-box">
+    <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
+    <!-- Header -->
+    <th:block th:replace="~{common/header}"></th:block>
+  </div>
+  <main>
+    <!-- <section class="left-section">
+      레프트 섹션
+    </section> -->
+
+    <section class="main-section">
+
+      <div class="main-container">
+        <div class="page-head">
+          공지 수정
+        </div>
+        <hr>
+    
+        <!-- id 같게 함 -->
+        <form action="/admin/noticeUpdate" 
+              id="noticeUpdateFrm"
+              method="POST">
+
+          <input type="hidden" th:value="${notice.noticeNumber}" name="noticeNumber">
+    
+          <div>
+            <input type="text" placeholder="제목" name="noticeTitle" th:value="${notice.noticeTitle}">
+            <button id="noticeUpdateBtn">
+              수정하기
+            </button>
+
+          </div>
+          <textarea name="noticeContent" id="" placeholder="내용 작성" th:text="${notice.noticeContent}"></textarea>
+      
+   
+      
+    
+        </form>
+    
+      </div>
+    
+
+
+      <div class="back-btn">
+        목록으로
+      </div>
+    </section>
+
+    <!-- <section class="right-section">
+      라이트 섹션
+    </section>  -->
+  </main>
+
+
+  <script src="/js/adminJS/adminNoticeUpdateView.js"></script>
+</body>
+
+</html>

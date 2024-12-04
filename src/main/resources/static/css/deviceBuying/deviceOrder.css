@@ -238,6 +238,8 @@ hr {
   background-color: var(--main-gray-color);
 
   border: none;
+
+  resize: vertical;
 }
 
 .point-charge {

@@ -1,0 +1,210 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left-section, .main-section, .right-section {
+  margin-top: 150px;
+}
+
+hr {
+  width: 100%;
+}
+
+.main-container {
+  width: 1000px;
+  height: 500px;
+
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 20px;
+
+}
+
+.page-title {
+  width: 100%;
+
+  font-size: 40px;
+
+  font-weight: bold;
+
+  text-align: start;
+}
+
+.page-head {
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-head button {
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 20px;
+
+  background-color: var(--main-gray-color);
+  border: 2px solid var(--main-gray-color);
+
+}
+
+.page-head button:hover {
+
+
+  border: 2px solid var(--main-color);
+
+  cursor: pointer;
+}
+
+
+
+hr {
+  margin: 10px 0;
+}
+
+.notice-table {
+  width: 100%;
+
+  font-size: 20px;
+}
+
+thead > tr > th:first-child {
+  width: 10%;
+  height: 30px;
+}
+
+thead > tr > th:nth-child(2) {
+  width: 40%;
+}
+
+thead > tr > th:nth-child(3) {
+  width: 30%;
+}
+
+thead > tr > th:nth-child(4) {
+  width: 20%;
+}
+
+
+
+tbody > tr > td:first-child {
+  text-align: center;
+  width: 10%;
+  height: 30px;
+}
+
+tbody > tr > td:nth-child(2) {
+  text-align: center;
+  width: 40%;
+}
+
+tbody > tr > td:nth-child(3) {
+  text-align: center;
+  width: 30%;
+}
+
+tbody > tr > td:nth-child(4) {
+  text-align: center;
+  width: 10%;
+}
+
+tbody > tr > td:nth-child(5) {
+  text-align: center;
+  width: 10%;
+}
+
+tbody button {
+  width: 60px;
+  height: 24px;
+
+  background-color: var(--main-gray-color);
+  border: 2px solid var(--main-gray-color)
+
+}
+
+tbody button:hover {
+  width: 60px;
+  height: 24px;
+
+  border: 2px solid var(--main-color);
+
+  cursor: pointer;
+}
+
+.back-btn {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
+
+  margin: 30px 0;
+
+  width: 200px;
+  height: 40px;
+
+  background-color: white;
+  border: 2px solid var(--main-gray-color)
+}
+
+.back-btn:hover {
+
+
+  border: 2px solid var(--main-color);
+
+  cursor: pointer;
+}
+
+
+
+
+
+
+/* pagination-area css */
+
+.pagination{
+  margin: 20px auto;
+
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.pagination a{
+  text-decoration-line: none;
+  color: black;
+
+  line-height: 24px;
+
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.pagination a:hover {
+  cursor: pointer;
+}
+
+.current {
+
+  font-weight: bold;
+
+  text-decoration: underline;
+
+  width: 20px;
+
+}

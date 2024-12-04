@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import edu.kh.bcs.admin.service.AdminService;
-
+import edu.kh.bcs.common.dto.Pagination;
 import edu.kh.bcs.common.util.FileUtil;
 import edu.kh.bcs.device.dto.BuyingDevice;
 import edu.kh.bcs.device.dto.Capacity;
@@ -40,6 +40,7 @@ import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.device.service.DeviceSellingService;
 import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -1121,5 +1122,100 @@ public class AdminController {
 	
 	
 	
+	// 공지 관리 화면
+	@GetMapping("adminNotice")
+	public String adminNoticeView (
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			Model model) {
+		
+		Map<String, Object> map = service.selectNoticeList(cp);
+		
+		List<HelpDto> noticeList = (List<HelpDto>)map.get("noticeList");
+		Pagination noticePagination = (Pagination)map.get("pagination");
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("noticePagination", noticePagination);
+		
+		return "admin/adminNotice";
+	}
+	
+	
+	
+	
+	
+	// 공지 입력 화면 이동
+	@GetMapping("adminNoticeWriteView")
+	public String adminNoticeWriteView() {
+		
+		return "admin/adminNoticeWriteView";
+	}
+	
+	
+	// 공지 등록
+	@PostMapping("noticeInsert")
+	public String adminNoticeInsert(
+			@ModelAttribute HelpDto notice,
+			RedirectAttributes ra
+			) {
+		
+		int result = service.adminNoticeInsert(notice);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "공지가 등록되었습니다");
+		}
+		
+		return "redirect:/admin/adminNotice";
+	}
+	
+	
+	
+	@PostMapping("adminNoticeUpdateView")
+	public String adminNoticeUpdateView(
+			@RequestParam("noticeNumber") int noticeNumber,
+			Model model
+			) {
+		
+		HelpDto notice = service.adminNoticeUpdateView(noticeNumber);
+		
+		model.addAttribute("notice", notice);
+
+		return "admin/adminNoticeUpdateView";
+	}
+	
+	
+	@PostMapping("noticeUpdate")
+	public String adminNoticeUpdate (
+			@ModelAttribute HelpDto notice,
+			RedirectAttributes ra){
+		
+		int result = service.adminNoticeUpdate(notice);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "공지가 수정되었습니다");
+		}
+		
+		return "redirect:/admin/adminNotice";
+	}
+	
+	
+	
+	@PostMapping("adminNoticeDelete")
+	public String adminNoticeDelete (
+			@RequestParam("noticeNumber") int noticeNumber,
+			RedirectAttributes ra
+			) {
+		
+		int result = service.adminNoticeDelete(noticeNumber);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "공지가 삭제되었습니다");
+		}
+		
+	
+	
+		
+		return "redirect:/admin/adminNotice";
+		
+	}
 	
 }

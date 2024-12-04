@@ -1158,4 +1158,68 @@ WHERE SELLING_DEVICE_NO = #{orderNo}
 </select>
 
 
+
+
+	<select id="getNoticeListCount">
+		SELECT COUNT(*)
+		FROM "NOTICE"
+		WHERE NOTICE_NUMBER > 0
+		AND   NOTICE_DEL_FL = 'N'
+		ORDER BY NOTICE_NUMBER DESC
+	</select>
+	
+	
+	<select id="selectNoticeList">
+		SELECT *
+		FROM "NOTICE"
+		WHERE NOTICE_NUMBER > 0
+		AND   NOTICE_DEL_FL = 'N'
+		ORDER BY NOTICE_NUMBER DESC
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<insert id="adminNoticeInsert">
+		INSERT INTO "NOTICE"
+		VALUES (
+			SEQ_NOTICE_NO.NEXTVAL,
+			#{noticeTitle},
+			#{noticeContent},
+			DEFAULT,
+			DEFAULT
+		)
+	</insert>
+
+	<select id="adminNoticeUpdateView">
+		SELECT *
+		FROM "NOTICE"
+		WHERE NOTICE_NUMBER = #{noticeNumber}
+		AND   NOTICE_DEL_FL = 'N'
+	</select>
+	
+	
+	
+	<!-- 공지 수정 -->
+	<update id="adminNoticeUpdate">
+		UPDATE "NOTICE"
+		SET
+			NOTICE_TITLE = #{noticeTitle},
+			NOTICE_CONTENT = #{noticeContent}
+		WHERE 
+			NOTICE_NUMBER = #{noticeNumber}
+	</update>
+	
+	
+	
+	<update id="adminNoticeDelete">
+		UPDATE "NOTICE"
+		SET
+			NOTICE_DEL_FL = 'Y'
+		WHERE 
+			NOTICE_NUMBER = #{noticeNumber}
+	</update>
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -18,6 +19,7 @@ import edu.kh.bcs.device.dto.Order;
 import edu.kh.bcs.device.dto.reviewRNDto;
 import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
+import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import edu.kh.bcs.myPage.dto.Member;
 
@@ -316,6 +318,55 @@ public interface AdminMapper {
 	int statusChange(String orderNo);
 
 	int getDeviceResultCount(@Param("deviceNo")String deviceNo, @Param("searchText")String searchText);
+
+	
+	
+	
+	/**
+	 * 공지사항 목록 수
+	 * @return
+	 */
+	int getNoticeListCount();
+
+	
+	/***
+	 * 공지사항 목록
+	 * @param rowBounds
+	 * @return
+	 */
+	List<HelpDto> selectNoticeList(RowBounds rowBounds);
+
+	
+	/**
+	 * 공지 등록
+	 * @param notice
+	 * @return
+	 */
+	int adminNoticeInsert(HelpDto notice);
+
+	
+	/**
+	 * 공지	사항 수정 화면 불러오기
+	 * @param noticeNumber
+	 * @return
+	 */
+	HelpDto adminNoticeUpdateView(int noticeNumber);
+
+	
+	/**
+	 * 공지 사항 수정
+	 * @param notice
+	 * @return
+	 */
+	int adminNoticeUpdate(HelpDto notice);
+
+	
+	/**
+	 * 공지 삭제
+	 * @param noticeNumber
+	 * @return
+	 */
+	int adminNoticeDelete(int noticeNumber);
 
 
 

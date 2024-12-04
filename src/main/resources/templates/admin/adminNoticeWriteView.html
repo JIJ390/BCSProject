@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 등록</title>
+  <link rel="stylesheet" href="/css/admin/header.css">
+  <link rel="stylesheet" href="/css/admin/adminNoticeWriteView.css">
+</head>
+
+<body>
+
+
+
+  <div class="blur-box">
+    <div class="overlay"></div> <!-- 흐림 효과 오버레이 추가 -->
+    <!-- Header -->
+    <th:block th:replace="~{common/header}"></th:block>
+  </div>
+  <main>
+    <!-- <section class="left-section">
+      레프트 섹션
+    </section> -->
+
+    <section class="main-section">
+
+      <div class="main-container">
+        <div class="page-head">
+          공지 등록
+
+        </div>
+        <hr>
+    
+        <form action="/admin/noticeInsert" 
+              id="noticeInsertFrm"
+              method="POST">
+    
+          <div>
+            <input type="text" placeholder="제목" name="noticeTitle">
+            <button id="noticeInsertBtn">
+              등록하기
+            </button>
+
+          </div>
+          <textarea name="noticeContent" id="" placeholder="내용 작성"></textarea>
+      
+   
+      
+    
+        </form>
+    
+      </div>
+    
+
+
+      <div class="back-btn">
+        목록으로
+      </div>
+    </section>
+
+    <!-- <section class="right-section">
+      라이트 섹션
+    </section>  -->
+  </main>
+
+
+
+  <script src="/js/adminJS/adminNoticeWriteView.js"></script>
+</body>
+
+</html>
