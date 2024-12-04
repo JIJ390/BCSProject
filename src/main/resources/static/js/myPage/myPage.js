@@ -1052,4 +1052,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 })
 
+/* 회원가입버튼 */
+const signUpBtn = document.querySelector(".signUpBtn")
 
+signUpBtn.addEventListener("click", ()=>{
+
+  location.href = "/signUp/signUpAccount";
+
+})
