@@ -531,6 +531,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// 검색 공백일 경우
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("searchSellDevice");
 
+  if (!form) {
+      console.error("폼이 존재하지 않습니다.");
+      return;
+  }
 
+  form.addEventListener("submit", function (event) {
+      const searchSellInputElement = document.getElementById("searchSellInput");
 
+      if (!searchSellInputElement) {
+          console.error("검색 입력 필드가 존재하지 않습니다.");
+          event.preventDefault(); // 폼 제출 방지
+          return;
+      }
+
+      const searchSellInput = searchSellInputElement.value.trim();
+      if (searchSellInput === "") {
+          alert("검색어를 입력해주세요.");
+          event.preventDefault(); // 폼 제출 방지
+      }
+  });
+});
