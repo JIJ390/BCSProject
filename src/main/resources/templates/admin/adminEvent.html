@@ -10,7 +10,7 @@
       width: 200px;
       height: 200px;
       margin: 0 60px;
-
+      cursor: pointer;
     }
 
     .event-list {
@@ -32,6 +32,7 @@
       height: 50px;
       margin: 20px;
       font-size: 20px;
+      cursor: pointer;
     }
 
     .add-event-popup {
@@ -56,6 +57,7 @@
       border: 0;
       margin: 10px;
       background-color: white;
+      cursor: pointer;
     }
 
     .update-event-popup-X {
@@ -65,6 +67,7 @@
       border: 0;
       margin: 10px;
       background-color: white;
+      cursor: pointer;
     }
 
     .add-event-popup-content {
@@ -138,10 +141,11 @@
       border: 0;
       background-color: white;
       font-size: 20px;
-
+      cursor: pointer;
     }
-
+    
     .event-pagenation>div>button {
+      cursor: pointer;
 
       width: 30px;
       height: 30px;
@@ -185,6 +189,7 @@
       font-size: 20px;
       border-radius: 10px;
       border: 1px solid gray;
+      resize: none;
     }
 
     .eventInputFile {
@@ -279,7 +284,7 @@
           style="width: 600px; height: 300px; border: 1px solid black; margin-bottom: 15px;" src="" alt=""></div>
 
       <div>
-        <input type="file" id="file" style="display: none;" onchange="eventThumbnailUpload1(this)">
+        <input type="file" id="file" style="display: none;" accept="image/jpeg, image/png" onchange="eventThumbnailUpload1(this)">
         <label for="file" class="eventInputFile">변경할 이미지 선택</label>
         <button class="update-event-img-btn">변경하기</button>
       </div>
@@ -287,8 +292,9 @@
       <div><input type="text" class="update-event-title" value="이벤트 제목"><button
           class="update-event-title-btn">변경하기</button></button>
       </div>
-      <div><input type="text" class="update-event-content" value="이벤트 내용"><button
-          class="update-event-content-btn">변경하기</button></button>
+      <div>
+        <textarea class="update-event-content" value="이벤트 내용"></textarea>
+        <button class="update-event-content-btn">변경하기</button></button>
       </div>
       <div>
         <p class="update-event-date">2022-11-11에 등록됨</p>
@@ -384,6 +390,13 @@
     addEventPopupX.addEventListener("click", () => {
       eventAddPopup.classList.add("add-event-popup-hidden")
       document.querySelector('body').style.pointerEvents = 'auto';
+
+      document.querySelector(".event-title").value = '';
+      document.querySelector(".eventContent").value = '';
+      const thumbnail = document.querySelector(".preview");
+      thumbnail.src = '/images/help/파일업로드.png';
+      imgUrl = "/images/help/파일업로드.png";
+      document.querySelector(".eventImage1").value = '';
     })
 
     /* 이벤트 수정 팝업 열기/닫기 */
@@ -452,6 +465,8 @@
         alert("내용 입력")
         e.preventDefault();
       }
+
+      // document.querySelector(".eventImage1").value = '';
 
     })
 

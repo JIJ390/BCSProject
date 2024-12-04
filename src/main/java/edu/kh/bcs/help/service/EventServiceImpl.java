@@ -63,7 +63,8 @@ public class EventServiceImpl implements EventService {
 	
 	        try {
 	        	
-		        File originalImage = new File(eventImage.getOriginalFilename());
+//		        File originalImage = new File(folderPath + eventImage.getOriginalFilename());
+		        File originalImage = new File(folderPath + originalRename);
 		        originalImage.createNewFile();
 		        
 		        //  MultipartFile을 file 로 변환하기
@@ -120,20 +121,20 @@ public class EventServiceImpl implements EventService {
 				return eventNo;
 			}
 
-			try {
-				// C에 폴더가 없으면 생성
-				File folder = new File(folderPath);
-				if (!folder.exists())
-					folder.mkdirs();
-
-			
-				
-				// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
-				eventImage.transferTo(new File(folderPath + originalRename));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+//			try {
+//				// C에 폴더가 없으면 생성
+//				File folder = new File(folderPath);
+//				if (!folder.exists())
+//					folder.mkdirs();
+//
+//			
+//				
+//				// 업로드되어 임시저장된 이미지를 지정된 경로에 옮기기
+//				eventImage.transferTo(new File(folderPath + originalRename));
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			
 			
 			
 		}
