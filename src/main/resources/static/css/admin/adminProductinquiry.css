@@ -27,14 +27,15 @@
     scale: 0.9;
 }
 
-html,
-body,
-main {
-    width: 1600px;
+.main-container {
+    width: 1600px !important;
+
     background-color: #D9D9D9;
     margin: 0 auto;
     align-items: center;
     flex-direction: column;
+
+    margin-bottom: 100px;
 }
 
 *{
