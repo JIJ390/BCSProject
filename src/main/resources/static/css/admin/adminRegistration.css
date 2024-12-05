@@ -47,10 +47,6 @@
     
 }
 
-.pwChangeForm{
-    
-}
-  
 
 .registration {
     /* display: flex
@@ -168,12 +164,18 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
 }
 
 ul li {
     padding: 5px;
     width: 220px;
-    /* border: 1px solid #ddd; */
+    border: 1px solid #ddd;
     margin-bottom: 5px;
     cursor: pointer;
 }
@@ -188,9 +190,6 @@ ul li {
 
 
 
-ul li:hover {
-   
-}
 
 /* 버튼 */
 button {
