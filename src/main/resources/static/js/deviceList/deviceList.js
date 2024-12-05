@@ -42,6 +42,8 @@ const selectFilterList = (filterType) => {
     .then(list => {
       // console.log("중복 제거 전 데이터:", list);
 
+
+
       // 중복 제거 및 정렬
       const uniqueList = [...new Set(list)];
       uniqueList.sort((a, b) => {
@@ -55,6 +57,11 @@ const selectFilterList = (filterType) => {
       });
 
       console.log("중복 제거 후 정렬된 데이터:", uniqueList);
+
+
+      const filterItems = document.querySelector(".filter-items")
+
+      
 
       // 필터 항목 초기화
       filterItem.innerHTML = "";
@@ -181,12 +188,40 @@ const convertToGB = (size) => {
 
 // 필터 버튼 클릭 이벤트
 document.querySelector("#ram-filter").addEventListener("click", () => {
+  
+    if(brand === undefined){
+      alert("브랜드를 선택해 주세요")
+      return;
+    } 
+
+
   selectFilterList("ram");
 });
+
+
 document.querySelector("#hdd-filter").addEventListener("click", () => {
+  
+  if(brand === undefined){
+    alert("브랜드를 선택해 주세요")
+    return;
+  } 
+
+
+
   selectFilterList("hdd");
 });
+
+
 document.querySelector("#inch-filter").addEventListener("click", () => {
+  
+  if(brand === undefined){
+    alert("브랜드를 선택해 주세요")
+    return;
+  } 
+
+
+
+
   selectFilterList("inch");
 });
 
@@ -427,7 +462,5 @@ dataBrand.forEach(filter => {
   })
 })
 
+const filterItems = document.querySelector(".filter-items")
 
-
-
-  
