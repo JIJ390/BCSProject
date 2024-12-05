@@ -1,7 +1,6 @@
 package edu.kh.bcs.deviceList.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import edu.kh.bcs.deviceList.mapper.DeviceListMapper;
 import edu.kh.bcs.help.dto.MainBannerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import oracle.net.aso.c;
 
 @Slf4j
 @Service
