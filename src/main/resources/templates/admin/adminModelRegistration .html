@@ -22,7 +22,7 @@
                 <div class="main-img">
                     <img src="" class="preview">
                 </div>
-                <input type="file" class="input-img" name="divceImg">
+                <input type="file" class="input-img" name="divceImg" id="main-device">
                 <span class="delete_image">&times;</span>
             </div>
         </div>
@@ -34,10 +34,10 @@
                 <div class="main-color-first">
                     <div class="main-color-in-radios">
                         <div class="main-img">
-                            <img src="" class="preview">
+                            <img src="" class="preview" >
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color1">
                             <span class="delete_image">1 &times;</span>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <img src="" class="preview">
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color2">
                             <span class="delete_image">2 &times;</span>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <img src="" class="preview">
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color3">
                             <span class="delete_image">3 &times;</span>
                         </div>
                     </div>
@@ -65,17 +65,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="1. ex.검정색">
-                            <input type="text" name="colorName" placeholder="2. ex.검정색">
-                            <input type="text" name="colorName" placeholder="3. ex.검정색">
+                            <input type="text" name="colorName" placeholder="1. ex.검정색" id="colorText1">
+                            <input type="text" name="colorName" placeholder="2. ex.검정색" id="colorText2">
+                            <input type="text" name="colorName" placeholder="3. ex.검정색" id="colorText3">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="1. ex.#0000">
-                            <input type="text" name="colorCode" placeholder="2. ex.#0000">
-                            <input type="text" name="colorCode" placeholder="3. ex.#0000">
+                            <input type="text" name="colorCode" placeholder="1. ex.#0000" id="colorCode1">
+                            <input type="text" name="colorCode" placeholder="2. ex.#0000" id="colorCode2">
+                            <input type="text" name="colorCode" placeholder="3. ex.#0000" id="colorCode3">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -87,7 +87,7 @@
                             <img src="" class="preview">
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color4">
                             <span class="delete_image">4 &times;</span>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                             <img src="" class="preview">
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color5">
                             <span class="delete_image">5 &times;</span>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                             <img src="" class="preview">
                         </div>
                         <div>
-                            <input type="file" class="input-img" name="colorImg">
+                            <input type="file" class="input-img" name="colorImg" id="color6">
                             <span class="delete_image">6 &times;</span>
                         </div>
                     </div>
@@ -114,17 +114,17 @@
                         <div>
                             이름 :
                             <!-- 색 이름 -->
-                            <input type="text" name="colorName" placeholder="4. ex.검정색">
-                            <input type="text" name="colorName" placeholder="5. ex.검정색">
-                            <input type="text" name="colorName" placeholder="6. ex.검정색">
+                            <input type="text" name="colorName" placeholder="4. ex.검정색" id="colorText4">
+                            <input type="text" name="colorName" placeholder="5. ex.검정색" id="colorText5">
+                            <input type="text" name="colorName" placeholder="6. ex.검정색" id="colorText6">
                         </div>
                         <hr>
                         <div>
                             색상코드 :
                             <!-- 색상 코드 -->
-                            <input type="text" name="colorCode" placeholder="4. ex.#0000">
-                            <input type="text" name="colorCode" placeholder="5. ex.#0000">
-                            <input type="text" name="colorCode" placeholder="6. ex.#0000">
+                            <input type="text" name="colorCode" placeholder="4. ex.#0000" id="colorCode4">
+                            <input type="text" name="colorCode" placeholder="5. ex.#0000" id="colorCode5"> 
+                            <input type="text" name="colorCode" placeholder="6. ex.#0000" id="colorCode6">
                         </div>
                         <p>*색상이 존재하지않으면 빈칸.</p>
                     </div>
@@ -183,46 +183,46 @@
                 <!-- 입력할 값 -->
                 <div class="main-content-left">
                     <!-- 출시일 -->
-                    <input type="text" name="deviceReleaseDate" placeholder="_띄어쓰기 없이 (YYYY-MM-DD)">
+                    <input type="text" name="deviceReleaseDate" placeholder="(_)띄어쓰기 없이 (YYYYMMDD)" id="deviceReleaseDate">
 
                     <!-- 출고가 -->
-                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외">
+                    <input type="text" name="deviceReleasePrice" placeholder="ex. 1000000  ,제외" id="deviceReleasePrice">
 
                     <!-- 운영체제 -->
-                    <input type="text" name="deviceOs" placeholder="ex. ios 00">
+                    <input type="text" name="deviceOs" placeholder="ex. ios 100" id="deviceOs">
 
                     <!-- 해상도 -->
-                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080">
+                    <input type="text" name="deviceResolution" placeholder="ex. 1920x1080" id="deviceResolution">
 
                     <!-- 기종 화소 밀도 -->
-                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display">
+                    <input type="text" name="devicePixel" placeholder="ex. 6.1인치 19.5:9 비율 Super Retina XDR Display" id="devicePixel">
 
                     <!-- 기종 전면 화소 -->
-                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만">
+                    <input type="text" name="deviceFrontPixel" placeholder="ex. 1,000만" id="deviceFrontPixel">
 
                     <!-- 기종 후면 화소 -->
-                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만">
+                    <input type="text" name="deviceBackPixel" placeholder="ex. 1,200만 / 4,800만" id="deviceBackPixel">
 
                     <!-- 기종 무게 -->
-                    <input type="text" name="deviceWeight" placeholder="ex. 100 g">
+                    <input type="text" name="deviceWeight" placeholder="ex. 100 g" id="deviceWeight">
 
                     <!-- 배터리 용량 -->
-                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh">
+                    <input type="text" name="deviceBatteryCapacity" placeholder="ex. 3,000mAh" id="deviceBatteryCapacity">
 
                     <!-- 디바이스 이름 -->
-                    <input type="text" name="deviceName" placeholder="ex. iPhone 16">
+                    <input type="text" name="deviceName" placeholder="ex. iPhone 16" id="deviceName">
 
                     <!-- 디바이스 한글 이름 -->
-                    <input type="text" name="deviceNameKor" placeholder="ex. 아이폰 16">
+                    <input type="text" name="deviceNameKor" placeholder="ex. 아이폰 16" id="deviceNameKor">
 
                     <!-- 내폰사기 -->
-                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000">
+                    <input type="text" name="deviceBuyingPrice" placeholder="관리자가 판매할 가격 ex. 1000000" id="deviceBuyingPrice">
 
                     <!-- 내폰 팔기 -->
-                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000">
+                    <input type="text" name="deviceSellingPrice" placeholder="유저가 판매할 가격 ex. 1000000" id="deviceSellingPrice">
                     <!-- cpu 이름 -->
                     <input type="text" name="deviceCpuName"
-                        placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz">
+                        placeholder="ex. 2x Apple Everest 3.46 GHz, 4x Apple Sawtooth 2.02 GHz" id="deviceCpuName">
 
 
 
@@ -267,7 +267,7 @@
             <br>
 
             <div>
-                <pre style="background-color: aquamarine;">등급                             ** 변경 불가 **</pre>
+                <pre style="background-color: aquamarine;">                                       등급</pre>
                 <input type="text" name="gradeType" placeholder="바꾸지마시오" value="B" readonly>
                 <input type="text" name="gradeType" placeholder="바꾸지마시오" value="A" readonly>
                 <input type="text" name="gradeType" placeholder="바꾸지마시오" value="S" readonly>
@@ -275,15 +275,15 @@
             </div>
             <div>
                 <p>등록할 가격</p>
-                <input type="text" name="gradePrice" placeholder="B등급 해당 가격 입력해주세요.">
-                <input type="text" name="gradePrice" placeholder="A등급 해당 가격 입력해주세요.">
-                <input type="text" name="gradePrice" placeholder="S등급 해당 가격 입력해주세요.">
+                <input type="text" name="gradePrice" placeholder="B등급 해당 가격 입력해주세요." id="BGradeTypeRegis">
+                <input type="text" name="gradePrice" placeholder="A등급 해당 가격 입력해주세요." id="AGradeTypeRegis">
+                <input type="text" name="gradePrice" placeholder="S등급 해당 가격 입력해주세요." id="SGradeTypeRegis">
             </div>
             <div>
                 <p>판매할 가격</p>
-                <input type="text" name="gradeSellPrice" placeholder="B등급 판매 가격 입력해주세요.">
-                <input type="text" name="gradeSellPrice" placeholder="A등급 판매 가격 입력해주세요.">
-                <input type="text" name="gradeSellPrice" placeholder="S등급 판매 가격 입력해주세요.">
+                <input type="text" name="gradeSellPrice" placeholder="B등급 판매 가격 입력해주세요." id="BGradeTypeSell">
+                <input type="text" name="gradeSellPrice" placeholder="A등급 판매 가격 입력해주세요." id="AGradeTypeSell">
+                <input type="text" name="gradeSellPrice" placeholder="S등급 판매 가격 입력해주세요." id="SGradeTypeSell">
             </div>
 
             <div>
@@ -311,11 +311,11 @@
             </div>
             <div>
                 <p>내 폰 팔기 가격</p>
-                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
-                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
-                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
-                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
-                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000">
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000" >
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000" >
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000" >
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000" >
+                <input type="text" name="capacitySellPrice" placeholder="내 폰 팔기 ex. 10000" >
             </div>
 
 
@@ -334,5 +334,6 @@
 
 </body>
 <script src="/js/adminJS/adminModelRegistration.js"></script>
+
 
 </html>

@@ -50,8 +50,6 @@ let search = '';
 
 const adminProductPageNation = () => {
 
-    console.log(cp);
-    console.log(search);
 
     fetch("/admin/adminProductPageNation?cp="+cp+"&search="+search)
         .then(Response => {
@@ -61,7 +59,6 @@ const adminProductPageNation = () => {
             throw new Error("페이지네이션 조회 실패")
         })
         .then(result => {
-            console.log(result);
             document.querySelector(".adminSalePagination").innerHTML = result;
             getEventPageMoveClick()
             getEventPageNumClick()
@@ -83,7 +80,6 @@ const adminProductPage = () => {
         throw new Error("비동기 조회 실패")
     })
     .then(result => {
-        console.log(result);
         document.querySelector(".deviceListColorBody").innerHTML = result;
     })
 }
