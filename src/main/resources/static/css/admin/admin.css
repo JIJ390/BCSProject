@@ -51,6 +51,7 @@ th {
   height: 40px;
 }
 
+
 table td {
   text-align: center;
 }
@@ -81,6 +82,7 @@ table td:last-child {
   margin-top: 50px;
   margin-bottom: 30px;
 }
+
 
 .box-out{
   width: 100%;

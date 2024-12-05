@@ -60,7 +60,6 @@ for (let i = 0; i < inputImg.length; i++) {
 
             const colorNo = deleteImage[i].getAttribute("data-value");
 
-            console.log(colorNo);
 
             if (colorNo !== "0") {
                 colorStatus[i-1].value = 1; // 수정
@@ -86,7 +85,6 @@ for (let i = 0; i < inputImg.length; i++) {
 
             const colorNo = deleteImage[i].getAttribute("data-value");
 
-            console.log(colorNo);
 
             if (colorNo !== "0") {
                 colorStatus[i-1].value = 3; // 삭제
@@ -209,7 +207,6 @@ imgInput1.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[0].innerText = fileName;
 })
@@ -219,7 +216,6 @@ imgInput2.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[1].innerText = fileName;
 })
@@ -229,7 +225,6 @@ imgInput3.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[2].innerText = fileName;
 })
@@ -239,7 +234,6 @@ imgInput4.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[3].innerText = fileName;
 })
@@ -249,7 +243,6 @@ imgInput5.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[4].innerText = fileName;
 })
@@ -259,7 +252,6 @@ imgInput6.addEventListener("change", e => {
 
     
 
-    console.log(fileName);
 
     pName[5].innerText = fileName;
 })

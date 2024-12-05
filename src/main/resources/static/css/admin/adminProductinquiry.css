@@ -57,7 +57,21 @@
 }
 /* ---------------------------------------- */
 
-
+.productinquirySearch{
+    display: flex;
+}
+.productinquirySearchBox{
+    display: flex;
+}
+.productinquirySearchBox > a{
+    width: 100%;
+}
+.productinquirySearchReset{
+    display: flex;
+    width: 103px;
+    flex-direction: column-reverse;
+    align-items: center;
+}
 .main-container{
     display: flex;
     justify-content: center;
@@ -107,10 +121,11 @@
 
 
 .container-in-title-search{
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 .container-in-title-search > div{
     display: flex;
