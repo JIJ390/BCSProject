@@ -63,7 +63,18 @@ public class AdminController {
 	
 	// localhost/admin 접속 시 admin/adminMain.html 매핑
 	@RequestMapping("")
-	public String adminMain() {
+	public String adminMain(
+			Model model) {
+		
+		// 연간 매매금액
+		List<Map<String, String>> annualTotalSales = service.selectAnnualTotalSales();
+		
+		// 연간 매입 금액
+		List<Map<String, String>> annualTotalPurchases = service.selectAnnualTotalPurchases();
+		
+		model.addAttribute("annualTotalSales", annualTotalSales);
+		model.addAttribute("annualTotalPurchases", annualTotalPurchases);
+		
 		return "admin/admin";
 	}
 	
