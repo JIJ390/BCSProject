@@ -225,5 +225,25 @@ insertBtn.addEventListener("click", () => {
 
   insertFrm.append(input);
 
+  fetch("/sidebar/deleteReviewRN",{
+    method : "DELETE",
+    headers : {"Content-Type" : "application/json"},
+    body : location.pathname.split("/")[3]
+  })
+  .then(Response => {
+    if(Response.ok){
+      return Response.text();
+    }
+    throw new Error("리뷰알림 삭제 실패");
+  })
+  .then(result => {
+    if(result > 0){
+      getHomeContent()
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
   insertFrm.submit();
 })

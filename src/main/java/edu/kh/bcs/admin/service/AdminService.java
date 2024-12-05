@@ -290,6 +290,20 @@ public interface AdminService {
 	int adminNoticeDelete(int noticeNumber);
 
 
+	/**
+	 * 연간 총 매도 금액
+	 * @return
+	 */
+	List<Map<String, String>> selectAnnualTotalSales();
+
+
+	/**
+	 * 연간 총 매입 금액
+	 * @return
+	 */
+	List<Map<String, String>> selectAnnualTotalPurchases();
+
+
 
 	
 	

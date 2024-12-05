@@ -1068,4 +1068,21 @@ public class AdminServiceImpl implements AdminService {
 	public int adminNoticeDelete(int noticeNumber) {
 		return mapper.adminNoticeDelete(noticeNumber);
 	}
+	
+	
+	
+	
+	
+	@Override
+	public List<Map<String, String>> selectAnnualTotalSales() {
+		return mapper.selectAnnualTotalSales();
+	}
+	
+	
+	@Override
+	public List<Map<String, String>> selectAnnualTotalPurchases() {
+		return mapper.selectAnnualTotalPurchases();
+	}
+	
+
 }

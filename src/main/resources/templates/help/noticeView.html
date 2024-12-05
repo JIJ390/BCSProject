@@ -52,7 +52,11 @@
                 <div class="sub-date" th:text="*{noticeWriteDate}">작성 게시일 영역</div>
               </div>
               <hr>
-              <div class="notice-view-content" th:text="*{noticeContent}">내용</div>
+              <div class="notice-view-content">
+                <pre th:text="*{noticeContent}">
+
+                </pre>
+              </div>
               <hr>
             </div>
             </div>
