@@ -22,9 +22,47 @@
 
     <section class="main-section">
 
+      <h1 class="page-message">BCS 관리자 페이지</h1>
 
-      <h2 class="page-message">관리자 페이지</h2>
-      <hr>
+      <div class="chart-area">
+        <canvas id="myChart" width="800px" height="400px"></canvas>
+        <div class="sale-contatiner">
+          <span class="current-date"></span>
+          <table border="1">
+            <thead>
+              <tr>
+                <th>-</th>
+                <th>금액</th>
+                <th>기기 수</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>총 매출</td>
+                <td id="currentSale"></td>
+                <td id="currentSaleDevice"></td>
+              </tr>
+
+              <tr>
+                <td>총 지출</td>
+                <td id="currentPurchase"></td>
+                <td id="currentPurchaseDevice"></td>
+              </tr>
+
+              <tr>
+                <td>순수익</td>
+                <td id="currentProfit"></td>
+                <td></td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+
+      <hr class="hr1">
 
 
       <div class="box-out">
@@ -120,6 +158,12 @@
   <footer>
   </footer>
 
+  <script th:inline="javascript">
+    const annualTotalSales = /*[[${annualTotalSales}]]*/ "총매매";
+    const annualTotalPurchases = /*[[${annualTotalPurchases}]]*/ "총매입";
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="/js/adminJs/admin.js"> </script>
 </body>
 
