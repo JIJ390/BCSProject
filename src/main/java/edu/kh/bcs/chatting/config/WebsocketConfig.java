@@ -37,7 +37,8 @@ public class WebsocketConfig implements WebSocketConfigurer{
         "http://localhost/",
         "http://127.0.0.1/",
         "http://192.168.10.30/",
-        "http://192.168.10.32/"
+        "http://192.168.10.32/",
+        "http://43.203.247.39/"
       )
 
       // SockJS 지원 + 브라우저 호환성 증가
