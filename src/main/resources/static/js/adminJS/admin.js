@@ -149,7 +149,11 @@ data: {
           backgroundColor: 'rgba(29, 29, 31, 0.1)',
           fill: false,
           tension: 0.1,
-          pointRadius: 3
+          pointRadius: 0, // 데이터 포인트 표시 숨기기
+          pointHoverRadius: 6, // 마우스를 올렸을 때 포인트 강조 크기
+          pointHoverBackgroundColor: 'rgba(29, 29, 31, 1)',
+          pointHitRadius: 15, // 마우스 오버 반응 범위를 넓게 설정
+          tension: 0.1 // 직선으로 만들기
       },
       {
           label: '총 지출',
@@ -158,7 +162,11 @@ data: {
           backgroundColor: 'rgba(255, 99, 132, 0.1)',
           fill: false,
           tension: 0.1,
-          pointRadius: 3
+          pointRadius: 0, // 데이터 포인트 표시 숨기기
+          pointHoverRadius: 6, // 마우스를 올렸을 때 포인트 강조 크기
+          pointHoverBackgroundColor: 'rgba(255, 99, 132, 1)',
+          pointHitRadius: 15, // 마우스 오버 반응 범위를 넓게 설정
+          tension: 0.1 // 직선으로 만들기
       },
       {
           label: '순수익',
@@ -167,7 +175,11 @@ data: {
           backgroundColor: 'rgba(75, 192, 192, 0.1)',
           fill: false,
           tension: 0.1,
-          pointRadius: 3
+          pointRadius: 0, // 데이터 포인트 표시 숨기기
+          pointHoverRadius: 6, // 마우스를 올렸을 때 포인트 강조 크기
+          pointHoverBackgroundColor: 'rgba(75, 192, 192, 1)',
+          pointHitRadius: 15, // 마우스 오버 반응 범위를 넓게 설정
+          tension: 0.1 // 직선으로 만들기
       }
   ]
 },
