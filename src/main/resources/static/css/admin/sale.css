@@ -262,6 +262,7 @@ table {
   right: 100px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .topBtn > p {
