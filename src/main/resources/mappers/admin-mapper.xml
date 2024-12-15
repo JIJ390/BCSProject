@@ -1256,4 +1256,19 @@ WHERE SELLING_DEVICE_NO = #{orderNo}
 		GROUP BY TO_CHAR(SELLING_DEVICE_DATE, 'YYYY-MM')
 		ORDER BY "month" ASC
 	</select>
+	
+	<insert id="locationInsert">
+	INSERT INTO 
+	  "LOCATION"
+	VALUES(
+	  SEQ_PK_LOCATION.NEXTVAL,
+	  #{latitudeNo},
+	  #{longitudeNo},
+	  #{storeName},
+	  #{address},
+	  #{streetNumber}
+	)
+	</insert>
+	
+	
 </mapper>

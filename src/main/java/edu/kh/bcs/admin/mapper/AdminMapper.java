@@ -22,6 +22,7 @@ import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
+import edu.kh.bcs.location.dto.locationDto;
 import edu.kh.bcs.myPage.dto.Member;
 
 @Mapper
@@ -375,6 +376,10 @@ public interface AdminMapper {
 
 	
 	List<Map<String, String>> selectAnnualTotalPurchases();
+
+	
+	//가게 등록
+	int locationInsert(locationDto location);
 
 
 

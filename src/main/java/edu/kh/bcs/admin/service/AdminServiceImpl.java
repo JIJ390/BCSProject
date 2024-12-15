@@ -32,6 +32,7 @@ import edu.kh.bcs.device.dto.SellingDevice;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
+import edu.kh.bcs.location.dto.locationDto;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -1082,6 +1083,24 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Map<String, String>> selectAnnualTotalPurchases() {
 		return mapper.selectAnnualTotalPurchases();
+	}
+	
+	@Override
+	public int locationInsert(locationDto location) {
+		
+		log.debug("AddressImpl  : {}",location.getAddress());
+		log.debug("StreetNumberImpl  : {}",location.getStreetNumber());
+		log.debug("LatitudeNoImpl  : {}",location.getLatitudeNo());
+		log.debug("LongitudeNoImpl  : {}",location.getLongitudeNo());
+		log.debug("StoreNameImpl  : {}",location.getStoreName());
+		
+		
+		
+		int result = mapper.locationInsert(location);
+		
+		
+		
+		return result;
 	}
 	
 

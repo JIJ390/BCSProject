@@ -33,7 +33,9 @@ import edu.kh.bcs.device.service.DeviceSellingService;
 import edu.kh.bcs.help.dto.EventDto;
 import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.MainBannerDto;
+import edu.kh.bcs.location.dto.locationDto;
 import edu.kh.bcs.myPage.dto.Member;
+import io.lettuce.core.dynamic.annotation.Param;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,6 +117,16 @@ public class AdminController {
 		
 		
 		return "admin/delivery";
+	}
+	
+	
+	//배송 내역 조회
+	@GetMapping("shopCreate")
+	public String shopCreate() {
+		
+		
+		
+		return "admin/shopCreate";
 	}
 	
 	
@@ -1215,7 +1227,31 @@ public class AdminController {
 	
 		
 		return "redirect:/admin/adminNotice";
-		
 	}
+	
+	//매장 등록
+	@GetMapping("shopCreate/create")
+	public String create(
+			@ModelAttribute locationDto location
+			) {
+		
+		
+		log.debug("Address  : {}",location.getAddress());
+		log.debug("StreetNumber  : {}",location.getStreetNumber());
+		log.debug("LatitudeNo  : {}",location.getLatitudeNo());
+		log.debug("LongitudeNo  : {}",location.getLongitudeNo());
+		log.debug("StoreName  : {}",location.getStoreName());
+		
+		int locationInsert = service.locationInsert(location); 
+		
+		
+		
+		return "redirect:/bcsMap/map";
+	}
+	
+	
+	
+	
+	
 	
 }
