@@ -2,11 +2,6 @@ package edu.kh.bcs.device.dto;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import edu.kh.bcs.device.dto.Capacity;
-import edu.kh.bcs.device.dto.Color;
-import edu.kh.bcs.device.dto.Grade;
 import edu.kh.bcs.myPage.dto.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -15,7 +15,6 @@ import edu.kh.bcs.common.util.RedisUtil;
 import edu.kh.bcs.myPage.mapper.MyPageMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.Helper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -374,7 +373,7 @@ public class EmailServiceImpl implements EmailService {
 			} catch (Exception e) {
 				e.printStackTrace();
 				return 0; // 예외 발생 == 실패 == 0 반환
-			}
+			
 	}
 	
 	

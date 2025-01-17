@@ -14,8 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.kh.bcs.help.dto.HelpDto;
 import edu.kh.bcs.help.dto.NoticePagination;
 import edu.kh.bcs.help.service.HelpService;
-import edu.kh.bcs.main.MainController;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import edu.kh.bcs.common.filter.AdminFilter;
-import jakarta.servlet.Filter;
 
 @Configuration
 public class FilterConfig {
